@@ -1,3 +1,6 @@
 [
-["index.html", "Applied Statistics II Preface", " Applied Statistics II Robin Donatello and Edward Roualdes 2017-10-20 Preface This text is in index.Rmd "]
+["index.html", "Applied Statistics II Preface", " Applied Statistics II Robin A. Donatello and Edward A. Roualdes 2017-10-23 Preface This text is in index.Rmd "],
+["introduction.html", "Chapter 1 Introduction", " Chapter 1 Introduction This is the first real chapter. "],
+["multiple-linear-regression.html", "Chapter 2 Multiple Linear Regression", " Chapter 2 Multiple Linear Regression Now let’s talk details. "],
+["logistic-regression.html", "Chapter 3 Logistic Regression", " Chapter 3 Logistic Regression Or should this be Generalized Linear Models? Would allow us to talk about Logistic, log-linear and Poisson models. "]
 ]
