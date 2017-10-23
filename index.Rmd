@@ -1,6 +1,6 @@
 --- 
 title: "Applied Statistics II"
-author: "Robin Donatello and Edward A. Roualdes"
+author: "Robin Donatello and Edward Roualdes"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
