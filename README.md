@@ -1,7 +1,7 @@
 # MATH456_notes
 Course notes for MATH 456
 
-Instructions follow: http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html  
+Instructions follow: http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html. 
 
 1. Create new repo.
     - Initalize README.md but no .gitignore
@@ -33,3 +33,25 @@ bookdown:::serve_book()
 ```
 
 9. If you're happy and you know it git commit...
+
+
+----
+## Stage 2 - working on branches
+
+This is also notes to myself on how to work collaboratively without screwing up and having to burn down and restart your repo. 
+Great looking tuorial: https://www.atlassian.com/git/tutorials/using-branches 
+
+1. Author 1 creates a branch named <branch>. 
+```
+git branch <new-feature>
+```
+2. Author 1 checks out the branch to be worked on. 
+```
+git checkout <new-feature>
+```
+Or you can combine the two commmands above to create and check out a branch
+```
+git checkout -b <new-feature>
+```
+3. Edit to your hearts content. 
+
