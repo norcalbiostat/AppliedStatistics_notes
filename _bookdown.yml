@@ -2,6 +2,6 @@ book_filename: "MATH456_notes"
 chapter_name: "Chapter "
 repo: https://github.com/norcalbiostat/MATH456_notes
 output_dir: docs
-rmd_files: ["index.Rmd", "01-Introduction.Rmd", "02-Multiple-Linear-Regression.Rmd", "03-Generalized-Linear-Models.Rmd"]
+rmd_files: ["index.Rmd", "01-Preparing-Data-for-Analysis.Rmd", "02-Multiple-Linear-Regression.Rmd", "03-Generalized-Linear-Models.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
