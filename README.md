@@ -1,57 +1,19 @@
-# MATH456_notes
-Course notes for MATH 456
+# Course notes for _Applied Statistics II (MATH 456)_
 
-Instructions follow: http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html. 
+Math 456 is taught at California State University, Chico in the Mathematics and Statistics Department. This course is required for Statistics majors and minors, Applied Statistics minors, and for the Data Science certificate program. 
 
-1. Create new repo.
-    - Initalize README.md but no .gitignore
-2. Create Rproj
-    - Clone repo into Rproj
-3. Install `bookdown` from github
+> Advanced topics in applied statistics including multiple and logistic regression, multivariate methods, multi-level modeling, repeated measures, and others as appropriate. The statistical programming language R is used. Appropriate for biology, agriculture, nutrition, business, psychology, social science and other majors. 
 
-```
-install.packages("devtools")
-devtools::install_github("rstudio/bookdown")
-```
+This repository contains a collection of course notes from multiple instructors on a wide variety of topics appropriate for this class. 
+These notes are then compiled into a book using [bookdown](https://bookdown.org/yihui/bookdown/) `R` package by Yihui Xie. 
 
-4. Download bare boilerplate code from Sean Kross's github: https://github.com/seankross/bookdown-start 
-    - As a zip file, since Repo is already made and project already created. 
-    - Move all files except README.md into local github repo.
-    - May get an error/warning saying can't move `.gitignore` because it's invisible. 
-    - It can be copy/pasted just fine 
-5. Open `_output.yaml`
-    - Change `A Minimal Bookdown Book` to your book name
-6. Open `bookdown.yaml`
-    - Change `book_filename` to the file you would like to have when printed to PDF. i.e. `MATH456-notes.pdf`
-    - Update repo association
-7. Open `index.Rmd`
-    - Update `title`, `author`, `date`, `github-repo`, `url`, and `description`
-    - Since your repo isn't published yet, use _http://example.com_ as a placeholder. 
-8. Preview the book by typing
-```
-bookdown:::serve_book()
-```
+## Topic Outline
 
-9. If you're happy and you know it git commit...
+The core set of topics that all instructors should expect to cover include those listed specifically in the course description above. Other topics in this notebook include: 
 
-
-----
-## Stage 2 - working on branches
-
-This is also notes to myself on how to work collaboratively without screwing up and having to burn down and restart your repo. 
-Great looking tuorial: https://www.atlassian.com/git/tutorials/using-branches 
-
-1. Author 1 creates a branch named <branch>. 
-```
-git branch <new-feature>
-```
-2. Author 1 checks out the branch to be worked on. 
-```
-git checkout <new-feature>
-```
-Or you can combine the two commmands above to create and check out a branch
-```
-git checkout -b <new-feature>
-```
-3. Edit to your hearts content. 
+* Missing Data Imputation
+* Bayesian Methods
+* Spatial Analysis
+* Survival Analysis
+* ...
 

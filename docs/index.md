@@ -18,22 +18,23 @@ This document is a set of course notes for Math 456 - Applied Statistics II at C
 
 Some data and examples in this notebook are drawn from _Practical Multivariate Analysis, 5th ed, Afifi, May, Clark_ and used with permission by the authors. 
 
-All material in these notes is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+<!-- All material in these notes is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). -->
 
 This notebook was created using the [bookdown](https://bookdown.org/yihui/bookdown/) package by Yihui Xie. 
 
 
-# (PART\*) Regression Model Building {-}
+<!-- # Preparing Data for Analysis {-} -->
 
-# Preparing data for analysis
-# Chapter 2
-# Chapter 3
+<!-- # (PART\*) Regression Modeling {-} -->
+<!-- # Linear Regression {-} -->
+<!-- # Model Building -->
+<!-- # Generalized Linear Models {-} -->
 
-# (PART\*) Multivariate Analysis {-}
-
-
-# (PART\*) Hierarchical Regression Analysis {-}
+<!-- # (PART\*) Multivariate Analysis {-} -->
 
 
-# (PART\*) Other {-}
+<!-- # (PART\*) Hierarchical Regression Analysis {-} -->
+
+
+<!-- # (PART\*) Other {-} -->
 

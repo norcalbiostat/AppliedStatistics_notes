@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="simple-linear-regression.html">
-<link rel="next" href="model-diagnostics.html">
+<link rel="prev" href="model-building.html">
+<link rel="next" href="factor-variable-coding.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -171,102 +171,102 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-linear-regression" class="section level2">
-<h2><span class="header-section-number">2.2</span> Multiple Linear Regression</h2>
-<ul>
-<li>Extends simple linear regression.</li>
-<li>Describes a linear relationship between a single continuous <span class="math inline">\(Y\)</span> variable, and several <span class="math inline">\(X\)</span> variables.</li>
-<li>Predicts <span class="math inline">\(Y\)</span> from <span class="math inline">\(X_{1}, X_{2}, \ldots , X_{P}\)</span>.</li>
-</ul>
-<p>Now it’s no longer a 2D regression <em>line</em>, but a <span class="math inline">\(p\)</span> dimensional regression plane.</p>
-<div class="figure">
-<img src="images/regression_plane.png" />
-
-</div>
-<div id="types-of-x-variables" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Types of X variables</h3>
-<ul>
-<li>Fixed: The levels of <span class="math inline">\(X\)</span> are selected in advance with the intent to measure the affect on an outcome <span class="math inline">\(Y\)</span>.</li>
-<li>Variable: Random sample of individuals from the population is taken and <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are measured on each individual.</li>
-<li>X’s can be continuous or discrete (categorical)</li>
-<li>X’s can be transformations of other X’s, e.g., <span class="math inline">\(log(x), x^{2}\)</span>.</li>
-</ul>
-</div>
-<div id="mathematical-model" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Mathematical Model</h3>
-<p><span class="math display">\[ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \ldots + \beta_{p}x_{pi} + \epsilon_{i}\]</span></p>
-<p>The assumptions on the residuals <span class="math inline">\(\epsilon_{i}\)</span> still hold:</p>
-<ul>
-<li>They have mean zero<br />
-</li>
-<li>They are homoscedastic, that is all have the same finite variance: <span class="math inline">\(Var(\epsilon_{i})=\sigma^{2}&lt;\infty\)</span><br />
-</li>
-<li>Distinct error terms are uncorrelated: (Independent) <span class="math inline">\(\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.\)</span></li>
-</ul>
-<p>The regression model relates <span class="math inline">\(y\)</span> to a function of <span class="math inline">\(\textbf{X}\)</span> and <span class="math inline">\(\mathbf{\beta}\)</span>, where <span class="math inline">\(\textbf{X}\)</span> is a <span class="math inline">\(nxp\)</span> matrix of <span class="math inline">\(p\)</span> covariates on <span class="math inline">\(n\)</span> observations and <span class="math inline">\(\mathbf{\beta}\)</span> is a length <span class="math inline">\(p\)</span> vector of regression coefficients.</p>
-<p>In matrix notation this looks like:</p>
-<p><span class="math display">\[ \textbf{y} = \textbf{X} \mathbf{\beta} + \mathbf{\epsilon} \]</span></p>
-</div>
-<div id="parameter-estimation" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Parameter Estimation</h3>
-<p>The goal of regression analysis is to minimize the residual error. That is, to minimize the difference between the value of the dependent variable predicted by the model and the true value of the dependent variable.</p>
-<p><span class="math display">\[ \epsilon_{i} = \hat{y_{i}} - y_{i}\]</span></p>
-<p>The method of Least Squares accomplishes this by finding parameter estimates <span class="math inline">\(\beta_{0}\)</span> and <span class="math inline">\(\beta_{1}\)</span> that minimized the sum of the squared residuals:</p>
-<p><span class="math display">\[ \sum_{i=1}^{n} \epsilon_{i} \]</span></p>
-<p>For simple linear regression the regression coefficient estimates that minimize the sum of squared errors can be calculated as: <span class="math display">\[ \hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}}\bar{x} \quad \mbox{  and  } \quad  \hat{\beta_{1}} = r\frac{s_{y}}{s_{x}} \]</span></p>
-<p>For multiple linear regression, the fitted values <span class="math inline">\(\hat{y_{i}}\)</span> are calculated as the linear combination of x’s and <span class="math inline">\(\beta\)</span>’s, <span class="math inline">\(\sum_{i=1}^{p}X_{ij}\beta_{j}\)</span>. The sum of the squared residual errors (the distance between the observed point <span class="math inline">\(y_{i}\)</span> and the fitted value) now has the following form:</p>
-<p><span class="math display">\[ \sum_{i=1}^{n} |y_{i} - \sum_{i=1}^{p}X_{ij}\beta_{j}|^{2}\]</span></p>
-<p>Or in matrix notation</p>
-<p><span class="math display">\[ || \mathbf{y} - \mathbf{X}\mathbf{\beta} ||^{2} \]</span></p>
-<p>The details of methods to calculate the Least Squares estimate of <span class="math inline">\(\beta\)</span>’s is left to a course in mathematical statistics.</p>
-</div>
-<div id="example-mlr-ex" class="section level3">
-<h3><span class="header-section-number">2.2.4</span> Example {mlr-ex}</h3>
-<p>The analysis in example <span class="citation">(<span class="citeproc-not-found" data-reference-id="slr-ex"><strong>???</strong></span>)</span> concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p&lt;.0001). Looking at the multiple <span class="math inline">\(R^{2}\)</span> (correlation of determination), this simple model explains 25% of the variance seen in the outcome <span class="math inline">\(y\)</span>.</p>
-<p>However, FEV tends to decrease with age for adults, so we should be able to predict it better if we use both height and age as independent variables in a multiple regression equation.</p>
-<ul>
-<li>What direction do you expect the slope coefficient for age to be? For height?</li>
-</ul>
-<p>Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a <code>+</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mv_model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FAGE <span class="op">+</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)
-<span class="kw">summary</span>(mv_model)</code></pre></div>
+<div id="categorical-predictors" class="section level2">
+<h2><span class="header-section-number">3.1</span> Categorical Predictors</h2>
+<p>Let’s continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we’ll keep species as a categorical variable. What happens if we just put the variable in the model?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris))</code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)
+## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.34708 -0.34142  0.00917  0.37174  1.41853 
+## -0.76390 -0.17875  0.00716  0.17461  0.79954 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  
-## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***
-## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
+## Sepal.Length       0.63211    0.04527  13.962  &lt; 2e-16 ***
+## Speciesversicolor  2.21014    0.07047  31.362  &lt; 2e-16 ***
+## Speciesvirginica   3.09000    0.09123  33.870  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5348 on 147 degrees of freedom
-## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 
-## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(mv_model)</code></pre></div>
-<pre><code>##                   2.5 %      97.5 %
-## (Intercept) -5.00919751 -0.51229620
-## FAGE        -0.03922545 -0.01405323
-## FHEIGHT      0.08319434  0.14559974</code></pre>
-<p>Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p&lt;.0001).</p>
-<p>Holding height constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p&lt;.0001).</p>
-<p>For the model that includes age, the coefficient for height is now 0.11, which is interpreted as the rate of change of FEV1 as a function of height <strong>after adjusting for age</strong>. This is also called the <strong>partial regression coefficient</strong> of FEV1 on height after adjusting for age.</p>
-<p>Both height and age are significantly associated with FEV in fathers (p&lt;.0001 each).</p>
-</div>
+## Residual standard error: 0.2826 on 146 degrees of freedom
+## Multiple R-squared:  0.9749, Adjusted R-squared:  0.9744 
+## F-statistic:  1890 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Examine the coefficient names, <code>Speciesversicolor</code> and <code>Speciesvirginica</code>. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let’s look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species <em>versicolor</em>, next the binary indicator for if the iris is from species <em>virginica</em>, and lastly the species as a 3 level categorical variable (which is what we’re used to seeing at this point.)</p>
+<pre><code>## Warning: package &#39;pander&#39; was built under R version 3.3.3</code></pre>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="19%" />
+<col width="26%" />
+<col width="25%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sepal.Length</th>
+<th align="center">Speciesversicolor</th>
+<th align="center">Speciesvirginica</th>
+<th align="center">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">5.1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>2</strong></td>
+<td align="center">4.9</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>51</strong></td>
+<td align="center">7</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">versicolor</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>52</strong></td>
+<td align="center">6.4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>101</strong></td>
+<td align="center">6.3</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">virginica</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>102</strong></td>
+<td align="center">5.8</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">virginica</td>
+</tr>
+</tbody>
+</table>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="simple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-diagnostics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-building.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factor-variable-coding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

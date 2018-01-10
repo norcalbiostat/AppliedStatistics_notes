@@ -1,9 +1,8 @@
-# Preparing Data for Analysis
-
-Just a recap
+# Preparing Data for Analysis {#prepare}
 
 
-## A Reproducible Workflow
+
+## Reproducible Workflows
 
 ![PrepareData](images/Afifi_Fig3_1.png)
 
@@ -29,7 +28,7 @@ depress <- read.table("data/Depress.txt", sep="\t", header=TRUE)
 ```
 
 ## Identifying Variable Types
-This section uses the `depression` data set from Afifi et.al. 
+This section uses the raw `depression` data set from Afifi et.al. 
 
 Consider a variable that measures marital status. What data type does R see this variable as? 
 ```{r}
@@ -150,16 +149,9 @@ summary(depress$AGE)
 
 Looks like it worked. 
 
-## Data screening and transformations 
-The aim of data preparation, screening, wrangling, or transforming is to 
+## Data Transformations 
 
-* Identify outliers and inconsistent values
-* Assess normality of the distribution
-* Assess independence of observations
-* Explore data transformations to aid description, inference. 
-
-
-In the previous section we looked at outliers and inconsistent values. Now let's look at normality and independence using the cleaned depression data set. 
+Let's look at assessing normal distributions using the cleaned depression data set. 
 
 ```{r, eval=FALSE}
 rm(depress) # remove the current version that was used in the previous part of this markdown file
@@ -242,4 +234,27 @@ Analysis options
 - Survival analysis: IF dependent variable is time to an event
 
 Unsure? Do several and compare results. 
+
+## Wide vs. Long data
+
+The data on Lung function originally was recorded in _wide_ format, with separate variables for mother's and father's FEV1 score (`MFEV1` and `FFEV`). In this format, the data is one record per family. 
+
+```{r}
+fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", 
+                    sep="\t", header=TRUE)
+head(fev)
+```
+
+To analyze the effect of gender on FEV, the data need to be in _long_ format, with a single variable for `FEV` and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females. 
+
+```{r}
+fev2 <- data.frame(gender = c(fev$FSEX, fev$MSEX), 
+                   FEV = c(fev$FFEV1, fev$MFEV1), 
+                   ht = c(fev$FHEIGHT, fev$MHEIGHT), 
+                   age = c(fev$FAGE, fev$MAGE))
+fev2$gender <- factor(fev2$gender, labels=c("M", "F"))
+head(fev2)  
+```
+
+Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several `R` packages that can help with this including `reshape2` and `tidyr`. 
 

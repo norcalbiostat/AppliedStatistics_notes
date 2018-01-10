@@ -1,9 +1,8 @@
-# Preparing Data for Analysis
-
-Just a recap
+# Preparing Data for Analysis {#prepare}
 
 
-## A Reproducible Workflow
+
+## Reproducible Workflows
 
 ![PrepareData](images/Afifi_Fig3_1.png)
 
@@ -25,7 +24,7 @@ Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
 
 ## Identifying Variable Types
-This section uses the `depression` data set from Afifi et.al. 
+This section uses the raw `depression` data set from Afifi et.al. 
 
 Consider a variable that measures marital status. What data type does R see this variable as? 
 
@@ -256,16 +255,9 @@ summary(depress$AGE)
 
 Looks like it worked. 
 
-## Data screening and transformations 
-The aim of data preparation, screening, wrangling, or transforming is to 
+## Data Transformations 
 
-* Identify outliers and inconsistent values
-* Assess normality of the distribution
-* Assess independence of observations
-* Explore data transformations to aid description, inference. 
-
-
-In the previous section we looked at outliers and inconsistent values. Now let's look at normality and independence using the cleaned depression data set. 
+Let's look at assessing normal distributions using the cleaned depression data set. 
 
 
 ```r
@@ -377,4 +369,70 @@ Analysis options
 - Survival analysis: IF dependent variable is time to an event
 
 Unsure? Do several and compare results. 
+
+## Wide vs. Long data
+
+The data on Lung function originally was recorded in _wide_ format, with separate variables for mother's and father's FEV1 score (`MFEV1` and `FFEV`). In this format, the data is one record per family. 
+
+
+```r
+fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", 
+                    sep="\t", header=TRUE)
+head(fev)
+```
+
+```
+##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT
+## 1  1    1    1   53      61     161  391  3.23    2   43      62     136
+## 2  2    1    1   40      72     198  441  3.95    2   38      66     160
+## 3  3    1    1   26      69     210  445  3.47    2   27      59     114
+## 4  4    1    1   34      68     187  433  3.74    2   36      58     123
+## 5  5    1    1   46      61     121  354  2.90    2   39      62     128
+## 6  6    1    1   44      72     153  610  4.91    2   36      66     125
+##   MFVC MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE
+## 1  370  3.31     2    12       59      115   296   2.79    NA    NA
+## 2  411  3.47     1    10       56       66   323   2.39    NA    NA
+## 3  309  2.65     1     8       50       59   114   1.11    NA    NA
+## 4  265  2.06     2    11       57      106   256   1.85     1     9
+## 5  245  2.33     1    16       61       88   260   2.47     2    12
+## 6  349  3.06     1    15       67      100   389   3.55     1    13
+##   MCHEIGHT MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC
+## 1       NA       NA    NA     NA    NA    NA       NA       NA    NA
+## 2       NA       NA    NA     NA    NA    NA       NA       NA    NA
+## 3       NA       NA    NA     NA    NA    NA       NA       NA    NA
+## 4       49       56   159   1.30    NA    NA       NA       NA    NA
+## 5       60       85   268   2.34     2    10       50       53   154
+## 6       57       87   276   2.37     2    10       55       72   195
+##   YCFEV1
+## 1     NA
+## 2     NA
+## 3     NA
+## 4     NA
+## 5   1.43
+## 6   1.69
+```
+
+To analyze the effect of gender on FEV, the data need to be in _long_ format, with a single variable for `FEV` and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females. 
+
+
+```r
+fev2 <- data.frame(gender = c(fev$FSEX, fev$MSEX), 
+                   FEV = c(fev$FFEV1, fev$MFEV1), 
+                   ht = c(fev$FHEIGHT, fev$MHEIGHT), 
+                   age = c(fev$FAGE, fev$MAGE))
+fev2$gender <- factor(fev2$gender, labels=c("M", "F"))
+head(fev2)  
+```
+
+```
+##   gender  FEV ht age
+## 1      M 3.23 61  53
+## 2      M 3.95 72  40
+## 3      M 3.47 69  26
+## 4      M 3.74 68  34
+## 5      M 2.90 61  46
+## 6      M 4.91 72  44
+```
+
+Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several `R` packages that can help with this including `reshape2` and `tidyr`. 
 
