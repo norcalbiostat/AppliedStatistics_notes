@@ -256,3 +256,125 @@ summary(depress$AGE)
 
 Looks like it worked. 
 
+## Data screening and transformations 
+The aim of data preparation, screening, wrangling, or transforming is to 
+
+* Identify outliers and inconsistent values
+* Assess normality of the distribution
+* Assess independence of observations
+* Explore data transformations to aid description, inference. 
+
+
+In the previous section we looked at outliers and inconsistent values. Now let's look at normality and independence using the cleaned depression data set. 
+
+
+```r
+rm(depress) # remove the current version that was used in the previous part of this markdown file
+depress <- read.table("C:/GitHub/MATH456/data/Depress_020116.txt", sep="\t", header=TRUE)  
+```
+
+
+```r
+hist(depress$INCOME, prob=TRUE, xlab="Annual income (in thousands)", 
+     main="Histogram and Density curve of Income", ylab="")
+lines(density(depress$INCOME), col="blue")
+```
+
+<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+```r
+summary(depress$INCOME)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2.00    9.00   15.00   20.57   28.00   65.00
+```
+
+The distribution of annual income is slightly skewed right with a mean of $20.5k per year and a median of $15k per year income. The range of values goes from $2k to $65k. Reported income above $40k appear to have been rounded to the nearest $10k, because there are noticeable peaks at $40k, $50k, and $60k. 
+
+In general, transformations are more effective when the the standard deviation is large relative to the mean. One rule of thumb is if the sd/mean ratio is less than 1/4, a transformation may not be necessary. 
+
+```r
+sd(depress$INCOME) / mean(depress$INCOME)
+```
+
+```
+## [1] 0.743147
+```
+
+Alternatively Hoaglin, Mosteller and Tukey (1985) showed that if the largest observation divided by the smallest observation is over 2, then the data may not be sufficiently variable for the transformation to be decisive. 
+
+```r
+max(depress$INCOME) / (min(depress$INCOME)+.1)
+```
+
+```
+## [1] 30.95238
+```
+
+Note these rules are not meaningful for data without a natural zero. 
+
+Another common method of assessing normality is to create a normal probability (or normal quantile) plot. 
+
+
+```r
+qqnorm(depress$INCOME);qqline(depress$INCOME, col="red")
+```
+
+<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
+The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or `U` shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created. 
+
+
+* Create three new variables: `log10inc` as the log base 10 of Income, `loginc` as the natural log of Income, and `xincome` which is equal to the negative of one divided by the cubic root of income. 
+
+
+```r
+log10inc <- log10(depress$INCOME)
+loginc   <- log(depress$INCOME)
+xincome  <- -1/(depress$INCOME)^(-1/3)
+```
+
+
+* Create a single plot that display normal probability plots for the original, and each of the three transformations of income. Use the base graphics grid organizer `par(mfrow=c(r,c))` where `r` is the number of rows and `c` is the number of columns. Which transformation does a better job of normalizing the distribution of Income?
+
+
+```r
+par(mfrow=c(2,2)) # Try (4,1) and (1,4) to see how this works. 
+qqnorm(depress$INCOME, main="Income"); qqline(depress$INCOME,col="blue")
+qqnorm(log10inc, main="Log 10"); qqline(log10inc, col="blue")
+qqnorm(loginc, main = "Natural Log"); qqline(loginc, col="blue")
+qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
+```
+
+<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-22-1.png" width="960" />
+
+
+## Selecting Appropriate Analysis
+
+**Considerations:**
+
+* Purpose of analysis.  
+* Types of variables in data set.  
+* Data used in analysis.   
+* Assumptions needed; satisfied?  
+* Choice of analyses is often arbitrary: consider several  
+
+**Example:** 
+
+5 independent variables: 3 interval, 1 ordinal, 1 nominal  
+
+1 dependent variable: interval
+
+Analysis options  
+
+- Multiple regression: pretend independent ordinal variable is an
+  interval variable use dummy (0 /1) variables for nominal variables
+- Analysis of variance: categorize all independent variables
+- Analysis of covariance: leave variables as is, check assumptions
+- Logistic regression: Categorize dependent variable: high, low
+- Survival analysis: IF dependent variable is time to an event
+
+Unsure? Do several and compare results. 
+

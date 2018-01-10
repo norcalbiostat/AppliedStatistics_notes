@@ -110,6 +110,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="preparing-data-for-analysis.html"><a href="preparing-data-for-analysis.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.2</b> Identifying Variable Types</a></li>
 <li class="chapter" data-level="1.3" data-path="preparing-data-for-analysis.html"><a href="preparing-data-for-analysis.html#data-editing-and-recoding"><i class="fa fa-check"></i><b>1.3</b> Data Editing and Recoding</a></li>
 <li class="chapter" data-level="1.4" data-path="preparing-data-for-analysis.html"><a href="preparing-data-for-analysis.html#outliers"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="preparing-data-for-analysis.html"><a href="preparing-data-for-analysis.html#data-screening-and-transformations"><i class="fa fa-check"></i><b>1.5</b> Data screening and transformations</a></li>
+<li class="chapter" data-level="1.6" data-path="preparing-data-for-analysis.html"><a href="preparing-data-for-analysis.html#selecting-appropriate-analysis"><i class="fa fa-check"></i><b>1.6</b> Selecting Appropriate Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a></li>
 <li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a></li>
@@ -263,6 +265,80 @@ b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(depress, <span cl
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   18.00   28.00   42.50   44.41   59.00   89.00</code></pre>
 <p>Looks like it worked.</p>
+</div>
+<div id="data-screening-and-transformations" class="section level2">
+<h2><span class="header-section-number">1.5</span> Data screening and transformations</h2>
+<p>The aim of data preparation, screening, wrangling, or transforming is to</p>
+<ul>
+<li>Identify outliers and inconsistent values</li>
+<li>Assess normality of the distribution</li>
+<li>Assess independence of observations</li>
+<li>Explore data transformations to aid description, inference.</li>
+</ul>
+<p>In the previous section we looked at outliers and inconsistent values. Now let’s look at normality and independence using the cleaned depression data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(depress) <span class="co"># remove the current version that was used in the previous part of this markdown file</span>
+depress &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;C:/GitHub/MATH456/data/Depress_020116.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)  </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(depress<span class="op">$</span>INCOME, <span class="dt">prob=</span><span class="ot">TRUE</span>, <span class="dt">xlab=</span><span class="st">&quot;Annual income (in thousands)&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;Histogram and Density curve of Income&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)
+<span class="kw">lines</span>(<span class="kw">density</span>(depress<span class="op">$</span>INCOME), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(depress<span class="op">$</span>INCOME)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2.00    9.00   15.00   20.57   28.00   65.00</code></pre>
+<p>The distribution of annual income is slightly skewed right with a mean of $20.5k per year and a median of $15k per year income. The range of values goes from $2k to $65k. Reported income above $40k appear to have been rounded to the nearest $10k, because there are noticeable peaks at $40k, $50k, and $60k.</p>
+<p>In general, transformations are more effective when the the standard deviation is large relative to the mean. One rule of thumb is if the sd/mean ratio is less than 1/4, a transformation may not be necessary.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(depress<span class="op">$</span>INCOME) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(depress<span class="op">$</span>INCOME)</code></pre></div>
+<pre><code>## [1] 0.743147</code></pre>
+<p>Alternatively Hoaglin, Mosteller and Tukey (1985) showed that if the largest observation divided by the smallest observation is over 2, then the data may not be sufficiently variable for the transformation to be decisive.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(depress<span class="op">$</span>INCOME) <span class="op">/</span><span class="st"> </span>(<span class="kw">min</span>(depress<span class="op">$</span>INCOME)<span class="op">+</span>.<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 30.95238</code></pre>
+<p>Note these rules are not meaningful for data without a natural zero.</p>
+<p>Another common method of assessing normality is to create a normal probability (or normal quantile) plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(depress<span class="op">$</span>INCOME);<span class="kw">qqline</span>(depress<span class="op">$</span>INCOME, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or <code>U</code> shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created.</p>
+<ul>
+<li>Create three new variables: <code>log10inc</code> as the log base 10 of Income, <code>loginc</code> as the natural log of Income, and <code>xincome</code> which is equal to the negative of one divided by the cubic root of income.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log10inc &lt;-<span class="st"> </span><span class="kw">log10</span>(depress<span class="op">$</span>INCOME)
+loginc   &lt;-<span class="st"> </span><span class="kw">log</span>(depress<span class="op">$</span>INCOME)
+xincome  &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span><span class="op">/</span>(depress<span class="op">$</span>INCOME)<span class="op">^</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</code></pre></div>
+<ul>
+<li>Create a single plot that display normal probability plots for the original, and each of the three transformations of income. Use the base graphics grid organizer <code>par(mfrow=c(r,c))</code> where <code>r</code> is the number of rows and <code>c</code> is the number of columns. Which transformation does a better job of normalizing the distribution of Income?</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># Try (4,1) and (1,4) to see how this works. </span>
+<span class="kw">qqnorm</span>(depress<span class="op">$</span>INCOME, <span class="dt">main=</span><span class="st">&quot;Income&quot;</span>); <span class="kw">qqline</span>(depress<span class="op">$</span>INCOME,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">qqnorm</span>(log10inc, <span class="dt">main=</span><span class="st">&quot;Log 10&quot;</span>); <span class="kw">qqline</span>(log10inc, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">qqnorm</span>(loginc, <span class="dt">main =</span> <span class="st">&quot;Natural Log&quot;</span>); <span class="kw">qqline</span>(loginc, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+<span class="kw">qqnorm</span>(xincome, <span class="dt">main=</span><span class="st">&quot;-1/cuberoot(income)&quot;</span>); <span class="kw">qqline</span>(xincome, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-22-1.png" width="960" /></p>
+</div>
+<div id="selecting-appropriate-analysis" class="section level2">
+<h2><span class="header-section-number">1.6</span> Selecting Appropriate Analysis</h2>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Purpose of analysis.<br />
+</li>
+<li>Types of variables in data set.<br />
+</li>
+<li>Data used in analysis.<br />
+</li>
+<li>Assumptions needed; satisfied?<br />
+</li>
+<li>Choice of analyses is often arbitrary: consider several</li>
+</ul>
+<p><strong>Example:</strong></p>
+<p>5 independent variables: 3 interval, 1 ordinal, 1 nominal</p>
+<p>1 dependent variable: interval</p>
+<p>Analysis options</p>
+<ul>
+<li>Multiple regression: pretend independent ordinal variable is an interval variable use dummy (0 /1) variables for nominal variables</li>
+<li>Analysis of variance: categorize all independent variables</li>
+<li>Analysis of covariance: leave variables as is, check assumptions</li>
+<li>Logistic regression: Categorize dependent variable: high, low</li>
+<li>Survival analysis: IF dependent variable is time to an event</li>
+</ul>
+<p>Unsure? Do several and compare results.</p>
 
 </div>
 </div>
