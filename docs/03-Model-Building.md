@@ -2,7 +2,7 @@
 
 Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable. 
 
-This chapter introduces categorical predictors first, then interactions, moderating and confounding variables, and then discusses model fit measures that can be used to compare between competing models. 
+This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models. 
 
 
 
@@ -62,7 +62,7 @@ Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (an
  **102**       5.8                0                  1           virginica  
 ----------------------------------------------------------------------------
 
-## Factor variable coding
+### Factor variable coding
 
 * Most commonly known as "Dummy coding". Not an informative term to use. 
 * Better used term: Indicator variable
@@ -313,27 +313,6 @@ The Wald Test has a large p-value of 0.73, thus blood pressure classification is
 
 * This means blood pressure classification should not be included in a model to explain smoking status. 
 
-
-
-
-## Moderation
-
-Moderation occurs when the relationship between two variables depends on a third variable.
-
-* The third variable is referred to as the moderating variable or simply the moderator. 
-* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
-    - This tends to be an important 
-* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
-    - This is also called a _stratified_ model, or a _subgroup analysis_.
-
-Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
-
-**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
-
-**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
-
-**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
-
 ## Stratification
 
 Stratified models examine the regression equations for each subgroup of the population and seeing if the relationship between the response and explanatory variables _changed_ for at least one subgroup. 
@@ -373,6 +352,29 @@ $$ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is
 $$ Y_{in} \sim \beta_{0n} + \beta_{1n}*x_{i} + \epsilon_{in} \qquad \epsilon_{in} \sim \mathcal{N}(0,\sigma^{2}_{n}) $$
 
 In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: $\beta_{0}, \beta_{1}$, and $\sigma^{2}$, for a total of 6 for the two models. The more parameters that need to be estimated, the more data we need. 
+
+
+
+## Moderation
+
+Moderation occurs when the relationship between two variables depends on a third variable.
+
+* The third variable is referred to as the moderating variable or simply the moderator. 
+* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
+    - This tends to be an important 
+* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
+    - This is also called a _stratified_ model, or a _subgroup analysis_.
+
+Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
+
+**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
+
+**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
+
+**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
+
+
+### Example
 
 
 ## Interactions {#interactions}
@@ -430,7 +432,7 @@ summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris
 
 The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
 
-### Interpretations
+### Example
 
 
 ```r
@@ -461,13 +463,13 @@ summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris
 ## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
 ```
 
-<span style="color:red"> The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model. </span>
-
 * If $x_{2}=0$, then the effect of $x_{1}$ on $Y$ simplifies to: $\beta_{1}$
     * $b_{1}$ The effect of sepal length on petal length **for non-setosa species of iris** (`setosa=0`) 
     * For non-setosa species, the petal length increases 1.03cm for every additional cm of sepal length. 
 * If $x_{2}=1$, then the effect of $x_{1}$ on $Y$ model simplifies to: $\beta_{1} + \beta_{3}$
     * For setosa species, the petal length increases by `1.03-0.9=0.13` cm for every additional cm of sepal length. 
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.</div>\EndKnitrBlock{rmdcaution}
 
 Let's up the game now and look at the full interaction model with a categorical version of species. Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . 
 
@@ -541,20 +543,7 @@ coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
 
 They're the same! Proof that an interaction is equivelant to stratification. 
 
-**So why do an interaction? Why not stratify?**
-
-Stratification implies that the stratifying variable interacts with all other variables. Even variables that the variable is not directly interacting with. 
-
-E.g. the stratified model below
-
-* $Y = A + B + C + D + C*D$, when D=1
-* $Y = A + B + C + D + C*D$, when D=0
-
-is the same as the following interaction model: 
-
-* $Y = A + B + C + D + A*D + B*D + C*D$
-
-## Adding more covariates to the model
+### Example
 
 What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model
 
@@ -593,6 +582,15 @@ So far, petal width, and the combination of species and sepal length are both si
 _Note of caution: Stratification implies that the stratifying variable interacts with all other variables._ 
 So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would  be implying that species interacts with both sepal length and petal width. 
 
+E.g. the following stratified model 
+
+* $Y = A + B + C + D + C*D$, when D=1
+* $Y = A + B + C + D + C*D$, when D=0
+
+is the same as the following interaction model: 
+
+* $Y = A + B + C + D + A*D + B*D + C*D$
+
 
 ## Variable Selection Process
 We want to choose a set of independent variables that both will yield a good prediction using as few variables as possible. In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
@@ -610,9 +608,47 @@ The set of independent variables can be broken down into logical subsets
   
 Partially model-driven regression analysis and partially an exploratory analysis. 
 
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
+
+### Confounding 
+
+One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
+
+As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
 
 
-### Selection Criteria
+> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$. 
+
+
+### Automated selection procedures
+
+* Forward selection: X variables added one at a time until optimal model reached
+* Backward elimination: X variables removed one at a time until optimal model reached
+* Stepwise selection: Combination of forward and backward. 
+
+> "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
+> "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
+> _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
+
+Take home message: Don't use these. 
+
+* Stopping criteria and algorithm can be different for differnet software programs. 
+* Can reject perfectly plausible models from later consideration
+* Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
+
+### Best Subsets
+
+* Select one X with highest simple $r$ with Y
+* Select two X’s with highest multiple $r$ with Y
+* Select three X’s with highest multiple $r$ with Y
+etc.
+* Compute adjusted R2, AIC or BIC each time.
+* Compare and choose among the "best subsets" of various sizes.
+
+Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html 
+
+## Comparing between models
+When working with multiple models, how do you choose between models? 
 
 ### Coefficient of Determination
 If the model explains a large amount of variation in the outcome that's good right? So we could consider using $R^{2}$ as a selection criteria and trying to find the model that maximizes this value. 
@@ -621,18 +657,53 @@ The residual sum of squares (RSS in the book or SSE) can be written as $\sum(Y-\
 
 * **Multiple $R^{2}$**
 Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
+    - Ex. 1: N = 100, P = 1, E($R^{2}$) = 0.01
+    - Ex. 2: N = 21, P = 10, E($R^{2}$) = 0.5
+
+
+Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
+
 
 * **Adjusted $R^{2}$**
-Ok, so let's add an adjustment, or a penalty, to keep this measure in check. $R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}$
+To alleviate bias use Mean squares instead of SS. 
+
+$R^{2} = 1-\frac{Model MS}{Total MS}$
+
+equivelantly, 
+
+$R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}$
+
+Now Adjusted $R^{2}$ is approximately unbiased and won't inflate as $p$ increases. 
+
+
 
 ### Akaike Information Criterion (AIC)
 
 * A penalty is applied to the deviance that increases as the number of
   parameters $p$ increase. 
-* AIC = $-2LL + 2p$ 
+* Tries to find a parsimonious model that is closer to the “truth”.  
+* Uses an information function, e.g., the likelihood function $(LL)$.
+
+$$ AIC = -2LL + 2p$$
+
 * Smaller is better
 
+### Bayesian Information Criterion
 
+* Similar to AIC. 
+* Tries to find a parsimonious model that is more likely to be the “truth”. The smaller BIC, the better.
+
+$$ BIC = -2LL + ln(N)*(P+1)$$ 
+
+### AIC vs BIC
+
+* Both are “penalized likelihood” functions
+* Each = -2loglikelihood + penalty
+* AIC: penalty = 2, BIC: penalty = ln(N)
+* For any N > 7, ln(N) > 2
+* Thus, BIC penalizes larger models more heavily.
+* They often agree.
+    - When they disagree, AIC chooses a larger model than BIC.
 
 
 ## What to watch out for
