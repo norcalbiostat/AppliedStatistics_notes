@@ -1,3 +1,248 @@
 # Generalized Linear Models {#glm}
 
-Or should this be Generalized Linear Models? Would allow us to talk about Logistic, log-linear and Poisson models. 
+One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely: 
+
+$$ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j $$
+
+When your outcome variable $y$ is non-continuous/non-normal, the above assumption fails dramatically. 
+
+Generalized Linear Models (GLM) allows for different data type outcomes by allowing the linear portion of the model ($\mathbf{X}\beta$) to be related to the outcome variable $y$ using a _link_ function, that allows the magnitude of the variance of the errors ($\sigma$) to be related to the predicted values themselves. 
+
+There are three overarching types of non-continuous outcomes that can be modeled with GLM's. 
+
+* Binary data: Logistic or Probit regression
+* Multinomial/categorical data: Multinomial or Ordinal Logistic regression. 
+* Count data: Poisson regression
+
+At this time these notes goes into depth for Logistic regression only, due to its commonplace in data analysis tools. 
+
+
+## Fitting GLMs in R
+
+Generalized linear regression models can be fit in R using the `glm()` function. This function can fit an entire _family_ of distributions and can be thought of as $E(Y|X) = C(X)$ where $C$ is the **link** function that relates $Y$ to $X$.
+
+* Linear regression: C = Identity function (no change)
+* Logistic regression: C = logit function
+* Poisson regression: C = log function
+
+The general syntax is similar to `lm()`, with the additional required `family=` argument. See `?family` for a list of options. 
+
+```{r, eval=FALSE}
+glm(y ~ x1 + x2 + x3, data=DATA, family="binomial")
+```
+
+## Logistic Regression 
+
+Goals: 
+
+* Assess the impact selected covariates have on the probability of an outcome occurring. 
+* Predict the likelihood / chance / probability of an event occurring given a certain covariate pattern.  
+
+Binary data can be fit using a _Logistic Model_ or a _Probit Model_.
+
+
+Consider an outcome variable $Y$ with two levels: Y = 1 if event, = 0 if no event. 
+
+Let $p_{i} = P(y_{i}=1)$. 
+
+The logistic model relates the probability of an event based on a linear combination of X's. 
+
+$$
+log\left(
+\frac{p_{i}}{1-p_{i}}
+\right) = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}
+$$
+
+Since the _odds_ are defined as the probability an event occurs divided by the  probability it does not occur: $(p/(1-p))$, the function $log\left(\frac{p_{i}}{1-p_{i}}\right)$ is also known as the _log odds_, or more commonly called the **_logit_**. This is the _link_ function for the logistic regression model. 
+
+```{r, fig.width=4, fig.height=3, fig.align='center', echo=FALSE}
+library(ggplot2)
+p <- seq(0, 1, by=.01)
+logit.p <- log(p/(1-p))
+qplot(logit.p, p, geom="line", xlab = "logit(p)", main="The logit transformation")
+```
+
+This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from $-\infty$ to $\infty$, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)
+
+Back solving the logistic model for $p_{i} = e^{\beta X} / (1+e^{\beta X})$ gives us the probability of an event. 
+
+$$
+p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+{1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+$$
+
+```{block2,  type='rmdtip'}
+The probit function uses the inverse CDF for the normal distribution as the link function. 
+```
+
+
+### Example: The effect of gender on Depression
+
+Is gender associated with depression? Read in the `depression` data and recode sex to be an indicator of being male. 
+```{r}
+depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt")
+names(depress) <- tolower(names(depress)) # make all variable names lower case. 
+```
+
+* Binary outcome variable: Symptoms of Depression (`cases`)
+* Binary predictor variable: Gender (`sex`) as an indicator of being female
+
+The outcome $y$ is a 0/1 Bernoulli random variable. The sum of a vector of Bernoulli's ($\sum_{i=1}^{n}y_{i}$) has a Binomial distribution. When we specify that `family = "binomial"` the `glm()` function auto-assigns "logit" link function. 
+
+```{r}
+dep_sex_model <- glm(cases ~ sex, data=depress, family="binomial")
+summary(dep_sex_model)
+```
+
+We exponentiate the coefficients to back transform the $\beta$ estimates into Odds Ratios
+```{r}
+exp(coef(dep_sex_model))
+```
+
+Females have 2.8 times the odds of showing signs of depression compared to males. 
+
+**Confidence Intervals**
+The OR is **not** a linear function of the $x's$, but $\beta$ is. This means that a CI for the OR is created by calculating a CI for $\beta$, and then exponentiating the endpoints. A 95% CI for the OR can be calculated as: 
+
+$$e^{\hat{\beta} \pm 1.96 SE_{\beta}} $$
+
+```{r}
+exp(confint(dep_sex_model))
+```
+
+### Multiple Logistic Regression 
+Just like multiple linear regression, additional predictors are simply included in the model using a `+` symbol. 
+```{r}
+mvmodel <- glm(cases ~ age + income + sex, data=depress, family="binomial")
+summary(mvmodel)
+```
+
+* The sign of the $\beta$ coefficients can be interpreted in the same manner as with linear regression. 
+* The odds of being depressed are less if the respondent has a higher income and is older, and higher if the respondent is female. 
+
+### Interpretation
+
+* The OR provides a directly understandable statistic for the relationship between $y$ and a specific $x$ given all other $x$'s in the model are fixed. 
+* For a continuous variable X with slope coefficient $\beta$, the quantity $e^{b}$ is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X. 
+* $exp(kb)$ is the incremental odds ratio corresponding to an increase of $k$ units in the variable X, assuming that the values of all other X variables remain unchanged. 
+
+**Where does $OR = e^{\beta}$ come from?**
+
+The full model is: 
+$$log(odds) = -0.676 - 0.02096*age - .03656*income + 0.92945*gender$$
+
+We want to calculate the Odds Ratio of depression for women compared to men. 
+$$ OR = \frac{Odds (Y=1|F)}{Odds (Y=1|M)} $$
+
+Write out the equations for men and women separately. 
+$$ = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945(1)}}
+          {e^{-0.676 - 0.02096*age - .03656*income + 0.92945(0)}}$$
+
+Applying rules of exponents to simplify.
+$$ = \frac{e^{-0.676}e^{- 0.02096*age}e^{- .03656*income}e^{0.92945(1)}}
+          {e^{-0.676}e^{- 0.02096*age}e^{- .03656*income}e^{0.92945(0)}}$$
+
+$$ = \frac{e^{0.92945(1)}}
+          {e^{0.92945(0)}}$$
+
+$$ = e^{0.92945} $$
+
+```{r}
+exp(.92945)
+exp(coef(mvmodel)[4])
+```
+
+The odds of a female being depressed are 2.53 times greater than the odds for Males after adjusting for the linear effects of age and income (p=.016). 
+
+
+#### Effect of a k unit change
+Sometimes a 1 unit change in a continuous variable is not meaningful. 
+
+```{r}
+exp(coef(mvmodel))
+exp(confint(mvmodel))
+```
+
+* The Adjusted odds ratio (AOR) for increase of 1 year of age is 0.98 (95%CI .96, 1.0)
+* How about a 10 year increase in age? $e^{10*\beta_{age}} = e^{-.21} = .81$
+
+```{r}
+exp(10*coef(mvmodel)[2])
+```
+with a confidence interval of
+```{r}
+round(exp(10*confint(mvmodel)[2,]),3)
+```
+
+Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
+
+##### Example: The relationship between income, employment status and depression. 
+
+Here I create the binary indicators of lowincome and underemployed as described in the textbook. In each case I ensure that missing data is retained.  
+```{r}
+depress$lowincome <- ifelse(depress$income < 10, 1, 0)
+depress$lowincome <- ifelse(is.na(depress$income), NA, depress$lowincome)
+
+depress$underemployed <- ifelse(depress$employ %in% c(2,3), 1, 0 )
+depress$underemployed <- ifelse(is.na(depress$employ) | depress$employ==7, NA, depress$underemployed)
+table(depress$underemployed, depress$employ, useNA="always")
+```
+
+The **Main Effects** model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income. 
+
+```{r}
+me_model <- glm(cases ~ lowincome + underemployed, data=depress, family="binomial")
+summary(me_model)
+```
+
+To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
+```{r}
+summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial"))
+```
+
+### Probability Interpretation
+For the above model of depression on age, income and gender the probability of depression is: 
+$$
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+$$
+
+Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
+
+```{r, echo=-1}
+library(dplyr)
+depress %>% summarize(age=mean(age), income=mean(income))
+```
+
+Plug the coefficient estimates and the values of the variables into the equation and calculate. 
+$$
+P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+$$
+
+```{r}
+XB.f <- -0.676 - 0.02096*(44.4) - .03656*(20.6) + 0.92945
+exp(XB.f) / (1+exp(XB.f))
+```
+$$
+P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+$$
+```{r}
+XB.m <- -0.676 - 0.02096*(44.4) - .03656*(20.6)
+exp(XB.m) / (1+exp(XB.m))
+```
+
+The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
+
+
+
+## Categorical Data
+
+
+
+
+## Count Data
+
+
+

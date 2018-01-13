@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Statistics II</title>
+  <meta name="description" content="Course notes for MATH 456 at CSU Chico">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Statistics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes for MATH 456 at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/MATH456_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Statistics II" />
+  
+  <meta name="twitter:description" content="Course notes for MATH 456 at CSU Chico" />
+  
+
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+
+
+<meta name="date" content="2018-01-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="fitting-glms-in-r.html">
+<link rel="next" href="categorical-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics II course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="prepare.html"><a href="prepare.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible Workflows</a></li>
+<li class="chapter" data-level="1.2" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3" data-path="data-editing-and-recoding.html"><a href="data-editing-and-recoding.html"><i class="fa fa-check"></i><b>1.3</b> Data Editing and Recoding</a></li>
+<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="data-transformations.html"><a href="data-transformations.html"><i class="fa fa-check"></i><b>1.5</b> Data Transformations</a></li>
+<li class="chapter" data-level="1.6" data-path="selecting-appropriate-analysis.html"><a href="selecting-appropriate-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Selecting Appropriate Analysis</a></li>
+<li class="chapter" data-level="1.7" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.7</b> Wide vs. Long data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>2.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#mathmatical-model"><i class="fa fa-check"></i><b>2.1.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#parameter-estimates"><i class="fa fa-check"></i><b>2.1.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="2.1.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#interval-estimation"><i class="fa fa-check"></i><b>2.1.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="2.1.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#corelation-coefficient"><i class="fa fa-check"></i><b>2.1.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="2.1.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#assumptions"><i class="fa fa-check"></i><b>2.1.5</b> Assumptions</a></li>
+<li class="chapter" data-level="2.1.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#slr-ex"><i class="fa fa-check"></i><b>2.1.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#types-of-x-variables"><i class="fa fa-check"></i><b>2.2.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#mathematical-model"><i class="fa fa-check"></i><b>2.2.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="2.2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>2.2.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#mlr-ex"><i class="fa fa-check"></i><b>2.2.4</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>2.3</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="2.4" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>2.4</b> Multicollinearity</a></li>
+<li class="chapter" data-level="2.5" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>2.5</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3</b> Model Building</a><ul>
+<li class="chapter" data-level="3.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>3.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>3.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="3.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>3.1.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>3.2</b> Stratification</a></li>
+<li class="chapter" data-level="3.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>3.3</b> Moderation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="moderation.html"><a href="moderation.html#example"><i class="fa fa-check"></i><b>3.3.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>3.4</b> Interactions</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="interactions.html"><a href="interactions.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+<li class="chapter" data-level="3.4.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>3.4.2</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>3.5</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>3.5.1</b> Confounding</a></li>
+<li class="chapter" data-level="3.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>3.5.2</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="3.5.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#best-subsets"><i class="fa fa-check"></i><b>3.5.3</b> Best Subsets</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>3.6</b> Comparing between models</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="comparing-between-models.html"><a href="comparing-between-models.html#coefficient-of-determination"><i class="fa fa-check"></i><b>3.6.1</b> Coefficient of Determination</a></li>
+<li class="chapter" data-level="3.6.2" data-path="comparing-between-models.html"><a href="comparing-between-models.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>3.6.2</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="3.6.3" data-path="comparing-between-models.html"><a href="comparing-between-models.html#bayesian-information-criterion"><i class="fa fa-check"></i><b>3.6.3</b> Bayesian Information Criterion</a></li>
+<li class="chapter" data-level="3.6.4" data-path="comparing-between-models.html"><a href="comparing-between-models.html#aic-vs-bic"><i class="fa fa-check"></i><b>3.6.4</b> AIC vs BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>3.7</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>4</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>4.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4.2</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="4.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-interpretation"><i class="fa fa-check"></i><b>4.2.4</b> Probability Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>4.3</b> Categorical Data</a></li>
+<li class="chapter" data-level="4.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>4.4</b> Count Data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logistic-regression" class="section level2">
+<h2><span class="header-section-number">4.2</span> Logistic Regression</h2>
+<p>Goals:</p>
+<ul>
+<li>Assess the impact selected covariates have on the probability of an outcome occurring.</li>
+<li>Predict the likelihood / chance / probability of an event occurring given a certain covariate pattern.</li>
+</ul>
+<p>Binary data can be fit using a <em>Logistic Model</em> or a <em>Probit Model</em>.</p>
+<p>Consider an outcome variable <span class="math inline">\(Y\)</span> with two levels: Y = 1 if event, = 0 if no event.</p>
+<p>Let <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>.</p>
+<p>The logistic model relates the probability of an event based on a linear combination of X’s.</p>
+<p><span class="math display">\[
+log\left(
+\frac{p_{i}}{1-p_{i}}
+\right) = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}
+\]</span></p>
+<p>Since the <em>odds</em> are defined as the probability an event occurs divided by the probability it does not occur: <span class="math inline">\((p/(1-p))\)</span>, the function <span class="math inline">\(log\left(\frac{p_{i}}{1-p_{i}}\right)\)</span> is also known as the <em>log odds</em>, or more commonly called the <strong><em>logit</em></strong>. This is the <em>link</em> function for the logistic regression model.</p>
+<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)</p>
+<p>Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
+<p><span class="math display">\[
+p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+{1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+\]</span></p>
+
+<div class="rmdtip">
+The probit function uses the inverse CDF for the normal distribution as the link function.
+</div>
+
+<div id="example-the-effect-of-gender-on-depression" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Example: The effect of gender on Depression</h3>
+<p>Is gender associated with depression? Read in the <code>depression</code> data and recode sex to be an indicator of being male.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/depress_081217.txt&quot;</span>)
+<span class="kw">names</span>(depress) &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(depress)) <span class="co"># make all variable names lower case. </span></code></pre></div>
+<ul>
+<li>Binary outcome variable: Symptoms of Depression (<code>cases</code>)</li>
+<li>Binary predictor variable: Gender (<code>sex</code>) as an indicator of being female</li>
+</ul>
+<p>The outcome <span class="math inline">\(y\)</span> is a 0/1 Bernoulli random variable. The sum of a vector of Bernoulli’s (<span class="math inline">\(\sum_{i=1}^{n}y_{i}\)</span>) has a Binomial distribution. When we specify that <code>family = &quot;binomial&quot;</code> the <code>glm()</code> function auto-assigns “logit” link function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dep_sex_model &lt;-<span class="st"> </span><span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>sex, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+<span class="kw">summary</span>(dep_sex_model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.7023  -0.7023  -0.4345  -0.4345   2.1941  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***
+## sex           1.0386     0.3767   2.757  0.00583 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 259.40  on 292  degrees of freedom
+## AIC: 263.4
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>We exponentiate the coefficients to back transform the <span class="math inline">\(\beta\)</span> estimates into Odds Ratios</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">coef</span>(dep_sex_model))</code></pre></div>
+<pre><code>## (Intercept)         sex 
+##   0.0990099   2.8251748</code></pre>
+<p>Females have 2.8 times the odds of showing signs of depression compared to males.</p>
+<p><strong>Confidence Intervals</strong> The OR is <strong>not</strong> a linear function of the <span class="math inline">\(x&#39;s\)</span>, but <span class="math inline">\(\beta\)</span> is. This means that a CI for the OR is created by calculating a CI for <span class="math inline">\(\beta\)</span>, and then exponentiating the endpoints. A 95% CI for the OR can be calculated as:</p>
+<p><span class="math display">\[e^{\hat{\beta} \pm 1.96 SE_{\beta}} \]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">confint</span>(dep_sex_model))</code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre><code>##                  2.5 %    97.5 %
+## (Intercept) 0.04843014 0.1801265
+## sex         1.39911056 6.2142384</code></pre>
+</div>
+<div id="multiple-logistic-regression" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Multiple Logistic Regression</h3>
+<p>Just like multiple linear regression, additional predictors are simply included in the model using a <code>+</code> symbol.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mvmodel &lt;-<span class="st"> </span><span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+<span class="kw">summary</span>(mvmodel)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, 
+##     data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.0249  -0.6524  -0.5050  -0.3179   2.5305  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept) -0.67646    0.57881  -1.169  0.24253   
+## age         -0.02096    0.00904  -2.318  0.02043 * 
+## income      -0.03656    0.01409  -2.595  0.00946 **
+## sex          0.92945    0.38582   2.409  0.01600 * 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 247.54  on 290  degrees of freedom
+## AIC: 255.54
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<ul>
+<li>The sign of the <span class="math inline">\(\beta\)</span> coefficients can be interpreted in the same manner as with linear regression.</li>
+<li>The odds of being depressed are less if the respondent has a higher income and is older, and higher if the respondent is female.</li>
+</ul>
+</div>
+<div id="interpretation" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Interpretation</h3>
+<ul>
+<li>The OR provides a directly understandable statistic for the relationship between <span class="math inline">\(y\)</span> and a specific <span class="math inline">\(x\)</span> given all other <span class="math inline">\(x\)</span>’s in the model are fixed.</li>
+<li>For a continuous variable X with slope coefficient <span class="math inline">\(\beta\)</span>, the quantity <span class="math inline">\(e^{b}\)</span> is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X.</li>
+<li><span class="math inline">\(exp(kb)\)</span> is the incremental odds ratio corresponding to an increase of <span class="math inline">\(k\)</span> units in the variable X, assuming that the values of all other X variables remain unchanged.</li>
+</ul>
+<p><strong>Where does <span class="math inline">\(OR = e^{\beta}\)</span> come from?</strong></p>
+<p>The full model is: <span class="math display">\[log(odds) = -0.676 - 0.02096*age - .03656*income + 0.92945*gender\]</span></p>
+<p>We want to calculate the Odds Ratio of depression for women compared to men. <span class="math display">\[ OR = \frac{Odds (Y=1|F)}{Odds (Y=1|M)} \]</span></p>
+<p>Write out the equations for men and women separately. <span class="math display">\[ = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945(1)}}
+          {e^{-0.676 - 0.02096*age - .03656*income + 0.92945(0)}}\]</span></p>
+<p>Applying rules of exponents to simplify. <span class="math display">\[ = \frac{e^{-0.676}e^{- 0.02096*age}e^{- .03656*income}e^{0.92945(1)}}
+          {e^{-0.676}e^{- 0.02096*age}e^{- .03656*income}e^{0.92945(0)}}\]</span></p>
+<p><span class="math display">\[ = \frac{e^{0.92945(1)}}
+          {e^{0.92945(0)}}\]</span></p>
+<p><span class="math display">\[ = e^{0.92945} \]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(.<span class="dv">92945</span>)</code></pre></div>
+<pre><code>## [1] 2.533116</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">coef</span>(mvmodel)[<span class="dv">4</span>])</code></pre></div>
+<pre><code>##      sex 
+## 2.533112</code></pre>
+<p>The odds of a female being depressed are 2.53 times greater than the odds for Males after adjusting for the linear effects of age and income (p=.016).</p>
+<div id="effect-of-a-k-unit-change" class="section level4">
+<h4><span class="header-section-number">4.2.3.1</span> Effect of a k unit change</h4>
+<p>Sometimes a 1 unit change in a continuous variable is not meaningful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">coef</span>(mvmodel))</code></pre></div>
+<pre><code>## (Intercept)         age      income         sex 
+##   0.5084157   0.9792605   0.9640969   2.5331122</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">confint</span>(mvmodel))</code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre><code>##                 2.5 %    97.5 %
+## (Intercept) 0.1585110 1.5491849
+## age         0.9615593 0.9964037
+## income      0.9357319 0.9891872
+## sex         1.2293435 5.6586150</code></pre>
+<ul>
+<li>The Adjusted odds ratio (AOR) for increase of 1 year of age is 0.98 (95%CI .96, 1.0)</li>
+<li>How about a 10 year increase in age? <span class="math inline">\(e^{10*\beta_{age}} = e^{-.21} = .81\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="dv">10</span><span class="op">*</span><span class="kw">coef</span>(mvmodel)[<span class="dv">2</span>])</code></pre></div>
+<pre><code>##       age 
+## 0.8109285</code></pre>
+<p>with a confidence interval of</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">exp</span>(<span class="dv">10</span><span class="op">*</span><span class="kw">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre><code>##  2.5 % 97.5 % 
+##  0.676  0.965</code></pre>
+<p>Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them.</p>
+<div id="example-the-relationship-between-income-employment-status-and-depression." class="section level5">
+<h5><span class="header-section-number">4.2.3.1.1</span> Example: The relationship between income, employment status and depression.</h5>
+<p>Here I create the binary indicators of lowincome and underemployed as described in the textbook. In each case I ensure that missing data is retained.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress<span class="op">$</span>lowincome &lt;-<span class="st"> </span><span class="kw">ifelse</span>(depress<span class="op">$</span>income <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">0</span>)
+depress<span class="op">$</span>lowincome &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(depress<span class="op">$</span>income), <span class="ot">NA</span>, depress<span class="op">$</span>lowincome)
+
+depress<span class="op">$</span>underemployed &lt;-<span class="st"> </span><span class="kw">ifelse</span>(depress<span class="op">$</span>employ <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="dv">1</span>, <span class="dv">0</span> )
+depress<span class="op">$</span>underemployed &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(depress<span class="op">$</span>employ) <span class="op">|</span><span class="st"> </span>depress<span class="op">$</span>employ<span class="op">==</span><span class="dv">7</span>, <span class="ot">NA</span>, depress<span class="op">$</span>underemployed)
+<span class="kw">table</span>(depress<span class="op">$</span>underemployed, depress<span class="op">$</span>employ, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)</code></pre></div>
+<pre><code>##       
+##         FT Houseperson In School Other  PT Retired Unemp &lt;NA&gt;
+##   0    167          27         2     4  42      38    14    0
+##   &lt;NA&gt;   0           0         0     0   0       0     0    0</code></pre>
+<p>The <strong>Main Effects</strong> model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">me_model &lt;-<span class="st"> </span><span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>lowincome <span class="op">+</span><span class="st"> </span>underemployed, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+<span class="kw">summary</span>(me_model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = cases ~ lowincome + underemployed, family = &quot;binomial&quot;, 
+##     data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.6431  -0.6312  -0.5957  -0.5957   1.9062  
+## 
+## Coefficients: (1 not defined because of singularities)
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)    -1.6393     0.1902  -8.618   &lt;2e-16 ***
+## lowincome       0.1684     0.3294   0.511    0.609    
+## underemployed       NA         NA      NA       NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 267.87  on 292  degrees of freedom
+## AIC: 271.87
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>lowincome <span class="op">+</span><span class="st"> </span>underemployed <span class="op">+</span><span class="st"> </span>lowincome<span class="op">*</span>underemployed, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>))</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = cases ~ lowincome + underemployed + lowincome * 
+##     underemployed, family = &quot;binomial&quot;, data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.6431  -0.6312  -0.5957  -0.5957   1.9062  
+## 
+## Coefficients: (2 not defined because of singularities)
+##                         Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              -1.6393     0.1902  -8.618   &lt;2e-16 ***
+## lowincome                 0.1684     0.3294   0.511    0.609    
+## underemployed                 NA         NA      NA       NA    
+## lowincome:underemployed       NA         NA      NA       NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 267.87  on 292  degrees of freedom
+## AIC: 271.87
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</div>
+<div id="probability-interpretation" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Probability Interpretation</h3>
+<p>For the above model of depression on age, income and gender the probability of depression is: <span class="math display">\[
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+\]</span></p>
+<p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.3.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))</code></pre></div>
+<pre><code>##        age   income
+## 1 44.41497 20.57483</code></pre>
+<p>Plug the coefficient estimates and the values of the variables into the equation and calculate. <span class="math display">\[
+P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">XB.f &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span>.<span class="dv">03656</span><span class="op">*</span>(<span class="fl">20.6</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.92945</span>
+<span class="kw">exp</span>(XB.f) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.f))</code></pre></div>
+<pre><code>## [1] 0.1930504</code></pre>
+<p><span class="math display">\[
+P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">XB.m &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span>.<span class="dv">03656</span><span class="op">*</span>(<span class="fl">20.6</span>)
+<span class="kw">exp</span>(XB.m) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.m))</code></pre></div>
+<pre><code>## [1] 0.08629312</code></pre>
+<p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fitting-glms-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="categorical-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+<!-- </html> -->

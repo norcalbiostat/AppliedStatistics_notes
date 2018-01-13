@@ -82,7 +82,7 @@ $$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
 
 
 
-### Example {slr-ex}
+### Example {#slr-ex}
 
 Using a cleaned version of the Lung function data set, lets explore the relationship between height and FEV for fathers in this data set. 
 
@@ -189,7 +189,7 @@ $$ || \mathbf{y} - \mathbf{X}\mathbf{\beta} ||^{2} $$
 The details of methods to calculate the Least Squares estimate of $\beta$'s is left to a course in mathematical statistics. 
 
 
-### Example {mlr-ex}
+### Example {#mlr-ex}
 
 The analysis in example @slr-ex concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
 
