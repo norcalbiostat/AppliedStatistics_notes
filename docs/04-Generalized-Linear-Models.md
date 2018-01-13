@@ -1,5 +1,11 @@
 # Generalized Linear Models {#glm}
 
+
+```r
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+
 One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely: 
 
 $$ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j $$
@@ -32,7 +38,7 @@ The general syntax is similar to `lm()`, with the additional required `family=` 
 glm(y ~ x1 + x2 + x3, data=DATA, family="binomial")
 ```
 
-## Logistic Regression 
+## Binary Data
 
 Goals: 
 
@@ -56,7 +62,7 @@ $$
 
 Since the _odds_ are defined as the probability an event occurs divided by the  probability it does not occur: $(p/(1-p))$, the function $log\left(\frac{p_{i}}{1-p_{i}}\right)$ is also known as the _log odds_, or more commonly called the **_logit_**. This is the _link_ function for the logistic regression model. 
 
-<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" />
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" />
 
 This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from $-\infty$ to $\infty$, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)
 
@@ -136,10 +142,6 @@ $$e^{\hat{\beta} \pm 1.96 SE_{\beta}} $$
 
 ```r
 exp(confint(dep_sex_model))
-```
-
-```
-## Waiting for profiling to be done...
 ```
 
 ```
@@ -253,10 +255,6 @@ exp(confint(mvmodel))
 ```
 
 ```
-## Waiting for profiling to be done...
-```
-
-```
 ##                 2.5 %    97.5 %
 ## (Intercept) 0.1585110 1.5491849
 ## age         0.9615593 0.9964037
@@ -280,10 +278,6 @@ with a confidence interval of
 
 ```r
 round(exp(10*confint(mvmodel)[2,]),3)
-```
-
-```
-## Waiting for profiling to be done...
 ```
 
 ```
@@ -382,8 +376,16 @@ summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=de
 ## Number of Fisher Scoring iterations: 4
 ```
 
-### Probability Interpretation
-For the above model of depression on age, income and gender the probability of depression is: 
+### Classification
+
+* Sometimes Odds Ratios can be difficult to interpret or understand. 
+* Sometimes you just want to report the probability of the event occuring. 
+* Or sometimes you want to predict whether or not a new individual is going to have the event. 
+
+For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
+
+
+For the main effects model of depression on age, income and gender the predicted probability of depression is: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
@@ -391,27 +393,6 @@ $$
 
 Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
 
-
-```
-## Warning: package 'dplyr' was built under R version 3.3.3
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
 
 ```r
 depress %>% summarize(age=mean(age), income=mean(income))
@@ -453,9 +434,142 @@ exp(XB.m) / (1+exp(XB.m))
 
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
+### Predictions using R
+
+So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way i'm doing that calculation for every person in the data set. 
+
+Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Any row with missing data on any variable used in the model will NOT get a predicted value.</div>\EndKnitrBlock{rmdcaution}
+
+
+The `predict` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
+
+```r
+model.pred.prob <- predict(mvmodel, type='response')
+head(model.pred.prob)
+```
+
+```
+##          1          2          3          4          5          6 
+## 0.21108906 0.08014012 0.15266203 0.24527840 0.15208679 0.17056409
+```
+
+
+#### Distribution of Predictions
+How well does our model do to predict depression? 
+
+
+```r
+library(ggplot2)
+plot.mpp <- data.frame(prediction = model.pred.prob, 
+                       truth = factor(mvmodel$y, labels=c("Not Depressed", "Depressed")))
+
+ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) + 
+      geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
+```
+
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+![](images/q.png) What things can you infer from this plot?
+
+![](images/q.png) What would happen if we used a cutoff value of 0.5? What about 0.2? 
+
+#### Moving the cutoff value
+
+* So how do we balance the true postives and true negatives? 
+* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
+* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
+    - calculate `prediction` using the model
+    - calculate the model `performance` on both true positive rate and true negative rate for a whole range of cutoff values. 
+    - `plot` the curve. 
+        - The `colorize` option colors the curve according to the probability cutoff point. 
+
+
+```r
+library(ROCR)
+pr <- prediction(model.pred.prob, mvmodel$y)
+perf <- performance(pr, measure="tpr", x.measure="fpr")
+plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
+abline(a=0, b=1, lty=2)
+```
+
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+
+ROC curves: 
+
+* Show tradeoff between sensitivity and specificity 
+* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
+* can give you a measure of overall model accuracy by calculating the area under the curve (auc). 
+
+
+```r
+auc <- performance(pr, 'auc')
+auc@y.values
+```
+
+```
+## [[1]]
+## [1] 0.695041
+```
+
+### Model Performance
+
+* Say we decide that a value of 0.15 is our optimal cutoff value. 
+* We can use this probability to classify each row into groups. 
+    - The assigned class values must match the data type and levels of the true value.
+    - It also has to be in the same order, so the `0` group needs to come first. 
+* Then we calculate a [[ConfusionMatrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similiarily named function from the `caret` package. 
+
+
+```r
+library(caret)
+
+plot.mpp$pred.class <- ifelse(plot.mpp$prediction <0.15, 0,1)
+plot.mpp$pred.class <- factor(plot.mpp$pred.class, labels=c("Not Depressed", "Depressed"))
+
+confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##                Reference
+## Prediction      Not Depressed Depressed
+##   Not Depressed           123        10
+##   Depressed               121        40
+##                                           
+##                Accuracy : 0.5544          
+##                  95% CI : (0.4956, 0.6121)
+##     No Information Rate : 0.8299          
+##     P-Value [Acc > NIR] : 1               
+##                                           
+##                   Kappa : 0.1615          
+##  Mcnemar's Test P-Value : <2e-16          
+##                                           
+##             Sensitivity : 0.8000          
+##             Specificity : 0.5041          
+##          Pos Pred Value : 0.2484          
+##          Neg Pred Value : 0.9248          
+##              Prevalence : 0.1701          
+##          Detection Rate : 0.1361          
+##    Detection Prevalence : 0.5476          
+##       Balanced Accuracy : 0.6520          
+##                                           
+##        'Positive' Class : Depressed       
+## 
+```
+
+
+* Sensitivity: P(True + |Predicted +)
+* Specificity: P(True - |Predicted -)
+* Accuracy: n_{11} + n_{22} / N (proportion of entries on main diagonal)
+* Balanced Accuracy: [(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2 
+* False Positive Rate: P(Predicted + | True -)
 
 
 ## Categorical Data
+
 
 
 

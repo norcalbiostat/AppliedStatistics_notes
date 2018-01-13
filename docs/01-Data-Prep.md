@@ -90,7 +90,7 @@ class(depress$MARITAL)
 qplot(y=INCOME, x=MARITAL, data=depress, geom="boxplot")
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 Boxplots are nice because they clearly show the range where 50% of the data lie and any potential outliers. Boxplots can also indicate skewness, but sometimes it is helpful to visualize the location of the mean as well as the median. `ggplot2` has a nice `stat_summary` layer that will calculate and add the means to the current plot. 
 
@@ -100,7 +100,7 @@ qplot(y=INCOME, x=MARITAL, data=depress, geom="boxplot") +
    stat_summary(fun.y=mean, colour="blue", size=3, geom="point")
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ## Data Editing and Recoding
 
@@ -187,7 +187,7 @@ b <- ggplot(depress, aes(x=INCOME, y=MARITAL2, color=MARITAL2), main="With jitte
 grid.arrange(a, b, ncol=2)
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-10-1.png" width="960" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-10-1.png" width="960" />
 
 * What do you think `coord_flip()` does? Look at the difference in the X and Y values between
   plot a and plot b. 
@@ -208,7 +208,7 @@ boxplot(depress$AGE)
 hist(depress$AGE)
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-11-1.png" width="960" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-11-1.png" width="960" />
 
 Just looking at the data graphically raises no red flags. The boxplot shows no outlying values and the histogram does not look wildly skewed. This is where knowledge about the data set is essential. The codebook does not provide a valid range for the data, but the description of the data starting on page 3 in the textbook clarifies that this data set is on adults. In the research world, this specifies 18 years or older. 
 
@@ -272,7 +272,7 @@ hist(depress$INCOME, prob=TRUE, xlab="Annual income (in thousands)",
 lines(density(depress$INCOME), col="blue")
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ```r
 summary(depress$INCOME)
@@ -314,7 +314,7 @@ Another common method of assessing normality is to create a normal probability (
 qqnorm(depress$INCOME);qqline(depress$INCOME, col="red")
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or `U` shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created. 
 
@@ -340,7 +340,7 @@ qqnorm(loginc, main = "Natural Log"); qqline(loginc, col="blue")
 qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
 ```
 
-<img src="01-Preparing-Data-for-Analysis_files/figure-html/unnamed-chunk-22-1.png" width="960" />
+<img src="01-Data-Prep_files/figure-html/unnamed-chunk-22-1.png" width="960" />
 
 
 ## Selecting Appropriate Analysis

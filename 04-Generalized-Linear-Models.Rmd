@@ -1,5 +1,10 @@
 # Generalized Linear Models {#glm}
 
+```{r, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+
 One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely: 
 
 $$ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j $$
@@ -31,7 +36,7 @@ The general syntax is similar to `lm()`, with the additional required `family=` 
 glm(y ~ x1 + x2 + x3, data=DATA, family="binomial")
 ```
 
-## Logistic Regression 
+## Binary Data
 
 Goals: 
 
@@ -200,8 +205,16 @@ To formally test whether an interaction term is necessary, we add the interactio
 summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial"))
 ```
 
-### Probability Interpretation
-For the above model of depression on age, income and gender the probability of depression is: 
+### Classification
+
+* Sometimes Odds Ratios can be difficult to interpret or understand. 
+* Sometimes you just want to report the probability of the event occuring. 
+* Or sometimes you want to predict whether or not a new individual is going to have the event. 
+
+For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
+
+
+For the main effects model of depression on age, income and gender the predicted probability of depression is: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
@@ -235,9 +248,95 @@ exp(XB.m) / (1+exp(XB.m))
 
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
+### Predictions using R
+
+So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way i'm doing that calculation for every person in the data set. 
+
+Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
+
+```{block2,  type='rmdcaution'}
+Any row with missing data on any variable used in the model will NOT get a predicted value.
+```
+
+
+The `predict` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
+```{r}
+model.pred.prob <- predict(mvmodel, type='response')
+head(model.pred.prob)
+```
+
+
+#### Distribution of Predictions
+How well does our model do to predict depression? 
+
+```{r}
+library(ggplot2)
+plot.mpp <- data.frame(prediction = model.pred.prob, 
+                       truth = factor(mvmodel$y, labels=c("Not Depressed", "Depressed")))
+
+ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) + 
+      geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
+```
+
+![](images/q.png) What things can you infer from this plot?
+
+![](images/q.png) What would happen if we used a cutoff value of 0.5? What about 0.2? 
+
+#### Moving the cutoff value
+
+* So how do we balance the true postives and true negatives? 
+* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
+* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
+    - calculate `prediction` using the model
+    - calculate the model `performance` on both true positive rate and true negative rate for a whole range of cutoff values. 
+    - `plot` the curve. 
+        - The `colorize` option colors the curve according to the probability cutoff point. 
+
+```{r}
+library(ROCR)
+pr <- prediction(model.pred.prob, mvmodel$y)
+perf <- performance(pr, measure="tpr", x.measure="fpr")
+plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
+abline(a=0, b=1, lty=2)
+```
+
+ROC curves: 
+
+* Show tradeoff between sensitivity and specificity 
+* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
+* can give you a measure of overall model accuracy by calculating the area under the curve (auc). 
+
+```{r}
+auc <- performance(pr, 'auc')
+auc@y.values
+```
+
+### Model Performance
+
+* Say we decide that a value of 0.15 is our optimal cutoff value. 
+* We can use this probability to classify each row into groups. 
+    - The assigned class values must match the data type and levels of the true value.
+    - It also has to be in the same order, so the `0` group needs to come first. 
+* Then we calculate a [[ConfusionMatrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similiarily named function from the `caret` package. 
+
+```{r}
+library(caret)
+
+plot.mpp$pred.class <- ifelse(plot.mpp$prediction <0.15, 0,1)
+plot.mpp$pred.class <- factor(plot.mpp$pred.class, labels=c("Not Depressed", "Depressed"))
+
+confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
+```
+
+* Sensitivity: P(True + |Predicted +)
+* Specificity: P(True - |Predicted -)
+* Accuracy: $n_{11} + n_{22} / N$ (proportion of entries on main diagonal)
+* Balanced Accuracy: [$(n_{11}/n_{.1}) + (n_{22}/n_{.2})$]/2 
+* False Positive Rate: P(Predicted + | True -)
 
 
 ## Categorical Data
+
 
 
 

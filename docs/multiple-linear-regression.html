@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -160,11 +160,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>4</b> Generalized Linear Models</a><ul>
 <li class="chapter" data-level="4.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>4.1</b> Fitting GLMs in R</a></li>
-<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4.2</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="4.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="4.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
-<li class="chapter" data-level="4.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-interpretation"><i class="fa fa-check"></i><b>4.2.4</b> Probability Interpretation</a></li>
+<li class="chapter" data-level="4.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>4.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="4.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>4.2.4</b> Classification</a></li>
+<li class="chapter" data-level="4.2.5" data-path="binary-data.html"><a href="binary-data.html#predictions-using-r"><i class="fa fa-check"></i><b>4.2.5</b> Predictions using R</a></li>
+<li class="chapter" data-level="4.2.6" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>4.2.6</b> Model Performance</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>4.3</b> Categorical Data</a></li>
 <li class="chapter" data-level="4.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>4.4</b> Count Data</a></li>
@@ -329,12 +331,14 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-<!-- </html> -->
+</html>

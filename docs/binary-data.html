@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -160,11 +160,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>4</b> Generalized Linear Models</a><ul>
 <li class="chapter" data-level="4.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>4.1</b> Fitting GLMs in R</a></li>
-<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4.2</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="4.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="4.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
-<li class="chapter" data-level="4.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-interpretation"><i class="fa fa-check"></i><b>4.2.4</b> Probability Interpretation</a></li>
+<li class="chapter" data-level="4.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>4.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="4.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>4.2.4</b> Classification</a></li>
+<li class="chapter" data-level="4.2.5" data-path="binary-data.html"><a href="binary-data.html#predictions-using-r"><i class="fa fa-check"></i><b>4.2.5</b> Predictions using R</a></li>
+<li class="chapter" data-level="4.2.6" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>4.2.6</b> Model Performance</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>4.3</b> Categorical Data</a></li>
 <li class="chapter" data-level="4.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>4.4</b> Count Data</a></li>
@@ -189,8 +191,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression" class="section level2">
-<h2><span class="header-section-number">4.2</span> Logistic Regression</h2>
+<div id="binary-data" class="section level2">
+<h2><span class="header-section-number">4.2</span> Binary Data</h2>
 <p>Goals:</p>
 <ul>
 <li>Assess the impact selected covariates have on the probability of an outcome occurring.</li>
@@ -206,7 +208,7 @@ log\left(
 \right) = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}
 \]</span></p>
 <p>Since the <em>odds</em> are defined as the probability an event occurs divided by the probability it does not occur: <span class="math inline">\((p/(1-p))\)</span>, the function <span class="math inline">\(log\left(\frac{p_{i}}{1-p_{i}}\right)\)</span> is also known as the <em>log odds</em>, or more commonly called the <strong><em>logit</em></strong>. This is the <em>link</em> function for the logistic regression model.</p>
-<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p>This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)</p>
 <p>Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
 <p><span class="math display">\[
@@ -260,7 +262,6 @@ The probit function uses the inverse CDF for the normal distribution as the link
 <p><strong>Confidence Intervals</strong> The OR is <strong>not</strong> a linear function of the <span class="math inline">\(x&#39;s\)</span>, but <span class="math inline">\(\beta\)</span> is. This means that a CI for the OR is created by calculating a CI for <span class="math inline">\(\beta\)</span>, and then exponentiating the endpoints. A 95% CI for the OR can be calculated as:</p>
 <p><span class="math display">\[e^{\hat{\beta} \pm 1.96 SE_{\beta}} \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">confint</span>(dep_sex_model))</code></pre></div>
-<pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                  2.5 %    97.5 %
 ## (Intercept) 0.04843014 0.1801265
 ## sex         1.39911056 6.2142384</code></pre>
@@ -330,7 +331,6 @@ The probit function uses the inverse CDF for the normal distribution as the link
 <pre><code>## (Intercept)         age      income         sex 
 ##   0.5084157   0.9792605   0.9640969   2.5331122</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="kw">confint</span>(mvmodel))</code></pre></div>
-<pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                 2.5 %    97.5 %
 ## (Intercept) 0.1585110 1.5491849
 ## age         0.9615593 0.9964037
@@ -345,7 +345,6 @@ The probit function uses the inverse CDF for the normal distribution as the link
 ## 0.8109285</code></pre>
 <p>with a confidence interval of</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">exp</span>(<span class="dv">10</span><span class="op">*</span><span class="kw">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</code></pre></div>
-<pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##  2.5 % 97.5 % 
 ##  0.676  0.965</code></pre>
 <p>Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them.</p>
@@ -419,22 +418,19 @@ depress<span class="op">$</span>underemployed &lt;-<span class="st"> </span><spa
 </div>
 </div>
 </div>
-<div id="probability-interpretation" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Probability Interpretation</h3>
-<p>For the above model of depression on age, income and gender the probability of depression is: <span class="math display">\[
+<div id="classification" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Classification</h3>
+<ul>
+<li>Sometimes Odds Ratios can be difficult to interpret or understand.</li>
+<li>Sometimes you just want to report the probability of the event occuring.</li>
+<li>Or sometimes you want to predict whether or not a new individual is going to have the event.</li>
+</ul>
+<p>For all of these, we need to calculate <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>, the probability of the event.</p>
+<p>For the main effects model of depression on age, income and gender the predicted probability of depression is: <span class="math display">\[
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 \]</span></p>
 <p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.3.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))</code></pre></div>
 <pre><code>##        age   income
 ## 1 44.41497 20.57483</code></pre>
@@ -453,6 +449,117 @@ P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}
 <span class="kw">exp</span>(XB.m) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.m))</code></pre></div>
 <pre><code>## [1] 0.08629312</code></pre>
 <p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p>
+</div>
+<div id="predictions-using-r" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Predictions using R</h3>
+<p>So what if you want to get the model predicted probability of the event for all individuals in the data set? There’s no way i’m doing that calculation for every person in the data set.</p>
+<p>Using the main effects model from above, stored in the object <code>mvmodel</code>, we can call the <code>predict()</code> command to generate a vector of predictions for each row used in the model.</p>
+
+<div class="rmdcaution">
+Any row with missing data on any variable used in the model will NOT get a predicted value.
+</div>
+
+<p>The <code>predict</code> function can calculate predictions for any GLM. The model object <code>mvmodel</code> stores the information that it was a logistic regression.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.pred.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mvmodel, <span class="dt">type=</span><span class="st">&#39;response&#39;</span>)
+<span class="kw">head</span>(model.pred.prob)</code></pre></div>
+<pre><code>##          1          2          3          4          5          6 
+## 0.21108906 0.08014012 0.15266203 0.24527840 0.15208679 0.17056409</code></pre>
+<div id="distribution-of-predictions" class="section level4">
+<h4><span class="header-section-number">4.2.5.1</span> Distribution of Predictions</h4>
+<p>How well does our model do to predict depression?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prediction =</span> model.pred.prob, 
+                       <span class="dt">truth =</span> <span class="kw">factor</span>(mvmodel<span class="op">$</span>y, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))
+
+<span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>prediction, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="images/q.png" /> What things can you infer from this plot?</p>
+<p><img src="images/q.png" /> What would happen if we used a cutoff value of 0.5? What about 0.2?</p>
+</div>
+<div id="moving-the-cutoff-value" class="section level4">
+<h4><span class="header-section-number">4.2.5.2</span> Moving the cutoff value</h4>
+<ul>
+<li>So how do we balance the true postives and true negatives?</li>
+<li>We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot.</li>
+<li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
+<ul>
+<li>calculate <code>prediction</code> using the model</li>
+<li>calculate the model <code>performance</code> on both true positive rate and true negative rate for a whole range of cutoff values.</li>
+<li><code>plot</code> the curve.
+<ul>
+<li>The <code>colorize</code> option colors the curve according to the probability cutoff point.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ROCR)
+pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)
+<span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))
+<span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>ROC curves:</p>
+<ul>
+<li>Show tradeoff between sensitivity and specificity</li>
+<li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
+<li>can give you a measure of overall model accuracy by calculating the area under the curve (auc).</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="st">&#39;auc&#39;</span>)
+auc<span class="op">@</span>y.values</code></pre></div>
+<pre><code>## [[1]]
+## [1] 0.695041</code></pre>
+</div>
+</div>
+<div id="model-performance" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Model Performance</h3>
+<ul>
+<li>Say we decide that a value of 0.15 is our optimal cutoff value.</li>
+<li>We can use this probability to classify each row into groups.
+<ul>
+<li>The assigned class values must match the data type and levels of the true value.</li>
+<li>It also has to be in the same order, so the <code>0</code> group needs to come first.</li>
+</ul></li>
+<li>Then we calculate a <a href="https://en.wikipedia.org/wiki/Confusion_matrix">[ConfusionMatrix]</a> using the similiarily named function from the <code>caret</code> package.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+
+plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">ifelse</span>(plot.mpp<span class="op">$</span>prediction <span class="op">&lt;</span><span class="fl">0.15</span>, <span class="dv">0</span>,<span class="dv">1</span>)
+plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.mpp<span class="op">$</span>pred.class, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>))
+
+<span class="kw">confusionMatrix</span>(plot.mpp<span class="op">$</span>pred.class, plot.mpp<span class="op">$</span>truth, <span class="dt">positive=</span><span class="st">&quot;Depressed&quot;</span>)</code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##                Reference
+## Prediction      Not Depressed Depressed
+##   Not Depressed           123        10
+##   Depressed               121        40
+##                                           
+##                Accuracy : 0.5544          
+##                  95% CI : (0.4956, 0.6121)
+##     No Information Rate : 0.8299          
+##     P-Value [Acc &gt; NIR] : 1               
+##                                           
+##                   Kappa : 0.1615          
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
+##                                           
+##             Sensitivity : 0.8000          
+##             Specificity : 0.5041          
+##          Pos Pred Value : 0.2484          
+##          Neg Pred Value : 0.9248          
+##              Prevalence : 0.1701          
+##          Detection Rate : 0.1361          
+##    Detection Prevalence : 0.5476          
+##       Balanced Accuracy : 0.6520          
+##                                           
+##        &#39;Positive&#39; Class : Depressed       
+## </code></pre>
+<ul>
+<li>Sensitivity: P(True + |Predicted +)</li>
+<li>Specificity: P(True - |Predicted -)</li>
+<li>Accuracy: n_{11} + n_{22} / N (proportion of entries on main diagonal)</li>
+<li>Balanced Accuracy: [(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2</li>
+<li>False Positive Rate: P(Predicted + | True -)</li>
+</ul>
 </div>
 </div>
             </section>
@@ -506,12 +613,14 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-<!-- </html> -->
+</html>
