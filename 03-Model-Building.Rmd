@@ -319,7 +319,7 @@ Take home message: Don't use these.
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
-### Best Subsets
+### Best Subsets (PMA5 Section 8.7)
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -332,13 +332,15 @@ Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.ama
 
 ## Comparing between models
 When working with multiple models, how do you choose between models? 
+There are several measures we can use to compare between competing models. 
 
-### Coefficient of Determination
+
+1. **Multiple $R^{2}$**
 If the model explains a large amount of variation in the outcome that's good right? So we could consider using $R^{2}$ as a selection criteria and trying to find the model that maximizes this value. 
 
 The residual sum of squares (RSS in the book or SSE) can be written as $\sum(Y-\hat{Y})^{2}(1-R^{2})$. Therefore minimizing the RSS is equivalent to maximizing the multiple correlation coefficient.  
 
-* **Multiple $R^{2}$**
+
 Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
     - Ex. 1: N = 100, P = 1, E($R^{2}$) = 0.01
     - Ex. 2: N = 21, P = 10, E($R^{2}$) = 0.5
@@ -347,7 +349,7 @@ Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the 
 Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
 
 
-* **Adjusted $R^{2}$**
+2. **Adjusted $R^{2}$**
 To alleviate bias use Mean squares instead of SS. 
 
 $R^{2} = 1-\frac{Model MS}{Total MS}$
@@ -358,9 +360,17 @@ $R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}$
 
 Now Adjusted $R^{2}$ is approximately unbiased and won't inflate as $p$ increases. 
 
+3. **Mallows $C_{p}$**
+
+$$
+    C_{p} = (N-P-1)\left(\frac{RMSE}{\hat{\sigma}^{2}} -1 \right) + (P+1)
+$$
+
+* Smaller is better
+* When all variables are chosen, $P+1$ is at it's maximum but the other part of $C_{p}$ is zero since $RMSE$==$\hat{\sigma}^{2}$
 
 
-### Akaike Information Criterion (AIC)
+4. **Akaike Information Criterion (AIC)**
 
 * A penalty is applied to the deviance that increases as the number of
   parameters $p$ increase. 
@@ -370,15 +380,16 @@ Now Adjusted $R^{2}$ is approximately unbiased and won't inflate as $p$ increase
 $$ AIC = -2LL + 2p$$
 
 * Smaller is better
+* Can also be written as a function of the residual sum of squares (RSS) (in book)
 
-### Bayesian Information Criterion
+5. **Bayesian Information Criterion (BIC)**
 
 * Similar to AIC. 
 * Tries to find a parsimonious model that is more likely to be the “truth”. The smaller BIC, the better.
 
 $$ BIC = -2LL + ln(N)*(P+1)$$ 
 
-### AIC vs BIC
+AIC vs BIC
 
 * Both are “penalized likelihood” functions
 * Each = -2loglikelihood + penalty

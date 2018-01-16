@@ -182,14 +182,15 @@ round(exp(10*confint(mvmodel)[2,]),3)
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
 ##### Example: The relationship between income, employment status and depression. 
+This example follows PMA5 Ch 12.7
 
-Here I create the binary indicators of lowincome and underemployed as described in the textbook. In each case I ensure that missing data is retained.  
+Here I create the binary indicators of lowincome (annual income <$10k/year) and underemployed (part time or unemployed).
+
 ```{r}
 depress$lowincome <- ifelse(depress$income < 10, 1, 0)
-depress$lowincome <- ifelse(is.na(depress$income), NA, depress$lowincome)
+table(depress$lowincome, depress$income, useNA="always")
 
-depress$underemployed <- ifelse(depress$employ %in% c(2,3), 1, 0 )
-depress$underemployed <- ifelse(is.na(depress$employ) | depress$employ==7, NA, depress$underemployed)
+depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
 table(depress$underemployed, depress$employ, useNA="always")
 ```
 
@@ -202,13 +203,44 @@ summary(me_model)
 
 To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
 ```{r}
-summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial"))
+me_intx_model <- glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial") 
+summary(me_intx_model)
 ```
+
+### Goodness of Fit
+
+* Tests to see if there is sufficient reason to believe that the logistic model does not fit ($H_{a}$), versus it does fit ($H_{0}$)
+* This means that a small p-value indicates that the model _does not fit_ the data. 
+* We'll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test 
+
+#### HL GoF
+1. Compute the probability ($p_{i}$) of event (risk) for each observation. 
+2. Sort data by this $p$.
+3. Divide into $G$ equal sized groups in ascending order (G=10 is common, i.e. split into deciles)
+4. Then for each group we calculate
+    - $O_{1g}$: the observed number of events
+    - $E_{1g}$: the expected number of events as the $\sum_{i} p_{ig}$
+    - $O_{0g}$: the observed number of non-events
+    - $E_{0g}$: the expected number of events as the $1-\sum_{i} p_{ig}$
+5. Then the HL test statistic ($H$) has a $\chi^{2}$ distribution and is is calculated as: 
+
+$$ 
+  H = \sum_{g=1}^{G}\left({\frac {(O_{1g}-E_{1g})^{2}}{E_{1g}}}+{\frac {(O_{0g}-E_{0g})^{2}}{E_{0g}}}\right) \sim \chi^{2}_{G-2}
+$$
+
+#### HL GoF in R
+
+```{r}
+library(MKmisc)
+HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
+```
+
+A very low test statistic and a very high p-value indicate that this model fits the data well. 
 
 ### Classification
 
 * Sometimes Odds Ratios can be difficult to interpret or understand. 
-* Sometimes you just want to report the probability of the event occuring. 
+* Sometimes you just want to report the probability of the event occurring. 
 * Or sometimes you want to predict whether or not a new individual is going to have the event. 
 
 For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
@@ -250,7 +282,7 @@ The probability for a 44.4 year old female who makes $20.6k annual income has a 
 
 ### Predictions using R
 
-So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way i'm doing that calculation for every person in the data set. 
+So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
 
 Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
 
@@ -284,7 +316,7 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
 
 #### Moving the cutoff value
 
-* So how do we balance the true postives and true negatives? 
+* So how do we balance the true positives and true negatives? 
 * We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
 * We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
     - calculate `prediction` using the model
@@ -302,7 +334,7 @@ abline(a=0, b=1, lty=2)
 
 ROC curves: 
 
-* Show tradeoff between sensitivity and specificity 
+* Show trade off between sensitivity and specificity 
 * Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
 * can give you a measure of overall model accuracy by calculating the area under the curve (auc). 
 
@@ -317,7 +349,7 @@ auc@y.values
 * We can use this probability to classify each row into groups. 
     - The assigned class values must match the data type and levels of the true value.
     - It also has to be in the same order, so the `0` group needs to come first. 
-* Then we calculate a [[ConfusionMatrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similiarily named function from the `caret` package. 
+* Then we calculate a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similarly named function from the `caret` package. 
 
 ```{r}
 library(caret)
@@ -337,11 +369,76 @@ confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
 
 ## Categorical Data
 
-
-
+* Multinomial Regression
+* Ordinal Logistic Regression
 
 
 ## Count Data
 
 
+
+Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
+    - e.g. Number of thunderstorms in a year
+
+* If we assume:
+    * Rate ($\mu$) is fixed over time
+    * Successive occurrences independent of each other
+
+Then we can use the **Poisson distribution**.
+
+$$
+P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
+$$
+* The Poisson distribution has a distinct feature where the mean of the distribution $\mu$, is also the variance. 
+
+![Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve](images/poisson.png)
+
+
+#### Poisson Regression
+
+Just another GLM - we use a $ln$ as the link function. 
+
+$$
+  ln(\mu) = \mathbf{X}\beta
+$$
+
+What actually gets fit, then is: 
+
+$$
+  \mu = e^{\mathbf{X}\beta}
+$$
+
+This model assumes that the time of "exposure" for each record is identical. 
+    - Number of cigarettes per month
+    - Number of epileptic seizures per week
+    
+If this is not the case (often), then this model needs to include an _offset_. 
+    - e.g. observing each patient for epileptic seizures for a different number of days
+  
+
+
+#### Example: Modeling counts from the Add Health data Wave IVset. 
+
+Let's model the number of siblings someone has, based off their age at Wave 1 (2008).
+
+```{r, echo=FALSE}
+addhealth <- read.csv("C:/Dropbox/CSUC/Data/AddHealth/AddHealth_Wave_IV.csv", header=TRUE)
+addhealth$nsib <- ifelse(addhealth$H4WS1<90,addhealth$H4WS1, NA) 
+addhealth$BIO_SEX[addhealth$BIO_SEX==6] <- NA
+addhealth$gender <- ifelse(addhealth$BIO_SEX==1, "Male", "Female")
+```
+
+Visualize
+```{r}
+hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE, ylim=c(0,3000))
+axis(1);axis(2, las=2);box()
+```
+
+```{r}
+summary(glm(nsib ~ agew1 + gender, data=addhealth, family="poisson"))
+```
+
+In this case, the exponentiated coefficient is the ratio of the rates of occurrence per unit time Thus, for Poisson regressions, exponentiated coefficients are rate ratios as contrasted with the odds ratios we discussed for logistic regression.
+
+> Incidence Rate Ratio (IRR): the relative difference measure used to compare the incidence rates of events occurring at any given point in time
 
