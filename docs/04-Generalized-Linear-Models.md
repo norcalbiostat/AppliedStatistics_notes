@@ -288,22 +288,39 @@ round(exp(10*confint(mvmodel)[2,]),3)
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
 ##### Example: The relationship between income, employment status and depression. 
+This example follows PMA5 Ch 12.7
 
-Here I create the binary indicators of lowincome and underemployed as described in the textbook. In each case I ensure that missing data is retained.  
+Here I create the binary indicators of lowincome (annual income <$10k/year) and underemployed (part time or unemployed).
+
 
 ```r
 depress$lowincome <- ifelse(depress$income < 10, 1, 0)
-depress$lowincome <- ifelse(is.na(depress$income), NA, depress$lowincome)
+table(depress$lowincome, depress$income, useNA="always")
+```
 
-depress$underemployed <- ifelse(depress$employ %in% c(2,3), 1, 0 )
-depress$underemployed <- ifelse(is.na(depress$employ) | depress$employ==7, NA, depress$underemployed)
+```
+##       
+##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31
+##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1
+##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##   <NA>  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##       
+##        32 35 36 37 42 45 55 65 <NA>
+##   0     1 24  1  1  1 15  9 10    0
+##   1     0  0  0  0  0  0  0  0    0
+##   <NA>  0  0  0  0  0  0  0  0    0
+```
+
+```r
+depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
 table(depress$underemployed, depress$employ, useNA="always")
 ```
 
 ```
 ##       
 ##         FT Houseperson In School Other  PT Retired Unemp <NA>
-##   0    167          27         2     4  42      38    14    0
+##   0    167          27         2     4   0      38     0    0
+##   1      0           0         0     0  42       0    14    0
 ##   <NA>   0           0         0     0   0       0     0    0
 ```
 
@@ -323,21 +340,21 @@ summary(me_model)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -0.6431  -0.6312  -0.5957  -0.5957   1.9062  
+## -0.9085  -0.5843  -0.5279  -0.5279   2.0197  
 ## 
-## Coefficients: (1 not defined because of singularities)
+## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)    -1.6393     0.1902  -8.618   <2e-16 ***
-## lowincome       0.1684     0.3294   0.511    0.609    
-## underemployed       NA         NA      NA       NA    
+## (Intercept)    -1.9003     0.2221  -8.556  < 2e-16 ***
+## lowincome       0.2192     0.3353   0.654  0.51322    
+## underemployed   1.0094     0.3470   2.909  0.00363 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 268.12  on 293  degrees of freedom
-## Residual deviance: 267.87  on 292  degrees of freedom
-## AIC: 271.87
+## Residual deviance: 259.93  on 291  degrees of freedom
+## AIC: 265.93
 ## 
 ## Number of Fisher Scoring iterations: 4
 ```
@@ -345,7 +362,8 @@ summary(me_model)
 To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
 
 ```r
-summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial"))
+me_intx_model <- glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial") 
+summary(me_intx_model)
 ```
 
 ```
@@ -356,30 +374,78 @@ summary(glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=de
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -0.6431  -0.6312  -0.5957  -0.5957   1.9062  
+## -1.3537  -0.5790  -0.5790  -0.4717   2.1219  
 ## 
-## Coefficients: (2 not defined because of singularities)
+## Coefficients:
 ##                         Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)              -1.6393     0.1902  -8.618   <2e-16 ***
-## lowincome                 0.1684     0.3294   0.511    0.609    
-## underemployed                 NA         NA      NA       NA    
-## lowincome:underemployed       NA         NA      NA       NA    
+## (Intercept)              -1.7011     0.2175  -7.822 5.21e-15 ***
+## lowincome                -0.4390     0.4324  -1.015  0.31005    
+## underemployed             0.2840     0.4501   0.631  0.52802    
+## lowincome:underemployed   2.2615     0.7874   2.872  0.00408 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 268.12  on 293  degrees of freedom
-## Residual deviance: 267.87  on 292  degrees of freedom
-## AIC: 271.87
+## Residual deviance: 251.17  on 290  degrees of freedom
+## AIC: 259.17
 ## 
 ## Number of Fisher Scoring iterations: 4
 ```
 
+### Goodness of Fit
+
+* Tests to see if there is sufficient reason to believe that the logistic model does not fit ($H_{a}$), versus it does fit ($H_{0}$)
+* This means that a small p-value indicates that the model _does not fit_ the data. 
+* We'll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test 
+
+#### HL GoF
+1. Compute the probability ($p_{i}$) of event (risk) for each observation. 
+2. Sort data by this $p$.
+3. Divide into $G$ equal sized groups in ascending order (G=10 is common, i.e. split into deciles)
+4. Then for each group we calculate
+    - $O_{1g}$: the observed number of events
+    - $E_{1g}$: the expected number of events as the $\sum_{i} p_{ig}$
+    - $O_{0g}$: the observed number of non-events
+    - $E_{0g}$: the expected number of events as the $1-\sum_{i} p_{ig}$
+5. Then the HL test statistic ($H$) has a $\chi^{2}$ distribution and is is calculated as: 
+
+$$ 
+  H = \sum_{g=1}^{G}\left({\frac {(O_{1g}-E_{1g})^{2}}{E_{1g}}}+{\frac {(O_{0g}-E_{0g})^{2}}{E_{0g}}}\right) \sim \chi^{2}_{G-2}
+$$
+
+#### HL GoF in R
+
+
+```r
+library(MKmisc)
+HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
+```
+
+```
+## $C
+## 
+## 	Hosmer-Lemeshow C statistic
+## 
+## data:  fitted(me_intx_model) and me_intx_model$y
+## X-squared = 2.2294e-16, df = 2, p-value = 1
+## 
+## 
+## $H
+## 
+## 	Hosmer-Lemeshow H statistic
+## 
+## data:  fitted(me_intx_model) and me_intx_model$y
+## X-squared = 5.614e-17, df = 8, p-value = 1
+```
+
+A very low test statistic and a very high p-value indicate that this model fits the data well. 
+
 ### Classification
 
 * Sometimes Odds Ratios can be difficult to interpret or understand. 
-* Sometimes you just want to report the probability of the event occuring. 
+* Sometimes you just want to report the probability of the event occurring. 
 * Or sometimes you want to predict whether or not a new individual is going to have the event. 
 
 For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
@@ -434,16 +500,15 @@ exp(XB.m) / (1+exp(XB.m))
 
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
-### Predictions using R
+### Calculating predictions
 
-So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way i'm doing that calculation for every person in the data set. 
+So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
 
 Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Any row with missing data on any variable used in the model will NOT get a predicted value.</div>\EndKnitrBlock{rmdcaution}
 
-
-The `predict` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
+The `predict()` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
 
 ```r
 model.pred.prob <- predict(mvmodel, type='response')
@@ -454,7 +519,6 @@ head(model.pred.prob)
 ##          1          2          3          4          5          6 
 ## 0.21108906 0.08014012 0.15266203 0.24527840 0.15208679 0.17056409
 ```
-
 
 #### Distribution of Predictions
 How well does our model do to predict depression? 
@@ -469,49 +533,12 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
       geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
 ```
 
-<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 ![](images/q.png) What things can you infer from this plot?
 
-![](images/q.png) What would happen if we used a cutoff value of 0.5? What about 0.2? 
+![](images/q.png) Where should we put the cutoff value? At what probability should we classify a record as "depressed"?
 
-#### Moving the cutoff value
-
-* So how do we balance the true postives and true negatives? 
-* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
-* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
-    - calculate `prediction` using the model
-    - calculate the model `performance` on both true positive rate and true negative rate for a whole range of cutoff values. 
-    - `plot` the curve. 
-        - The `colorize` option colors the curve according to the probability cutoff point. 
-
-
-```r
-library(ROCR)
-pr <- prediction(model.pred.prob, mvmodel$y)
-perf <- performance(pr, measure="tpr", x.measure="fpr")
-plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
-abline(a=0, b=1, lty=2)
-```
-
-<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
-
-ROC curves: 
-
-* Show tradeoff between sensitivity and specificity 
-* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
-* can give you a measure of overall model accuracy by calculating the area under the curve (auc). 
-
-
-```r
-auc <- performance(pr, 'auc')
-auc@y.values
-```
-
-```
-## [[1]]
-## [1] 0.695041
-```
 
 ### Model Performance
 
@@ -519,7 +546,8 @@ auc@y.values
 * We can use this probability to classify each row into groups. 
     - The assigned class values must match the data type and levels of the true value.
     - It also has to be in the same order, so the `0` group needs to come first. 
-* Then we calculate a [[ConfusionMatrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similiarily named function from the `caret` package. 
+* Then we calculate a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similarly named function from the `caret` package. 
+    - At it's core, this is a 2x2 table containing counts of each combination of predicted value and true value. 
 
 
 ```r
@@ -560,21 +588,170 @@ confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
 ## 
 ```
 
+* 123 people were correctly predicted to not be depressed (True Negative, $n_{11}$)
+* 121 people were incorrectly predicted to be depressed (False Positive, $n_{21}$)
+* 10 people were incorrectly predicted to not be depressed (False Negative, $n_{12}$)
+* 40 people were correctly predicted to be depressed (True Positive, $n_{22}$)
 
-* Sensitivity: P(True + |Predicted +)
-* Specificity: P(True - |Predicted -)
-* Accuracy: n_{11} + n_{22} / N (proportion of entries on main diagonal)
-* Balanced Accuracy: [(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2 
-* False Positive Rate: P(Predicted + | True -)
+Other terminology: 
 
+* **Sensitivity/Recall/True positive rate**: P(condition positive|predicted positive) = `40/(10+40) = .8`
+* **Specificity/true negative rate**: P(condition negative|predicted negative) = `123/(123+121) = .504`
+* **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
+* **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
+* **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
+* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
+
+
+
+#### Optimal Cutoff Value
+Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes "high risk". For some models, this could be as low as 30%. It's whatever the probability is that optimally separates the classes. Let's look at two ways to visualize model performance as a function of cutoff.
+
+### ROC Curves
+
+* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
+* ROC curves show the balance between sensitivity and specificity.
+* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
+    - calculate `prediction()` using the model
+    - calculate the model `performance()` on both true positive rate and true negative rate for a whole range of cutoff values. 
+    - `plot` the curve. 
+        - The `colorize` option colors the curve according to the probability cutoff point. 
+
+
+```r
+library(ROCR)
+pr <- prediction(model.pred.prob, mvmodel$y)
+perf <- performance(pr, measure="tpr", x.measure="fpr")
+plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
+abline(a=0, b=1, lty=2)
+```
+
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+We can also use the `performance()` function and say we want to evaluate the $f1$ measure
+
+
+```r
+perf.f1 <- performance(pr,measure="f")
+plot(perf.f1)
+```
+
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+ROC curves: 
+
+* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
+* The Area under the Curve an give you a measure of overall model accuracy by calculating the area under the curve (auc). 
+
+
+```r
+auc <- performance(pr, measure='auc')
+auc@y.values
+```
+
+```
+## [[1]]
+## [1] 0.695041
+```
 
 ## Categorical Data
 
-
-
+* Multinomial Regression
+* Ordinal Logistic Regression
 
 
 ## Count Data
 
 
+
+Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
+    - e.g. Number of thunderstorms in a year
+
+* If we assume:
+    * Rate ($\mu$) is fixed over time
+    * Successive occurrences independent of each other
+
+Then we can use the **Poisson distribution**.
+
+$$
+P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
+$$
+* The Poisson distribution has a distinct feature where the mean of the distribution $\mu$, is also the variance. 
+
+![Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve](images/poisson.png)
+
+
+#### Poisson Regression
+
+Just another GLM - we use a $ln$ as the link function. 
+
+$$
+  ln(\mu) = \mathbf{X}\beta
+$$
+
+What actually gets fit, then is: 
+
+$$
+  \mu = e^{\mathbf{X}\beta}
+$$
+
+This model assumes that the time of "exposure" for each record is identical. 
+    - Number of cigarettes per month
+    - Number of epileptic seizures per week
+    
+If this is not the case (often), then this model needs to include an _offset_. 
+    - e.g. observing each patient for epileptic seizures for a different number of days
+  
+
+
+#### Example: Modeling counts from the Add Health data Wave IVset. 
+
+Let's model the number of siblings someone has, based off their age at Wave 1 (2008).
+
+
+
+Visualize
+
+```r
+hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE, ylim=c(0,3000))
+axis(1);axis(2, las=2);box()
+```
+
+<img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+
+
+```r
+summary(glm(nsib ~ agew1 + gender, data=addhealth, family="poisson"))
+```
+
+```
+## 
+## Call:
+## glm(formula = nsib ~ agew1 + gender, family = "poisson", data = addhealth)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.5489  -1.1666  -0.4465   0.5469   7.0560  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)  0.361561   0.099775   3.624  0.00029 ***
+## agew1        0.044303   0.005989   7.397 1.39e-13 ***
+## genderMale  -0.096900   0.019089  -5.076 3.85e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 6410.9  on 3917  degrees of freedom
+## Residual deviance: 6335.3  on 3915  degrees of freedom
+##   (2586 observations deleted due to missingness)
+## AIC: 16755
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
+In this case, the exponentiated coefficient is the ratio of the rates of occurrence per unit time Thus, for Poisson regressions, exponentiated coefficients are rate ratios as contrasted with the odds ratios we discussed for logistic regression.
+
+> Incidence Rate Ratio (IRR): the relative difference measure used to compare the incidence rates of events occurring at any given point in time
 

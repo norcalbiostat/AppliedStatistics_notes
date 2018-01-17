@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Statistics II</title>
+  <meta name="description" content="Course notes for MATH 456 at CSU Chico">
+  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Statistics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes for MATH 456 at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/MATH456_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Statistics II" />
+  
+  <meta name="twitter:description" content="Course notes for MATH 456 at CSU Chico" />
+  
+
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+
+
+<meta name="date" content="2018-01-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="mvmodels.html">
+<link rel="next" href="factor-analysis.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics II course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="prepare.html"><a href="prepare.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible Workflows</a></li>
+<li class="chapter" data-level="1.2" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3" data-path="data-editing-and-recoding.html"><a href="data-editing-and-recoding.html"><i class="fa fa-check"></i><b>1.3</b> Data Editing and Recoding</a></li>
+<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="data-transformations.html"><a href="data-transformations.html"><i class="fa fa-check"></i><b>1.5</b> Data Transformations</a></li>
+<li class="chapter" data-level="1.6" data-path="selecting-appropriate-analysis.html"><a href="selecting-appropriate-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Selecting Appropriate Analysis</a></li>
+<li class="chapter" data-level="1.7" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.7</b> Wide vs. Long data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>2.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#mathmatical-model"><i class="fa fa-check"></i><b>2.1.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#parameter-estimates"><i class="fa fa-check"></i><b>2.1.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="2.1.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#interval-estimation"><i class="fa fa-check"></i><b>2.1.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="2.1.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#corelation-coefficient"><i class="fa fa-check"></i><b>2.1.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="2.1.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#assumptions"><i class="fa fa-check"></i><b>2.1.5</b> Assumptions</a></li>
+<li class="chapter" data-level="2.1.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#slr-ex"><i class="fa fa-check"></i><b>2.1.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#types-of-x-variables"><i class="fa fa-check"></i><b>2.2.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#mathematical-model"><i class="fa fa-check"></i><b>2.2.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="2.2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>2.2.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#mlr-ex"><i class="fa fa-check"></i><b>2.2.4</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>2.3</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="2.4" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>2.4</b> Multicollinearity</a></li>
+<li class="chapter" data-level="2.5" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>2.5</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3</b> Model Building</a><ul>
+<li class="chapter" data-level="3.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>3.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>3.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="3.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>3.1.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>3.2</b> Stratification</a></li>
+<li class="chapter" data-level="3.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>3.3</b> Moderation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="moderation.html"><a href="moderation.html#example"><i class="fa fa-check"></i><b>3.3.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>3.4</b> Interactions</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="interactions.html"><a href="interactions.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+<li class="chapter" data-level="3.4.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>3.4.2</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>3.5</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>3.5.1</b> Confounding</a></li>
+<li class="chapter" data-level="3.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>3.5.2</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="3.5.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>3.5.3</b> Best Subsets (PMA5 Section 8.7)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>3.6</b> Comparing between models</a></li>
+<li class="chapter" data-level="3.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>3.7</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>4</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>4.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="4.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>4.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="4.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="4.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>4.2.4</b> Goodness of Fit</a></li>
+<li class="chapter" data-level="4.2.5" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>4.2.5</b> Classification</a></li>
+<li class="chapter" data-level="4.2.6" data-path="binary-data.html"><a href="binary-data.html#calculating-predictions"><i class="fa fa-check"></i><b>4.2.6</b> Calculating predictions</a></li>
+<li class="chapter" data-level="4.2.7" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>4.2.7</b> Model Performance</a></li>
+<li class="chapter" data-level="4.2.8" data-path="binary-data.html"><a href="binary-data.html#roc-curves"><i class="fa fa-check"></i><b>4.2.8</b> ROC Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>4.3</b> Categorical Data</a></li>
+<li class="chapter" data-level="4.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>4.4</b> Count Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mvmodels.html"><a href="mvmodels.html"><i class="fa fa-check"></i><b>5</b> Multivariate Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>5.1</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#not-variable-selection"><i class="fa fa-check"></i><b>5.1.1</b> Not variable selection</a></li>
+<li class="chapter" data-level="5.1.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#basic-idea"><i class="fa fa-check"></i><b>5.1.2</b> Basic Idea</a></li>
+<li class="chapter" data-level="5.1.3" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#more-generally"><i class="fa fa-check"></i><b>5.1.3</b> More Generally</a></li>
+<li class="chapter" data-level="5.1.4" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#calculating-c"><i class="fa fa-check"></i><b>5.1.4</b> Calculating C</a></li>
+<li class="chapter" data-level="5.1.5" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#using-the-correlation-matrix"><i class="fa fa-check"></i><b>5.1.5</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="5.1.6" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#data-reduction"><i class="fa fa-check"></i><b>5.1.6</b> Data Reduction</a></li>
+<li class="chapter" data-level="5.1.7" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#example-analysis-of-depression"><i class="fa fa-check"></i><b>5.1.7</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="5.1.8" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#use-in-multiple-regression"><i class="fa fa-check"></i><b>5.1.8</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="5.1.9" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#things-to-watch-out-for"><i class="fa fa-check"></i><b>5.1.9</b> Things to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Factor Analysis</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="principal-component-analysis" class="section level2">
+<h2><span class="header-section-number">5.1</span> Principal Component Analysis</h2>
+<p>More nomenclature tidbits: It’s <strong>“Principal”</strong> Components (adjective), not <strong>“Principle”</strong> Components (noun)</p>
+<p>From <a href="http://grammarist.com/spelling/principle-principal/">Grammerist</a>:</p>
+<blockquote>
+<p>As a noun, principal refers to (1) one who holds a presiding position or rank, and (2) capital or property before interest, and it’s also an adjective meaning (3) first or most important in rank</p>
+<p>Principle is only a noun. In its primary sense, it refers to a basic truth, law, assumption, or rule.</p>
+</blockquote>
+<p>This third definition (3) is the context in which we will be using this term.</p>
+<div id="not-variable-selection" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Not variable selection</h3>
+<p>Principal Components Analysis (PCA) differs from variable selection in two ways:</p>
+<ol style="list-style-type: decimal">
+<li>No dependent variable exists</li>
+<li>Variables are not eliminated but rather summary variables, i.e., principal components, are computed from all of the original variables.</li>
+</ol>
+<p>We are trying to understand a phenomenon by collecting a series of component measurements, but the underlying mechanics is complex and not easily understood by simply looking at each component individually. The data could be redundant and high levels of multicolinearity may be present.</p>
+</div>
+<div id="basic-idea" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Basic Idea</h3>
+<p>Consider a hypothetical data set that consists of 100 random pairs of observations <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> that are correlated. Let <span class="math inline">\(X_{1} \sim \mathcal{N}(100, 100)\)</span>, <span class="math inline">\(X_{2} \sim \mathcal{N}(50, 50)\)</span>, with <span class="math inline">\(\rho_{12} = \frac{1}{\sqrt{2}}\)</span>.</p>
+<p>In matrix notation this is written as: <span class="math inline">\(\mathbf{X} \sim \mathcal{N}\left(\mathbf{\mu}, \mathbf{\Sigma}\right)\)</span> where <span class="math display">\[\mathbf{\mu} = 
+  \left(\begin{array}
+  {r}
+  \mu_{1} \\
+  \mu_{2}
+  \end{array}\right), 
+  \mathbf{\Sigma} = 
+  \left(\begin{array}
+  {cc}
+  \sigma_{1}^{2} &amp; \rho_{12}\sigma_{x}\sigma_{y} \\
+  \rho_{12}\sigma_{x}\sigma_{y} &amp; \sigma_{2}^{2} 
+  \end{array}\right)
+\]</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">456</span>)
+m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">50</span>)
+s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="kw">sqrt</span>(.<span class="dv">5</span><span class="op">*</span><span class="dv">100</span><span class="op">*</span><span class="dv">50</span>), <span class="kw">sqrt</span>(.<span class="dv">5</span><span class="op">*</span><span class="dv">100</span><span class="op">*</span><span class="dv">50</span>), <span class="dv">50</span>), <span class="dt">nrow=</span><span class="dv">2</span>)
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>)
+
+<span class="kw">plot</span>(X2 <span class="op">~</span><span class="st"> </span>X1, <span class="dt">data=</span>data, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Goal: Create two new variables <span class="math inline">\(C_{1}\)</span> and <span class="math inline">\(C_{2}\)</span> as linear combinations of <span class="math inline">\(\mathbf{x_{1}}\)</span> and <span class="math inline">\(\mathbf{x_{2}}\)</span></p>
+<p><span class="math display">\[ \mathbf{C_{1}} = a_{11}\mathbf{x_{1}} + a_{12}\mathbf{x_{2}} \]</span> <span class="math display">\[ \mathbf{C_{2}} = a_{21}\mathbf{x_{1}} + a_{22}\mathbf{x_{2}} \]</span></p>
+<p>or more simply <span class="math inline">\(\mathbf{C = aX}\)</span>, where</p>
+<ul>
+<li>The <span class="math inline">\(\mathbf{x}\)</span>’s have been centered by subtracting their mean (<span class="math inline">\(\mathbf{x_{1}} = x_{1}-\bar{x_{1}}\)</span>)</li>
+<li><span class="math inline">\(Var(C_{1})\)</span> is as large as possible</li>
+</ul>
+<p>Graphically we’re creating two new axes, where now <span class="math inline">\(C_{1}\)</span> and <span class="math inline">\(C_{2}\)</span> are uncorrelated.</p>
+<blockquote>
+<p>PCA is mathematically defined as an orthogonal linear transformation that transforms the data to a new coordinate system such that the greatest variance by some projection of the data comes to lie on the first coordinate (called the first principal component), the second greatest variance on the second coordinate, and so on. <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia</a></p>
+</blockquote>
+<div class="figure">
+<img src="images/pca_coord_rotate.png" />
+
+</div>
+</div>
+<div id="more-generally" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> More Generally</h3>
+<p>We want</p>
+<ul>
+<li>From <span class="math inline">\(P\)</span> original variables <span class="math inline">\(X_{1}, \ldots , X_{P}\)</span> get <span class="math inline">\(P\)</span> principal components <span class="math inline">\(C_{1}, \ldots , C_{P}\)</span></li>
+<li>Where each <span class="math inline">\(C_{j}\)</span> is a linear combination of the <span class="math inline">\(X_{i}\)</span>’s: <span class="math inline">\(C_{j} = a_{j1}X_{1} + a_{j2}X_{2} + \ldots + a_{jP}X_{P}\)</span></li>
+<li>The coefficients are chosen such that <span class="math inline">\(Var(C_{1}) \geq Var(C_{2}) \geq \ldots \geq Var(C_{P})\)</span>
+<ul>
+<li>Variance is a measure of information. Consider modeling prostate cancer.
+<ul>
+<li>Gender has 0 variance. No information.</li>
+<li>Size of tumor: the variance is &gt; 0, it provides useful information.</li>
+</ul></li>
+</ul></li>
+<li>Any two PC’s are uncorrelated: <span class="math inline">\(Cov(C_{i}, C_{j})=0, \quad \forall i \neq j\)</span></li>
+</ul>
+<p>We have</p>
+<p><span class="math display">\[
+  \left[\begin{array}
+  {r}
+  C_{1} \\
+  C_{2} \\
+  \vdots \\
+  C_{P}
+  \end{array}\right] 
+  = 
+  \left[\begin{array}
+  {cccc}
+  a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1P} \\
+  a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2P} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  a_{P1} &amp; a_{P2} &amp; \ldots &amp; a_{PP} 
+  \end{array}\right]
+  \left[\begin{array}
+  {r}
+  X_{1} \\
+  X_{2} \\
+  \vdots \\
+  X_{P}
+  \end{array}\right] 
+\]</span></p>
+<ul>
+<li>Hotelling (1933) showed that the <span class="math inline">\(a_{ij}\)</span>’s are solutions to <span class="math inline">\((\mathbf{\Sigma} -\lambda\mathbf{I})\mathbf{a}=\mathbf{0}\)</span>.
+<ul>
+<li><span class="math inline">\(\mathbf{\Sigma}\)</span> is the variance-covariance matrix of the <span class="math inline">\(\mathbf{X}\)</span> variables.<br />
+</li>
+</ul></li>
+<li>This means <span class="math inline">\(\lambda\)</span> is an eigenvalue and <span class="math inline">\(\mathbf{a}\)</span> an eigenvector.</li>
+<li>Problem: There are infinite number of possible <span class="math inline">\(\mathbf{a}\)</span>’s</li>
+<li>Solution: Choose <span class="math inline">\(a_{ij}\)</span>’s such that the sum of the squares of the coefficients for any one eigenvector is = 1.
+<ul>
+<li><span class="math inline">\(P\)</span> unique eigenvalues and <span class="math inline">\(P\)</span> corresponding eigenvectors.</li>
+</ul></li>
+</ul>
+<p>So,</p>
+<ul>
+<li>Principal components are the eigenvectors <span class="math inline">\(\mathbf{a_{p}}\)</span></li>
+<li>and their variances are the eigenvalues of the covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> of the <span class="math inline">\(X\)</span>’s.</li>
+<li>Variances of the <span class="math inline">\(C_{j}\)</span>’s add up to the sum of the variances of the original variables (total variance).</li>
+</ul>
+</div>
+<div id="calculating-c" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Calculating C</h3>
+<p>Calculating the principal components in R can be done using a call to the function <code>prcomp()</code>. <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/">STHDA</a> has a good overview of the difference between <code>prcomp()</code> and <code>princomp()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data)
+<span class="kw">summary</span>(pr)</code></pre></div>
+<pre><code>## Importance of components:
+##                            Comp.1    Comp.2
+## Standard deviation     11.4019265 4.2236767
+## Proportion of Variance  0.8793355 0.1206645
+## Cumulative Proportion   0.8793355 1.0000000</code></pre>
+<ul>
+<li>The summary output above shows the first PC (<code>Comp.1</code>) explains the highest proportion of variance.</li>
+<li>The values for the matrix <span class="math inline">\(\mathbf{A}\)</span> is contained in <code>pr$loadings</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pr<span class="op">$</span>loadings</code></pre></div>
+<pre><code>## 
+## Loadings:
+##    Comp.1 Comp.2
+## X1 -0.854  0.519
+## X2 -0.519 -0.854
+## 
+##                Comp.1 Comp.2
+## SS loadings       1.0    1.0
+## Proportion Var    0.5    0.5
+## Cumulative Var    0.5    1.0</code></pre>
+<p>To visualize these new axes, we plot the centered data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>pr<span class="op">$</span>loadings
+x1 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X1))
+x2 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X2))
+
+<span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;x2&quot;</span>)
+<span class="kw">points</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">pch=</span><span class="dv">16</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="kw">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="kw">expression</span>(C[<span class="dv">1</span>]))
+<span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="kw">text</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="kw">expression</span>(C[<span class="dv">2</span>]))</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pr)</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="using-the-correlation-matrix" class="section level3">
+<h3><span class="header-section-number">5.1.5</span> Using the correlation matrix</h3>
+<ul>
+<li>Standardizing: Take <span class="math inline">\(X\)</span> and divide each element by <span class="math inline">\(\sigma_{x}\)</span>.
+<ul>
+<li><span class="math inline">\(Z = X/\sigma_{X}\)</span></li>
+</ul></li>
+<li>Side note: Standardizing and centering == normalizing
+<ul>
+<li><span class="math inline">\(Z = (X-\bar{X})/\sigma_{X}\)</span></li>
+</ul></li>
+<li>Equivalent to analyzing the correlation matrix (<span class="math inline">\(\mathbf{R}\)</span>) instead of covariance matrix (<span class="math inline">\(\mathbf{\Sigma}\)</span>).</li>
+</ul>
+
+<div class="rmdwarning">
+Using <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Sigma}\)</span> will generate different PC’s
+</div>
+
+<p>This makes sense given the difference in matricies:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(data) <span class="co">#Covariance Matrix</span></code></pre></div>
+<pre><code>##           X1       X2
+## X1 100.74146 50.29187
+## X2  50.29187 48.59528</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(data) <span class="co">#Correlation Matrix</span></code></pre></div>
+<pre><code>##           X1        X2
+## X1 1.0000000 0.7187811
+## X2 0.7187811 1.0000000</code></pre>
+<p>Standardizing your data prior to analysis aids the interpretation of the PC’s in a few ways</p>
+<ol style="list-style-type: decimal">
+<li>The total variance is the number of variables <span class="math inline">\(P\)</span></li>
+<li>The proportion explained by each PC is the corresponding eigenvalue / <span class="math inline">\(P\)</span></li>
+<li>The correlation between <span class="math inline">\(C_{i}\)</span> and standardized variable <span class="math inline">\(x_{j}\)</span> can be written as <span class="math inline">\(r_{ij} = a_{ij}SD(C_{i})\)</span></li>
+</ol>
+<p>This last point means that for any given <span class="math inline">\(C_{i}\)</span> we can quantify the relative degree of dependence of the PC on each of the standardized variables. This is a.k.a. the <strong>factor loading</strong> (we will return to this key term later).</p>
+<p>To calculate the principal components using the correlation matrix, you just need to specify that you want <code>cor=TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pr_corr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data, <span class="dt">cor=</span><span class="ot">TRUE</span>)
+<span class="kw">summary</span>(pr_corr)</code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1    Comp.2
+## Standard deviation     1.3110229 0.5303008
+## Proportion of Variance 0.8593906 0.1406094
+## Cumulative Proportion  0.8593906 1.0000000</code></pre>
+<ul>
+<li>If we use the covariance matrix and change the scale of a variable (i.e. in to cm) that will change the results of the PC’s</li>
+<li>Many researchers prefer to use the correlation matrix
+<ul>
+<li>It compensates for the units of measurements for the different variables.</li>
+<li>Interpretations are made in terms of the standardized variables.</li>
+</ul></li>
+</ul>
+</div>
+<div id="data-reduction" class="section level3">
+<h3><span class="header-section-number">5.1.6</span> Data Reduction</h3>
+<ul>
+<li>Keep first <span class="math inline">\(m\)</span> principal components as representatives of original P variables</li>
+<li>Keep enough to explain a large percentage of original total variance.</li>
+<li>Ideally you want a small number of PC’s that explain a large percentage of the total variance.</li>
+</ul>
+<p><strong>Choosing <span class="math inline">\(m\)</span></strong></p>
+<ul>
+<li>Rely on existing theory</li>
+<li>Explain a given % of variance (cumulative percentage plot)</li>
+<li>All eigenvalues &gt; 1 (Scree plot)</li>
+<li>Elbow rule (Scree Plot)</li>
+</ul>
+<p>These last two will be best explained using an example.</p>
+</div>
+<div id="example-analysis-of-depression" class="section level3">
+<h3><span class="header-section-number">5.1.7</span> Example Analysis of depression</h3>
+<p>This example follows <em>Analysis of depression data set</em> section in PMA5 Section 14.5. This survey asks 20 questions on emotional states that relate to depression. Here I use PCA to reduce these 20 correlated variables down to a few uncorrelated variables that explain the most variance.</p>
+<div id="read-in-the-data-and-run-princomp-on-the-c1c20-variables." class="section level4">
+<h4><span class="header-section-number">5.1.7.1</span> Read in the data and run <code>princomp</code> on the <code>C1:C20</code> variables.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/depress_081217.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+pc_dep  &lt;-<span class="st"> </span><span class="kw">princomp</span>(depress[,<span class="dv">9</span><span class="op">:</span><span class="dv">28</span>], <span class="dt">cor=</span><span class="ot">TRUE</span>)
+<span class="kw">summary</span>(pc_dep)</code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1     Comp.2     Comp.3     Comp.4
+## Standard deviation     2.6562036 1.21883931 1.10973409 1.03232021
+## Proportion of Variance 0.3527709 0.07427846 0.06157549 0.05328425
+## Cumulative Proportion  0.3527709 0.42704935 0.48862483 0.54190909
+##                            Comp.5     Comp.6     Comp.7     Comp.8
+## Standard deviation     1.00629648 0.98359581 0.97304489 0.87706188
+## Proportion of Variance 0.05063163 0.04837304 0.04734082 0.03846188
+## Cumulative Proportion  0.59254072 0.64091375 0.68825457 0.72671645
+##                            Comp.9    Comp.10    Comp.11    Comp.12
+## Standard deviation     0.83344885 0.81248191 0.77950975 0.74117295
+## Proportion of Variance 0.03473185 0.03300634 0.03038177 0.02746687
+## Cumulative Proportion  0.76144830 0.79445464 0.82483641 0.85230328
+##                           Comp.13    Comp.14    Comp.15    Comp.16
+## Standard deviation     0.73255278 0.71324438 0.67149280 0.61252016
+## Proportion of Variance 0.02683168 0.02543588 0.02254513 0.01875905
+## Cumulative Proportion  0.87913496 0.90457083 0.92711596 0.94587501
+##                           Comp.17    Comp.18    Comp.19     Comp.20
+## Standard deviation     0.56673129 0.54273638 0.51804873 0.445396635
+## Proportion of Variance 0.01605922 0.01472814 0.01341872 0.009918908
+## Cumulative Proportion  0.96193423 0.97666237 0.99008109 1.000000000</code></pre>
+</div>
+<div id="pick-a-subset-of-pcs-to-work-with" class="section level4">
+<h4><span class="header-section-number">5.1.7.2</span> Pick a subset of PC’s to work with</h4>
+<p>In the cumulative percentage plot below, I drew a horizontal line at 80%. So the first 9 PC’s explain around 75% of the total variance, and the first 10 can explain around 80%.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span><span class="kw">cumsum</span>((pc_dep<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="dv">20</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Cumulative %&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span><span class="dv">80</span>))</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Create a <strong>Scree plot</strong> by plotting the eigenvalue against the PC number.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span>(pc_dep<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span>, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p><strong>Option 1</strong>: Take all eigenvalues &gt; 1 (<span class="math inline">\(m=5\)</span>) <strong>Option 2</strong>: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. (<span class="math inline">\(m=2\)</span>).</p>
+</div>
+<div id="examine-the-loadings" class="section level4">
+<h4><span class="header-section-number">5.1.7.3</span> Examine the loadings</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pc_dep<span class="op">$</span>loadings[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</code></pre></div>
+<pre><code>##       Comp.1      Comp.2     Comp.3       Comp.4      Comp.5
+## c1 0.2774384 -0.14497938 0.05770239 -0.002723687 -0.08826773
+## c2 0.3131829  0.02713557 0.03162990  0.247811083 -0.02439748
+## c3 0.2677985 -0.15471968 0.03459037  0.247246879  0.21830547</code></pre>
+<p>Here</p>
+<ul>
+<li><span class="math inline">\(X_{1}\)</span> = <em>“I felt that I could not shake…”</em></li>
+<li><span class="math inline">\(X_{2}\)</span> = <em>“I felt depressed…”</em></li>
+</ul>
+<p>So the PC’s are calculated as</p>
+<ul>
+<li>$C_{1} = 0.277x_{1} + 0.313x_{2} + $</li>
+<li>$C_{2} = -0.1449x_{1} + 0.0271x_{2} + $</li>
+</ul>
+<p>etc…</p>
+</div>
+<div id="interpret-the-pcs" class="section level4">
+<h4><span class="header-section-number">5.1.7.4</span> Interpret the PC’s</h4>
+<ol style="list-style-type: decimal">
+<li>Visualize the loadings using <code>heatmap.2()</code> in the <code>gplots</code> package.
+<ul>
+<li>I reversed the colors so that red was high positive correlation and yellow/white is low.</li>
+<li>half the options I use below come from <a href="https://stackoverflow.com/questions/11713563/heatmap-color-key-with-five-different-colors">this SO post</a>. I had no idea what they did, so I took what the solution showed, and played with it (added/changed some to see what they did), and reviewed <code>?heatmap.2</code> to see what options were available.</li>
+</ul></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gplots)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;gplots&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     lowess</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap.2</span>(pc_dep<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">scale=</span><span class="st">&quot;none&quot;</span>, <span class="dt">Rowv=</span><span class="ot">NA</span>, <span class="dt">Colv=</span><span class="ot">NA</span>, <span class="dt">density.info=</span><span class="st">&quot;none&quot;</span>,
+          <span class="dt">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>, <span class="dt">col=</span><span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">256</span>)))</code></pre></div>
+<p><img src="05-Multivariate-Analysis_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Loadings over 0.5 (red) help us interpret what these components could “mean”
+<ul>
+<li>Must know exact wording of component questions</li>
+</ul></li>
+</ol>
+<ul>
+<li><span class="math inline">\(C_{1}{\)</span>: a weighted average of most items. High value indicates respondent had many symptoms of depression. Note sign of loadings are all positive and all roughly the same color.
+<ul>
+<li>Recall</li>
+</ul></li>
+<li><span class="math inline">\(C_{2}\)</span>: lethargy (high energetic). High loading on c14, 16, 17, low on 4, 8, 20</li>
+<li><span class="math inline">\(C_{3}\)</span>: friendliness of others. Large negative loading on c19, c9</li>
+</ul>
+<p>etc.</p>
+</div>
+</div>
+<div id="use-in-multiple-regression" class="section level3">
+<h3><span class="header-section-number">5.1.8</span> Use in Multiple Regression</h3>
+<ul>
+<li>Choose a handful of few principal components to use as predictors in a regression model
+<ul>
+<li>Leads to more stable regression estimates.</li>
+</ul></li>
+<li>Alternative to variable selection
+<ul>
+<li>Ex: several measures of behavior.</li>
+<li>Use PC<span class="math inline">\(_{1}\)</span> or PC<span class="math inline">\(_{1}\)</span> and PC<span class="math inline">\(_{2}\)</span> as summary measures of all.</li>
+</ul></li>
+</ul>
+</div>
+<div id="things-to-watch-out-for" class="section level3">
+<h3><span class="header-section-number">5.1.9</span> Things to watch out for</h3>
+<ul>
+<li>Eigenvalues are estimated variances of the PC’s and so are subject to large sample variations.</li>
+<li>The size of variance of last few principal components can be useful as indicator of multicollinearity among original variables</li>
+<li>Principal components derived from standardized variables differ from those derived from original variables</li>
+<li>Important that measurements are accurate, especially for detection of collinearity</li>
+</ul>
+
+<div class="rmdcaution">
+Arbitrary cutoff points should not be taken too seriously
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mvmodels.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factor-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

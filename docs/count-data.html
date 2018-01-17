@@ -25,7 +25,7 @@
 <meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
 
 
-<meta name="date" content="2018-01-12">
+<meta name="date" content="2018-01-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="categorical-data.html">
-
+<link rel="next" href="mvmodels.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -148,14 +148,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>3.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>3.5.1</b> Confounding</a></li>
 <li class="chapter" data-level="3.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>3.5.2</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="3.5.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#best-subsets"><i class="fa fa-check"></i><b>3.5.3</b> Best Subsets</a></li>
+<li class="chapter" data-level="3.5.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>3.5.3</b> Best Subsets (PMA5 Section 8.7)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>3.6</b> Comparing between models</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="comparing-between-models.html"><a href="comparing-between-models.html#coefficient-of-determination"><i class="fa fa-check"></i><b>3.6.1</b> Coefficient of Determination</a></li>
-<li class="chapter" data-level="3.6.2" data-path="comparing-between-models.html"><a href="comparing-between-models.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>3.6.2</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="3.6.3" data-path="comparing-between-models.html"><a href="comparing-between-models.html#bayesian-information-criterion"><i class="fa fa-check"></i><b>3.6.3</b> Bayesian Information Criterion</a></li>
-<li class="chapter" data-level="3.6.4" data-path="comparing-between-models.html"><a href="comparing-between-models.html#aic-vs-bic"><i class="fa fa-check"></i><b>3.6.4</b> AIC vs BIC</a></li>
-</ul></li>
+<li class="chapter" data-level="3.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>3.6</b> Comparing between models</a></li>
 <li class="chapter" data-level="3.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>3.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>4</b> Generalized Linear Models</a><ul>
@@ -164,12 +159,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>4.2.1</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="4.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>4.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="4.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
-<li class="chapter" data-level="4.2.4" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>4.2.4</b> Classification</a></li>
-<li class="chapter" data-level="4.2.5" data-path="binary-data.html"><a href="binary-data.html#predictions-using-r"><i class="fa fa-check"></i><b>4.2.5</b> Predictions using R</a></li>
-<li class="chapter" data-level="4.2.6" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>4.2.6</b> Model Performance</a></li>
+<li class="chapter" data-level="4.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>4.2.4</b> Goodness of Fit</a></li>
+<li class="chapter" data-level="4.2.5" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>4.2.5</b> Classification</a></li>
+<li class="chapter" data-level="4.2.6" data-path="binary-data.html"><a href="binary-data.html#calculating-predictions"><i class="fa fa-check"></i><b>4.2.6</b> Calculating predictions</a></li>
+<li class="chapter" data-level="4.2.7" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>4.2.7</b> Model Performance</a></li>
+<li class="chapter" data-level="4.2.8" data-path="binary-data.html"><a href="binary-data.html#roc-curves"><i class="fa fa-check"></i><b>4.2.8</b> ROC Curves</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>4.3</b> Categorical Data</a></li>
 <li class="chapter" data-level="4.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>4.4</b> Count Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mvmodels.html"><a href="mvmodels.html"><i class="fa fa-check"></i><b>5</b> Multivariate Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>5.1</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#not-variable-selection"><i class="fa fa-check"></i><b>5.1.1</b> Not variable selection</a></li>
+<li class="chapter" data-level="5.1.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#basic-idea"><i class="fa fa-check"></i><b>5.1.2</b> Basic Idea</a></li>
+<li class="chapter" data-level="5.1.3" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#more-generally"><i class="fa fa-check"></i><b>5.1.3</b> More Generally</a></li>
+<li class="chapter" data-level="5.1.4" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#calculating-c"><i class="fa fa-check"></i><b>5.1.4</b> Calculating C</a></li>
+<li class="chapter" data-level="5.1.5" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#using-the-correlation-matrix"><i class="fa fa-check"></i><b>5.1.5</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="5.1.6" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#data-reduction"><i class="fa fa-check"></i><b>5.1.6</b> Data Reduction</a></li>
+<li class="chapter" data-level="5.1.7" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#example-analysis-of-depression"><i class="fa fa-check"></i><b>5.1.7</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="5.1.8" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#use-in-multiple-regression"><i class="fa fa-check"></i><b>5.1.8</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="5.1.9" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#things-to-watch-out-for"><i class="fa fa-check"></i><b>5.1.9</b> Things to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Factor Analysis</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -193,7 +204,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="count-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Count Data</h2>
+<p>Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time - e.g. Number of thunderstorms in a year</p>
+<ul>
+<li>If we assume:
+<ul>
+<li>Rate (<span class="math inline">\(\mu\)</span>) is fixed over time</li>
+<li>Successive occurrences independent of each other</li>
+</ul></li>
+</ul>
+<p>Then we can use the <strong>Poisson distribution</strong>.</p>
+<p><span class="math display">\[
+P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
+\]</span> * The Poisson distribution has a distinct feature where the mean of the distribution <span class="math inline">\(\mu\)</span>, is also the variance.</p>
+<div class="figure">
+<img src="images/poisson.png" alt="Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve" />
+<p class="caption">Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve</p>
+</div>
+<div id="poisson-regression" class="section level4">
+<h4><span class="header-section-number">4.4.0.1</span> Poisson Regression</h4>
+<p>Just another GLM - we use a <span class="math inline">\(ln\)</span> as the link function.</p>
+<p><span class="math display">\[
+  ln(\mu) = \mathbf{X}\beta
+\]</span></p>
+<p>What actually gets fit, then is:</p>
+<p><span class="math display">\[
+  \mu = e^{\mathbf{X}\beta}
+\]</span></p>
+<p>This model assumes that the time of “exposure” for each record is identical. - Number of cigarettes per month - Number of epileptic seizures per week</p>
+<p>If this is not the case (often), then this model needs to include an <em>offset</em>. - e.g. observing each patient for epileptic seizures for a different number of days</p>
+</div>
+<div id="example-modeling-counts-from-the-add-health-data-wave-ivset." class="section level4">
+<h4><span class="header-section-number">4.4.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.</h4>
+<p>Let’s model the number of siblings someone has, based off their age at Wave 1 (2008).</p>
+<p>Visualize</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(addhealth<span class="op">$</span>nsib, <span class="dt">xlab=</span><span class="st">&quot;Number of siblings&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Count&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))
+<span class="kw">axis</span>(<span class="dv">1</span>);<span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>);<span class="kw">box</span>()</code></pre></div>
+<p><img src="04-Generalized-Linear-Models_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">glm</span>(nsib <span class="op">~</span><span class="st"> </span>agew1 <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data=</span>addhealth, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>))</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = nsib ~ agew1 + gender, family = &quot;poisson&quot;, data = addhealth)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.5489  -1.1666  -0.4465   0.5469   7.0560  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  0.361561   0.099775   3.624  0.00029 ***
+## agew1        0.044303   0.005989   7.397 1.39e-13 ***
+## genderMale  -0.096900   0.019089  -5.076 3.85e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 6410.9  on 3917  degrees of freedom
+## Residual deviance: 6335.3  on 3915  degrees of freedom
+##   (2586 observations deleted due to missingness)
+## AIC: 16755
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>In this case, the exponentiated coefficient is the ratio of the rates of occurrence per unit time Thus, for Poisson regressions, exponentiated coefficients are rate ratios as contrasted with the odds ratios we discussed for logistic regression.</p>
+<blockquote>
+<p>Incidence Rate Ratio (IRR): the relative difference measure used to compare the incidence rates of events occurring at any given point in time</p>
+</blockquote>
 
+</div>
 </div>
 <!-- </div> -->
             </section>
@@ -201,8 +278,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="categorical-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="categorical-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mvmodels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -95,13 +95,13 @@ regTermTest(full_model, "employ")
 
 * Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
     - Employment has 7 levels, so $df=6$. 
-    - Or equivelantly, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
+    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
     
 The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
 
 
 ```{r, echo=FALSE}
-load("J:/MATH315/Project/addhealth_clean.Rdata")
+load("C:/Dropbox/CSUC/Data/AddHealth/addhealth_clean.Rdata")
 addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
 ```
 
@@ -248,7 +248,7 @@ coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="versicolor")))
 coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
 ```
 
-They're the same! Proof that an interaction is equivelant to stratification. 
+They're the same! Proof that an interaction is equivalent to stratification. 
 
 ### Example
 
@@ -315,7 +315,7 @@ As we just discussed, those other factors (characteristics/variables) could also
 
 Take home message: Don't use these. 
 
-* Stopping criteria and algorithm can be different for differnet software programs. 
+* Stopping criteria and algorithm can be different for different software programs. 
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
@@ -354,7 +354,7 @@ To alleviate bias use Mean squares instead of SS.
 
 $R^{2} = 1-\frac{Model MS}{Total MS}$
 
-equivelantly, 
+equivalently, 
 
 $R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}$
 
@@ -392,7 +392,7 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 AIC vs BIC
 
 * Both are “penalized likelihood” functions
-* Each = -2loglikelihood + penalty
+* Each = -2log likelihood + penalty
 * AIC: penalty = 2, BIC: penalty = ln(N)
 * For any N > 7, ln(N) > 2
 * Thus, BIC penalizes larger models more heavily.

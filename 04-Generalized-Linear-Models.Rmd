@@ -280,7 +280,7 @@ exp(XB.m) / (1+exp(XB.m))
 
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
-### Predictions using R
+### Calculating predictions
 
 So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
 
@@ -290,13 +290,11 @@ Using the main effects model from above, stored in the object `mvmodel`, we can 
 Any row with missing data on any variable used in the model will NOT get a predicted value.
 ```
 
-
-The `predict` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
+The `predict()` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
 ```{r}
 model.pred.prob <- predict(mvmodel, type='response')
 head(model.pred.prob)
 ```
-
 
 #### Distribution of Predictions
 How well does our model do to predict depression? 
@@ -312,15 +310,53 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
 
 ![](images/q.png) What things can you infer from this plot?
 
-![](images/q.png) What would happen if we used a cutoff value of 0.5? What about 0.2? 
+![](images/q.png) Where should we put the cutoff value? At what probability should we classify a record as "depressed"?
 
-#### Moving the cutoff value
 
-* So how do we balance the true positives and true negatives? 
+### Model Performance
+
+* Say we decide that a value of 0.15 is our optimal cutoff value. 
+* We can use this probability to classify each row into groups. 
+    - The assigned class values must match the data type and levels of the true value.
+    - It also has to be in the same order, so the `0` group needs to come first. 
+* Then we calculate a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similarly named function from the `caret` package. 
+    - At it's core, this is a 2x2 table containing counts of each combination of predicted value and true value. 
+
+```{r}
+library(caret)
+
+plot.mpp$pred.class <- ifelse(plot.mpp$prediction <0.15, 0,1)
+plot.mpp$pred.class <- factor(plot.mpp$pred.class, labels=c("Not Depressed", "Depressed"))
+
+confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
+```
+
+* 123 people were correctly predicted to not be depressed (True Negative, $n_{11}$)
+* 121 people were incorrectly predicted to be depressed (False Positive, $n_{21}$)
+* 10 people were incorrectly predicted to not be depressed (False Negative, $n_{12}$)
+* 40 people were correctly predicted to be depressed (True Positive, $n_{22}$)
+
+Other terminology: 
+
+* **Sensitivity/Recall/True positive rate**: P(condition positive|predicted positive) = `40/(10+40) = .8`
+* **Specificity/true negative rate**: P(condition negative|predicted negative) = `123/(123+121) = .504`
+* **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
+* **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
+* **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
+* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
+
+
+
+#### Optimal Cutoff Value
+Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes "high risk". For some models, this could be as low as 30%. It's whatever the probability is that optimally separates the classes. Let's look at two ways to visualize model performance as a function of cutoff.
+
+### ROC Curves
+
 * We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
+* ROC curves show the balance between sensitivity and specificity.
 * We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
-    - calculate `prediction` using the model
-    - calculate the model `performance` on both true positive rate and true negative rate for a whole range of cutoff values. 
+    - calculate `prediction()` using the model
+    - calculate the model `performance()` on both true positive rate and true negative rate for a whole range of cutoff values. 
     - `plot` the curve. 
         - The `colorize` option colors the curve according to the probability cutoff point. 
 
@@ -332,40 +368,22 @@ plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
 ```
 
+We can also use the `performance()` function and say we want to evaluate the $f1$ measure
+
+```{r}
+perf.f1 <- performance(pr,measure="f")
+plot(perf.f1)
+```
+
 ROC curves: 
 
-* Show trade off between sensitivity and specificity 
 * Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
-* can give you a measure of overall model accuracy by calculating the area under the curve (auc). 
+* The Area under the Curve an give you a measure of overall model accuracy by calculating the area under the curve (auc). 
 
 ```{r}
-auc <- performance(pr, 'auc')
+auc <- performance(pr, measure='auc')
 auc@y.values
 ```
-
-### Model Performance
-
-* Say we decide that a value of 0.15 is our optimal cutoff value. 
-* We can use this probability to classify each row into groups. 
-    - The assigned class values must match the data type and levels of the true value.
-    - It also has to be in the same order, so the `0` group needs to come first. 
-* Then we calculate a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similarly named function from the `caret` package. 
-
-```{r}
-library(caret)
-
-plot.mpp$pred.class <- ifelse(plot.mpp$prediction <0.15, 0,1)
-plot.mpp$pred.class <- factor(plot.mpp$pred.class, labels=c("Not Depressed", "Depressed"))
-
-confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
-```
-
-* Sensitivity: P(True + |Predicted +)
-* Specificity: P(True - |Predicted -)
-* Accuracy: $n_{11} + n_{22} / N$ (proportion of entries on main diagonal)
-* Balanced Accuracy: [$(n_{11}/n_{.1}) + (n_{22}/n_{.2})$]/2 
-* False Positive Rate: P(Predicted + | True -)
-
 
 ## Categorical Data
 
