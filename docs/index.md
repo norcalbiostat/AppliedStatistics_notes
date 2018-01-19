@@ -1,7 +1,8 @@
+
 --- 
 title: "Applied Statistics II"
 author: "Robin A. Donatello and Edward A. Roualdes"
-date: "2018-01-16"
+date: "2018-01-18"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -21,20 +22,4 @@ Some data and examples in this notebook are drawn from _Practical Multivariate A
 <!-- All material in these notes is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). -->
 
 This notebook was created in [Rmarkdown](http://rmarkdown.rstudio.com/) using the [bookdown](https://bookdown.org/yihui/bookdown/) package by Yihui Xie. 
-
-
-<!-- # Preparing Data for Analysis {-} -->
-
-<!-- # (PART\*) Regression Modeling {-} -->
-<!-- # Linear Regression {-} -->
-<!-- # Model Building -->
-<!-- # Generalized Linear Models {-} -->
-
-<!-- # (PART\*) Multivariate Analysis {-} -->
-
-
-<!-- # (PART\*) Hierarchical Regression Analysis {-} -->
-
-
-<!-- # (PART\*) Other {-} -->
 

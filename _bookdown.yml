@@ -2,6 +2,27 @@ book_filename: "MATH456_notes"
 chapter_name: "Chapter "
 repo: https://github.com/norcalbiostat/MATH456_notes
 output_dir: docs
-#rmd_files: ["index.Rmd", "01-Preparing-Data-for-Analysis.Rmd", "02-Linear-Regression.Rmd", "03-Generalized-Linear-Models.Rmd"]
+rmd_files: ["index.Rmd" 
+            ,"data_prep.Rmd"
+            
+            ,"reg_intro.Rmd"
+            ,"linreg.Rmd"
+            ,"GLM.Rmd"
+            ,"model_building.Rmd"
+            
+            ,"multivariable_intro.Rmd"
+            ,"PCA.Rmd"
+            ,"FA.Rmd"
+            
+            ,"HLM_intro.Rmd"
+            ,"random_intercept.Rmd"
+            ,"longitudinal.Rmd"
+            ,"spatial.Rmd"
+            
+            ,"other_intro.Rmd"
+            ,"missing_data.Rmd"
+            ]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
+
+before_chapter_script: "_common.R"

@@ -22,19 +22,3 @@ Some data and examples in this notebook are drawn from _Practical Multivariate A
 
 This notebook was created in [Rmarkdown](http://rmarkdown.rstudio.com/) using the [bookdown](https://bookdown.org/yihui/bookdown/) package by Yihui Xie. 
 
-
-<!-- # Preparing Data for Analysis {-} -->
-
-<!-- # (PART\*) Regression Modeling {-} -->
-<!-- # Linear Regression {-} -->
-<!-- # Model Building -->
-<!-- # Generalized Linear Models {-} -->
-
-<!-- # (PART\*) Multivariate Analysis {-} -->
-
-
-<!-- # (PART\*) Hierarchical Regression Analysis {-} -->
-
-
-<!-- # (PART\*) Other {-} -->
-
