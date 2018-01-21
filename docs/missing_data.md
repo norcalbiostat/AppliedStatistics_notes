@@ -81,11 +81,10 @@ The amount of missing data per variable varies from 0 to 19%.
 Using `ggplot2`
 
 ```r
-library(ggplot2)
 pmpv <- data.frame(variable = names(survey), pct.miss =prop.miss)
 
 ggplot(pmpv, aes(x=variable, y=pct.miss)) +
-  geom_bar(stat="identity") + ylab("Percent") + scale_y_continuous(labels=percent, limits=c(0,1)) + 
+  geom_bar(stat="identity") + ylab("Percent") + scale_y_continuous(labels=scales::percent, limits=c(0,1)) + 
   geom_text(data=pmpv, aes(label=paste0(round(pct.miss*100,1),"%"), y=pct.miss+.025), size=4)
 ```
 
@@ -113,6 +112,7 @@ This somewhat ugly output tells us that 168 records have no missing data, 38 rec
 Using `VIM`
 
 ```r
+library(VIM)
 aggr(survey, col=c('chartreuse3','mediumvioletred'),
               numbers=TRUE, sortVars=TRUE,
               labels=names(survey), cex.axis=.7,
@@ -525,6 +525,7 @@ We will demonstrate using Fisher's Iris data (pre-built in with R) where we can 
 For the `iris` data we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
 
 ```r
+library(missForest)
 prop.table(table(is.na(iris)))
 ## 
 ## FALSE 
@@ -683,11 +684,7 @@ Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are pr
 Additional information included in this table is the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
 
 
-You can easily create a simpler table using `kable()` from the `knitr` package and selecting specific columns to display. 
-
-
 ```r
-library(knitr)
 kable(summary(pool(model))[,c(1:3, 5:7, 9)], digits=3)
 ```
 

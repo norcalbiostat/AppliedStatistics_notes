@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 <meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
 
 
-<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -214,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View on Github</a></li>
 
 </ul>
 
@@ -283,11 +282,10 @@ prop.miss
 <div id="visualize-missing-patterns" class="section level3">
 <h3><span class="header-section-number">11.1.1</span> Visualize missing patterns</h3>
 <p>Using <code>ggplot2</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-pmpv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">variable =</span> <span class="kw">names</span>(survey), <span class="dt">pct.miss =</span>prop.miss)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pmpv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">variable =</span> <span class="kw">names</span>(survey), <span class="dt">pct.miss =</span>prop.miss)
 
 <span class="kw">ggplot</span>(pmpv, <span class="kw">aes</span>(<span class="dt">x=</span>variable, <span class="dt">y=</span>pct.miss)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>percent, <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent, <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data=</span>pmpv, <span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(<span class="kw">round</span>(pct.miss<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="dt">y=</span>pct.miss<span class="op">+</span>.<span class="dv">025</span>), <span class="dt">size=</span><span class="dv">4</span>)</code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Using <code>mice</code></p>
@@ -305,7 +303,8 @@ pmpv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107</code></pre></div>
 <p>This somewhat ugly output tells us that 168 records have no missing data, 38 records are missing only <code>Pulse</code> and 20 are missing both <code>Height</code> and <code>M.I</code>.</p>
 <p>Using <code>VIM</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggr</span>(survey, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(VIM)
+<span class="kw">aggr</span>(survey, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),
               <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>,
               <span class="dt">labels=</span><span class="kw">names</span>(survey), <span class="dt">cex.axis=</span>.<span class="dv">7</span>,
               <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</code></pre></div>
@@ -377,14 +376,12 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-</html>
+<!-- </html> -->

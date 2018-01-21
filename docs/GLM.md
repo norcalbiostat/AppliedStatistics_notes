@@ -365,14 +365,13 @@ $$
 
 
 ```r
-library(MKmisc)
-HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
+MKmisc::HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
 ## $C
 ## 
 ## 	Hosmer-Lemeshow C statistic
 ## 
 ## data:  fitted(me_intx_model) and me_intx_model$y
-## X-squared = 2.2294e-16, df = 2, p-value = 1
+## X-squared = 5.614e-17, df = 1, p-value = 1
 ## 
 ## 
 ## $H
@@ -404,6 +403,7 @@ Let's compare the probability of being depressed for males and females separatel
 
 
 ```r
+library(dplyr)
 depress %>% summarize(age=mean(age), income=mean(income))
 ##        age   income
 ## 1 44.41497 20.57483
@@ -456,7 +456,6 @@ How well does our model do to predict depression?
 
 
 ```r
-library(ggplot2)
 plot.mpp <- data.frame(prediction = model.pred.prob, 
                        truth = factor(mvmodel$y, labels=c("Not Depressed", "Depressed")))
 

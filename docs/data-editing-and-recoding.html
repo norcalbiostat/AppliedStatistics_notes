@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 <meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
 
 
-<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -214,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View on Github</a></li>
 
 </ul>
 
@@ -242,8 +241,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##            73           127            43            13            38</code></pre></div>
 <p>There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis.</p>
 <p>One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the <code>recode()</code> function from the <code>car</code> package to create a new variable that I am calling <code>MARITAL2</code> that combines the <code>Divorced</code> and <code>Separated</code> levels.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
-depress<span class="op">$</span>MARITAL2 &lt;-<span class="st"> </span><span class="kw">recode</span>(depress<span class="op">$</span>MARITAL, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress<span class="op">$</span>MARITAL2 &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">recode</span>(depress<span class="op">$</span>MARITAL, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</code></pre></div>
 <p>Always confirm your recodes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(depress<span class="op">$</span>MARITAL, depress<span class="op">$</span>MARITAL2, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)
 ##                
@@ -263,14 +261,9 @@ b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(depress, <span cl
 <span class="st">            </span><span class="kw">geom_point</span>(<span class="dt">position=</span><span class="kw">position_jitter</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)
 <span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
-<ul>
-<li><p>What do you think <code>coord_flip()</code> does? Look at the difference in the X and Y values between plot a and plot b.</p></li>
-<li><p>What do you think <code>theme(legend.position=&quot;none&quot;)</code> does?</p></li>
-</ul>
-<p><em>Hint:</em> Try removing them and see what happens.</p>
-<ul>
-<li>What can you say about the relationship between Income and marital status?</li>
-</ul>
+<p><img src="images/q.png" /> What do you think <code>coord_flip()</code> does? Look at the difference in the X and Y values between plot a and plot b.</p>
+<p><img src="images/q.png" /> What do you think <code>theme(legend.position=&quot;none&quot;)</code> does?</p>
+<p><img src="images/q.png" /> What can you say about the relationship between Income and marital status?</p>
 </div>
             </section>
 
@@ -323,14 +316,12 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-</html>
+<!-- </html> -->

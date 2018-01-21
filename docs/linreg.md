@@ -84,7 +84,6 @@ fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep=
 
 
 ```r
-library(ggplot2)
 qplot(y=FFEV1, x=FHEIGHT, geom="point", data=fev, xlab="Height", ylab="FEV1", 
       main="Scatter Diagram with Regression (blue) and Lowess (red) Lines 
       of FEV1 Versus Height for Fathers.") + 
@@ -283,11 +282,10 @@ plot(mv_model)
 
 
 ```r
-library(car)
-vif(mv_model)
+car::vif(mv_model)
 ##     FAGE  FHEIGHT 
 ## 1.003163 1.003163
-tolerance = 1/vif(mv_model)
+tolerance = 1/car::vif(mv_model)
 tolerance
 ##      FAGE   FHEIGHT 
 ## 0.9968473 0.9968473

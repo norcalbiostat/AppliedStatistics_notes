@@ -24,6 +24,9 @@ Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
 
 
+```r
+depress <- read.table("data/Depress.txt", sep="\t", header=TRUE)  
+```
 
 ## Identifying Variable Types
 This section uses the raw `depression` data set from Afifi et.al. 
@@ -98,8 +101,7 @@ One way to deal with insufficient data within a certain category is to collapse 
 
 
 ```r
-library(car)
-depress$MARITAL2 <- recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
+depress$MARITAL2 <- car::recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
 ```
 
 Always confirm your recodes. 
@@ -133,14 +135,11 @@ grid.arrange(a, b, ncol=2)
 
 <img src="data_prep_files/figure-html/unnamed-chunk-11-1.png" width="960" />
 
-* What do you think `coord_flip()` does? Look at the difference in the X and Y values between
-  plot a and plot b. 
+![](images/q.png) What do you think `coord_flip()` does? Look at the difference in the X and Y values between plot a and plot b. 
 
-* What do you think `theme(legend.position="none")` does? 
+![](images/q.png) What do you think `theme(legend.position="none")` does? 
 
-_Hint:_ Try removing them and see what happens. 
-
-* What can you say about the relationship between Income and marital status? 
+![](images/q.png) What can you say about the relationship between Income and marital status? 
 
 ## Outliers
 

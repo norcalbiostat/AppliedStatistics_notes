@@ -10,3 +10,7 @@ knitr::opts_chunk$set(
 # ,fig.asp   = 0.618 # 1 / phi
 # ,fig.show  = "hold"
 )
+
+library(ggplot2)
+library(dplyr)
+library(knitr)

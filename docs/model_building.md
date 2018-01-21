@@ -132,8 +132,10 @@ This can be done in R by using the `regTermTest()` function in the `survey` pack
 
 
 ```r
-library(survey)
-## regTermTest(model.name, "variable name to test") # not run
+survey::regTermTest(main.eff.model, "Species") 
+## Wald test for Species
+##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+## F =  624.9854  on  2  and  146  df: p= < 2.22e-16
 ```
 
 ##### Example 1: Employment status on depression score
@@ -282,7 +284,6 @@ Within the _setosa_ species, there is little to no relationship between sepal an
 
 
 ```r
-library(ggplot2)
 ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=as.factor(setosa))) + 
             geom_point() + theme_bw() + theme(legend.position="top") + 
             scale_color_manual(name="Species setosa", values=c("red", "darkgreen")) + 

@@ -1,7 +1,7 @@
 --- 
 title: "Applied Statistics II"
 author: "Robin A. Donatello and Edward A. Roualdes"
-date: "`r Sys.Date()`"
+date: "Last Updated `r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -14,11 +14,19 @@ description: "Course notes for MATH 456 at CSU Chico"
 
 # Preface {-}
 
+
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("logo.png"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0; padding:10px;width: 10%')
+```
+
 This document is a set of course notes for Math 456 - Applied Statistics II at California State University, Chico. This is not a textbook replacement, and topics covered will vary depending on the instructor. To make this clear we use the term _notebook_ to refer to this document so as not to be confused with a traditional textbook. 
 
 Some data and examples in this notebook are drawn from _Practical Multivariate Analysis, 5th ed, Afifi, May, Clark_ and used with permission by the authors. 
 
-<!-- All material in these notes is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
-This notebook was created in [Rmarkdown](http://rmarkdown.rstudio.com/) using the [bookdown](https://bookdown.org/yihui/bookdown/) package by Yihui Xie. 
 
+<img src="images/rmarkdown.png" height="120px" width="110px" /><img src="images/bookdown.png" height="120px" width="100px" /><img src="images/rstudio.png" height="120px" width="110px" /><img src="images/github.png" height="120px" width="120px" />
+  

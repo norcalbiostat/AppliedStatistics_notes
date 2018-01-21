@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 <meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
 
 
-<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -214,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View on Github</a></li>
 
 </ul>
 
@@ -271,7 +270,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4><span class="header-section-number">11.7.0.1</span> Example: Prescribed amount of missing.</h4>
 <p>We will demonstrate using Fisher’s Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to estimate the bias incurred by using these imputation methods.</p>
 <p>For the <code>iris</code> data we set a seed and use the <code>prodNA()</code> function from the <code>missForest</code> package to create 10% missing values in this data set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris)))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(missForest)
+<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris)))
 ## 
 ## FALSE 
 ##     1
@@ -391,9 +391,7 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 ## Species3     -1.8242833 -0.4268994   NA 0.3017982 0.2649972</code></pre></div>
 <p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>), and a 95% interval.</p>
 <p>Additional information included in this table is the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
-<p>You can easily create a simpler table using <code>kable()</code> from the <code>knitr</code> package and selecting specific columns to display.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-<span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -521,14 +519,12 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-</html>
+<!-- </html> -->

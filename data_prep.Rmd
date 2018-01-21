@@ -22,9 +22,7 @@ make your future self happy.
 Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
-library(dplyr)
-library(ggplot2)  
+```{r}
 depress <- read.table("data/Depress.txt", sep="\t", header=TRUE)  
 ```
 
@@ -78,8 +76,7 @@ There are only 13 people who report being separated. This could potentially be t
 One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the `recode()` function from the `car` package to create a new variable that I am calling `MARITAL2` that combines the `Divorced` and `Separated` levels. 
 
 ```{r}
-library(car)
-depress$MARITAL2 <- recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
+depress$MARITAL2 <- car::recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
 ```
 
 Always confirm your recodes. 
@@ -101,14 +98,11 @@ b <- ggplot(depress, aes(x=INCOME, y=MARITAL2, color=MARITAL2), main="With jitte
 grid.arrange(a, b, ncol=2)
 ```
 
-* What do you think `coord_flip()` does? Look at the difference in the X and Y values between
-  plot a and plot b. 
+![](images/q.png) What do you think `coord_flip()` does? Look at the difference in the X and Y values between plot a and plot b. 
 
-* What do you think `theme(legend.position="none")` does? 
+![](images/q.png) What do you think `theme(legend.position="none")` does? 
 
-_Hint:_ Try removing them and see what happens. 
-
-* What can you say about the relationship between Income and marital status? 
+![](images/q.png) What can you say about the relationship between Income and marital status? 
 
 ## Outliers
 

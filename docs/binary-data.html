@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 <meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
 
 
-<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -214,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View on Github</a></li>
 
 </ul>
 
@@ -500,14 +499,13 @@ depress<span class="op">$</span>underemployed &lt;-<span class="st"> </span><spa
 </div>
 <div id="hl-gof-in-r" class="section level4">
 <h4><span class="header-section-number">4.2.4.2</span> HL GoF in R</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MKmisc)
-<span class="kw">HLgof.test</span>(<span class="dt">fit =</span> <span class="kw">fitted</span>(me_intx_model), <span class="dt">obs =</span> me_intx_model<span class="op">$</span>y)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MKmisc<span class="op">::</span><span class="kw">HLgof.test</span>(<span class="dt">fit =</span> <span class="kw">fitted</span>(me_intx_model), <span class="dt">obs =</span> me_intx_model<span class="op">$</span>y)
 ## $C
 ## 
 ##  Hosmer-Lemeshow C statistic
 ## 
 ## data:  fitted(me_intx_model) and me_intx_model$y
-## X-squared = 2.2294e-16, df = 2, p-value = 1
+## X-squared = 5.614e-17, df = 1, p-value = 1
 ## 
 ## 
 ## $H
@@ -532,7 +530,8 @@ P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 \]</span></p>
 <p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))
 ##        age   income
 ## 1 44.41497 20.57483</code></pre></div>
 <p>Plug the coefficient estimates and the values of the variables into the equation and calculate. <span class="math display">\[
@@ -568,8 +567,7 @@ Any row with missing data on any variable used in the model will NOT get a predi
 <div id="distribution-of-predictions" class="section level4">
 <h4><span class="header-section-number">4.2.6.1</span> Distribution of Predictions</h4>
 <p>How well does our model do to predict depression?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prediction =</span> model.pred.prob, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prediction =</span> model.pred.prob, 
                        <span class="dt">truth =</span> <span class="kw">factor</span>(mvmodel<span class="op">$</span>y, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))
 
 <span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>prediction, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span>
@@ -732,14 +730,12 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-</html>
+<!-- </html> -->

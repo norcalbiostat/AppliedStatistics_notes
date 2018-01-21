@@ -227,8 +227,7 @@ $$
 #### HL GoF in R
 
 ```{r}
-library(MKmisc)
-HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
+MKmisc::HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
 ```
 
 A very low test statistic and a very high p-value indicate that this model fits the data well. 
@@ -250,7 +249,7 @@ $$
 
 Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
 
-```{r, echo=-1}
+```{r}
 library(dplyr)
 depress %>% summarize(age=mean(age), income=mean(income))
 ```
@@ -296,7 +295,6 @@ head(model.pred.prob)
 How well does our model do to predict depression? 
 
 ```{r}
-library(ggplot2)
 plot.mpp <- data.frame(prediction = model.pred.prob, 
                        truth = factor(mvmodel$y, labels=c("Not Depressed", "Depressed")))
 

@@ -66,9 +66,8 @@ The Wald test is used for simultaneous tests of $Q$ variables in a model
 
 This can be done in R by using the `regTermTest()` function in the `survey` package. 
 
-```{r, eval=1}
-library(survey)
-regTermTest(model.name, "variable name to test") # not run
+```{r}
+survey::regTermTest(main.eff.model, "Species") 
 ```
 
 ##### Example 1: Employment status on depression score
@@ -142,7 +141,6 @@ table(iris$setosa, iris$Species)
 Within the _setosa_ species, there is little to no relationship between sepal and petal length. For the other two species, the relationship looks still significantly positive, but in the combined sample there appears to be a strong positive relationship (blue). 
 
 ```{r}
-library(ggplot2)
 ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=as.factor(setosa))) + 
             geom_point() + theme_bw() + theme(legend.position="top") + 
             scale_color_manual(name="Species setosa", values=c("red", "darkgreen")) + 
