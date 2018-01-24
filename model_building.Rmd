@@ -67,7 +67,8 @@ The Wald test is used for simultaneous tests of $Q$ variables in a model
 This can be done in R by using the `regTermTest()` function in the `survey` package. 
 
 ```{r}
-survey::regTermTest(main.eff.model, "Species") 
+library(survey)
+regTermTest(main.eff.model, "Species") 
 ```
 
 ##### Example 1: Employment status on depression score

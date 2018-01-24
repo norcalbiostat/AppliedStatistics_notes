@@ -132,7 +132,8 @@ This can be done in R by using the `regTermTest()` function in the `survey` pack
 
 
 ```r
-survey::regTermTest(main.eff.model, "Species") 
+library(survey)
+regTermTest(main.eff.model, "Species") 
 ## Wald test for Species
 ##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
 ## F =  624.9854  on  2  and  146  df: p= < 2.22e-16

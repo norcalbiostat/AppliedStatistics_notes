@@ -185,35 +185,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>9</b> Longitudinal Data</a></li>
 <li class="chapter" data-level="10" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>10</b> Spatial Data</a></li>
 <li class="part"><span><b>IV Other Topics</b></span></li>
-<li class="chapter" data-level="11" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>11</b> Missing Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>11.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>11.1.1</b> Visualize missing patterns</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>11.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="11.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>11.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>11.3.1</b> Demonstration via Simulation</a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>11.4</b> General strategies</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>11.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="11.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>11.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="11.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>11.4.3</b> Imputation</a></li>
-</ul></li>
-<li class="chapter" data-level="11.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>11.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="11.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>11.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="11.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>11.6.1</b> Goals</a></li>
-<li class="chapter" data-level="11.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>11.6.2</b> Technique</a></li>
-<li class="chapter" data-level="11.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>11.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="11.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>11.6.4</b> Inference on MI</a></li>
-</ul></li>
-<li class="chapter" data-level="11.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>11.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="11.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#visualize-imputations"><i class="fa fa-check"></i><b>11.7.1</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="11.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>11.7.2</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="11.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>11.8</b> Final thoughts</a></li>
-<li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
-</ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View on Github</a></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
 
 </ul>
 
@@ -242,6 +215,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis.</p>
 <p>One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the <code>recode()</code> function from the <code>car</code> package to create a new variable that I am calling <code>MARITAL2</code> that combines the <code>Divorced</code> and <code>Separated</code> levels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress<span class="op">$</span>MARITAL2 &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">recode</span>(depress<span class="op">$</span>MARITAL, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</code></pre></div>
+<p><img src="images/q.png" alt="q" /> What does the double colon <code>::</code> notation in <code>car::recode</code> do, and why is this tactic beneficial?</p>
 <p>Always confirm your recodes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(depress<span class="op">$</span>MARITAL, depress<span class="op">$</span>MARITAL2, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)
 ##                
@@ -324,4 +298,4 @@ gitbook.start({
 </script>
 </body>
 
-<!-- </html> -->
+</html>

@@ -8,6 +8,8 @@ Write an introduction here.
 
 ![PrepareData](images/Afifi_Fig3_1.png)
 
+![q](images/q.png) Why do we need a codebook? 
+
 * You are your own collaborator 6 months from now. Make sure you will be able
 to understand what you were doing.
 * Investing the time to do things clearly and in a reproducible manner will
@@ -15,13 +17,14 @@ make your future self happy.
 * Comment your code with explanations and instructions.
     - How did you get from point A to B? 
     - Why did you recode this variable in this manner? 
-* This is reason #1 we use the Markdown language through R. 
+
 
 
 ![Repro](images/pipeline.png)
 
 Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
+![q](images/q.png) What stages of this pipeline can we conduct using R Markdown? 
 
 
 ```r
@@ -31,7 +34,8 @@ depress <- read.table("data/Depress.txt", sep="\t", header=TRUE)
 ## Identifying Variable Types
 This section uses the raw `depression` data set from Afifi et.al. 
 
-Consider a variable that measures marital status. What data type does R see this variable as? 
+Consider a variable that measures marital status. 
+
 
 ```r
 table(depress$MARITAL)
@@ -43,6 +47,8 @@ str(depress$MARITAL)
 class(depress$MARITAL)
 ## [1] "integer"
 ```
+![q](images/q.png) What data type does R see this variable as? 
+
 
 When variables have numerical levels it is necessary to ensure that R knows it is a factor variable.
 
@@ -103,6 +109,8 @@ One way to deal with insufficient data within a certain category is to collapse 
 ```r
 depress$MARITAL2 <- car::recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
 ```
+
+![q](images/q.png) What does the double colon `::` notation in `car::recode` do, and why is this tactic beneficial? 
 
 Always confirm your recodes. 
 
