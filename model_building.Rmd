@@ -100,8 +100,8 @@ regTermTest(full_model, "employ")
 The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
 
 
-```{r, echo=FALSE}
-load("C:/Dropbox/CSUC/Data/AddHealth/addhealth_clean.Rdata")
+```{r}
+load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
 addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
 ```
 
