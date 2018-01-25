@@ -403,7 +403,6 @@ Let's compare the probability of being depressed for males and females separatel
 
 
 ```r
-library(dplyr)
 depress %>% summarize(age=mean(age), income=mean(income))
 ##        age   income
 ## 1 44.41497 20.57483

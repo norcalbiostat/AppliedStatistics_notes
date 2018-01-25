@@ -27,12 +27,12 @@ Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 ![q](images/q.png) What stages of this pipeline can we conduct using R Markdown? 
 
 
-```r
-depress <- read.table("data/Depress.txt", sep="\t", header=TRUE)  
-```
-
 ## Identifying Variable Types
 This section uses the raw `depression` data set from Afifi et.al. 
+
+```r
+depress <- read.table("https://norcalbiostat.netlify.com/data/Depress.txt", sep="\t", header=TRUE)  
+```
 
 Consider a variable that measures marital status. 
 
@@ -207,7 +207,7 @@ Let's look at assessing normal distributions using the cleaned depression data s
 
 ```r
 rm(depress) # remove the current version that was used in the previous part of this markdown file
-depress <- read.table("C:/GitHub/MATH456/data/Depress_020116.txt", sep="\t", header=TRUE)  
+depress <- read.table("https://norcalbiostat.netlify.com/data/depress_081217.txt", sep="\t", header=TRUE)  
 ```
 
 

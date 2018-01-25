@@ -206,6 +206,10 @@ The p-value of this Wald test is significant, thus employment significantly pred
 
 
 
+```r
+load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
+addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
+```
 
 #### Example 2: Blood Pressure
 Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
