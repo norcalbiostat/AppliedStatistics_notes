@@ -580,11 +580,11 @@ full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span c
 </ul></li>
 </ul>
 <p>The p-value of this Wald test is significant, thus employment significantly predicts CESD score.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata&quot;</span>))
-addhealth<span class="op">$</span>smoke &lt;-<span class="st"> </span><span class="kw">ifelse</span>(addhealth<span class="op">$</span>eversmoke_c<span class="op">==</span><span class="st">&quot;Smoker&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
 </div>
 <div id="example-2-blood-pressure" class="section level4">
 <h4><span class="header-section-number">4.1.2.1</span> Example 2: Blood Pressure</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata&quot;</span>))
+addhealth<span class="op">$</span>smoke &lt;-<span class="st"> </span><span class="kw">ifelse</span>(addhealth<span class="op">$</span>eversmoke_c<span class="op">==</span><span class="st">&quot;Smoker&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
 <p>Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (<code>bp_class</code>) as predictors.</p>
 <p><span class="math display">\[
 logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)} 

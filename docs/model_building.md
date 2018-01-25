@@ -205,13 +205,14 @@ regTermTest(full_model, "employ")
 The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
 
 
+#### Example 2: Blood Pressure
+
 
 ```r
 load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
 addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
 ```
 
-#### Example 2: Blood Pressure
 Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
 
 $$
@@ -328,6 +329,7 @@ Here are 3 scenarios demonstrating how a third variable can modify the relations
 
 ### Example
 
+\BeginKnitrBlock{rmderror}<div class="rmderror">Write example!</div>\EndKnitrBlock{rmderror}
 
 ## Interactions {#interactions}
 
