@@ -242,20 +242,10 @@ bfit_partpool &lt;-<span class="st"> </span>broom<span class="op">::</span><span
 
 fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon<span class="op">~</span>county, <span class="dt">data=</span>radon)
 bfit_nopool &lt;-<span class="st"> </span>broom<span class="op">::</span><span class="kw">augment</span>(fit_nopool)</code></pre></div>
-<p>The plot below displays the overall mean as complete pooling estimate (solid, horizontal line), and the no-pooling (fixed effect) and partial pooling (random effect) estimates for 8 randomly selected counties contained in the radon data. The amount of shrinkage from the partial pooling fit is determined by sample size, and the variances within and among the counties. The counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less. The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">county_idx &lt;-<span class="st"> </span><span class="kw">sample</span>(radon<span class="op">$</span>county, <span class="dv">8</span>)
-bfit_nopool <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(county <span class="op">%in%</span><span class="st"> </span>county_idx) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>county, <span class="dt">y=</span>.fitted, <span class="dt">color=</span><span class="st">&quot;fixed&quot;</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data=</span>bfit_partpool[bfit_partpool<span class="op">$</span>county <span class="op">%in%</span><span class="st"> </span>county_idx,],
-               <span class="kw">aes</span>(<span class="dt">y=</span>.fitted, <span class="dt">colour=</span><span class="st">&quot;random&quot;</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span><span class="kw">mean</span>(bfit_partpool<span class="op">$</span>log_radon))) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Estimated county means&quot;</span>, <span class="dt">x=</span><span class="st">&quot;County&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">35</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">scale_colour_hue</span>(<span class="st">&quot;Effect&quot;</span>)</code></pre></div>
-<p><img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>The plot below displays the overall mean as complete pooling estimate (solid, horizontal line), and the no-pooling (fixed effect) and partial pooling (random effect) estimates for 8 randomly selected counties contained in the radon data. The amount of shrinkage from the partial pooling fit is determined by sample size and the variances within and among the counties. In general, we can see that the counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less. The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county.</p>
+<p><img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>A similar sort of shrinkage effect is seen with covariates included in the model. Consider the covariate <span class="math inline">\(floor\)</span>, which takes on the value <span class="math inline">\(1\)</span> when the radon measurement was read within the first floor of the house and <span class="math inline">\(0\)</span> when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, <span class="math inline">\(log(radon)\)</span>, within each level of the covariate.</p>
+<p><img src="random_intercept_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </div>
             </section>
