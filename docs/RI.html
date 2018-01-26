@@ -234,7 +234,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="RI" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Random Intercept Models</h1>
-<p>Intro</p>
+<p>Radon data explanation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(radon, <span class="dt">package=</span><span class="st">&quot;rstanarm&quot;</span>)</code></pre></div>
+<p>Compare two models, partial pooling versus no-pooling.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span>county), <span class="dt">data=</span>radon)
+bfit_partpool &lt;-<span class="st"> </span>broom<span class="op">::</span><span class="kw">augment</span>(fit_partpool)
+
+fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon<span class="op">~</span>county, <span class="dt">data=</span>radon)
+bfit_nopool &lt;-<span class="st"> </span>broom<span class="op">::</span><span class="kw">augment</span>(fit_nopool)</code></pre></div>
+<p>The plot below displays the overall mean as complete pooling estimate (solid, horizontal line), and the no-pooling (fixed effect) and partial pooling (random effect) estimates for 8 randomly selected counties contained in the radon data. The amount of shrinkage from the partial pooling fit is determined by sample size, and the variances within and among the counties. The counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less. The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">county_idx &lt;-<span class="st"> </span><span class="kw">sample</span>(radon<span class="op">$</span>county, <span class="dv">8</span>)
+bfit_nopool <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(county <span class="op">%in%</span><span class="st"> </span>county_idx) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>county, <span class="dt">y=</span>.fitted, <span class="dt">color=</span><span class="st">&quot;fixed&quot;</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data=</span>bfit_partpool[bfit_partpool<span class="op">$</span>county <span class="op">%in%</span><span class="st"> </span>county_idx,],
+               <span class="kw">aes</span>(<span class="dt">y=</span>.fitted, <span class="dt">colour=</span><span class="st">&quot;random&quot;</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span><span class="kw">mean</span>(bfit_partpool<span class="op">$</span>log_radon))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Estimated county means&quot;</span>, <span class="dt">x=</span><span class="st">&quot;County&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">35</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_colour_hue</span>(<span class="st">&quot;Effect&quot;</span>)</code></pre></div>
+<p><img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /></p>
 
 </div>
             </section>

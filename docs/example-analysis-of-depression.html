@@ -274,10 +274,10 @@ pc_dep  &lt;-<span class="st"> </span><span class="kw">princomp</span>(depress[,
 <p><strong>Option 1</strong>: Take all eigenvalues &gt; 1 (<span class="math inline">\(m=5\)</span>) <strong>Option 2</strong>: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. (<span class="math inline">\(m=2\)</span>).</p>
 <p><strong>4. Examine the loadings</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pc_dep<span class="op">$</span>loadings[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]
-##       Comp.1      Comp.2     Comp.3       Comp.4      Comp.5
-## c1 0.2774384 -0.14497938 0.05770239 -0.002723687 -0.08826773
-## c2 0.3131829  0.02713557 0.03162990  0.247811083 -0.02439748
-## c3 0.2677985 -0.15471968 0.03459037  0.247246879  0.21830547</code></pre></div>
+##        Comp.1      Comp.2     Comp.3       Comp.4      Comp.5
+## c1 -0.2774384 -0.14497938 0.05770239 -0.002723687 -0.08826773
+## c2 -0.3131829  0.02713557 0.03162990  0.247811083 -0.02439748
+## c3 -0.2677985 -0.15471968 0.03459037  0.247246879  0.21830547</code></pre></div>
 <p>Here</p>
 <ul>
 <li><span class="math inline">\(X_{1}\)</span> = <em>“I felt that I could not shake…”</em></li>

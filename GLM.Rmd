@@ -444,7 +444,7 @@ axis(1);axis(2, las=2);box()
 ```
 
 ```{r}
-summary(glm(nsib ~ agew1 + gender, data=addhealth, family="poisson"))
+summary(glm(nsib ~ agew1 + female, data=addhealth, family="poisson"))
 ```
 
 In this case, the exponentiated coefficient is the ratio of the rates of occurrence per unit time Thus, for Poisson regressions, exponentiated coefficients are rate ratios as contrasted with the odds ratios we discussed for logistic regression.

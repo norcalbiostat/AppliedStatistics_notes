@@ -644,20 +644,20 @@ axis(1);axis(2, las=2);box()
 
 
 ```r
-summary(glm(nsib ~ agew1 + gender, data=addhealth, family="poisson"))
+summary(glm(nsib ~ agew1 + female, data=addhealth, family="poisson"))
 ## 
 ## Call:
-## glm(formula = nsib ~ agew1 + gender, family = "poisson", data = addhealth)
+## glm(formula = nsib ~ agew1 + female, family = "poisson", data = addhealth)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
 ## -2.5489  -1.1666  -0.4465   0.5469   7.0560  
 ## 
 ## Coefficients:
-##              Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)  0.361561   0.099775   3.624  0.00029 ***
-## agew1        0.044303   0.005989   7.397 1.39e-13 ***
-## genderMale  -0.096900   0.019089  -5.076 3.85e-07 ***
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) 0.264661   0.101352   2.611  0.00902 ** 
+## agew1       0.044303   0.005989   7.397 1.39e-13 ***
+## female      0.096900   0.019089   5.076 3.85e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
