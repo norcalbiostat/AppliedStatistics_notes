@@ -137,11 +137,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.2</b> Stratification</a></li>
 <li class="chapter" data-level="4.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>4.3</b> Moderation</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-2"><i class="fa fa-check"></i><b>4.3.1</b> Example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>4.3.1</b> Example 1: Sepal vs Petal Length</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>4.4</b> Interactions</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
-<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-4"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
+<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
+<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>4.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>4.5.1</b> Confounding</a></li>
@@ -250,13 +250,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Scenario 1</strong> - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.</p>
 <p><strong>Scenario 2</strong> - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.</p>
 <p><strong>Scenario 3</strong> - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.</p>
-<div id="example-2" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Example</h3>
+<p>Recall that common analysis methods for analyzing bivariate relationships come in very few flavors:</p>
+<ul>
+<li>Correlation (Q~Q)</li>
+<li>Linear Regression (Q~Q)</li>
+<li><span class="math inline">\(\chi^{2}\)</span> (C~C)</li>
+<li>ANOVA (Q~C)</li>
+</ul>
+<div id="example-1-sepal-vs-petal-length" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Example 1: Sepal vs Petal Length</h3>
+<p>We just got done looking at the relationship between the length of an iris’s Sepal, and the length (cm) of it’s petal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">overall &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">theme_bw</span>()
 
-<div class="rmderror">
-Write example!
-</div>
+by_spec &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length, <span class="dt">col=</span>Species)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">                  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>)
 
+<span class="kw">library</span>(gridExtra)
+<span class="kw">grid.arrange</span>(overall, by_spec , <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="images/q.png" alt="q" /> Is the relationship between sepal length and petal length the same within each species?</p>
+<p>Let’s look at the correlation between these two continuous variables</p>
+<p><em>overall</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length)
+## [1] 0.8717538</code></pre></div>
+<p><em>stratified by species</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(iris, iris<span class="op">$</span>Species, <span class="cf">function</span>(x) <span class="kw">cor</span>(x<span class="op">$</span>Sepal.Length, x<span class="op">$</span>Petal.Length))
+## iris$Species: setosa
+## [1] 0.2671758
+## -------------------------------------------------------- 
+## iris$Species: versicolor
+## [1] 0.754049
+## -------------------------------------------------------- 
+## iris$Species: virginica
+## [1] 0.8642247</code></pre></div>
+<p>There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient <span class="math inline">\(r\)</span> for virginica and veriscolor are similar to the overall <span class="math inline">\(r\)</span> value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.</p>
+<p>The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.</p>
 </div>
 </div>
             </section>

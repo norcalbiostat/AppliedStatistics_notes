@@ -137,11 +137,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.2</b> Stratification</a></li>
 <li class="chapter" data-level="4.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>4.3</b> Moderation</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-2"><i class="fa fa-check"></i><b>4.3.1</b> Example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>4.3.1</b> Example 1: Sepal vs Petal Length</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>4.4</b> Interactions</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
-<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-4"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
+<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
+<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>4.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>4.5.1</b> Confounding</a></li>
@@ -266,7 +266,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 
 ## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre></div>
 <p>The coefficient <span class="math inline">\(b_{3}\)</span> for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.</p>
-<div id="example-3" class="section level3">
+<div id="example-2" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> Example</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))
 ## 
@@ -350,7 +350,7 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 ##    0.6104680    0.7500808</code></pre></div>
 <p>They’re the same! Proof that an interaction is equivalent to stratification.</p>
 </div>
-<div id="example-4" class="section level3">
+<div id="example-3" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Example</h3>
 <p>What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data=</span>iris))

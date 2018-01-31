@@ -124,9 +124,20 @@ In this _main effects_ model, Species only changes the intercept. The effect of 
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model
 
-* Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+
 * $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
 * $H_{A}: Q$ additional variables are useful
+
+More generally, the Wald test can be used to test _any_ linear combination of predictors. 
+The test statistic (below) is a very generalized and multivariate version of the traditional test statistic that we've seen since Intro stats: 
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+
+$$
+(R{\hat {\theta }}_{n}-r)^{'}[R({\hat {V}}_{n}/n)R^{'}]^{-1}(R{\hat {\theta }}_{n}-r)\quad {\xrightarrow {\mathcal {D}}}\quad F(Q,n-P)}
+$$
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, R is the identity matrix. $\hat {V}}_{n}$ is a consisten estimot or the covariance matrix. 
 
 This can be done in R by using the `regTermTest()` function in the `survey` package. 
 
@@ -326,10 +337,62 @@ Here are 3 scenarios demonstrating how a third variable can modify the relations
 
 **Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
 
+Recall that common analysis methods for analyzing bivariate relationships come in very few flavors: 
 
-### Example
+* Correlation (Q~Q)
+* Linear Regression (Q~Q)
+* $\chi^{2}$ (C~C)
+* ANOVA (Q~C)
 
-\BeginKnitrBlock{rmderror}<div class="rmderror">Write example!</div>\EndKnitrBlock{rmderror}
+
+### Example 1: Sepal vs Petal Length
+
+We just got done looking at the relationship between the length of an iris's Sepal, and the length (cm) of it's petal. 
+
+```r
+overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
+                geom_point() + geom_smooth(se=FALSE) + 
+                theme_bw()
+
+by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
+                  geom_point() + geom_smooth(se=FALSE) + 
+                  theme_bw() + theme(legend.position="top")
+
+library(gridExtra)
+grid.arrange(overall, by_spec , ncol=2)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
+
+Let's look at the correlation between these two continuous variables
+
+_overall_
+
+```r
+cor(iris$Sepal.Length, iris$Petal.Length)
+## [1] 0.8717538
+```
+
+_stratified by species_
+
+```r
+by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
+## iris$Species: setosa
+## [1] 0.2671758
+## -------------------------------------------------------- 
+## iris$Species: versicolor
+## [1] 0.754049
+## -------------------------------------------------------- 
+## iris$Species: virginica
+## [1] 0.8642247
+```
+
+There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
+
+The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
+
 
 ## Interactions {#interactions}
 
@@ -543,8 +606,7 @@ One primary purpose of a multivariable model is to assess the relationship betwe
 
 As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
 
-
-> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$. 
+**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
 
 
 ### Automated selection procedures

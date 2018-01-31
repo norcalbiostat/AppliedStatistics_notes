@@ -137,11 +137,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.2</b> Stratification</a></li>
 <li class="chapter" data-level="4.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>4.3</b> Moderation</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-2"><i class="fa fa-check"></i><b>4.3.1</b> Example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>4.3.1</b> Example 1: Sepal vs Petal Length</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>4.4</b> Interactions</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
-<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-4"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
+<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
+<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>4.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>4.5.1</b> Confounding</a></li>
@@ -256,9 +256,7 @@ Automated versions of variable selection processes should not be used blindly.
 <h3><span class="header-section-number">4.5.1</span> Confounding</h3>
 <p>One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable <span class="math inline">\(x\)</span> and your response variable <span class="math inline">\(y\)</span>, <em>after controlling for other factors</em>.</p>
 <p>As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in <span class="math inline">\(y\)</span>.</p>
-<blockquote>
-<p>If the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is bivariately significant, but then no longer significant once <span class="math inline">\(x_{2}\)</span> has been added to the model, then <span class="math inline">\(x_{2}\)</span> is said to explain, or <strong>confound</strong>, the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span>.</p>
-</blockquote>
+<p><strong>If the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is bivariately significant, but then no longer significant once <span class="math inline">\(x_{2}\)</span> has been added to the model, then <span class="math inline">\(x_{2}\)</span> is said to explain, or <em>confound</em>, the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span>.</strong></p>
 </div>
 <div id="automated-selection-procedures" class="section level3">
 <h3><span class="header-section-number">4.5.2</span> Automated selection procedures</h3>

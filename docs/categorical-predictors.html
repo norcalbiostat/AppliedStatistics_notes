@@ -137,11 +137,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.2</b> Stratification</a></li>
 <li class="chapter" data-level="4.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>4.3</b> Moderation</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-2"><i class="fa fa-check"></i><b>4.3.1</b> Example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>4.3.1</b> Example 1: Sepal vs Petal Length</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>4.4</b> Interactions</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
-<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-4"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
+<li class="chapter" data-level="4.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>4.4.1</b> Example</a></li>
+<li class="chapter" data-level="4.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>4.4.2</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>4.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#confounding"><i class="fa fa-check"></i><b>4.5.1</b> Confounding</a></li>
@@ -436,13 +436,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="wald-test" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> Wald test</h3>
 <p>The Wald test is used for simultaneous tests of <span class="math inline">\(Q\)</span> variables in a model</p>
+<p>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.</p>
 <ul>
-<li>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.<br />
-</li>
 <li><span class="math inline">\(H_{0}: Q\)</span> additional variables are useless, i.e., their <span class="math inline">\(\beta\)</span>’s all = 0<br />
 </li>
 <li><span class="math inline">\(H_{A}: Q\)</span> additional variables are useful</li>
 </ul>
+<p>More generally, the Wald test can be used to test <em>any</em> linear combination of predictors. The test statistic (below) is a very generalized and multivariate version of the traditional test statistic that we’ve seen since Intro stats: <span class="math inline">\(\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}\)</span></p>
+<p><span class="math display">\[
+(R{\hat {\theta }}_{n}-r)^{&#39;}[R({\hat {V}}_{n}/n)R^{&#39;}]^{-1}(R{\hat {\theta }}_{n}-r)\quad {\xrightarrow {\mathcal {D}}}\quad F(Q,n-P)}
+\]</span></p>
+<p>In the case where we’re testing <span class="math inline">\(\beta_{p}=\beta_{q}=...=0\)</span>, R is the identity matrix. <span class="math inline">\(\hat {V}}_{n}\)</span> is a consisten estimot or the covariance matrix.</p>
 <p>This can be done in R by using the <code>regTermTest()</code> function in the <code>survey</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(survey)
 <span class="kw">regTermTest</span>(main.eff.model, <span class="st">&quot;Species&quot;</span>) 
