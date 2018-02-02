@@ -65,15 +65,20 @@ Consider a model with $P$ variables and you want to test if $Q$ additional varia
 * $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
 * $H_{A}: Q$ additional variables are useful
 
-More generally, the Wald test can be used to test _any_ linear combination of predictors. 
-The test statistic (below) is a very generalized and multivariate version of the traditional test statistic that we've seen since Intro stats: 
+The traditional test statistic that we've seen since Intro stats is
 $\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
 
+The Wald test generalizes this test _any_ linear combination of predictors. 
+
 $$
-(R{\hat {\theta }}_{n}-r)^{'}[R({\hat {V}}_{n}/n)R^{'}]^{-1}(R{\hat {\theta }}_{n}-r)\quad {\xrightarrow {\mathcal {D}}}\quad F(Q,n-P)}
+(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
 $$
 
-In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, R is the identity matrix. $\hat {V}}_{n}$ is a consisten estimot or the covariance matrix. 
+Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
 
 This can be done in R by using the `regTermTest()` function in the `survey` package. 
 
@@ -230,6 +235,11 @@ There is a strong, positive, linear relationship between the sepal length of the
 
 The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
 
+### Example 2: Simpson's Paradox
+
+Sometimes moderating variables can result in what's known as _Simpson's Paradox_
+
+https://en.wikipedia.org/wiki/Simpson%27s_paradox
 
 ## Interactions {#interactions}
 
@@ -322,9 +332,28 @@ is the same as the following interaction model:
 
 * $Y = A + B + C + D + A*D + B*D + C*D$
 
+## Confounding 
+
+One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
+
+As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
+
+**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
+
+
+![All the ways covariates can affect response variables](images/confounder.png)
+
+Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
+
+
+
+```{block2, type='rmdnote'}
+Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/
+```
 
 ## Variable Selection Process
-We want to choose a set of independent variables that both will yield a good prediction using as few variables as possible. In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
+
+We want to choose a set of independent variables that both will yield a good prediction using as few variables as possible. We also need to consider controlling for moderators and confounders.  In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
 
 * previous studies
 * accepted theory
@@ -343,14 +372,6 @@ Partially model-driven regression analysis and partially an exploratory analysis
 Automated versions of variable selection processes should not be used blindly. 
 ```
 
-### Confounding 
-
-One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
-
-As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
-
-**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
-
 
 ### Automated selection procedures
 
@@ -362,13 +383,14 @@ As we just discussed, those other factors (characteristics/variables) could also
 > "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
 > _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
 
-Take home message: Don't use these. 
+Take home message: Don't use these blindly. 
 
 * Stopping criteria and algorithm can be different for different software programs. 
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
-### Best Subsets (PMA5 Section 8.7)
+
+### The lesser of three evils: Best Subsets (PMA5 Section 8.7)
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -380,7 +402,28 @@ etc.
 Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html 
 
 ## Comparing between models
-When working with multiple models, how do you choose between models? 
+When working with multiple models, how do you choose the optimal model? 
+
+![q](images/q.png) How do we measure "optimal"? 
+
+1. RMSE: Root Mean Squared Error
+How biased are the results? How ``far away" are the estimates $\hat{\theta}$ from the truth $\theta$? 
+
+$$
+\sqrt{\operatorname{MSE}(\hat{\theta})} = \sqrt{\operatorname{E}((\hat{\theta}-\theta)^2)}.
+$$
+
+2. Maximize the Likelihood function
+What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
+$$
+\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
+$$
+* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).
+* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function. 
+* We can compare between models using functions based off the LL. 
+
+
+
 There are several measures we can use to compare between competing models. 
 
 
@@ -421,8 +464,7 @@ $$
 
 4. **Akaike Information Criterion (AIC)**
 
-* A penalty is applied to the deviance that increases as the number of
-  parameters $p$ increase. 
+* A penalty is applied to the deviance that increases as the number of parameters $p$ increase. 
 * Tries to find a parsimonious model that is closer to the “truth”.  
 * Uses an information function, e.g., the likelihood function $(LL)$.
 
@@ -430,6 +472,9 @@ $$ AIC = -2LL + 2p$$
 
 * Smaller is better
 * Can also be written as a function of the residual sum of squares (RSS) (in book)
+* Estimates the information in one model _relative to other models_
+    - So if all models suck, your AIC will just tell you which one sucks less. 
+
 
 5. **Bayesian Information Criterion (BIC)**
 
@@ -449,7 +494,10 @@ AIC vs BIC
     - When they disagree, AIC chooses a larger model than BIC.
 
 
+
 ## What to watch out for
+* Multicollinearity
+* Missing Data
 * Use previous research as a guide
 * Variables not included can bias the results
 * Significance levels are only a guide
