@@ -14,10 +14,13 @@ head(radon)
 ```{r, echo=FALSE}
 
 fit_nopool <- lm(log_radon~-1+county, data=radon)
-bfit_nopool <- broom::augment(fit_nopool)
+fitted_nopool <- dplyr::bind_cols(radon,
+                                       data.frame(.fitted=predict(fit_nopool)))
 
 fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
-bfit_partpool <- broom::augment(fit_partpool)
+fitted_partpool <- dplyr::bind_cols(radon,
+                                    data.frame(.fitted=predict(fit_partpool),
+                                               .fixed=lme4::fixef(fit_partpool)))
 
 ```
 
@@ -26,13 +29,13 @@ The plot below displays the overall mean as the complete pooling estimate (solid
 ```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
 
 county_idx <- sample(unique(radon$county), 8, replace=FALSE)
-bfit_nopool %>%
+fitted_nopool %>%
     filter(county %in% county_idx) %>%
-    ggplot(aes(x=county, y=.fitted, color="not pooled")) +
+    ggplot(aes(x=county, y=.fitted, colour="not pooled")) +
     geom_jitter() +
-    geom_point(data=bfit_partpool[bfit_partpool$county %in% county_idx,],
+    geom_point(data=filter(fitted_partpool, county %in% county_idx),
                aes(y=.fitted, colour="partially pooled")) +
-    geom_hline(data=bfit_partpool, aes(yintercept=.fixed, colour="completely pooled")) +
+    geom_hline(data=fitted_partpool, aes(yintercept=mean(.fixed), colour="completely pooled")) +
     labs(y="Estimated county means", x="County") +
     theme(axis.text.x=element_text(angle=35, hjust=1)) +
     guides(colour=guide_legend(title="Model"))
@@ -81,12 +84,11 @@ The random intercept model, better known as the partial pooling model, gives eac
 
 Fit the not pooled or partially pooled models in R with the following code.
 
-```{r}
+```{r, eval=FALSE}
+
 fit_nopool <- lm(log_radon~-1+county, data=radon)
-bfit_nopool <- broom::augment(fit_nopool)
 
 fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
-bfit_partpool <- broom::augment(fit_partpool)
 
 ```
 
@@ -96,20 +98,26 @@ A similar sort of shrinkage effect is seen with covariates included in the model
 ```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
 
 radon$floor <- factor(radon$floor, labels=c("basement", "first floor"))
-fit <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
-bfit <- broom::augment(fit)
+fit_nopool <- lm(log_radon ~ floor + county, data=radon)
+fitted_nopool <- dplyr::bind_cols(radon,
+                                  data.frame(.fitted=predict(fit_nopool)))
 
-ffit <- lm(log_radon ~ floor + county, data=radon)
-bffit <- broom::augment(ffit)
 
-county_idx <- sample(unique(radon$county), 8)
-bffit %>%
+fit_partpool <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
+fitted_partpool <- dplyr::bind_cols(radon,
+                                    data.frame(.fitted=predict(fit_partpool),
+                                               .fixed=predict(fit_partpool, re.form=NA)))
+
+county_idx <- c("BLUEEARTH", "DAKOTA", "FARIBAULT", "HENNEPIN",
+                "LACQUIPARLE", "MARSHALL", "PINE", "WASECA")
+
+fitted_nopool %>%
     filter(county %in% county_idx) %>%
     ggplot(aes(x=county, y=.fitted, colour="not pooled")) +
     geom_jitter() +
+    geom_point(data=filter(fitted_partpool, county %in% county_idx), aes(y=.fitted, colour="partially pooled")) +
+    geom_hline(data=filter(fitted_partpool, county %in% county_idx), aes(yintercept=.fixed, colour="completely pooled")) +
     facet_grid(.~floor) +
-    geom_point(data=bfit[bfit$county %in% county_idx,], aes(y=.fitted, colour="partially pooled")) +
-    geom_hline(data=bfit, aes(yintercept=.fixed, colour="completely pooled")) +
     labs(y="Estimated county means", x="County") +
     theme(axis.text.x=element_text(angle=35, hjust=1)) +
     guides(colour=guide_legend(title="Model"))
