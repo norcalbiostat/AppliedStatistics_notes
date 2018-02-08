@@ -3,7 +3,7 @@
 
 To highlight the benefits of random intercepts models we will compare three linear regression models: complete pooling, no pooling, and the random intercept model (AKA partial pooling).  We'll use a dataset named `radon` from the `rstanarm` package.  Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, amongst other things, dust particles commonly found in homes.  The EPA believes [radon exposure](https://www.epa.gov/radon) is one of the leading causes of cancer in the United States.
 
-The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  Measurements of radon were taken within each home, either in the basement floor $1$ or on the first floor $0$.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$ and, of the four homes measured in Aitkin, only the first house had radon measured in the basement.  Each of the three models will predict $log(radon).$
+The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Each of the three models will predict $log(radon).$
 
 
 ```r
@@ -70,10 +70,9 @@ Fit the not pooled or partially pooled models in R with the following code.
 ```r
 
 fit_nopool <- lm(log_radon~-1+county, data=radon)
-bfit_nopool <- broom::augment(fit_nopool)
 
 fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
-bfit_partpool <- broom::augment(fit_partpool)
+
 ```
 
 
