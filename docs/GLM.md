@@ -384,7 +384,8 @@ MKmisc::HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
 
 A very low test statistic and a very high p-value indicate that this model fits the data well. 
 
-### Classification
+
+## Classification of Binary outcomes
 
 * Sometimes Odds Ratios can be difficult to interpret or understand. 
 * Sometimes you just want to report the probability of the event occurring. 

@@ -159,13 +159,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>5.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="5.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>5.2.3</b> Interpretation</a></li>
 <li class="chapter" data-level="5.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>5.2.4</b> Goodness of Fit</a></li>
-<li class="chapter" data-level="5.2.5" data-path="binary-data.html"><a href="binary-data.html#classification"><i class="fa fa-check"></i><b>5.2.5</b> Classification</a></li>
-<li class="chapter" data-level="5.2.6" data-path="binary-data.html"><a href="binary-data.html#calculating-predictions"><i class="fa fa-check"></i><b>5.2.6</b> Calculating predictions</a></li>
-<li class="chapter" data-level="5.2.7" data-path="binary-data.html"><a href="binary-data.html#model-performance"><i class="fa fa-check"></i><b>5.2.7</b> Model Performance</a></li>
-<li class="chapter" data-level="5.2.8" data-path="binary-data.html"><a href="binary-data.html#roc-curves"><i class="fa fa-check"></i><b>5.2.8</b> ROC Curves</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>5.3</b> Categorical Data</a></li>
-<li class="chapter" data-level="5.4" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>5.4</b> Count Data</a></li>
+<li class="chapter" data-level="5.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>5.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>5.3.2</b> Model Performance</a></li>
+<li class="chapter" data-level="5.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>5.3.3</b> ROC Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>5.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="5.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>5.5</b> Count Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="6" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>6</b> Principal Component Analysis</a><ul>
@@ -207,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="count-data" class="section level2">
-<h2><span class="header-section-number">5.4</span> Count Data</h2>
+<h2><span class="header-section-number">5.5</span> Count Data</h2>
 <p>Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time - e.g. Number of thunderstorms in a year</p>
 <ul>
 <li>If we assume:
@@ -225,7 +226,7 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 <p class="caption">Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve</p>
 </div>
 <div id="poisson-regression" class="section level4">
-<h4><span class="header-section-number">5.4.0.1</span> Poisson Regression</h4>
+<h4><span class="header-section-number">5.5.0.1</span> Poisson Regression</h4>
 <p>Just another GLM - we use a <span class="math inline">\(ln\)</span> as the link function.</p>
 <p><span class="math display">\[
   ln(\mu) = \mathbf{X}\beta
@@ -238,7 +239,7 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 <p>If this is not the case (often), then this model needs to include an <em>offset</em>. - e.g. observing each patient for epileptic seizures for a different number of days</p>
 </div>
 <div id="example-modeling-counts-from-the-add-health-data-wave-ivset." class="section level4">
-<h4><span class="header-section-number">5.4.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.</h4>
+<h4><span class="header-section-number">5.5.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.</h4>
 <p>Let’s model the number of siblings someone has, based off their age at Wave 1 (2008).</p>
 <p>Visualize</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(addhealth<span class="op">$</span>nsib, <span class="dt">xlab=</span><span class="st">&quot;Number of siblings&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Count&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))
