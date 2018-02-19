@@ -1,4 +1,5 @@
 
+
 # Generalized Linear Models {#glm}
 
 
@@ -58,7 +59,7 @@ $$
 
 Since the _odds_ are defined as the probability an event occurs divided by the  probability it does not occur: $(p/(1-p))$, the function $log\left(\frac{p_{i}}{1-p_{i}}\right)$ is also known as the _log odds_, or more commonly called the **_logit_**. This is the _link_ function for the logistic regression model. 
 
-<img src="GLM_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" />
+<img src="GLM_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" />
 
 This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from $-\infty$ to $\infty$, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)
 
@@ -463,7 +464,7 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
       geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 ![](images/q.png) What things can you infer from this plot?
 
@@ -553,7 +554,7 @@ plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 We can also use the `performance()` function and say we want to evaluate the $f1$ measure
 
@@ -563,7 +564,7 @@ perf.f1 <- performance(pr,measure="f")
 plot(perf.f1)
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 ROC curves: 
 
@@ -586,8 +587,6 @@ auc@y.values
 
 ## Count Data
 
-
-
 Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
     - e.g. Number of thunderstorms in a year
 
@@ -600,6 +599,7 @@ Then we can use the **Poisson distribution**.
 $$
 P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 $$
+
 * The Poisson distribution has a distinct feature where the mean of the distribution $\mu$, is also the variance. 
 
 ![Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve](images/poisson.png)
@@ -607,28 +607,66 @@ $$
 
 #### Poisson Regression
 
-Just another GLM - we use a $ln$ as the link function. 
+Just another GLM - we use a $ln$ as the link function. This lets us model the log rates using a linear combination of covariates. 
 
 $$
   ln(\mu) = \mathbf{X}\beta
 $$
 
-What actually gets fit, then is: 
+Then the expected rate of events per unit of time is: 
 
 $$
   \mu = e^{\mathbf{X}\beta}
 $$
 
 This model assumes that the time of "exposure" for each record is identical. 
-    - Number of cigarettes per month
-    - Number of epileptic seizures per week
+
+*  Number of cigarettes per month
+* Number of epileptic seizures per week
+* Number of people with lung cancer in four cities
     
 If this is not the case (often), then this model needs to include an _offset_. 
-    - e.g. observing each patient for epileptic seizures for a different number of days
+
+* e.g. observing each patient for epileptic seizures for a different number of days
+* accounting for different sizes or structures of populations of interest (e.g. different cities with lung cancer)
   
 
+What actually gets fit in `glm` is the model of expected _counts_, rather than rates, with an offset for the time period $T$. 
+
+* If all time periods are the same, then T is constant, and a linear combination of the intercept, thus dropped from the model. 
+
+$$
+  ln(\lambda) = \mathbf{X}\beta + ln(T)
+$$
+
+While this offset will be added to the regression model as if it were another variable, it's not quite the same because the regression coefficient for the $ln(T)$ term is fixed at 1. 
+
+The generic formula for fitting a poisson model using `glm` is: 
+
+```r
+glm(y ~ x1 + x2 + offset(log(T)), family='poisson')
+```
+or alternatively as an argument
+
+```r
+glm(y ~ x1 + x2, offset = log(T),  family='poisson')
+```
+
+The interpretation of the $\beta$ regression coefficients are differences in the log rate (or the log rate-ratio). So, just like with a logistic regression often we back-transform the coefficients by exponentiating before interpreting. So $e^{\beta}$ is now the rate-ratio. 
+
+* The intercept term is not a ratio, but a baseline rate when all covariates are 0
+* For other covariates, the coefficient is the relative change _per unit_ change in the covariate. 
+    - one year older
+    - males vs females
+    
+Also, similar to logistic regression, since the outcome was transformed, the standard errors are not useful or interpretable as is. To calculate confidence intervals for the rate ratios, 
+
+1. calculate the CI for $\beta$
+2. exponentiate each end point. 
 
 #### Example: Modeling counts from the Add Health data Wave IVset. 
+
+**better example forthcoming**
 
 Let's model the number of siblings someone has, based off their age at Wave 1 (2008).
 
@@ -641,38 +679,47 @@ hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE
 axis(1);axis(2, las=2);box()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 
 ```r
-summary(glm(nsib ~ agew1 + female, data=addhealth, family="poisson"))
-## 
-## Call:
-## glm(formula = nsib ~ agew1 + female, family = "poisson", data = addhealth)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.5489  -1.1666  -0.4465   0.5469   7.0560  
-## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) 0.264661   0.101352   2.611  0.00902 ** 
-## agew1       0.044303   0.005989   7.397 1.39e-13 ***
-## female      0.096900   0.019089   5.076 3.85e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 6410.9  on 3917  degrees of freedom
-## Residual deviance: 6335.3  on 3915  degrees of freedom
-##   (2586 observations deleted due to missingness)
-## AIC: 16755
-## 
-## Number of Fisher Scoring iterations: 5
+nsib.model <- glm(nsib ~ agew1 + female, data=addhealth, family="poisson")
+pander(summary(nsib.model))
 ```
 
-In this case, the exponentiated coefficient is the ratio of the rates of occurrence per unit time Thus, for Poisson regressions, exponentiated coefficients are rate ratios as contrasted with the odds ratios we discussed for logistic regression.
 
-> Incidence Rate Ratio (IRR): the relative difference measure used to compare the incidence rates of events occurring at any given point in time
+---------------------------------------------------------------
+     &nbsp;        Estimate   Std. Error   z value   Pr(>|z|)  
+----------------- ---------- ------------ --------- -----------
+ **(Intercept)**    0.2647      0.1014      2.611    0.009019  
+
+    **agew1**       0.0443     0.005989     7.397    1.39e-13  
+
+   **female**       0.0969     0.01909      5.076    3.851e-07 
+---------------------------------------------------------------
+
+
+(Dispersion parameter for  poisson  family taken to be  1 )
+
+
+-------------------- ---------------------------
+   Null deviance:     6411  on 3917  degrees of 
+                               freedom          
+
+ Residual deviance:   6335  on 3915  degrees of 
+                               freedom          
+-------------------- ---------------------------
+
+
+```r
+betas <- cbind(coef(nsib.model), confint(nsib.model))
+kable(exp(betas), digits=3)
+```
+
+                       2.5 %   97.5 %
+------------  ------  ------  -------
+(Intercept)    1.303   1.068    1.589
+agew1          1.045   1.033    1.058
+female         1.102   1.061    1.144
+
 

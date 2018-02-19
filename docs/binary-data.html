@@ -227,7 +227,7 @@ log\left(
 \right) = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}
 \]</span></p>
 <p>Since the <em>odds</em> are defined as the probability an event occurs divided by the probability it does not occur: <span class="math inline">\((p/(1-p))\)</span>, the function <span class="math inline">\(log\left(\frac{p_{i}}{1-p_{i}}\right)\)</span> is also known as the <em>log odds</em>, or more commonly called the <strong><em>logit</em></strong>. This is the <em>link</em> function for the logistic regression model.</p>
-<p><img src="GLM_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p>This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)</p>
 <p>Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
 <p><span class="math display">\[

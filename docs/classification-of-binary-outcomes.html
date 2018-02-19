@@ -263,7 +263,7 @@ Any row with missing data on any variable used in the model will NOT get a predi
 
 <span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>prediction, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p><img src="images/q.png" /> What things can you infer from this plot?</p>
 <p><img src="images/q.png" /> Where should we put the cutoff value? At what probability should we classify a record as “depressed”?</p>
 </div>
@@ -354,11 +354,11 @@ pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.p
 perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)
 <span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))
 <span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>We can also use the <code>performance()</code> function and say we want to evaluate the <span class="math inline">\(f1\)</span> measure</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)
 <span class="kw">plot</span>(perf.f1)</code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>ROC curves:</p>
 <ul>
 <li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
