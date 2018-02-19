@@ -1,6 +1,8 @@
 
 # (PART) Regression Modeling {-}
 
+# Introduction {#reg-intro}
+
 The general purpose of regression is to learn more about the relationship between several independent or predictor variables and a quantitative dependent variable. Multiple regression procedures are very widely used in research. In general, this inferential tool allows us to ask (and hopefully answer) the general question "_what is the best predictor of_...", and does “_additional variable A_” or “_additional variable B” confound the relationship between my explanatory and response variable?_” 
 
 > * Educational researchers might want to learn about the best predictors of success in high-school. 
