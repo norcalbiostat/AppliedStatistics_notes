@@ -343,7 +343,9 @@ summary(me_intx_model)
 
 ### Goodness of Fit
 
-* Tests to see if there is sufficient reason to believe that the logistic model does not fit ($H_{a}$), versus it does fit ($H_{0}$)
+* Tests to see if there is sufficient reason to believe that the data does not fit a logistic model
+    - $H_{0}$ The data do come from a logistic model.
+    - $H_{a}$ The data do not come from a logistic model. 
 * This means that a small p-value indicates that the model _does not fit_ the data. 
 * We'll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test 
 
@@ -471,6 +473,55 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
 ![](images/q.png) Where should we put the cutoff value? At what probability should we classify a record as "depressed"?
 
 
+
+#### Optimal Cutoff Value
+Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes "high risk". For some models, this could be as low as 30%. It's whatever the probability is that optimally separates the classes. Let's look at two ways to visualize model performance as a function of cutoff.
+
+### ROC Curves
+
+* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
+* ROC curves show the balance between sensitivity and specificity.
+* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
+    - calculate `prediction()` using the model
+    - calculate the model `performance()` on both true positive rate and true negative rate for a whole range of cutoff values. 
+    - `plot` the curve. 
+        - The `colorize` option colors the curve according to the probability cutoff point. 
+
+
+```r
+library(ROCR)
+pr <- prediction(model.pred.prob, mvmodel$y)
+perf <- performance(pr, measure="tpr", x.measure="fpr")
+plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
+abline(a=0, b=1, lty=2)
+```
+
+<img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+We can also use the `performance()` function and say we want to evaluate the $f1$ measure
+
+
+```r
+perf.f1 <- performance(pr,measure="f")
+plot(perf.f1)
+```
+
+<img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+ROC curves: 
+
+* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
+* The Area under the Curve (auc) also gives you a measure of overall model accuracy. 
+
+
+```r
+auc <- performance(pr, measure='auc')
+auc@y.values
+## [[1]]
+## [1] 0.695041
+```
+
+
 ### Model Performance
 
 * Say we decide that a value of 0.15 is our optimal cutoff value. 
@@ -523,61 +574,13 @@ confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
 
 Other terminology: 
 
-* **Sensitivity/Recall/True positive rate**: P(condition positive|predicted positive) = `40/(10+40) = .8`
-* **Specificity/true negative rate**: P(condition negative|predicted negative) = `123/(123+121) = .504`
+* **Sensitivity/Recall/True positive rate**: P(predicted positive | total positive) = `40/(10+40) = .8`
+* **Specificity/true negative rate**: P(predicted negative | total negative) = `123/(123+121) = .504`
 * **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
 * **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
 * **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
 * **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
 
-
-
-#### Optimal Cutoff Value
-Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes "high risk". For some models, this could be as low as 30%. It's whatever the probability is that optimally separates the classes. Let's look at two ways to visualize model performance as a function of cutoff.
-
-### ROC Curves
-
-* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
-* ROC curves show the balance between sensitivity and specificity.
-* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
-    - calculate `prediction()` using the model
-    - calculate the model `performance()` on both true positive rate and true negative rate for a whole range of cutoff values. 
-    - `plot` the curve. 
-        - The `colorize` option colors the curve according to the probability cutoff point. 
-
-
-```r
-library(ROCR)
-pr <- prediction(model.pred.prob, mvmodel$y)
-perf <- performance(pr, measure="tpr", x.measure="fpr")
-plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
-abline(a=0, b=1, lty=2)
-```
-
-<img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" />
-
-We can also use the `performance()` function and say we want to evaluate the $f1$ measure
-
-
-```r
-perf.f1 <- performance(pr,measure="f")
-plot(perf.f1)
-```
-
-<img src="GLM_files/figure-html/unnamed-chunk-27-1.png" width="672" />
-
-ROC curves: 
-
-* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
-* The Area under the Curve an give you a measure of overall model accuracy by calculating the area under the curve (auc). 
-
-
-```r
-auc <- performance(pr, measure='auc')
-auc@y.values
-## [[1]]
-## [1] 0.695041
-```
 
 ## Categorical Data
 

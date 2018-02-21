@@ -163,8 +163,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>6.3</b> Classification of Binary outcomes</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>6.3.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.2</b> Model Performance</a></li>
-<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.3</b> Model Performance</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>6.4</b> Categorical Data</a></li>
 <li class="chapter" data-level="6.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>6.5</b> Count Data</a></li>
@@ -452,7 +452,11 @@ depress<span class="op">$</span>underemployed &lt;-<span class="st"> </span><spa
 <div id="goodness-of-fit" class="section level3">
 <h3><span class="header-section-number">6.2.4</span> Goodness of Fit</h3>
 <ul>
-<li>Tests to see if there is sufficient reason to believe that the logistic model does not fit (<span class="math inline">\(H_{a}\)</span>), versus it does fit (<span class="math inline">\(H_{0}\)</span>)</li>
+<li>Tests to see if there is sufficient reason to believe that the data does not fit a logistic model
+<ul>
+<li><span class="math inline">\(H_{0}\)</span> The data do come from a logistic model.</li>
+<li><span class="math inline">\(H_{a}\)</span> The data do not come from a logistic model.</li>
+</ul></li>
 <li>This means that a small p-value indicates that the model <em>does not fit</em> the data.</li>
 <li>We’ll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test</li>
 </ul>

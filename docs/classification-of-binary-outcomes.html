@@ -163,8 +163,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>6.3</b> Classification of Binary outcomes</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>6.3.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.2</b> Model Performance</a></li>
-<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.3</b> Model Performance</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>6.4</b> Categorical Data</a></li>
 <li class="chapter" data-level="6.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>6.5</b> Count Data</a></li>
@@ -267,9 +267,48 @@ Any row with missing data on any variable used in the model will NOT get a predi
 <p><img src="images/q.png" /> What things can you infer from this plot?</p>
 <p><img src="images/q.png" /> Where should we put the cutoff value? At what probability should we classify a record as “depressed”?</p>
 </div>
+<div id="optimal-cutoff-value" class="section level4">
+<h4><span class="header-section-number">6.3.1.2</span> Optimal Cutoff Value</h4>
+<p>Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes “high risk”. For some models, this could be as low as 30%. It’s whatever the probability is that optimally separates the classes. Let’s look at two ways to visualize model performance as a function of cutoff.</p>
+</div>
+</div>
+<div id="roc-curves" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> ROC Curves</h3>
+<ul>
+<li>We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot.</li>
+<li>ROC curves show the balance between sensitivity and specificity.</li>
+<li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
+<ul>
+<li>calculate <code>prediction()</code> using the model</li>
+<li>calculate the model <code>performance()</code> on both true positive rate and true negative rate for a whole range of cutoff values.</li>
+<li><code>plot</code> the curve.
+<ul>
+<li>The <code>colorize</code> option colors the curve according to the probability cutoff point.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ROCR)
+pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)
+<span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))
+<span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>We can also use the <code>performance()</code> function and say we want to evaluate the <span class="math inline">\(f1\)</span> measure</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)
+<span class="kw">plot</span>(perf.f1)</code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>ROC curves:</p>
+<ul>
+<li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
+<li>The Area under the Curve (auc) also gives you a measure of overall model accuracy.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&#39;auc&#39;</span>)
+auc<span class="op">@</span>y.values
+## [[1]]
+## [1] 0.695041</code></pre></div>
 </div>
 <div id="model-performance" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Model Performance</h3>
+<h3><span class="header-section-number">6.3.3</span> Model Performance</h3>
 <ul>
 <li>Say we decide that a value of 0.15 is our optimal cutoff value.</li>
 <li>We can use this probability to classify each row into groups.
@@ -322,52 +361,13 @@ plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span 
 </ul>
 <p>Other terminology:</p>
 <ul>
-<li><strong>Sensitivity/Recall/True positive rate</strong>: P(condition positive|predicted positive) = <code>40/(10+40) = .8</code></li>
-<li><strong>Specificity/true negative rate</strong>: P(condition negative|predicted negative) = <code>123/(123+121) = .504</code></li>
+<li><strong>Sensitivity/Recall/True positive rate</strong>: P(predicted positive | total positive) = <code>40/(10+40) = .8</code></li>
+<li><strong>Specificity/true negative rate</strong>: P(predicted negative | total negative) = <code>123/(123+121) = .504</code></li>
 <li><strong>Precision/positive predicted value</strong>: P(true positive | predicted positive) = <code>40/(121+40) = .2484</code></li>
 <li><strong>Accuracy</strong>: (TP + TN)/ Total: <code>(40 + 123)/(40+123+121+10) = .5544</code></li>
 <li><strong>Balanced Accuracy</strong>: <span class="math inline">\([(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2\)</span> - This is to adjust for class size imbalances (like in this example)</li>
 <li><strong>F1 score</strong>: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): <span class="math inline">\(2*\frac{precision*recall}{precision + recall}\)</span> = <code>2*(.2484*.8)/(.2484+.8) = .38</code></li>
 </ul>
-<div id="optimal-cutoff-value" class="section level4">
-<h4><span class="header-section-number">6.3.2.1</span> Optimal Cutoff Value</h4>
-<p>Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes “high risk”. For some models, this could be as low as 30%. It’s whatever the probability is that optimally separates the classes. Let’s look at two ways to visualize model performance as a function of cutoff.</p>
-</div>
-</div>
-<div id="roc-curves" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> ROC Curves</h3>
-<ul>
-<li>We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot.</li>
-<li>ROC curves show the balance between sensitivity and specificity.</li>
-<li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
-<ul>
-<li>calculate <code>prediction()</code> using the model</li>
-<li>calculate the model <code>performance()</code> on both true positive rate and true negative rate for a whole range of cutoff values.</li>
-<li><code>plot</code> the curve.
-<ul>
-<li>The <code>colorize</code> option colors the curve according to the probability cutoff point.</li>
-</ul></li>
-</ul></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ROCR)
-pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)
-perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)
-<span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))
-<span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<p>We can also use the <code>performance()</code> function and say we want to evaluate the <span class="math inline">\(f1\)</span> measure</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)
-<span class="kw">plot</span>(perf.f1)</code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-<p>ROC curves:</p>
-<ul>
-<li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
-<li>The Area under the Curve an give you a measure of overall model accuracy by calculating the area under the curve (auc).</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&#39;auc&#39;</span>)
-auc<span class="op">@</span>y.values
-## [[1]]
-## [1] 0.695041</code></pre></div>
 </div>
 </div>
             </section>
