@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="mv-intro.html">
-<link rel="next" href="basic-idea.html">
+<link rel="prev" href="more-generally.html">
+<link rel="next" href="using-the-correlation-matrix.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -211,30 +211,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pca" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Principal Component Analysis</h1>
-<p>More nomenclature tidbits: It’s <strong>“Principal”</strong> Components (adjective), not <strong>“Principle”</strong> Components (noun)</p>
-<p>From <a href="http://grammarist.com/spelling/principle-principal/">Grammerist</a>:</p>
-<blockquote>
-<p>As a noun, principal refers to (1) one who holds a presiding position or rank, and (2) capital or property before interest, and it’s also an adjective meaning (3) first or most important in rank</p>
-<p>Principle is only a noun. In its primary sense, it refers to a basic truth, law, assumption, or rule.</p>
-</blockquote>
-<p>This third definition (3) is the context in which we will be using this term.</p>
-<p><strong>Not variable selection</strong></p>
-<p>Principal Components Analysis (PCA) differs from variable selection in two ways:</p>
-<ol style="list-style-type: decimal">
-<li>No dependent variable exists</li>
-<li>Variables are not eliminated but rather summary variables, i.e., principal components, are computed from all of the original variables.</li>
-</ol>
-<p>We are trying to understand a phenomenon by collecting a series of component measurements, but the underlying mechanics is complex and not easily understood by simply looking at each component individually. The data could be redundant and high levels of multicolinearity may be present.</p> 
+<div id="generating-pcs-using-r" class="section level2">
+<h2><span class="header-section-number">8.3</span> Generating PC’s using R</h2>
+<p>Calculating the principal components in R can be done using a call to the function <code>prcomp()</code>. <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/">STHDA</a> has a good overview of the difference between <code>prcomp()</code> and <code>princomp()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data)
+<span class="kw">summary</span>(pr)
+## Importance of components:
+##                            Comp.1    Comp.2
+## Standard deviation     11.4019265 4.2236767
+## Proportion of Variance  0.8793355 0.1206645
+## Cumulative Proportion   0.8793355 1.0000000</code></pre></div>
+<ul>
+<li>The summary output above shows the first PC (<code>Comp.1</code>) explains the highest proportion of variance.</li>
+<li>The values for the matrix <span class="math inline">\(\mathbf{A}\)</span> is contained in <code>pr$loadings</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pr<span class="op">$</span>loadings
+## 
+## Loadings:
+##    Comp.1 Comp.2
+## X1 -0.854  0.519
+## X2 -0.519 -0.854
+## 
+##                Comp.1 Comp.2
+## SS loadings       1.0    1.0
+## Proportion Var    0.5    0.5
+## Cumulative Var    0.5    1.0</code></pre></div>
+<p>To visualize these new axes, we plot the centered data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>pr<span class="op">$</span>loadings
+x1 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X1))
+x2 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X2))
+
+<span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;x2&quot;</span>)
+<span class="kw">points</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">pch=</span><span class="dv">16</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="kw">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="kw">expression</span>(C[<span class="dv">1</span>]))
+<span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="kw">text</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="kw">expression</span>(C[<span class="dv">2</span>]))</code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pr)</code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="mv-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="basic-idea.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="more-generally.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-the-correlation-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="basic-idea.html">
-<link rel="next" href="calculating-c.html">
+<link rel="next" href="generating-pcs-using-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -174,12 +174,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>8</b> Principal Component Analysis</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>8.1</b> Basic Idea</a></li>
 <li class="chapter" data-level="8.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>8.2</b> More Generally</a></li>
-<li class="chapter" data-level="8.3" data-path="calculating-c.html"><a href="calculating-c.html"><i class="fa fa-check"></i><b>8.3</b> Calculating C</a></li>
+<li class="chapter" data-level="8.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>8.3</b> Generating PC’s using R</a></li>
 <li class="chapter" data-level="8.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>8.4</b> Using the correlation matrix</a></li>
 <li class="chapter" data-level="8.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>8.5</b> Data Reduction</a></li>
 <li class="chapter" data-level="8.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>8.6</b> Example Analysis of depression</a></li>
 <li class="chapter" data-level="8.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>8.7</b> Use in Multiple Regression</a></li>
 <li class="chapter" data-level="8.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> Things to watch out for</a></li>
+<li class="chapter" data-level="8.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>8.9</b> Additional References</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>9</b> Factor Analysis</a><ul>
 <li class="chapter" data-level="9.1" data-path="stuff.html"><a href="stuff.html"><i class="fa fa-check"></i><b>9.1</b> stuff</a></li>
@@ -260,18 +261,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><span class="math inline">\(\mathbf{\Sigma}\)</span> is the variance-covariance matrix of the <span class="math inline">\(\mathbf{X}\)</span> variables.<br />
 </li>
 </ul></li>
-<li>This means <span class="math inline">\(\lambda\)</span> is an eigenvalue and <span class="math inline">\(\mathbf{a}\)</span> an eigenvector.</li>
+<li>This means <span class="math inline">\(\lambda\)</span> is an eigenvalue and <span class="math inline">\(\mathbf{a}\)</span> an eigenvector of the covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span>.</li>
 <li>Problem: There are infinite number of possible <span class="math inline">\(\mathbf{a}\)</span>’s</li>
 <li>Solution: Choose <span class="math inline">\(a_{ij}\)</span>’s such that the sum of the squares of the coefficients for any one eigenvector is = 1.
 <ul>
 <li><span class="math inline">\(P\)</span> unique eigenvalues and <span class="math inline">\(P\)</span> corresponding eigenvectors.</li>
 </ul></li>
 </ul>
-<p>So,</p>
+<p>Which gives us</p>
 <ul>
-<li>Principal components are the eigenvectors <span class="math inline">\(\mathbf{a_{p}}\)</span></li>
-<li>and their variances are the eigenvalues of the covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> of the <span class="math inline">\(X\)</span>’s.</li>
 <li>Variances of the <span class="math inline">\(C_{j}\)</span>’s add up to the sum of the variances of the original variables (total variance).</li>
+<li>Can be thought of as variance decomposition into orthogonal (independet) vectors (variables).</li>
+<li>With <span class="math inline">\(Var(C_{1}) \geq Var(C_{2}) \geq \ldots \geq Var(C_{P})\)</span>.</li>
 </ul>
 </div>
             </section>
@@ -280,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="basic-idea.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="calculating-c.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="generating-pcs-using-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -122,19 +122,19 @@ $$
 
 * Hotelling (1933) showed that the $a_{ij}$'s are solutions to $(\mathbf{\Sigma} -\lambda\mathbf{I})\mathbf{a}=\mathbf{0}$. 
     - $\mathbf{\Sigma}$ is the variance-covariance matrix of the $\mathbf{X}$ variables.  
-* This means $\lambda$ is an eigenvalue and $\mathbf{a}$ an eigenvector.
+* This means $\lambda$ is an eigenvalue and $\mathbf{a}$ an eigenvector of the covariance matrix $\mathbf{\Sigma}$.
 * Problem: There are infinite number of possible $\mathbf{a}$'s
 * Solution: Choose $a_{ij}$'s such that the sum of the squares of the coefficients for any one
   eigenvector is = 1. 
     - $P$ unique eigenvalues and $P$ corresponding eigenvectors. 
 
-So, 
+Which gives us 
 
-* Principal components are the eigenvectors $\mathbf{a_{p}}$
-* and their variances are the eigenvalues of the covariance matrix $\mathbf{\Sigma}$ of the $X$'s.
 * Variances of the $C_{j}$'s add up to the sum of the variances of the original variables (total variance).
+* Can be thought of as variance decomposition into orthogonal (independet) vectors (variables). 
+* With $Var(C_{1}) \geq Var(C_{2}) \geq \ldots \geq Var(C_{P})$. 
 
-## Calculating C
+## Generating PC's using R
 
 Calculating the principal components in R can be done using a call to the function `prcomp()`.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) has a good overview of the difference between `prcomp()` and `princomp()`. 
 
@@ -379,6 +379,14 @@ etc.
 * Important that measurements are accurate, especially for detection of collinearity
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Arbitrary cutoff points should not be taken too seriously</div>\EndKnitrBlock{rmdcaution}
+
+## Additional References
+
+A collection of other tools and websites that do a good job of explaining PCA. 
+
+* Principal Component Analysis Essentials in R tutorial by [STHDA]](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)
+* [Stack Overflow](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues) This has animations, and walks through the explanation using wine and "how you would explain it to your grandma". 
+* 
 
 
 
