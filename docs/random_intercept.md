@@ -19,13 +19,27 @@ head(radon)
 ## 6     0  ANOKA 0.95551145  -0.8473129
 ```
 
+The no pooling model is fit with the function `lm`, giving each county a unique intercept in the model.  No pooling refers to the fact that no information is shared amongst the counties.  Each county is independent of the next.  The partial pooling model, partially shares information amongst the counties and is fit with the function `lme4::lmer`.  Within the `lme4::lmer` function, the extra notation around the input variable `county` dictates that each county should get a unique intercept such that the collection of county intercepts are randomly sampled from a normal distribution with mean $0$ and variance $\sigma^2_{\alpha}$.
+
+Because all county intercepts are randomly sampled from the same theoretical population, $N(0, \sigma^2_{\alpha})$, information is shared amongst the counties.  This sharing of information is generally referred to as shrinkage, and should be thought of as a means to reduce variation in estimates amongst the counties.  When a county has little information to offer, it's estimated intercept will be shrunk towards to overall mean of all counties.
 
 
-The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a compromise between the county level sample size, the variation amongst the counties, and the variation within the counties.  Over simplifying, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county -- estimates of variation within each county should not be determined from this arbitrary jittering of points.
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" />
+```r
 
-The three models considered set $y_n=log(radon)$, and $x_n$ records floor for homes $n=1, \ldots, N$.  The complete pooling model pools all counties together to give them one single estimate of the $log(radon)$ level, $\hat{\alpha}$.  Note that the error term $\epsilon_n$ may represent variation due to measurement error, within-house variation, and/or within-county variation.  Fans of the random intercept model accept this as a fault of the completely pooled model.
+fit_nopool <- lm(log_radon ~ -1 + county, data=radon)
+
+fit_partpool <- lme4::lmer(log_radon ~ (1|county), data=radon)
+
+```
+
+
+
+The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation amongst the counties, and the variation within the counties.  Over simplifying, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county -- estimates of variation within each county should not be determined from this arbitrary jittering of points.
+
+<img src="random_intercept_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" />
+
+The three models considered set $y_n=log(radon)$, and $x_n$ records floor for homes $n=1, \ldots, N$.  The complete pooling model pools all counties together to give them one single estimate of the $log(radon)$ level, $\hat{\alpha}$.  Note that the error term $\epsilon_n$ may represent variation due to measurement error, within-house variation, and/or within-county variation.  Fans of the random intercept model think that $\epsilon_n$, here, captures too many sources of error into one term, and think that this is a fault of the completely pooled model.
 
 
 \begin{equation*}
@@ -51,7 +65,7 @@ The no pooling model gives each county an independent estimate of  $log(radon$),
 \end{equation*}
 
 
-The random intercept model, better known as the partial pooling model, gives each county an intercept term $\alpha_j[n]$ that varies according to its own error term, $\sigma_{\alpha}^2$.  This error term measures within-county variation, thus separating measurement error from county level error.  This multi-level modeling shares information amongst the counties to the effect that the estimates $\alpha_{j[n]}$ are a compromise between the completely pooled and not pooled estimates.  The compromise is data dependent.  When a county has a relatively smaller sample size and/or the variance $\sigma^2_y$ is larger than the variance $\sigma^2_{\alpha}$, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.
+The random intercept model, better known as the partial pooling model, gives each county an intercept term $\alpha_j[n]$ that varies according to its own error term, $\sigma_{\alpha}^2$.  This error term measures within-county variation, thus separating measurement error from county level error.  This multi-level modeling shares information amongst the counties to the effect that the estimates $\alpha_{j[n]}$ are a compromise between the completely pooled and not pooled estimates.  When a county has a relatively smaller sample size and/or the variance $\sigma^2_y$ is larger than the variance $\sigma^2_{\alpha}$, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.
 
 
 \begin{equation*}
@@ -69,13 +83,40 @@ Fit the not pooled or partially pooled models in R with the following code.
 
 ```r
 
-fit_nopool <- lm(log_radon~-1+county, data=radon)
+fit_nopool <- lm(log_radon ~ -1 + county, data=radon)
 
 fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
 
 ```
 
+The fixed effects portion of the model output of `lme4::lmer` is similar to output from `lm`, except no p-values are displayed.  The fact that no p-values are displayed is a much discussed topic.  The author of the library `lme4`, Douglas Bates, believes that there is no "obviously correct" solution to calculating p-values for models with randomly varying intercepts (or slopes); see [here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html) for a general discussion.  The random effects portion of the `lme4::lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha}$ and the model's residual variance, $\sigma_y$.
+
+
+```r
+
+summary(fit_partpool)
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_radon ~ (1 | county)
+##    Data: radon
+## 
+## REML criterion at convergence: 2184.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.6880 -0.5884  0.0323  0.6444  3.4186 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  county   (Intercept) 0.08861  0.2977  
+##  Residual             0.58686  0.7661  
+## Number of obs: 919, groups:  county, 85
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    1.350      0.047   28.72
+```
+
 
 A similar sort of shrinkage effect is seen with covariates included in the model.  Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" />
