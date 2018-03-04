@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="fa.html">
+<link rel="prev" href="latent-constructs.html">
+<link rel="next" href="fa-extract.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,32 +138,95 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mv-intro" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>There is an important distinction between <em>multivariable</em> and <em>multivariate</em> models.</p>
+<div id="factor-model" class="section level2">
+<h2><span class="header-section-number">2.2</span> Factor Model</h2>
 <ul>
-<li><em>multivariable</em> : Multiple predictor variables (<span class="math inline">\(\mathbf{x}\)</span>).</li>
-<li><em>multivariate</em>: Multiple response variables (<span class="math inline">\(\mathbf{Y}\)</span>).</li>
-</ul>
-<p>Often analysts will misuse <em>multivaraite</em> when they really mean <em>multivariable</em>.</p>
-<p>Multivariate techniques are</p>
+<li>Start with P <strong>standardized</strong> variables. That is <span class="math inline">\(\frac{(x_{i}-\bar{x})}{s_{i}}\)</span>.
 <ul>
-<li>Primarily used as an exploratory technique</li>
-<li>Restructure interrelated variables</li>
-<li>Simplify description</li>
-<li>Reduce dimensionality</li>
-<li>Avoid multicollinearity problems in regression</li>
+<li>So for the rest of these FA notes, understand that each <span class="math inline">\(X\)</span> written has already been standardized.</li>
+</ul></li>
+<li>Express each variable as (its own) linear combination of <span class="math inline">\(m\)</span> common factors plus a unique factor <span class="math inline">\(e\)</span>.</li>
+<li><span class="math inline">\(m &lt;&lt; P\)</span>. Ideally <span class="math inline">\(m\)</span> is known in advance</li>
 </ul>
-<p>We will discuss two different, but related techniques: Principal Component Analysis and Factor Analysis.</p>
+<p><span class="math display">\[ 
+X_{1} = l_{11}F_{1} + l_{12}F_{2} + \ldots + l_{1m}F_{m} + e_{1} \\
+X_{2} = l_{21}F_{1} + l_{22}F_{2} + \ldots + l_{2m}F_{m} + e_{1} \\
+\vdots  \\
+X_{P} = l_{P1}F_{1} + l_{P2}F_{2} + \ldots + l_{Pm}F_{m} + e_{P}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(X_{i} = \sum l_{ij} F_{j}+ \epsilon_{i}\)</span></li>
+<li><span class="math inline">\(F_{j}\)</span> = common or latent factors</li>
+<li><span class="math inline">\(e_{i}\)</span> = unique factors</li>
+<li><p><span class="math inline">\(l_{ij}\)</span> = coefficients of common factors = factor loadings</p></li>
+<li>Each <span class="math inline">\(F_{j}\)</span> has mean 0 and variance 1</li>
+<li><span class="math inline">\(F_{j}\)</span>’s are uncorrelated</li>
+<li><p>$e_{i}’s and <span class="math inline">\(F_{j}\)</span>’s are uncorrelated</p></li>
+</ul>
+<blockquote>
+<p>How does this compare to the equations for Principal Components?</p>
+</blockquote>
+<div id="comparison-with-pca" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Comparison with PCA</h3>
+<ul>
+<li>Similar in that no dependent variable</li>
+<li>PCA:
+<ul>
+<li>Select a number of components that explain as much of the total variance as possible.</li>
+</ul></li>
+<li>FA: Factors selected mainly to explain the interrelationships among the original variables.
+<ul>
+<li>Ideally, the number of factors expected is known in advance.</li>
+<li>Major emphasis is placed on obtaining easily understandable factors that convey the essential information contained in the original set of variables.</li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="images/fa_vs_pca_concept.png" alt="https://www.researchgate.net/figure/Conceptual-distinction-between-factor-analysis-and-principal-component-analysis-ote-An_fig1_47386956" />
+<p class="caption"><a href="https://www.researchgate.net/figure/Conceptual-distinction-between-factor-analysis-and-principal-component-analysis-ote-An_fig1_47386956" class="uri">https://www.researchgate.net/figure/Conceptual-distinction-between-factor-analysis-and-principal-component-analysis-ote-An_fig1_47386956</a></p>
+</div>
+<ul>
+<li>Mirror image of PCA
+<ul>
+<li>Each PC is expressed as a linear combination of X’s</li>
+<li>Each <span class="math inline">\(X\)</span> is expressed as a linear combination of Factors</li>
+</ul></li>
+</ul>
+</div>
+<div id="implications" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Implications</h3>
+<ul>
+<li>Variance of any orginal <span class="math inline">\(X\)</span> is composed of
+<ul>
+<li><strong>communality</strong>: part due to common factors</li>
+<li><strong>specificity</strong>: part due to a unique factor</li>
+<li>= 1 when <span class="math inline">\(X\)</span>’s are standardized.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[    
+V(X_{i}) = communality + specificity \\
+\qquad   = h^{2}_{i} + u^{2}_{i} 
+\]</span></p>
+</div>
+<div id="two-big-steps" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Two big steps</h3>
+<ol style="list-style-type: decimal">
+<li>Initial factor extraction: estimate loadings and communalities</li>
+<li>Factor “rotations” to improve interpretation</li>
+</ol>
 
+<div class="rmdnote">
+Pause here and look at the [hypothetical example setup][fa-example]
+</div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="latent-constructs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fa-extract.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

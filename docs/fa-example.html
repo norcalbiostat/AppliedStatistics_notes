@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="fa.html">
+<link rel="prev" href="fa-extract.html">
+<link rel="next" href="additional-resources.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,32 +138,65 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mv-intro" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>There is an important distinction between <em>multivariable</em> and <em>multivariate</em> models.</p>
+<div id="fa-example" class="section level2">
+<h2><span class="header-section-number">2.4</span> Fake example setup</h2>
+<p>Generate 100 data points from the following multivariate normal distribution:</p>
+<p><span class="math display">\[\mathbf{\mu} = 
+  \left(\begin{array}
+  {r}
+  0.163 \\
+  0.142 \\
+  0.098 \\
+  -0.039 \\
+  -0.013
+  \end{array}\right), 
+  \mathbf{\Sigma} = 
+  \left(\begin{array}
+  {cc}
+  1     &amp;       &amp;   &amp;   &amp;     &amp;  \\
+  0.757 &amp; 1     &amp;   &amp;   &amp;     &amp;  \\
+  0.047 &amp; 0.054 &amp; 1 &amp;   &amp;     &amp;  \\
+  0.155 &amp; 0.176 &amp; 0.531 &amp; 1   &amp;  \\
+  0.279 &amp; 0.322 &amp; 0.521 &amp; 0.942 &amp; 1
+  \end{array}\right)
+\]</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">456</span>)
+m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="op">-</span><span class="fl">0.039</span>, <span class="op">-</span><span class="fl">0.013</span>)
+s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, 
+              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, 
+              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, 
+              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, 
+              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), 
+            <span class="dt">nrow=</span><span class="dv">5</span>)
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
+<p>The hypothetical data model is that these 5 variables are generated from 2 underlying factors.</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+X_{1} &amp;=  (1)*F_{1} +    (0)*F_{2} + e_{1} \\
+X_{2} &amp;=  (1)*F_{1} +    (0)*F_{2} + e_{2} \\
+X_{3} &amp;=  (0)*F_{1} +   (.5)*F_{2} + e_{3} \\
+X_{4} &amp;=  (0)*F_{1} + (1.5)*F_{2} + e_{4} \\
+X_{5} &amp;=  (0)*F_{1} +    (2)*F_{2} + e_{5} \\
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p><strong>Implications</strong></p>
 <ul>
-<li><em>multivariable</em> : Multiple predictor variables (<span class="math inline">\(\mathbf{x}\)</span>).</li>
-<li><em>multivariate</em>: Multiple response variables (<span class="math inline">\(\mathbf{Y}\)</span>).</li>
+<li><span class="math inline">\(F_{1}, F_{2}\)</span> and all <span class="math inline">\(e_{i}\)</span>’s are independent normal variables</li>
+<li>The first two <span class="math inline">\(X\)</span>’s are inter-correlated, and the last 3 <span class="math inline">\(X\)</span>’s are inter-correlated</li>
+<li>The frist 2 <span class="math inline">\(X\)</span>’s are NOT correlated with the last 3 <span class="math inline">\(X\)</span>’s</li>
 </ul>
-<p>Often analysts will misuse <em>multivaraite</em> when they really mean <em>multivariable</em>.</p>
-<p>Multivariate techniques are</p>
-<ul>
-<li>Primarily used as an exploratory technique</li>
-<li>Restructure interrelated variables</li>
-<li>Simplify description</li>
-<li>Reduce dimensionality</li>
-<li>Avoid multicollinearity problems in regression</li>
-</ul>
-<p>We will discuss two different, but related techniques: Principal Component Analysis and Factor Analysis.</p>
-
+<p>Back to (<span class="citation">(<span class="citeproc-not-found" data-reference-id="fa-extract"><strong>???</strong></span>)</span>)</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fa-extract.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

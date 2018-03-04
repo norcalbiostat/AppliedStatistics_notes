@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="fa.html">
+<link rel="prev" href="factor-model.html">
+<link rel="next" href="fa-example.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,32 +138,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mv-intro" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>There is an important distinction between <em>multivariable</em> and <em>multivariate</em> models.</p>
+<div id="fa-extract" class="section level2">
+<h2><span class="header-section-number">2.3</span> Factor Extraction</h2>
+<p>Methods</p>
+<ol style="list-style-type: decimal">
+<li>PC Factor Model</li>
+<li>Iterated PC Factor Model</li>
+<li>Maximum Likelihood</li>
+</ol>
+<p>Notice that the most common method for initial extraction of common factors is <em>principle components analysis</em>.</p>
 <ul>
-<li><em>multivariable</em> : Multiple predictor variables (<span class="math inline">\(\mathbf{x}\)</span>).</li>
-<li><em>multivariate</em>: Multiple response variables (<span class="math inline">\(\mathbf{Y}\)</span>).</li>
+<li>Choose the first <span class="math inline">\(m\)</span> principal components and modify them to fit the factor model defined in the previous section.</li>
+<li>They explain the greatest proportion of the variance and are therefore the most important</li>
 </ul>
-<p>Often analysts will misuse <em>multivaraite</em> when they really mean <em>multivariable</em>.</p>
-<p>Multivariate techniques are</p>
+<div id="pc-factor-model" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> PC Factor Model</h3>
+<p>Recall that <span class="math inline">\(\mathbf{C} = \mathbf{A}\mathbf{X}\)</span>, C’s are a function of X</p>
+<p><span class="math display">\[ X_{1} = a_{11}C_{1} + a_{12}C_{2} + \ldots + a_{1P}C_{p} \]</span></p>
+<p>We want the reverse: X’s are a function of F’s.</p>
 <ul>
-<li>Primarily used as an exploratory technique</li>
-<li>Restructure interrelated variables</li>
-<li>Simplify description</li>
-<li>Reduce dimensionality</li>
-<li>Avoid multicollinearity problems in regression</li>
+<li>Use the inverse! –&gt; If <span class="math inline">\(c = 5x\)</span> then <span class="math inline">\(x = 5^{-1}C\)</span></li>
 </ul>
-<p>We will discuss two different, but related techniques: Principal Component Analysis and Factor Analysis.</p>
+<p>The inverse PC model is <span class="math inline">\(\mathbf{X} = \mathbf{A}^{-1}\mathbf{C}\)</span>.</p>
+<p>Since <span class="math inline">\(\mathbf{A}\)</span> is orthogonal, <span class="math inline">\(\mathbf{A}^{-1} = \mathbf{A}^{T} = \mathbf{A}^{&#39;}\)</span>, so</p>
+<p><span class="math display">\[ X_{1} = a_{11}C_{1} + a_{21}C_{2} + \ldots + a_{P1}C_{p} \]</span></p>
+<p>But there are more PC’s than Factors…</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+X_{i} &amp;=  \sum_{j=1}^{P}a_{ji}C_{j} \\
+&amp;= \sum_{j=1}^{m}a_{ji}C_{j} + \sum_{j=m+1}^{m}a_{ji}C_{j} \\
+&amp;= \sum_{j=1}^{m}l_{ji}F_{j} + e_{i} \\
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p><strong>Adjustment</strong></p>
+<ul>
+<li><span class="math inline">\(V(C_{j}) = \lambda_{j}\)</span> not 1</li>
+<li>We transform: <span class="math inline">\(F_{j} = C_{j}\lambda_{j}^{-1/2}\)</span></li>
+<li>Now <span class="math inline">\(V(F_{j}) = 1\)</span></li>
+<li>Loadings: <span class="math inline">\(l_{ij} = \lambda_{j}^{1/2}a_{ji}\)</span></li>
+</ul>
 
+<div class="rmdnote">
+<span class="math inline">\(l_{ij}\)</span> is the correlation coefficient between variable <span class="math inline">\(i\)</span> and factor <span class="math inline">\(j\)</span>
+</div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="factor-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fa-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
