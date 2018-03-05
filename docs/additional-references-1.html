@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glm.html">
-<link rel="next" href="binary-data.html">
+<link rel="prev" href="final-thoughts.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,24 +243,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fitting-glms-in-r" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fitting GLMs in R</h2>
-<p>Generalized linear regression models can be fit in R using the <code>glm()</code> function. This function can fit an entire <em>family</em> of distributions and can be thought of as <span class="math inline">\(E(Y|X) = C(X)\)</span> where <span class="math inline">\(C\)</span> is the <strong>link</strong> function that relates <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>.</p>
+<div id="additional-references-1" class="section level2">
+<h2><span class="header-section-number">11.9</span> Additional References</h2>
 <ul>
-<li>Linear regression: C = Identity function (no change)</li>
-<li>Logistic regression: C = logit function</li>
-<li>Poisson regression: C = log function</li>
+<li>Little, R. and Rubin, D. Statistical Analysis with Missing Data, 2nd Ed., Wiley, 2002
+<ul>
+<li>Standard reference</li>
+<li>Requires some math</li>
+</ul></li>
+<li>Allison, P. Missing Data, Sage, 2001
+<ul>
+<li>Small and cheap</li>
+<li>Requires very little math</li>
+</ul></li>
+<li>Multiple Imputation.com <a href="http://www.stefvanbuuren.nl/mi/" class="uri">http://www.stefvanbuuren.nl/mi/</a></li>
+<li>mice: Multivariate Imputation by Chained Equations in R (skim) <a href="https://www.jstatsoft.org/article/view/v045i03" class="uri">https://www.jstatsoft.org/article/view/v045i03</a></li>
+<li><a href="http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/" class="uri">http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/</a></li>
+<li><a href="http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/" class="uri">http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/</a></li>
 </ul>
-<p>The general syntax is similar to <code>lm()</code>, with the additional required <code>family=</code> argument. See <code>?family</code> for a list of options.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3, <span class="dt">data=</span>DATA, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<p>A more in-depth tutorial on these packages can be found at <a href="http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/" class="uri">http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/</a></p>
+<p>Imputation methods for complex survey data and data not missing at random is an open research topic. Read more about this here: <a href="https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm" class="uri">https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm</a></p>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="glm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="final-thoughts.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

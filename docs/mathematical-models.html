@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glm.html">
-<link rel="next" href="binary-data.html">
+<link rel="prev" href="pooling.html">
+<link rel="next" href="fitting-models-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,24 +243,75 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fitting-glms-in-r" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fitting GLMs in R</h2>
-<p>Generalized linear regression models can be fit in R using the <code>glm()</code> function. This function can fit an entire <em>family</em> of distributions and can be thought of as <span class="math inline">\(E(Y|X) = C(X)\)</span> where <span class="math inline">\(C\)</span> is the <strong>link</strong> function that relates <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>.</p>
+<div id="mathematical-models" class="section level2">
+<h2><span class="header-section-number">8.2</span> Mathematical Models</h2>
+<p>The three models considered set <span class="math inline">\(y_n=log(radon)\)</span>, and <span class="math inline">\(x_n\)</span> records floor (0=basement, 1=first floor) for homes <span class="math inline">\(n=1, \ldots, N\)</span>.</p>
+<div id="complete-pooling" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Complete Pooling</h3>
+<p>The complete pooling model pools all counties together to give them one single estimate of the <span class="math inline">\(log(radon)\)</span> level, <span class="math inline">\(\hat{\alpha}\)</span>.</p>
 <ul>
-<li>Linear regression: C = Identity function (no change)</li>
-<li>Logistic regression: C = logit function</li>
-<li>Poisson regression: C = log function</li>
+<li>The error term <span class="math inline">\(\epsilon_n\)</span> may represent variation due to measurement error, within-house variation, and/or within-county variation.<br />
+</li>
+<li>Fans of the random intercept model think that <span class="math inline">\(\epsilon_n\)</span>, here, captures too many sources of error into one term, and think that this is a fault of the completely pooled model.</li>
 </ul>
-<p>The general syntax is similar to <code>lm()</code>, with the additional required <code>family=</code> argument. See <code>?family</code> for a list of options.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3, <span class="dt">data=</span>DATA, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<span class="math display">\[\begin{equation*}
+\begin{split}
+
+        y_n = \alpha &amp; + \epsilon_n \\
+            &amp; \epsilon_n \sim N(0, \sigma_y^2)
+
+\end{split}
+\end{equation*}\]</span>
+</div>
+<div id="no-pooling" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> No Pooling</h3>
+<ul>
+<li>The no pooling model gives each county an independent estimate of <span class="math inline">\(log(radon\)</span>), <span class="math inline">\(\hat{\alpha}_{j[n]}\)</span>.<br />
+</li>
+<li>Read the subscript <span class="math inline">\(j[n]\)</span> as home <span class="math inline">\(n\)</span> is nested within county <span class="math inline">\(j\)</span>. Hence, all homes in each county get their own independent estimate of <span class="math inline">\(log(radon)\)</span>.<br />
+</li>
+<li>Here again, one might argue that the error term captures too much noise.</li>
+</ul>
+<span class="math display">\[\begin{equation*}
+\begin{split}
+
+        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
+            \epsilon_n &amp; \sim N(0, \sigma_y^2)
+
+\end{split}
+\end{equation*}\]</span>
+</div>
+<div id="partial-pooling-ri" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Partial Pooling (RI)</h3>
+<ul>
+<li>The random intercept model, better known as the partial pooling model, gives each county an intercept term <span class="math inline">\(\alpha_j[n]\)</span> that varies according to its own error term, <span class="math inline">\(\sigma_{\alpha}^2\)</span>.<br />
+</li>
+<li>This error term measures within-county variation
+<ul>
+<li>Separating measurement error from county level error.</li>
+</ul></li>
+<li>This multi-level modeling shares information amongst the counties to the effect that the estimates <span class="math inline">\(\alpha_{j[n]}\)</span> are a compromise between the completely pooled and not pooled estimates.<br />
+</li>
+<li>When a county has a relatively smaller sample size and/or the variance <span class="math inline">\(\sigma^2_y\)</span> is larger than the variance <span class="math inline">\(\sigma^2_{\alpha}\)</span>, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.</li>
+</ul>
+<span class="math display">\[\begin{equation*}
+\begin{split}
+
+        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
+            \epsilon_n &amp; \sim N(0, \sigma_y^2) \\
+            \alpha_j[n] &amp; \sim N(\mu_{\alpha}, \sigma_{\alpha}^2)
+
+\end{split}
+\end{equation*}\]</span>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pooling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fitting-models-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

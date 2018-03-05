@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glm.html">
-<link rel="next" href="binary-data.html">
+<link rel="prev" href="mathematical-models.html">
+<link rel="next" href="including-covariates.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,24 +243,47 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fitting-glms-in-r" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fitting GLMs in R</h2>
-<p>Generalized linear regression models can be fit in R using the <code>glm()</code> function. This function can fit an entire <em>family</em> of distributions and can be thought of as <span class="math inline">\(E(Y|X) = C(X)\)</span> where <span class="math inline">\(C\)</span> is the <strong>link</strong> function that relates <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>.</p>
+<div id="fitting-models-in-r" class="section level2">
+<h2><span class="header-section-number">8.3</span> Fitting models in R</h2>
+<p><strong>No Pooling</strong></p>
+<p>The no pooling model is fit with the function <code>lm</code>, giving each county a unique intercept in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>county, <span class="dt">data=</span>radon)</code></pre></div>
+<p><strong>Partial Pooling</strong></p>
 <ul>
-<li>Linear regression: C = Identity function (no change)</li>
-<li>Logistic regression: C = logit function</li>
-<li>Poisson regression: C = log function</li>
+<li>The partial pooling model is fit with the function <code>lmer()</code>, which is part of the <code>lme4</code> package.</li>
+<li>The extra notation around the input variable <code>(1|county)</code> dictates that each county should get its own unique intercept <span class="math inline">\(\alpha_{j[n]}\)</span>.</li>
 </ul>
-<p>The general syntax is similar to <code>lm()</code>, with the additional required <code>family=</code> argument. See <code>?family</code> for a list of options.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3, <span class="dt">data=</span>DATA, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span>county), <span class="dt">data=</span>radon)</code></pre></div>
+<p>The fixed effects portion of the model output of <code>lmer</code> is similar to output from <code>lm</code>, except no p-values are displayed. The fact that no p-values are displayed is a much discussed topic. The author of the library <code>lme4</code>, Douglas Bates, believes that there is no “obviously correct” solution to calculating p-values for models with randomly varying intercepts (or slopes); see <a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here</a> for a general discussion.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit_partpool)
+## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: log_radon ~ (1 | county)
+##    Data: radon
+## 
+## REML criterion at convergence: 2184.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.6880 -0.5884  0.0323  0.6444  3.4186 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  county   (Intercept) 0.08861  0.2977  
+##  Residual             0.58686  0.7661  
+## Number of obs: 919, groups:  county, 85
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    1.350      0.047   28.72</code></pre></div>
+<p>The random effects portion of the <code>lmer</code> output provides a point estimate of the variance of component <span class="math inline">\(\sigma^2_{\alpha} = 0.0\)</span> and the model’s residual variance, <span class="math inline">\(\sigma_y = 0.57\)</span>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mathematical-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="including-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

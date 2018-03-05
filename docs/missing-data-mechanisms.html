@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -181,7 +181,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="stuff.html"><a href="stuff.html"><i class="fa fa-check"></i><b>7.1</b> stuff</a></li>
 </ul></li>
 <li class="part"><span><b>III Multi-level Analysis</b></span></li>
-<li class="chapter" data-level="8" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>8</b> Random Intercept Models</a></li>
+<li class="chapter" data-level="8" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>8</b> Random Intercept Models (RI)</a><ul>
+<li class="chapter" data-level="8.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>8.1</b> Pooling</a></li>
+<li class="chapter" data-level="8.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>8.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>8.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="8.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>8.2.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="fitting-models-in-r.html"><a href="fitting-models-in-r.html"><i class="fa fa-check"></i><b>8.3</b> Fitting models in R</a></li>
+<li class="chapter" data-level="8.4" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>8.4</b> Including Covariates</a></li>
+<li class="chapter" data-level="8.5" data-path="intraclass-correlation.html"><a href="intraclass-correlation.html"><i class="fa fa-check"></i><b>8.5</b> Intraclass Correlation</a></li>
+<li class="chapter" data-level="8.6" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>8.6</b> Additional References</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>9</b> Longitudinal Data</a></li>
 <li class="chapter" data-level="10" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>10</b> Spatial Data</a></li>
 <li class="part"><span><b>IV Other Topics</b></span></li>
@@ -210,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>11.7.2</b> Calculating bias</a></li>
 </ul></li>
 <li class="chapter" data-level="11.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>11.8</b> Final thoughts</a></li>
-<li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
@@ -273,7 +284,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
 mean.z &lt;-<span class="st"> </span><span class="kw">mean</span>(z)
 mean.z
-## [1] -0.05554659</code></pre></div>
+## [1] 0.07627938</code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Delete data at a rate of <span class="math inline">\(p\)</span> and calculate the complete case (available) mean.
 <ul>
@@ -292,11 +303,11 @@ mean.z
 <li>Calculate the complete case mean</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] -0.02135646</code></pre></div></li>
+## [1] 0.05156296</code></pre></div></li>
 <li>Calculate the bias</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.z <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] -0.03419013</code></pre></div>
+## [1] 0.02471642</code></pre></div>
 <p>How does the bias change as a function of the proportion of missing? Let <span class="math inline">\(p\)</span> range from 0% to 99% and plot the bias as a function of <span class="math inline">\(p\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc.bias &lt;-<span class="st"> </span><span class="cf">function</span>(p){
   mean.z <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, z), <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
@@ -322,13 +333,13 @@ p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dta &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Z=</span><span class="kw">sort</span>(Z), <span class="dt">p=</span><span class="kw">sort</span>(p))
 <span class="kw">head</span>(dta)
-##           Z           p
-## 1 -2.100138 0.005653608
-## 2 -2.029691 0.006836734
-## 3 -1.876353 0.022586751
-## 4 -1.875249 0.027003822
-## 5 -1.772034 0.029657417
-## 6 -1.611500 0.031898097
+##           Z            p
+## 1 -1.876325 0.0007573694
+## 2 -1.813006 0.0081423270
+## 3 -1.723723 0.0102764855
+## 4 -1.647617 0.0224227244
+## 5 -1.522886 0.0224698714
+## 6 -1.431914 0.0266853301
 <span class="kw">ggplot</span>(dta, <span class="kw">aes</span>(<span class="dt">x=</span>p, <span class="dt">y=</span>Z)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
@@ -336,21 +347,21 @@ p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dta<span class="op">$</span>Z.miss &lt;-<span class="st"> </span>dta<span class="op">$</span>Z <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">rbinom</span>(<span class="kw">NROW</span>(dta), <span class="dv">1</span>, dta<span class="op">$</span>p))
 <span class="kw">head</span>(dta)
-##           Z           p    Z.miss
-## 1 -2.100138 0.005653608 -2.100138
-## 2 -2.029691 0.006836734 -2.029691
-## 3 -1.876353 0.022586751 -1.876353
-## 4 -1.875249 0.027003822 -1.875249
-## 5 -1.772034 0.029657417 -1.772034
-## 6 -1.611500 0.031898097 -1.611500
+##           Z            p    Z.miss
+## 1 -1.876325 0.0007573694 -1.876325
+## 2 -1.813006 0.0081423270 -1.813006
+## 3 -1.723723 0.0102764855 -1.723723
+## 4 -1.647617 0.0224227244 -1.647617
+## 5 -1.522886 0.0224698714 -1.522886
+## 6 -1.431914 0.0266853301 -1.431914
 dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class="op">==</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Calculate the complete case mean and the bias</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] -0.7199216
+## [1] -0.6020052
 <span class="kw">mean</span>(dta<span class="op">$</span>Z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 0.7523426</code></pre></div>
+## [1] 0.5910749</code></pre></div>
 </div>
 <div id="nmar-pure-censoring" class="section level4">
 <h4><span class="header-section-number">11.3.1.3</span> NMAR: Pure Censoring</h4>
@@ -359,7 +370,7 @@ dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class
 y &lt;-<span class="st"> </span>z
 y[y<span class="op">&lt;</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
 <span class="kw">mean</span>(y, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 10.88031</code></pre></div>
+## [1] 10.87093</code></pre></div>
 <p>When the data is not missing at random, the bias can be much greater.</p>
 <p><em>Problem: Usually you don’t know the missing data mechanism.</em></p>
 <p><strong>Degrees of difficulty</strong></p>
@@ -419,10 +430,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -446,12 +458,14 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-<!-- </html> -->
+</html>

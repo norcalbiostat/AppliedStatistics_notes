@@ -216,7 +216,7 @@ Process by which some units observed, some units not observed
 z <- rnorm(100)
 mean.z <- mean(z)
 mean.z
-## [1] -0.05554659
+## [1] 0.07627938
 ```
 
 2. Delete data at a rate of $p$ and calculate the complete case (available) mean. 
@@ -239,14 +239,14 @@ mean.z
     
     ```r
     mean(z, na.rm=TRUE)
-    ## [1] -0.02135646
+    ## [1] 0.05156296
     ```
     
 3. Calculate the bias
 
 ```r
 mean.z - mean(z, na.rm=TRUE)
-## [1] -0.03419013
+## [1] 0.02471642
 ```
 
 How does the bias change as a function of the proportion of missing? Let $p$ range from 0% to 99% and plot the bias as a function of $p$. 
@@ -288,13 +288,13 @@ ascending order
 ```r
 dta <- data.frame(Z=sort(Z), p=sort(p))
 head(dta)
-##           Z           p
-## 1 -2.100138 0.005653608
-## 2 -2.029691 0.006836734
-## 3 -1.876353 0.022586751
-## 4 -1.875249 0.027003822
-## 5 -1.772034 0.029657417
-## 6 -1.611500 0.031898097
+##           Z            p
+## 1 -1.876325 0.0007573694
+## 2 -1.813006 0.0081423270
+## 3 -1.723723 0.0102764855
+## 4 -1.647617 0.0224227244
+## 5 -1.522886 0.0224698714
+## 6 -1.431914 0.0266853301
 ggplot(dta, aes(x=p, y=Z)) + geom_point() + xlab("P(missing)") + ylab("Z~Normal(0,1)")
 ```
 
@@ -308,13 +308,13 @@ of `dta$Z` with probability `1-dta$p`. Then change all the 0's to `NA`.
 ```r
 dta$Z.miss <- dta$Z * (1-rbinom(NROW(dta), 1, dta$p))
 head(dta)
-##           Z           p    Z.miss
-## 1 -2.100138 0.005653608 -2.100138
-## 2 -2.029691 0.006836734 -2.029691
-## 3 -1.876353 0.022586751 -1.876353
-## 4 -1.875249 0.027003822 -1.875249
-## 5 -1.772034 0.029657417 -1.772034
-## 6 -1.611500 0.031898097 -1.611500
+##           Z            p    Z.miss
+## 1 -1.876325 0.0007573694 -1.876325
+## 2 -1.813006 0.0081423270 -1.813006
+## 3 -1.723723 0.0102764855 -1.723723
+## 4 -1.647617 0.0224227244 -1.647617
+## 5 -1.522886 0.0224698714 -1.522886
+## 6 -1.431914 0.0266853301 -1.431914
 dta$Z.miss[dta$Z.miss==0] <- NA
 ```
 
@@ -322,9 +322,9 @@ dta$Z.miss[dta$Z.miss==0] <- NA
 
 ```r
 mean(dta$Z.miss, na.rm=TRUE)
-## [1] -0.7199216
+## [1] -0.6020052
 mean(dta$Z) - mean(dta$Z.miss, na.rm=TRUE)
-## [1] 0.7523426
+## [1] 0.5910749
 ```
 
 #### NMAR: Pure Censoring
@@ -335,7 +335,7 @@ z <- rnorm(100, 10, 1)
 y <- z
 y[y<10] <- NA
 mean(y, na.rm=TRUE)
-## [1] 10.88031
+## [1] 10.87093
 ```
 
 When the data is not missing at random, the bias can be much greater. 

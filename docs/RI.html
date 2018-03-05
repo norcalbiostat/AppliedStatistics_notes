@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Applied Statistics II</title>
   <meta name="description" content="Course notes for MATH 456 at CSU Chico">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Applied Statistics II" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="stuff.html">
-<link rel="next" href="longitudinal.html">
+<link rel="next" href="pooling.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,7 +181,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="stuff.html"><a href="stuff.html"><i class="fa fa-check"></i><b>7.1</b> stuff</a></li>
 </ul></li>
 <li class="part"><span><b>III Multi-level Analysis</b></span></li>
-<li class="chapter" data-level="8" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>8</b> Random Intercept Models</a></li>
+<li class="chapter" data-level="8" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>8</b> Random Intercept Models (RI)</a><ul>
+<li class="chapter" data-level="8.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>8.1</b> Pooling</a></li>
+<li class="chapter" data-level="8.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>8.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>8.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="8.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>8.2.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="fitting-models-in-r.html"><a href="fitting-models-in-r.html"><i class="fa fa-check"></i><b>8.3</b> Fitting models in R</a></li>
+<li class="chapter" data-level="8.4" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>8.4</b> Including Covariates</a></li>
+<li class="chapter" data-level="8.5" data-path="intraclass-correlation.html"><a href="intraclass-correlation.html"><i class="fa fa-check"></i><b>8.5</b> Intraclass Correlation</a></li>
+<li class="chapter" data-level="8.6" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>8.6</b> Additional References</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>9</b> Longitudinal Data</a></li>
 <li class="chapter" data-level="10" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>10</b> Spatial Data</a></li>
 <li class="part"><span><b>IV Other Topics</b></span></li>
@@ -210,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>11.7.2</b> Calculating bias</a></li>
 </ul></li>
 <li class="chapter" data-level="11.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>11.8</b> Final thoughts</a></li>
-<li class="chapter" data-level="11.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
@@ -233,11 +244,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="RI" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Random Intercept Models</h1>
-<p>To highlight the benefits of random intercepts models we will compare three linear regression models: complete pooling, no pooling, and the random intercept model (AKA partial pooling). We’ll use a dataset named <code>radon</code> from the <code>rstanarm</code> package. Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, amongst other things, dust particles commonly found in homes. The EPA believes <a href="https://www.epa.gov/radon">radon exposure</a> is one of the leading causes of cancer in the United States.</p>
-<p>The dataset contains <span class="math inline">\(N=919\)</span> observations, each measurement taken within a home that is located within one of the <span class="math inline">\(J=85\)</span> sampled counties in Minnesota. The first six rows of the dataframe show us that the county Aitkin has variable levels of <span class="math inline">\(log(radon)\)</span>. Each of the three models will predict <span class="math inline">\(log(radon).\)</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">data</span>(radon, <span class="dt">package=</span><span class="st">&quot;rstanarm&quot;</span>)
+<h1><span class="header-section-number">Chapter 8</span> Random Intercept Models (RI)</h1>
+<p>When data are correlated at some level, (measurements within plots, students within schools), the assumption of independent errors in the normal linear models is violated. One very common way to account for this clustering or correlation between observations is to fit a <strong>Random Intercept</strong> model.</p>
+<p><strong>Example Data</strong></p>
+<p>Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, amongst other things, dust particles commonly found in homes. The EPA believes <a href="https://www.epa.gov/radon">radon exposure</a> is one of the leading causes of cancer in the United States.</p>
+<p>This example uses a dataset named <code>radon</code> from the <code>rstanarm</code> package. The dataset contains <span class="math inline">\(N=919\)</span> observations, each measurement taken within a home that is located within one of the <span class="math inline">\(J=85\)</span> sampled counties in Minnesota. The first six rows of the dataframe show us that the county Aitkin has variable levels of <span class="math inline">\(log(radon)\)</span>. Each of the three models will predict <span class="math inline">\(log(radon)\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(radon, <span class="dt">package=</span><span class="st">&quot;rstanarm&quot;</span>)
 <span class="kw">head</span>(radon)
 ##   floor county  log_radon log_uranium
 ## 1     1 AITKIN 0.83290912  -0.6890476
@@ -245,73 +257,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 3     0 AITKIN 1.09861229  -0.6890476
 ## 4     0 AITKIN 0.09531018  -0.6890476
 ## 5     0  ANOKA 1.16315081  -0.8473129
-## 6     0  ANOKA 0.95551145  -0.8473129</code></pre></div>
-<p>The no pooling model is fit with the function <code>lm</code>, giving each county a unique intercept in the model. No pooling refers to the fact that no information is shared amongst the counties. Each county is independent of the next. The partial pooling model, partially shares information amongst the counties and is fit with the function <code>lme4::lmer</code>. Within the <code>lme4::lmer</code> function, the extra notation around the input variable <code>county</code> dictates that each county should get a unique intercept such that the collection of county intercepts are randomly sampled from a normal distribution with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(\sigma^2_{\alpha}\)</span>.</p>
-<p>Because all county intercepts are randomly sampled from the same theoretical population, <span class="math inline">\(N(0, \sigma^2_{\alpha})\)</span>, information is shared amongst the counties. This sharing of information is generally referred to as shrinkage, and should be thought of as a means to reduce variation in estimates amongst the counties. When a county has little information to offer, it’s estimated intercept will be shrunk towards to overall mean of all counties.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>county, <span class="dt">data=</span>radon)
-
-fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>county), <span class="dt">data=</span>radon)</code></pre></div>
-<p>The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data. The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation amongst the counties, and the variation within the counties. Over simplifying, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less. The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county – estimates of variation within each county should not be determined from this arbitrary jittering of points.</p>
-<p><img src="random_intercept_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>The three models considered set <span class="math inline">\(y_n=log(radon)\)</span>, and <span class="math inline">\(x_n\)</span> records floor for homes <span class="math inline">\(n=1, \ldots, N\)</span>. The complete pooling model pools all counties together to give them one single estimate of the <span class="math inline">\(log(radon)\)</span> level, <span class="math inline">\(\hat{\alpha}\)</span>. Note that the error term <span class="math inline">\(\epsilon_n\)</span> may represent variation due to measurement error, within-house variation, and/or within-county variation. Fans of the random intercept model think that <span class="math inline">\(\epsilon_n\)</span>, here, captures too many sources of error into one term, and think that this is a fault of the completely pooled model.</p>
-<span class="math display">\[\begin{equation*}
-\begin{split}
-
-        y_n = \alpha &amp; + \epsilon_n \\
-            &amp; \epsilon_n \sim N(0, \sigma_y^2)
-
-\end{split}
-\end{equation*}\]</span>
-<p>The no pooling model gives each county an independent estimate of <span class="math inline">\(log(radon\)</span>), <span class="math inline">\(\hat{\alpha}_{j[n]}\)</span>. Read the subscript <span class="math inline">\(j[n]\)</span> as home <span class="math inline">\(n\)</span> is nested within county <span class="math inline">\(j\)</span>. Hence, all homes in each county get their own independent estimate of <span class="math inline">\(log(radon)\)</span>. Here again, one might argue that the error term captures too much noise.</p>
-<span class="math display">\[\begin{equation*}
-\begin{split}
-
-        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
-            \epsilon_n &amp; \sim N(0, \sigma_y^2)
-
-\end{split}
-\end{equation*}\]</span>
-<p>The random intercept model, better known as the partial pooling model, gives each county an intercept term <span class="math inline">\(\alpha_j[n]\)</span> that varies according to its own error term, <span class="math inline">\(\sigma_{\alpha}^2\)</span>. This error term measures within-county variation, thus separating measurement error from county level error. This multi-level modeling shares information amongst the counties to the effect that the estimates <span class="math inline">\(\alpha_{j[n]}\)</span> are a compromise between the completely pooled and not pooled estimates. When a county has a relatively smaller sample size and/or the variance <span class="math inline">\(\sigma^2_y\)</span> is larger than the variance <span class="math inline">\(\sigma^2_{\alpha}\)</span>, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.</p>
-<span class="math display">\[\begin{equation*}
-\begin{split}
-
-        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
-            \epsilon_n &amp; \sim N(0, \sigma_y^2) \\
-            \alpha_j[n] &amp; \sim N(\mu_{\alpha}, \sigma_{\alpha}^2)
-
-\end{split}
-\end{equation*}\]</span>
-<p>Fit the not pooled or partially pooled models in R with the following code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>county, <span class="dt">data=</span>radon)
-
-fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span>county), <span class="dt">data=</span>radon)</code></pre></div>
-<p>The fixed effects portion of the model output of <code>lme4::lmer</code> is similar to output from <code>lm</code>, except no p-values are displayed. The fact that no p-values are displayed is a much discussed topic. The author of the library <code>lme4</code>, Douglas Bates, believes that there is no “obviously correct” solution to calculating p-values for models with randomly varying intercepts (or slopes); see <a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here</a> for a general discussion. The random effects portion of the <code>lme4::lmer</code> output provides a point estimate of the variance of component <span class="math inline">\(\sigma^2_{\alpha}\)</span> and the model’s residual variance, <span class="math inline">\(\sigma_y\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">summary</span>(fit_partpool)
-## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: log_radon ~ (1 | county)
-##    Data: radon
-## 
-## REML criterion at convergence: 2184.9
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -4.6880 -0.5884  0.0323  0.6444  3.4186 
-## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  county   (Intercept) 0.08861  0.2977  
-##  Residual             0.58686  0.7661  
-## Number of obs: 919, groups:  county, 85
-## 
-## Fixed effects:
-##             Estimate Std. Error t value
-## (Intercept)    1.350      0.047   28.72</code></pre></div>
-<p>A similar sort of shrinkage effect is seen with covariates included in the model. Consider the covariate <span class="math inline">\(floor\)</span>, which takes on the value <span class="math inline">\(1\)</span> when the radon measurement was read within the first floor of the house and <span class="math inline">\(0\)</span> when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, <span class="math inline">\(log(radon)\)</span>, within each level of the covariate.</p>
-<p><img src="random_intercept_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
-
+## 6     0  ANOKA 0.95551145  -0.8473129</code></pre></div> 
 </div>
             </section>
 
@@ -319,7 +265,7 @@ fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span c
         </div>
       </div>
 <a href="stuff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="longitudinal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pooling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -337,10 +283,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -364,12 +311,14 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-<!-- </html> -->
+</html>

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glm.html">
-<link rel="next" href="binary-data.html">
+<link rel="prev" href="including-covariates.html">
+<link rel="next" href="additional-references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,24 +243,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fitting-glms-in-r" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fitting GLMs in R</h2>
-<p>Generalized linear regression models can be fit in R using the <code>glm()</code> function. This function can fit an entire <em>family</em> of distributions and can be thought of as <span class="math inline">\(E(Y|X) = C(X)\)</span> where <span class="math inline">\(C\)</span> is the <strong>link</strong> function that relates <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>.</p>
+<div id="intraclass-correlation" class="section level2">
+<h2><span class="header-section-number">8.5</span> Intraclass Correlation</h2>
+<p>Is a thing that we should talk about.</p>
 <ul>
-<li>Linear regression: C = Identity function (no change)</li>
-<li>Logistic regression: C = logit function</li>
-<li>Poisson regression: C = log function</li>
+<li>How correlated do objects have to be before using a RI model is worth the hassle to fit (or worse explain to reviewers)</li>
 </ul>
-<p>The general syntax is similar to <code>lm()</code>, with the additional required <code>family=</code> argument. See <code>?family</code> for a list of options.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3, <span class="dt">data=</span>DATA, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="including-covariates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

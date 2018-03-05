@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glm.html">
-<link rel="next" href="binary-data.html">
+<link rel="prev" href="RI.html">
+<link rel="next" href="mathematical-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,24 +243,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fitting-glms-in-r" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fitting GLMs in R</h2>
-<p>Generalized linear regression models can be fit in R using the <code>glm()</code> function. This function can fit an entire <em>family</em> of distributions and can be thought of as <span class="math inline">\(E(Y|X) = C(X)\)</span> where <span class="math inline">\(C\)</span> is the <strong>link</strong> function that relates <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>.</p>
+<div id="pooling" class="section level2">
+<h2><span class="header-section-number">8.1</span> Pooling</h2>
+<p>To highlight the benefits of random intercepts models we will compare three linear regression models:</p>
 <ul>
-<li>Linear regression: C = Identity function (no change)</li>
-<li>Logistic regression: C = logit function</li>
-<li>Poisson regression: C = log function</li>
+<li>complete pooling</li>
+<li>no pooling</li>
+<li>partial pooling (the random intercept model)</li>
 </ul>
-<p>The general syntax is similar to <code>lm()</code>, with the additional required <code>family=</code> argument. See <code>?family</code> for a list of options.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3, <span class="dt">data=</span>DATA, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<p><strong>Complete Pooling</strong></p>
+<p>The complete pooling model pools all counties together to give one single estimate of the <span class="math inline">\(log(radon)\)</span> level.</p>
+<p><strong>No Pooling</strong></p>
+<p>No pooling refers to the fact that no information is shared amongst the counties. Each county is independent of the next.</p>
+<p><strong>Partial Pooling</strong></p>
+<p>The partial pooling model, partially shares information amongst the counties.</p>
+<p>Each county should get a <em>unique intercept</em> such that the collection of county intercepts are randomly sampled from a normal distribution with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(\sigma^2_{\alpha}\)</span>.</p>
+<p>Because all county intercepts are randomly sampled from the same theoretical population, <span class="math inline">\(N(0, \sigma^2_{\alpha})\)</span>, information is shared amongst the counties. This sharing of information is generally referred to as <strong>shrinkage</strong>, and should be thought of as a means to reduce variation in estimates amongst the counties. When a county has little information to offer, it’s estimated intercept will be shrunk towards to overall mean of all counties.</p>
+<p>The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data. The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation amongst the counties, and the variation within the counties.</p>
+<p><img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Generally, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.</p>
+
+<div class="rmdcaution">
+<p>The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county.</p>
+Estimates of variation within each county should not be determined from this arbitrary jittering of points.
+</div>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="RI.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mathematical-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
