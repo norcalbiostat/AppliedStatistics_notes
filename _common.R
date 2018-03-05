@@ -19,6 +19,7 @@ if ( length(new.packages) ) {
 }
 
 library(ggplot2)
+library(lme4)
 library(dplyr)
 library(knitr)
 library(pander)
