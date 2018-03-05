@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 
 list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", 
-                      "corrplot", "psych", "ggfortify", "GPArotation")
+                      "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if ( length(new.packages) ) {
     install.packages(new.packages)
