@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Statistics II</title>
+  <meta name="description" content="Course notes for MATH 456 at CSU Chico">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Statistics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes for MATH 456 at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/MATH456_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Statistics II" />
+  
+  <meta name="twitter:description" content="Course notes for MATH 456 at CSU Chico" />
+  
+
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="binary-data.html">
+<link rel="next" href="categorical-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics II course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible Workflows</a></li>
+<li class="chapter" data-level="1.2" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3" data-path="data-editing-and-recoding.html"><a href="data-editing-and-recoding.html"><i class="fa fa-check"></i><b>1.3</b> Data Editing and Recoding</a></li>
+<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="data-transformations.html"><a href="data-transformations.html"><i class="fa fa-check"></i><b>1.5</b> Data Transformations</a></li>
+<li class="chapter" data-level="1.6" data-path="selecting-appropriate-analysis.html"><a href="selecting-appropriate-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Selecting Appropriate Analysis</a></li>
+<li class="chapter" data-level="1.7" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.7</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.8" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.8</b> Dealing with missing data post-analysis</a></li>
+</ul></li>
+<li class="part"><span><b>I Regression Modeling</b></span></li>
+<li class="chapter" data-level="2" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>3</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>3.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="3.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>3.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="3.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>3.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="3.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>3.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="3.5" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>3.5</b> Assumptions</a></li>
+<li class="chapter" data-level="3.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>3.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>4</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>4.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="4.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>4.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="4.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>4.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="4.4" data-path="example-1.html"><a href="example-1.html"><i class="fa fa-check"></i><b>4.4</b> Example</a></li>
+<li class="chapter" data-level="4.5" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>4.5</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="4.6" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>4.6</b> Multicollinearity</a></li>
+<li class="chapter" data-level="4.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>4.7</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>5</b> Model Building</a><ul>
+<li class="chapter" data-level="5.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>5.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>5.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>5.1.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>5.2</b> Stratification</a></li>
+<li class="chapter" data-level="5.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>5.3</b> Moderation</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>5.3.1</b> Example 1: Sepal vs Petal Length</a></li>
+<li class="chapter" data-level="5.3.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>5.3.2</b> Example 2: Simpson’s Paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>5.4</b> Interactions</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>5.4.1</b> Example</a></li>
+<li class="chapter" data-level="5.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>5.4.2</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>5.5</b> Confounding</a></li>
+<li class="chapter" data-level="5.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>5.6</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>5.6.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="5.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>5.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>5.7</b> Comparing between models</a></li>
+<li class="chapter" data-level="5.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>5.8</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>6</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="6.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>6.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="6.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>6.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>6.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>6.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="6.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>6.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>6.2.4</b> Goodness of Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>6.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>6.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>6.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="6.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>6.5</b> Count Data</a></li>
+</ul></li>
+<li class="part"><span><b>II Multivariate Analysis</b></span></li>
+<li class="chapter" data-level="7" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>7</b> Introduction</a></li>
+<li class="chapter" data-level="8" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>8</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="8.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>8.1</b> Basic Idea</a></li>
+<li class="chapter" data-level="8.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>8.2</b> More Generally</a></li>
+<li class="chapter" data-level="8.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>8.3</b> Generating PC’s using R</a></li>
+<li class="chapter" data-level="8.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>8.4</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="8.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>8.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="8.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>8.6</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="8.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>8.7</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="8.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> Things to watch out for</a></li>
+<li class="chapter" data-level="8.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>8.9</b> Additional References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>9</b> Factor Analysis</a><ul>
+<li class="chapter" data-level="9.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>9.1.1</b> Latent Constructs</a></li>
+<li class="chapter" data-level="9.1.2" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>9.1.2</b> EFA vs CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>9.2</b> Factor Model</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="factor-model.html"><a href="factor-model.html#comparison-with-pca"><i class="fa fa-check"></i><b>9.2.1</b> Comparison with PCA</a></li>
+<li class="chapter" data-level="9.2.2" data-path="factor-model.html"><a href="factor-model.html#implications"><i class="fa fa-check"></i><b>9.2.2</b> Implications</a></li>
+<li class="chapter" data-level="9.2.3" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>9.2.3</b> Two big steps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>9.3</b> Example setup</a></li>
+<li class="chapter" data-level="9.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>9.4</b> Factor Extraction</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>9.4.1</b> PC Factor Model</a></li>
+<li class="chapter" data-level="9.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>9.4.2</b> Iterated PC Factor Model</a></li>
+<li class="chapter" data-level="9.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>9.4.3</b> Maximum Likelihood</a></li>
+<li class="chapter" data-level="9.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-4"><i class="fa fa-check"></i><b>9.4.4</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>9.5</b> Rotating Factors</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>9.5.1</b> Varimax Rotation</a></li>
+<li class="chapter" data-level="9.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>9.5.2</b> Oblique rotation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>9.6</b> Factor Scores</a></li>
+<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9.8</b> Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>III Multi-level Analysis</b></span></li>
+<li class="chapter" data-level="10" data-path="hlm-intro.html"><a href="hlm-intro.html"><i class="fa fa-check"></i><b>10</b> Introduction</a></li>
+<li class="chapter" data-level="11" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>11</b> Random Intercept Models (RI)</a><ul>
+<li class="chapter" data-level="11.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>11.1</b> Pooling</a></li>
+<li class="chapter" data-level="11.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>11.2</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>11.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="11.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>11.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="11.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>11.2.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="fitting-models-in-r.html"><a href="fitting-models-in-r.html"><i class="fa fa-check"></i><b>11.3</b> Fitting models in R</a></li>
+<li class="chapter" data-level="11.4" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.4</b> Including Covariates</a></li>
+<li class="chapter" data-level="11.5" data-path="intraclass-correlation.html"><a href="intraclass-correlation.html"><i class="fa fa-check"></i><b>11.5</b> Intraclass Correlation</a></li>
+<li class="chapter" data-level="11.6" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.6</b> Additional References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>12</b> Longitudinal Data</a></li>
+<li class="chapter" data-level="13" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>13</b> Spatial Data</a></li>
+<li class="part"><span><b>IV Other Topics</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="classification-of-binary-outcomes" class="section level2">
+<h2><span class="header-section-number">6.3</span> Classification of Binary outcomes</h2>
+<ul>
+<li>Sometimes Odds Ratios can be difficult to interpret or understand.</li>
+<li>Sometimes you just want to report the probability of the event occurring.</li>
+<li>Or sometimes you want to predict whether or not a new individual is going to have the event.</li>
+</ul>
+<p>For all of these, we need to calculate <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>, the probability of the event.</p>
+<p>For the main effects model of depression on age, income and gender the predicted probability of depression is: <span class="math display">\[
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+\]</span></p>
+<p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))
+##        age   income
+## 1 44.41497 20.57483</code></pre></div>
+<p>Plug the coefficient estimates and the values of the variables into the equation and calculate. <span class="math display">\[
+P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">XB.f &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span>.<span class="dv">03656</span><span class="op">*</span>(<span class="fl">20.6</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.92945</span>
+<span class="kw">exp</span>(XB.f) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.f))
+## [1] 0.1930504</code></pre></div>
+<p><span class="math display">\[
+P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">XB.m &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span>.<span class="dv">03656</span><span class="op">*</span>(<span class="fl">20.6</span>)
+<span class="kw">exp</span>(XB.m) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.m))
+## [1] 0.08629312</code></pre></div>
+<p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p>
+<div id="calculating-predictions" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Calculating predictions</h3>
+<p>So what if you want to get the model predicted probability of the event for all individuals in the data set? There’s no way I’m doing that calculation for every person in the data set.</p>
+<p>Using the main effects model from above, stored in the object <code>mvmodel</code>, we can call the <code>predict()</code> command to generate a vector of predictions for each row used in the model.</p>
+
+<div class="rmdcaution">
+Any row with missing data on any variable used in the model will NOT get a predicted value.
+</div>
+
+<p>The <code>predict()</code> function can calculate predictions for any GLM. The model object <code>mvmodel</code> stores the information that it was a logistic regression.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.pred.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mvmodel, <span class="dt">type=</span><span class="st">&#39;response&#39;</span>)
+<span class="kw">head</span>(model.pred.prob)
+##          1          2          3          4          5          6 
+## 0.21108906 0.08014012 0.15266203 0.24527840 0.15208679 0.17056409</code></pre></div>
+<div id="distribution-of-predictions" class="section level4">
+<h4><span class="header-section-number">6.3.1.1</span> Distribution of Predictions</h4>
+<p>How well does our model do to predict depression?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prediction =</span> model.pred.prob, 
+                       <span class="dt">truth =</span> <span class="kw">factor</span>(mvmodel<span class="op">$</span>y, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))
+
+<span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>prediction, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="images/q.png" /> What things can you infer from this plot?</p>
+<p><img src="images/q.png" /> Where should we put the cutoff value? At what probability should we classify a record as “depressed”?</p>
+</div>
+<div id="optimal-cutoff-value" class="section level4">
+<h4><span class="header-section-number">6.3.1.2</span> Optimal Cutoff Value</h4>
+<p>Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes “high risk”. For some models, this could be as low as 30%. It’s whatever the probability is that optimally separates the classes. Let’s look at two ways to visualize model performance as a function of cutoff.</p>
+</div>
+</div>
+<div id="roc-curves" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> ROC Curves</h3>
+<ul>
+<li>We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot.</li>
+<li>ROC curves show the balance between sensitivity and specificity.</li>
+<li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
+<ul>
+<li>calculate <code>prediction()</code> using the model</li>
+<li>calculate the model <code>performance()</code> on both true positive rate and true negative rate for a whole range of cutoff values.</li>
+<li><code>plot</code> the curve.
+<ul>
+<li>The <code>colorize</code> option colors the curve according to the probability cutoff point.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ROCR)
+pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)
+perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)
+<span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))
+<span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>We can also use the <code>performance()</code> function and say we want to evaluate the <span class="math inline">\(f1\)</span> measure</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)
+<span class="kw">plot</span>(perf.f1)</code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>ROC curves:</p>
+<ul>
+<li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
+<li>The Area under the Curve (auc) also gives you a measure of overall model accuracy.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&#39;auc&#39;</span>)
+auc<span class="op">@</span>y.values
+## [[1]]
+## [1] 0.695041</code></pre></div>
+</div>
+<div id="model-performance" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Model Performance</h3>
+<ul>
+<li>Say we decide that a value of 0.15 is our optimal cutoff value.</li>
+<li>We can use this probability to classify each row into groups.
+<ul>
+<li>The assigned class values must match the data type and levels of the true value.</li>
+<li>It also has to be in the same order, so the <code>0</code> group needs to come first.</li>
+</ul></li>
+<li>Then we calculate a <a href="https://en.wikipedia.org/wiki/Confusion_matrix">[Confusion Matrix]</a> using the similarly named function from the <code>caret</code> package.
+<ul>
+<li>At it’s core, this is a 2x2 table containing counts of each combination of predicted value and true value.</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+
+plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">ifelse</span>(plot.mpp<span class="op">$</span>prediction <span class="op">&lt;</span><span class="fl">0.15</span>, <span class="dv">0</span>,<span class="dv">1</span>)
+plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.mpp<span class="op">$</span>pred.class, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>))
+
+<span class="kw">confusionMatrix</span>(plot.mpp<span class="op">$</span>pred.class, plot.mpp<span class="op">$</span>truth, <span class="dt">positive=</span><span class="st">&quot;Depressed&quot;</span>)
+## Confusion Matrix and Statistics
+## 
+##                Reference
+## Prediction      Not Depressed Depressed
+##   Not Depressed           123        10
+##   Depressed               121        40
+##                                           
+##                Accuracy : 0.5544          
+##                  95% CI : (0.4956, 0.6121)
+##     No Information Rate : 0.8299          
+##     P-Value [Acc &gt; NIR] : 1               
+##                                           
+##                   Kappa : 0.1615          
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
+##                                           
+##             Sensitivity : 0.8000          
+##             Specificity : 0.5041          
+##          Pos Pred Value : 0.2484          
+##          Neg Pred Value : 0.9248          
+##              Prevalence : 0.1701          
+##          Detection Rate : 0.1361          
+##    Detection Prevalence : 0.5476          
+##       Balanced Accuracy : 0.6520          
+##                                           
+##        &#39;Positive&#39; Class : Depressed       
+## </code></pre></div>
+<ul>
+<li>123 people were correctly predicted to not be depressed (True Negative, <span class="math inline">\(n_{11}\)</span>)</li>
+<li>121 people were incorrectly predicted to be depressed (False Positive, <span class="math inline">\(n_{21}\)</span>)</li>
+<li>10 people were incorrectly predicted to not be depressed (False Negative, <span class="math inline">\(n_{12}\)</span>)</li>
+<li>40 people were correctly predicted to be depressed (True Positive, <span class="math inline">\(n_{22}\)</span>)</li>
+</ul>
+<p>Other terminology:</p>
+<ul>
+<li><strong>Sensitivity/Recall/True positive rate</strong>: P(predicted positive | total positive) = <code>40/(10+40) = .8</code></li>
+<li><strong>Specificity/true negative rate</strong>: P(predicted negative | total negative) = <code>123/(123+121) = .504</code></li>
+<li><strong>Precision/positive predicted value</strong>: P(true positive | predicted positive) = <code>40/(121+40) = .2484</code></li>
+<li><strong>Accuracy</strong>: (TP + TN)/ Total: <code>(40 + 123)/(40+123+121+10) = .5544</code></li>
+<li><strong>Balanced Accuracy</strong>: <span class="math inline">\([(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2\)</span> - This is to adjust for class size imbalances (like in this example)</li>
+<li><strong>F1 score</strong>: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): <span class="math inline">\(2*\frac{precision*recall}{precision + recall}\)</span> = <code>2*(.2484*.8)/(.2484+.8) = .38</code></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="binary-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="categorical-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
