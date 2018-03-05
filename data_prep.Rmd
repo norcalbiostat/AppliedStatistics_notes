@@ -261,3 +261,19 @@ head(fev2)
 
 Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several `R` packages that can help with this including `reshape2` and `tidyr`. 
 
+
+## Dealing with missing data post-analysis 
+
+* Case when: you want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis. 
+
+
+
+If your original data had missing values, here is one way to get the factor scores for available data back onto the data set. Alternatively you can look into methods to conduct factor analysis with missing data (FactomineR)
+
+1. If no ID column exists, create one: `id = 1:NROW(data)`
+2. Use `select()` to extract ID and all variables used in the factor analysis
+3. Do `na.omit()`
+4. Conduct factor analysis on this subsetted data set
+5. Use `bind_cols()` to add columns containing factor scores to this subsetted data set as described above
+6. Use `select()` to only keep the ID and the factor score variables
+5. Then `left_join()` the factor scores back to the original data, using the ID variable as the joining key.
