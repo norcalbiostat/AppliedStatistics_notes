@@ -15,7 +15,6 @@ rmd_files: ["index.Rmd"
             ,"FA.Rmd"
             
             ,"MLM_intro.Rmd"
-            ,"RE_ANOVA.Rmd"
             ,"random_intercept.Rmd"
             ,"longitudinal.Rmd"
             ,"spatial.Rmd"
