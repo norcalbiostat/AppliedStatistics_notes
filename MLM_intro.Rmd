@@ -10,7 +10,7 @@ The assumption of independence between observations is often violated $Cor(\epsi
 * Repeatedly measuring the same tree over time. (Temporal correlation)
 * Poverty measurements from different, but neighboring, counties. (Spatial correlation)
 
-When data are _clustered_, we need to adjust the correlation. 
+When data are _clustered_ into **known group memberships**, we need to adjust the correlation structure between observations to account for this. 
 
 ```{block2, type="rmdnote"}
 Multi-level modeling can also be referred to as Hierarchical modeling
