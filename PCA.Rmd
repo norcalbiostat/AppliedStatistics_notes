@@ -237,7 +237,9 @@ In the cumulative percentage plot below, I drew a horizontal line at 80%. So the
 
 ```{r, fig.height=4, fig.width=4, fig.align='center'}
 library(ggplot2)
-qplot(x=1:20, y=cumsum((pc_dep$sdev)^2/20)*100, geom="point") + 
+var_pc <- (pc_dep$sdev)^2
+
+qplot(x=1:20, y=cumsum(var_pc)/sum(var_pc)*100, geom="point") + 
   xlab("PC number") + ylab("Cumulative %") + ylim(c(0,100)) +
   geom_hline(aes(yintercept=80))
 ```
@@ -245,7 +247,7 @@ qplot(x=1:20, y=cumsum((pc_dep$sdev)^2/20)*100, geom="point") +
 **3. Create a _Scree plot_ by plotting the eigenvalue against the PC number.**
 
 ```{r, fig.height=4, fig.width=4, fig.align='center'}
-qplot(x=1:20, y=(pc_dep$sdev)^2, geom=c("point", "line")) + 
+qplot(x=1:20, y=var_pc, geom=c("point", "line")) + 
   xlab("PC number") + ylab("Eigenvalue") + ylim(c(0,8))
 ```
 
@@ -271,6 +273,10 @@ C_{2} = -0.1449x_{1} + 0.0271x_{2} + \ldots
 \]
 
 etc...
+
+```{block2 , type='rmdnote'}
+The full question text for the depression data used here can be found on Table 15.7 in the PMA5 textbook.
+```
 
 **5. Interpret the PC's**
 

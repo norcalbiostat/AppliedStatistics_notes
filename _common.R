@@ -11,13 +11,15 @@ knitr::opts_chunk$set(
 # ,fig.show  = "hold"
 )
 
-list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander")
+list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", 
+                      "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if ( length(new.packages) ) {
     install.packages(new.packages)
 }
 
 library(ggplot2)
+library(lme4)
 library(dplyr)
 library(knitr)
 library(pander)

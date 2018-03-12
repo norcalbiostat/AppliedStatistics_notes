@@ -1,15 +1,46 @@
 # Random Intercept Models {#RI}
 
-To highlight the benefits of random intercepts models we will compare three linear regression models: complete pooling, no pooling, and the random intercept model (AKA partial pooling).  We'll use a dataset named `radon` from the `rstanarm` package.  Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, amongst other things, dust particles commonly found in homes.  The EPA believes [radon exposure](https://www.epa.gov/radon) is one of the leading causes of cancer in the United States.
+When data are correlated at some level, (measurements within plots, students within schools), the assumption of independent errors in the normal linear models is violated. One very common way to account for this clustering or correlation between observations is to fit a **Random Intercept** model. 
 
-The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Each of the three models will predict $log(radon).$
+
+**Example Data**
+
+Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, amongst other things, dust particles commonly found in homes.  The EPA believes [radon exposure](https://www.epa.gov/radon) is one of the leading causes of cancer in the United States.
+
+This example uses a dataset named `radon` from the `rstanarm` package. The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Each of the three models will predict $log(radon)$.
 
 ```{r}
-
 data(radon, package="rstanarm")
 head(radon)
 
 ```
+
+## Pooling
+
+To highlight the benefits of random intercepts models we will compare three linear regression models: 
+
+* complete pooling
+* no pooling
+* partial pooling (the random intercept model)
+
+
+**Complete Pooling**
+
+The complete pooling model pools all counties together to give one single estimate of the $log(radon)$ level. 
+
+
+**No Pooling**
+
+No pooling refers to the fact that no information is shared amongst the counties.  Each county is independent of the next.
+
+
+**Partial Pooling**
+
+The partial pooling model, partially shares information amongst the counties. 
+
+Each county should get a _unique intercept_ such that the collection of county intercepts are randomly sampled from a normal distribution with mean $0$ and variance $\sigma^2_{\alpha}$.
+
+Because all county intercepts are randomly sampled from the same theoretical population, $N(0, \sigma^2_{\alpha})$, information is shared amongst the counties.  This sharing of information is generally referred to as **shrinkage**, and should be thought of as a means to reduce variation in estimates amongst the counties.  When a county has little information to offer, it's estimated intercept will be shrunk towards to overall mean of all counties.
 
 ```{r, echo=FALSE}
 
@@ -24,7 +55,8 @@ fitted_partpool <- dplyr::bind_cols(radon,
 
 ```
 
-The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a compromise between the county level sample size, the variation amongst the counties, and the variation within the counties.  Over simplifying, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county -- estimates of variation within each county should not be determined from this arbitrary jittering of points.
+The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation amongst the counties, and the variation within the counties.  
+
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
 
@@ -43,7 +75,24 @@ fitted_nopool %>%
 
 ```
 
-The three models considered set $y_n=log(radon)$, and $x_n$ records floor for homes $n=1, \ldots, N$.  The complete pooling model pools all counties together to give them one single estimate of the $log(radon)$ level, $\hat{\alpha}$.  Note that the error term $\epsilon_n$ may represent variation due to measurement error, within-house variation, and/or within-county variation.  Fans of the random intercept model accept this as a fault of the completely pooled model.
+Generally, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  
+
+```{block2, type="rmdcaution"}
+The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county. 
+
+Estimates of variation within each county should not be determined from this arbitrary jittering of points.
+```
+
+## Mathematical Models
+
+The three models considered set $y_n=log(radon)$, and $x_n$ records floor (0=basement, 1=first floor) for homes $n=1, \ldots, N$.  
+
+### Complete Pooling
+
+The complete pooling model pools all counties together to give them one single estimate of the $log(radon)$ level, $\hat{\alpha}$.  
+
+* The error term $\epsilon_n$ may represent variation due to measurement error, within-house variation, and/or within-county variation.  
+* Fans of the random intercept model think that $\epsilon_n$, here, captures too many sources of error into one term, and think that this is a fault of the completely pooled model.
 
 
 \begin{equation*}
@@ -56,7 +105,11 @@ The three models considered set $y_n=log(radon)$, and $x_n$ records floor for ho
 \end{equation*}
 
 
-The no pooling model gives each county an independent estimate of  $log(radon$), $\hat{\alpha}_{j[n]}$.  Read the subscript $j[n]$ as home $n$ is nested within county $j$.  Hence, all homes in each county get their own independent estimate of $log(radon)$.  Here again, one might argue that the error term captures too much noise.
+### No Pooling
+
+* The no pooling model gives each county an independent estimate of  $log(radon$), $\hat{\alpha}_{j[n]}$.  
+* Read the subscript $j[n]$ as home $n$ is nested within county $j$.  Hence, all homes in each county get their own independent estimate of $log(radon)$.  
+* Here again, one might argue that the error term captures too much noise.
 
 
 \begin{equation*}
@@ -68,8 +121,13 @@ The no pooling model gives each county an independent estimate of  $log(radon$),
 \end{split}
 \end{equation*}
 
+### Partial Pooling (RI)
 
-The random intercept model, better known as the partial pooling model, gives each county an intercept term $\alpha_j[n]$ that varies according to its own error term, $\sigma_{\alpha}^2$.  This error term measures within-county variation, thus separating measurement error from county level error.  This multi-level modeling shares information amongst the counties to the effect that the estimates $\alpha_{j[n]}$ are a compromise between the completely pooled and not pooled estimates.  The compromise is data dependent.  When a county has a relatively smaller sample size and/or the variance $\sigma^2_y$ is larger than the variance $\sigma^2_{\alpha}$, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.
+* The random intercept model, better known as the partial pooling model, gives each county an intercept term $\alpha_j[n]$ that varies according to its own error term, $\sigma_{\alpha}^2$.  
+* This error term measures within-county variation
+    - Separating measurement error from county level error. 
+* This multi-level modeling shares information amongst the counties to the effect that the estimates $\alpha_{j[n]}$ are a compromise between the completely pooled and not pooled estimates.  
+* When a county has a relatively smaller sample size and/or the variance $\sigma^2_y$ is larger than the variance $\sigma^2_{\alpha}$, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.
 
 
 \begin{equation*}
@@ -82,18 +140,38 @@ The random intercept model, better known as the partial pooling model, gives eac
 \end{split}
 \end{equation*}
 
-Fit the not pooled or partially pooled models in R with the following code.
 
-```{r, eval=FALSE}
+## Fitting models in R
 
-fit_nopool <- lm(log_radon~-1+county, data=radon)
+**No Pooling**
 
-fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
-
+The no pooling model is fit with the function `lm`, giving each county a unique intercept in the model.  
+```{r}
+fit_nopool <- lm(log_radon ~ -1 + county, data=radon)
 ```
 
+**Partial Pooling**
 
-A similar sort of shrinkage effect is seen with covariates included in the model.  Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
+* The partial pooling model is fit with the function `lmer()`, which is part of the `lme4` package.
+* The extra notation around the input variable `(1|county)` dictates that each county should get its own unique intercept $\alpha_{j[n]}$. 
+
+```{r}
+fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
+```
+
+The fixed effects portion of the model output of `lmer` is similar to output from `lm`, except no p-values are displayed.  The fact that no p-values are displayed is a much discussed topic.  The author of the library `lme4`, Douglas Bates, believes that there is no "obviously correct" solution to calculating p-values for models with randomly varying intercepts (or slopes); see [here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html) for a general discussion. 
+
+```{r}
+summary(fit_partpool)
+```
+
+The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.0$ and the model's residual variance, $\sigma_y = 0.57$.
+
+## Including Covariates
+
+A similar sort of shrinkage effect is seen with covariates included in the model.  
+
+Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
 
@@ -123,3 +201,18 @@ fitted_nopool %>%
     guides(colour=guide_legend(title="Model"))
 
 ```
+
+Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
+
+```{r}
+# library(sjPlot)
+ri.with.x <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
+sjPlot::sjt.lmer(ri.with.x)
+```
+
+
+## Additional References
+
+* [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing lmer output as tables!
+* [visreg](http://pbreheny.github.io/visreg/mixed.html ) - a R package for visualization of regression models (not so super useful here, but worth a scan) 
+* Interesting blog by [Tristan Mahr](https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/) about pooling and shrinkage. 
