@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Statistics II</title>
+  <meta name="description" content="Course notes for MATH 456 at CSU Chico">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Statistics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes for MATH 456 at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/MATH456_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Statistics II" />
+  
+  <meta name="twitter:description" content="Course notes for MATH 456 at CSU Chico" />
+  
+
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="example-school-data.html">
+<link rel="next" href="additional-references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics II course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>1.1</b> Example School Data</a></li>
+<li class="chapter" data-level="1.2" data-path="fixed-effects-vs-random-effects.html"><a href="fixed-effects-vs-random-effects.html"><i class="fa fa-check"></i><b>1.2</b> Fixed Effects vs Random Effects</a></li>
+<li class="chapter" data-level="1.3" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>1.3</b> Additional References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>2</b> Random Intercept Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="floor-county-log-radon-log-uranium.html"><a href="floor-county-log-radon-log-uranium.html"><i class="fa fa-check"></i><b>2.1</b> floor county log_radon log_uranium</a></li>
+<li class="chapter" data-level="2.2" data-path="aitkin-0-83290912-0-6890476.html"><a href="aitkin-0-83290912-0-6890476.html"><i class="fa fa-check"></i><b>2.2</b> 1 1 AITKIN 0.83290912 -0.6890476</a></li>
+<li class="chapter" data-level="2.3" data-path="aitkin-0-83290912-0-6890476-1.html"><a href="aitkin-0-83290912-0-6890476-1.html"><i class="fa fa-check"></i><b>2.3</b> 2 0 AITKIN 0.83290912 -0.6890476</a></li>
+<li class="chapter" data-level="2.4" data-path="aitkin-1-09861229-0-6890476.html"><a href="aitkin-1-09861229-0-6890476.html"><i class="fa fa-check"></i><b>2.4</b> 3 0 AITKIN 1.09861229 -0.6890476</a></li>
+<li class="chapter" data-level="2.5" data-path="aitkin-0-09531018-0-6890476.html"><a href="aitkin-0-09531018-0-6890476.html"><i class="fa fa-check"></i><b>2.5</b> 4 0 AITKIN 0.09531018 -0.6890476</a></li>
+<li class="chapter" data-level="2.6" data-path="anoka-1-16315081-0-8473129.html"><a href="anoka-1-16315081-0-8473129.html"><i class="fa fa-check"></i><b>2.6</b> 5 0 ANOKA 1.16315081 -0.8473129</a></li>
+<li class="chapter" data-level="2.7" data-path="anoka-0-95551145-0-8473129.html"><a href="anoka-0-95551145-0-8473129.html"><i class="fa fa-check"></i><b>2.7</b> 6 0 ANOKA 0.95551145 -0.8473129</a></li>
+<li class="chapter" data-level="2.8" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>2.8</b> Pooling</a></li>
+<li class="chapter" data-level="2.9" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>2.9</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>2.9.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="2.9.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>2.9.2</b> No Pooling</a></li>
+<li class="chapter" data-level="2.9.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>2.9.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="fitting-models-in-r.html"><a href="fitting-models-in-r.html"><i class="fa fa-check"></i><b>2.10</b> Fitting models in R</a></li>
+<li class="chapter" data-level="2.11" data-path="linear-mixed-model-fit-by-reml-lmermod.html"><a href="linear-mixed-model-fit-by-reml-lmermod.html"><i class="fa fa-check"></i><b>2.11</b> Linear mixed model fit by REML [‘lmerMod’]</a></li>
+<li class="chapter" data-level="2.12" data-path="formula-log-radon-1-county.html"><a href="formula-log-radon-1-county.html"><i class="fa fa-check"></i><b>2.12</b> Formula: log_radon ~ (1 | county)</a></li>
+<li class="chapter" data-level="2.13" data-path="data-radon.html"><a href="data-radon.html"><i class="fa fa-check"></i><b>2.13</b> Data: radon</a></li>
+<li class="chapter" data-level="2.14" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>2.14</b> </a></li>
+<li class="chapter" data-level="2.15" data-path="reml-criterion-at-convergence-2184-9.html"><a href="reml-criterion-at-convergence-2184-9.html"><i class="fa fa-check"></i><b>2.15</b> REML criterion at convergence: 2184.9</a></li>
+<li class="chapter" data-level="2.16" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>2.16</b> </a></li>
+<li class="chapter" data-level="2.17" data-path="scaled-residuals.html"><a href="scaled-residuals.html"><i class="fa fa-check"></i><b>2.17</b> Scaled residuals:</a></li>
+<li class="chapter" data-level="2.18" data-path="min-1q-median-3q-max.html"><a href="min-1q-median-3q-max.html"><i class="fa fa-check"></i><b>2.18</b> Min 1Q Median 3Q Max</a></li>
+<li class="chapter" data-level="2.19" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2.19</b> -4.6880 -0.5884 0.0323 0.6444 3.4186</a></li>
+<li class="chapter" data-level="2.20" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>2.20</b> </a></li>
+<li class="chapter" data-level="2.21" data-path="random-effects.html"><a href="random-effects.html"><i class="fa fa-check"></i><b>2.21</b> Random effects:</a></li>
+<li class="chapter" data-level="2.22" data-path="groups-name-variance-std-dev-.html"><a href="groups-name-variance-std-dev-.html"><i class="fa fa-check"></i><b>2.22</b> Groups Name Variance Std.Dev.</a></li>
+<li class="chapter" data-level="2.23" data-path="county-intercept-0-08861-0-2977.html"><a href="county-intercept-0-08861-0-2977.html"><i class="fa fa-check"></i><b>2.23</b> county (Intercept) 0.08861 0.2977</a></li>
+<li class="chapter" data-level="2.24" data-path="residual-0-58686-0-7661.html"><a href="residual-0-58686-0-7661.html"><i class="fa fa-check"></i><b>2.24</b> Residual 0.58686 0.7661</a></li>
+<li class="chapter" data-level="2.25" data-path="number-of-obs-919-groups-county-85.html"><a href="number-of-obs-919-groups-county-85.html"><i class="fa fa-check"></i><b>2.25</b> Number of obs: 919, groups: county, 85</a></li>
+<li class="chapter" data-level="2.26" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>2.26</b> </a></li>
+<li class="chapter" data-level="2.27" data-path="fixed-effects.html"><a href="fixed-effects.html"><i class="fa fa-check"></i><b>2.27</b> Fixed effects:</a></li>
+<li class="chapter" data-level="2.28" data-path="estimate-std-error-t-value.html"><a href="estimate-std-error-t-value.html"><i class="fa fa-check"></i><b>2.28</b> Estimate Std. Error t value</a></li>
+<li class="chapter" data-level="2.29" data-path="intercept-1-350-0-047-28-72.html"><a href="intercept-1-350-0-047-28-72.html"><i class="fa fa-check"></i><b>2.29</b> (Intercept) 1.350 0.047 28.72</a></li>
+<li class="chapter" data-level="2.30" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>2.30</b> Including Covariates</a></li>
+<li class="chapter" data-level="2.31" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>2.31</b> Additional References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fixed-effects-vs-random-effects" class="section level2">
+<h2><span class="header-section-number">1.2</span> Fixed Effects vs Random Effects</h2>
+<ul>
+<li><strong>Fixed Effects</strong>: The variable is thought to have it’s own specific effect on the outcome relative to some referant group. The factors are fixed by nature, there are only the levels observed in the data.
+<ul>
+<li>The 23 schools in the data make up the entire universe of schools, and we are interested in how one particular school fares.</li>
+</ul></li>
+<li><strong>Random Effects</strong>: The variable was chosen at random, and the levels observed in the data are thought of as representative of all possible levels that could be sampled. We are interseted in the distribution of the effects rather than the effect of any one specific level.
+<ul>
+<li>The 23 schools in the data set is a sample of a larger population of schools and we are interested in the overall distribution of how school can affect the math score, not any one specific school.</li>
+</ul></li>
+</ul>
+<p>Let’s look at a model for math scores again, with the fixed micro level effect of SES and the random macro level school effect.</p>
+<span class="math display">\[\begin{equation*}
+  \begin{aligned}
+  MathScore_{ij} &amp; = \beta_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}, \qquad i = 1, \ldots, n_{j}, j=1, \ldots, 23\\
+  \beta_{0j} &amp; = \gamma_{00} + U_{0j}
+  \end{aligned}
+\end{equation*}\]</span>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="example-school-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
