@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pooling.html">
-<link rel="next" href="fitting-models-in-r.html">
+<link rel="prev" href="introduction.html">
+<link rel="next" href="RI.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -142,76 +142,82 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mathematical-models" class="section level2">
-<h2><span class="header-section-number">2.2</span> Mathematical Models</h2>
-<p>The three models considered set <span class="math inline">\(y_n=log(radon)\)</span>, and <span class="math inline">\(x_n\)</span> records floor (0=basement, 1=first floor) for homes <span class="math inline">\(n=1, \ldots, N\)</span>.</p>
-<div id="complete-pooling" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Complete Pooling</h3>
-<p>The complete pooling model pools all counties together to give them one single estimate of the <span class="math inline">\(log(radon)\)</span> level, <span class="math inline">\(\hat{\alpha}\)</span>.</p>
-<ul>
-<li>The error term <span class="math inline">\(\epsilon_n\)</span> may represent variation due to measurement error, within-house variation, and/or within-county variation.<br />
-</li>
-<li>Fans of the random intercept model think that <span class="math inline">\(\epsilon_n\)</span>, here, captures too many sources of error into one term, and think that this is a fault of the completely pooled model.</li>
-</ul>
-<span class="math display">\[\begin{equation*}
-\begin{split}
+<div id="example-school-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> Example School Data</h2>
+<p>The data used in this first example comes from a publicly available data set called the National Education Longitudinal Study of 1988 (yes it’s a bit old data, but sufficient for our purposes here). In this data set math scores are recorded for 519 students from 23 schools.</p>
+<p><img src="images/q.png" /> List a few characteristics that you think are associated with math performance, and at what level they are measured.</p>
+<div class="figure">
+<img src="images/multilevel.png" />
 
-        y_n = \alpha &amp; + \epsilon_n \\
-            &amp; \epsilon_n \sim N(0, \sigma_{\epsilon}^{2})
-
-\end{split}
-\end{equation*}\]</span>
 </div>
-<div id="no-pooling" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> No Pooling</h3>
+<p>The <code>School23</code> data set contains the following variables:</p>
 <ul>
-<li>The no pooling model gives each county an independent estimate of <span class="math inline">\(log(radon\)</span>), <span class="math inline">\(\hat{\alpha}_{j[n]}\)</span>.<br />
-</li>
-<li>Read the subscript <span class="math inline">\(j[n]\)</span> as home <span class="math inline">\(n\)</span> is nested within county <span class="math inline">\(j\)</span>. Hence, all homes in each county get their own independent estimate of <span class="math inline">\(log(radon)\)</span>.<br />
-</li>
-<li>This is equivalent to the fixed effects model</li>
-<li>Here again, one might argue that the error term captures too much noise.</li>
-</ul>
-<span class="math display">\[\begin{equation*}
-\begin{split}
-
-        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
-            \epsilon_n &amp; \sim N(0, \sigma_{\epsilon}^{2})
-
-\end{split}
-\end{equation*}\]</span>
-</div>
-<div id="partial-pooling-ri" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Partial Pooling (RI)</h3>
+<li><strong>School (macro) level variables</strong>
 <ul>
-<li>The random intercept model, better known as the partial pooling model, gives each county an intercept term <span class="math inline">\(\alpha_j[n]\)</span> that varies according to its own error term, <span class="math inline">\(\sigma_{\alpha}^2\)</span>.<br />
-</li>
-<li>This error term measures within-county variation
-<ul>
-<li>Separating measurement error (<span class="math inline">\(\sigma_{\epsilon}^{2}\)</span>) from county level error (<span class="math inline">\(\sigma_{\alpha}^{2}\)</span>) .</li>
+<li>School type</li>
+<li>class structure</li>
+<li>school size</li>
+<li>urbanity</li>
+<li>geographic region</li>
+<li>percent minority</li>
+<li>student-teacher ratio</li>
 </ul></li>
-<li>This multi-level modeling shares information among the counties to the effect that the estimates <span class="math inline">\(\alpha_{j[n]}\)</span> are a compromise between the completely pooled and not pooled estimates.<br />
-</li>
-<li>When a county has a relatively smaller sample size and/or the variance <span class="math inline">\(\sigma^{2}_{\epsilon}\)</span> is larger than the variance <span class="math inline">\(\sigma^2_{\alpha}\)</span>, estimates are shrunk more from the not pooled estimates towards to completely pooled estimate.</li>
+<li><strong>Student (micro) level variables</strong>
+<ul>
+<li>Gender</li>
+<li>Race</li>
+<li>Time spent on math homework</li>
+<li>SES</li>
+<li>parental education</li>
+<li>math score</li>
+</ul></li>
 </ul>
+<p>Imagine a model of math score based on school type (<span class="math inline">\(X_{1}\)</span> 1 for public, 0 for private) and SES (<span class="math inline">\(X_{2}\)</span>).</p>
+<p><span class="math display">\[
+Y_{i} = \beta_{0} + \beta_{1}X_{1i} + \beta_{2}X_{2i} + \epsilon_{i}, \qquad i = 1, \ldots, n=519
+\]</span></p>
+<p>This model does not take into the account the hierarchical nature of the data in that students are nested within schools. School type is a macro level variable, SES is a micro level variable. We could consider adding indicator variables for each of the 23 schools to create a <strong>Fixed Effects</strong> model,</p>
+<p><span class="math display">\[
+Y_{i} = \beta_{0} + \beta_{1}(SchoolType)_{1i} + \beta_{2}(SES)_{2i} + \beta_{3}(School2)_{i} + \ldots + \beta_{24}(School23)_{i} + \epsilon_{i}
+\]</span></p>
+<p>but we already are well aware of fitting models with that many parameters, and when some school only have a few students in them. So we need a different model.</p>
+<p>Here we specify separate models for the the fixed micro level effect of SES and the random macro level school effect.</p>
 <span class="math display">\[\begin{equation*}
-\begin{split}
-
-        y_n = \alpha_{j[n]} &amp; + \epsilon_n \\
-            \epsilon_n &amp; \sim N(0, \sigma_{\epsilon}^{2}) \\
-            \alpha_j[n] &amp; \sim N(\mu_{\alpha}, \sigma_{\alpha}^2)
-
-\end{split}
+  \begin{aligned}
+  MathScore_{ij} &amp; = \beta_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}, \qquad i = 1, \ldots, n_{j}, j=1, \ldots, 23\\
+  \beta_{0j} &amp; = \gamma_{00} + U_{0j}
+  \end{aligned}
 \end{equation*}\]</span>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the average slope across all schools</li>
+<li><span class="math inline">\(U_{0j}\)</span> is the difference between the slope for school <span class="math inline">\(j\)</span> and the average slope across all schools (random effect of school)</li>
+</ul>
+<p>Of course we could simply substitute the intercept <span class="math inline">\(\beta_{0j}\)</span> in the first model with the information from the second model,</p>
+<p><span class="math display">\[
+  MathScore_{ij} = \gamma_{00} + U_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}
+\]</span></p>
+<p>Instead of assuming that there is an overall average of math scores (<span class="math inline">\(\beta_0\)</span>) from which each school deviates by a fixed amount, the above model assumes that the adjusted average school math scores are normally distributed and are centered at <span class="math inline">\(\gamma_{00}\)</span>.</p>
+<p>Because we assume that there is a <em>distribution of intercepts</em>, this model is also called a <strong>Random intercept model</strong>.</p>
+<p>We’ll look at this type of model more closely in the next section using a different example, and using the concept of <em>pooling</em> information.</p>
+<p><img src="images/q.png" /> Random Slopes</p>
+<p>More complex models are possible. That’s a constant theme in all of statistical modeling. Just remember that</p>
+<ul>
+<li>the underlying complex effects being modeled must be strong enough that a simpler model that doesn’t account for these effects will be invalid</li>
+<li>you have to have enough data to estimate any additional parameters</li>
+<li>you have to be able to explain the model and results to an audience</li>
+</ul>
+<p>We are not going to cover models that have random slopes, or interactions between fixed and random effects in this notebook.</p>
+
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="pooling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fitting-models-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="RI.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
