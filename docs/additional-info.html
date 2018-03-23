@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="mathematical-models.html">
-<link rel="next" href="fitri.html">
+<link rel="prev" href="spatial.html">
+<link rel="next" href="mda.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -285,36 +285,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="components-of-variance" class="section level2">
-<h2><span class="header-section-number">11.3</span> Components of Variance</h2>
-<p>Statistics can be thought of as the study of uncertainty, and variance is a measure of uncertainty (and information). So yet again we see that we’re partitioning the variance. Recall that</p>
-<ul>
-<li>Measurement error: <span class="math inline">\(\sigma^{2}_{\epsilon}\)</span></li>
-<li>County level error: <span class="math inline">\(\sigma^{2}_{\alpha}\)</span></li>
-</ul>
-<p>The <strong>intraclass correlation</strong> (ICC, <span class="math inline">\(\rho\)</span>) is interpreted as</p>
-<ul>
-<li>the proportion of total variance that is explained by the clusters.<br />
-</li>
-<li>the expected correlation between two individuals who are drawn from the same cluster.</li>
-</ul>
-<p><span class="math display">\[ 
-\rho = \frac{\sigma^{2}_{\alpha}}{\sigma^{2}_{\alpha} + \sigma^{2}_{\epsilon}}
-\]</span></p>
-<ul>
-<li>When <span class="math inline">\(\rho\)</span> is large, a lot of the variance is at the macro level</li>
-<li>units within each group are very similar</li>
-<li>If <span class="math inline">\(\rho\)</span> is small enough, one may ask if fitting a multi-level model is worth the complexity.</li>
-<li>no hard and fast rule to say “is it large enough?”, rules of thumb include if it’s under 10% (0.1) then a single level analysis may still be appropriate, if it’s over 10% (0.1) then a multilevel model can be justified.</li>
-</ul>
+<div id="additional-info" class="section level2">
+<h2><span class="header-section-number">13.1</span> Additional Info</h2>
+<p><a href="http://rspatial.org/analysis/rst/7-spregression.html" class="uri">http://rspatial.org/analysis/rst/7-spregression.html</a> <a href="https://journal.r-project.org/archive/2015/RJ-2015-017/RJ-2015-017.pdf" class="uri">https://journal.r-project.org/archive/2015/RJ-2015-017/RJ-2015-017.pdf</a> <a href="https://cran.r-project.org/web/packages/hglm/vignettes/hglm.pdf" class="uri">https://cran.r-project.org/web/packages/hglm/vignettes/hglm.pdf</a></p>
+
+</div>
+<!-- </div> -->
+
+
+
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="mathematical-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fitri.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="spatial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -75,13 +75,14 @@ Y_{i} = \beta_{0} + \beta_{1}(SchoolType)_{1i} + \beta_{2}(SES)_{2i} + \beta_{3}
 
 but we already are well aware of fitting models with that many parameters, and when some school only have a few students in them. So we need a different model. 
 
+## Multi-level models
 
 Here we specify separate models for the the fixed micro level effect of SES and the random macro level school effect. 
 
 \begin{equation*}
   \begin{aligned}
-  MathScore_{ij} & = \beta_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}, \qquad i = 1, \ldots, n_{j}, j=1, \ldots, 23\\
-  \beta_{0j} & = \gamma_{00} + U_{0j}
+  MathScore_{ij} & = \beta_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}, & \qquad i = 1, \ldots, n_{j}\\
+  \beta_{0j} & = \gamma_{00} + U_{0j}, & \qquad j=1, \ldots, 23
   \end{aligned}
 \end{equation*}
 
@@ -90,10 +91,10 @@ where
 * $\gamma_{00}$ is the average slope across all schools
 * $U_{0j}$ is the difference between the slope for school $j$ and the average slope across all schools (random effect of school)
 
-Of course we could simply substitute the intercept $\beta_{0j}$ in the first model with the information from the second model, 
+If we substitute the intercept $\beta_{0j}$ in the first model with the information from the second model, 
 
 \[
-  MathScore_{ij} = \gamma_{00} + U_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}
+  MathScore_{ij} = \overbrace{\gamma_{00} + \beta_{1}SES_{ij}}^{^{\mbox{fixed part}}} + \overbrace{U_{0j} + \epsilon_{ij}}^{\mbox{random part}}
 \]
 
 

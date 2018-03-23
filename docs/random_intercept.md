@@ -5,7 +5,7 @@
 
 Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, among other things, dust particles commonly found in homes.  The EPA believes [radon exposure](https://www.epa.gov/radon) is one of the leading causes of cancer in the United States.
 
-This example uses a dataset named `radon` from the `rstanarm` package. The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Each of the three models will predict $log(radon)$.
+This example uses a dataset named `radon` from the `rstanarm` package. The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Our goal is to build a model to predict $log(radon)$.
 
 
 ```r
@@ -119,7 +119,29 @@ The complete pooling model pools all counties together to give them one single e
 \end{equation*}
 
 
-## Fitting models in R
+## Components of Variance
+
+Statistics can be thought of as the study of uncertainty, and variance is a measure of uncertainty (and information). So yet again we see that we're partitioning the variance. Recall that 
+
+* Measurement error: $\sigma^{2}_{\epsilon}$ 
+* County level error: $\sigma^{2}_{\alpha}$ 
+
+The **intraclass correlation** (ICC, $\rho$) is interpreted as
+
+* the proportion of total variance that is explained by the clusters.  
+* the expected correlation between two individuals who are drawn from the same cluster. 
+
+$$ 
+\rho = \frac{\sigma^{2}_{\alpha}}{\sigma^{2}_{\alpha} + \sigma^{2}_{\epsilon}}
+$$
+
+* When $\rho$ is large, a lot of the variance is at the macro level
+* units within each group are very similar
+* If $\rho$ is small enough, one may ask if fitting a multi-level model is worth the complexity. 
+* no hard and fast rule to say "is it large enough?", rules of thumb include if it's under 10% (0.1) then a single level analysis may still be appropriate, if it's over 10\% (0.1) then a multilevel model can be justified. 
+  
+
+## Fitting models in R {#fitri}
 
 **No Pooling**
 
@@ -165,14 +187,15 @@ summary(fit_partpool)
 ## (Intercept)    1.350      0.047   28.72
 ```
 
-The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.0$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
+The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
 
 
 ### Restricted (residual) Maximum Likelihood (REML)
 
-* Similar to logistic regression, estimates can't be estimated directly using maximum likelihood (ML) methods. 
-* Iterative methods like REML are needed to get approximations. 
+* Similar to logistic regression, estimates typically aren't estimated directly using maximum likelihood (ML) methods. 
+* Iterative methods like REML are used to get approximations. 
 * REML is typically the default estimation method for most packages. 
+
 
 Details of REML are beyond the scope of this class, but knowing the estimation method is important for two reasons
 
@@ -186,10 +209,64 @@ Details of REML are beyond the scope of this class, but knowing the estimation m
     - The more complex the model, the higher chance this can happen
     - scaling, centering, and avoiding collinearity can alleviate these problems with convergence.
 
+You can change the fitting algorithm to use the Log Likelihood anyhow, it may be slightly slower but for simple models the estimates are going to be very close to the REML estimate. Below is a table showing the estimates for the random intercepts, 
 
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> REML </th>
+   <th style="text-align:right;"> MLE </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> 1.1107728 </td>
+   <td style="text-align:right;"> 1.1143654 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> 0.9427047 </td>
+   <td style="text-align:right;"> 0.9438526 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+   <td style="text-align:right;"> 1.2700351 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+   <td style="text-align:right;"> 1.2702493 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+   <td style="text-align:right;"> 1.3245917 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 1.4081133 </td>
+   <td style="text-align:right;"> 1.4068866 </td>
+  </tr>
+</tbody>
+</table>
 
+and the same estimates for the variance terms. 
 
+```r
+VarCorr(fit_partpool)
+##  Groups   Name        Std.Dev.
+##  county   (Intercept) 0.29767 
+##  Residual             0.76607
+VarCorr(fit_partpool_MLE)
+##  Groups   Name        Std.Dev.
+##  county   (Intercept) 0.29390 
+##  Residual             0.76607
+```
 
+So does it matter? Yes and no. In general you want to fit the models using REML, but if you really want to use a Likelihood Ratio **test** to compare models then you need to fit the models using ML. 
 
 
 ## Including Covariates
@@ -198,7 +275,7 @@ A similar sort of shrinkage effect is seen with covariates included in the model
 
 Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" />
 
 Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
 
@@ -206,7 +283,7 @@ Covariates are fit using standard `+` notation outside the random effects specif
 ```r
 library(sjPlot)
 ri.with.x <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
-sjt.lmer(ri.with.x)
+sjt.lmer(ri.with.x, show.r2=FALSE)
 ```
 
 <table style="border-collapse:collapse; border:none;border-bottom:double;">
@@ -264,43 +341,21 @@ sjt.lmer(ri.with.x)
 <td style="padding:0.2cm; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;">Observations</td>
 <td style="padding-left:0.5em; padding-right:0.5em; border-top:1px solid;">&nbsp;</td><td style="padding:0.2cm; padding-top:0.1cm; padding-bottom:0.1cm; text-align:center; border-top:1px solid;" colspan="3">919</td>
 </tr>
-<tr>
-<td style="padding:0.2cm; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / &Omega;<sub>0</sub><sup>2</sup></td>
-
-<td style="padding-left:0.5em; padding-right:0.5em;">&nbsp;</td><td style="padding:0.2cm; text-align:center; padding-top:0.1cm; padding-bottom:0.1cm;" colspan="3">.261 / .253</td>
- </tr>
 </table>
 
-The estimated random effects can also be easily visualized. 
+Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the same `sjPlot` package. 
 
 
 ```r
 plot_model(ri.with.x, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 Function enhancements -- (see [vignette](http://www.strengejacke.de/sjPlot/) for more options) 
 
 * Display the fixed effects by changing `type="est"`. 
 * Plot the slope of the fixed effect for each level of the random effect `sjp.lmer(ri.with.x, type="ri.slope")` -- this is being depreciated in the future but works for now. Eventually I'll figure out how to get this plot out of `plot_model()`. 
-
-
-## Components of Variance
-
-Statistics can be thought of as the study of uncertainty, and variance is a measure of uncertainty (and information). So yet again we see that we're partitioning the variance. Recall that 
-
-* Measurement error: $\sigma^{2}_{\epsilon}$ -- This was just $\sigma^{2}$ in the previous model output
-* County level error: $\sigma^{2}_{\alpha}$ -- This is listed as $\tau_{00}$ in the previous model output
-
-The **intraclass correlation** (ICC, $\rho$) is interpreted as
-
-* the proportion of total variance that is explained by the clusters.  
-* the expected correlation between two individuals who are drawn from the same cluster. 
-
-$$ 
-\rho = \frac{\sigma^{2}_{\alpha}}{\sigma^{2}_{\alpha} + \sigma^{2}_{\epsilon}}
-$$
 
 ## Centering terms
 
@@ -315,14 +370,136 @@ $$
     - both cluster average (macro) and difference (micro) are included in the model. 
 
 
+## Specifying Correlation Structures
+
+* **Independence** In standard linear models, the assumption on the residuals $\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$ means that
+
+* The variance of each observation is $\sigma_{\epsilon}^{2}$
+* The covariance between two different observations $0$
+
+Consider $n=4$ observations, $y_{1}, \ldots , y_{4}$. Visually the covariance matrix between these four observations would look like this: 
+
+$$
+\begin{array}{c|cccc}
+  & y_{1} & y_{2} & y_{3} & y_{4}\\
+  \hline 
+  y_{1} & \sigma_{\epsilon}^{2} & 0 & 0 & 0\\ 
+  y_{2} & 0 & \sigma_{\epsilon}^{2} & 0 & 0\\ 
+  y_{3} & 0 & 0 & \sigma_{\epsilon}^{2} & 0\\ 
+  y_{4} & 0& 0 & 0 & \sigma_{\epsilon}^{2} 
+\end{array}
+$$
+
+We can also write the covariance matrix as $\sigma_{\epsilon}^{2}$ times the correlation matrix. 
+
+$$
+\begin{bmatrix} 
+  \sigma_{\epsilon}^{2} & 0 & 0 & 0\\ 
+  0 & \sigma_{\epsilon}^{2} & 0 & 0\\ 
+  0 & 0 & \sigma_{\epsilon}^{2} & 0\\ 
+  0& 0 & 0 & \sigma_{\epsilon}^{2} 
+\end{bmatrix}
+=
+\sigma_{\epsilon}^2 
+\begin{bmatrix} 
+1 & 0 & 0 & 0 \\ 
+& 1 & 0 & 0 \\ 
+& & 1 & 0 \\ 
+& & & 1 
+\end{bmatrix} 
+$$
+
+
+
+* **Compound Symmetry** or **Exchangeable** The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely $\rho$. 
+
+$$
+\sigma_{\epsilon}^{2}
+\begin{bmatrix} 
+1 & \rho & \rho & \rho \\ 
+& 1 & \rho & \rho \\ 
+& & 1 & \rho \\ 
+& & & 1 
+\end{bmatrix} 
+$$
+
+* **Autoregressive** Imagine that $y_{1}, \ldots , y_{4}$ were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.
+
+$$
+\sigma_{\epsilon}^{2}
+\begin{bmatrix} 
+1 & \rho & \rho^{2} & \rho^{3} \\ 
+& 1 & \rho & \rho^{2} \\ 
+& & 1 & \rho \\ 
+& & & 1 
+\end{bmatrix}
+$$
+
+
+* **Unstructured** The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate. 
+
+$$
+\begin{bmatrix} 
+\sigma_{1}^{2} & \rho_{12} & \rho_{13} & \rho_{14} \\ 
+& \sigma_{2}^{2} & \rho_{23} & \rho_{24} \\ 
+& & \sigma_{3}^{2} & \rho_{34} \\ 
+& & & \sigma_{4}^{2}
+\end{bmatrix}
+$$
+
+* Random Intercept Model
+
+Let $y_{1}$ and $y_{2}$ be from group 1, and $y_{3}$ and $y_{4}$ be from group 2. 
+
+* error terms between groups are uncorrelated (groups are independent)
+* two different observations from the same group have covariance $\sigma_{\alpha}^{2}$
+* individuals now have the error associated with their own observation but also due to the group 
+  $\sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2}$
+
+
+$$
+\left[
+\begin{array}{cc|cc}
+  \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & \sigma_{\alpha}^{2} & 0 & 0\\ 
+ \sigma_{\alpha}^{2} & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & 0 & 0\\ 
+ \hline
+  0 & 0 & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & \sigma_{\alpha}^{2}\\ 
+  0 & 0 & \sigma_{\alpha}^{2} & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} 
+\end{array}
+\right]
+$$
+
+
+### Specifying different covariance structures in R
+
+* Not able to do this using `lmer()` from package `lme4`
+* Can do this using `lme()` from package `nlme`
+    - Syntax is similar
+    
+
+```r
+library(nlme)
+model_lme_cs<-lme(log_radon ~ floor,
+               random = ~ 1 | county, 
+               cor=corCompSymm(0.5,form=~1|county),data = radon)
+```
+
+Using a different covariance structure can have a large effect on the results. 
+
+* `lmer` using Identity: $\sigma^{2}_{\alpha} = 0.10, \sigma^{2}_{\epsilon} = 0.53$  
+* `nlme` using Identity: $\sigma^{2}_{\alpha} = 0.32^2 = 0.10, \sigma^{2}_{\epsilon} = 0.73^2 = 0.53$  
+* `nlme` using CS: $\sigma^{2}_{\alpha} = 0.13^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61$
+
+Also, mis-specifying the covariance structure can also have a large effect on the results. 
+
 
 
 ## Additional References
 
-* http://stla.github.io/stlapblog/posts/AV1R_SASandR.html
-* https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/
-
-
+* Random effects ANOVA in SAS and R http://stla.github.io/stlapblog/posts/AV1R_SASandR.html
+* ICCs in mixed models https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/
+* Very nice introduction to mixed models in R https://m-clark.github.io/mixed-models-with-R/introduction.html
 * [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing output as tables (and plots).
-* [visreg](http://pbreheny.github.io/visreg/mixed.html ) - a R package for visualization of regression models (not so super useful here, but worth a scan) 
 * Interesting blog by [Tristan Mahr](https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/) about pooling and shrinkage. 
+* Derivation of the covariance structures http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2 
+* Changing covariance structures in lme4qtl: [[paper]](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com) [[github]](https://github.com/variani/lme4qtl)
