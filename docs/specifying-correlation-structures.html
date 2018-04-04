@@ -222,14 +222,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>11.3</b> Components of Variance</a></li>
 <li class="chapter" data-level="11.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>11.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#restricted-residual-maximum-likelihood-reml"><i class="fa fa-check"></i><b>11.4.1</b> Restricted (residual) Maximum Likelihood (REML)</a></li>
+<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>11.4.1</b> Comparison of estimates</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.5</b> Including Covariates</a></li>
-<li class="chapter" data-level="11.6" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.6</b> Centering terms</a></li>
-<li class="chapter" data-level="11.7" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.7</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="11.7.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.7.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="11.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>11.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="11.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="11.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.7</b> Centering terms</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>11.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.8</b> Additional References</a></li>
+<li class="chapter" data-level="11.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.8</b> Specifying Correlation Structures</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.8.1</b> Specifying different covariance structures in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a><ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>11.9.1</b> Package Vignettes</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>12</b> Longitudinal Data</a><ul>
 <li class="chapter" data-level="12.1" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>12.1</b> Additional Resources</a></li>
@@ -286,9 +291,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="specifying-correlation-structures" class="section level2">
-<h2><span class="header-section-number">11.7</span> Specifying Correlation Structures</h2>
+<h2><span class="header-section-number">11.8</span> Specifying Correlation Structures</h2>
 <ul>
-<li><p><strong>Independence</strong> In standard linear models, the assumption on the residuals <span class="math inline">\(\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})\)</span> means that</p></li>
+<li><p><strong>Independence:</strong> In standard linear models, the assumption on the residuals <span class="math inline">\(\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})\)</span> means that</p></li>
 <li>The variance of each observation is <span class="math inline">\(\sigma_{\epsilon}^{2}\)</span></li>
 <li><p>The covariance between two different observations <span class="math inline">\(0\)</span></p></li>
 </ul>
@@ -321,7 +326,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{bmatrix} 
 \]</span></p>
 <ul>
-<li><strong>Compound Symmetry</strong> or <strong>Exchangeable</strong> The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely <span class="math inline">\(\rho\)</span>.</li>
+<li><strong>Compound Symmetry</strong> or <strong>Exchangeable:</strong> The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely <span class="math inline">\(\rho\)</span>.</li>
 </ul>
 <p><span class="math display">\[
 \sigma_{\epsilon}^{2}
@@ -333,7 +338,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{bmatrix} 
 \]</span></p>
 <ul>
-<li><strong>Autoregressive</strong> Imagine that <span class="math inline">\(y_{1}, \ldots , y_{4}\)</span> were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.</li>
+<li><strong>Autoregressive:</strong> Imagine that <span class="math inline">\(y_{1}, \ldots , y_{4}\)</span> were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.</li>
 </ul>
 <p><span class="math display">\[
 \sigma_{\epsilon}^{2}
@@ -345,7 +350,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{bmatrix}
 \]</span></p>
 <ul>
-<li><strong>Unstructured</strong> The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate.</li>
+<li><strong>Unstructured:</strong> The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate.</li>
 </ul>
 <p><span class="math display">\[
 \begin{bmatrix} 
@@ -376,27 +381,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \right]
 \]</span></p>
 <div id="specifying-different-covariance-structures-in-r" class="section level3">
-<h3><span class="header-section-number">11.7.1</span> Specifying different covariance structures in R</h3>
+<h3><span class="header-section-number">11.8.1</span> Specifying different covariance structures in R</h3>
 <ul>
-<li>Not able to do this using <code>lmer()</code> from package <code>lme4</code></li>
-<li>Can do this using <code>lme()</code> from package <code>nlme</code>
-<ul>
-<li>Syntax is similar</li>
-</ul></li>
+<li>Not <em>easily</em> able to do this using <code>lmer()</code> from package <code>lme4</code></li>
+<li>Can do this using <code>lme()</code> from package <code>nlme</code>. Syntax is similar.</li>
+<li>The standard classes of correlation structures available in the <code>nlme</code> package can be found in <a href="https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/corClasses.html">[this help file]</a></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nlme)
 model_lme_cs&lt;-<span class="kw">lme</span>(log_radon <span class="op">~</span><span class="st"> </span>floor,
                <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>county, 
-               <span class="dt">cor=</span><span class="kw">corCompSymm</span>(<span class="fl">0.5</span>,<span class="dt">form=</span><span class="op">~</span><span class="dv">1</span><span class="op">|</span>county),<span class="dt">data =</span> radon)</code></pre></div>
+               <span class="dt">cor=</span><span class="kw">corCompSymm</span>(<span class="dt">value=</span><span class="fl">0.159</span>,<span class="dt">form=</span><span class="op">~</span><span class="dv">1</span><span class="op">|</span>county),<span class="dt">data =</span> radon)</code></pre></div>
 <p>Using a different covariance structure can have a large effect on the results.</p>
 <ul>
 <li><code>lmer</code> using Identity: <span class="math inline">\(\sigma^{2}_{\alpha} = 0.10, \sigma^{2}_{\epsilon} = 0.53\)</span><br />
 </li>
 <li><code>nlme</code> using Identity: <span class="math inline">\(\sigma^{2}_{\alpha} = 0.32^2 = 0.10, \sigma^{2}_{\epsilon} = 0.73^2 = 0.53\)</span><br />
 </li>
-<li><code>nlme</code> using CS: <span class="math inline">\(\sigma^{2}_{\alpha} = 0.13^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61\)</span></li>
+<li><code>nlme</code> using CS: <span class="math inline">\(\sigma^{2}_{\alpha} = 0.14^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61\)</span></li>
 </ul>
-<p>Also, mis-specifying the covariance structure can also have a large effect on the results.</p>
+
+<div class="rmdcaution">
+Mis-specifying the covariance structure can also have a large effect on the results.
+</div>
+
 </div>
 </div>
             </section>

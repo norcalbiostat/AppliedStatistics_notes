@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="components-of-variance.html">
-<link rel="next" href="including-covariates.html">
+<link rel="next" href="estimation-methods.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -222,14 +222,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>11.3</b> Components of Variance</a></li>
 <li class="chapter" data-level="11.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>11.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#restricted-residual-maximum-likelihood-reml"><i class="fa fa-check"></i><b>11.4.1</b> Restricted (residual) Maximum Likelihood (REML)</a></li>
+<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>11.4.1</b> Comparison of estimates</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.5</b> Including Covariates</a></li>
-<li class="chapter" data-level="11.6" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.6</b> Centering terms</a></li>
-<li class="chapter" data-level="11.7" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.7</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="11.7.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.7.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="11.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>11.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="11.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="11.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.7</b> Centering terms</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>11.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.8</b> Additional References</a></li>
+<li class="chapter" data-level="11.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.8</b> Specifying Correlation Structures</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.8.1</b> Specifying different covariance structures in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a><ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>11.9.1</b> Package Vignettes</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>12</b> Longitudinal Data</a><ul>
 <li class="chapter" data-level="12.1" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>12.1</b> Additional Resources</a></li>
@@ -287,16 +292,139 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="fitri" class="section level2">
 <h2><span class="header-section-number">11.4</span> Fitting models in R</h2>
+<p><strong>Complete Pooling</strong></p>
+<p>The complete pooling model is fit with the function <code>lm</code>, and is only modeled by <code>1</code> and no covariates. This is the simple mean model, and is equivelant to estimating the mean.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_completepool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data=</span>radon)
+fit_completepool
+## 
+## Call:
+## lm(formula = log_radon ~ 1, data = radon)
+## 
+## Coefficients:
+## (Intercept)  
+##       1.265
+<span class="kw">mean</span>(radon<span class="op">$</span>log_radon)
+## [1] 1.264779</code></pre></div>
 <p><strong>No Pooling</strong></p>
-<p>The no pooling model is fit with the function <code>lm</code>, giving each county a unique intercept in the model.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>county, <span class="dt">data=</span>radon)</code></pre></div>
+<p>The no pooling model is also fit with the function <code>lm</code>, but gives each county a unique intercept in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_nopool &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>county, <span class="dt">data=</span>radon)
+fit_nopool.withint &lt;-<span class="st"> </span><span class="kw">lm</span>(log_radon <span class="op">~</span><span class="st"> </span>county, <span class="dt">data=</span>radon)</code></pre></div>
+<table style="text-align:center">
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="2">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="2">
+log_radon
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+</td>
+<td>
+0.715<sup>*</sup> (0.383)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+countyAITKIN
+</td>
+<td>
+0.715<sup>*</sup> (0.383)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+countyANOKA
+</td>
+<td>
+0.891<sup>***</sup> (0.106)
+</td>
+<td>
+0.176 (0.398)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+countyBECKER
+</td>
+<td>
+1.090<sup>**</sup> (0.443)
+</td>
+<td>
+0.375 (0.585)
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="2" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<ul>
+<li>The first model (<code>fit_nopool</code>) is coded as <code>lm(log_radon ~ -1 + county, data=radon)</code>, and so does not have the global intercept (that’s what the <code>-1</code> does). Each <span class="math inline">\(\beta\)</span> coefficient is the estimate of the mean <code>log_radon</code> for that county.</li>
+<li>The second model (<code>fit_nopool.withint</code>) is coded as <code>lm(log_radon ~ county, data=radon)</code> and is what we are typically used to fitting.
+<ul>
+<li>Each estimate is the difference in log(radon) for that county <em>compared to a reference county</em>.</li>
+<li>Because county is alphabetical, the reference group is AITKIN.</li>
+<li>Aitkin’s mean level of log(radon) shows up as the intercept or <em>Constant</em> term.</li>
+</ul></li>
+<li>For display purposes only, only the first 3 county estimates are being shown.</li>
+</ul>
 <p><strong>Partial Pooling</strong></p>
 <ul>
-<li>The partial pooling model is fit with the function <code>lmer()</code>, which is part of the <code>lme4</code> package.</li>
+<li>The partial pooling model is fit with the function <code>lmer()</code>, which is part of the <strong><a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf"><code>lme4</code></a></strong> package.</li>
 <li>The extra notation around the input variable <code>(1|county)</code> dictates that each county should get its own unique intercept <span class="math inline">\(\alpha_{j[n]}\)</span>.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_partpool &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span>county), <span class="dt">data=</span>radon)</code></pre></div>
-<p>The fixed effects portion of the model output of <code>lmer</code> is similar to output from <code>lm</code>, except no p-values are displayed. The fact that no p-values are displayed is a much discussed topic. The author of the library <code>lme4</code>, Douglas Bates, believes that there is no “obviously correct” solution to calculating p-values for models with randomly varying intercepts (or slopes); see <a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here</a> for a general discussion.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lme4)
+fit_partpool &lt;-<span class="st"> </span><span class="kw">lmer</span>(log_radon <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span>county), <span class="dt">data=</span>radon)</code></pre></div>
+<p>The fixed effects portion of the model output of <code>lmer</code> is similar to output from <code>lm</code>, except no p-values are displayed. The fact that no p-values are displayed is a much discussed topic. The author of the library <code>lme4</code>, Douglas Bates, believes that there is no “obviously correct” solution to calculating p-values for models with randomly varying intercepts (or slopes); see <strong><a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here</a></strong> for a general discussion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit_partpool)
 ## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: log_radon ~ (1 | county)
@@ -317,122 +445,128 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Fixed effects:
 ##             Estimate Std. Error t value
 ## (Intercept)    1.350      0.047   28.72</code></pre></div>
-<p>The random effects portion of the <code>lmer</code> output provides a point estimate of the variance of component <span class="math inline">\(\sigma^2_{\alpha} = 0.09\)</span> and the model’s residual variance, <span class="math inline">\(\sigma_\epsilon = 0.57\)</span>.</p>
-<div id="restricted-residual-maximum-likelihood-reml" class="section level3">
-<h3><span class="header-section-number">11.4.1</span> Restricted (residual) Maximum Likelihood (REML)</h3>
 <ul>
-<li>Similar to logistic regression, estimates typically aren’t estimated directly using maximum likelihood (ML) methods.</li>
-<li>Iterative methods like REML are used to get approximations.</li>
-<li>REML is typically the default estimation method for most packages.</li>
+<li>The random effects portion of the <code>lmer</code> output provides a point estimate of the variance of component <span class="math inline">\(\sigma^2_{\alpha} = 0.09\)</span> and the model’s residual variance, <span class="math inline">\(\sigma_\epsilon = 0.57\)</span>.</li>
+<li>The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of <code>log_radon</code>.</li>
+<li>The random intercepts aren’t automatically shown in this output. We can visualize these using what some call a <em>forest plot</em>. A very easy way to accomplish this is to use the <a href="http://www.strengejacke.de/sjPlot/">sjPlot</a> package. We use the <code>plot_model()</code> function, on the <code>fit_partpool</code> model, we want to see the random effects (<code>type=&quot;re&quot;</code>), and we want to sort on the name of the random variable, here it’s <code>&quot;(Intercept)&quot;</code>.</li>
 </ul>
-<p>Details of REML are beyond the scope of this class, but knowing the estimation method is important for two reasons</p>
-<ol style="list-style-type: decimal">
-<li>Some type of testing procedures that use the likelihood ratio may not be valid.
-<ul>
-<li>Comparing models with different fixed effects using a likelihood ratio test is not valid. (Must use Wald Test instead)</li>
-<li>Can still use AIC/BIC as guidance (not as formal tests)</li>
-</ul></li>
-<li>Iterative procedures are procedures that perform estimation steps over and over until the change in estimates from one step to the next is smaller than some tolerance.
-<ul>
-<li>Sometimes this convergence to an answer never happens.</li>
-<li>You will get some error message about the algorithm not converging.</li>
-<li>The more complex the model, the higher chance this can happen</li>
-<li>scaling, centering, and avoiding collinearity can alleviate these problems with convergence.</li>
-</ul></li>
-</ol>
-<p>You can change the fitting algorithm to use the Log Likelihood anyhow, it may be slightly slower but for simple models the estimates are going to be very close to the REML estimate. Below is a table showing the estimates for the random intercepts,</p>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sjPlot)
+<span class="kw">plot_model</span>(fit_partpool, <span class="dt">type=</span><span class="st">&quot;re&quot;</span>, <span class="dt">sort.est =</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="dt">y.offset =</span> .<span class="dv">4</span>)</code></pre></div>
+<p><img src="random_intercept_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Notice that these effects are centered around 0. Refering back to Section 10.2 in this notebook, the intercept <span class="math inline">\(\beta_{0j}\)</span> was modeled equal to some average intercept across all groups <span class="math inline">\(\gamma_{00}\)</span>, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">showri &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Random_Effect   =</span> <span class="kw">unlist</span>(<span class="kw">ranef</span>(fit_partpool)), 
+                     <span class="dt">Fixed_Intercept =</span> <span class="kw">fixef</span>(fit_partpool), 
+                     <span class="dt">RandomIntercept =</span> <span class="kw">unlist</span>(<span class="kw">ranef</span>(fit_partpool))<span class="op">+</span><span class="kw">fixef</span>(fit_partpool))
+                
+<span class="kw">rownames</span>(showri) &lt;-<span class="st"> </span><span class="kw">rownames</span>(<span class="kw">coef</span>(fit_partpool)<span class="op">$</span>county)
+<span class="kw">kable</span>(<span class="kw">head</span>(showri))</code></pre></div>
+<table>
 <thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-REML
-</th>
-<th style="text-align:right;">
-MLE
-</th>
+<tr class="header">
+<th></th>
+<th align="right">Random_Effect</th>
+<th align="right">Fixed_Intercept</th>
+<th align="right">RandomIntercept</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-AITKIN
-</td>
-<td style="text-align:right;">
-1.1107728
-</td>
-<td style="text-align:right;">
-1.1143654
-</td>
+<tr class="odd">
+<td>AITKIN</td>
+<td align="right">-0.2390574</td>
+<td align="right">1.34983</td>
+<td align="right">1.1107728</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ANOKA
-</td>
-<td style="text-align:right;">
-0.9427047
-</td>
-<td style="text-align:right;">
-0.9438526
-</td>
+<tr class="even">
+<td>ANOKA</td>
+<td align="right">-0.4071256</td>
+<td align="right">1.34983</td>
+<td align="right">0.9427047</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-BECKER
-</td>
-<td style="text-align:right;">
-1.2688325
-</td>
-<td style="text-align:right;">
-1.2700351
-</td>
+<tr class="odd">
+<td>BECKER</td>
+<td align="right">-0.0809977</td>
+<td align="right">1.34983</td>
+<td align="right">1.2688325</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-BELTRAMI
-</td>
-<td style="text-align:right;">
-1.2694025
-</td>
-<td style="text-align:right;">
-1.2702493
-</td>
+<tr class="even">
+<td>BELTRAMI</td>
+<td align="right">-0.0804277</td>
+<td align="right">1.34983</td>
+<td align="right">1.2694025</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-BENTON
-</td>
-<td style="text-align:right;">
-1.3243796
-</td>
-<td style="text-align:right;">
-1.3245917
-</td>
+<tr class="odd">
+<td>BENTON</td>
+<td align="right">-0.0254506</td>
+<td align="right">1.34983</td>
+<td align="right">1.3243796</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-BIGSTONE
-</td>
-<td style="text-align:right;">
-1.4081133
-</td>
-<td style="text-align:right;">
-1.4068866
-</td>
+<tr class="even">
+<td>BIGSTONE</td>
+<td align="right">0.0582831</td>
+<td align="right">1.34983</td>
+<td align="right">1.4081133</td>
 </tr>
 </tbody>
 </table>
-<p>and the same estimates for the variance terms.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(fit_partpool)
-##  Groups   Name        Std.Dev.
-##  county   (Intercept) 0.29767 
-##  Residual             0.76607
-<span class="kw">VarCorr</span>(fit_partpool_MLE)
-##  Groups   Name        Std.Dev.
-##  county   (Intercept) 0.29390 
-##  Residual             0.76607</code></pre></div>
-<p>So does it matter? Yes and no. In general you want to fit the models using REML, but if you really want to use a Likelihood Ratio <strong>test</strong> to compare models then you need to fit the models using ML.</p>
+<div id="comparison-of-estimates" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> Comparison of estimates</h3>
+<ul>
+<li>By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties.</li>
+<li>Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section 1.11.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cmpr.est &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Mean_Model       =</span> <span class="kw">coef</span>(fit_completepool), 
+                       <span class="dt">Random_Intercept =</span> <span class="kw">unlist</span>(<span class="kw">ranef</span>(fit_partpool))<span class="op">+</span><span class="kw">fixef</span>(fit_partpool), 
+                       <span class="dt">Fixed_Effects    =</span> <span class="kw">coef</span>(fit_nopool))
+<span class="kw">rownames</span>(cmpr.est) &lt;-<span class="st"> </span><span class="kw">rownames</span>(<span class="kw">coef</span>(fit_partpool)<span class="op">$</span>county)
+<span class="kw">kable</span>(<span class="kw">head</span>(cmpr.est))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Mean_Model</th>
+<th align="right">Random_Intercept</th>
+<th align="right">Fixed_Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AITKIN</td>
+<td align="right">1.264779</td>
+<td align="right">1.1107728</td>
+<td align="right">0.7149352</td>
+</tr>
+<tr class="even">
+<td>ANOKA</td>
+<td align="right">1.264779</td>
+<td align="right">0.9427047</td>
+<td align="right">0.8908486</td>
+</tr>
+<tr class="odd">
+<td>BECKER</td>
+<td align="right">1.264779</td>
+<td align="right">1.2688325</td>
+<td align="right">1.0900084</td>
+</tr>
+<tr class="even">
+<td>BELTRAMI</td>
+<td align="right">1.264779</td>
+<td align="right">1.2694025</td>
+<td align="right">1.1933029</td>
+</tr>
+<tr class="odd">
+<td>BENTON</td>
+<td align="right">1.264779</td>
+<td align="right">1.3243796</td>
+<td align="right">1.2822379</td>
+</tr>
+<tr class="even">
+<td>BIGSTONE</td>
+<td align="right">1.264779</td>
+<td align="right">1.4081133</td>
+<td align="right">1.5367889</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
             </section>
@@ -441,7 +575,7 @@ BIGSTONE
         </div>
       </div>
 <a href="components-of-variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="including-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

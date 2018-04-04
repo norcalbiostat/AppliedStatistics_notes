@@ -87,8 +87,8 @@ Here we specify separate models for the the fixed micro level effect of SES and 
 
 where 
 
-* $\gamma_{00}$ is the average slope across all schools
-* $U_{0j}$ is the difference between the slope for school $j$ and the average slope across all schools (random effect of school)
+* $\gamma_{00}$ is the average intercept across all schools
+* $U_{0j}$ is the difference between the intercept for school $j$ and the average intercept across all schools (random effect of school)
 
 If we substitute the intercept $\beta_{0j}$ in the first model with the information from the second model, 
 

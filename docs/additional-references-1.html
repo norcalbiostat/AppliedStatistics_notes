@@ -222,14 +222,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>11.3</b> Components of Variance</a></li>
 <li class="chapter" data-level="11.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>11.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#restricted-residual-maximum-likelihood-reml"><i class="fa fa-check"></i><b>11.4.1</b> Restricted (residual) Maximum Likelihood (REML)</a></li>
+<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>11.4.1</b> Comparison of estimates</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.5</b> Including Covariates</a></li>
-<li class="chapter" data-level="11.6" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.6</b> Centering terms</a></li>
-<li class="chapter" data-level="11.7" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.7</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="11.7.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.7.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="11.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>11.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="11.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="11.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.7</b> Centering terms</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>11.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.8</b> Additional References</a></li>
+<li class="chapter" data-level="11.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.8</b> Specifying Correlation Structures</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.8.1</b> Specifying different covariance structures in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a><ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>11.9.1</b> Package Vignettes</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>12</b> Longitudinal Data</a><ul>
 <li class="chapter" data-level="12.1" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>12.1</b> Additional Resources</a></li>
@@ -286,17 +291,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="additional-references-1" class="section level2">
-<h2><span class="header-section-number">11.8</span> Additional References</h2>
+<h2><span class="header-section-number">11.9</span> Additional References</h2>
 <ul>
 <li>Random effects ANOVA in SAS and R <a href="http://stla.github.io/stlapblog/posts/AV1R_SASandR.html" class="uri">http://stla.github.io/stlapblog/posts/AV1R_SASandR.html</a></li>
 <li>ICCs in mixed models <a href="https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/" class="uri">https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/</a></li>
 <li>Very nice introduction to mixed models in R <a href="https://m-clark.github.io/mixed-models-with-R/introduction.html" class="uri">https://m-clark.github.io/mixed-models-with-R/introduction.html</a></li>
-<li><a href="http://strengejacke.de/sjPlot/sjt.lmer/">sjPlot</a> <strong>Really</strong> nice way of printing output as tables (and plots).</li>
 <li>Interesting blog by <a href="https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/">Tristan Mahr</a> about pooling and shrinkage.</li>
 <li>Derivation of the covariance structures <a href="http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2" class="uri">http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2</a></li>
-<li>Changing covariance structures in lme4qtl: <a href="https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com">[paper]</a> <a href="https://github.com/variani/lme4qtl">[github]</a></li>
+</ul>
+<div id="package-vignettes" class="section level3">
+<h3><span class="header-section-number">11.9.1</span> Package Vignettes</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf">lme4</a> Functions to fit HLMs</li>
+<li><a href="http://strengejacke.de/sjPlot/sjt.lmer/">sjPlot</a> <strong>Really</strong> nice way of printing output as tables (and plots).</li>
+<li>Changing covariance structures in <code>lme4qtl</code>: <a href="https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com">[paper]</a> <a href="https://github.com/variani/lme4qtl">[github]</a></li>
 </ul>
 
+</div>
 </div>
 <!-- </div> -->
             </section>

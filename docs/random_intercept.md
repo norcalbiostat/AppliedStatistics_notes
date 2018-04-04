@@ -143,25 +143,65 @@ $$
 
 ## Fitting models in R {#fitri}
 
+**Complete Pooling**
+
+The complete pooling model is fit with the function `lm`, and is only modeled by `1` and no covariates. This is the simple mean model, and is equivelant to estimating the mean. 
+
+```r
+fit_completepool <- lm(log_radon ~ 1, data=radon)
+fit_completepool
+## 
+## Call:
+## lm(formula = log_radon ~ 1, data = radon)
+## 
+## Coefficients:
+## (Intercept)  
+##       1.265
+mean(radon$log_radon)
+## [1] 1.264779
+```
+
 **No Pooling**
 
-The no pooling model is fit with the function `lm`, giving each county a unique intercept in the model.  
+The no pooling model is also fit with the function `lm`, but gives each county a unique intercept in the model. 
+
 
 ```r
 fit_nopool <- lm(log_radon ~ -1 + county, data=radon)
+fit_nopool.withint <- lm(log_radon ~ county, data=radon)
 ```
+
+
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">log_radon</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Constant</td><td></td><td>0.715<sup>*</sup> (0.383)</td></tr>
+<tr><td style="text-align:left">countyAITKIN</td><td>0.715<sup>*</sup> (0.383)</td><td></td></tr>
+<tr><td style="text-align:left">countyANOKA</td><td>0.891<sup>***</sup> (0.106)</td><td>0.176 (0.398)</td></tr>
+<tr><td style="text-align:left">countyBECKER</td><td>1.090<sup>**</sup> (0.443)</td><td>0.375 (0.585)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+* The first model (`fit_nopool`) is coded as `lm(log_radon ~ -1 + county, data=radon)`, and so does not have the global intercept (that's what the `-1` does). Each $\beta$ coefficient is the estimate of the mean `log_radon` for that county. 
+* The second model (`fit_nopool.withint`) is coded as `lm(log_radon ~ county, data=radon)` and is what we are typically used to fitting.      
+    - Each estimate is the difference in log(radon) for that county _compared to a reference county_.
+    - Because county is alphabetical, the reference group is AITKIN.
+    - Aitkin's mean level of log(radon) shows up as the intercept or _Constant_ term.
+* For display purposes only, only the first 3 county estimates are being shown. 
 
 **Partial Pooling**
 
-* The partial pooling model is fit with the function `lmer()`, which is part of the `lme4` package.
+* The partial pooling model is fit with the function `lmer()`, which is part of the **[`lme4`](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf)** package.
 * The extra notation around the input variable `(1|county)` dictates that each county should get its own unique intercept $\alpha_{j[n]}$. 
 
 
 ```r
-fit_partpool <- lme4::lmer(log_radon ~ (1 |county), data=radon)
+library(lme4)
+fit_partpool <- lmer(log_radon ~ (1 |county), data=radon)
 ```
 
-The fixed effects portion of the model output of `lmer` is similar to output from `lm`, except no p-values are displayed.  The fact that no p-values are displayed is a much discussed topic.  The author of the library `lme4`, Douglas Bates, believes that there is no "obviously correct" solution to calculating p-values for models with randomly varying intercepts (or slopes); see [here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html) for a general discussion. 
+The fixed effects portion of the model output of `lmer` is similar to output from `lm`, except no p-values are displayed.  The fact that no p-values are displayed is a much discussed topic.  The author of the library `lme4`, Douglas Bates, believes that there is no "obviously correct" solution to calculating p-values for models with randomly varying intercepts (or slopes); see **[here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)** for a general discussion. 
 
 
 ```r
@@ -187,13 +227,70 @@ summary(fit_partpool)
 ## (Intercept)    1.350      0.047   28.72
 ```
 
-The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
+* The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
+* The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of `log_radon`. 
+* The random intercepts aren't automatically shown in this output. We can visualize these using what some call a _forest plot_. A very easy way to accomplish this is to use the [sjPlot](http://www.strengejacke.de/sjPlot/) package. We use the `plot_model()` function, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
 
 
-### Restricted (residual) Maximum Likelihood (REML)
+```r
+library(sjPlot)
+plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
+```
 
-* Similar to logistic regression, estimates typically aren't estimated directly using maximum likelihood (ML) methods. 
-* Iterative methods like REML are used to get approximations. 
+<img src="random_intercept_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+Notice that these effects are centered around 0. Refering back to Section 10.2 in this notebook, the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
+
+
+```r
+showri <- data.frame(Random_Effect   = unlist(ranef(fit_partpool)), 
+                     Fixed_Intercept = fixef(fit_partpool), 
+                     RandomIntercept = unlist(ranef(fit_partpool))+fixef(fit_partpool))
+                
+rownames(showri) <- rownames(coef(fit_partpool)$county)
+kable(head(showri))
+```
+
+            Random_Effect   Fixed_Intercept   RandomIntercept
+---------  --------------  ----------------  ----------------
+AITKIN         -0.2390574           1.34983         1.1107728
+ANOKA          -0.4071256           1.34983         0.9427047
+BECKER         -0.0809977           1.34983         1.2688325
+BELTRAMI       -0.0804277           1.34983         1.2694025
+BENTON         -0.0254506           1.34983         1.3243796
+BIGSTONE        0.0582831           1.34983         1.4081133
+
+
+
+### Comparison of estimates
+
+* By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties. 
+* Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section 1.11. 
+
+
+```r
+cmpr.est <- data.frame(Mean_Model       = coef(fit_completepool), 
+                       Random_Intercept = unlist(ranef(fit_partpool))+fixef(fit_partpool), 
+                       Fixed_Effects    = coef(fit_nopool))
+rownames(cmpr.est) <- rownames(coef(fit_partpool)$county)
+kable(head(cmpr.est))
+```
+
+            Mean_Model   Random_Intercept   Fixed_Effects
+---------  -----------  -----------------  --------------
+AITKIN        1.264779          1.1107728       0.7149352
+ANOKA         1.264779          0.9427047       0.8908486
+BECKER        1.264779          1.2688325       1.0900084
+BELTRAMI      1.264779          1.2694025       1.1933029
+BENTON        1.264779          1.3243796       1.2822379
+BIGSTONE      1.264779          1.4081133       1.5367889
+
+
+
+## Estimation Methods
+
+* Similar to logistic regression, estimates from multi-level models typically aren't estimated directly using maximum likelihood (ML) methods. 
+* Iterative methods like **Restricted (residual) Maximum Likelihood (REML)** are used to get approximations. 
 * REML is typically the default estimation method for most packages. 
 
 
@@ -275,14 +372,13 @@ A similar sort of shrinkage effect is seen with covariates included in the model
 
 Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" />
 
 Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
 
 
 ```r
-library(sjPlot)
-ri.with.x <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
+ri.with.x <- lmer(log_radon ~ floor + (1 |county), data=radon)
 sjt.lmer(ri.with.x, show.r2=FALSE)
 ```
 
@@ -343,16 +439,16 @@ sjt.lmer(ri.with.x, show.r2=FALSE)
 </tr>
 </table>
 
-Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the same `sjPlot` package. 
+Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the [sjPlot](http://www.strengejacke.de/sjPlot/) package. 
 
 
 ```r
 plot_model(ri.with.x, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-Function enhancements -- (see [vignette](http://www.strengejacke.de/sjPlot/) for more options) 
+Function enhancements -- (
 
 * Display the fixed effects by changing `type="est"`. 
 * Plot the slope of the fixed effect for each level of the random effect `sjp.lmer(ri.with.x, type="ri.slope")` -- this is being depreciated in the future but works for now. Eventually I'll figure out how to get this plot out of `plot_model()`. 
@@ -364,15 +460,34 @@ Function enhancements -- (see [vignette](http://www.strengejacke.de/sjPlot/) for
     - A student with an average IQ may be more confident and excel in a group of students with less than average IQ
     - But they may be discouraged and not perform to their potential in a group of students with higher than average IQ.
     
-* Instead of using the actual value in the regression model
+* If the effect of a specific level of a factor is dependent on where the level is in reference to _other cluster members_, more so than where the level is in reference to _all other participants_, the model should be adjusted for as follows: 
+* Instead of using the actual value in the regression model you would...
     - calculate the cluster specific average
     - calculate the difference between individual and specific cluster average
     - both cluster average (macro) and difference (micro) are included in the model. 
 
 
+### A generic `dplyr` approach to centering. 
+
+```
+group.means <- data %>% group_by(cluster) %>% summarise(c.ave=mean(variable))
+newdata <- data %>% left_join(group.means) %>% mutate(diff = variable - c.ave)
+```
+
+1. Create a new data set that I call `group.means` that
+    - takes the original `data` set and then (`%>%`)...
+    - groups it by the clustering variable so that all subsequent actions are done on each group
+    - makes a new variable that I call `c.ave` that is the average of the `variable` of interest
+2. I then take the original `data` set, and then
+    - merge onto `data`, this `group.means` data set that only contains the clustering variable, and the cluster average variable `c.ave`. 
+    - I also toss in a `mutate` to create a new variable that is the `diff`erence between the `variable` of interest and the group averages. 
+    - and assign all of this to a `newdata` set 
+
+
+
 ## Specifying Correlation Structures
 
-* **Independence** In standard linear models, the assumption on the residuals $\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$ means that
+* **Independence:** In standard linear models, the assumption on the residuals $\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$ means that
 
 * The variance of each observation is $\sigma_{\epsilon}^{2}$
 * The covariance between two different observations $0$
@@ -411,7 +526,7 @@ $$
 
 
 
-* **Compound Symmetry** or **Exchangeable** The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely $\rho$. 
+* **Compound Symmetry** or **Exchangeable:** The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely $\rho$. 
 
 $$
 \sigma_{\epsilon}^{2}
@@ -423,7 +538,7 @@ $$
 \end{bmatrix} 
 $$
 
-* **Autoregressive** Imagine that $y_{1}, \ldots , y_{4}$ were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.
+* **Autoregressive:** Imagine that $y_{1}, \ldots , y_{4}$ were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.
 
 $$
 \sigma_{\epsilon}^{2}
@@ -436,7 +551,7 @@ $$
 $$
 
 
-* **Unstructured** The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate. 
+* **Unstructured:** The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate. 
 
 $$
 \begin{bmatrix} 
@@ -472,25 +587,27 @@ $$
 
 ### Specifying different covariance structures in R
 
-* Not able to do this using `lmer()` from package `lme4`
-* Can do this using `lme()` from package `nlme`
-    - Syntax is similar
+* Not _easily_ able to do this using `lmer()` from package `lme4`
+* Can do this using `lme()` from package `nlme`. Syntax is similar. 
+* The standard classes of correlation structures available in the `nlme` package can be found in [[this help file]](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/corClasses.html)
     
 
 ```r
 library(nlme)
 model_lme_cs<-lme(log_radon ~ floor,
                random = ~ 1 | county, 
-               cor=corCompSymm(0.5,form=~1|county),data = radon)
+               cor=corCompSymm(value=0.159,form=~1|county),data = radon)
 ```
 
 Using a different covariance structure can have a large effect on the results. 
 
 * `lmer` using Identity: $\sigma^{2}_{\alpha} = 0.10, \sigma^{2}_{\epsilon} = 0.53$  
 * `nlme` using Identity: $\sigma^{2}_{\alpha} = 0.32^2 = 0.10, \sigma^{2}_{\epsilon} = 0.73^2 = 0.53$  
-* `nlme` using CS: $\sigma^{2}_{\alpha} = 0.13^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61$
+* `nlme` using CS: $\sigma^{2}_{\alpha} = 0.14^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61$
 
-Also, mis-specifying the covariance structure can also have a large effect on the results. 
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Mis-specifying the covariance structure can also have a large effect on the results. </div>\EndKnitrBlock{rmdcaution}
+
+
 
 
 
@@ -499,7 +616,12 @@ Also, mis-specifying the covariance structure can also have a large effect on th
 * Random effects ANOVA in SAS and R http://stla.github.io/stlapblog/posts/AV1R_SASandR.html
 * ICCs in mixed models https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/
 * Very nice introduction to mixed models in R https://m-clark.github.io/mixed-models-with-R/introduction.html
-* [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing output as tables (and plots).
 * Interesting blog by [Tristan Mahr](https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/) about pooling and shrinkage. 
 * Derivation of the covariance structures http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2 
-* Changing covariance structures in lme4qtl: [[paper]](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com) [[github]](https://github.com/variani/lme4qtl)
+
+### Package Vignettes
+* [lme4](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) Functions to fit HLMs
+* [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing output as tables (and plots).
+* Changing covariance structures in `lme4qtl`: [[paper]](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com) [[github]](https://github.com/variani/lme4qtl)
+
+
