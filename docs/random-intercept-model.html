@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-intercept-model.html">
-
+<link rel="prev" href="what-about-just-the-4th-observation-minus-the-2nd.html">
+<link rel="next" href="additional-resources.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -143,22 +143,152 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-resources" class="section level2">
-<h2><span class="header-section-number">1.7</span> Additional Resources</h2>
+<div id="random-intercept-model" class="section level2">
+<h2><span class="header-section-number">1.6</span> Random Intercept Model</h2>
+<p>The random intercept model combines aspects of the various simple analyses in one large model that uses all the data available and in an appropriate fashion.</p>
+<p>Since we have a specified correlation structure, we’ll use the <code>lme</code> function found in the <code>nlme</code> package and change the correlation structure to an <strong>Autoregressive with lag 1</strong> (AR1) structure. The <code>value=</code> argument is an estimate of the value of the lag 1 autocorrelation.</p>
+<p><img src="images/q.png" /> Where did the 0.7 come from?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nlme)
+ar.model &lt;-<span class="st"> </span><span class="kw">lme</span>(l2paintol <span class="op">~</span><span class="st"> </span>cs, 
+            <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span><span class="op">|</span>id, <span class="dt">cor =</span> <span class="kw">corAR1</span>(<span class="dt">value =</span> <span class="fl">0.7</span>, <span class="dt">form=</span><span class="op">~</span><span class="dv">1</span><span class="op">|</span>id),  
+            <span class="dt">data=</span>pain, <span class="dt">na.action=</span>na.omit)
+<span class="kw">summary</span>(ar.model)
+## Linear mixed-effects model fit by REML
+##  Data: pain 
+##        AIC      BIC    logLik
+##   599.8891 617.3544 -294.9446
+## 
+## Random effects:
+##  Formula: ~1 | id
+##         (Intercept)  Residual
+## StdDev:   0.8982031 0.6173987
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~1 | id 
+##  Parameter estimate(s):
+##       Phi 
+## 0.1098905 
+## Fixed effects: l2paintol ~ cs 
+##                 Value Std.Error  DF   t-value p-value
+## (Intercept)  4.538559 0.1704000 181 26.634729  0.0000
+## csdistracter 0.455238 0.2407376  62  1.891012  0.0633
+##  Correlation: 
+##              (Intr)
+## csdistracter -0.708
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.58503556 -0.42732434 -0.07170972  0.41710872  3.95545284 
+## 
+## Number of Observations: 245
+## Number of Groups: 64</code></pre></div>
 <ul>
-<li>Modeling Longitudinal Data, Robert E. Weiss (2005) <a href="https://www.springer.com/us/book/9780387402710" class="uri">https://www.springer.com/us/book/9780387402710</a></li>
-<li>Modeling time series data <a href="https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials" class="uri">https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials</a></li>
+<li>The model converged - don’t forget to check this. There was no error message in the output saying it didn’t converge, so we’re good.</li>
+<li>let’s look at and interpret the fixed effects</li>
 </ul>
-
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stargazer<span class="op">::</span><span class="kw">stargazer</span>(ar.model, <span class="dt">single.row=</span><span class="ot">TRUE</span>, <span class="dt">ci=</span><span class="ot">TRUE</span>, <span class="dt">type=</span><span class="st">&#39;html&#39;</span>)</code></pre></div>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+l2paintol
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+csdistracter
+</td>
+<td>
+0.455<sup>*</sup> (-0.017, 0.927)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+4.539<sup>***</sup> (4.205, 4.873)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+245
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-294.945
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+599.889
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Bayesian Inf. Crit.
+</td>
+<td>
+617.354
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-intercept-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="what-about-just-the-4th-observation-minus-the-2nd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

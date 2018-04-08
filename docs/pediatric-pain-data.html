@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-intercept-model.html">
-
+<link rel="prev" href="longitudinal.html">
+<link rel="next" href="visualizing-longitudinal-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -143,22 +143,211 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-resources" class="section level2">
-<h2><span class="header-section-number">1.7</span> Additional Resources</h2>
+<div id="pediatric-pain-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> Pediatric pain data</h2>
+<p>The Pediatric Pain data set used in this chapter is a result of a designed experiment. Most studies on human pain are observational. The data consist of up to four observations on 64 children aged 8-10. The response is the length of time in seconds that the child can tolerate keeping his or her arm in very cold water, a proxy measure of pain tolerance. After the cold becomes intolerable, the child removes his or her arm. The arm is toweled off, no harm is done.</p>
+<p>Two measurements were done on the first visit, then another 2 measurements were taken two weeks later during a second visit. After the arm was dried off study staff asked the child what they were thinking about during that trial. Children were classified into two groups depending on the child’s coping style during the trial. <em>Attenders</em> thought about the experiment, objects related to the experiment or their arm. <em>Distracters</em> distracted themselves during the test by thinking about something unrelated to the experiment: the wall, homework, their pet, etc.</p>
+<p>A treatment was administered before the fourth trial. This treatment was a 10 minute conversation where the child was either counseled to attend to the arm, distract themselves from the arm, or no advice was given.</p>
+<blockquote>
+<p>The study authors were interested in the main effects of treatment, coping style, and the interaction between the two.</p>
+</blockquote>
+<div id="data-sample" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Data sample</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(pain[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+<th align="right">ses</th>
+<th align="left">cs</th>
+<th align="left">treatment</th>
+<th align="left">sex</th>
+<th align="right">age</th>
+<th align="right">trial</th>
+<th align="right">paintol</th>
+<th align="right">l2paintol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">73.5</td>
+<td align="left">attender</td>
+<td align="left">attend</td>
+<td align="left">female</td>
+<td align="right">10.083333</td>
+<td align="right">1</td>
+<td align="right">20.55</td>
+<td align="right">4.361066</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">73.5</td>
+<td align="left">attender</td>
+<td align="left">attend</td>
+<td align="left">female</td>
+<td align="right">10.083333</td>
+<td align="right">2</td>
+<td align="right">35.31</td>
+<td align="right">5.142005</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">73.5</td>
+<td align="left">attender</td>
+<td align="left">attend</td>
+<td align="left">female</td>
+<td align="right">10.083333</td>
+<td align="right">3</td>
+<td align="right">14.29</td>
+<td align="right">3.836934</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">73.5</td>
+<td align="left">attender</td>
+<td align="left">attend</td>
+<td align="left">female</td>
+<td align="right">10.083333</td>
+<td align="right">4</td>
+<td align="right">11.71</td>
+<td align="right">3.549669</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">74.7</td>
+<td align="left">distracter</td>
+<td align="left">distract</td>
+<td align="left">female</td>
+<td align="right">9.250000</td>
+<td align="right">1</td>
+<td align="right">28.13</td>
+<td align="right">4.814038</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">74.7</td>
+<td align="left">distracter</td>
+<td align="left">distract</td>
+<td align="left">female</td>
+<td align="right">9.250000</td>
+<td align="right">2</td>
+<td align="right">24.22</td>
+<td align="right">4.598127</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">74.7</td>
+<td align="left">distracter</td>
+<td align="left">distract</td>
+<td align="left">female</td>
+<td align="right">9.250000</td>
+<td align="right">3</td>
+<td align="right">15.86</td>
+<td align="right">3.987321</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">74.7</td>
+<td align="left">distracter</td>
+<td align="left">distract</td>
+<td align="left">female</td>
+<td align="right">9.250000</td>
+<td align="right">4</td>
+<td align="right">20.30</td>
+<td align="right">4.343408</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">81.5</td>
+<td align="left">attender</td>
+<td align="left">no directions</td>
+<td align="left">female</td>
+<td align="right">8.666667</td>
+<td align="right">1</td>
+<td align="right">12.00</td>
+<td align="right">3.584963</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">81.5</td>
+<td align="left">attender</td>
+<td align="left">no directions</td>
+<td align="left">female</td>
+<td align="right">8.666667</td>
+<td align="right">2</td>
+<td align="right">10.00</td>
+<td align="right">3.321928</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>Modeling Longitudinal Data, Robert E. Weiss (2005) <a href="https://www.springer.com/us/book/9780387402710" class="uri">https://www.springer.com/us/book/9780387402710</a></li>
-<li>Modeling time series data <a href="https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials" class="uri">https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials</a></li>
+<li><code>id</code>: participant ID</li>
+<li><code>ses</code>: child’s socio-economic status</li>
+<li><code>cs</code>: coping style. Assessed and assigned at the first visit.
+<ul>
+<li><code>Attender</code> : thought about the experiment, objects related to their their arm,</li>
+<li><code>Distracter</code> : distracted themselves during the test</li>
+</ul></li>
+<li><code>treatment</code>: Treatment group.
+<ul>
+<li><code>Attend</code> advised to pay attention to the arm</li>
+<li><code>Distract</code> advised to pay attention to something other than the arm</li>
+<li><code>no direction</code> no advice was given.</li>
+</ul></li>
+<li><code>trial</code>: 1, 2, 3, 4 (time)</li>
+<li><code>paintol</code> = The length of time in seconds arm was underwater. Proxy measure of pain tolerance.</li>
+<li><code>l2paintol</code> = <span class="math inline">\(\log_{2}(paintol)\)</span> - Normality transformation.</li>
 </ul>
-
 </div>
-<!-- </div> -->
+<div id="univariate-visualizations" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Univariate Visualizations</h3>
+<ul>
+<li><strong>Pain tolerance</strong></li>
+</ul>
+<p>The raw score for <code>paintol</code> is very skewed right. A <span class="math inline">\(log_{2}\)</span> transformation was applied and found sufficient to achieve approximate normality.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pain.dist &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(<span class="dt">x=</span>paintol)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() 
+l2pain.dist &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(l2paintol)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()
+<span class="kw">grid.arrange</span>(pain.dist, l2pain.dist)</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li><strong>Coping style and treatment</strong></li>
+</ul>
+<p>There are nearly equal proportions of coping styles and treatment types.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">table</span>(pain<span class="op">$</span>cs, pain<span class="op">$</span>treatment))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">attend</th>
+<th align="right">distract</th>
+<th align="right">no directions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>attender</td>
+<td align="right">40</td>
+<td align="right">48</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td>distracter</td>
+<td align="right">44</td>
+<td align="right">44</td>
+<td align="right">40</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-intercept-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="longitudinal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizing-longitudinal-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

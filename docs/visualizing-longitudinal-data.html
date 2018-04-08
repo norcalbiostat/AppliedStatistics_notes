@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-intercept-model.html">
-
+<link rel="prev" href="pediatric-pain-data.html">
+<link rel="next" href="analyze-pain-tolerance-across-coping-style.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -143,22 +143,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-resources" class="section level2">
-<h2><span class="header-section-number">1.7</span> Additional Resources</h2>
-<ul>
-<li>Modeling Longitudinal Data, Robert E. Weiss (2005) <a href="https://www.springer.com/us/book/9780387402710" class="uri">https://www.springer.com/us/book/9780387402710</a></li>
-<li>Modeling time series data <a href="https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials" class="uri">https://www.datascience.com/blog/introduction-to-forecasting-with-arima-in-r-learn-data-science-tutorials</a></li>
-</ul>
+<div id="visualizing-longitudinal-data" class="section level2">
+<h2><span class="header-section-number">1.2</span> Visualizing longitudinal data</h2>
+<div id="profile-or-spaghetti-plots" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Profile or spaghetti plots</h3>
+<p>How does individual’s pain tolerance change over time/trials? What does the average trend look like?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(trial, l2paintol)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">group=</span>id), <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+few &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,], <span class="kw">aes</span>(trial, l2paintol, <span class="dt">group=</span>id)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">theme_bw</span>() 
+<span class="kw">grid.arrange</span>(all, few, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
+<p>The average is around 5, with a slight decrease at time 2 and then relatively constant. The shading around the trendline shows that the variance across time points is pretty constant. The right hand plot shows the profile plot for the first 4 kids in the data set, notice how one path stops after trial 2? This tells us there is missing data in this data set that we will have to look out for.</p>
+<p>Quite a bit of variation across individuals, but what about the variation within person? I.e. how does the individual pain tolerance at each trial differ from the individual’s average pain tolerance. We’ll <em>center</em> the data around each person’s own average. With longitudinal data - the person is the cluster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person.ave &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">l2.ave =</span> <span class="kw">mean</span>(l2paintol, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))
+pain &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(person.ave) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">diff =</span> l2.ave<span class="op">-</span>l2paintol)
+<span class="co"># Always be very cautious when overwriting your data object! </span>
+<span class="co"># Novice users recommended to create a new name.</span>
 
+<span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(trial, diff)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">group=</span>id), <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)<span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Few individuals have large variations in their pain tolerance across time, and it appears as if those that had higher than average at trial 2, were lower than average at trial 3, and vice versa.</p>
 </div>
-<!-- </div> -->
+<div id="corrmat" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Correlation of pain tolerance within person across time</h3>
+<p>To calculate the correlation of <code>l2paintol</code> between trials, we need to reshape the data to wide format. In wide data, the measure of pain tolerance for each trial is it’s own variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First select only the variable we want to transform wide</span>
+pain.<span class="fl">2.</span>wide &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(id, trial, l2paintol)
+<span class="co"># Use the reshape() function to transform - this comes with baseR</span>
+pw &lt;-<span class="st"> </span><span class="kw">reshape</span>(pain.<span class="fl">2.</span>wide, <span class="dt">idvar=</span><span class="st">&quot;id&quot;</span>, <span class="dt">timevar=</span><span class="st">&quot;trial&quot;</span>, <span class="dt">direction=</span><span class="st">&quot;wide&quot;</span>)
+<span class="co"># then calculate and visualize the correlation of pain tolerance across time points. </span>
+corrplot<span class="op">::</span><span class="kw">corrplot.mixed</span>(<span class="kw">cor</span>(pw[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">use =</span> <span class="st">&#39;pairwise.complete.obs&#39;</span>))</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>There is a fairly high correlation of pain tolerance between trials.</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-intercept-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pediatric-pain-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analyze-pain-tolerance-across-coping-style.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
