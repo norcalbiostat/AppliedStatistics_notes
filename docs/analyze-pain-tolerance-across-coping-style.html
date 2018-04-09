@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="visualizing-longitudinal-data.html">
-<link rel="next" href="might-need-textbook-for-this-.html">
+<link rel="next" href="paired-t-tests.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -103,25 +103,194 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>1</b> Longitudinal Data</a><ul>
-<li class="chapter" data-level="1.1" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html"><i class="fa fa-check"></i><b>1.1</b> Pediatric pain data</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html#data-sample"><i class="fa fa-check"></i><b>1.1.1</b> Data sample</a></li>
-<li class="chapter" data-level="1.1.2" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html#univariate-visualizations"><i class="fa fa-check"></i><b>1.1.2</b> Univariate Visualizations</a></li>
+<li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible Workflows</a></li>
+<li class="chapter" data-level="1.2" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3" data-path="data-editing-and-recoding.html"><a href="data-editing-and-recoding.html"><i class="fa fa-check"></i><b>1.3</b> Data Editing and Recoding</a></li>
+<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="data-transformations.html"><a href="data-transformations.html"><i class="fa fa-check"></i><b>1.5</b> Data Transformations</a></li>
+<li class="chapter" data-level="1.6" data-path="selecting-appropriate-analysis.html"><a href="selecting-appropriate-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Selecting Appropriate Analysis</a></li>
+<li class="chapter" data-level="1.7" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.7</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.8" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.8</b> Dealing with missing data post-analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html"><i class="fa fa-check"></i><b>1.2</b> Visualizing longitudinal data</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html#profile-or-spaghetti-plots"><i class="fa fa-check"></i><b>1.2.1</b> Profile or spaghetti plots</a></li>
-<li class="chapter" data-level="1.2.2" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html#corrmat"><i class="fa fa-check"></i><b>1.2.2</b> Correlation of pain tolerance within person across time</a></li>
+<li class="part"><span><b>I Regression Modeling</b></span></li>
+<li class="chapter" data-level="2" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>3</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>3.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="3.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>3.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="3.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>3.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="3.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>3.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="3.5" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>3.5</b> Assumptions</a></li>
+<li class="chapter" data-level="3.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>3.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html"><i class="fa fa-check"></i><b>1.3</b> Analyze pain tolerance across coping style</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#two-sample-t-test"><i class="fa fa-check"></i><b>1.3.1</b> Two Sample T-test</a></li>
-<li class="chapter" data-level="1.3.2" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#averaged-over-the-observed-baseline-values."><i class="fa fa-check"></i><b>1.3.2</b> Averaged over the observed baseline values.</a></li>
-<li class="chapter" data-level="1.3.3" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#missing-data"><i class="fa fa-check"></i><b>1.3.3</b> Missing Data</a></li>
-<li class="chapter" data-level="1.3.4" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#paired-t-test"><i class="fa fa-check"></i><b>1.3.4</b> Paired t-test</a></li>
+<li class="chapter" data-level="4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>4</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>4.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="4.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>4.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="4.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>4.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="4.4" data-path="example-1.html"><a href="example-1.html"><i class="fa fa-check"></i><b>4.4</b> Example</a></li>
+<li class="chapter" data-level="4.5" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>4.5</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="4.6" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>4.6</b> Multicollinearity</a></li>
+<li class="chapter" data-level="4.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>4.7</b> What to watch out for</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="might-need-textbook-for-this-.html"><a href="might-need-textbook-for-this-.html"><i class="fa fa-check"></i><b>1.4</b> Might need textbook for this.</a></li>
-<li class="chapter" data-level="1.5" data-path="what-about-just-the-4th-observation-minus-the-2nd.html"><a href="what-about-just-the-4th-observation-minus-the-2nd.html"><i class="fa fa-check"></i><b>1.5</b> What about just the 4th observation minus the 2nd?</a></li>
-<li class="chapter" data-level="1.6" data-path="random-intercept-model.html"><a href="random-intercept-model.html"><i class="fa fa-check"></i><b>1.6</b> Random Intercept Model</a></li>
-<li class="chapter" data-level="1.7" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>1.7</b> Additional Resources</a></li>
+<li class="chapter" data-level="5" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>5</b> Model Building</a><ul>
+<li class="chapter" data-level="5.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>5.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>5.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>5.1.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>5.2</b> Stratification</a></li>
+<li class="chapter" data-level="5.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>5.3</b> Moderation</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>5.3.1</b> Example 1: Sepal vs Petal Length</a></li>
+<li class="chapter" data-level="5.3.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>5.3.2</b> Example 2: Simpson’s Paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>5.4</b> Interactions</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>5.4.1</b> Example</a></li>
+<li class="chapter" data-level="5.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>5.4.2</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>5.5</b> Confounding</a></li>
+<li class="chapter" data-level="5.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>5.6</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>5.6.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="5.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>5.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>5.7</b> Comparing between models</a></li>
+<li class="chapter" data-level="5.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>5.8</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>6</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="6.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>6.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="6.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>6.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>6.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>6.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="6.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>6.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>6.2.4</b> Goodness of Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>6.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>6.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>6.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>6.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>6.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="6.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>6.5</b> Count Data</a></li>
+</ul></li>
+<li class="part"><span><b>II Multivariate Analysis</b></span></li>
+<li class="chapter" data-level="7" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>7</b> Introduction</a></li>
+<li class="chapter" data-level="8" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>8</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="8.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>8.1</b> Basic Idea</a></li>
+<li class="chapter" data-level="8.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>8.2</b> More Generally</a></li>
+<li class="chapter" data-level="8.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>8.3</b> Generating PC’s using R</a></li>
+<li class="chapter" data-level="8.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>8.4</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="8.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>8.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="8.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>8.6</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="8.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>8.7</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="8.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> Things to watch out for</a></li>
+<li class="chapter" data-level="8.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>8.9</b> Additional References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>9</b> Factor Analysis</a><ul>
+<li class="chapter" data-level="9.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>9.1.1</b> Latent Constructs</a></li>
+<li class="chapter" data-level="9.1.2" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>9.1.2</b> EFA vs CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>9.2</b> Factor Model</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="factor-model.html"><a href="factor-model.html#comparison-with-pca"><i class="fa fa-check"></i><b>9.2.1</b> Comparison with PCA</a></li>
+<li class="chapter" data-level="9.2.2" data-path="factor-model.html"><a href="factor-model.html#implications"><i class="fa fa-check"></i><b>9.2.2</b> Implications</a></li>
+<li class="chapter" data-level="9.2.3" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>9.2.3</b> Two big steps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>9.3</b> Example setup</a></li>
+<li class="chapter" data-level="9.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>9.4</b> Factor Extraction</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>9.4.1</b> PC Factor Model</a></li>
+<li class="chapter" data-level="9.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>9.4.2</b> Iterated PC Factor Model</a></li>
+<li class="chapter" data-level="9.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>9.4.3</b> Maximum Likelihood</a></li>
+<li class="chapter" data-level="9.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-4"><i class="fa fa-check"></i><b>9.4.4</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>9.5</b> Rotating Factors</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>9.5.1</b> Varimax Rotation</a></li>
+<li class="chapter" data-level="9.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>9.5.2</b> Oblique rotation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>9.6</b> Factor Scores</a></li>
+<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9.8</b> Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>III Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="10" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>10</b> Introduction</a><ul>
+<li class="chapter" data-level="10.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>10.1</b> Example School Data</a></li>
+<li class="chapter" data-level="10.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>10.2</b> Multi-level models</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>11</b> Random Intercept Models</a><ul>
+<li class="chapter" data-level="11.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>11.1</b> Pooling</a></li>
+<li class="chapter" data-level="11.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>11.2</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>11.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="11.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>11.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="11.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>11.2.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>11.3</b> Components of Variance</a></li>
+<li class="chapter" data-level="11.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>11.4</b> Fitting models in R</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>11.4.1</b> Comparison of estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>11.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="11.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>11.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="11.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>11.7</b> Centering terms</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>11.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>11.8</b> Specifying Correlation Structures</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>11.8.1</b> Specifying different covariance structures in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>11.9</b> Additional References</a><ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>11.9.1</b> Package Vignettes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="longitudinal.html"><a href="longitudinal.html"><i class="fa fa-check"></i><b>12</b> Longitudinal Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html"><i class="fa fa-check"></i><b>12.1</b> Pediatric pain data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html#data-sample"><i class="fa fa-check"></i><b>12.1.1</b> Data sample</a></li>
+<li class="chapter" data-level="12.1.2" data-path="pediatric-pain-data.html"><a href="pediatric-pain-data.html#univariate-visualizations"><i class="fa fa-check"></i><b>12.1.2</b> Univariate Visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html"><i class="fa fa-check"></i><b>12.2</b> Visualizing longitudinal data</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html#profile-or-spaghetti-plots"><i class="fa fa-check"></i><b>12.2.1</b> Profile or spaghetti plots</a></li>
+<li class="chapter" data-level="12.2.2" data-path="visualizing-longitudinal-data.html"><a href="visualizing-longitudinal-data.html#corrmat"><i class="fa fa-check"></i><b>12.2.2</b> Correlation of pain tolerance within person across time</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html"><i class="fa fa-check"></i><b>12.3</b> Analyze pain tolerance across coping style</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#two-sample-t-test"><i class="fa fa-check"></i><b>12.3.1</b> Two Sample T-test</a></li>
+<li class="chapter" data-level="12.3.2" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#averaged-over-the-observed-baseline-values."><i class="fa fa-check"></i><b>12.3.2</b> Averaged over the observed baseline values.</a></li>
+<li class="chapter" data-level="12.3.3" data-path="analyze-pain-tolerance-across-coping-style.html"><a href="analyze-pain-tolerance-across-coping-style.html#missing-data"><i class="fa fa-check"></i><b>12.3.3</b> Missing Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="paired-t-tests.html"><a href="paired-t-tests.html"><i class="fa fa-check"></i><b>12.4</b> Paired t-tests</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="paired-t-tests.html"><a href="paired-t-tests.html#but-what-about-treatment-groups"><i class="fa fa-check"></i><b>12.4.1</b> But what about treatment groups?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="random-intercept-model.html"><a href="random-intercept-model.html"><i class="fa fa-check"></i><b>12.5</b> Random Intercept Model</a></li>
+<li class="chapter" data-level="12.6" data-path="writing-contrasts.html"><a href="writing-contrasts.html"><i class="fa fa-check"></i><b>12.6</b> Writing Contrasts</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="writing-contrasts.html"><a href="writing-contrasts.html#comparing-groups-contrasts-subtracting-l_1-from-l_2"><i class="fa fa-check"></i><b>12.6.1</b> Comparing groups (contrasts) Subtracting <span class="math inline">\(L_{1}\)</span> from <span class="math inline">\(L_{2}\)</span></a></li>
+<li class="chapter" data-level="12.6.2" data-path="writing-contrasts.html"><a href="writing-contrasts.html#confidence-intervals-of-those-estimates"><i class="fa fa-check"></i><b>12.6.2</b> Confidence intervals of those estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>12.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="12.8" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>12.8</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>13</b> Spatial Data</a><ul>
+<li class="chapter" data-level="13.1" data-path="additional-info.html"><a href="additional-info.html"><i class="fa fa-check"></i><b>13.1</b> Additional Info</a></li>
+</ul></li>
+<li class="part"><span><b>IV Other Topics</b></span></li>
+<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
+<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
+<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
+<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#visualize-imputations"><i class="fa fa-check"></i><b>14.7.1</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>14.7.2</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.8</b> Final thoughts</a></li>
+<li class="chapter" data-level="14.9" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
@@ -144,18 +313,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="analyze-pain-tolerance-across-coping-style" class="section level2">
-<h2><span class="header-section-number">1.3</span> Analyze pain tolerance across coping style</h2>
-<p>Visualize the distribution of pain tolerance across the different coping styles.</p>
+<h2><span class="header-section-number">12.3</span> Analyze pain tolerance across coping style</h2>
+<p>Visualize the distribution of pain tolerance across the different coping styles. The first plots show the distribution of the raw number of seconds the arms are held under ice water, and the log2 transformation. For the rest of this analysis we’ll be using this log2 transformation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pt.dist   &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(paintol, <span class="dt">fill=</span>cs)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)
 l2pt.dist &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(l2paintol, <span class="dt">fill=</span>cs)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)
 <span class="kw">grid.arrange</span>(pt.dist, l2pt.dist, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="longitudinal_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
-<p>There appears to be a slight difference, but is it sigificantly different? Does it change over time? We’ll look at many different ways to approach this question.</p>
+<p>There appears to be a slight difference, but is it significantly different? What about the treatment? How does it appear to affect the pain tolerance of the coping styles?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(l2paintol, <span class="dt">x=</span>cs, <span class="dt">fill=</span>treatment)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span><span class="dv">1</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">colour=</span><span class="st">&quot;black&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span>.<span class="dv">9</span>))</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Attenders seem to lower pain tolerance, and lower variation in that pain tolerance. The exception is attenders who were under the “no directions” treatment group. Distracters who were advised to distract themselves were able to keep their arm under water for much longer than the other groups.</p>
+<p>We’ll look at many different ways to approach this analysis.</p>
 <div id="two-sample-t-test" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> Two Sample T-test</h3>
-<p>Compare pain tolerance across coping styles at each trial.</p>
+<h3><span class="header-section-number">12.3.1</span> Two Sample T-test</h3>
+<p>Compare pain tolerance across coping styles at each trial. Individuals only have one measurement per trial, and individuals are independent of each other, so the data within trials satisfy the independence assumption.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pain, <span class="kw">aes</span>(l2paintol, <span class="dt">fill=</span>cs)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>trial)</code></pre></div>
-<p><img src="longitudinal_files/figure-html/unnamed-chunk-10-1.png" width="960" /></p>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
 <p>There is a lot of overlap. Which differences are significant? We have no preconceived notion whether or not we can assume equal variances across groups, so we’ll run t-tests under both conditions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make an empty data frame to hold the p-values from the t-tests below.</span>
 ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">eq.var=</span><span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">4</span>), <span class="dt">uneq.var=</span><span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">4</span>), 
@@ -202,7 +377,7 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
       <span class="dt">caption=</span><span class="st">&quot;T-test p-values for a difference between averge pain tolerance across coping style groups&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>) <span class="co"># now it&#39;s full</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-11">Table 1.1: </span>T-test p-values for a difference between averge pain tolerance across coping style groups</caption>
+<caption><span id="tab:unnamed-chunk-12">Table 12.1: </span>T-test p-values for a difference between averge pain tolerance across coping style groups</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -236,22 +411,189 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <p>Conclusion: regardless if we assume equal or unequal variances, there is a difference in the log2 pain tolerance between attending groups during trial 1 and 2 only, not during 3 or 4.</p>
 </div>
 <div id="averaged-over-the-observed-baseline-values." class="section level3">
-<h3><span class="header-section-number">1.3.2</span> Averaged over the observed baseline values.</h3>
-<p>Perhaps the difference we’re seeing is due to a difference at baseline between the two groups? Lets compute the baseline average over the first three responses and see if that changes across groups.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">baseline &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(trial <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">             </span><span class="kw">group_by</span>(cs, trial) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">             </span><span class="kw">summarise</span>(<span class="dt">ave.baseline.tol =</span> <span class="kw">mean</span>(l2paintol, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))
-
-<span class="kw">ggplot</span>(baseline, <span class="kw">aes</span>(ave.baseline.tol, <span class="dt">fill=</span>cs)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
-<p><img src="longitudinal_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Pretty clear baseline difference isn’t it?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(<span class="kw">t.test</span>(ave.baseline.tol <span class="op">~</span><span class="st"> </span>cs, <span class="dt">data=</span>baseline))</code></pre></div>
-<table style="width:89%;">
-<caption>Welch Two Sample t-test: <code>ave.baseline.tol</code> by <code>cs</code> (continued below)</caption>
+<h3><span class="header-section-number">12.3.2</span> Averaged over the observed baseline values.</h3>
+<p>Perhaps the difference we’re seeing is due to a difference at baseline between the two groups? Lets compute the baseline average over the first three responses and see how that differs between coping styles.</p>
+<p>For this analyses the data needs to be in wide format, so we can calculate the row-wise average across times 1-3. We did this earlier using <code>reshape()</code>, but that example only turned the <code>l2paintol</code> variable wide. Here we need to keep the coping style (<code>cs</code>) in addition to the time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wide.pain.cs &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(id, trial, l2paintol, cs)
+pwc &lt;-<span class="st"> </span><span class="kw">reshape</span>(wide.pain.cs, <span class="dt">idvar=</span><span class="st">&quot;id&quot;</span>, <span class="dt">timevar=</span><span class="st">&quot;trial&quot;</span>, <span class="dt">direction=</span><span class="st">&quot;wide&quot;</span>)
+<span class="kw">kable</span>(<span class="kw">head</span>(pwc))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">id</th>
+<th align="right">l2paintol.1</th>
+<th align="left">cs.1</th>
+<th align="right">l2paintol.2</th>
+<th align="left">cs.2</th>
+<th align="right">l2paintol.3</th>
+<th align="left">cs.3</th>
+<th align="right">l2paintol.4</th>
+<th align="left">cs.4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="right">1</td>
+<td align="right">4.361066</td>
+<td align="left">attender</td>
+<td align="right">5.142005</td>
+<td align="left">attender</td>
+<td align="right">3.836934</td>
+<td align="left">attender</td>
+<td align="right">3.549669</td>
+<td align="left">attender</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="right">2</td>
+<td align="right">4.814038</td>
+<td align="left">distracter</td>
+<td align="right">4.598127</td>
+<td align="left">distracter</td>
+<td align="right">3.987321</td>
+<td align="left">distracter</td>
+<td align="right">4.343408</td>
+<td align="left">distracter</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="right">3</td>
+<td align="right">3.584963</td>
+<td align="left">attender</td>
+<td align="right">3.321928</td>
+<td align="left">attender</td>
+<td align="right">3.614710</td>
+<td align="left">attender</td>
+<td align="right">3.047887</td>
+<td align="left">attender</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td align="right">4</td>
+<td align="right">3.956986</td>
+<td align="left">distracter</td>
+<td align="right">4.503349</td>
+<td align="left">distracter</td>
+<td align="right"></td>
+<td align="left">distracter</td>
+<td align="right"></td>
+<td align="left">distracter</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td align="right">5</td>
+<td align="right">4.638653</td>
+<td align="left">attender</td>
+<td align="right">4.549053</td>
+<td align="left">attender</td>
+<td align="right">4.961160</td>
+<td align="left">attender</td>
+<td align="right">4.971773</td>
+<td align="left">attender</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td align="right">6</td>
+<td align="right">6.773073</td>
+<td align="left">distracter</td>
+<td align="right">6.424754</td>
+<td align="left">distracter</td>
+<td align="right">6.099716</td>
+<td align="left">distracter</td>
+<td align="right">5.914086</td>
+<td align="left">distracter</td>
+</tr>
+</tbody>
+</table>
+<p>Each variable that we kept now has 4 entries, one for each time point. Some variables such as <code>cs</code> are <strong>time fixed</strong>, meaning they don’t change over time; <code>cs.1</code> = <code>cs.2</code> = <code>cs.3</code> = <code>cs=4</code>. We can drop the other copies of this variable. Other variables like <code>paintol</code> are <strong>time varying</strong>, they change within person across time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pwc &lt;-<span class="st"> </span>pwc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>cs.<span class="dv">2</span>, <span class="op">-</span>cs.<span class="dv">3</span>, <span class="op">-</span>cs.<span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">               </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">               </span><span class="kw">mutate</span>(<span class="dt">ave.baseline.tol =</span> <span class="kw">mean</span>(<span class="kw">c</span>(l2paintol.<span class="dv">1</span>, l2paintol.<span class="dv">2</span>, l2paintol.<span class="dv">3</span>), <span class="dt">na.rm=</span><span class="ot">TRUE</span>))
+<span class="kw">kable</span>(<span class="kw">head</span>(pwc))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+<th align="right">l2paintol.1</th>
+<th align="left">cs.1</th>
+<th align="right">l2paintol.2</th>
+<th align="right">l2paintol.3</th>
+<th align="right">l2paintol.4</th>
+<th align="right">ave.baseline.tol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">4.361066</td>
+<td align="left">attender</td>
+<td align="right">5.142005</td>
+<td align="right">3.836934</td>
+<td align="right">3.549669</td>
+<td align="right">4.446669</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">4.814038</td>
+<td align="left">distracter</td>
+<td align="right">4.598127</td>
+<td align="right">3.987321</td>
+<td align="right">4.343408</td>
+<td align="right">4.466495</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">3.584963</td>
+<td align="left">attender</td>
+<td align="right">3.321928</td>
+<td align="right">3.614710</td>
+<td align="right">3.047887</td>
+<td align="right">3.507200</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">3.956986</td>
+<td align="left">distracter</td>
+<td align="right">4.503349</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">4.230167</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">4.638653</td>
+<td align="left">attender</td>
+<td align="right">4.549053</td>
+<td align="right">4.961160</td>
+<td align="right">4.971773</td>
+<td align="right">4.716289</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">6.773073</td>
+<td align="left">distracter</td>
+<td align="right">6.424754</td>
+<td align="right">6.099716</td>
+<td align="right">5.914086</td>
+<td align="right">6.432514</td>
+</tr>
+</tbody>
+</table>
+<p>The boxplot below has the individual points plotted on top of the boxplots, this allows us to see that the high end outlying point on the boxplot is due to two individuals (one in each coping style group). Distractors seem to have a higher average average baseline tolerance compared to attenders.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pwc, <span class="kw">aes</span>(<span class="dt">y=</span>ave.baseline.tol, <span class="dt">x=</span>cs.<span class="dv">1</span>, <span class="dt">fill=</span>cs.<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;purple&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">colour=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">4</span>)</code></pre></div>
+<p><img src="longitudinal_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Is this difference significant?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(<span class="kw">t.test</span>(ave.baseline.tol <span class="op">~</span><span class="st"> </span>cs.<span class="dv">1</span>, <span class="dt">data=</span>pwc))</code></pre></div>
+<table style="width:82%;">
+<caption>Welch Two Sample t-test: <code>ave.baseline.tol</code> by <code>cs.1</code> (continued below)</caption>
 <colgroup>
 <col width="23%" />
 <col width="11%" />
-<col width="20%" />
+<col width="13%" />
 <col width="33%" />
 </colgroup>
 <thead>
@@ -264,9 +606,9 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">-6.11</td>
-<td align="center">3.598</td>
-<td align="center">0.005095 * *</td>
+<td align="center">-1.899</td>
+<td align="center">59.84</td>
+<td align="center">0.06236</td>
 <td align="center">two.sided</td>
 </tr>
 </tbody>
@@ -284,15 +626,16 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">4.504</td>
-<td align="center">5.037</td>
+<td align="center">4.54</td>
+<td align="center">5.004</td>
 </tr>
 </tbody>
 </table>
-<p>Children who distracted themselves from the experiment could keep their arm in the ice water for an average of 5.04 seconds. This was signficantly longer compared to children who attended to the experiment, they averaged 4.5 seconds keeping their arm in the ice water (p=.005).</p>
+<p>Children who distracted themselves from the experiment could keep their arm in the ice water for an average of 5.0 seconds. This was slightly longer than children who attended to the experiment who averaged 4.5 seconds (p=.06).</p>
+<p><img src="images/q.png" /> How does this result compare to the previous results? Was this expected?</p>
 </div>
 <div id="missing-data" class="section level3">
-<h3><span class="header-section-number">1.3.3</span> Missing Data</h3>
+<h3><span class="header-section-number">12.3.3</span> Missing Data</h3>
 <p>We noticed earlier that there were some missing values in the data. Turns out that no one dropped out for reasons related to the experiment (i.e. they were uncomfortable), but there were some absences from school that day and a few broken arms.</p>
 <p>So far we’ve been ignoring that there is missing data. The table below shows that there are 6 individuals who are missing a score at time 3, but only 3 at time 4. This means that the time-stratified t-tests conducted earlier are on different sets of data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(pain<span class="op">$</span>l2paintol), pain<span class="op">$</span>trial))</code></pre></div>
@@ -327,7 +670,7 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">miss.idx &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">is.na</span>(pain<span class="op">$</span>l2paintol))
 miss.idx
 ##  [1]  15  16  71  79 131 132 166 167 168 173 175</code></pre></div>
-<p>Then let’s see the id’s for those rows</p>
+<p>Then let’s see the id’s that correspond to those rows, and save those id numbers in a vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ids.with.missing &lt;-<span class="st"> </span>pain<span class="op">$</span>id[miss.idx]
 ids.with.missing
 ##  [1]  4  4 18 20 33 33 42 42 42 44 44</code></pre></div>
@@ -541,20 +884,21 @@ ids.with.missing
 </tr>
 </tbody>
 </table>
-<p>What if we just drop all records for all children with missing values at any time point? How does the results here compare to the previous test? First we have to go back and drop these 6 individuals from the data set <em>before</em> we calculate the baseline mean.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.nomiss &lt;-<span class="st"> </span>pain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(trial <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">group_by</span>(cs, trial) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">summarise</span>(<span class="dt">ave.baseline.tol =</span> <span class="kw">mean</span>(l2paintol))
+<p>What if we just drop all records for all children with missing values at any time point. How does the results here compare to the previous test?</p>
 
-<span class="kw">ggplot</span>(base.nomiss, <span class="kw">aes</span>(ave.baseline.tol, <span class="dt">fill=</span>cs)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
-<p><img src="longitudinal_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(<span class="kw">t.test</span>(ave.baseline.tol <span class="op">~</span><span class="st"> </span>cs, <span class="dt">data=</span>base.nomiss))</code></pre></div>
+<div class="rmdnote">
+<p>The syntax <code>a %in% b</code> results in a vector of TRUE and FALSE for every entry in a, whether or not that value is found in b. So <code>(pwc$id %in% ids.with.missing)</code> is a list of TRUE/FALSE for every pwc$id, where TRUE is if that id was found in the vector <code>ids.with.missing</code>.</p>
+Then we negate that boolean/logic vector by using <code>!</code>, (turn TRUE to FALSE and FALSE to TRUE) - so now TRUE means that record belongs to an id with no missing data. Those are the ones we want to keep.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pwc.nomiss &lt;-<span class="st"> </span>pwc[<span class="op">!</span>(pwc<span class="op">$</span>id <span class="op">%in%</span><span class="st"> </span>ids.with.missing),]
+<span class="kw">pander</span>(<span class="kw">t.test</span>(ave.baseline.tol <span class="op">~</span><span class="st"> </span>cs.<span class="dv">1</span>, <span class="dt">data=</span>pwc.nomiss))</code></pre></div>
 <table style="width:85%;">
-<caption>Welch Two Sample t-test: <code>ave.baseline.tol</code> by <code>cs</code> (continued below)</caption>
+<caption>Welch Two Sample t-test: <code>ave.baseline.tol</code> by <code>cs.1</code> (continued below)</caption>
 <colgroup>
 <col width="23%" />
-<col width="6%" />
-<col width="20%" />
+<col width="11%" />
+<col width="16%" />
 <col width="33%" />
 </colgroup>
 <thead>
@@ -567,9 +911,9 @@ ids.with.missing
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">-6.615</td>
-<td align="center">4</td>
-<td align="center">0.002708 * *</td>
+<td align="center">-2.314</td>
+<td align="center">53.53</td>
+<td align="center">0.02452 *</td>
 <td align="center">two.sided</td>
 </tr>
 </tbody>
@@ -587,27 +931,16 @@ ids.with.missing
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">4.471</td>
-<td align="center">5.039</td>
+<td align="center">4.473</td>
+<td align="center">5.076</td>
 </tr>
 </tbody>
 </table>
-<p>The average shift a little bit, the bimodality of the distribution of baseline pain tolerance is more clear. The conclusion remains the same however, the p-value was nearly doubled but when it’s already in the third digit, a move from 0.005 to 0.002 does not change your conclusion.</p>
-</div>
-<div id="paired-t-test" class="section level3">
-<h3><span class="header-section-number">1.3.4</span> Paired t-test</h3>
-<p>So far we’ve assumed that pain tolerance within person is independent across time points. That could be an unreasonable assumption, so let’s look at using paired T-tests between time points instead. Since now we’re treating the data as paired, we need the data back into wide format. We’ll apply <code>reshape</code> to the whole data set this time, turning <em>all</em> variables wide. We’ll keep using only the fully complete cases from here on out so that each analyses is on the same set of individuals.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pain.wide &lt;-<span class="st"> </span><span class="kw">reshape</span>(pain, <span class="dt">idvar=</span><span class="st">&quot;id&quot;</span>, <span class="dt">timevar=</span><span class="st">&quot;trial&quot;</span>, <span class="dt">direction=</span><span class="st">&quot;wide&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()
-<span class="kw">names</span>(pain.wide) <span class="co"># What does this data set look like now? </span>
-##  [1] &quot;id&quot;          &quot;ses.1&quot;       &quot;cs.1&quot;        &quot;treatment.1&quot; &quot;sex.1&quot;      
-##  [6] &quot;age.1&quot;       &quot;paintol.1&quot;   &quot;l2paintol.1&quot; &quot;l2.ave.1&quot;    &quot;diff.1&quot;     
-## [11] &quot;ses.2&quot;       &quot;cs.2&quot;        &quot;treatment.2&quot; &quot;sex.2&quot;       &quot;age.2&quot;      
-## [16] &quot;paintol.2&quot;   &quot;l2paintol.2&quot; &quot;l2.ave.2&quot;    &quot;diff.2&quot;      &quot;ses.3&quot;      
-## [21] &quot;cs.3&quot;        &quot;treatment.3&quot; &quot;sex.3&quot;       &quot;age.3&quot;       &quot;paintol.3&quot;  
-## [26] &quot;l2paintol.3&quot; &quot;l2.ave.3&quot;    &quot;diff.3&quot;      &quot;ses.4&quot;       &quot;cs.4&quot;       
-## [31] &quot;treatment.4&quot; &quot;sex.4&quot;       &quot;age.4&quot;       &quot;paintol.4&quot;   &quot;l2paintol.4&quot;
-## [36] &quot;l2.ave.4&quot;    &quot;diff.4&quot;</code></pre></div>
-<p>Each variable now has 4 entries, one for each time point. Some variables such as <code>cs</code> are <strong>time fixed</strong>, meaning they don’t change over time; <code>cs.1</code> = <code>cs.2</code> = <code>cs.3</code> = <code>cs=4</code>. Other variables like <code>paintol</code> are <strong>time varying</strong>, they change within person across time.</p>
+<p>Dropping all data on children with any missing visit data changed our conclusion!</p>
+<blockquote>
+<p>Of the students providing data at all time points, distractors can keep their arm under ice water significantly longer on average compared to attenders.</p>
+</blockquote>
+<p>From here on all analyses will be on the 58 students with data on all four time points.</p>
 </div>
 </div>
             </section>
@@ -616,7 +949,7 @@ ids.with.missing
         </div>
       </div>
 <a href="visualizing-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="might-need-textbook-for-this-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="paired-t-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

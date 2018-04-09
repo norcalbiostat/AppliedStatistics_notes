@@ -39,7 +39,7 @@ Each county should get a _unique intercept_ such that the collection of county i
 Because all county intercepts are randomly sampled from the same theoretical population, $N(0, \sigma^2_{\alpha})$, information is shared among the counties.  This sharing of information is generally referred to as **shrinkage**, and should be thought of as a means to reduce variation in estimates among the counties.  When a county has little information to offer, it's estimated intercept will be shrunk towards to overall mean of all counties.
 
 ```{r, echo=FALSE}
-
+library(lme4)
 fit_nopool <- lm(log_radon~-1+county, data=radon)
 fitted_nopool <- dplyr::bind_cols(radon,
                                        data.frame(.fitted=predict(fit_nopool)))
