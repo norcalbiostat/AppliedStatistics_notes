@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="additional-resources.html">
-<link rel="next" href="additional-info.html">
+<link rel="next" href="terminology.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -262,7 +262,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.8" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>12.8</b> Additional Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="spatial.html"><a href="spatial.html"><i class="fa fa-check"></i><b>13</b> Spatial Data</a><ul>
-<li class="chapter" data-level="13.1" data-path="additional-info.html"><a href="additional-info.html"><i class="fa fa-check"></i><b>13.1</b> Additional Info</a></li>
+<li class="chapter" data-level="13.1" data-path="terminology.html"><a href="terminology.html"><i class="fa fa-check"></i><b>13.1</b> Terminology</a></li>
+<li class="chapter" data-level="13.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>13.2</b> Mapping in R</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#plotting-region-polygons"><i class="fa fa-check"></i><b>13.2.1</b> Plotting Region polygons</a></li>
+<li class="chapter" data-level="13.2.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#plotting-points"><i class="fa fa-check"></i><b>13.2.2</b> Plotting points</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="spatial-influence.html"><a href="spatial-influence.html"><i class="fa fa-check"></i><b>13.3</b> Spatial Influence</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="spatial-influence.html"><a href="spatial-influence.html#distance-between-points"><i class="fa fa-check"></i><b>13.3.1</b> Distance between points</a></li>
+<li class="chapter" data-level="13.3.2" data-path="spatial-influence.html"><a href="spatial-influence.html#spatial-weights-matrix"><i class="fa fa-check"></i><b>13.3.2</b> Spatial Weights Matrix</a></li>
+<li class="chapter" data-level="13.3.3" data-path="spatial-influence.html"><a href="spatial-influence.html#identifying-neighbors"><i class="fa fa-check"></i><b>13.3.3</b> Identifying Neighbors</a></li>
+<li class="chapter" data-level="13.3.4" data-path="spatial-influence.html"><a href="spatial-influence.html#neighborhood-matrix"><i class="fa fa-check"></i><b>13.3.4</b> Neighborhood matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="modeling-geographically-correlated-data.html"><a href="modeling-geographically-correlated-data.html"><i class="fa fa-check"></i><b>13.4</b> Modeling geographically correlated data</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="modeling-geographically-correlated-data.html"><a href="modeling-geographically-correlated-data.html#geographically-weighted-regression"><i class="fa fa-check"></i><b>13.4.1</b> Geographically weighted regression</a></li>
+<li class="chapter" data-level="13.4.2" data-path="modeling-geographically-correlated-data.html"><a href="modeling-geographically-correlated-data.html#bayesian-models"><i class="fa fa-check"></i><b>13.4.2</b> Bayesian Models</a></li>
+<li class="chapter" data-level="13.4.3" data-path="modeling-geographically-correlated-data.html"><a href="modeling-geographically-correlated-data.html#random-intercept-model-1"><i class="fa fa-check"></i><b>13.4.3</b> Random Intercept Model</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="additional-info.html"><a href="additional-info.html"><i class="fa fa-check"></i><b>13.5</b> Additional Info</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other Topics</b></span></li>
 <li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
@@ -314,7 +330,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="spatial" class="section level1">
 <h1><span class="header-section-number">Chapter 13</span> Spatial Data</h1>
-<p>Intro on spatial data and models</p> 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)</code></pre></div>
+<p>Outline:</p>
+<ul>
+<li>Terminology</li>
+<li>How to make maps using ggplot, and shade areas of interest by the value of other variables</li>
+<li>How to identify neighbors</li>
+<li>How to create a neighborhood matrix</li>
+<li>How to test for spatial autocorrelation</li>
+<li>How to calculate a regression model using geographically correlated data.</li>
+</ul>
+<p>As before with longitudinal data, this topic can (and should) fill an entire class. There are also MANY MANY ways to play with spatial data in R. Much googling has occured to complete these notes.</p> 
 </div>
             </section>
 
@@ -322,7 +349,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="additional-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-info.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="terminology.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

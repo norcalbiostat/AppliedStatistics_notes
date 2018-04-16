@@ -25,6 +25,6 @@ library(pander)
 library(knitr)
 library(kableExtra)
 
-options(knitr.kable.NA = '')
+options(knitr.kable.NA = '', knitr.table.format = "html")
 theme_set(theme_bw())
 
