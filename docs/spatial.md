@@ -665,6 +665,8 @@ npm <- model.to.map(mod=no_pooled)
 
 #### Partially pooled: States are independent
 
+\BeginKnitrBlock{rmderror}<div class="rmderror">Disclaimer: This section does not work as intended. Do not use. For discussion purposes only. </div>\EndKnitrBlock{rmderror}
+
 
 ```r
 pp_ind <- lme4::lmer(y ~ home_ownership + foreign_born + poverty + 
@@ -672,7 +674,7 @@ pp_ind <- lme4::lmer(y ~ home_ownership + foreign_born + poverty +
 pp_ind_map <- model.to.map(mod=pp_ind)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 
 #### Partially pooled: Neighboring states are correlated. 
@@ -687,7 +689,7 @@ states.corr <- diag(49); colnames(states.corr) <- rownames(states.corr) <- rowna
 corrplot::corrplot(states.corr)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 2. Then we add on the neighbor matrix - but add correlation between states. 
 
@@ -697,7 +699,7 @@ states.spcorr <- states.corr + 0.9*states_nb_mat
 corrplot::corrplot(states.spcorr)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 3. Model using `lme4qtl` so we can specifiy the relationship matrix. 
 
@@ -709,18 +711,18 @@ pp_spcorr_map <- model.to.map(mod=pp_spcorr)
 ```
 
 
-<img src="spatial_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 
 Let's see these all together. 
 
-<img src="spatial_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 Estimates are similar, so let's look at the differences (residuals) between the predicted values using the fully pooled and all others. 
 
 * Red = fully pooled model under-estimated
 * Blue = fully pooled over-estimated 
 
-<img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-45-1.png" width="672" />
 
 Story possibly to be continued. The RI model is creating identical state-level estimates as the spatially correlated model. This is due to one of two reasons: 
 

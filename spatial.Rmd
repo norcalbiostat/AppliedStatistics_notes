@@ -429,6 +429,10 @@ np_map
 
 #### Partially pooled: States are independent
 
+```{block2, type="rmderror"}
+Disclaimer: This section does not work as intended. Do not use. For discussion purposes only. 
+```
+
 ```{r}
 pp_ind <- lme4::lmer(y ~ home_ownership + foreign_born + poverty + 
                      bachelors + (1|state), data=cont.us)

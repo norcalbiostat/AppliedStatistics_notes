@@ -439,10 +439,15 @@ npm &lt;-<span class="st"> </span><span class="kw">model.to.map</span>(<span cla
 </div>
 <div id="partially-pooled-states-are-independent" class="section level4">
 <h4><span class="header-section-number">13.4.3.3</span> Partially pooled: States are independent</h4>
+
+<div class="rmderror">
+Disclaimer: This section does not work as intended. Do not use. For discussion purposes only.
+</div>
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pp_ind &lt;-<span class="st"> </span>lme4<span class="op">::</span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>home_ownership <span class="op">+</span><span class="st"> </span>foreign_born <span class="op">+</span><span class="st"> </span>poverty <span class="op">+</span><span class="st"> </span>
 <span class="st">                     </span>bachelors <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>state), <span class="dt">data=</span>cont.us)
 pp_ind_map &lt;-<span class="st"> </span><span class="kw">model.to.map</span>(<span class="dt">mod=</span>pp_ind)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 <div id="partially-pooled-neighboring-states-are-correlated." class="section level4">
 <h4><span class="header-section-number">13.4.3.4</span> Partially pooled: Neighboring states are correlated.</h4>
@@ -452,13 +457,13 @@ pp_ind_map &lt;-<span class="st"> </span><span class="kw">model.to.map</span>(<s
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">states.corr &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">49</span>); <span class="kw">colnames</span>(states.corr) &lt;-<span class="st"> </span><span class="kw">rownames</span>(states.corr) &lt;-<span class="st"> </span><span class="kw">rownames</span>(states_nb_mat)
 corrplot<span class="op">::</span><span class="kw">corrplot</span>(states.corr)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Then we add on the neighbor matrix - but add correlation between states.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">states.spcorr &lt;-<span class="st"> </span>states.corr <span class="op">+</span><span class="st"> </span><span class="fl">0.9</span><span class="op">*</span>states_nb_mat
 corrplot<span class="op">::</span><span class="kw">corrplot</span>(states.spcorr)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Model using <code>lme4qtl</code> so we can specifiy the relationship matrix.</li>
 </ol>
@@ -466,15 +471,15 @@ corrplot<span class="op">::</span><span class="kw">corrplot</span>(states.spcorr
 <span class="st">                     </span>bachelors <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>state), <span class="dt">data=</span>cont.us, 
                      <span class="dt">relmat =</span> <span class="kw">list</span>(<span class="dt">state =</span> states.corr))
 pp_spcorr_map &lt;-<span class="st"> </span><span class="kw">model.to.map</span>(<span class="dt">mod=</span>pp_spcorr)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<p>Let’s see these all together.</p>
 <p><img src="spatial_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>Let’s see these all together.</p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Estimates are similar, so let’s look at the differences (residuals) between the predicted values using the fully pooled and all others.</p>
 <ul>
 <li>Red = fully pooled model under-estimated</li>
 <li>Blue = fully pooled over-estimated</li>
 </ul>
-<p><img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Story possibly to be continued. The RI model is creating identical state-level estimates as the spatially correlated model. This is due to one of two reasons:</p>
 <ul>
 <li>We’re predicting at the county level but aggregating up to the state level</li>
