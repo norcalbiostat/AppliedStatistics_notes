@@ -552,14 +552,75 @@ data.withscores <- bind_cols(data, data.frame(fa.ml.varimax$scores))
 kable(head(data.withscores))
 ```
 
-         X1           X2           X3           X4           X5      Factor1      Factor2
------------  -----------  -----------  -----------  -----------  -----------  -----------
- -0.8236763   -0.1210726   -0.5970760   -1.4752693   -1.2355056   -1.4917431    0.0036129
-  1.4013214    1.0733569    0.7681035   -0.0509857    0.0180061   -0.2625472    1.0908647
-  0.2781468    0.7574632    0.6445954    0.6765583    0.7532815    0.5551604    0.6311199
-  0.1819544   -1.3228227   -1.0847105   -0.9574722   -1.3719843   -1.2102868   -1.2812405
- -1.6147171   -1.4254411    0.3519605   -0.0124497   -0.2523487   -0.0485221   -1.5756915
-  0.8251470    0.6245702   -1.2923348   -0.6345633   -0.0885945   -0.5376877    0.6611383
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> X1 </th>
+   <th style="text-align:right;"> X2 </th>
+   <th style="text-align:right;"> X3 </th>
+   <th style="text-align:right;"> X4 </th>
+   <th style="text-align:right;"> X5 </th>
+   <th style="text-align:right;"> Factor1 </th>
+   <th style="text-align:right;"> Factor2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> -0.8236763 </td>
+   <td style="text-align:right;"> -0.1210726 </td>
+   <td style="text-align:right;"> -0.5970760 </td>
+   <td style="text-align:right;"> -1.4752693 </td>
+   <td style="text-align:right;"> -1.2355056 </td>
+   <td style="text-align:right;"> -1.4917431 </td>
+   <td style="text-align:right;"> 0.0036129 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1.4013214 </td>
+   <td style="text-align:right;"> 1.0733569 </td>
+   <td style="text-align:right;"> 0.7681035 </td>
+   <td style="text-align:right;"> -0.0509857 </td>
+   <td style="text-align:right;"> 0.0180061 </td>
+   <td style="text-align:right;"> -0.2625472 </td>
+   <td style="text-align:right;"> 1.0908647 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.2781468 </td>
+   <td style="text-align:right;"> 0.7574632 </td>
+   <td style="text-align:right;"> 0.6445954 </td>
+   <td style="text-align:right;"> 0.6765583 </td>
+   <td style="text-align:right;"> 0.7532815 </td>
+   <td style="text-align:right;"> 0.5551604 </td>
+   <td style="text-align:right;"> 0.6311199 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.1819544 </td>
+   <td style="text-align:right;"> -1.3228227 </td>
+   <td style="text-align:right;"> -1.0847105 </td>
+   <td style="text-align:right;"> -0.9574722 </td>
+   <td style="text-align:right;"> -1.3719843 </td>
+   <td style="text-align:right;"> -1.2102868 </td>
+   <td style="text-align:right;"> -1.2812405 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -1.6147171 </td>
+   <td style="text-align:right;"> -1.4254411 </td>
+   <td style="text-align:right;"> 0.3519605 </td>
+   <td style="text-align:right;"> -0.0124497 </td>
+   <td style="text-align:right;"> -0.2523487 </td>
+   <td style="text-align:right;"> -0.0485221 </td>
+   <td style="text-align:right;"> -1.5756915 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.8251470 </td>
+   <td style="text-align:right;"> 0.6245702 </td>
+   <td style="text-align:right;"> -1.2923348 </td>
+   <td style="text-align:right;"> -0.6345633 </td>
+   <td style="text-align:right;"> -0.0885945 </td>
+   <td style="text-align:right;"> -0.5376877 </td>
+   <td style="text-align:right;"> 0.6611383 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ## What to watch out for

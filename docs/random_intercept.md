@@ -251,14 +251,54 @@ rownames(showri) <- rownames(coef(fit_partpool)$county)
 kable(head(showri))
 ```
 
-            Random_Effect   Fixed_Intercept   RandomIntercept
----------  --------------  ----------------  ----------------
-AITKIN         -0.2390574           1.34983         1.1107728
-ANOKA          -0.4071256           1.34983         0.9427047
-BECKER         -0.0809977           1.34983         1.2688325
-BELTRAMI       -0.0804277           1.34983         1.2694025
-BENTON         -0.0254506           1.34983         1.3243796
-BIGSTONE        0.0582831           1.34983         1.4081133
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Random_Effect </th>
+   <th style="text-align:right;"> Fixed_Intercept </th>
+   <th style="text-align:right;"> RandomIntercept </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> -0.2390574 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> -0.4071256 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> -0.0809977 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> -0.0804277 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> -0.0254506 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 0.0582831 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
+  </tr>
+</tbody>
+</table>
 
 
 
@@ -276,14 +316,54 @@ rownames(cmpr.est) <- rownames(coef(fit_partpool)$county)
 kable(head(cmpr.est))
 ```
 
-            Mean_Model   Random_Intercept   Fixed_Effects
----------  -----------  -----------------  --------------
-AITKIN        1.264779          1.1107728       0.7149352
-ANOKA         1.264779          0.9427047       0.8908486
-BECKER        1.264779          1.2688325       1.0900084
-BELTRAMI      1.264779          1.2694025       1.1933029
-BENTON        1.264779          1.3243796       1.2822379
-BIGSTONE      1.264779          1.4081133       1.5367889
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Mean_Model </th>
+   <th style="text-align:right;"> Random_Intercept </th>
+   <th style="text-align:right;"> Fixed_Effects </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
+   <td style="text-align:right;"> 0.7149352 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
+   <td style="text-align:right;"> 0.8908486 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+   <td style="text-align:right;"> 1.0900084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+   <td style="text-align:right;"> 1.1933029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+   <td style="text-align:right;"> 1.2822379 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
+   <td style="text-align:right;"> 1.5367889 </td>
+  </tr>
+</tbody>
+</table>
 
 
 

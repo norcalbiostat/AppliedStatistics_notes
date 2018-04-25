@@ -48,20 +48,133 @@ A treatment was administered before the fourth trial. This treatment was a 10 mi
 kable(pain[1:10,])
 ```
 
-
-
- id    ses  cs           treatment       sex             age   trial   paintol   l2paintol
----  -----  -----------  --------------  -------  ----------  ------  --------  ----------
-  1   73.5  attender     attend          female    10.083333       1     20.55    4.361066
-  1   73.5  attender     attend          female    10.083333       2     35.31    5.142005
-  1   73.5  attender     attend          female    10.083333       3     14.29    3.836934
-  1   73.5  attender     attend          female    10.083333       4     11.71    3.549669
-  2   74.7  distracter   distract        female     9.250000       1     28.13    4.814038
-  2   74.7  distracter   distract        female     9.250000       2     24.22    4.598127
-  2   74.7  distracter   distract        female     9.250000       3     15.86    3.987321
-  2   74.7  distracter   distract        female     9.250000       4     20.30    4.343408
-  3   81.5  attender     no directions   female     8.666667       1     12.00    3.584963
-  3   81.5  attender     no directions   female     8.666667       2     10.00    3.321928
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:right;"> ses </th>
+   <th style="text-align:left;"> cs </th>
+   <th style="text-align:left;"> treatment </th>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> age </th>
+   <th style="text-align:right;"> trial </th>
+   <th style="text-align:right;"> paintol </th>
+   <th style="text-align:right;"> l2paintol </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 73.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 10.083333 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 20.55 </td>
+   <td style="text-align:right;"> 4.361066 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 73.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 10.083333 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 35.31 </td>
+   <td style="text-align:right;"> 5.142005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 73.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 10.083333 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 14.29 </td>
+   <td style="text-align:right;"> 3.836934 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 73.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 10.083333 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 11.71 </td>
+   <td style="text-align:right;"> 3.549669 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 74.7 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 9.250000 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 28.13 </td>
+   <td style="text-align:right;"> 4.814038 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 74.7 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 9.250000 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 24.22 </td>
+   <td style="text-align:right;"> 4.598127 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 74.7 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 9.250000 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 15.86 </td>
+   <td style="text-align:right;"> 3.987321 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 74.7 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 9.250000 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 20.30 </td>
+   <td style="text-align:right;"> 4.343408 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 81.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 8.666667 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 12.00 </td>
+   <td style="text-align:right;"> 3.584963 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 81.5 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 8.666667 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 10.00 </td>
+   <td style="text-align:right;"> 3.321928 </td>
+  </tr>
+</tbody>
+</table>
 
 * `id`: participant ID
 * `ses`: child's socio-economic status
@@ -100,10 +213,30 @@ There are nearly equal proportions of coping styles and treatment types.
 kable(table(pain$cs, pain$treatment))
 ```
 
-              attend   distract   no directions
------------  -------  ---------  --------------
-attender          40         48              40
-distracter        44         44              40
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> attend </th>
+   <th style="text-align:right;"> distract </th>
+   <th style="text-align:right;"> no directions </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Visualizing longitudinal data
 
@@ -208,12 +341,37 @@ ttst <- data.frame(eq.var=rep(NA,4), uneq.var=rep(NA,4),
 kable(ttst) # what does this look like empty? 
 ```
 
-         eq.var   uneq.var 
--------  -------  ---------
-Trial1                     
-Trial2                     
-Trial3                     
-Trial4                     
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:left;"> eq.var </th>
+   <th style="text-align:left;"> uneq.var </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Trial1 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial2 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial3 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial4 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
 
 ```r
 
@@ -227,16 +385,38 @@ kable(ttst, type='html', digits=4,
     kable_styling(bootstrap_options = "striped", full_width = F, position = "center") # now it's full
 ```
 
-
-
-Table: (\#tab:unnamed-chunk-12)T-test p-values for a difference between averge pain tolerance across coping style groups
-
-          eq.var   uneq.var
--------  -------  ---------
-Trial1    0.0524     0.0535
-Trial2    0.0308     0.0305
-Trial3    0.1041     0.1049
-Trial4    0.1121     0.1104
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-12)T-test p-values for a difference between averge pain tolerance across coping style groups</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> eq.var </th>
+   <th style="text-align:right;"> uneq.var </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Trial1 </td>
+   <td style="text-align:right;"> 0.0524 </td>
+   <td style="text-align:right;"> 0.0535 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial2 </td>
+   <td style="text-align:right;"> 0.0308 </td>
+   <td style="text-align:right;"> 0.0305 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial3 </td>
+   <td style="text-align:right;"> 0.1041 </td>
+   <td style="text-align:right;"> 0.1049 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Trial4 </td>
+   <td style="text-align:right;"> 0.1121 </td>
+   <td style="text-align:right;"> 0.1104 </td>
+  </tr>
+</tbody>
+</table>
 
 Conclusion: regardless if we assume equal or unequal variances, there is a difference in the log2 pain tolerance between attending groups during trial 1 and 2 only, not during 3 or 4. 
 
@@ -252,14 +432,96 @@ pwc <- reshape(wide.pain.cs, idvar="id", timevar="trial", direction="wide")
 kable(head(pwc))
 ```
 
-      id   l2paintol.1  cs.1          l2paintol.2  cs.2          l2paintol.3  cs.3          l2paintol.4  cs.4       
----  ---  ------------  -----------  ------------  -----------  ------------  -----------  ------------  -----------
-1      1      4.361066  attender         5.142005  attender         3.836934  attender         3.549669  attender   
-5      2      4.814038  distracter       4.598127  distracter       3.987321  distracter       4.343408  distracter 
-9      3      3.584963  attender         3.321928  attender         3.614710  attender         3.047887  attender   
-13     4      3.956986  distracter       4.503349  distracter                 distracter                 distracter 
-17     5      4.638653  attender         4.549053  attender         4.961160  attender         4.971773  attender   
-21     6      6.773073  distracter       6.424754  distracter       6.099716  distracter       5.914086  distracter 
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:right;"> l2paintol.1 </th>
+   <th style="text-align:left;"> cs.1 </th>
+   <th style="text-align:right;"> l2paintol.2 </th>
+   <th style="text-align:left;"> cs.2 </th>
+   <th style="text-align:right;"> l2paintol.3 </th>
+   <th style="text-align:left;"> cs.3 </th>
+   <th style="text-align:right;"> l2paintol.4 </th>
+   <th style="text-align:left;"> cs.4 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.361066 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 5.142005 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.836934 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.549669 </td>
+   <td style="text-align:left;"> attender </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 4.814038 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 4.598127 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 3.987321 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 4.343408 </td>
+   <td style="text-align:left;"> distracter </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 9 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3.584963 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.321928 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.614710 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.047887 </td>
+   <td style="text-align:left;"> attender </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3.956986 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 4.503349 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:left;"> distracter </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 17 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4.638653 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 4.549053 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 4.961160 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 4.971773 </td>
+   <td style="text-align:left;"> attender </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 21 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 6.773073 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 6.424754 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 6.099716 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 5.914086 </td>
+   <td style="text-align:left;"> distracter </td>
+  </tr>
+</tbody>
+</table>
 
 Each variable that we kept now has 4 entries, one for each time point. Some variables such as `cs` are **time fixed**, meaning they don't change over time; `cs.1` = `cs.2` = `cs.3` = `cs=4`. We can drop the other copies of this variable. Other variables like `paintol` are **time varying**, they change within person across time. 
 
@@ -271,16 +533,75 @@ pwc <- pwc %>% select(-cs.2, -cs.3, -cs.4) %>%
 kable(head(pwc))
 ```
 
-
-
- id   l2paintol.1  cs.1          l2paintol.2   l2paintol.3   l2paintol.4   ave.baseline.tol
----  ------------  -----------  ------------  ------------  ------------  -----------------
-  1      4.361066  attender         5.142005      3.836934      3.549669           4.446669
-  2      4.814038  distracter       4.598127      3.987321      4.343408           4.466495
-  3      3.584963  attender         3.321928      3.614710      3.047887           3.507200
-  4      3.956986  distracter       4.503349                                       4.230167
-  5      4.638653  attender         4.549053      4.961160      4.971773           4.716289
-  6      6.773073  distracter       6.424754      6.099716      5.914086           6.432514
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:right;"> l2paintol.1 </th>
+   <th style="text-align:left;"> cs.1 </th>
+   <th style="text-align:right;"> l2paintol.2 </th>
+   <th style="text-align:right;"> l2paintol.3 </th>
+   <th style="text-align:right;"> l2paintol.4 </th>
+   <th style="text-align:right;"> ave.baseline.tol </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.361066 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 5.142005 </td>
+   <td style="text-align:right;"> 3.836934 </td>
+   <td style="text-align:right;"> 3.549669 </td>
+   <td style="text-align:right;"> 4.446669 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 4.814038 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 4.598127 </td>
+   <td style="text-align:right;"> 3.987321 </td>
+   <td style="text-align:right;"> 4.343408 </td>
+   <td style="text-align:right;"> 4.466495 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3.584963 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 3.321928 </td>
+   <td style="text-align:right;"> 3.614710 </td>
+   <td style="text-align:right;"> 3.047887 </td>
+   <td style="text-align:right;"> 3.507200 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3.956986 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 4.503349 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 4.230167 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4.638653 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:right;"> 4.549053 </td>
+   <td style="text-align:right;"> 4.961160 </td>
+   <td style="text-align:right;"> 4.971773 </td>
+   <td style="text-align:right;"> 4.716289 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 6.773073 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:right;"> 6.424754 </td>
+   <td style="text-align:right;"> 6.099716 </td>
+   <td style="text-align:right;"> 5.914086 </td>
+   <td style="text-align:right;"> 6.432514 </td>
+  </tr>
+</tbody>
+</table>
 
 The boxplot below has the individual points plotted on top of the boxplots, this allows us to see that the high end outlying point on the boxplot is due to two individuals (one in each coping style group). Distractors seem to have a higher average average baseline tolerance compared to attenders. 
 
@@ -330,10 +651,33 @@ So far we've been ignoring that there is missing data. The table below shows tha
 kable(table(is.na(pain$l2paintol), pain$trial))
 ```
 
-          1    2    3    4
-------  ---  ---  ---  ---
-FALSE    63   63   58   61
-TRUE      1    1    6    3
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> 1 </th>
+   <th style="text-align:right;"> 2 </th>
+   <th style="text-align:right;"> 3 </th>
+   <th style="text-align:right;"> 4 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> TRUE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+</tbody>
+</table>
 
 Is it the same individuals who are missing data? First let's identify the rows with any missing values and save that as a vector of row numbers into `miss.idx`.  
 
@@ -362,34 +706,212 @@ kable(pain[pain$id %in% ids.with.missing,c('id', 'cs', 'treatment', 'sex', 'tria
       kable_styling(bootstrap_options = "striped", full_width = F, position = "center")
 ```
 
-
-
- id  cs           treatment       sex       trial   paintol
----  -----------  --------------  -------  ------  --------
-  4  distracter   attend          male          1     15.53
-  4  distracter   attend          male          2     22.68
-  4  distracter   attend          male          3          
-  4  distracter   attend          male          4          
- 18  attender     no directions   male          1     22.48
- 18  attender     no directions   male          2     20.03
- 18  attender     no directions   male          3          
- 18  attender     no directions   male          4     26.82
- 20  distracter   no directions   male          1     30.57
- 20  distracter   no directions   male          2     20.29
- 20  distracter   no directions   male          3          
- 20  distracter   no directions   male          4     11.89
- 33  attender     distract        female        1     35.88
- 33  attender     distract        female        2     53.04
- 33  attender     distract        female        3          
- 33  attender     distract        female        4          
- 42  attender     distract        female        1     52.58
- 42  attender     distract        female        2          
- 42  attender     distract        female        3          
- 42  attender     distract        female        4          
- 44  distracter   no directions   female        1          
- 44  distracter   no directions   female        2     16.75
- 44  distracter   no directions   female        3          
- 44  distracter   no directions   female        4     14.66
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> cs </th>
+   <th style="text-align:left;"> treatment </th>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> trial </th>
+   <th style="text-align:right;"> paintol </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 15.53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 22.68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> attend </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 22.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 20.03 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 26.82 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 30.57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 20.29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 11.89 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 35.88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 53.04 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 52.58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> attender </td>
+   <td style="text-align:left;"> distract </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 16.75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:left;"> distracter </td>
+   <td style="text-align:left;"> no directions </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 14.66 </td>
+  </tr>
+</tbody>
+</table>
 
 What if we just drop all records for all children with missing values at any time point. How does the results here compare to the previous test? 
 
@@ -451,11 +973,24 @@ names(p) <- c("4-3", "4-2", "4-1", "4-ave")
 kable(t(p), type='html', digits=3)
 ```
 
-
-
-   4-3     4-2     4-1   4-ave
-------  ------  ------  ------
- 0.737   0.483   0.355   0.951
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> 4-3 </th>
+   <th style="text-align:right;"> 4-2 </th>
+   <th style="text-align:right;"> 4-1 </th>
+   <th style="text-align:right;"> 4-ave </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0.773 </td>
+   <td style="text-align:right;"> 0.587 </td>
+   <td style="text-align:right;"> 0.371 </td>
+   <td style="text-align:right;"> 0.954 </td>
+  </tr>
+</tbody>
+</table>
 
 Using this approach, we see there is no significant difference between any pair of time points _when combining the data across all coping style and treatment groups_. What is the average trajectory of pain tolerance within coping styles? 
 

@@ -332,10 +332,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">14.4</span> General strategies</h2>
 <p>Strategies for handling missing data include:</p>
 <ul>
-<li>Complete-case/available-case analysis: drop cases that make analysis inconvenient<br />
-</li>
-<li>Imputation procedures: fill in missing values, then analyze completed data sets using complete-date methods<br />
-</li>
+<li>Complete-case/available-case analysis: drop cases that make analysis inconvenient.</li>
+<li>If variables are known to contribute to the missing values, then appropriate modeling can often account for the missingness.</li>
+<li>Imputation procedures: fill in missing values, then analyze completed data sets using complete-date methods</li>
 <li>Weighting procedures: modify “design weights” (i.e., inverse probabilities of selection from sampling plan) to account for probability of response<br />
 </li>
 <li>Model-based approaches: develop model for partially missing data, base inferences on likelihood under that model</li>
@@ -351,7 +350,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li>Disadvantages:
 <ul>
-<li>Loss of information, e.g., if there are 20 variables, each 10% missing MCAR, then expect 12% complete cases (0.92 -0.12)</li>
+<li>Loss of valid information</li>
 <li>Bias due to violation of MCAR</li>
 </ul></li>
 </ul>
@@ -380,7 +379,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li>Disadvantage:
 <ul>
-<li>“Both seductive and dangerous”&quot; (Little and Rubin)</li>
+<li>“Both seductive and dangerous” (Little and Rubin)</li>
 <li>Can understate uncertainty due to missing values.</li>
 <li>Can induce bias if imputing under the wrong model.</li>
 </ul></li>

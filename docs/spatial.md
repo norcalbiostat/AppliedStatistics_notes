@@ -1,12 +1,6 @@
 
 # Spatial Data {#spatial}
 
-
-```r
-library(ggplot2)
-library(dplyr)
-```
-
 Outline: 
 
 * Terminology
@@ -65,7 +59,7 @@ ggplot() +
           axis.ticks=element_blank(), axis.text = element_blank())
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">Play around with the plotting code to understand what each layer controls. </div>\EndKnitrBlock{rmdnote}
@@ -176,7 +170,7 @@ ggplot() +
   scale_fill_continuous(low='white', high='darkorchid4')
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">We couldn't set `group=subregion` because county names are not unique. Change this value and replot the map above to see the impact. This demonstrates why having uniquely numbered shapes are critical for plotting. </div>\EndKnitrBlock{rmdcaution}
 
@@ -211,7 +205,7 @@ ggmap(norcal.map) +
   scale_color_gradient(low="darkgreen", high="chartreuse")
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
  
 ## Spatial Influence
@@ -313,7 +307,7 @@ ggmap(norcal.map) +
   geom_segment(data=norcal.nb.toplot, aes(x=x, xend=xend, y=y, yend=yend), lwd=1.5)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 2. **Adjacent polygons**
 
@@ -338,7 +332,7 @@ local.spp <- local %>%
 plot(local.spp)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 Now we can create the neighborhood matrix on this polygon shape file using `poly2nb`. 
 
@@ -554,7 +548,7 @@ log <- ggplot(cc, aes(x=log(pop2010))) +
 gridExtra::grid.arrange(raw, log, nrow=1)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-26-1.png" width="576" />
+<img src="spatial_files/figure-html/unnamed-chunk-25-1.png" width="576" />
 
 Does there appear to be a spatial trend? Yup.  Note i took off the color of the polygons here to make it more clear to read. 
 
@@ -568,7 +562,7 @@ ggplot() +
   scale_fill_continuous(low='white', high='darkorchid4')
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 We will use % of the county who own a home (`home_ownership`), % of people who are `foreign_born`, the % of the county living in `poverty` and the % of the county who have a `bachelors` degree.
 
@@ -606,7 +600,7 @@ states.spp <- states %>%
 plot(states.spp)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 ```r
 states_nb <- poly2nb(states.spp)
@@ -651,7 +645,7 @@ fully_pooled <- lm(y ~ home_ownership + foreign_born + poverty + bachelors, data
 fpm <- model.to.map(mod=fully_pooled)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 #### No pooled model - Fixed effects for state.  
 
@@ -661,7 +655,7 @@ no_pooled <- lm(y ~ home_ownership + foreign_born + poverty + bachelors + state,
 npm <- model.to.map(mod=no_pooled)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 #### Partially pooled: States are independent
 
@@ -674,7 +668,7 @@ pp_ind <- lme4::lmer(y ~ home_ownership + foreign_born + poverty +
 pp_ind_map <- model.to.map(mod=pp_ind)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 
 #### Partially pooled: Neighboring states are correlated. 
@@ -689,7 +683,7 @@ states.corr <- diag(49); colnames(states.corr) <- rownames(states.corr) <- rowna
 corrplot::corrplot(states.corr)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 2. Then we add on the neighbor matrix - but add correlation between states. 
 
@@ -699,7 +693,7 @@ states.spcorr <- states.corr + 0.9*states_nb_mat
 corrplot::corrplot(states.spcorr)
 ```
 
-<img src="spatial_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 3. Model using `lme4qtl` so we can specifiy the relationship matrix. 
 
@@ -711,18 +705,18 @@ pp_spcorr_map <- model.to.map(mod=pp_spcorr)
 ```
 
 
-<img src="spatial_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 Let's see these all together. 
 
-<img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 
 Estimates are similar, so let's look at the differences (residuals) between the predicted values using the fully pooled and all others. 
 
 * Red = fully pooled model under-estimated
 * Blue = fully pooled over-estimated 
 
-<img src="spatial_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+<img src="spatial_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 Story possibly to be continued. The RI model is creating identical state-level estimates as the spatially correlated model. This is due to one of two reasons: 
 

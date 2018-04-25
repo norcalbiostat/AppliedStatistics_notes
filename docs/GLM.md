@@ -718,10 +718,35 @@ betas <- cbind(coef(nsib.model), confint(nsib.model))
 kable(exp(betas), digits=3)
 ```
 
-                       2.5 %   97.5 %
-------------  ------  ------  -------
-(Intercept)    1.303   1.068    1.589
-agew1          1.045   1.033    1.058
-female         1.102   1.061    1.144
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;">  </th>
+   <th style="text-align:right;"> 2.5 % </th>
+   <th style="text-align:right;"> 97.5 % </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 1.303 </td>
+   <td style="text-align:right;"> 1.068 </td>
+   <td style="text-align:right;"> 1.589 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> agew1 </td>
+   <td style="text-align:right;"> 1.045 </td>
+   <td style="text-align:right;"> 1.033 </td>
+   <td style="text-align:right;"> 1.058 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 1.102 </td>
+   <td style="text-align:right;"> 1.061 </td>
+   <td style="text-align:right;"> 1.144 </td>
+  </tr>
+</tbody>
+</table>
 
 

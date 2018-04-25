@@ -354,22 +354,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Richer person may be less willing to disclose income<br />
 </li>
-<li>Illegal immigrant may be less willing to disclose income</li>
+<li>Undocumented immigrant may be less willing to disclose income</li>
 </ul></li>
 </ul></li>
 </ul>
+<p><img src="images/q.png" /> Write down an example of each.</p>
 <p>Does it matter to inferences? <span style="color:red"><strong>Yes!</strong></span></p>
 <div id="demonstration-via-simulation" class="section level3">
 <h3><span class="header-section-number">14.3.1</span> Demonstration via Simulation</h3>
+<p>What follows is just <em>one</em> method of approaching this problem via code. Simulation is a frequently used technique to understand the behavior of a process over time or over repeated samples.</p>
 <div id="mcar" class="section level4">
 <h4><span class="header-section-number">14.3.1.1</span> MCAR</h4>
 <ol style="list-style-type: decimal">
 <li>Draw a random sample of size 100 from a standard Normal distribution (Z) and calculate the mean.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">456</span>) <span class="co"># setting a seed ensures the same numbers will be drawn each time</span>
+z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
 mean.z &lt;-<span class="st"> </span><span class="kw">mean</span>(z)
 mean.z
-## [1] 0.07877068</code></pre></div>
+## [1] 0.1205748</code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Delete data at a rate of <span class="math inline">\(p\)</span> and calculate the complete case (available) mean.
 <ul>
@@ -388,14 +391,14 @@ mean.z
 <li>Calculate the complete case mean</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] -0.08505795</code></pre></div></li>
-<li>Calculate the bias</li>
+## [1] 0.1377305</code></pre></div></li>
+<li>Calculate the bias as the sample mean minus the true mean (<span class="math inline">\(E(\hat\theta) - \theta\)</span>).</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.z <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 0.1638286</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z
+## [1] 0.01715565</code></pre></div>
 <p>How does the bias change as a function of the proportion of missing? Let <span class="math inline">\(p\)</span> range from 0% to 99% and plot the bias as a function of <span class="math inline">\(p\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc.bias &lt;-<span class="st"> </span><span class="cf">function</span>(p){
-  mean.z <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, z), <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc.bias &lt;-<span class="st"> </span><span class="cf">function</span>(p){ <span class="co"># create a function to handle the repeated calculations</span>
+  <span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, z), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z
 }
 
 p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,.<span class="dv">99</span>,<span class="dt">by=</span>.<span class="dv">01</span>)
@@ -404,49 +407,51 @@ p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</
   <span class="kw">points</span>(p, <span class="kw">sapply</span>(p, calc.bias), <span class="dt">pch=</span><span class="dv">16</span>)
   <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="images/q.png" /> What is the behavior of the bias as <span class="math inline">\(p\)</span> increases? Look specifically at the position/location of the bias, and the variance/variability of the bias.</p>
 </div>
 <div id="nmar-missing-related-to-data" class="section level4">
 <h4><span class="header-section-number">14.3.1.2</span> NMAR: Missing related to data</h4>
-<p>What if the rate of missing is related to the value of the outcome? 1. Randomly draw 100 random normal samples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>Randomly draw 100 uniform random values between 0 and 1 to serve as probabilities.</li>
+<p>What if the rate of missing is related to the value of the outcome? Again, let’s setup a simulation to see how this works.</p>
+<ol style="list-style-type: decimal">
+<li>Randomly draw 100 random data points from a Standard Normal distribution to serve as our population, and 100 uniform random values between 0 and 1 to serve as probabilities of the data being missing (<span class="math inline">\(p=P(miss)\)</span>)</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Sort both the value of Z and the probability of missingness <span class="math inline">\(p\)</span> in ascending order</li>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+p &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Sort both in ascending order, shove into a data frame and confirm that <span class="math inline">\(p(miss)\)</span> increases along with <span class="math inline">\(z\)</span>.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dta &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Z=</span><span class="kw">sort</span>(Z), <span class="dt">p=</span><span class="kw">sort</span>(p))
 <span class="kw">head</span>(dta)
 ##           Z           p
-## 1 -2.199942 0.002518838
-## 2 -1.731158 0.008803299
-## 3 -1.602187 0.024811557
-## 4 -1.504189 0.038401086
-## 5 -1.455615 0.039140528
-## 6 -1.346866 0.042132315
+## 1 -2.898122 0.003673455
+## 2 -2.185058 0.013886146
+## 3 -2.076032 0.035447986
+## 4 -1.938288 0.039780643
+## 5 -1.930809 0.051362816
+## 6 -1.905331 0.054639596
 <span class="kw">ggplot</span>(dta, <span class="kw">aes</span>(<span class="dt">x=</span>p, <span class="dt">y=</span>Z)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</code></pre></div>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Set <span class="math inline">\(Z\)</span> missing with probability equal to the <span class="math inline">\(p\)</span> for that row. _Create a new vector <code>dta$z.miss</code> that is either 0, or the value of <code>dta$Z</code> with probability <code>1-dta$p</code>. Then change all the 0’s to <code>NA</code>.</li>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-20-1.png" width="384" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Set <span class="math inline">\(Z\)</span> missing with probability equal to the <span class="math inline">\(p\)</span> for that row. Create a new vector <code>dta$z.miss</code> that is either 0, or the value of <code>dta$Z</code> with probability <code>1-dta$p</code>. Then change all the 0’s to <code>NA</code>.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dta<span class="op">$</span>Z.miss &lt;-<span class="st"> </span>dta<span class="op">$</span>Z <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">rbinom</span>(<span class="kw">NROW</span>(dta), <span class="dv">1</span>, dta<span class="op">$</span>p))
-<span class="kw">head</span>(dta)
+<span class="kw">head</span>(dta) <span class="co"># see structure of data to understand what is going on</span>
 ##           Z           p    Z.miss
-## 1 -2.199942 0.002518838 -2.199942
-## 2 -1.731158 0.008803299 -1.731158
-## 3 -1.602187 0.024811557 -1.602187
-## 4 -1.504189 0.038401086  0.000000
-## 5 -1.455615 0.039140528 -1.455615
-## 6 -1.346866 0.042132315 -1.346866
+## 1 -2.898122 0.003673455 -2.898122
+## 2 -2.185058 0.013886146 -2.185058
+## 3 -2.076032 0.035447986 -2.076032
+## 4 -1.938288 0.039780643 -1.938288
+## 5 -1.930809 0.051362816 -1.930809
+## 6 -1.905331 0.054639596 -1.905331
 dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class="op">==</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Calculate the complete case mean and the bias</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] -0.5621845
+## [1] -0.7777319
 <span class="kw">mean</span>(dta<span class="op">$</span>Z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 0.5153174</code></pre></div>
+## [1] 0.6830372</code></pre></div>
+<p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean? Is the bias positive or negative?</p>
 </div>
 <div id="nmar-pure-censoring" class="section level4">
 <h4><span class="header-section-number">14.3.1.3</span> NMAR: Pure Censoring</h4>
@@ -454,13 +459,22 @@ dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)
 y &lt;-<span class="st"> </span>z
 y[y<span class="op">&lt;</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
-<span class="kw">mean</span>(y, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 10.78298</code></pre></div>
-<p>When the data is not missing at random, the bias can be much greater.</p>
-<p><em>Problem: Usually you don’t know the missing data mechanism.</em></p>
+<span class="kw">mean</span>(z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+## [1] -0.6850601</code></pre></div>
+<p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean?</p>
+
+<div class="rmdnote">
+When the data is not missing at random, the bias can be much greater.
+</div>
+
+
+<div class="rmdcaution">
+Usually you don’t know the missing data mechanism.
+</div>
+
 <p><strong>Degrees of difficulty</strong></p>
 <ul>
-<li>MCAR is easiest to deal with.</li>
+<li>MCAR: is easiest to deal with.</li>
 <li>MAR: we can live with it.</li>
 <li>NMAR: most difficult to handle.</li>
 </ul>
@@ -483,7 +497,7 @@ y[y<span class="op">&lt;</span><span class="dv">10</span>] &lt;-<span class="st"
 </ul>
 <p><strong>Ignorable Missing</strong></p>
 <ul>
-<li>If missing-data mechanism is MCAR or MAR then nonresponse is said to be “ignorable”</li>
+<li>If missing-data mechanism is MCAR or MAR then nonresponse is said to be “ignorable”.</li>
 <li>Origin of name: in likelihood-based inference, both the data model and missing-data mechanism are important but with MCAR or MAR, inference can be based solely on the data model, thus making inference much simpler<br />
 </li>
 <li>“<em>Ignorability</em>” is a relative assumption: missingness on income may be NMAR given only gender, but may be MAR given gender, age, occupation, region of the country</li>

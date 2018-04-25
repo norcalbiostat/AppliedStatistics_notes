@@ -409,7 +409,7 @@ norcal_nb &lt;-<span class="st"> </span><span class="kw">dnearneigh</span>(<span
 <span class="kw">ggmap</span>(norcal.map) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>norcal, <span class="kw">aes</span>(<span class="dt">x=</span>long.c, <span class="dt">y=</span>lat.c), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_segment</span>(<span class="dt">data=</span>norcal.nb.toplot, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">xend=</span>xend, <span class="dt">y=</span>y, <span class="dt">yend=</span>yend), <span class="dt">lwd=</span><span class="fl">1.5</span>)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li><strong>Adjacent polygons</strong></li>
 </ol>
@@ -429,7 +429,7 @@ local.spp &lt;-<span class="st"> </span>local <span class="op">%&gt;%</span>
 <span class="st">  </span>{<span class="kw">SpatialPolygons</span>(.<span class="op">$</span>polys)}
 
 <span class="kw">plot</span>(local.spp)</code></pre></div>
-<p><img src="spatial_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="spatial_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Now we can create the neighborhood matrix on this polygon shape file using <code>poly2nb</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">local_nb &lt;-<span class="st"> </span><span class="kw">poly2nb</span>(local.spp)
 <span class="kw">summary</span>(local_nb)

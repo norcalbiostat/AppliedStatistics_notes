@@ -330,6 +330,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="multiple-imputation-using-chained-equations-mice" class="section level2">
 <h2><span class="header-section-number">14.7</span> Multiple Imputation using Chained Equations (MICE)</h2>
+<div class="figure">
+<img src="images/mice.jpg" />
+
+</div>
 <ul>
 <li>Generates multiple imputations for incomplete multivariate data by Gibbs sampling.</li>
 <li>Missing data can occur anywhere in the data.</li>
@@ -465,10 +469,10 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 <p>Let’s compare the imputed values to the observed values to see if they are indeed “plausible” We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed).</p>
 <p><strong>Univariately</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">densityplot</span>(imp_iris)</code></pre></div>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="768" /></p>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
 <p><strong>Multivariately</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(imp_iris, Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width <span class="op">|</span><span class="st"> </span>Species, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre></div>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
 <p><strong>Analyze and pool</strong> All of this imputation was done so we could actually perform an analysis!</p>
 <p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>, <code>Petal.Length</code> and <code>Species</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">with</span>(imp_iris, <span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species))
@@ -490,67 +494,162 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">est</th>
-<th align="right">se</th>
-<th align="right">t</th>
-<th align="right">Pr(&gt;|t|)</th>
-<th align="right">lo 95</th>
-<th align="right">hi 95</th>
-<th align="right">fmi</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+est
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+Pr(&gt;|t|)
+</th>
+<th style="text-align:right;">
+lo 95
+</th>
+<th style="text-align:right;">
+hi 95
+</th>
+<th style="text-align:right;">
+fmi
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td align="right">2.442</td>
-<td align="right">0.294</td>
-<td align="right">8.299</td>
-<td align="right">0.000</td>
-<td align="right">1.857</td>
-<td align="right">3.028</td>
-<td align="right">0.151</td>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+2.442
+</td>
+<td style="text-align:right;">
+0.294
+</td>
+<td style="text-align:right;">
+8.299
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1.857
+</td>
+<td style="text-align:right;">
+3.028
+</td>
+<td style="text-align:right;">
+0.151
+</td>
 </tr>
-<tr class="even">
-<td>Sepal.Width</td>
-<td align="right">0.457</td>
-<td align="right">0.091</td>
-<td align="right">5.034</td>
-<td align="right">0.000</td>
-<td align="right">0.277</td>
-<td align="right">0.638</td>
-<td align="right">0.142</td>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0.457
+</td>
+<td style="text-align:right;">
+0.091
+</td>
+<td style="text-align:right;">
+5.034
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+0.638
+</td>
+<td style="text-align:right;">
+0.142
+</td>
 </tr>
-<tr class="odd">
-<td>Petal.Length</td>
-<td align="right">0.706</td>
-<td align="right">0.077</td>
-<td align="right">9.195</td>
-<td align="right">0.000</td>
-<td align="right">0.551</td>
-<td align="right">0.861</td>
-<td align="right">0.289</td>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0.706
+</td>
+<td style="text-align:right;">
+0.077
+</td>
+<td style="text-align:right;">
+9.195
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.551
+</td>
+<td style="text-align:right;">
+0.861
+</td>
+<td style="text-align:right;">
+0.289
+</td>
 </tr>
-<tr class="even">
-<td>Species2</td>
-<td align="right">-0.773</td>
-<td align="right">0.247</td>
-<td align="right">-3.126</td>
-<td align="right">0.003</td>
-<td align="right">-1.268</td>
-<td align="right">-0.278</td>
-<td align="right">0.218</td>
+<tr>
+<td style="text-align:left;">
+Species2
+</td>
+<td style="text-align:right;">
+-0.773
+</td>
+<td style="text-align:right;">
+0.247
+</td>
+<td style="text-align:right;">
+-3.126
+</td>
+<td style="text-align:right;">
+0.003
+</td>
+<td style="text-align:right;">
+-1.268
+</td>
+<td style="text-align:right;">
+-0.278
+</td>
+<td style="text-align:right;">
+0.218
+</td>
 </tr>
-<tr class="odd">
-<td>Species3</td>
-<td align="right">-1.126</td>
-<td align="right">0.345</td>
-<td align="right">-3.264</td>
-<td align="right">0.002</td>
-<td align="right">-1.824</td>
-<td align="right">-0.427</td>
-<td align="right">0.302</td>
+<tr>
+<td style="text-align:left;">
+Species3
+</td>
+<td style="text-align:right;">
+-1.126
+</td>
+<td style="text-align:right;">
+0.345
+</td>
+<td style="text-align:right;">
+-3.264
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+-1.824
+</td>
+<td style="text-align:right;">
+-0.427
+</td>
+<td style="text-align:right;">
+0.302
+</td>
 </tr>
 </tbody>
 </table>
@@ -561,7 +660,7 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</code></pre></div>
 <p>and find the difference in coefficients.</p>
 <p>The variance of the multiply imputed estimates is larger because of the between-imputation variance.</p>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-37-1.png" width="960" /></p>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="960" /></p>
 </div>
 </div>
             </section>

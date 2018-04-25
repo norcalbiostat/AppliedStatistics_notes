@@ -203,21 +203,24 @@ Process by which some units observed, some units not observed
     - P(Y missing | X, Y) = P (Y missing|X, Y)  
     - Ex: Y = income, X = immigration status  
         - Richer person may be less willing to disclose income  
-        - Illegal immigrant may be less willing to disclose income  
+        - Undocumented immigrant may be less willing to disclose income  
 
+![](images/q.png) Write down an example of each. 
 
- Does it matter to inferences?  <span style ="color:red">**Yes!**</span>
+Does it matter to inferences?  <span style ="color:red">**Yes!**</span>
 
 ### Demonstration via Simulation
+What follows is just _one_ method of approaching this problem via code. Simulation is a frequently used technique to understand the behavior of a process over time or over repeated samples. 
 
 #### MCAR
 1. Draw a random sample of size 100 from a standard Normal distribution (Z) and calculate the mean. 
 
 ```r
+set.seed(456) # setting a seed ensures the same numbers will be drawn each time
 z <- rnorm(100)
 mean.z <- mean(z)
 mean.z
-## [1] 0.07877068
+## [1] 0.1205748
 ```
 
 2. Delete data at a rate of $p$ and calculate the complete case (available) mean. 
@@ -240,22 +243,22 @@ mean.z
     
     ```r
     mean(z, na.rm=TRUE)
-    ## [1] -0.08505795
+    ## [1] 0.1377305
     ```
     
-3. Calculate the bias
+3. Calculate the bias as the sample mean minus the true mean ($E(\hat\theta) - \theta$). 
 
 ```r
-mean.z - mean(z, na.rm=TRUE)
-## [1] 0.1638286
+mean(z, na.rm=TRUE) - mean.z
+## [1] 0.01715565
 ```
 
 How does the bias change as a function of the proportion of missing? Let $p$ range from 0% to 99% and plot the bias as a function of $p$. 
 
 
 ```r
-calc.bias <- function(p){
-  mean.z - mean(ifelse(rbinom(100, 1, p)==1, NA, z), na.rm=TRUE)
+calc.bias <- function(p){ # create a function to handle the repeated calculations
+  mean(ifelse(rbinom(100, 1, p)==1, NA, z), na.rm=TRUE) - mean.z
 }
 
 p <- seq(0,.99,by=.01)
@@ -268,54 +271,48 @@ plot(c(0,1), c(-1, 1), type="n", ylab="Bias", xlab="Proportion of missing")
 <img src="missing_data_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
+![](images/q.png) What is the behavior of the bias as $p$ increases? Look specifically at the position/location of the bias, and the variance/variability of the bias. 
+
 #### NMAR: Missing related to data
-What if the rate of missing is related to the value of the outcome? 
-1. Randomly draw 100 random normal samples. 
+What if the rate of missing is related to the value of the outcome? Again, let's setup a simulation to see how this works. 
+
+1. Randomly draw 100 random data points from a Standard Normal distribution to serve as our population, and 100 uniform random values between 0 and 1 to serve as probabilities of the data being missing ($p=P(miss)$)
 
 ```r
 Z <- rnorm(100)
-```
-
-2. Randomly draw 100 uniform random values between 0 and 1 to serve as
-   probabilities. 
-
-```r
 p <- runif(100, 0, 1)
 ```
 
-3. Sort both the value of Z and the probability of missingness $p$ in 
-ascending order
+2. Sort both in ascending order, shove into a data frame and confirm that $p(miss)$ increases along with $z$. 
 
 ```r
 dta <- data.frame(Z=sort(Z), p=sort(p))
 head(dta)
 ##           Z           p
-## 1 -2.199942 0.002518838
-## 2 -1.731158 0.008803299
-## 3 -1.602187 0.024811557
-## 4 -1.504189 0.038401086
-## 5 -1.455615 0.039140528
-## 6 -1.346866 0.042132315
+## 1 -2.898122 0.003673455
+## 2 -2.185058 0.013886146
+## 3 -2.076032 0.035447986
+## 4 -1.938288 0.039780643
+## 5 -1.930809 0.051362816
+## 6 -1.905331 0.054639596
 ggplot(dta, aes(x=p, y=Z)) + geom_point() + xlab("P(missing)") + ylab("Z~Normal(0,1)")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-20-1.png" width="384" />
 
-4. Set $Z$ missing with probability equal to the $p$ 
-for that row. _Create a new vector `dta$z.miss` that is either 0, or the value
-of `dta$Z` with probability `1-dta$p`. Then change all the 0's to `NA`.
+3. Set $Z$ missing with probability equal to the $p$ for that row. Create a new vector `dta$z.miss` that is either 0, or the value of `dta$Z` with probability `1-dta$p`. Then change all the 0's to `NA`.
 
 
 ```r
 dta$Z.miss <- dta$Z * (1-rbinom(NROW(dta), 1, dta$p))
-head(dta)
+head(dta) # see structure of data to understand what is going on
 ##           Z           p    Z.miss
-## 1 -2.199942 0.002518838 -2.199942
-## 2 -1.731158 0.008803299 -1.731158
-## 3 -1.602187 0.024811557 -1.602187
-## 4 -1.504189 0.038401086  0.000000
-## 5 -1.455615 0.039140528 -1.455615
-## 6 -1.346866 0.042132315 -1.346866
+## 1 -2.898122 0.003673455 -2.898122
+## 2 -2.185058 0.013886146 -2.185058
+## 3 -2.076032 0.035447986 -2.076032
+## 4 -1.938288 0.039780643 -1.938288
+## 5 -1.930809 0.051362816 -1.930809
+## 6 -1.905331 0.054639596 -1.905331
 dta$Z.miss[dta$Z.miss==0] <- NA
 ```
 
@@ -323,10 +320,13 @@ dta$Z.miss[dta$Z.miss==0] <- NA
 
 ```r
 mean(dta$Z.miss, na.rm=TRUE)
-## [1] -0.5621845
+## [1] -0.7777319
 mean(dta$Z) - mean(dta$Z.miss, na.rm=TRUE)
-## [1] 0.5153174
+## [1] 0.6830372
 ```
+
+[](images/q.png) Did the complete case estimate over- or under-estimate the true mean? Is the bias positive or negative? 
+
 
 #### NMAR: Pure Censoring
 Consider a hypothetical blood test to measure a hormone that is normally distributed in the blood with mean 10$\mu g$ and variance 1. However the test to detect the compound only can detect levels above 10. 
@@ -335,18 +335,20 @@ Consider a hypothetical blood test to measure a hormone that is normally distrib
 z <- rnorm(100, 10, 1)
 y <- z
 y[y<10] <- NA
-mean(y, na.rm=TRUE)
-## [1] 10.78298
+mean(z) - mean(y, na.rm=TRUE)
+## [1] -0.6850601
 ```
 
-When the data is not missing at random, the bias can be much greater. 
+[](images/q.png) Did the complete case estimate over- or under-estimate the true mean? 
 
 
-_Problem: Usually you don't know the missing data mechanism._ 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">When the data is not missing at random, the bias can be much greater. </div>\EndKnitrBlock{rmdnote}
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Usually you don't know the missing data mechanism.</div>\EndKnitrBlock{rmdcaution}
 
 **Degrees of difficulty**
 
-* MCAR is easiest to deal with.
+* MCAR: is easiest to deal with.
 * MAR: we can live with it.
 * NMAR: most difficult to handle.
 
@@ -355,20 +357,20 @@ _Problem: Usually you don't know the missing data mechanism._
 What can we learn from evidence in the data set at hand?
 
 * May be evidence in the data rule out MCAR - test responders vs. nonresponders.
-    * Example: Responders tend to have higher/lower average education than nonresponders by t-test
-    * Example: Response more likely in one geographic area than another by chi-square test
+    - Example: Responders tend to have higher/lower average education than nonresponders by t-test
+    - Example: Response more likely in one geographic area than another by chi-square test
 * No evidence in data set to rule out MAR (although there may be evidence from an external data source)
   
 **What is plausible?**
 
 * Cochran example: when human behavior is involved, MCAR must be viewed as an extremely special case that would often be violated in practice
-* Missing data may be introduced by design (e.g., measure some variables, don’t measure others for reasons of cost,     response burden), in which case MCAR would apply
+* Missing data may be introduced by design (e.g., measure some variables, don’t measure others for reasons of cost, response burden), in which case MCAR would apply
 * MAR is much more common than MCAR
 * We cannot be too cavalier about assuming MAR, but anecdotal evidence shows that it often is plausible when conditioning on enough information
 
 **Ignorable Missing**
 
-* If missing-data mechanism is MCAR or MAR then nonresponse is said to be "ignorable"
+* If missing-data mechanism is MCAR or MAR then nonresponse is said to be "ignorable".
 * Origin of name: in likelihood-based inference, both the data model and missing-data mechanism are important but with MCAR or MAR, inference can be based solely on the data model, thus making inference much simpler   
 * "_Ignorability_" is a relative assumption:  missingness on income may be NMAR given only gender, but may be MAR given gender, age, occupation, region of the country
 
@@ -376,8 +378,9 @@ What can we learn from evidence in the data set at hand?
 
 Strategies for handling missing data include:
 
-* Complete-case/available-case analysis: drop cases that make analysis inconvenient  
-* Imputation procedures: fill in missing values, then analyze completed data sets using complete-date methods  
+* Complete-case/available-case analysis: drop cases that make analysis inconvenient. 
+* If variables are known to contribute to the missing values, then appropriate modeling can often account for the missingness. 
+* Imputation procedures: fill in missing values, then analyze completed data sets using complete-date methods
 * Weighting procedures: modify "design weights" (i.e., inverse probabilities of selection from sampling plan) to account for probability of response  
 * Model-based approaches: develop model for partially missing data, base inferences on likelihood under that model
 
@@ -389,8 +392,7 @@ If not all variables observed, delete case from analysis
     - Simplicity
     - Common sample for all estimates
 * Disadvantages:
-    - Loss of information, e.g., if there are 20 variables, each 10% missing MCAR, 
-      then expect 12% complete cases (0.92 -0.12)
+    - Loss of valid information
     - Bias due to violation of MCAR  
 
 
@@ -407,7 +409,7 @@ Fill in missing values, analyze completed data set
 * Advantage: 
     * Rectangular data set easier to analyze
 * Disadvantage:
-    * "Both seductive and dangerous"" (Little and Rubin)
+    * "Both seductive and dangerous" (Little and Rubin)
     * Can understate uncertainty due to missing values. 
     * Can induce bias if imputing under the wrong model.
 
@@ -415,8 +417,7 @@ Fill in missing values, analyze completed data set
 
 * Unconditional mean substitution. <span style ="color:red">**Never use**</span>
     - Impute all missing data using the mean of observed cases
-    - Highly biased 
-    - Artificially decreases the mean. 
+    - Artificially decreases the variance. 
 * Hot deck imputation
     - Impute values by randomly sampling values from observed data.  
     - Good for categorical data
@@ -449,6 +450,13 @@ Fill in missing values, analyze completed data set
 2. Create $m$ complete data sets
 3. Perform desired analysis on each of the $m$ complete data sets
 4. Combine final estimates in a manner that accounts for the between, and within imputation variance. 
+
+
+![](http://www.stefvanbuuren.nl/mi/image/flow.png)
+
+_Credit: http://www.stefvanbuuren.nl_
+
+
 
 ### MI as a paradigm
 * Logic: "Average over" uncertainty, don’t assume most likely scenario (single imputation) covers all plausible scenarios
@@ -485,6 +493,8 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 * Ratio of (B = between-imputation variance) to (T = between + within-imputation variance) is known as the fraction of missing information. 	
 
 ## Multiple Imputation using Chained Equations (MICE)
+
+![](images/mice.jpg)
 
 * Generates multiple imputations for incomplete multivariate data by Gibbs sampling. 
 * Missing data can occur anywhere in the data. 
@@ -646,7 +656,7 @@ Let's compare the imputed values to the observed values to see if they are indee
 densityplot(imp_iris)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="768" />
 
 **Multivariately**
 
@@ -654,7 +664,7 @@ densityplot(imp_iris)
 xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Species, cex=.8, pch=16)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-34-1.png" width="768" />
 
 **Analyze and pool**
 All of this imputation was done so we could actually perform an analysis! 
@@ -689,13 +699,72 @@ Additional information included in this table is the number of missing values, t
 kable(summary(pool(model))[,c(1:3, 5:7, 9)], digits=3)
 ```
 
-                   est      se        t   Pr(>|t|)    lo 95    hi 95     fmi
--------------  -------  ------  -------  ---------  -------  -------  ------
-(Intercept)      2.442   0.294    8.299      0.000    1.857    3.028   0.151
-Sepal.Width      0.457   0.091    5.034      0.000    0.277    0.638   0.142
-Petal.Length     0.706   0.077    9.195      0.000    0.551    0.861   0.289
-Species2        -0.773   0.247   -3.126      0.003   -1.268   -0.278   0.218
-Species3        -1.126   0.345   -3.264      0.002   -1.824   -0.427   0.302
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> est </th>
+   <th style="text-align:right;"> se </th>
+   <th style="text-align:right;"> t </th>
+   <th style="text-align:right;"> Pr(&gt;|t|) </th>
+   <th style="text-align:right;"> lo 95 </th>
+   <th style="text-align:right;"> hi 95 </th>
+   <th style="text-align:right;"> fmi </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 2.442 </td>
+   <td style="text-align:right;"> 0.294 </td>
+   <td style="text-align:right;"> 8.299 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 1.857 </td>
+   <td style="text-align:right;"> 3.028 </td>
+   <td style="text-align:right;"> 0.151 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sepal.Width </td>
+   <td style="text-align:right;"> 0.457 </td>
+   <td style="text-align:right;"> 0.091 </td>
+   <td style="text-align:right;"> 5.034 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.277 </td>
+   <td style="text-align:right;"> 0.638 </td>
+   <td style="text-align:right;"> 0.142 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Petal.Length </td>
+   <td style="text-align:right;"> 0.706 </td>
+   <td style="text-align:right;"> 0.077 </td>
+   <td style="text-align:right;"> 9.195 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.551 </td>
+   <td style="text-align:right;"> 0.861 </td>
+   <td style="text-align:right;"> 0.289 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Species2 </td>
+   <td style="text-align:right;"> -0.773 </td>
+   <td style="text-align:right;"> 0.247 </td>
+   <td style="text-align:right;"> -3.126 </td>
+   <td style="text-align:right;"> 0.003 </td>
+   <td style="text-align:right;"> -1.268 </td>
+   <td style="text-align:right;"> -0.278 </td>
+   <td style="text-align:right;"> 0.218 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Species3 </td>
+   <td style="text-align:right;"> -1.126 </td>
+   <td style="text-align:right;"> 0.345 </td>
+   <td style="text-align:right;"> -3.264 </td>
+   <td style="text-align:right;"> 0.002 </td>
+   <td style="text-align:right;"> -1.824 </td>
+   <td style="text-align:right;"> -0.427 </td>
+   <td style="text-align:right;"> 0.302 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ### Calculating bias
@@ -708,7 +777,7 @@ and find the difference in coefficients.
 
 The variance of the multiply imputed estimates is larger because of the between-imputation variance. 
 
-<img src="missing_data_files/figure-html/unnamed-chunk-37-1.png" width="960" />
+<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="960" />
 
 
 
@@ -752,10 +821,13 @@ The variance of the multiply imputed estimates is larger because of the between-
 * http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/ 
 * http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/
 
-A more in-depth tutorial on these packages can be found at 
-http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/
 
 Imputation methods for complex survey data and data not missing at random is an open research topic. Read more about this here: https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm 
+
+![](https://shiring.github.io/netlify_images/mice_sketchnote_gxjsgc.jpg)
+https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/
+
+
 
 
 

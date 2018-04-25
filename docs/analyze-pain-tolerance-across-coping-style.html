@@ -354,32 +354,53 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <span class="kw">kable</span>(ttst) <span class="co"># what does this look like empty? </span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="left">eq.var</th>
-<th align="left">uneq.var</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+eq.var
+</th>
+<th style="text-align:left;">
+uneq.var
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Trial1</td>
-<td align="left"></td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+Trial1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="even">
-<td>Trial2</td>
-<td align="left"></td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+Trial2
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="odd">
-<td>Trial3</td>
-<td align="left"></td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+Trial3
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="even">
-<td>Trial4</td>
-<td align="left"></td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+Trial4
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
 </tbody>
 </table>
@@ -392,35 +413,66 @@ ttst &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <span class="kw">kable</span>(ttst, <span class="dt">type=</span><span class="st">&#39;html&#39;</span>, <span class="dt">digits=</span><span class="dv">4</span>,  
       <span class="dt">caption=</span><span class="st">&quot;T-test p-values for a difference between averge pain tolerance across coping style groups&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>) <span class="co"># now it&#39;s full</span></code></pre></div>
-<table>
-<caption><span id="tab:unnamed-chunk-12">Table 12.1: </span>T-test p-values for a difference between averge pain tolerance across coping style groups</caption>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-12">Table 12.1: </span>T-test p-values for a difference between averge pain tolerance across coping style groups
+</caption>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">eq.var</th>
-<th align="right">uneq.var</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+eq.var
+</th>
+<th style="text-align:right;">
+uneq.var
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Trial1</td>
-<td align="right">0.0524</td>
-<td align="right">0.0535</td>
+<tr>
+<td style="text-align:left;">
+Trial1
+</td>
+<td style="text-align:right;">
+0.0524
+</td>
+<td style="text-align:right;">
+0.0535
+</td>
 </tr>
-<tr class="even">
-<td>Trial2</td>
-<td align="right">0.0308</td>
-<td align="right">0.0305</td>
+<tr>
+<td style="text-align:left;">
+Trial2
+</td>
+<td style="text-align:right;">
+0.0308
+</td>
+<td style="text-align:right;">
+0.0305
+</td>
 </tr>
-<tr class="odd">
-<td>Trial3</td>
-<td align="right">0.1041</td>
-<td align="right">0.1049</td>
+<tr>
+<td style="text-align:left;">
+Trial3
+</td>
+<td style="text-align:right;">
+0.1041
+</td>
+<td style="text-align:right;">
+0.1049
+</td>
 </tr>
-<tr class="even">
-<td>Trial4</td>
-<td align="right">0.1121</td>
-<td align="right">0.1104</td>
+<tr>
+<td style="text-align:left;">
+Trial4
+</td>
+<td style="text-align:right;">
+0.1121
+</td>
+<td style="text-align:right;">
+0.1104
+</td>
 </tr>
 </tbody>
 </table>
@@ -435,91 +487,228 @@ pwc &lt;-<span class="st"> </span><span class="kw">reshape</span>(wide.pain.cs, 
 <span class="kw">kable</span>(<span class="kw">head</span>(pwc))</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">id</th>
-<th align="right">l2paintol.1</th>
-<th align="left">cs.1</th>
-<th align="right">l2paintol.2</th>
-<th align="left">cs.2</th>
-<th align="right">l2paintol.3</th>
-<th align="left">cs.3</th>
-<th align="right">l2paintol.4</th>
-<th align="left">cs.4</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+id
+</th>
+<th style="text-align:right;">
+l2paintol.1
+</th>
+<th style="text-align:left;">
+cs.1
+</th>
+<th style="text-align:right;">
+l2paintol.2
+</th>
+<th style="text-align:left;">
+cs.2
+</th>
+<th style="text-align:right;">
+l2paintol.3
+</th>
+<th style="text-align:left;">
+cs.3
+</th>
+<th style="text-align:right;">
+l2paintol.4
+</th>
+<th style="text-align:left;">
+cs.4
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>1</td>
-<td align="right">1</td>
-<td align="right">4.361066</td>
-<td align="left">attender</td>
-<td align="right">5.142005</td>
-<td align="left">attender</td>
-<td align="right">3.836934</td>
-<td align="left">attender</td>
-<td align="right">3.549669</td>
-<td align="left">attender</td>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4.361066
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+5.142005
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.836934
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.549669
+</td>
+<td style="text-align:left;">
+attender
+</td>
 </tr>
-<tr class="even">
-<td>5</td>
-<td align="right">2</td>
-<td align="right">4.814038</td>
-<td align="left">distracter</td>
-<td align="right">4.598127</td>
-<td align="left">distracter</td>
-<td align="right">3.987321</td>
-<td align="left">distracter</td>
-<td align="right">4.343408</td>
-<td align="left">distracter</td>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4.814038
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+4.598127
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+3.987321
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+4.343408
+</td>
+<td style="text-align:left;">
+distracter
+</td>
 </tr>
-<tr class="odd">
-<td>9</td>
-<td align="right">3</td>
-<td align="right">3.584963</td>
-<td align="left">attender</td>
-<td align="right">3.321928</td>
-<td align="left">attender</td>
-<td align="right">3.614710</td>
-<td align="left">attender</td>
-<td align="right">3.047887</td>
-<td align="left">attender</td>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.584963
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.321928
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.614710
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.047887
+</td>
+<td style="text-align:left;">
+attender
+</td>
 </tr>
-<tr class="even">
-<td>13</td>
-<td align="right">4</td>
-<td align="right">3.956986</td>
-<td align="left">distracter</td>
-<td align="right">4.503349</td>
-<td align="left">distracter</td>
-<td align="right"></td>
-<td align="left">distracter</td>
-<td align="right"></td>
-<td align="left">distracter</td>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.956986
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+4.503349
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
+distracter
+</td>
 </tr>
-<tr class="odd">
-<td>17</td>
-<td align="right">5</td>
-<td align="right">4.638653</td>
-<td align="left">attender</td>
-<td align="right">4.549053</td>
-<td align="left">attender</td>
-<td align="right">4.961160</td>
-<td align="left">attender</td>
-<td align="right">4.971773</td>
-<td align="left">attender</td>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4.638653
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+4.549053
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+4.961160
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+4.971773
+</td>
+<td style="text-align:left;">
+attender
+</td>
 </tr>
-<tr class="even">
-<td>21</td>
-<td align="right">6</td>
-<td align="right">6.773073</td>
-<td align="left">distracter</td>
-<td align="right">6.424754</td>
-<td align="left">distracter</td>
-<td align="right">6.099716</td>
-<td align="left">distracter</td>
-<td align="right">5.914086</td>
-<td align="left">distracter</td>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+6.773073
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+6.424754
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+6.099716
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+5.914086
+</td>
+<td style="text-align:left;">
+distracter
+</td>
 </tr>
 </tbody>
 </table>
@@ -530,70 +719,166 @@ pwc &lt;-<span class="st"> </span><span class="kw">reshape</span>(wide.pain.cs, 
 <span class="kw">kable</span>(<span class="kw">head</span>(pwc))</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">id</th>
-<th align="right">l2paintol.1</th>
-<th align="left">cs.1</th>
-<th align="right">l2paintol.2</th>
-<th align="right">l2paintol.3</th>
-<th align="right">l2paintol.4</th>
-<th align="right">ave.baseline.tol</th>
+<tr>
+<th style="text-align:right;">
+id
+</th>
+<th style="text-align:right;">
+l2paintol.1
+</th>
+<th style="text-align:left;">
+cs.1
+</th>
+<th style="text-align:right;">
+l2paintol.2
+</th>
+<th style="text-align:right;">
+l2paintol.3
+</th>
+<th style="text-align:right;">
+l2paintol.4
+</th>
+<th style="text-align:right;">
+ave.baseline.tol
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">4.361066</td>
-<td align="left">attender</td>
-<td align="right">5.142005</td>
-<td align="right">3.836934</td>
-<td align="right">3.549669</td>
-<td align="right">4.446669</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4.361066
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+5.142005
+</td>
+<td style="text-align:right;">
+3.836934
+</td>
+<td style="text-align:right;">
+3.549669
+</td>
+<td style="text-align:right;">
+4.446669
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">4.814038</td>
-<td align="left">distracter</td>
-<td align="right">4.598127</td>
-<td align="right">3.987321</td>
-<td align="right">4.343408</td>
-<td align="right">4.466495</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4.814038
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+4.598127
+</td>
+<td style="text-align:right;">
+3.987321
+</td>
+<td style="text-align:right;">
+4.343408
+</td>
+<td style="text-align:right;">
+4.466495
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">3.584963</td>
-<td align="left">attender</td>
-<td align="right">3.321928</td>
-<td align="right">3.614710</td>
-<td align="right">3.047887</td>
-<td align="right">3.507200</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.584963
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+3.321928
+</td>
+<td style="text-align:right;">
+3.614710
+</td>
+<td style="text-align:right;">
+3.047887
+</td>
+<td style="text-align:right;">
+3.507200
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">3.956986</td>
-<td align="left">distracter</td>
-<td align="right">4.503349</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">4.230167</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.956986
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+4.503349
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+4.230167
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">4.638653</td>
-<td align="left">attender</td>
-<td align="right">4.549053</td>
-<td align="right">4.961160</td>
-<td align="right">4.971773</td>
-<td align="right">4.716289</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4.638653
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+4.549053
+</td>
+<td style="text-align:right;">
+4.961160
+</td>
+<td style="text-align:right;">
+4.971773
+</td>
+<td style="text-align:right;">
+4.716289
+</td>
 </tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">6.773073</td>
-<td align="left">distracter</td>
-<td align="right">6.424754</td>
-<td align="right">6.099716</td>
-<td align="right">5.914086</td>
-<td align="right">6.432514</td>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+6.773073
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+6.424754
+</td>
+<td style="text-align:right;">
+6.099716
+</td>
+<td style="text-align:right;">
+5.914086
+</td>
+<td style="text-align:right;">
+6.432514
+</td>
 </tr>
 </tbody>
 </table>
@@ -657,28 +942,57 @@ pwc &lt;-<span class="st"> </span><span class="kw">reshape</span>(wide.pain.cs, 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(pain<span class="op">$</span>l2paintol), pain<span class="op">$</span>trial))</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">1</th>
-<th align="right">2</th>
-<th align="right">3</th>
-<th align="right">4</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>FALSE</td>
-<td align="right">63</td>
-<td align="right">63</td>
-<td align="right">58</td>
-<td align="right">61</td>
+<tr>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+61
+</td>
 </tr>
-<tr class="even">
-<td>TRUE</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">3</td>
+<tr>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3
+</td>
 </tr>
 </tbody>
 </table>
@@ -694,209 +1008,498 @@ ids.with.missing
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(pain[pain<span class="op">$</span>id <span class="op">%in%</span><span class="st"> </span>ids.with.missing,<span class="kw">c</span>(<span class="st">&#39;id&#39;</span>, <span class="st">&#39;cs&#39;</span>, <span class="st">&#39;treatment&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;trial&#39;</span>, <span class="st">&#39;paintol&#39;</span> )], 
       <span class="dt">type=</span><span class="st">&#39;html&#39;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">kable_styling</span>(<span class="dt">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>)</code></pre></div>
-<table>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="right">id</th>
-<th align="left">cs</th>
-<th align="left">treatment</th>
-<th align="left">sex</th>
-<th align="right">trial</th>
-<th align="right">paintol</th>
+<tr>
+<th style="text-align:right;">
+id
+</th>
+<th style="text-align:left;">
+cs
+</th>
+<th style="text-align:left;">
+treatment
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+trial
+</th>
+<th style="text-align:right;">
+paintol
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">4</td>
-<td align="left">distracter</td>
-<td align="left">attend</td>
-<td align="left">male</td>
-<td align="right">1</td>
-<td align="right">15.53</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15.53
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">distracter</td>
-<td align="left">attend</td>
-<td align="left">male</td>
-<td align="right">2</td>
-<td align="right">22.68</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+22.68
+</td>
 </tr>
-<tr class="odd">
-<td align="right">4</td>
-<td align="left">distracter</td>
-<td align="left">attend</td>
-<td align="left">male</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">distracter</td>
-<td align="left">attend</td>
-<td align="left">male</td>
-<td align="right">4</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="odd">
-<td align="right">18</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">1</td>
-<td align="right">22.48</td>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+22.48
+</td>
 </tr>
-<tr class="even">
-<td align="right">18</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">2</td>
-<td align="right">20.03</td>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20.03
+</td>
 </tr>
-<tr class="odd">
-<td align="right">18</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">18</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">4</td>
-<td align="right">26.82</td>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+26.82
+</td>
 </tr>
-<tr class="odd">
-<td align="right">20</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">1</td>
-<td align="right">30.57</td>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+30.57
+</td>
 </tr>
-<tr class="even">
-<td align="right">20</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">2</td>
-<td align="right">20.29</td>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20.29
+</td>
 </tr>
-<tr class="odd">
-<td align="right">20</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">20</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">male</td>
-<td align="right">4</td>
-<td align="right">11.89</td>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+11.89
+</td>
 </tr>
-<tr class="odd">
-<td align="right">33</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">1</td>
-<td align="right">35.88</td>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+35.88
+</td>
 </tr>
-<tr class="even">
-<td align="right">33</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">2</td>
-<td align="right">53.04</td>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+53.04
+</td>
 </tr>
-<tr class="odd">
-<td align="right">33</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">33</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">4</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="odd">
-<td align="right">42</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">1</td>
-<td align="right">52.58</td>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+52.58
+</td>
 </tr>
-<tr class="even">
-<td align="right">42</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">2</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="odd">
-<td align="right">42</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">42</td>
-<td align="left">attender</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">4</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="odd">
-<td align="right">44</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">1</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">44</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">2</td>
-<td align="right">16.75</td>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+16.75
+</td>
 </tr>
-<tr class="odd">
-<td align="right">44</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">3</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+</td>
 </tr>
-<tr class="even">
-<td align="right">44</td>
-<td align="left">distracter</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">4</td>
-<td align="right">14.66</td>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+14.66
+</td>
 </tr>
 </tbody>
 </table>

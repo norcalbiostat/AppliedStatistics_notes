@@ -341,128 +341,326 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(pain[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">id</th>
-<th align="right">ses</th>
-<th align="left">cs</th>
-<th align="left">treatment</th>
-<th align="left">sex</th>
-<th align="right">age</th>
-<th align="right">trial</th>
-<th align="right">paintol</th>
-<th align="right">l2paintol</th>
+<tr>
+<th style="text-align:right;">
+id
+</th>
+<th style="text-align:right;">
+ses
+</th>
+<th style="text-align:left;">
+cs
+</th>
+<th style="text-align:left;">
+treatment
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+trial
+</th>
+<th style="text-align:right;">
+paintol
+</th>
+<th style="text-align:right;">
+l2paintol
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">73.5</td>
-<td align="left">attender</td>
-<td align="left">attend</td>
-<td align="left">female</td>
-<td align="right">10.083333</td>
-<td align="right">1</td>
-<td align="right">20.55</td>
-<td align="right">4.361066</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+73.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+10.083333
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+20.55
+</td>
+<td style="text-align:right;">
+4.361066
+</td>
 </tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="right">73.5</td>
-<td align="left">attender</td>
-<td align="left">attend</td>
-<td align="left">female</td>
-<td align="right">10.083333</td>
-<td align="right">2</td>
-<td align="right">35.31</td>
-<td align="right">5.142005</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+73.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+10.083333
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+35.31
+</td>
+<td style="text-align:right;">
+5.142005
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">73.5</td>
-<td align="left">attender</td>
-<td align="left">attend</td>
-<td align="left">female</td>
-<td align="right">10.083333</td>
-<td align="right">3</td>
-<td align="right">14.29</td>
-<td align="right">3.836934</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+73.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+10.083333
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+14.29
+</td>
+<td style="text-align:right;">
+3.836934
+</td>
 </tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="right">73.5</td>
-<td align="left">attender</td>
-<td align="left">attend</td>
-<td align="left">female</td>
-<td align="right">10.083333</td>
-<td align="right">4</td>
-<td align="right">11.71</td>
-<td align="right">3.549669</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+73.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+attend
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+10.083333
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+11.71
+</td>
+<td style="text-align:right;">
+3.549669
+</td>
 </tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="right">74.7</td>
-<td align="left">distracter</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">9.250000</td>
-<td align="right">1</td>
-<td align="right">28.13</td>
-<td align="right">4.814038</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+74.7
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+9.250000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+28.13
+</td>
+<td style="text-align:right;">
+4.814038
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">74.7</td>
-<td align="left">distracter</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">9.250000</td>
-<td align="right">2</td>
-<td align="right">24.22</td>
-<td align="right">4.598127</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+74.7
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+9.250000
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+24.22
+</td>
+<td style="text-align:right;">
+4.598127
+</td>
 </tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="right">74.7</td>
-<td align="left">distracter</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">9.250000</td>
-<td align="right">3</td>
-<td align="right">15.86</td>
-<td align="right">3.987321</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+74.7
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+9.250000
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+15.86
+</td>
+<td style="text-align:right;">
+3.987321
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">74.7</td>
-<td align="left">distracter</td>
-<td align="left">distract</td>
-<td align="left">female</td>
-<td align="right">9.250000</td>
-<td align="right">4</td>
-<td align="right">20.30</td>
-<td align="right">4.343408</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+74.7
+</td>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:left;">
+distract
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+9.250000
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+20.30
+</td>
+<td style="text-align:right;">
+4.343408
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">81.5</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">8.666667</td>
-<td align="right">1</td>
-<td align="right">12.00</td>
-<td align="right">3.584963</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+81.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+8.666667
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12.00
+</td>
+<td style="text-align:right;">
+3.584963
+</td>
 </tr>
-<tr class="even">
-<td align="right">3</td>
-<td align="right">81.5</td>
-<td align="left">attender</td>
-<td align="left">no directions</td>
-<td align="left">female</td>
-<td align="right">8.666667</td>
-<td align="right">2</td>
-<td align="right">10.00</td>
-<td align="right">3.321928</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+81.5
+</td>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:left;">
+no directions
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+8.666667
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:right;">
+3.321928
+</td>
 </tr>
 </tbody>
 </table>
@@ -502,25 +700,48 @@ l2pain.dist &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pain, <
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">table</span>(pain<span class="op">$</span>cs, pain<span class="op">$</span>treatment))</code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">attend</th>
-<th align="right">distract</th>
-<th align="right">no directions</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+attend
+</th>
+<th style="text-align:right;">
+distract
+</th>
+<th style="text-align:right;">
+no directions
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>attender</td>
-<td align="right">40</td>
-<td align="right">48</td>
-<td align="right">40</td>
+<tr>
+<td style="text-align:left;">
+attender
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+40
+</td>
 </tr>
-<tr class="even">
-<td>distracter</td>
-<td align="right">44</td>
-<td align="right">44</td>
-<td align="right">40</td>
+<tr>
+<td style="text-align:left;">
+distracter
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+40
+</td>
 </tr>
 </tbody>
 </table>
