@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="additional-info.html">
-<link rel="next" href="identifying-missing-data.html">
+<link rel="prev" href="multiple-imputation-using-chained-equations-mice.html">
+<link rel="next" href="final-thoughts.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -339,23 +339,344 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mda" class="section level1">
-<h1><span class="header-section-number">Chapter 14</span> Missing Data</h1>
-<p>Missing Data happens. Not always</p>
-<ul>
-<li>General: Item non-response. Individual pieces of data are missing.<br />
-</li>
-<li>Unit non-response: Records have some background data on all units, but some units don’t respond to any question.</li>
-<li>Monotonone missing data: Variables can be ordered such that one block of variables more observed than the next.</li>
-</ul> 
+<div id="example-prescribed-amount-of-missing." class="section level2">
+<h2><span class="header-section-number">14.8</span> Example: Prescribed amount of missing.</h2>
+<p>We will demonstrate using Fisher’s Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to estimate the bias incurred by using these imputation methods.</p>
+<p>For the <code>iris</code> data we set a seed and use the <code>prodNA()</code> function from the <code>missForest</code> package to create 10% missing values in this data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(missForest)
+<span class="kw">set.seed</span>(<span class="dv">12345</span>) <span class="co"># Note to self: Change the combo on my luggage</span>
+iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <span class="dt">noNA=</span><span class="fl">0.1</span>)
+<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris.mis)))
+## 
+## FALSE  TRUE 
+##   0.9   0.1</code></pre></div>
+<p>Visualize missing data pattern.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(VIM)
+<span class="kw">aggr</span>(iris.mis, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;darkolivegreen3&#39;</span>,<span class="st">&#39;salmon&#39;</span>),
+              <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>,
+              <span class="dt">labels=</span><span class="kw">names</span>(iris.mis), <span class="dt">cex.axis=</span>.<span class="dv">7</span>,
+              <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre><code>## 
+##  Variables sorted by number of missings: 
+##      Variable      Count
+##  Sepal.Length 0.10666667
+##   Petal.Width 0.10666667
+##   Sepal.Width 0.10000000
+##       Species 0.10000000
+##  Petal.Length 0.08666667</code></pre>
+<p>Here’s another example of where only 10% of the data overall is missing, but it results in only 58% complete cases.</p>
+<div id="multiply-impute-the-missing-data-using-mice" class="section level3">
+<h3><span class="header-section-number">14.8.1</span> Multiply impute the missing data using <code>mice()</code></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris &lt;-<span class="st"> </span><span class="kw">mice</span>(iris.mis, <span class="dt">m=</span><span class="dv">10</span>, <span class="dt">maxit=</span><span class="dv">25</span>, <span class="dt">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">seed=</span><span class="dv">500</span>, <span class="dt">printFlag=</span><span class="ot">FALSE</span>)
+<span class="kw">summary</span>(imp_iris)
+## Multiply imputed data set
+## Call:
+## mice(data = iris.mis, m = 10, method = &quot;pmm&quot;, maxit = 25, printFlag = FALSE, 
+##     seed = 500)
+## Number of multiple imputations:  10
+## Missing cells per column:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##           16           15           13           16           15 
+## Imputation methods:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; 
+## VisitSequence:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##            1            2            3            4            5 
+## PredictorMatrix:
+##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## Sepal.Length            0           1            1           1       1
+## Sepal.Width             1           0            1           1       1
+## Petal.Length            1           1            0           1       1
+## Petal.Width             1           1            1           0       1
+## Species                 1           1            1           1       0
+## Random generator seed value:  500</code></pre></div>
+
+<div class="rmdnote">
+<p>The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a <strong>very</strong> good idea to understand these controls.</p>
+<a href="https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputations-the-maximum-iterations-affect-accuracy-in-mul/219049#219049" class="uri">https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputations-the-maximum-iterations-affect-accuracy-in-mul/219049#219049</a>
+</div>
+
+</div>
+<div id="check-the-imputation-method-used-on-each-variable." class="section level3">
+<h3><span class="header-section-number">14.8.2</span> Check the imputation method used on each variable.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>meth
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</code></pre></div>
+<p>Predictive mean matching was used for all variables, even <code>Species</code>. This is reasonable because PMM is a hot deck method of imputation.</p>
+</div>
+<div id="check-convergence" class="section level3">
+<h3><span class="header-section-number">14.8.3</span> Check Convergence</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(imp_iris, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>))</code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>The variance across chains is no larger than the variance within chains.</p>
+</div>
+<div id="look-at-the-values-generated-for-imputation" class="section level3">
+<h3><span class="header-section-number">14.8.4</span> Look at the values generated for imputation</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>imp<span class="op">$</span>Sepal.Length
+##       1   2   3   4   5   6   7   8   9  10
+## 1   5.0 5.0 5.0 5.8 5.0 5.0 5.5 5.0 5.0 4.9
+## 5   5.1 5.0 4.9 4.9 5.8 5.1 4.8 4.7 5.1 5.3
+## 26  4.9 5.1 5.0 5.0 5.0 4.6 5.1 4.6 4.9 5.1
+## 31  5.1 4.7 5.0 4.9 5.2 4.6 4.6 5.0 4.6 5.0
+## 33  5.2 5.5 6.0 4.9 5.5 5.5 5.5 5.6 5.7 5.7
+## 39  4.4 5.0 4.3 5.0 4.4 5.0 4.4 4.4 4.4 4.9
+## 43  4.7 5.4 4.9 4.9 4.6 4.6 4.9 4.7 4.8 4.6
+## 56  5.8 5.6 6.1 5.4 5.4 5.5 6.2 6.0 5.8 5.8
+## 96  5.8 6.3 5.6 6.5 6.2 6.2 5.8 6.5 6.4 6.6
+## 103 6.5 6.9 6.7 6.8 6.7 7.2 7.4 7.2 6.7 6.8
+## 113 6.3 6.7 6.7 6.7 6.7 6.7 6.7 6.7 6.4 5.9
+## 124 5.7 5.8 6.2 6.1 5.5 6.6 6.2 6.2 6.2 5.5
+## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3
+## 135 6.0 6.4 6.3 6.7 6.7 6.5 6.3 6.4 7.0 5.6
+## 149 6.4 6.5 6.8 7.0 7.0 6.4 6.3 6.3 6.5 6.3
+## 150 6.4 6.1 6.4 6.4 6.3 6.5 6.4 6.1 6.4 6.4</code></pre></div>
+<p>This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for <code>Sepal.Length</code> was needed. Notice only imputations are shown, no observed data is showing here.</p>
+</div>
+<div id="create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations" class="section level3">
+<h3><span class="header-section-number">14.8.5</span> Create a complete data set by filling in the missing data using the imputations</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="dt">action=</span><span class="dv">1</span>)</code></pre></div>
+<p>Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on.</p>
+<div id="alternative---stack-the-imputed-data-sets-in-long-format." class="section level4">
+<h4><span class="header-section-number">14.8.5.1</span> Alternative - Stack the imputed data sets in <em>long</em> format.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_long &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</code></pre></div>
+<p>By looking at the <code>names</code> of this new object we can confirm that there are indeed 10 complete data sets with <span class="math inline">\(n=150\)</span> in each.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(iris_long)
+## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; 
+## [5] &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;
+<span class="kw">table</span>(iris_long<span class="op">$</span>.imp)
+## 
+##   1   2   3   4   5   6   7   8   9  10 
+## 150 150 150 150 150 150 150 150 150 150</code></pre></div>
+</div>
+</div>
+<div id="visualize-imputations" class="section level3">
+<h3><span class="header-section-number">14.8.6</span> Visualize Imputations</h3>
+<p>Let’s compare the imputed values to the observed values to see if they are indeed “plausible” We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed).</p>
+<p><strong>Univariately</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">densityplot</span>(imp_iris)</code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" /></p>
+<p><strong>Multivariately</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(imp_iris, Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width <span class="op">|</span><span class="st"> </span>Species, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-39-1.png" width="768" /></p>
+<p><strong>Analyze and pool</strong> All of this imputation was done so we could actually perform an analysis!</p>
+<p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>, <code>Petal.Length</code> and <code>Species</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">with</span>(imp_iris, <span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species))
+<span class="kw">summary</span>(<span class="kw">pool</span>(model))
+##                     est         se         t        df     Pr(&gt;|t|)
+## (Intercept)   2.4003660 0.27904211  8.602164 117.11666 4.107825e-14
+## Sepal.Width   0.4635384 0.08556538  5.417359 122.66722 3.066295e-07
+## Petal.Length  0.7126897 0.07046809 10.113652  87.37099 2.220446e-16
+## Species2     -0.7875803 0.23149303 -3.402177 100.83240 9.597852e-04
+## Species3     -1.1614620 0.32513199 -3.572279  69.21508 6.493711e-04
+##                   lo 95      hi 95 nmis        fmi     lambda
+## (Intercept)   1.8477435  2.9529885   NA 0.10362235 0.08844452
+## Sepal.Width   0.2941624  0.6329144   15 0.08849659 0.07375537
+## Petal.Length  0.5726351  0.8527443   13 0.18448110 0.16602439
+## Species2     -1.2468094 -0.3283511   NA 0.14686085 0.13010510
+## Species3     -1.8100466 -0.5128774   NA 0.24332027 0.22176707</code></pre></div>
+<p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>), and a 95% interval.</p>
+<p>Additional information included in this table is the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+est
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+Pr(&gt;|t|)
+</th>
+<th style="text-align:right;">
+lo 95
+</th>
+<th style="text-align:right;">
+hi 95
+</th>
+<th style="text-align:right;">
+fmi
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+2.400
+</td>
+<td style="text-align:right;">
+0.279
+</td>
+<td style="text-align:right;">
+8.602
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1.848
+</td>
+<td style="text-align:right;">
+2.953
+</td>
+<td style="text-align:right;">
+0.104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0.464
+</td>
+<td style="text-align:right;">
+0.086
+</td>
+<td style="text-align:right;">
+5.417
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.294
+</td>
+<td style="text-align:right;">
+0.633
+</td>
+<td style="text-align:right;">
+0.088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0.713
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+<td style="text-align:right;">
+10.114
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.573
+</td>
+<td style="text-align:right;">
+0.853
+</td>
+<td style="text-align:right;">
+0.184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Species2
+</td>
+<td style="text-align:right;">
+-0.788
+</td>
+<td style="text-align:right;">
+0.231
+</td>
+<td style="text-align:right;">
+-3.402
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:right;">
+-1.247
+</td>
+<td style="text-align:right;">
+-0.328
+</td>
+<td style="text-align:right;">
+0.147
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Species3
+</td>
+<td style="text-align:right;">
+-1.161
+</td>
+<td style="text-align:right;">
+0.325
+</td>
+<td style="text-align:right;">
+-3.572
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:right;">
+-1.810
+</td>
+<td style="text-align:right;">
+-0.513
+</td>
+<td style="text-align:right;">
+0.243
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="calculating-bias" class="section level3">
+<h3><span class="header-section-number">14.8.7</span> Calculating bias</h3>
+<p>The iris data set had no missing data to begin with. So we can calculate the “true” parameter estimates…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</code></pre></div>
+<p>and find the difference in coefficients.</p>
+<p>The variance of the multiply imputed estimates is larger because of the between-imputation variance.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forestplot)
+te.mean &lt;-<span class="st"> </span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">1</span>]
+mi.mean &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">1</span>]
+te.ll   &lt;-<span class="st"> </span>te.mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">2</span>]
+mi.ll   &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">6</span>]
+te.ul   &lt;-<span class="st"> </span>te.mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">2</span>]
+mi.ul   &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">7</span>]
+names   &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">coef</span>(true.model))
+
+
+<span class="kw">forestplot</span>(names, 
+           <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;True Model&quot;</span>, <span class="st">&quot;MICE&quot;</span>),
+           <span class="dt">fn.ci_norm =</span> <span class="kw">c</span>(fpDrawNormalCI, fpDrawCircleCI), 
+           <span class="dt">mean =</span> <span class="kw">cbind</span>(te.mean, mi.mean), 
+           <span class="dt">lower =</span> <span class="kw">cbind</span>(te.ll, mi.ll),
+           <span class="dt">upper =</span> <span class="kw">cbind</span>(te.ul, mi.ul), 
+           <span class="dt">col=</span><span class="kw">fpColors</span>(<span class="dt">box=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkred&quot;</span>)), 
+           <span class="dt">xlab=</span><span class="st">&quot;Regression coefficients&quot;</span>,
+           <span class="dt">boxsize =</span> .<span class="dv">1</span>
+           )</code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-43-1.png" width="960" /></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="additional-info.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="identifying-missing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiple-imputation-using-chained-equations-mice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-thoughts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

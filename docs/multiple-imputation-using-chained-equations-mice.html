@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="multiple-imputation-mi.html">
-<link rel="next" href="final-thoughts.html">
+<link rel="next" href="example-prescribed-amount-of-missing-.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -302,11 +302,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#visualize-imputations"><i class="fa fa-check"></i><b>14.7.1</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>14.7.2</b> Calculating bias</a></li>
+<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
+<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.8</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.9" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
+<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
@@ -334,6 +345,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="images/mice.jpg" />
 
 </div>
+<div id="overview" class="section level3">
+<h3><span class="header-section-number">14.7.1</span> Overview</h3>
 <ul>
 <li>Generates multiple imputations for incomplete multivariate data by Gibbs sampling.</li>
 <li>Missing data can occur anywhere in the data.</li>
@@ -342,6 +355,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>A separate univariate imputation model can be specified for each column.</li>
 <li>The default imputation method depends on the measurement level of the target column.</li>
 </ul>
+
+<div class="rmdtip">
+<p>Your best reference guide to this section of the notes is the mice: Multivariate Imputation by Chained Equations in R article in the Journal of Statistical Software by Stef van Buuren.</p>
+<a href="https://www.jstatsoft.org/article/view/v045i03" class="uri">https://www.jstatsoft.org/article/view/v045i03</a>
+</div>
+
+</div>
+<div id="process-algorithm" class="section level3">
+<h3><span class="header-section-number">14.7.2</span> Process / Algorithm</h3>
 <p>Consider a data matrix with 3 variables <span class="math inline">\(y_{1}\)</span>, <span class="math inline">\(y_{2}\)</span>, <span class="math inline">\(y_{3}\)</span>, each with missing values. At iteration <span class="math inline">\((\ell)\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>Fit a model on <span class="math inline">\(y_{1}^{(\ell-1)}\)</span> using current values of <span class="math inline">\(y_{2}^{(\ell-1)}, y_{3}^{(\ell-1)}\)</span></li>
@@ -352,11 +374,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Impute missing <span class="math inline">\(y_{3}\)</span>, generating <span class="math inline">\(y_{3}^{(\ell)}\)</span></li>
 <li>Start next cycle using updated values <span class="math inline">\(y_{1}^{(\ell)}, y_{2}^{(\ell)}, y_{3}^{(\ell)}\)</span></li>
 </ol>
-<p>(Select) Built-in elementary imputation methods are:</p>
+<p>where <span class="math inline">\((\ell)\)</span> cycles from 1 to <span class="math inline">\(L\)</span>, before an imputed value is drawn.</p>
+</div>
+<div id="convergence" class="section level3">
+<h3><span class="header-section-number">14.7.3</span> Convergence</h3>
+<p>How many imputations (<span class="math inline">\(m\)</span>) should we create and how many iterations (<span class="math inline">\(L\)</span>) should I run between imputations?</p>
+<ul>
+<li>Original research from Rubin states that small amount of imputations (<span class="math inline">\(m=5\)</span>) would be sufficient.</li>
+<li>Advances in computation have resulted in very efficient programs such as <code>mice</code> - so generating a larger number of imputations (say <span class="math inline">\(m=40\)</span>) are more common <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4934387/">Pan, 2016</a></li>
+<li>You want the number of iterations between draws to be long enough that the Gibbs sampler has converged.</li>
+<li>There is no test or direct method for determing convergence.
+<ul>
+<li>Plot parameter against iteration number, one line per chain.</li>
+<li>These lines should be intertwined together, without showing trends.</li>
+<li>Convergence can be identified when the variance between lines is smaller (or at least no larger) than the variance within the lines.</li>
+</ul></li>
+</ul>
+
+<div class="rmdimportant">
+<p><strong>Mandatory Reading</strong></p>
+Read 4.3: Assessing Convergence in the <a href="https://www.jstatsoft.org/article/view/v045i03">JSS article on mice</a>
+</div>
+
+</div>
+<div id="imputation-methods-1" class="section level3">
+<h3><span class="header-section-number">14.7.4</span> Imputation Methods</h3>
+<p>Some built-in imputation methods in the <code>mice</code> package are:</p>
 <ul>
 <li><em>pmm</em>: Predictive mean matching (any) <strong>DEFAULT FOR NUMERIC</strong></li>
-<li><em>norm.nob</em>: Linear regression ignoring model error (numeric)</li>
-<li><em>norm.boot</em>: Linear regression using bootstrap (numeric)</li>
 <li><em>norm.predict</em>: Linear regression, predicted values (numeric)</li>
 <li><em>mean</em>: Unconditional mean imputation (numeric)</li>
 <li><em>logreg</em>: Logistic regression (factor, 2 levels) <strong>DEFAULT</strong></li>
@@ -366,301 +411,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><em>cart</em>: Classification and regression trees (any)</li>
 <li><em>rf</em>: Random forest imputations (any)</li>
 </ul>
-<div id="example-prescribed-amount-of-missing." class="section level4">
-<h4><span class="header-section-number">14.7.0.1</span> Example: Prescribed amount of missing.</h4>
-<p>We will demonstrate using Fisher’s Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to estimate the bias incurred by using these imputation methods.</p>
-<p>For the <code>iris</code> data we set a seed and use the <code>prodNA()</code> function from the <code>missForest</code> package to create 10% missing values in this data set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(missForest)
-<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris)))
-## 
-## FALSE 
-##     1
-<span class="kw">set.seed</span>(<span class="dv">12345</span>) <span class="co"># Note to self: Change the combo on my luggage</span>
-iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <span class="dt">noNA=</span><span class="fl">0.1</span>)
-<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris.mis)))
-## 
-## FALSE  TRUE 
-##   0.9   0.1</code></pre></div>
-</div>
-<div id="multiply-impute-the-missing-data-using-mice" class="section level4">
-<h4><span class="header-section-number">14.7.0.2</span> Multiply impute the missing data using <code>mice()</code></h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris &lt;-<span class="st"> </span><span class="kw">mice</span>(iris.mis, <span class="dt">m=</span><span class="dv">5</span>, <span class="dt">maxit=</span><span class="dv">20</span>, <span class="dt">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">seed=</span><span class="dv">500</span>, <span class="dt">printFlag=</span><span class="ot">FALSE</span>)
-<span class="kw">summary</span>(imp_iris)
-## Multiply imputed data set
-## Call:
-## mice(data = iris.mis, m = 5, method = &quot;pmm&quot;, maxit = 20, printFlag = FALSE, 
-##     seed = 500)
-## Number of multiple imputations:  5
-## Missing cells per column:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##           16           15           13           16           15 
-## Imputation methods:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; 
-## VisitSequence:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##            1            2            3            4            5 
-## PredictorMatrix:
-##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## Sepal.Length            0           1            1           1       1
-## Sepal.Width             1           0            1           1       1
-## Petal.Length            1           1            0           1       1
-## Petal.Width             1           1            1           0       1
-## Species                 1           1            1           1       0
-## Random generator seed value:  500</code></pre></div>
-<ul>
-<li>The <code>meth</code>od can be either a single string, or a vector of strings with length <code>ncol(data)</code>
-<ul>
-<li>specifying the elementary imputation method to be used for each column in data.</li>
-<li>If specified as a single string, the same method will be used for all columns.</li>
-<li>Columns that need not be imputed have the empty method ’’</li>
-</ul></li>
-<li><code>printFlag</code>: Use print=FALSE for silent computation.</li>
-</ul>
-<p><strong>Read 4.3: Assessing Convergence in the <a href="https://www.jstatsoft.org/article/view/v045i03">JSS article on mice</a></strong></p>
-</div>
-<div id="check-the-imputation-method-used-on-each-variable." class="section level4">
-<h4><span class="header-section-number">14.7.0.3</span> Check the imputation method used on each variable.</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>meth
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</code></pre></div>
-</div>
-<div id="look-at-the-values-generated-for-imputation" class="section level4">
-<h4><span class="header-section-number">14.7.0.4</span> Look at the values generated for imputation</h4>
-<p>This just shows what values were imputed for this variable at each imputation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>imp<span class="op">$</span>Sepal.Length
-##       1   2   3   4   5
-## 1   5.0 5.0 5.0 5.8 5.2
-## 5   5.6 5.0 5.4 4.8 5.8
-## 26  5.1 4.9 5.1 5.0 5.5
-## 31  5.1 5.0 5.1 4.7 5.5
-## 33  5.5 5.7 5.5 5.8 4.9
-## 39  4.9 4.4 4.4 4.8 4.6
-## 43  5.0 4.9 4.3 4.6 4.6
-## 56  6.6 5.8 6.1 5.6 6.1
-## 96  6.2 6.2 5.8 6.7 6.6
-## 103 6.3 6.3 6.7 6.7 7.2
-## 113 6.3 6.7 6.9 6.9 6.7
-## 124 6.6 5.6 6.4 6.2 6.2
-## 132 7.2 7.7 7.7 7.7 7.7
-## 135 7.7 6.9 6.3 6.7 6.3
-## 149 7.0 6.7 6.7 6.3 6.7
-## 150 6.3 6.4 6.7 7.2 6.4</code></pre></div>
-</div>
-<div id="create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations" class="section level4">
-<h4><span class="header-section-number">14.7.0.5</span> Create a complete data set by filling in the missing data using the imputations</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="dt">action=</span><span class="dv">1</span>)</code></pre></div>
-<p>Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on.</p>
-</div>
-<div id="alternative---stack-the-imputed-data-sets-in-long-format." class="section level4">
-<h4><span class="header-section-number">14.7.0.6</span> Alternative - Stack the imputed data sets in <em>long</em> format.</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_long &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</code></pre></div>
-<p>By looking at the <code>names</code> of this new object we can confirm that there are indeed 5 complete data sets with <span class="math inline">\(n=150\)</span> in each.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(iris_long)
-## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; 
-## [5] &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;
-<span class="kw">table</span>(iris_long<span class="op">$</span>.imp)
-## 
-##   1   2   3   4   5 
-## 150 150 150 150 150</code></pre></div>
-</div>
-<div id="visualize-imputations" class="section level3">
-<h3><span class="header-section-number">14.7.1</span> Visualize Imputations</h3>
-<p>Let’s compare the imputed values to the observed values to see if they are indeed “plausible” We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed).</p>
-<p><strong>Univariately</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">densityplot</span>(imp_iris)</code></pre></div>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
-<p><strong>Multivariately</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(imp_iris, Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width <span class="op">|</span><span class="st"> </span>Species, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre></div>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
-<p><strong>Analyze and pool</strong> All of this imputation was done so we could actually perform an analysis!</p>
-<p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>, <code>Petal.Length</code> and <code>Species</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">with</span>(imp_iris, <span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species))
-<span class="kw">summary</span>(<span class="kw">pool</span>(model))
-##                     est         se         t       df     Pr(&gt;|t|)
-## (Intercept)   2.4424312 0.29430137  8.299082 81.52267 1.851852e-12
-## Sepal.Width   0.4574809 0.09086928  5.034495 85.27283 2.636929e-06
-## Petal.Length  0.7058246 0.07676480  9.194639 39.26328 2.448841e-11
-## Species2     -0.7728084 0.24720667 -3.126163 56.48034 2.796938e-03
-## Species3     -1.1255913 0.34481260 -3.264357 36.94475 2.368406e-03
-##                   lo 95      hi 95 nmis       fmi    lambda
-## (Intercept)   1.8569206  3.0279417   NA 0.1506633 0.1300790
-## Sepal.Width   0.2768168  0.6381451   15 0.1424999 0.1226211
-## Petal.Length  0.5505864  0.8610627   13 0.2890890 0.2537759
-## Species2     -1.2679300 -0.2776869   NA 0.2176870 0.1904668
-## Species3     -1.8242833 -0.4268994   NA 0.3017982 0.2649972</code></pre></div>
-<p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>), and a 95% interval.</p>
-<p>Additional information included in this table is the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-est
-</th>
-<th style="text-align:right;">
-se
-</th>
-<th style="text-align:right;">
-t
-</th>
-<th style="text-align:right;">
-Pr(&gt;|t|)
-</th>
-<th style="text-align:right;">
-lo 95
-</th>
-<th style="text-align:right;">
-hi 95
-</th>
-<th style="text-align:right;">
-fmi
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-2.442
-</td>
-<td style="text-align:right;">
-0.294
-</td>
-<td style="text-align:right;">
-8.299
-</td>
-<td style="text-align:right;">
-0.000
-</td>
-<td style="text-align:right;">
-1.857
-</td>
-<td style="text-align:right;">
-3.028
-</td>
-<td style="text-align:right;">
-0.151
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sepal.Width
-</td>
-<td style="text-align:right;">
-0.457
-</td>
-<td style="text-align:right;">
-0.091
-</td>
-<td style="text-align:right;">
-5.034
-</td>
-<td style="text-align:right;">
-0.000
-</td>
-<td style="text-align:right;">
-0.277
-</td>
-<td style="text-align:right;">
-0.638
-</td>
-<td style="text-align:right;">
-0.142
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Petal.Length
-</td>
-<td style="text-align:right;">
-0.706
-</td>
-<td style="text-align:right;">
-0.077
-</td>
-<td style="text-align:right;">
-9.195
-</td>
-<td style="text-align:right;">
-0.000
-</td>
-<td style="text-align:right;">
-0.551
-</td>
-<td style="text-align:right;">
-0.861
-</td>
-<td style="text-align:right;">
-0.289
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Species2
-</td>
-<td style="text-align:right;">
--0.773
-</td>
-<td style="text-align:right;">
-0.247
-</td>
-<td style="text-align:right;">
--3.126
-</td>
-<td style="text-align:right;">
-0.003
-</td>
-<td style="text-align:right;">
--1.268
-</td>
-<td style="text-align:right;">
--0.278
-</td>
-<td style="text-align:right;">
-0.218
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Species3
-</td>
-<td style="text-align:right;">
--1.126
-</td>
-<td style="text-align:right;">
-0.345
-</td>
-<td style="text-align:right;">
--3.264
-</td>
-<td style="text-align:right;">
-0.002
-</td>
-<td style="text-align:right;">
--1.824
-</td>
-<td style="text-align:right;">
--0.427
-</td>
-<td style="text-align:right;">
-0.302
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="calculating-bias" class="section level3">
-<h3><span class="header-section-number">14.7.2</span> Calculating bias</h3>
-<p>The iris data set had no missing data to begin with. So we can calculate the “true” parameter estimates…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</code></pre></div>
-<p>and find the difference in coefficients.</p>
-<p>The variance of the multiply imputed estimates is larger because of the between-imputation variance.</p>
-<p><img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="960" /></p>
 </div>
 </div>
             </section>
@@ -669,7 +419,7 @@ Species3
         </div>
       </div>
 <a href="multiple-imputation-mi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="final-thoughts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="example-prescribed-amount-of-missing-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

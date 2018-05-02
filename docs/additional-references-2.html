@@ -302,11 +302,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#visualize-imputations"><i class="fa fa-check"></i><b>14.7.1</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#calculating-bias"><i class="fa fa-check"></i><b>14.7.2</b> Calculating bias</a></li>
+<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
+<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.8" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.8</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.9" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
+<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/MATH456_notes" target="blank">View source on Github</a></li>
@@ -329,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="additional-references-2" class="section level2">
-<h2><span class="header-section-number">14.9</span> Additional References</h2>
+<h2><span class="header-section-number">14.10</span> Additional References</h2>
 <ul>
 <li>Little, R. and Rubin, D. Statistical Analysis with Missing Data, 2nd Ed., Wiley, 2002
 <ul>
@@ -341,10 +352,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Small and cheap</li>
 <li>Requires very little math</li>
 </ul></li>
-<li>Multiple Imputation.com <a href="http://www.stefvanbuuren.nl/mi/" class="uri">http://www.stefvanbuuren.nl/mi/</a></li>
-<li>mice: Multivariate Imputation by Chained Equations in R (skim) <a href="https://www.jstatsoft.org/article/view/v045i03" class="uri">https://www.jstatsoft.org/article/view/v045i03</a></li>
+<li><p>Multiple Imputation.com <a href="http://www.stefvanbuuren.nl/mi/" class="uri">http://www.stefvanbuuren.nl/mi/</a></p></li>
 <li><a href="http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/" class="uri">http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/</a></li>
-<li><a href="http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/" class="uri">http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/</a></li>
+<li><p><a href="http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/" class="uri">http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/</a></p></li>
 </ul>
 <p>Imputation methods for complex survey data and data not missing at random is an open research topic. Read more about this here: <a href="https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm" class="uri">https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm</a></p>
 <p><img src="https://shiring.github.io/netlify_images/mice_sketchnote_gxjsgc.jpg" /> <a href="https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/" class="uri">https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/</a></p>

@@ -412,11 +412,14 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 
                                   
 * df are similar to those for comparison of normal means with unequal variances, i.e., using Satterthwaite approximation.
-* Ratio of (B = between-imputation variance) to (T = between + within-imputation variance) is known as the fraction of missing information. 	
-
+* Ratio of (B = between-imputation variance) to (T = between + within-imputation variance) is known as the fraction of missing information (FMI). 	
+    - The FMI has been proposed as a way to monitor ongoing data collection and estimate the potential bias resulting from survey non-responders [Wagner, 2018](https://academic.oup.com/poq/article-abstract/74/2/223/1936466?redirectedFrom=fulltext)
+    
 ## Multiple Imputation using Chained Equations (MICE)
 
 ![](images/mice.jpg)
+
+### Overview 
 
 * Generates multiple imputations for incomplete multivariate data by Gibbs sampling. 
 * Missing data can occur anywhere in the data. 
@@ -425,6 +428,13 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 * A separate univariate imputation model can be specified for each column. 
 * The default imputation method depends on the measurement level of the target column. 
 
+```{block2, type="rmdtip"}
+Your best reference guide to this section of the notes is the mice: Multivariate Imputation by Chained Equations in R article in the Journal of Statistical Software by Stef van Buuren.
+
+https://www.jstatsoft.org/article/view/v045i03 
+```
+
+### Process / Algorithm 
 
 Consider a data matrix with 3 variables $y_{1}$, $y_{2}$, $y_{3}$, each with missing values. At iteration $(\ell)$:
 
@@ -436,12 +446,31 @@ Consider a data matrix with 3 variables $y_{1}$, $y_{2}$, $y_{3}$, each with mis
 6. Impute missing  $y_{3}$, generating $y_{3}^{(\ell)}$ 
 7. Start next cycle using updated values $y_{1}^{(\ell)}, y_{2}^{(\ell)}, y_{3}^{(\ell)}$
 
+where $(\ell)$ cycles from 1 to $L$, before an imputed value is drawn. 
 
-(Select) Built-in elementary imputation methods are:
+### Convergence
+
+How many imputations ($m$) should we create and how many iterations ($L$) should I run between imputations? 
+
+* Original research from Rubin states that small amount of imputations ($m=5$) would be sufficient. 
+* Advances in computation have resulted in very efficient programs such as `mice` - so generating a larger number of imputations (say $m=40$) are more common [Pan, 2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4934387/)
+* You want the number of iterations between draws to be long enough that the Gibbs sampler has converged. 
+* There is no test or direct method for determing convergence. 
+    - Plot parameter against iteration number, one line per chain. 
+    - These lines should be intertwined together, without showing trends. 
+    - Convergence can be identified when the variance between lines is smaller (or at least no larger) than the variance within the lines. 
+
+```{block2, type="rmdimportant"}
+**Mandatory Reading**
+  
+Read 4.3: Assessing Convergence in the [JSS article on mice](https://www.jstatsoft.org/article/view/v045i03)
+```
+
+### Imputation Methods
+
+Some built-in imputation methods in the `mice` package are:
 
 * _pmm_: Predictive mean matching (any) **DEFAULT FOR NUMERIC**
-* _norm.nob_: Linear regression ignoring model error (numeric)
-* _norm.boot_: Linear regression using bootstrap (numeric)
 * _norm.predict_: Linear regression, predicted values (numeric)
 * _mean_: Unconditional mean imputation (numeric)
 * _logreg_: Logistic regression (factor, 2 levels) **DEFAULT**
@@ -452,46 +481,63 @@ Consider a data matrix with 3 variables $y_{1}$, $y_{2}$, $y_{3}$, each with mis
 * _rf_: Random forest imputations (any)
 
 
-#### Example: Prescribed amount of missing.
+## Example: Prescribed amount of missing.
 We will demonstrate using Fisher's Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to  estimate the bias incurred by using these imputation methods.
 
 For the `iris` data we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
 ```{r}
 library(missForest)
-prop.table(table(is.na(iris)))
 set.seed(12345) # Note to self: Change the combo on my luggage
 iris.mis <- prodNA(iris, noNA=0.1)
 prop.table(table(is.na(iris.mis)))
 ```
 
-
-#### Multiply impute the missing data using `mice()`
+Visualize missing data pattern.
 ```{r}
-imp_iris <- mice(iris.mis, m=5, maxit=20, meth="pmm", seed=500, printFlag=FALSE)
+library(VIM)
+aggr(iris.mis, col=c('darkolivegreen3','salmon'),
+              numbers=TRUE, sortVars=TRUE,
+              labels=names(iris.mis), cex.axis=.7,
+              gap=3, ylab=c("Missing data","Pattern"))
+```
+
+Here's another example of where only 10% of the data overall is missing, but it results in only 58% complete cases. 
+
+
+### Multiply impute the missing data using `mice()`
+```{r}
+imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
 summary(imp_iris)
 ```
 
-* The `meth`od can be either a single string, or a vector of strings with length `ncol(data)`
-    - specifying the elementary imputation method to be used for each column in data. 
-    - If specified as a single string, the same method will be used for all columns. 
-    - Columns that need not be imputed have the empty method ''
-* `printFlag`: Use print=FALSE for silent computation.
+```{block2, type="rmdnote"}
+The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a **very** good idea to understand these controls. 
 
-**Read 4.3: Assessing Convergence in the [JSS article on mice](https://www.jstatsoft.org/article/view/v045i03)**
+https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputations-the-maximum-iterations-affect-accuracy-in-mul/219049#219049
+```
 
-
-#### Check the imputation method used on each variable.
+### Check the imputation method used on each variable.
 ```{r}
 imp_iris$meth
 ```
 
-#### Look at the values generated for imputation
-This just shows what values were imputed for this variable at each imputation. 
+Predictive mean matching was used for all variables, even `Species`. This is reasonable because PMM is a hot deck method of imputation. 
+
+### Check Convergence
+```{r}
+plot(imp_iris, c("Sepal.Length", "Sepal.Width", "Petal.Length"))
+```
+
+The variance across chains is no larger than the variance within chains. 
+
+### Look at the values generated for imputation
 ```{r}
 imp_iris$imp$Sepal.Length
 ```
 
-#### Create a complete data set by filling in the missing data using the imputations
+This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
+
+### Create a complete data set by filling in the missing data using the imputations
 ```{r}
 iris_1 <- complete(imp_iris, action=1)
 ```
@@ -502,7 +548,7 @@ Action=1 returns the first completed data set, action=2 returns the second compl
 iris_long <- complete(imp_iris, 'long')
 ```
 
-By looking at the `names` of this new object we can confirm that there are indeed 5 complete data sets with $n=150$ in each. 
+By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=150$ in each. 
 
 ```{r}
 names(iris_long)
@@ -552,7 +598,7 @@ and find the difference in coefficients.
 
 The variance of the multiply imputed estimates is larger because of the between-imputation variance. 
 
-```{r, echo=FALSE, fig.width=10}
+```{r, fig.width=10}
 library(forestplot)
 te.mean <- summary(true.model)$coefficients[,1]
 mi.mean <- summary(pool(model))[,1]
@@ -562,18 +608,18 @@ te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
 mi.ul   <- summary(pool(model))[,7]
 names   <- names(coef(true.model))
 
+
 forestplot(names, 
            legend = c("True Model", "MICE"),
            fn.ci_norm = c(fpDrawNormalCI, fpDrawCircleCI), 
-           boxsize = .1, 
-           line.margin = .05, 
            mean = cbind(te.mean, mi.mean), 
            lower = cbind(te.ll, mi.ll),
            upper = cbind(te.ul, mi.ul), 
            col=fpColors(box=c("blue", "darkred")), 
-           xlab="Regression coefficients", 
-           ci.verticies=TRUE
+           xlab="Regression coefficients",
+           boxsize = .1
            )
+
 ```
 
 
@@ -614,7 +660,7 @@ forestplot(names,
     - Small and cheap
     - Requires very little math
 * Multiple Imputation.com http://www.stefvanbuuren.nl/mi/
-* mice: Multivariate Imputation by Chained Equations in R (skim) https://www.jstatsoft.org/article/view/v045i03 
+
 * http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/ 
 * http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/
 
