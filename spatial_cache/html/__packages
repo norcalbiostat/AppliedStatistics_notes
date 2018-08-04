@@ -1,0 +1,15 @@
+base
+ggplot2
+gridExtra
+dplyr
+pander
+knitr
+kableExtra
+maps
+housingData
+bindrcpp
+ggmap
+sp
+Matrix
+spData
+spdep

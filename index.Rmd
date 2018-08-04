@@ -1,5 +1,5 @@
 --- 
-title: "Applied Statistics II"
+title: "Applied Statistics"
 author: "Robin A. Donatello and Edward A. Roualdes"
 date: "Last Updated `r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,9 +7,9 @@ documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: norcalbiostat/MATH456_notes
+github-repo: norcalbiostat/AppliedStatistics_notes
 url: 
-description: "Course notes for MATH 456 at CSU Chico"
+description: "Course notes for Applied Statistics courses at CSU Chico"
 ---
 
 # Preface {-}
@@ -21,7 +21,7 @@ htmltools::img(src = knitr::image_uri("logo.png"),
                style = 'position:absolute; top:0; right:0; padding:10px;width: 10%')
 ```
 
-This document is a set of course notes for Math 456 - Applied Statistics II at California State University, Chico. This is not a textbook replacement, and topics covered will vary depending on the instructor. To make this clear we use the term _notebook_ to refer to this document so as not to be confused with a traditional textbook. 
+This document is a set of course notes for several Applied Statistics courses at California State University, Chico. This is not a textbook replacement, and topics covered will vary depending on the instructor. To make this clear we use the term _notebook_ to refer to this document so as not to be confused with a traditional textbook. 
 
 Some data and examples in this notebook are drawn from _Practical Multivariate Analysis, 5th ed, Afifi, May, Clark_ and used with permission by the authors. 
 
@@ -29,4 +29,5 @@ Some data and examples in this notebook are drawn from _Practical Multivariate A
 
 
 <img src="images/rmarkdown.png" height="120px" width="110px" /><img src="images/bookdown.png" height="120px" width="100px" /><img src="images/rstudio.png" height="120px" width="110px" /><img src="images/github.png" height="120px" width="120px" />
+<img src="images/ggplot2.png" height="120px" width="110px" /><img src="images/magrittr.png" height="120px" width="110px" />
   

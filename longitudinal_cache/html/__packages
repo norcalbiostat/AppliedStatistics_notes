@@ -1,0 +1,15 @@
+base
+ggplot2
+gridExtra
+dplyr
+pander
+knitr
+kableExtra
+haven
+bindrcpp
+nlme
+mvtnorm
+survival
+MASS
+TH.data
+multcomp

@@ -1,9 +1,10 @@
-book_filename: "MATH456_notes"
+book_filename: "AppliedStatistics_notes"
 chapter_name: "Chapter "
-repo: https://github.com/norcalbiostat/MATH456_notes
+repo: https://github.com/norcalbiostat/AppliedStatistics_notes
 output_dir: docs
 rmd_files: ["index.Rmd" 
             ,"data_prep.Rmd"
+            ,"data_viz.Rmd"
             
             ,"reg_intro.Rmd"
             ,"linreg.Rmd"
