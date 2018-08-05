@@ -5,6 +5,7 @@ output_dir: docs
 rmd_files: ["index.Rmd" 
             ,"data_prep.Rmd"
             ,"data_viz.Rmd"
+            ,"select_analysis.Rmd"
             
             ,"reg_intro.Rmd"
             ,"linreg.Rmd"

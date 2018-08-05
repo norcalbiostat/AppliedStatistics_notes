@@ -26,5 +26,5 @@ Some data and examples in this notebook are drawn from _Practical Multivariate A
 
 
 <img src="images/rmarkdown.png" height="120px" width="110px" /><img src="images/bookdown.png" height="120px" width="100px" /><img src="images/rstudio.png" height="120px" width="110px" /><img src="images/github.png" height="120px" width="120px" />
-<img src="images/ggplot2.png" height="120px" width="120px" /><img src="images/magrittr.png" height="120px" width="120px" />
+<img src="images/ggplot2.png" height="120px" width="110px" /><img src="images/magrittr.png" height="120px" width="110px" />
   

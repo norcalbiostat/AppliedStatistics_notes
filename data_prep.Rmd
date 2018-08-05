@@ -3,21 +3,24 @@
 Write an introduction here. 
 
 
-## Reproducible Workflows
+### Reproducible Workflows
 
 ![PrepareData](images/Afifi_Fig3_1.png)
 
 ![q](images/q.png) Why do we need a codebook? 
 
-* You are your own collaborator 6 months from now. Make sure you will be able
-to understand what you were doing.
-* Investing the time to do things clearly and in a reproducible manner will
-make your future self happy.
+* You are your own collaborator 6 months from now. Make sure you will be able to understand what you were doing.
+* Investing the time to do things clearly and in a reproducible manner will make your future self happy.
 * Comment your code with explanations and instructions.
     - How did you get from point A to B? 
     - Why did you recode this variable in this manner? 
-
-
+* We need to record those steps (not just for posterity). 
+* This means your code must be saved in a script file. 
+    - Include sufficient notes to yourself describing what you are doing and why. 
+    - For R, this can be in a `.R` or `.RMD` file. I always prefer the latter. 
+    - For SPSS you can specify to `paste the syntax` and copy into a `.sps` script file.
+    - For SAS you'll use a `.sas` file
+    - For STATA this will be a `.do` file
 
 ![Repro](images/pipeline.png)
 
@@ -25,100 +28,157 @@ Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
 ![q](images/q.png) What stages of this pipeline can we conduct using R Markdown? 
 
+### Data Management 
+Questions to ask yourself (and the data) while preparing a data management file. 
 
-## Identifying Variable Types
-This section uses the raw `depression` data set from Afifi et.al. 
-```{r}
-depress <- read.table("https://norcalbiostat.netlify.com/data/Depress.txt", sep="\t", header=TRUE)  
+1. Do you need to code out missing data? 
+2. Do you need to code out skip patterns?
+3. Do you need to make response codes more logical? 
+4. Do you need to recode categorical variables to quantitative? 
+5. Do you need to create secondary variables?
+
+Many of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. 
+
+
+## Import data
+This section uses the raw `depression` data set from the Afifi et.al. textbook. 
+
+```{r start2, warning=FALSE, message=FALSE}
+library(ggplot2)  
+depress <- read.table("https://norcalbiostat.netlify.com/data/Depress.txt", 
+                      sep="\t", header=TRUE)  
 ```
 
-Consider a variable that measures marital status. 
+SPSS syntax will look similar like this: 
+
+```
+GET DATA /TYPE=XLSX 
+  /FILE='C:\path\to\file.xlsx' 
+  /SHEET=name 'Name-of-Sheet' 
+  /CELLRANGE=full
+  /READNAMES=on
+  /ASSUMEDSTRWIDTH=32767.
+EXECUTE. 
+DATASET NAME DataSetExcel WINDOW=FRONT.
+```
+
+Reference on importing data into SPSS: https://libguides.library.kent.edu/SPSS/ImportData. 
+
+The absolute first thing you should do is to look at your raw data table. Are the column headers variable names? Did all the rows get read in? Are there any extra columns or rows included? 
+
+### Renaming varible names for sanity sake
+Turn all variable names to lower case. This is especially frustrating for R and STATA users where syntax is case sensitive. **This is completely optional but helpful**
 
 ```{r}
-table(depress$MARITAL)
-str(depress$MARITAL)
-class(depress$MARITAL)
+names(depress) <- tolower(names(depress))
+```
+
+You should also rename any variable that has spaces or special characters in the name. 
+
+
+## Missing data 
+In Excel, missing data can show up as a blank cell. In SPSS it is represented as a `.` period. R displays missing data as `NA` values. 
+
+Missing Data in SPSS: https://stats.idre.ucla.edu/spss/modules/missing-data/
+
+Why would data be missing? Other than the obvious data entry errors, tech glitches or just non-cooperative plants or people, sometimes values are out of range and you would rather delete them than change their value (data edit). 
+
+Lets look at the religion variable in the depression data set. 
+```{r relig_tab}
+table(depress$relig, useNA="always")
+```
+
+Looking at the codebook, there is no category `6` for religion. Let's change all values to `NA`.
+```{r relig_fix}
+depress$relig[depress$relig==6] <- NA
+```
+This code says take all rows where `relig` is equal to 6, and change them to `NA`. 
+
+Confirm recode.
+```{r relig_tab2}
+table(depress$relig, useNA="always")
+```
+
+Notice the use of the `useNA="always"` argument. If we just looked at the base table without this argument, we would have never known there was missing data!
+```{r relig_tab2_nona}
+table(depress$relig)
+```
+
+What about continuous variables? Well there happens to be no other missing data in this data set, so let's make up a set of 7 data points stored in a variable named `y`. 
+
+```{r fakey}
+y <- c(1, 2, 3, NA, 4, NA, 6)
+y
+```
+
+The #1 way to identify missing data in a continuous variable is by looking at the `summary()` values. 
+```{r fakey_ss}
+mean(y)
+summary(y)
+mean(y, na.rm=TRUE)
+```
+
+In R, any arithmetic function (like addition, multipliation) on missing data results in a missing value. The `na.rm=TRUE` toggle tells R to calculate the _complete case_ mean. This is a biased measure of the mean, but missing data is a topic worthy of it's own course. 
+
+
+## Identifying Variable Types
+
+The `str` function is short for _structure_. This shows you the variable names, what data types R thinks each variable are, and some of the raw data. You can also use the `view()` function to open the data as a simliar spreadsheet format, or `head()` to see the top 6 rows of the data. The latter is sometimes less than helpful for a very large data set. 
+```{r look_depress}
+str(depress)
+```
+
+Right away this tells me that **R** thinks all variables are numeric integers, not categorical variables. This will have to be changed. We'll get to that in a moment. 
+
+In SPSS you'll the following set of icons to tell you what data types the program thinks each column is: 
+
+![](images/spss_icons.png)
+
+
+Consider the variable that measures marital status. 
+
+```{r}
+table(depress$marital)
+str(depress$marital)
+class(depress$marital)
 ```
 ![q](images/q.png) What data type does R see this variable as? 
 
 
-When variables have numerical levels it is necessary to ensure that R knows it is a factor variable.
+When variables have numerical levels it is necessary to ensure that the program knows it is a factor variable.
 
 The following code uses the `factor()` function to take the marital status variable and convert it into a factor variable with specified labels that match the codebook. 
 ```{r}
-depress$MARITAL <- factor(depress$MARITAL, 
+depress$marital <- factor(depress$marital, 
                           labels = c("Never Married", "Married", "Divorced", "Separated", "Widowed"))
 ```
 
-It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable `SEX` was replaced. 
+It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable `sex` was replaced. 
 
 ```{r}
-table(depress$MARITAL)
-class(depress$MARITAL)
+table(depress$marital)
+class(depress$marital)
 ```
 
 * Create a boxplot of income across marital status category.
 ```{r}
-qplot(y=INCOME, x=MARITAL, data=depress, geom="boxplot")
+ggplot(depress, aes(y=income, x=marital)) + geom_boxplot()
 ```
 
 Boxplots are nice because they clearly show the range where 50% of the data lie and any potential outliers. Boxplots can also indicate skewness, but sometimes it is helpful to visualize the location of the mean as well as the median. `ggplot2` has a nice `stat_summary` layer that will calculate and add the means to the current plot. 
 
 ```{r}
-qplot(y=INCOME, x=MARITAL, data=depress, geom="boxplot") + 
+ggplot(depress, aes(y=income, x=marital)) + geom_boxplot() + 
    stat_summary(fun.y=mean, colour="blue", size=3, geom="point")
 ```
-
-## Data Editing and Recoding
-
-For unbiased and accurate results of a statistical analysis, sufficient data has to be present. Often times once you start slicing and dicing the data to only look at certain groups, or if you are interested in the behavior of certain variables across levels of another variable, sometimes you start to run into small sample size problems. For example, consider marital status again:  
-
-```{r}
-table(depress$MARITAL)
-```
-
-There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis. 
-
-One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the `recode()` function from the `car` package to create a new variable that I am calling `MARITAL2` that combines the `Divorced` and `Separated` levels. 
-
-```{r}
-depress$MARITAL2 <- car::recode(depress$MARITAL, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
-```
-
-![q](images/q.png) What does the double colon `::` notation in `car::recode` do, and why is this tactic beneficial? 
-
-Always confirm your recodes. 
-```{r}
-table(depress$MARITAL, depress$MARITAL2, useNA="always")
-```
-
-This confirms that records where `MARITAL` (rows) is `Divorced` or `Separated` have the value of `Sep/Div` for `MARITAL2` (columns).
-
-
-Now let's examine the relationship between income against marital status by creating a boxplot. This is a situation where _jittering_  or _dodging_ the points is helpful to avoid overplotting of points. Note that the full `ggplot` code had to be used here, not the simpler `qplot` methods. Furthermore, the `grid.arrange` function from the `gridExtra` package is used  to display these plots side by side. 
-
-```{r, fig.width=10, fig.height=4}
-library(gridExtra)
-a <- qplot(x=MARITAL2, y=INCOME, data=depress, col=MARITAL2, geom="point", main = "Without jittering") + 
-           coord_flip() + theme(legend.position="none")
-b <- ggplot(depress, aes(x=INCOME, y=MARITAL2, color=MARITAL2), main="With jittering") +
-            geom_point(position=position_jitter()) + theme(legend.position="none")
-grid.arrange(a, b, ncol=2)
-```
-
-![](images/q.png) What do you think `coord_flip()` does? Look at the difference in the X and Y values between plot a and plot b. 
-
-![](images/q.png) What do you think `theme(legend.position="none")` does? 
-
-![](images/q.png) What can you say about the relationship between Income and marital status? 
 
 ## Outliers
 
 Let's look at the age variable in the depression data set. 
 ```{r, fig.width=10, fig.height=6}
 par(mfrow=c(1,2))
-boxplot(depress$AGE)
-hist(depress$AGE)
+boxplot(depress$age)
+hist(depress$age)
 ```
 
 Just looking at the data graphically raises no red flags. The boxplot shows no outlying values and the histogram does not look wildly skewed. This is where knowledge about the data set is essential. The codebook does not provide a valid range for the data, but the description of the data starting on page 3 in the textbook clarifies that this data set is on adults. In the research world, this specifies 18 years or older. 
@@ -126,7 +186,7 @@ Just looking at the data graphically raises no red flags. The boxplot shows no o
 Now look back at the graphics. See anything odd? It appears as if the data go pretty far below 20, possibly below 18. Let's check the numerical summary to get more details. 
 
 ```{r}
-summary(depress$AGE)
+summary(depress$age)
 ```
 
 The minimum value is a 9, which is outside the range of valid values for this variable. This is where you, as a statistician, data analyst or researcher goes back to the PI and asks for advice. Should this data be set to missing, or edited in a way that changes this data point into a valid piece of data. 
@@ -134,27 +194,109 @@ The minimum value is a 9, which is outside the range of valid values for this va
 As an example of a common data entry error, and for demonstration purposes, I went in and changed a 19 to a 9. So the correct thing to do here is to change that 9, back to a 19. This is a very good use of the `ifelse()` function. 
 
 ```{r}
-depress$AGE <- ifelse(depress$AGE==9, 19, depress$AGE)
+depress$age <- ifelse(depress$age==9, 19, depress$age)
 ```
 
-The logical statement is `depress$AGE==9`. Wherever this is true, replace the value of `depress$AGE` with 19, wherever this is false then keep the value of `depress$AGE` unchanged (by "replacing" the new value with the same old value). 
+The logical statement is `depress$age9`. Wherever this is true, replace the value of `depress$age` with 19, wherever this is false then keep the value of `depress$age` unchanged (by "replacing" the new value with the same old value). 
 
 
-Alternatively, you can change that one value using bracket notation. Here you are specifying that you only want the rows where `AGE==9`, and directly assign a value of 19 to those rows.  
+Alternatively, you can change that one value using bracket notation. Here you are specifying that you only want the rows where `age==9`, and directly assign a value of 19 to those rows.  
 ```{r}
-depress$AGE[depress$AGE==9] <- 19
+depress$age[depress$age==9] <- 19
 ```
 
 Confirm the recode. 
 ```{r}
-summary(depress$AGE)
+summary(depress$age)
 ```
 
 Looks like it worked. 
 
-## Data Transformations 
 
-Let's look at assessing normal distributions using the cleaned depression data set. 
+## Creating secondary variables
+
+
+### Collapsing variables into fewer categories
+For unbiased and accurate results of a statistical analysis, sufficient data has to be present. Often times once you start slicing and dicing the data to only look at certain groups, or if you are interested in the behavior of certain variables across levels of another variable, sometimes you start to run into small sample size problems. 
+
+For example, consider marital status again. There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis. 
+
+One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the `recode()` function from  the `car` package to create a new variable that I am calling `marital2` that combines the `Divorced` and `Separated` levels. 
+
+```{r recode_marital, message=FALSE, warning=FALSE}
+library(car)
+marital2 <- recode(depress$marital, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
+```
+
+Always confirm your recodes. 
+```{r confirm_marital_recode}
+table(depress$marital, marital2, useNA="always")
+```
+This confirms that records where `marital` (rows) is `Divorced` or `Separated` have the value of `Sep/Div` for `marital2` (columns). And that no missing data crept up in the process. Now I can drop the temporary `marital2` variable and actually fix `marital`. (keeping it clean)
+
+```{r recode_marital2}
+depress$marital <- recode(depress$marital, "'Divorced' = 'Sep/Div'; 'Separated' = 'Sep/Div'")
+rm(marital2)
+```
+
+### Binning a continuous variable into categorical ranges. 
+Let's create a new variable that categorizes income into the following ranges: <30, [30, 40), [40,50), [50, 60), 60+.  
+The easiest way is to use the `cut2` function in the package `Hmisc`. Note you don't have to load the package fully to use a function from within that package. Useful for times when you only need to use a function once or twice. 
+
+```{r}
+depress$inc_cut <- Hmisc::cut2(depress$income, cuts=c(30,40,50,60))
+table(depress$inc_cut)
+```
+
+### Dichotomizing
+Dichotomous variables tend to be binary indicator variables where a code of `1` is the level you're interested in. 
+
+For example, gender is coded as 2=Female and 1=Male. This is in the right direction but it needs to be 0/1. 
+```{r recode_depress_sex}
+depress$sex <- depress$sex -1 
+table(depress$sex)
+```
+
+0/1 binary coding is mandatory for many analyses. One simple reason is that now you can calculate the mean and interpret it as a proportion. 
+```{r mean_depress_sex}
+mean(depress$sex)
+```
+
+62% of individuals in this data set are female. 
+
+Sometimes the data is recorded as 1/2 (Yes/No), so just subtracting from 1 doesn't create a positive indicator of the variable. For example, `drink=1` if they are a regular drinker, and `drink=2` if they are not. We want not drinking to be coded as `0`, not `2`. 
+
+```{r tab_depress_drink}
+table(depress$drink)
+```
+
+The `ifelse()` function says that if `depress$DRINK` has a value equal to 2 `==2`, then change the value to 0. Otherwise leave it alone. 
+
+```{r fix_depress_drink}
+depress$drink <- ifelse(depress$drink==2, 0, depress$drink)
+table(depress$drink)
+``` 
+
+
+###  Sum or Average values across multiple variables
+
+The Center for Epidemiologic Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. `CESD` is calculated as the sum of all 20 component variables, and is already on this data set. Let's create a new variable named `sleep` as subscale for sleep quality by adding up question numbers 5, 11, and 19. 
+
+Reference: http://cesd-r.com/cesdr/
+
+```{r create_depress_sleep, eval=1}
+depress$sleep <- depress$c5 + depress$c11 + depress$c19
+# depress <- depress %>% mutate(sleep = c5+c11+c19) # Not run. dplyr example
+```
+
+```{r summ_depress_sleep}
+summary(depress$sleep)
+```
+
+
+## Transformations for Normality
+
+Let's look at assessing normal distributions using the **cleaned** depression data set. 
 
 ```{r, eval=FALSE}
 rm(depress) # remove the current version that was used in the previous part of this markdown file
@@ -162,22 +304,22 @@ depress <- read.table("https://norcalbiostat.netlify.com/data/depress_081217.txt
 ```
 
 ```{r}
-hist(depress$INCOME, prob=TRUE, xlab="Annual income (in thousands)", 
+hist(depress$income, prob=TRUE, xlab="Annual income (in thousands)", 
      main="Histogram and Density curve of Income", ylab="")
-lines(density(depress$INCOME), col="blue")
-summary(depress$INCOME)
+lines(density(depress$income), col="blue")
+summary(depress$income)
 ```
 
 The distribution of annual income is slightly skewed right with a mean of $20.5k per year and a median of $15k per year income. The range of values goes from $2k to $65k. Reported income above $40k appear to have been rounded to the nearest $10k, because there are noticeable peaks at $40k, $50k, and $60k. 
 
 In general, transformations are more effective when the the standard deviation is large relative to the mean. One rule of thumb is if the sd/mean ratio is less than 1/4, a transformation may not be necessary. 
 ```{r}
-sd(depress$INCOME) / mean(depress$INCOME)
+sd(depress$income) / mean(depress$income)
 ```
 
 Alternatively Hoaglin, Mosteller and Tukey (1985) showed that if the largest observation divided by the smallest observation is over 2, then the data may not be sufficiently variable for the transformation to be decisive. 
 ```{r}
-max(depress$INCOME) / (min(depress$INCOME)+.1)
+max(depress$income) / (min(depress$income)+.1)
 ```
 
 Note these rules are not meaningful for data without a natural zero. 
@@ -185,7 +327,7 @@ Note these rules are not meaningful for data without a natural zero.
 Another common method of assessing normality is to create a normal probability (or normal quantile) plot. 
 
 ```{r}
-qqnorm(depress$INCOME);qqline(depress$INCOME, col="red")
+qqnorm(depress$income);qqline(depress$income, col="red")
 ```
 
 The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or `U` shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created. 
@@ -194,9 +336,9 @@ The points on the normal probability plot do not follow the red reference line v
 * Create three new variables: `log10inc` as the log base 10 of Income, `loginc` as the natural log of Income, and `xincome` which is equal to the negative of one divided by the cubic root of income. 
 
 ```{r}
-log10inc <- log10(depress$INCOME)
-loginc   <- log(depress$INCOME)
-xincome  <- -1/(depress$INCOME)^(-1/3)
+log10inc <- log10(depress$income)
+loginc   <- log(depress$income)
+xincome  <- -1/(depress$income)^(-1/3)
 ```
 
 
@@ -204,39 +346,27 @@ xincome  <- -1/(depress$INCOME)^(-1/3)
 
 ```{r, fig.width=10, fig.height=10}
 par(mfrow=c(2,2)) # Try (4,1) and (1,4) to see how this works. 
-qqnorm(depress$INCOME, main="Income"); qqline(depress$INCOME,col="blue")
+qqnorm(depress$income, main="Income"); qqline(depress$income,col="blue")
 qqnorm(log10inc, main="Log 10"); qqline(log10inc, col="blue")
 qqnorm(loginc, main = "Natural Log"); qqline(loginc, col="blue")
 qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
 ```
 
 
-## Selecting Appropriate Analysis
+## Saving your changes
 
-**Considerations:**
+You've just made a ton of changes! 
 
-* Purpose of analysis.  
-* Types of variables in data set.  
-* Data used in analysis.   
-* Assumptions needed; satisfied?  
-* Choice of analyses is often arbitrary: consider several  
+* Save or export the new data set to your computer. 
+* Edit the codebook to reflect the changes that you made. Save this codebook with todays date as well. 
+* Keep the data, codebook and data management file in the same folder. 
 
-**Example:** 
-
-5 independent variables: 3 interval, 1 ordinal, 1 nominal  
-
-1 dependent variable: interval
-
-Analysis options  
-
-- Multiple regression: pretend independent ordinal variable is an
-  interval variable use dummy (0 /1) variables for nominal variables
-- Analysis of variance: categorize all independent variables
-- Analysis of covariance: leave variables as is, check assumptions
-- Logistic regression: Categorize dependent variable: high, low
-- Survival analysis: IF dependent variable is time to an event
-
-Unsure? Do several and compare results. 
+The `Sys.Date()` function takes the current date from your computer. The value is then formatted nicely for human consumption and added (pasted) to the file name before written to the working directory as a new text file.
+```{r save_clean_depress, eval=FALSE}
+date <- format(Sys.Date(), "%m%d%y")
+filename <- paste("depress_", date, ".txt", sep="")
+write.table(depress, filename, sep="\t", row.names=FALSE)
+```
 
 ## Wide vs. Long data
 
@@ -248,11 +378,11 @@ fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt",
 head(fev)
 ```
 
-To analyze the effect of gender on FEV, the data need to be in _long_ format, with a single variable for `FEV` and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females. 
+To analyze the effect of gender on FEV, the data need to be in _long_ format, with a single variable for `fev` and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females. 
 
 ```{r}
 fev2 <- data.frame(gender = c(fev$FSEX, fev$MSEX), 
-                   FEV = c(fev$FFEV1, fev$MFEV1), 
+                   rev = c(fev$FFEV1, fev$MFEV1), 
                    ht = c(fev$FHEIGHT, fev$MHEIGHT), 
                    age = c(fev$FAGE, fev$MAGE))
 fev2$gender <- factor(fev2$gender, labels=c("M", "F"))
@@ -261,12 +391,9 @@ head(fev2)
 
 Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several `R` packages that can help with this including `reshape2` and `tidyr`. 
 
-
 ## Dealing with missing data post-analysis 
 
 * Case when: you want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis. 
-
-
 
 If your original data had missing values, here is one way to get the factor scores for available data back onto the data set. Alternatively you can look into methods to conduct factor analysis with missing data (FactomineR)
 
