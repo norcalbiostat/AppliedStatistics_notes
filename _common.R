@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
 
 list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", "kableExtra",
                       "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot", "gridExtra", "knitr", 
-                      "ggmap", "spdep", "housingData")
+                      "ggmap", "spdep", "housingData", "Hmisc", "waffle", "MKmisc", "ROCR", "caret", 
+                      "stargazer", "missForest")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if ( length(new.packages) ) {
     install.packages(new.packages)

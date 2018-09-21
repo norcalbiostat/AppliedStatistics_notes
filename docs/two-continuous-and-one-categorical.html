@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Applied Statistics</title>
+  <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Applied Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Statistics" />
+  
+  <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  
+
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="two-categorical-and-one-continuous.html">
+<link rel="next" href="paneling-on-two-variables.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="chapter" data-level="1.0.1" data-path="data-prep.html"><a href="data-prep.html#reproducible-workflows"><i class="fa fa-check"></i><b>1.0.1</b> Reproducible Workflows</a></li>
+<li class="chapter" data-level="1.0.2" data-path="data-prep.html"><a href="data-prep.html#data-management"><i class="fa fa-check"></i><b>1.0.2</b> Data Management</a></li>
+<li class="chapter" data-level="1.1" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.1</b> Import data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="import-data.html"><a href="import-data.html#renaming-varible-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.1.1</b> Renaming varible names for sanity sake</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>1.2</b> Missing data</a></li>
+<li class="chapter" data-level="1.3" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.3</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
+<li class="chapter" data-level="1.5" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html"><i class="fa fa-check"></i><b>1.5</b> Creating secondary variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#collapsing-variables-into-fewer-categories"><i class="fa fa-check"></i><b>1.5.1</b> Collapsing variables into fewer categories</a></li>
+<li class="chapter" data-level="1.5.2" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#binning-a-continuous-variable-into-categorical-ranges."><i class="fa fa-check"></i><b>1.5.2</b> Binning a continuous variable into categorical ranges.</a></li>
+<li class="chapter" data-level="1.5.3" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#dichotomizing"><i class="fa fa-check"></i><b>1.5.3</b> Dichotomizing</a></li>
+<li class="chapter" data-level="1.5.4" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#sum-or-average-values-across-multiple-variables"><i class="fa fa-check"></i><b>1.5.4</b> Sum or Average values across multiple variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="transformations-for-normality.html"><a href="transformations-for-normality.html"><i class="fa fa-check"></i><b>1.6</b> Transformations for Normality</a></li>
+<li class="chapter" data-level="1.7" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.7</b> Saving your changes</a></li>
+<li class="chapter" data-level="1.8" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.8</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.9" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.9</b> Dealing with missing data post-analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-viz.html"><a href="data-viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html"><i class="fa fa-check"></i><b>2.1</b> The syntax of <code>ggplot</code></a><ul>
+<li class="chapter" data-level="2.1.1" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html#required-arguments"><i class="fa fa-check"></i><b>2.1.1</b> Required arguments</a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html#optional-but-helpful-arguments"><i class="fa fa-check"></i><b>2.1.2</b> Optional but helpful arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>2.2</b> The Data</a></li>
+<li class="chapter" data-level="2.3" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html"><i class="fa fa-check"></i><b>2.3</b> Univariate Categorical variables</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#tables"><i class="fa fa-check"></i><b>2.3.1</b> Tables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#barcharts-barplots"><i class="fa fa-check"></i><b>2.3.2</b> Barcharts / Barplots</a></li>
+<li class="chapter" data-level="2.3.3" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#cleveland-dot-plots"><i class="fa fa-check"></i><b>2.3.3</b> Cleveland Dot Plots</a></li>
+<li class="chapter" data-level="2.3.4" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#pie-chart"><i class="fa fa-check"></i><b>2.3.4</b> Pie Chart</a></li>
+<li class="chapter" data-level="2.3.5" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#waffle-chart"><i class="fa fa-check"></i><b>2.3.5</b> Waffle Chart</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html"><i class="fa fa-check"></i><b>2.4</b> Univariate Continuous variable</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#dotplot"><i class="fa fa-check"></i><b>2.4.1</b> Dotplot</a></li>
+<li class="chapter" data-level="2.4.2" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#histograms"><i class="fa fa-check"></i><b>2.4.2</b> Histograms</a></li>
+<li class="chapter" data-level="2.4.3" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#density-plots"><i class="fa fa-check"></i><b>2.4.3</b> Density plots</a></li>
+<li class="chapter" data-level="2.4.4" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#histograms-density"><i class="fa fa-check"></i><b>2.4.4</b> Histograms + density</a></li>
+<li class="chapter" data-level="2.4.5" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#boxplots"><i class="fa fa-check"></i><b>2.4.5</b> Boxplots</a></li>
+<li class="chapter" data-level="2.4.6" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#violin-plots"><i class="fa fa-check"></i><b>2.4.6</b> Violin plots</a></li>
+<li class="chapter" data-level="2.4.7" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#boxplot-violin-plots"><i class="fa fa-check"></i><b>2.4.7</b> Boxplot + Violin plots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="normal-qq-plots.html"><a href="normal-qq-plots.html"><i class="fa fa-check"></i><b>2.5</b> Normal QQ plots</a></li>
+<li class="chapter" data-level="2.6" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html"><i class="fa fa-check"></i><b>2.6</b> Categorical v. Categorical</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#two-way-tables"><i class="fa fa-check"></i><b>2.6.1</b> Two-way Tables</a></li>
+<li class="chapter" data-level="2.6.2" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#grouped-bar-charts"><i class="fa fa-check"></i><b>2.6.2</b> Grouped bar charts</a></li>
+<li class="chapter" data-level="2.6.3" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#mosaic-plots"><i class="fa fa-check"></i><b>2.6.3</b> Mosaic plots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="continuous-v-continuous.html"><a href="continuous-v-continuous.html"><i class="fa fa-check"></i><b>2.7</b> Continuous v. Continuous</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="continuous-v-continuous.html"><a href="continuous-v-continuous.html#scatterplot"><i class="fa fa-check"></i><b>2.7.1</b> Scatterplot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="scatterplot-matrix.html"><a href="scatterplot-matrix.html"><i class="fa fa-check"></i><b>2.8</b> Scatterplot matrix</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="scatterplot-matrix.html"><a href="scatterplot-matrix.html#adding-lines-to-the-scatterplots"><i class="fa fa-check"></i><b>2.8.1</b> Adding lines to the scatterplots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="line-plots.html"><a href="line-plots.html"><i class="fa fa-check"></i><b>2.9</b> Line plots</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="line-plots.html"><a href="line-plots.html#base-9"><i class="fa fa-check"></i><b>2.9.1</b> base</a></li>
+<li class="chapter" data-level="2.9.2" data-path="line-plots.html"><a href="line-plots.html#ggplot-9"><i class="fa fa-check"></i><b>2.9.2</b> ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html"><i class="fa fa-check"></i><b>2.10</b> Continuous v. Categorical</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#dotplotstrip-chart"><i class="fa fa-check"></i><b>2.10.1</b> Dotplot/strip chart</a></li>
+<li class="chapter" data-level="2.10.2" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#grouped-boxplots"><i class="fa fa-check"></i><b>2.10.2</b> Grouped boxplots</a></li>
+<li class="chapter" data-level="2.10.3" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#grouped-histograms"><i class="fa fa-check"></i><b>2.10.3</b> Grouped histograms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="joy-plots-in-progress.html"><a href="joy-plots-in-progress.html"><i class="fa fa-check"></i><b>2.11</b> Joy plots (in progress)</a></li>
+<li class="chapter" data-level="2.12" data-path="faceting-paneling.html"><a href="faceting-paneling.html"><i class="fa fa-check"></i><b>2.12</b> Faceting / paneling</a></li>
+<li class="chapter" data-level="2.13" data-path="other-ways-to-get-multiple-plots-per-window.html"><a href="other-ways-to-get-multiple-plots-per-window.html"><i class="fa fa-check"></i><b>2.13</b> Other ways to get multiple plots per window</a><ul>
+<li class="chapter" data-level="2.13.1" data-path="other-ways-to-get-multiple-plots-per-window.html"><a href="other-ways-to-get-multiple-plots-per-window.html#base-14"><i class="fa fa-check"></i><b>2.13.1</b> base</a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="multivariate-2-variables.html"><a href="multivariate-2-variables.html"><i class="fa fa-check"></i><b>2.14</b> Multivariate (2+ variables)</a></li>
+<li class="chapter" data-level="2.15" data-path="three-continuous.html"><a href="three-continuous.html"><i class="fa fa-check"></i><b>2.15</b> Three continuous</a></li>
+<li class="chapter" data-level="2.16" data-path="two-categorical-and-one-continuous.html"><a href="two-categorical-and-one-continuous.html"><i class="fa fa-check"></i><b>2.16</b> Two categorical and one continuous</a></li>
+<li class="chapter" data-level="2.17" data-path="two-continuous-and-one-categorical.html"><a href="two-continuous-and-one-categorical.html"><i class="fa fa-check"></i><b>2.17</b> Two continuous and one categorical</a></li>
+<li class="chapter" data-level="2.18" data-path="paneling-on-two-variables.html"><a href="paneling-on-two-variables.html"><i class="fa fa-check"></i><b>2.18</b> Paneling on two variables</a></li>
+<li class="chapter" data-level="2.19" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>2.19</b> Troubleshooting</a></li>
+<li class="chapter" data-level="2.20" data-path="but-what-about.html"><a href="but-what-about.html"><i class="fa fa-check"></i><b>2.20</b> But what about…</a><ul>
+<li class="chapter" data-level="2.20.1" data-path="but-what-about.html"><a href="but-what-about.html#other-plots-not-mentioned"><i class="fa fa-check"></i><b>2.20.1</b> Other plots not mentioned</a></li>
+</ul></li>
+<li class="chapter" data-level="2.21" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>2.21</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="select-analysis.html"><a href="select-analysis.html"><i class="fa fa-check"></i><b>3</b> Selecting Appropriate Analyses</a></li>
+<li class="part"><span><b>I Regression Modeling</b></span></li>
+<li class="chapter" data-level="4" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>4</b> Introduction</a></li>
+<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>5.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="5.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>5.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="5.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>5.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="5.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>5.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="5.5" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>5.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>6</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>6.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="6.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>6.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="6.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>6.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="6.4" data-path="example-1.html"><a href="example-1.html"><i class="fa fa-check"></i><b>6.4</b> Example</a></li>
+<li class="chapter" data-level="6.5" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>6.5</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.6" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>6.6</b> Multicollinearity</a></li>
+<li class="chapter" data-level="6.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>6.7</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7</b> Model Building</a><ul>
+<li class="chapter" data-level="7.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>7.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="7.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>7.1.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>7.2</b> Stratification</a></li>
+<li class="chapter" data-level="7.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>7.3</b> Moderation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>7.3.1</b> Example 1: Sepal vs Petal Length</a></li>
+<li class="chapter" data-level="7.3.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>7.3.2</b> Example 2: Simpson’s Paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>7.4</b> Interactions</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>7.4.1</b> Example</a></li>
+<li class="chapter" data-level="7.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>7.4.2</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>7.5</b> Confounding</a></li>
+<li class="chapter" data-level="7.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>7.6</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>7.6.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="7.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>7.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>7.7</b> Comparing between models</a></li>
+<li class="chapter" data-level="7.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>7.8</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>8.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="8.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>8.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>8.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="8.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>8.2.4</b> Goodness of Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
+</ul></li>
+<li class="part"><span><b>II Multivariate Analysis</b></span></li>
+<li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="10.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>10.1</b> Basic Idea</a></li>
+<li class="chapter" data-level="10.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>10.2</b> More Generally</a></li>
+<li class="chapter" data-level="10.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>10.3</b> Generating PC’s using R</a></li>
+<li class="chapter" data-level="10.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>10.4</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="10.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>10.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="10.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>10.6</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="10.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>10.7</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="10.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>10.8</b> Things to watch out for</a></li>
+<li class="chapter" data-level="10.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>10.9</b> Additional References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>11</b> Factor Analysis</a><ul>
+<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>11.1.1</b> Latent Constructs</a></li>
+<li class="chapter" data-level="11.1.2" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>11.1.2</b> EFA vs CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>11.2</b> Factor Model</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="factor-model.html"><a href="factor-model.html#comparison-with-pca"><i class="fa fa-check"></i><b>11.2.1</b> Comparison with PCA</a></li>
+<li class="chapter" data-level="11.2.2" data-path="factor-model.html"><a href="factor-model.html#implications"><i class="fa fa-check"></i><b>11.2.2</b> Implications</a></li>
+<li class="chapter" data-level="11.2.3" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>11.2.3</b> Two big steps</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>11.3</b> Example setup</a></li>
+<li class="chapter" data-level="11.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>11.4</b> Factor Extraction</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>11.4.1</b> PC Factor Model</a></li>
+<li class="chapter" data-level="11.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>11.4.2</b> Iterated PC Factor Model</a></li>
+<li class="chapter" data-level="11.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>11.4.3</b> Maximum Likelihood</a></li>
+<li class="chapter" data-level="11.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-4"><i class="fa fa-check"></i><b>11.4.4</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>11.5</b> Rotating Factors</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>11.5.1</b> Varimax Rotation</a></li>
+<li class="chapter" data-level="11.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>11.5.2</b> Oblique rotation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>11.6</b> Factor Scores</a></li>
+<li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>III Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
+<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
+<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="two-continuous-and-one-categorical" class="section level2">
+<h2><span class="header-section-number">2.17</span> Two continuous and one categorical</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Colored by cut&quot;</span>)
+d &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;Lowess line per cut&quot;</span>)
+<span class="kw">grid.arrange</span>(a, d, <span class="dt">nrow=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Change the shape</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">shape=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Shape by cut&quot;</span>)</code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>Or we just panel by the third variable</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cut)</code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="two-categorical-and-one-continuous.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paneling-on-two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
