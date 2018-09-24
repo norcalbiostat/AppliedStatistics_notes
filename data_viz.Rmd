@@ -396,6 +396,34 @@ ggplot(dsmall, aes(x=color, fill=cut)) + geom_bar(position = "dodge")
 
 And this easy change is why we love `ggplot2`. 
 
+
+### Grouped bar charts with percentages
+Not as easy as one would hope, but the solution is to calculate the desired percentages first and then plot the summary data using either `geom_bar(stat='identity')` or `geom_col()`. 
+
+```{r}
+calc.props <- diamonds %>% group_by(color, cut) %>%
+              summarise(count=n()) %>%
+              mutate(pct=round(count/sum(count),3))
+calc.props
+```
+
+Since we're plotting summary data, the height of the bars is specified using `y=pct`. 
+
+```{r}
+ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
+                  geom_col(position="dodge") + theme_bw() 
+```   
+
+Now set some options to the y axis using `scale_y_continuous()` to make the graph more accurate and readable. The `labels=percent` comes from the `scales` package. 
+
+```{r}
+library(scales)
+ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
+                  geom_col(position="dodge") + theme_bw() +
+                  scale_y_continuous(limits=c(0,1), labels=percent)
+```   
+
+
 ### Mosaic plots
 But what if you want to know how two categorical variables are related and you don't want to look at two different barplots? Mosaic plots are a way to visualize the proportions in a table. So here's the two-way table we'll be plotting. 
 ```{r}
@@ -733,7 +761,6 @@ Before you share your plot with any other eyes, always take a step back and try 
 
 **Problem:** Missing data showing up as a category in ggplot? 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(dplyr)
 NCbirths <- read.csv("https://norcalbiostat.netlify.com/data/NCbirths.csv", header=TRUE)
 email <- read.table("https://norcalbiostat.netlify.com/data/email.txt", header=TRUE, sep="\t")
 ```
