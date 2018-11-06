@@ -16,13 +16,13 @@ rmd_files: ["index.Rmd"
             ,"PCA.Rmd"
             ,"FA.Rmd"
             
-            ,"MLM_intro.Rmd"
+#            ,"MLM_intro.Rmd"
 #            ,"random_intercept.Rmd"
 #            ,"longitudinal.Rmd"
 #            ,"spatial.Rmd"
             
-#            ,"other_intro.Rmd"
-#            ,"missing_data.Rmd"
+            ,"other_intro.Rmd"
+            ,"missing_data.Rmd"
             ]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes

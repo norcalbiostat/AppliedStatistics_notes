@@ -4,7 +4,7 @@
 Missing Data happens. Not always
 
 * General: Item non-response. Individual pieces of data are missing.  
-* Unit non-response: Records have some background data on all units, but some units don’t respond to any question. 
+* Unit non-response: Records have some background data on all units, but some units donâ€™t respond to any question. 
 * Monotonone missing data: Variables can be ordered such that one block of variables more observed than the next. 
 
 
@@ -95,20 +95,15 @@ Using `mice`
 ```r
 library(mice)
 md.pattern(survey)
-```
-
-<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
-
-```
 ##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
 ## 168    1    1   1   1      1      1     1    1     1      1   1     1   0
-## 38     1    1   1   1      1      1     1    1     1      1   1     0   1
-## 20     1    1   1   1      1      1     1    1     1      0   0     1   2
-## 7      1    1   1   1      1      1     1    1     1      0   0     0   3
-## 1      1    1   1   1      1      1     1    1     0      0   0     1   3
-## 1      1    1   1   1      1      1     0    1     1      1   1     1   1
-## 1      1    1   1   1      0      0     1    0     1      1   1     1   3
-## 1      1    1   1   0      1      1     1    1     1      1   1     1   1
+##   1    1    1   1   0      1      1     1    1     1      1   1     1   1
+##   1    1    1   1   1      1      1     0    1     1      1   1     1   1
+##  38    1    1   1   1      1      1     1    1     1      1   1     0   1
+##  20    1    1   1   1      1      1     1    1     1      0   0     1   2
+##   1    1    1   1   1      0      0     1    0     1      1   1     1   3
+##   7    1    1   1   1      1      1     1    1     1      0   0     0   3
+##   1    1    1   1   1      1      1     1    1     0      0   0     1   3
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107
 ```
 
@@ -159,7 +154,7 @@ Textbook example: Example reported in W.G. Cochran, Sampling Techniques, 3rd edi
 
 <br>
 
-|      Ave. # trees         | # of growers |  % of pop’n  | Ave # trees/grower  |
+|      Ave. # trees         | # of growers |  % of popâ€™n  | Ave # trees/grower  |
 |---------------------------|--------------|--------------|---------------------|
 | 1st mailing responders	  |   300	       |     10		    |   456               |
 | 2nd mailing responders    |   543	       |     17		    |   382               |
@@ -369,7 +364,7 @@ What can we learn from evidence in the data set at hand?
 **What is plausible?**
 
 * Cochran example: when human behavior is involved, MCAR must be viewed as an extremely special case that would often be violated in practice
-* Missing data may be introduced by design (e.g., measure some variables, don’t measure others for reasons of cost, response burden), in which case MCAR would apply
+* Missing data may be introduced by design (e.g., measure some variables, donâ€™t measure others for reasons of cost, response burden), in which case MCAR would apply
 * MAR is much more common than MCAR
 * We cannot be too cavalier about assuming MAR, but anecdotal evidence shows that it often is plausible when conditioning on enough information
 
@@ -438,7 +433,7 @@ Fill in missing values, analyze completed data set
     - Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
     - Over the long-term, we can reduce bias, on the average
 
-…but we can do better.
+â€¦but we can do better.
   
 
 ## Multiple Imputation (MI)
@@ -464,7 +459,7 @@ _Credit: http://www.stefvanbuuren.nl_
 
 
 ### MI as a paradigm
-* Logic: "Average over" uncertainty, don’t assume most likely scenario (single imputation) covers all plausible scenarios
+* Logic: "Average over" uncertainty, donâ€™t assume most likely scenario (single imputation) covers all plausible scenarios
 * Principle: Want nominal 95% intervals to cover targets of estimation 95% of the time
 * Simulation studies show that, when MAR assumption holds:
     - Proper imputations will yield close to nominal coverage (Rubin 87)
@@ -565,31 +560,350 @@ We will demonstrate using Fisher's Iris data (pre-built in with R) where we can 
 
 For the `iris` data we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
 
+```r
+library(missForest)
+set.seed(12345) # Note to self: Change the combo on my luggage
+iris.mis <- prodNA(iris, noNA=0.1)
+prop.table(table(is.na(iris.mis)))
+## 
+## FALSE  TRUE 
+##   0.9   0.1
+```
+
+Visualize missing data pattern.
+
+```r
+library(VIM)
+aggr(iris.mis, col=c('darkolivegreen3','salmon'),
+              numbers=TRUE, sortVars=TRUE,
+              labels=names(iris.mis), cex.axis=.7,
+              gap=3, ylab=c("Missing data","Pattern"))
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+
+```
+## 
+##  Variables sorted by number of missings: 
+##      Variable      Count
+##  Sepal.Length 0.10666667
+##   Petal.Width 0.10666667
+##   Sepal.Width 0.10000000
+##       Species 0.10000000
+##  Petal.Length 0.08666667
+```
+
+Here's another example of where only 10% of the data overall is missing, but it results in only 58% complete cases. 
+
+
+### Multiply impute the missing data using `mice()`
+
+```r
+imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+summary(imp_iris)
+## Multiply imputed data set
+## Call:
+## mice(data = iris.mis, m = 10, method = "pmm", maxit = 25, printFlag = FALSE, 
+##     seed = 500)
+## Number of multiple imputations:  10
+## Missing cells per column:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##           16           15           13           16           15 
+## Imputation methods:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##        "pmm"        "pmm"        "pmm"        "pmm"        "pmm" 
+## VisitSequence:
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##            1            2            3            4            5 
+## PredictorMatrix:
+##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## Sepal.Length            0           1            1           1       1
+## Sepal.Width             1           0            1           1       1
+## Petal.Length            1           1            0           1       1
+## Petal.Width             1           1            1           0       1
+## Species                 1           1            1           1       0
+## Random generator seed value:  500
+```
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a **very** good idea to understand these controls. 
+
+https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputations-the-maximum-iterations-affect-accuracy-in-mul/219049#219049</div>\EndKnitrBlock{rmdnote}
+
+### Check the imputation method used on each variable.
+
+```r
+imp_iris$meth
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##        "pmm"        "pmm"        "pmm"        "pmm"        "pmm"
+```
+
+Predictive mean matching was used for all variables, even `Species`. This is reasonable because PMM is a hot deck method of imputation. 
+
+### Check Convergence
+
+```r
+plot(imp_iris, c("Sepal.Length", "Sepal.Width", "Petal.Length"))
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+
+The variance across chains is no larger than the variance within chains. 
+
+### Look at the values generated for imputation
+
+```r
+imp_iris$imp$Sepal.Length
+##       1   2   3   4   5   6   7   8   9  10
+## 1   5.0 5.0 5.0 5.8 5.0 5.0 5.5 5.0 5.0 4.9
+## 5   5.1 5.0 4.9 4.9 5.8 5.1 4.8 4.7 5.1 5.3
+## 26  4.9 5.1 5.0 5.0 5.0 4.6 5.1 4.6 4.9 5.1
+## 31  5.1 4.7 5.0 4.9 5.2 4.6 4.6 5.0 4.6 5.0
+## 33  5.2 5.5 6.0 4.9 5.5 5.5 5.5 5.6 5.7 5.7
+## 39  4.4 5.0 4.3 5.0 4.4 5.0 4.4 4.4 4.4 4.9
+## 43  4.7 5.4 4.9 4.9 4.6 4.6 4.9 4.7 4.8 4.6
+## 56  5.8 5.6 6.1 5.4 5.4 5.5 6.2 6.0 5.8 5.8
+## 96  5.8 6.3 5.6 6.5 6.2 6.2 5.8 6.5 6.4 6.6
+## 103 6.5 6.9 6.7 6.8 6.7 7.2 7.4 7.2 6.7 6.8
+## 113 6.3 6.7 6.7 6.7 6.7 6.7 6.7 6.7 6.4 5.9
+## 124 5.7 5.8 6.2 6.1 5.5 6.6 6.2 6.2 6.2 5.5
+## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3
+## 135 6.0 6.4 6.3 6.7 6.7 6.5 6.3 6.4 7.0 5.6
+## 149 6.4 6.5 6.8 7.0 7.0 6.4 6.3 6.3 6.5 6.3
+## 150 6.4 6.1 6.4 6.4 6.3 6.5 6.4 6.1 6.4 6.4
+```
+
+This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
+
+### Create a complete data set by filling in the missing data using the imputations
+
+```r
+iris_1 <- complete(imp_iris, action=1)
+```
+Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on. 
+
+#### Alternative - Stack the imputed data sets in _long_ format.
+
+```r
+iris_long <- complete(imp_iris, 'long')
+```
+
+By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=150$ in each. 
+
+
+```r
+names(iris_long)
+## [1] ".imp"         ".id"          "Sepal.Length" "Sepal.Width" 
+## [5] "Petal.Length" "Petal.Width"  "Species"
+table(iris_long$.imp)
+## 
+##   1   2   3   4   5   6   7   8   9  10 
+## 150 150 150 150 150 150 150 150 150 150
+```
+
+
+### Visualize Imputations
+Let's compare the imputed values to the observed values to see if they are indeed "plausible" We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed). 
+
+**Univariately**
+
+```r
+densityplot(imp_iris)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" />
+
+**Multivariately**
+
+```r
+xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Species, cex=.8, pch=16)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-39-1.png" width="768" />
+
+**Analyze and pool**
+All of this imputation was done so we could actually perform an analysis! 
+
+Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.Width`, 
+`Petal.Length` and `Species`.
+
+
+```r
+model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
+summary(pool(model))
+##                     est         se         t        df     Pr(>|t|)
+## (Intercept)   2.4003660 0.27904211  8.602164 117.11666 4.107825e-14
+## Sepal.Width   0.4635384 0.08556538  5.417359 122.66722 3.066295e-07
+## Petal.Length  0.7126897 0.07046809 10.113652  87.37099 2.220446e-16
+## Species2     -0.7875803 0.23149303 -3.402177 100.83240 9.597852e-04
+## Species3     -1.1614620 0.32513199 -3.572279  69.21508 6.493711e-04
+##                   lo 95      hi 95 nmis        fmi     lambda
+## (Intercept)   1.8477435  2.9529885   NA 0.10362235 0.08844452
+## Sepal.Width   0.2941624  0.6329144   15 0.08849659 0.07375537
+## Petal.Length  0.5726351  0.8527443   13 0.18448110 0.16602439
+## Species2     -1.2468094 -0.3283511   NA 0.14686085 0.13010510
+## Species3     -1.8100466 -0.5128774   NA 0.24332027 0.22176707
+```
+
+Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$), and a 95% interval. 
+
+Additional information included in this table is the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
+
+
+```r
+kable(summary(pool(model))[,c(1:3, 5:7, 9)], digits=3)
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> est </th>
+   <th style="text-align:right;"> se </th>
+   <th style="text-align:right;"> t </th>
+   <th style="text-align:right;"> Pr(&gt;|t|) </th>
+   <th style="text-align:right;"> lo 95 </th>
+   <th style="text-align:right;"> hi 95 </th>
+   <th style="text-align:right;"> fmi </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 2.400 </td>
+   <td style="text-align:right;"> 0.279 </td>
+   <td style="text-align:right;"> 8.602 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 1.848 </td>
+   <td style="text-align:right;"> 2.953 </td>
+   <td style="text-align:right;"> 0.104 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sepal.Width </td>
+   <td style="text-align:right;"> 0.464 </td>
+   <td style="text-align:right;"> 0.086 </td>
+   <td style="text-align:right;"> 5.417 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.294 </td>
+   <td style="text-align:right;"> 0.633 </td>
+   <td style="text-align:right;"> 0.088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Petal.Length </td>
+   <td style="text-align:right;"> 0.713 </td>
+   <td style="text-align:right;"> 0.070 </td>
+   <td style="text-align:right;"> 10.114 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.573 </td>
+   <td style="text-align:right;"> 0.853 </td>
+   <td style="text-align:right;"> 0.184 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Species2 </td>
+   <td style="text-align:right;"> -0.788 </td>
+   <td style="text-align:right;"> 0.231 </td>
+   <td style="text-align:right;"> -3.402 </td>
+   <td style="text-align:right;"> 0.001 </td>
+   <td style="text-align:right;"> -1.247 </td>
+   <td style="text-align:right;"> -0.328 </td>
+   <td style="text-align:right;"> 0.147 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Species3 </td>
+   <td style="text-align:right;"> -1.161 </td>
+   <td style="text-align:right;"> 0.325 </td>
+   <td style="text-align:right;"> -3.572 </td>
+   <td style="text-align:right;"> 0.001 </td>
+   <td style="text-align:right;"> -1.810 </td>
+   <td style="text-align:right;"> -0.513 </td>
+   <td style="text-align:right;"> 0.243 </td>
+  </tr>
+</tbody>
+</table>
+
+
+### Calculating bias
+The iris data set had no missing data to begin with. So we can calculate the "true" parameter estimates...
+
+```r
+true.model <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data=iris)
+```
+and find the difference in coefficients. 
+
+The variance of the multiply imputed estimates is larger because of the between-imputation variance. 
+
+
+```r
+library(forestplot)
+te.mean <- summary(true.model)$coefficients[,1]
+mi.mean <- summary(pool(model))[,1]
+te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
+mi.ll   <- summary(pool(model))[,6]
+te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
+mi.ul   <- summary(pool(model))[,7]
+names   <- names(coef(true.model))
+
+
+forestplot(names, 
+           legend = c("True Model", "MICE"),
+           fn.ci_norm = c(fpDrawNormalCI, fpDrawCircleCI), 
+           mean = cbind(te.mean, mi.mean), 
+           lower = cbind(te.ll, mi.ll),
+           upper = cbind(te.ul, mi.ul), 
+           col=fpColors(box=c("blue", "darkred")), 
+           xlab="Regression coefficients",
+           boxsize = .1
+           )
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-43-1.png" width="960" />
 
 
 
+## Final thoughts
 
 
+> "In our experience with real and artificial data..., the practical conclusion appears to be that multiple imputation, when carefully done, can be safely used with real problems even when the ultimate user may be applying models or analyses not contemplated by the imputer." - Little & Rubin (Book, p. 218)
 
 
+* Don't ignore missing data. 
+* Impute sensibly and multiple times. 
+* It's typically desirable to include many predictors in an imputation model, both to 
+    - improve precision of imputed values
+    - make MAR assumption more plausible
+* But the number of covariance parameters goes up as the square of the number of variables in the model,
+  - implying practical limits on the number of variables for which parameters can be estimated well 
+* MI applies to subjects who have a general missingness pattern, i.e., they have measurements on some variables, but not on others. 
+* But, subjects can be lost to follow up due to death or other reasons (i.e., attrition). 
+* Here we have only baseline data, but not the outcome or other follow up data. 
+* If attrition subjects are eliminated from the sample, they can produce non-response or attrition bias. 
+* Use attrition weights.
+    - Given a baseline profile, predict the probability that subject will 
+      stay and use the inverse probability as weight. 
+    - e.g., if for a given profile all subjects stay, then the predicted probability
+      is 1 and the attrition weight is 1. Such a subject "counts once". 
+    - For another profile, the probability may be 0.5, attrition weight is 
+      1/.5 = 2 and that person "counts twice". 
+* For differential drop-out, or self-selected treatment, you can consider using Propensity Scores.
 
 
+## Additional References
+
+* Little, R. and Rubin, D. Statistical Analysis with Missing Data, 2nd Ed., Wiley, 2002
+    - Standard reference
+    - Requires some math
+* Allison, P. Missing Data, Sage, 2001
+    - Small and cheap
+    - Requires very little math
+* Multiple Imputation.com http://www.stefvanbuuren.nl/mi/
+
+* http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/ 
+* http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/
 
 
+Imputation methods for complex survey data and data not missing at random is an open research topic. Read more about this here: https://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_mi_sect032.htm 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://shiring.github.io/netlify_images/mice_sketchnote_gxjsgc.jpg)
+https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/
 
 
 

@@ -16,9 +16,7 @@ list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pan
                       "ggmap", "spdep", "housingData", "Hmisc", "waffle", "MKmisc", "ROCR", "caret", 
                       "stargazer", "missForest")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if ( length(new.packages) ) {
-    install.packages(new.packages)
-}
+
 
 library(ggplot2)
 library(gridExtra)

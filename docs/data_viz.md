@@ -546,6 +546,56 @@ ggplot(dsmall, aes(x=color, fill=cut)) + geom_bar(position = "dodge")
 
 And this easy change is why we love `ggplot2`. 
 
+
+### Grouped bar charts with percentages
+Not as easy as one would hope, but the solution is to calculate the desired percentages first and then plot the summary data using either `geom_bar(stat='identity')` or `geom_col()`. 
+
+
+```r
+calc.props <- diamonds %>% group_by(color, cut) %>%
+              summarise(count=n()) %>%
+              mutate(pct=round(count/sum(count),3))
+calc.props
+## # A tibble: 35 x 4
+## # Groups:   color [7]
+##    color cut       count   pct
+##    <ord> <ord>     <int> <dbl>
+##  1 D     Fair        163 0.024
+##  2 D     Good        662 0.098
+##  3 D     Very Good  1513 0.223
+##  4 D     Premium    1603 0.237
+##  5 D     Ideal      2834 0.418
+##  6 E     Fair        224 0.023
+##  7 E     Good        933 0.095
+##  8 E     Very Good  2400 0.245
+##  9 E     Premium    2337 0.239
+## 10 E     Ideal      3903 0.398
+## # ... with 25 more rows
+```
+
+Since we're plotting summary data, the height of the bars is specified using `y=pct`. 
+
+
+```r
+ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
+                  geom_col(position="dodge") + theme_bw() 
+```
+
+<img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+
+Now set some options to the y axis using `scale_y_continuous()` to make the graph more accurate and readable. The `labels=percent` comes from the `scales` package. 
+
+
+```r
+library(scales)
+ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
+                  geom_col(position="dodge") + theme_bw() +
+                  scale_y_continuous(limits=c(0,1), labels=percent)
+```
+
+<img src="data_viz_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+
+
 ### Mosaic plots
 But what if you want to know how two categorical variables are related and you don't want to look at two different barplots? Mosaic plots are a way to visualize the proportions in a table. So here's the two-way table we'll be plotting. 
 
@@ -566,7 +616,7 @@ The syntax for a mosaic plot uses _model notation_, which is basically y ~ x whe
 mosaicplot(cut~color, data=dsmall)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-47-1.png" width="672" />
 
 Helpful, ish. Here are two very useful options. In reverse obviousness, `color` applies shades of gray to one of the factor levels, and `shade` applies a color gradient scale to the cells in order of what is less than expected (red) to what is more than expected (blue) if these two factors were completely independent. 
 
@@ -576,7 +626,7 @@ mosaicplot(cut~color, data=dsmall, color=TRUE)
 mosaicplot(cut~color, data=dsmall, shade=TRUE)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-45-1.png" width="960" />
+<img src="data_viz_files/figure-html/unnamed-chunk-48-1.png" width="960" />
 
 For example, there are fewer 'Very Good' cut diamonds that are color 'G', and fewer 'Premium' cut diamonds that are color 'H'. As you can see, knowing what your data means when trying to interpret what the plots are telling you is essential. 
 
@@ -599,7 +649,7 @@ Back to the `plot()` command. Here we use model notation again, so it's $y~x$.
 plot(price~carat, data=dsmall)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-49-1.png" width="672" />
 
 Looks like for the most part as the carat value increases so does price. That makes sense. 
 
@@ -610,7 +660,7 @@ With ggplot we specify both the x and y variables, and add a point.
 ggplot(dsmall, aes(x=carat, y=price)) + geom_point()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-50-1.png" width="672" />
 
 ## Scatterplot matrix
 A scatterplot matrix allows you to look at the bivariate comparison of multiple pairs of variables simultaneously. First we need to trim down the data set to only include the variables we want to plot, then we use the `pairs()` function.
@@ -621,7 +671,7 @@ c.vars <- dsmall[,c('carat', 'depth', 'price', 'x', 'y', 'z')]
 pairs(c.vars)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-48-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-51-1.png" width="672" />
 We can see price has a non-linear relationship with X, Y and Z and x & y have a near perfect linear relationship. 
 
 **Other Resources**
@@ -641,7 +691,7 @@ abline(lm(price~carat, data=dsmall), col="blue")
 lines(lowess(dsmall$price~dsmall$carat), col="red")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-52-1.png" width="672" />
 
 #### ggplot
 With ggplot, we just add a `geom_smooth()` layer. 
@@ -650,7 +700,7 @@ With ggplot, we just add a `geom_smooth()` layer.
 ggplot(dsmall, aes(x=carat, y=price)) + geom_point() + geom_smooth() 
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-50-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-53-1.png" width="672" />
 
 Here the point-wise confidence interval for this lowess line is shown in grey. If you want to turn the confidence interval off, use `se=FALSE`. Also notice that the smoothing geom uses a different function or window than the `lowess` function used in base graphics. 
 
@@ -663,7 +713,7 @@ ggplot(dsmall, aes(x=carat, y=price)) + geom_point() +
   geom_smooth(se=FALSE, color="red")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-54-1.png" width="672" />
 
 
 ## Line plots
@@ -685,7 +735,7 @@ For base graphics, type='b' means both points and lines, 'l' gives you just line
 plot(mean~carat, data=price.per.carat, type='l')
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-53-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-56-1.png" width="672" />
 
 ### ggplot
 With ggplot we specify that we want a line geometry only. 
@@ -694,7 +744,7 @@ With ggplot we specify that we want a line geometry only.
 ggplot(price.per.carat, aes(x=carat, y=mean)) + geom_line()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-54-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-57-1.png" width="672" />
 
 How does this relationship change with cut of the diamond? First lets 
 get the average price per combination of carat and cut. 
@@ -718,7 +768,7 @@ colored by the cut variable.
 ggplot(ppc2, aes(x=carat, y=mean, col=cut)) + geom_line()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-56-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-59-1.png" width="672" />
 
 And we get one line per cut. 
 
@@ -737,7 +787,7 @@ Dotplots can be very useful when plotting dots against several categories. They 
 stripchart(carat ~ cut, data=dsmall)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-57-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-60-1.png" width="672" />
 
 Doesn't look to pretty, but kinda gets the point across. Few fair quality diamonds in the data set, pretty spread out across the carat range except one high end outlier. 
 
@@ -750,7 +800,7 @@ b <- ggplot(dsmall, aes(y=cut, x=carat)) + geom_point()
 grid.arrange(a, b, ncol=2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-58-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-61-1.png" width="672" />
 
 
 
@@ -765,7 +815,7 @@ Another example of where model notation works.
 boxplot(carat~color, data=dsmall)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-59-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-62-1.png" width="672" />
 
 #### ggplot
 A simple addition, just define your x and y accordingly. 
@@ -774,7 +824,7 @@ A simple addition, just define your x and y accordingly.
 ggplot(dsmall, aes(x=color, y=carat, fill=color)) + geom_boxplot()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-60-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-63-1.png" width="672" />
 
 #### Adding violins
 Violin plots can be overlaid here as well. 
@@ -785,7 +835,7 @@ ggplot(dsmall, aes(x=color, y=carat, fill=color)) +
         geom_boxplot(alpha=.5, width=.2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-61-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-64-1.png" width="672" />
 
 ### Grouped histograms
 
@@ -801,7 +851,7 @@ b <- ggplot(dsmall, aes(x=carat, fill=color)) + geom_density()
 grid.arrange(a,b, ncol=2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-62-1.png" width="960" />
+<img src="data_viz_files/figure-html/unnamed-chunk-65-1.png" width="960" />
 
 The solid fills are still difficult to read, so we can either turn down the alpha (turn up the transparency) or only color the lines and not the fill. 
 
@@ -811,7 +861,7 @@ d <- ggplot(dsmall, aes(x=carat, col=color)) + geom_density()
 grid.arrange(c,d, ncol=2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-63-1.png" width="960" />
+<img src="data_viz_files/figure-html/unnamed-chunk-66-1.png" width="960" />
 
 ## Joy plots (in progress)
 Hot off the press, gaining instant popularity this summer (2017). They are a combination of a Cleveland dot plot and a density plot. 
@@ -831,7 +881,7 @@ We add a `facet_wrap()` and specify that we want to panel on the color group. No
 ggplot(dsmall, aes(x=carat, fill=color)) + geom_density() + facet_wrap(~color)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-64-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-67-1.png" width="672" />
 
 The grid placement can be semi-controlled by using the `ncol` argument in the `facet_wrap()` statement. 
 
@@ -839,7 +889,7 @@ The grid placement can be semi-controlled by using the `ncol` argument in the `f
 ggplot(dsmall, aes(x=carat, fill=color)) + geom_density() + facet_wrap(~color, ncol=4)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-65-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-68-1.png" width="672" />
 
 It is important to compare distributions across groups on the same scale, and our eyes can compare items vertically better than horizontally. So let's force `ncol=1`. 
 
@@ -848,7 +898,7 @@ It is important to compare distributions across groups on the same scale, and ou
 ggplot(dsmall, aes(x=carat, fill=color)) + geom_density() + facet_wrap(~color, ncol=1)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-66-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-69-1.png" width="672" />
 
 ## Other ways to get multiple plots per window
 
@@ -863,7 +913,7 @@ plot(dsmall$color)
 plot(dsmall$price ~ dsmall$carat)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-67-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-70-1.png" width="672" />
 
 Other resources including learning about `layouts`. Multipanel plotting with base graphics http://seananderson.ca/courses/11-multipanel/multipanel.pdf 
 
@@ -876,7 +926,7 @@ b <- ggplot(dsmall, aes(x=carat, col=color)) + geom_density()
 grid.arrange(a,b, ncol=2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-68-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-71-1.png" width="672" />
 
 
 ## Multivariate (2+ variables)
@@ -892,7 +942,7 @@ Continuous variables can also be mapped to the size of the point. Here I set the
 ggplot(dsmall, aes(x=carat, y=price, size=depth)) + geom_point(alpha=.2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-69-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-72-1.png" width="672" />
 
 
 ## Two categorical and one continuous
@@ -903,7 +953,7 @@ This is very similar to side by side boxplots, one violin plot per `cut`, within
 ggplot(dsmall, aes(x=color, y=price, fill=cut)) + geom_violin()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-70-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-73-1.png" width="672" />
 
 Best bet here would be to panel on color and change the x axis to cut.  
 
@@ -911,7 +961,7 @@ Best bet here would be to panel on color and change the x axis to cut.
 ggplot(dsmall, aes(x=cut, y=price, fill=cut)) + geom_violin() + facet_wrap(~color)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-71-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-74-1.png" width="672" />
 
 
 ## Two continuous and one categorical 
@@ -923,7 +973,7 @@ d <- ggplot(dsmall, aes(x=carat, y=price, color=cut)) + geom_point() +
 grid.arrange(a, d, nrow=1)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-72-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-75-1.png" width="672" />
 
 Change the shape
 
@@ -931,7 +981,7 @@ Change the shape
 ggplot(dsmall, aes(x=carat, y=price, shape=cut)) + geom_point() + ggtitle("Shape by cut")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-73-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-76-1.png" width="672" />
 
 Or we just panel by the third variable
 
@@ -940,7 +990,7 @@ Or we just panel by the third variable
 ggplot(dsmall, aes(x=carat, y=price)) + geom_point() + facet_wrap(~cut)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-74-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-77-1.png" width="672" />
 
 ## Paneling on two variables
 Who says we're stuck with only faceting on one variable? A variant on `facet_wrap` is `facet_grid`. Here we can specify multiple variables to panel on. 
@@ -950,7 +1000,7 @@ Who says we're stuck with only faceting on one variable? A variant on `facet_wra
 ggplot(dsmall, aes(x=carat, fill=color)) + geom_density() + facet_grid(cut~color)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-75-1.png" width="960" />
+<img src="data_viz_files/figure-html/unnamed-chunk-78-1.png" width="960" />
 
 How about plotting price against caret, for all combinations of color and clarity, with the points further separated by cut?
 
@@ -958,7 +1008,7 @@ How about plotting price against caret, for all combinations of color and clarit
 ggplot(dsmall, aes(x=carat, y=price, color=cut)) + geom_point() + facet_grid(clarity~color)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-76-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-79-1.png" width="672" />
 
 And lastly let's look back at how we can play with scatterplots of using a third categorical variable (using `ggplot2` only). We can color the points by cut, 
 
@@ -967,7 +1017,7 @@ And lastly let's look back at how we can play with scatterplots of using a third
 ggplot(dsmall, aes(x=carat, y=price, color=cut)) + geom_point()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-77-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-80-1.png" width="672" />
 
 We could add a smoothing lowess line for each cut separately, 
 
@@ -975,7 +1025,7 @@ We could add a smoothing lowess line for each cut separately,
 ggplot(dsmall, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(se=FALSE)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-78-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-81-1.png" width="672" />
 
 We could change the color by clarity, and shape by cut. 
 
@@ -983,7 +1033,7 @@ We could change the color by clarity, and shape by cut.
 ggplot(dsmall, aes(x=carat, y=price, color=clarity, shape=cut)) + geom_point() 
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-79-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-82-1.png" width="672" />
 
 That's pretty hard to read. So note that just because you **can** change an aesthetic, doesn't mean you should. And just because you can plot things on the same axis, doesn't mean you have to. 
 
@@ -1002,7 +1052,7 @@ Get rid of that far right bar!
 ggplot(NCbirths, aes(x=marital)) + geom_bar()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-81-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-84-1.png" width="672" />
 
 **Solution:** Use `dplyr` to select only the variables you are going to plot, then pipe in the `na.omit()` at the end. It will create a temporary data frame (e.g) `plot.data` that you then provide to `ggplot()`.
 
@@ -1012,7 +1062,7 @@ plot.data <- NCbirths %>% select(marital) %>% na.omit()
 ggplot(plot.data, aes(x=marital)) + geom_bar()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-82-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-85-1.png" width="672" />
 
 
 **Problem:** Got numerical binary 0/1 data but want to plot it as categorical? 
@@ -1029,7 +1079,7 @@ email$spam_cat <- factor(email$spam, labels=c("Ham", "Spam"))
 ggplot(email, aes(y=num_char, x=spam_cat)) + geom_boxplot()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-83-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-86-1.png" width="672" />
 
 **Problem:** You want to change the legend title for a `fill` or `color` scale.  
 
@@ -1041,7 +1091,7 @@ ggplot(email, aes(y=num_char, x=spam_cat, fill=spam_cat)) + geom_boxplot() +
   scale_fill_discrete(name="Ya like Spam?")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-84-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-87-1.png" width="672" />
 
 Here, I `col`ored the points by a discrete variable, so the layer is `scale_color_discrete()`.
 
@@ -1050,7 +1100,7 @@ ggplot(email, aes(x=num_char, y=line_breaks, col=spam_cat)) + geom_point() +
   scale_color_discrete(name="Ya like Spam?")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-85-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-88-1.png" width="672" />
 
 **Problem:** You want to add means to boxplots. 
 Boxplots are great. Even better with violin overlays. Know what makes them even better than butter? Adding a point for the mean. `stat_summary` is the layer you want to add. Check out [this stack overflow post](https://stackoverflow.com/questions/23942959/ggplot2-show-separate-mean-values-in-box-plot-for-grouped-data) for more context. 
@@ -1062,7 +1112,7 @@ ggplot(email, aes(x=spam_cat, y=num_char, fill=spam_cat)) +
   stat_summary(fun.y="mean", geom="point", size=3, pch=17,color="blue")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-86-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-89-1.png" width="672" />
 
 I suggest playing around with `size` and plotting character `pch` to get a feel for how these work. You can also look at `?pch` (and scroll down in the help file) to see the 25 default plotting characters.
 

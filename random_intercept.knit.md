@@ -389,41 +389,39 @@ Details of REML are beyond the scope of this class, but knowing the estimation m
 You can change the fitting algorithm to use the Log Likelihood anyhow, it may be slightly slower but for simple models the estimates are going to be very close to the REML estimate. Below is a table showing the estimates for the random intercepts, 
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
+<thead><tr>
+<th style="text-align:left;">   </th>
    <th style="text-align:right;"> REML </th>
    <th style="text-align:right;"> MLE </th>
-  </tr>
- </thead>
+  </tr></thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> AITKIN </td>
+<tr>
+<td style="text-align:left;"> AITKIN </td>
    <td style="text-align:right;"> 1.1107728 </td>
    <td style="text-align:right;"> 1.1143654 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> ANOKA </td>
+<tr>
+<td style="text-align:left;"> ANOKA </td>
    <td style="text-align:right;"> 0.9427047 </td>
    <td style="text-align:right;"> 0.9438526 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> BECKER </td>
+<tr>
+<td style="text-align:left;"> BECKER </td>
    <td style="text-align:right;"> 1.2688325 </td>
    <td style="text-align:right;"> 1.2700351 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> BELTRAMI </td>
+<tr>
+<td style="text-align:left;"> BELTRAMI </td>
    <td style="text-align:right;"> 1.2694025 </td>
    <td style="text-align:right;"> 1.2702493 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> BENTON </td>
+<tr>
+<td style="text-align:left;"> BENTON </td>
    <td style="text-align:right;"> 1.3243796 </td>
    <td style="text-align:right;"> 1.3245917 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> BIGSTONE </td>
+<tr>
+<td style="text-align:left;"> BIGSTONE </td>
    <td style="text-align:right;"> 1.4081133 </td>
    <td style="text-align:right;"> 1.4068866 </td>
   </tr>
