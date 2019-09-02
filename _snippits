@@ -1,0 +1,65 @@
+
+<!---
+### Goodness of Fit
+
+* Tests to see if there is sufficient reason to believe that the data does not fit a logistic model
+    - $H_{0}$ The data do come from a logistic model.
+    - $H_{a}$ The data do not come from a logistic model. 
+* This means that a small p-value indicates that the model _does not fit_ the data. 
+* We'll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test 
+
+#### HL GoF
+1. Compute the probability ($p_{i}$) of event (risk) for each observation. 
+2. Sort data by this $p$.
+3. Divide into $G$ equal sized groups in ascending order (G=10 is common, i.e. split into deciles)
+4. Then for each group we calculate
+    - $O_{1g}$: the observed number of events
+    - $E_{1g}$: the expected number of events as the $\sum_{i} p_{ig}$
+    - $O_{0g}$: the observed number of non-events
+    - $E_{0g}$: the expected number of events as the $1-\sum_{i} p_{ig}$
+5. Then the HL test statistic ($H$) has a $\chi^{2}$ distribution and is is calculated as: 
+
+$$ 
+  H = \sum_{g=1}^{G}\left({\frac {(O_{1g}-E_{1g})^{2}}{E_{1g}}}+{\frac {(O_{0g}-E_{0g})^{2}}{E_{0g}}}\right) \sim \chi^{2}_{G-2}
+$$
+
+#### HL GoF in R
+
+`rms` package
+
+From Frank Harrell - https://discourse.datamethods.org/t/goodness-of-fit-for-probit-model-hosmer-lemeshow/1680 
+
+> Hosmer-Lemeshow is obsolete due to low power, arbitrariness, and not penalizing sufficiently for overfitting
+> The Hosmer-Le Cessie one d.f. test is better, as implemented in the R `rms` package `residuals.lrm` function (but this only works for logit link)
+
+> A main reason that Hosmer and others felt that H-L is obsolete is that it depends on arbitrary binning of predicted probabilities, with the most typical choice being decile intervals. They showed that tiny differences in how different software packages defined deciles results in noticeable differences in the H-L χ2 goodness of fit statistic.
+
+
+```{r}
+library(rms)
+lrm_model <- lrm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, x=TRUE, y=TRUE) 
+lrm_model
+```
+
+```{r}
+
+residuals(lrm_model, type="gof")
+
+MKmisc::HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
+
+generalhoslem::logitgof(obs=me_intx_model$y, exp=fitted(me_intx_model), g=5)
+```
+
+A very low p-value indicates that this model does not fit the data well.
+
+
+> Although tests, such as Hosmer–Lemeshow test and le Cessie–van Houwelingen test, have been devised and widely used in applications, they often have low power in detecting lack of fit and not much theoretical justification has been made on when they can work well.
+
+https://onlinelibrary.wiley.com/doi/full/10.1111/biom.12969?af=R
+
+############################################################################
+
+
+
+
+

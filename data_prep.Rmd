@@ -1,9 +1,23 @@
 # Preparing Data for Analysis {#data_prep}
 
-Write an introduction here. 
+Once the data are available from a study there are still a number of steps that must be undertaken to get them into shape for analysis.
+
+One of the most misunderstood parts of the analysis process is the data preparation stage. To say that 70% of any analysis is spent on the data management stage is not an understatement. 
+
+This chapter provides information on topics related to data processing and corresponds to :book: PMA6 Chapter 3. 
 
 
-### Reproducible Workflows
+## Generating a reproducible workflows
+
+Reproducibility is the ability for any researcher to take the same data set and run the same
+set of software program instructions as another researcher and achieve the same results. 
+
+The goal is to create an exact record of what was done to a data set to produce a specific result. To achieve
+reproducibility, we believe that three things must be present:
+
+1. The un-processed data are connected directly to software code file(s) that perform data preparation techniques.
+2. The processed data are connected directly to other software code file(s) that perform the analyses. 
+3. All data and code files are self-contained such that they could be given to another researcher to execute the code commands on a separate computer and achieve the same results as the original author. 
 
 ![PrepareData](images/Afifi_Fig3_1.png)
 
@@ -26,18 +40,36 @@ Write an introduction here.
 
 Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
-![q](images/q.png) What stages of this pipeline can we conduct using R Markdown? 
+### Literate programming
 
-### Data Management 
-Questions to ask yourself (and the data) while preparing a data management file. 
+* Programming paradigm introduced by Knuth (1984) 
+* Explain the logic of the program or analysis process in a natural language, 
+* Small code snippets included at each step act as a full set of instructions that can be executed to reproduce the result/analysis being disucssed. 
 
-1. Do you need to code out missing data? 
-2. Do you need to code out skip patterns?
-3. Do you need to make response codes more logical? 
-4. Do you need to recode categorical variables to quantitative? 
-5. Do you need to create secondary variables?
+Literate programming tools are integrated into most common statistical packages
 
-Many of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. 
+* Markdown (R, Stata)
+* $\LaTeX$ (R, SAS, Stata)  
+
+
+### Reproducible Research + Literate Programming
+
+Practicing reproducible research techniques using literate programming tools allows such major updates to
+be a simple matter of re-compiling all coded instructions using the updated data set. 
+
+The effort then is reduced to a careful review and update of any written results.
+
+Using literate programming tools create formatted documents
+* section headers
+* bold and italicized words
+* tables and graphics with built-in captions
+
+in a streamlined manner that is fully synchronized with the code itself. 
+
+The author writes the text explanations, interpretations, and code in the statistical software program itself, and the program will execute all commands and combine the text, code and output all together into a final dynamic document. 
+
+
+![q](images/q.png) What stages of the pipeline shown above can we conduct using literate programmign tools? 
 
 
 ## Import data
@@ -76,7 +108,23 @@ names(depress) <- tolower(names(depress))
 You should also rename any variable that has spaces or special characters in the name. 
 
 
-## Missing data 
+## Data Management 
+Questions to ask yourself (and the data) while reviewing the codebook to choose variables to be used in an analysis. 
+
+1. Do you need to code out missing data? 
+    - Missing values sometimes are recorded as something like *MISSING* or *-99*? 
+2. Do you need to make response codes more logical? 
+    - Some systems will record 1=YES and 2=NO. This should be changed to 0=NO. 
+3. Do you need to recode numerical variables to categorical?
+    - Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories. 
+4. Do you need to create secondary variables?
+    - Such as an average across measures to create a score. 
+
+Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted. 
+
+Let's look at a few of the common data management processes. 
+
+### Missing data 
 In Excel, missing data can show up as a blank cell. In SPSS it is represented as a `.` period. R displays missing data as `NA` values. 
 
 Missing Data in SPSS: https://stats.idre.ucla.edu/spss/modules/missing-data/
@@ -121,7 +169,7 @@ mean(y, na.rm=TRUE)
 In R, any arithmetic function (like addition, multipliation) on missing data results in a missing value. The `na.rm=TRUE` toggle tells R to calculate the _complete case_ mean. This is a biased measure of the mean, but missing data is a topic worthy of it's own course. 
 
 
-## Identifying Variable Types
+### Identifying Variable Types
 
 The `str` function is short for _structure_. This shows you the variable names, what data types R thinks each variable are, and some of the raw data. You can also use the `view()` function to open the data as a simliar spreadsheet format, or `head()` to see the top 6 rows of the data. The latter is sometimes less than helpful for a very large data set. 
 ```{r look_depress}
@@ -150,29 +198,17 @@ When variables have numerical levels it is necessary to ensure that the program 
 The following code uses the `factor()` function to take the marital status variable and convert it into a factor variable with specified labels that match the codebook. 
 ```{r}
 depress$marital <- factor(depress$marital, 
-                          labels = c("Never Married", "Married", "Divorced", "Separated", "Widowed"))
+      labels = c("Never Married", "Married", "Divorced", "Separated", "Widowed"))
 ```
 
-It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable `sex` was replaced. 
+It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable `marital` was replaced. 
 
 ```{r}
 table(depress$marital)
 class(depress$marital)
 ```
 
-* Create a boxplot of income across marital status category.
-```{r}
-ggplot(depress, aes(y=income, x=marital)) + geom_boxplot()
-```
-
-Boxplots are nice because they clearly show the range where 50% of the data lie and any potential outliers. Boxplots can also indicate skewness, but sometimes it is helpful to visualize the location of the mean as well as the median. `ggplot2` has a nice `stat_summary` layer that will calculate and add the means to the current plot. 
-
-```{r}
-ggplot(depress, aes(y=income, x=marital)) + geom_boxplot() + 
-   stat_summary(fun.y=mean, colour="blue", size=3, geom="point")
-```
-
-## Outliers
+### Outliers
 
 Let's look at the age variable in the depression data set. 
 ```{r, fig.width=10, fig.height=6}
@@ -190,6 +226,16 @@ summary(depress$age)
 ```
 
 The minimum value is a 9, which is outside the range of valid values for this variable. This is where you, as a statistician, data analyst or researcher goes back to the PI and asks for advice. Should this data be set to missing, or edited in a way that changes this data point into a valid piece of data. 
+
+
+Another visual way to look for outliers in a continuous measurement is to create a boxplot.
+Here we look at boxplots of income across marital status category.
+```{r}
+ggplot(depress, aes(y=income, x=marital)) + geom_boxplot()
+```
+
+While there are a few potential outliers (denoted by the dots), there are none so far away from the rest of the group (or at values such as 99 or -99 that may indicate missing codes) that we need to be concerned about. 
+
 
 As an example of a common data entry error, and for demonstration purposes, I went in and changed a 19 to a 9. So the correct thing to do here is to change that 9, back to a 19. This is a very good use of the `ifelse()` function. 
 
@@ -213,10 +259,10 @@ summary(depress$age)
 Looks like it worked. 
 
 
-## Creating secondary variables
+### Creating secondary variables
 
 
-### Collapsing variables into fewer categories
+#### Collapsing categorical variables into fewer categories
 For unbiased and accurate results of a statistical analysis, sufficient data has to be present. Often times once you start slicing and dicing the data to only look at certain groups, or if you are interested in the behavior of certain variables across levels of another variable, sometimes you start to run into small sample size problems. 
 
 For example, consider marital status again. There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis. 
@@ -239,7 +285,7 @@ depress$marital <- recode(depress$marital, "'Divorced' = 'Sep/Div'; 'Separated' 
 rm(marital2)
 ```
 
-### Binning a continuous variable into categorical ranges. 
+#### Binning a continuous variable into categorical ranges. 
 Let's create a new variable that categorizes income into the following ranges: <30, [30, 40), [40,50), [50, 60), 60+.  
 The easiest way is to use the `cut2` function in the package `Hmisc`. Note you don't have to load the package fully to use a function from within that package. Useful for times when you only need to use a function once or twice. 
 
@@ -248,7 +294,7 @@ depress$inc_cut <- Hmisc::cut2(depress$income, cuts=c(30,40,50,60))
 table(depress$inc_cut)
 ```
 
-### Dichotomizing
+#### Dichotomizing a measure into 2 categories
 Dichotomous variables tend to be binary indicator variables where a code of `1` is the level you're interested in. 
 
 For example, gender is coded as 2=Female and 1=Male. This is in the right direction but it needs to be 0/1. 
@@ -278,7 +324,7 @@ table(depress$drink)
 ``` 
 
 
-###  Sum or Average values across multiple variables
+#### Sum or Average values across multiple variables
 
 The Center for Epidemiologic Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. `CESD` is calculated as the sum of all 20 component variables, and is already on this data set. Let's create a new variable named `sleep` as subscale for sleep quality by adding up question numbers 5, 11, and 19. 
 
@@ -294,7 +340,7 @@ summary(depress$sleep)
 ```
 
 
-## Transformations for Normality
+#### Transformations for Normality
 
 Let's look at assessing normal distributions using the **cleaned** depression data set. 
 
@@ -358,15 +404,32 @@ qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
 You've just made a ton of changes! 
 
 * Save or export the new data set to your computer. 
-* Edit the codebook to reflect the changes that you made. Save this codebook with todays date as well. 
+* Edit the codebook to reflect the changes that you made. 
+* In a production situation, or when changes aren't being made on a rapid basis, it is common to include the date in the file name. 
 * Keep the data, codebook and data management file in the same folder. 
 
 The `Sys.Date()` function takes the current date from your computer. The value is then formatted nicely for human consumption and added (pasted) to the file name before written to the working directory as a new text file.
 ```{r save_clean_depress, eval=FALSE}
+depress_clean <- depress %>% select(var1, var2, var3)
 date <- format(Sys.Date(), "%m%d%y")
 filename <- paste("depress_", date, ".txt", sep="")
-write.table(depress, filename, sep="\t", row.names=FALSE)
+write.table(depress_clean, filename, sep="\t", row.names=FALSE)
 ```
+
+SPSS users commonly save cleaned data as a `.sav` format.  
+
+```
+SAVE outfile='FilePath\depress_sysdate.sav'
+/KEEP = Variable_Name1 Variable_Name2.
+EXECUTE.
+```
+
+**Saving only selected variables**
+
+* In SPSS the `/KEEP` statement demonstrated above only writes the variable names listed to the saved data set. This can be very useful when dealing with data sets with a large number of variables. 
+* For R users, using `dplyr` select is generally the fastest. 
+
+
 
 ## Wide vs. Long data
 

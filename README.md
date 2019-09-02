@@ -4,4 +4,3 @@ These courses are taught at California State University, Chico in the Mathematic
 
 This repository contains a collection of course notes from multiple instructors on a wide variety of topics appropriate for these classes. This is not a list of required topics for these courses, just a place to collect all this cross-class information. 
 These notes are then compiled into a book using [bookdown](https://bookdown.org/yihui/bookdown/) `R` package by Yihui Xie. 
-

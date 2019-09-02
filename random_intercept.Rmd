@@ -329,7 +329,7 @@ Covariates are fit using standard `+` notation outside the random effects specif
 
 ```{r}
 ri.with.x <- lmer(log_radon ~ floor + (1 |county), data=radon)
-sjt.lmer(ri.with.x, show.r2=FALSE)
+tab_model(ri.with.x, show.r2=FALSE)
 ```
 
 Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the [sjPlot](http://www.strengejacke.de/sjPlot/) package. 

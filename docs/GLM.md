@@ -340,51 +340,6 @@ summary(me_intx_model)
 ## Number of Fisher Scoring iterations: 4
 ```
 
-### Goodness of Fit
-
-* Tests to see if there is sufficient reason to believe that the data does not fit a logistic model
-    - $H_{0}$ The data do come from a logistic model.
-    - $H_{a}$ The data do not come from a logistic model. 
-* This means that a small p-value indicates that the model _does not fit_ the data. 
-* We'll look specifically at the Hosmer-Lemeshow (HL) Goodness of fit (GoF) test 
-
-#### HL GoF
-1. Compute the probability ($p_{i}$) of event (risk) for each observation. 
-2. Sort data by this $p$.
-3. Divide into $G$ equal sized groups in ascending order (G=10 is common, i.e. split into deciles)
-4. Then for each group we calculate
-    - $O_{1g}$: the observed number of events
-    - $E_{1g}$: the expected number of events as the $\sum_{i} p_{ig}$
-    - $O_{0g}$: the observed number of non-events
-    - $E_{0g}$: the expected number of events as the $1-\sum_{i} p_{ig}$
-5. Then the HL test statistic ($H$) has a $\chi^{2}$ distribution and is is calculated as: 
-
-$$ 
-  H = \sum_{g=1}^{G}\left({\frac {(O_{1g}-E_{1g})^{2}}{E_{1g}}}+{\frac {(O_{0g}-E_{0g})^{2}}{E_{0g}}}\right) \sim \chi^{2}_{G-2}
-$$
-
-#### HL GoF in R
-
-
-```r
-MKmisc::HLgof.test(fit = fitted(me_intx_model), obs = me_intx_model$y)
-## $C
-## 
-## 	Hosmer-Lemeshow C statistic
-## 
-## data:  fitted(me_intx_model) and me_intx_model$y
-## X-squared = 5.614e-17, df = 1, p-value = 1
-## 
-## 
-## $H
-## 
-## 	Hosmer-Lemeshow H statistic
-## 
-## data:  fitted(me_intx_model) and me_intx_model$y
-## X-squared = 5.614e-17, df = 8, p-value = 1
-```
-
-A very low test statistic and a very high p-value indicate that this model fits the data well. 
 
 
 ## Classification of Binary outcomes
@@ -436,6 +391,8 @@ exp(XB.m) / (1+exp(XB.m))
 
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
+
+
 ### Calculating predictions
 
 So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
@@ -465,7 +422,7 @@ ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) +
       geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ![](images/q.png) What things can you infer from this plot?
 
@@ -495,7 +452,7 @@ plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 We can also use the `performance()` function and say we want to evaluate the $f1$ measure
 
@@ -505,7 +462,7 @@ perf.f1 <- performance(pr,measure="f")
 plot(perf.f1)
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 ROC curves: 
 
@@ -551,6 +508,7 @@ confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
 ##     P-Value [Acc > NIR] : 1               
 ##                                           
 ##                   Kappa : 0.1615          
+##                                           
 ##  Mcnemar's Test P-Value : <2e-16          
 ##                                           
 ##             Sensitivity : 0.8000          
@@ -666,6 +624,8 @@ Also, similar to logistic regression, since the outcome was transformed, the sta
 1. calculate the CI for $\beta$
 2. exponentiate each end point. 
 
+
+
 #### Example: Modeling counts from the Add Health data Wave IVset. 
 
 **better example forthcoming**
@@ -681,7 +641,7 @@ hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE
 axis(1);axis(2, las=2);box()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 
 ```r
@@ -748,5 +708,4 @@ kable(exp(betas), digits=3)
   </tr>
 </tbody>
 </table>
-
 

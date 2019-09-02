@@ -580,12 +580,12 @@ model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
 ```
 
-Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$), and a 95% interval. 
+Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note that a 95% interval must be calculated manually. 
 
-Additional information included in this table is the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
+Digging deeper into the object created by `pool(model)`, specifically the `pooled` list, we can pull out additional information including the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
 
 ```{r}
-kable(summary(pool(model))[,c(1:3, 5:7, 9)], digits=3)
+kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 ```
 
 
@@ -603,9 +603,9 @@ library(forestplot)
 te.mean <- summary(true.model)$coefficients[,1]
 mi.mean <- summary(pool(model))[,1]
 te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
-mi.ll   <- summary(pool(model))[,6]
+mi.ll   <- mi.mean - 1.96*summary(pool(model))[,2]
 te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
-mi.ul   <- summary(pool(model))[,7]
+mi.ul   <- mi.mean + 1.96*summary(pool(model))[,2]
 names   <- names(coef(true.model))
 
 
@@ -661,6 +661,7 @@ forestplot(names,
     - Requires very little math
 * Multiple Imputation.com http://www.stefvanbuuren.nl/mi/
 
+* Applied Missing Data Analysis with SPSS and (R) Studio https://bookdown.org/mwheymans/Book_MI/
 * http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/ 
 * http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/
 
@@ -669,7 +670,6 @@ Imputation methods for complex survey data and data not missing at random is an 
 
 ![](https://shiring.github.io/netlify_images/mice_sketchnote_gxjsgc.jpg)
 https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/
-
 
 
 

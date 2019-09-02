@@ -95,15 +95,20 @@ Using `mice`
 ```r
 library(mice)
 md.pattern(survey)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
+```
 ##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
 ## 168    1    1   1   1      1      1     1    1     1      1   1     1   0
-##   1    1    1   1   0      1      1     1    1     1      1   1     1   1
-##   1    1    1   1   1      1      1     0    1     1      1   1     1   1
-##  38    1    1   1   1      1      1     1    1     1      1   1     0   1
-##  20    1    1   1   1      1      1     1    1     1      0   0     1   2
-##   1    1    1   1   1      0      0     1    0     1      1   1     1   3
-##   7    1    1   1   1      1      1     1    1     1      0   0     0   3
-##   1    1    1   1   1      1      1     1    1     0      0   0     1   3
+## 38     1    1   1   1      1      1     1    1     1      1   1     0   1
+## 20     1    1   1   1      1      1     1    1     1      0   0     1   2
+## 7      1    1   1   1      1      1     1    1     1      0   0     0   3
+## 1      1    1   1   1      1      1     1    1     0      0   0     1   3
+## 1      1    1   1   1      1      1     0    1     1      1   1     1   1
+## 1      1    1   1   1      0      0     1    0     1      1   1     1   3
+## 1      1    1   1   0      1      1     1    1     1      1   1     1   1
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107
 ```
 
@@ -601,20 +606,11 @@ Here's another example of where only 10% of the data overall is missing, but it 
 ```r
 imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
 summary(imp_iris)
-## Multiply imputed data set
-## Call:
-## mice(data = iris.mis, m = 10, method = "pmm", maxit = 25, printFlag = FALSE, 
-##     seed = 500)
-## Number of multiple imputations:  10
-## Missing cells per column:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##           16           15           13           16           15 
+## Class: mids
+## Number of multiple imputations:  10 
 ## Imputation methods:
 ## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
 ##        "pmm"        "pmm"        "pmm"        "pmm"        "pmm" 
-## VisitSequence:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##            1            2            3            4            5 
 ## PredictorMatrix:
 ##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## Sepal.Length            0           1            1           1       1
@@ -622,7 +618,6 @@ summary(imp_iris)
 ## Petal.Length            1           1            0           1       1
 ## Petal.Width             1           1            1           0       1
 ## Species                 1           1            1           1       0
-## Random generator seed value:  500
 ```
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a **very** good idea to understand these controls. 
@@ -654,22 +649,22 @@ The variance across chains is no larger than the variance within chains.
 ```r
 imp_iris$imp$Sepal.Length
 ##       1   2   3   4   5   6   7   8   9  10
-## 1   5.0 5.0 5.0 5.8 5.0 5.0 5.5 5.0 5.0 4.9
-## 5   5.1 5.0 4.9 4.9 5.8 5.1 4.8 4.7 5.1 5.3
-## 26  4.9 5.1 5.0 5.0 5.0 4.6 5.1 4.6 4.9 5.1
-## 31  5.1 4.7 5.0 4.9 5.2 4.6 4.6 5.0 4.6 5.0
-## 33  5.2 5.5 6.0 4.9 5.5 5.5 5.5 5.6 5.7 5.7
-## 39  4.4 5.0 4.3 5.0 4.4 5.0 4.4 4.4 4.4 4.9
-## 43  4.7 5.4 4.9 4.9 4.6 4.6 4.9 4.7 4.8 4.6
-## 56  5.8 5.6 6.1 5.4 5.4 5.5 6.2 6.0 5.8 5.8
-## 96  5.8 6.3 5.6 6.5 6.2 6.2 5.8 6.5 6.4 6.6
-## 103 6.5 6.9 6.7 6.8 6.7 7.2 7.4 7.2 6.7 6.8
-## 113 6.3 6.7 6.7 6.7 6.7 6.7 6.7 6.7 6.4 5.9
-## 124 5.7 5.8 6.2 6.1 5.5 6.6 6.2 6.2 6.2 5.5
+## 1   5.0 5.0 5.0 5.8 5.0 5.1 5.5 5.0 5.0 4.9
+## 5   5.0 5.2 5.0 5.7 5.4 5.1 5.8 4.9 5.1 5.3
+## 26  4.6 5.1 4.9 5.1 5.0 4.6 5.1 4.9 5.0 5.0
+## 31  5.0 4.7 5.0 5.0 4.9 4.6 4.6 5.0 4.6 5.0
+## 33  5.2 5.5 6.0 6.0 5.1 6.0 5.5 5.8 5.7 5.7
+## 39  4.4 4.6 4.4 5.0 4.4 5.0 4.4 4.4 4.9 4.9
+## 43  4.7 4.9 4.9 4.9 4.6 4.6 4.9 4.9 4.8 4.6
+## 56  6.8 6.2 5.4 6.3 5.4 5.5 6.2 6.5 5.8 6.1
+## 96  5.6 6.0 5.6 6.6 6.9 6.2 5.8 6.5 6.4 6.6
+## 103 6.7 7.7 7.3 6.3 6.7 6.7 6.9 6.7 6.9 6.8
+## 113 6.9 6.9 6.7 6.7 6.7 6.7 6.7 6.4 6.4 5.9
+## 124 5.7 5.8 6.2 5.6 6.0 5.5 5.7 5.6 6.2 5.8
 ## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3
-## 135 6.0 6.4 6.3 6.7 6.7 6.5 6.3 6.4 7.0 5.6
-## 149 6.4 6.5 6.8 7.0 7.0 6.4 6.3 6.3 6.5 6.3
-## 150 6.4 6.1 6.4 6.4 6.3 6.5 6.4 6.1 6.4 6.4
+## 135 7.0 6.9 7.2 6.7 6.3 6.0 7.7 6.4 7.0 6.0
+## 149 6.4 6.3 6.3 7.0 6.8 6.4 6.3 6.7 6.5 6.3
+## 150 6.6 6.7 6.4 6.0 6.1 6.0 6.4 6.1 6.0 6.3
 ```
 
 This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
@@ -730,92 +725,80 @@ Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.W
 ```r
 model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
-##                     est         se         t        df     Pr(>|t|)
-## (Intercept)   2.4003660 0.27904211  8.602164 117.11666 4.107825e-14
-## Sepal.Width   0.4635384 0.08556538  5.417359 122.66722 3.066295e-07
-## Petal.Length  0.7126897 0.07046809 10.113652  87.37099 2.220446e-16
-## Species2     -0.7875803 0.23149303 -3.402177 100.83240 9.597852e-04
-## Species3     -1.1614620 0.32513199 -3.572279  69.21508 6.493711e-04
-##                   lo 95      hi 95 nmis        fmi     lambda
-## (Intercept)   1.8477435  2.9529885   NA 0.10362235 0.08844452
-## Sepal.Width   0.2941624  0.6329144   15 0.08849659 0.07375537
-## Petal.Length  0.5726351  0.8527443   13 0.18448110 0.16602439
-## Species2     -1.2468094 -0.3283511   NA 0.14686085 0.13010510
-## Species3     -1.8100466 -0.5128774   NA 0.24332027 0.22176707
+##                     estimate  std.error statistic        df      p.value
+## (Intercept)        2.4075510 0.29296336  8.217925  97.59044 8.895107e-13
+## Sepal.Width        0.4556317 0.09393898  4.850294  78.33099 6.142499e-06
+## Petal.Length       0.7302035 0.07064102 10.336819 101.88212 0.000000e+00
+## Speciesversicolor -0.8433947 0.23754195 -3.550508 101.59155 5.842697e-04
+## Speciesvirginica  -1.2443653 0.31458517 -3.955575 103.59135 1.399700e-04
 ```
 
-Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$), and a 95% interval. 
+Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note that a 95% interval must be calculated manually. 
 
-Additional information included in this table is the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
+Digging deeper into the object created by `pool(model)`, specifically the `pooled` list, we can pull out additional information including the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
 
 
 ```r
-kable(summary(pool(model))[,c(1:3, 5:7, 9)], digits=3)
+kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 ```
 
 <table>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> est </th>
-   <th style="text-align:right;"> se </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> ubar </th>
+   <th style="text-align:right;"> b </th>
    <th style="text-align:right;"> t </th>
-   <th style="text-align:right;"> Pr(&gt;|t|) </th>
-   <th style="text-align:right;"> lo 95 </th>
-   <th style="text-align:right;"> hi 95 </th>
+   <th style="text-align:right;"> lambda </th>
    <th style="text-align:right;"> fmi </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 2.400 </td>
-   <td style="text-align:right;"> 0.279 </td>
-   <td style="text-align:right;"> 8.602 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 1.848 </td>
-   <td style="text-align:right;"> 2.953 </td>
-   <td style="text-align:right;"> 0.104 </td>
+   <td style="text-align:right;"> 2.408 </td>
+   <td style="text-align:right;"> 0.074 </td>
+   <td style="text-align:right;"> 0.011 </td>
+   <td style="text-align:right;"> 0.086 </td>
+   <td style="text-align:right;"> 0.139 </td>
+   <td style="text-align:right;"> 0.156 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sepal.Width </td>
-   <td style="text-align:right;"> 0.464 </td>
-   <td style="text-align:right;"> 0.086 </td>
-   <td style="text-align:right;"> 5.417 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.294 </td>
-   <td style="text-align:right;"> 0.633 </td>
-   <td style="text-align:right;"> 0.088 </td>
+   <td style="text-align:right;"> 0.456 </td>
+   <td style="text-align:right;"> 0.007 </td>
+   <td style="text-align:right;"> 0.002 </td>
+   <td style="text-align:right;"> 0.009 </td>
+   <td style="text-align:right;"> 0.192 </td>
+   <td style="text-align:right;"> 0.212 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Petal.Length </td>
-   <td style="text-align:right;"> 0.713 </td>
-   <td style="text-align:right;"> 0.070 </td>
-   <td style="text-align:right;"> 10.114 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.573 </td>
-   <td style="text-align:right;"> 0.853 </td>
-   <td style="text-align:right;"> 0.184 </td>
+   <td style="text-align:right;"> 0.730 </td>
+   <td style="text-align:right;"> 0.004 </td>
+   <td style="text-align:right;"> 0.001 </td>
+   <td style="text-align:right;"> 0.005 </td>
+   <td style="text-align:right;"> 0.127 </td>
+   <td style="text-align:right;"> 0.144 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Species2 </td>
-   <td style="text-align:right;"> -0.788 </td>
-   <td style="text-align:right;"> 0.231 </td>
-   <td style="text-align:right;"> -3.402 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> -1.247 </td>
-   <td style="text-align:right;"> -0.328 </td>
-   <td style="text-align:right;"> 0.147 </td>
+   <td style="text-align:left;"> Speciesversicolor </td>
+   <td style="text-align:right;"> -0.843 </td>
+   <td style="text-align:right;"> 0.049 </td>
+   <td style="text-align:right;"> 0.007 </td>
+   <td style="text-align:right;"> 0.056 </td>
+   <td style="text-align:right;"> 0.128 </td>
+   <td style="text-align:right;"> 0.145 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Species3 </td>
-   <td style="text-align:right;"> -1.161 </td>
-   <td style="text-align:right;"> 0.325 </td>
-   <td style="text-align:right;"> -3.572 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> -1.810 </td>
-   <td style="text-align:right;"> -0.513 </td>
-   <td style="text-align:right;"> 0.243 </td>
+   <td style="text-align:left;"> Speciesvirginica </td>
+   <td style="text-align:right;"> -1.244 </td>
+   <td style="text-align:right;"> 0.087 </td>
+   <td style="text-align:right;"> 0.011 </td>
+   <td style="text-align:right;"> 0.099 </td>
+   <td style="text-align:right;"> 0.123 </td>
+   <td style="text-align:right;"> 0.139 </td>
   </tr>
 </tbody>
 </table>
@@ -837,9 +820,9 @@ library(forestplot)
 te.mean <- summary(true.model)$coefficients[,1]
 mi.mean <- summary(pool(model))[,1]
 te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
-mi.ll   <- summary(pool(model))[,6]
+mi.ll   <- mi.mean - 1.96*summary(pool(model))[,2]
 te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
-mi.ul   <- summary(pool(model))[,7]
+mi.ul   <- mi.mean + 1.96*summary(pool(model))[,2]
 names   <- names(coef(true.model))
 
 
@@ -896,6 +879,7 @@ forestplot(names,
     - Requires very little math
 * Multiple Imputation.com http://www.stefvanbuuren.nl/mi/
 
+* Applied Missing Data Analysis with SPSS and (R) Studio https://bookdown.org/mwheymans/Book_MI/
 * http://www.analyticsvidhya.com/blog/2016/03/tutorial-powerful-packages-imputing-missing-values/ 
 * http://www.r-bloggers.com/imputing-missing-data-with-r-mice-package/
 
@@ -904,7 +888,6 @@ Imputation methods for complex survey data and data not missing at random is an 
 
 ![](https://shiring.github.io/netlify_images/mice_sketchnote_gxjsgc.jpg)
 https://shirinsplayground.netlify.com/2017/11/mice_sketchnotes/
-
 
 
 

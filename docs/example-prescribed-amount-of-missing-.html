@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Applied Statistics</title>
-  <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>14.8 Example: Prescribed amount of missing. | Applied Statistics</title>
+  <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Statistics" />
+  <meta property="og:title" content="14.8 Example: Prescribed amount of missing. | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Statistics" />
+  <meta name="twitter:title" content="14.8 Example: Prescribed amount of missing. | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
 
-<meta name="author" content="Robin A. Donatello and Edward A. Roualdes">
+<meta name="author" content="Robin A. Donatello and Edward A. Roualdes" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="multiple-imputation-using-chained-equations-mice.html">
 <link rel="next" href="final-thoughts.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -46,44 +46,71 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -104,24 +131,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
-<li class="chapter" data-level="1.0.1" data-path="data-prep.html"><a href="data-prep.html#reproducible-workflows"><i class="fa fa-check"></i><b>1.0.1</b> Reproducible Workflows</a></li>
-<li class="chapter" data-level="1.0.2" data-path="data-prep.html"><a href="data-prep.html#data-management"><i class="fa fa-check"></i><b>1.0.2</b> Data Management</a></li>
-<li class="chapter" data-level="1.1" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.1</b> Import data</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="import-data.html"><a href="import-data.html#renaming-varible-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.1.1</b> Renaming varible names for sanity sake</a></li>
+<li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
+<li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>1.2</b> Missing data</a></li>
-<li class="chapter" data-level="1.3" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.3</b> Identifying Variable Types</a></li>
-<li class="chapter" data-level="1.4" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>1.4</b> Outliers</a></li>
-<li class="chapter" data-level="1.5" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html"><i class="fa fa-check"></i><b>1.5</b> Creating secondary variables</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#collapsing-variables-into-fewer-categories"><i class="fa fa-check"></i><b>1.5.1</b> Collapsing variables into fewer categories</a></li>
-<li class="chapter" data-level="1.5.2" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#binning-a-continuous-variable-into-categorical-ranges."><i class="fa fa-check"></i><b>1.5.2</b> Binning a continuous variable into categorical ranges.</a></li>
-<li class="chapter" data-level="1.5.3" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#dichotomizing"><i class="fa fa-check"></i><b>1.5.3</b> Dichotomizing</a></li>
-<li class="chapter" data-level="1.5.4" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html#sum-or-average-values-across-multiple-variables"><i class="fa fa-check"></i><b>1.5.4</b> Sum or Average values across multiple variables</a></li>
+<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-varible-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming varible names for sanity sake</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="transformations-for-normality.html"><a href="transformations-for-normality.html"><i class="fa fa-check"></i><b>1.6</b> Transformations for Normality</a></li>
-<li class="chapter" data-level="1.7" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.7</b> Saving your changes</a></li>
-<li class="chapter" data-level="1.8" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.8</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.9" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.9</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="data-management.html"><a href="data-management.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.3.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3.3" data-path="data-management.html"><a href="data-management.html#outliers"><i class="fa fa-check"></i><b>1.3.3</b> Outliers</a></li>
+<li class="chapter" data-level="1.3.4" data-path="data-management.html"><a href="data-management.html#creating-secondary-variables"><i class="fa fa-check"></i><b>1.3.4</b> Creating secondary variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
+<li class="chapter" data-level="1.5" data-path="wide-vs-long-data.html"><a href="wide-vs-long-data.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-viz.html"><a href="data-viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a><ul>
 <li class="chapter" data-level="2.1" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html"><i class="fa fa-check"></i><b>2.1</b> The syntax of <code>ggplot</code></a><ul>
@@ -129,59 +154,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.2" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html#optional-but-helpful-arguments"><i class="fa fa-check"></i><b>2.1.2</b> Optional but helpful arguments</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>2.2</b> The Data</a></li>
-<li class="chapter" data-level="2.3" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html"><i class="fa fa-check"></i><b>2.3</b> Univariate Categorical variables</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#tables"><i class="fa fa-check"></i><b>2.3.1</b> Tables</a></li>
-<li class="chapter" data-level="2.3.2" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#barcharts-barplots"><i class="fa fa-check"></i><b>2.3.2</b> Barcharts / Barplots</a></li>
-<li class="chapter" data-level="2.3.3" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#cleveland-dot-plots"><i class="fa fa-check"></i><b>2.3.3</b> Cleveland Dot Plots</a></li>
-<li class="chapter" data-level="2.3.4" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#pie-chart"><i class="fa fa-check"></i><b>2.3.4</b> Pie Chart</a></li>
-<li class="chapter" data-level="2.3.5" data-path="univariate-categorical-variables.html"><a href="univariate-categorical-variables.html#waffle-chart"><i class="fa fa-check"></i><b>2.3.5</b> Waffle Chart</a></li>
+<li class="chapter" data-level="2.3" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html"><i class="fa fa-check"></i><b>2.3</b> Univariate Visualizations</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html#categorical-variables"><i class="fa fa-check"></i><b>2.3.1</b> Categorical variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html#continuous-measures"><i class="fa fa-check"></i><b>2.3.2</b> Continuous Measures</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html"><i class="fa fa-check"></i><b>2.4</b> Univariate Continuous variable</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#dotplot"><i class="fa fa-check"></i><b>2.4.1</b> Dotplot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#histograms"><i class="fa fa-check"></i><b>2.4.2</b> Histograms</a></li>
-<li class="chapter" data-level="2.4.3" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#density-plots"><i class="fa fa-check"></i><b>2.4.3</b> Density plots</a></li>
-<li class="chapter" data-level="2.4.4" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#histograms-density"><i class="fa fa-check"></i><b>2.4.4</b> Histograms + density</a></li>
-<li class="chapter" data-level="2.4.5" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#boxplots"><i class="fa fa-check"></i><b>2.4.5</b> Boxplots</a></li>
-<li class="chapter" data-level="2.4.6" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#violin-plots"><i class="fa fa-check"></i><b>2.4.6</b> Violin plots</a></li>
-<li class="chapter" data-level="2.4.7" data-path="univariate-continuous-variable.html"><a href="univariate-continuous-variable.html#boxplot-violin-plots"><i class="fa fa-check"></i><b>2.4.7</b> Boxplot + Violin plots</a></li>
+<li class="chapter" data-level="2.4" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html"><i class="fa fa-check"></i><b>2.4</b> Bivariate Visualizations</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#categorical-v.-categorical"><i class="fa fa-check"></i><b>2.4.1</b> Categorical v. Categorical</a></li>
+<li class="chapter" data-level="2.4.2" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#grouped-bar-charts-with-percentages"><i class="fa fa-check"></i><b>2.4.2</b> Grouped bar charts with percentages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#continuous-v.-continuous"><i class="fa fa-check"></i><b>2.4.3</b> Continuous v. Continuous</a></li>
+<li class="chapter" data-level="2.4.4" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#continuous-v.-categorical"><i class="fa fa-check"></i><b>2.4.4</b> Continuous v. Categorical</a></li>
+<li class="chapter" data-level="2.4.5" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#joy-plots-ridgelines"><i class="fa fa-check"></i><b>2.4.5</b> Joy plots / Ridgelines</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="normal-qq-plots.html"><a href="normal-qq-plots.html"><i class="fa fa-check"></i><b>2.5</b> Normal QQ plots</a></li>
-<li class="chapter" data-level="2.6" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html"><i class="fa fa-check"></i><b>2.6</b> Categorical v. Categorical</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#two-way-tables"><i class="fa fa-check"></i><b>2.6.1</b> Two-way Tables</a></li>
-<li class="chapter" data-level="2.6.2" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#grouped-bar-charts"><i class="fa fa-check"></i><b>2.6.2</b> Grouped bar charts</a></li>
-<li class="chapter" data-level="2.6.3" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#grouped-bar-charts-with-percentages"><i class="fa fa-check"></i><b>2.6.3</b> Grouped bar charts with percentages</a></li>
-<li class="chapter" data-level="2.6.4" data-path="categorical-v-categorical.html"><a href="categorical-v-categorical.html#mosaic-plots"><i class="fa fa-check"></i><b>2.6.4</b> Mosaic plots</a></li>
+<li class="chapter" data-level="2.5" data-path="faceting-paneling.html"><a href="faceting-paneling.html"><i class="fa fa-check"></i><b>2.5</b> Faceting / paneling</a></li>
+<li class="chapter" data-level="2.6" data-path="multiple-plots-per-window.html"><a href="multiple-plots-per-window.html"><i class="fa fa-check"></i><b>2.6</b> Multiple plots per window</a></li>
+<li class="chapter" data-level="2.7" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html"><i class="fa fa-check"></i><b>2.7</b> Multivariate (3+ variables)</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#three-continuous"><i class="fa fa-check"></i><b>2.7.1</b> Three continuous</a></li>
+<li class="chapter" data-level="2.7.2" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#scatterplot-matrix"><i class="fa fa-check"></i><b>2.7.2</b> Scatterplot matrix</a></li>
+<li class="chapter" data-level="2.7.3" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#two-categorical-and-one-continuous"><i class="fa fa-check"></i><b>2.7.3</b> Two categorical and one continuous</a></li>
+<li class="chapter" data-level="2.7.4" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#two-continuous-and-one-categorical"><i class="fa fa-check"></i><b>2.7.4</b> Two continuous and one categorical</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="continuous-v-continuous.html"><a href="continuous-v-continuous.html"><i class="fa fa-check"></i><b>2.7</b> Continuous v. Continuous</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="continuous-v-continuous.html"><a href="continuous-v-continuous.html#scatterplot"><i class="fa fa-check"></i><b>2.7.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="2.8" data-path="paneling-on-two-variables.html"><a href="paneling-on-two-variables.html"><i class="fa fa-check"></i><b>2.8</b> Paneling on two variables</a></li>
+<li class="chapter" data-level="2.9" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>2.9</b> Troubleshooting</a></li>
+<li class="chapter" data-level="2.10" data-path="but-what-about.html"><a href="but-what-about.html"><i class="fa fa-check"></i><b>2.10</b> But what about…</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="but-what-about.html"><a href="but-what-about.html#other-plots-not-mentioned"><i class="fa fa-check"></i><b>2.10.1</b> Other plots not mentioned</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="scatterplot-matrix.html"><a href="scatterplot-matrix.html"><i class="fa fa-check"></i><b>2.8</b> Scatterplot matrix</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="scatterplot-matrix.html"><a href="scatterplot-matrix.html#adding-lines-to-the-scatterplots"><i class="fa fa-check"></i><b>2.8.1</b> Adding lines to the scatterplots</a></li>
-</ul></li>
-<li class="chapter" data-level="2.9" data-path="line-plots.html"><a href="line-plots.html"><i class="fa fa-check"></i><b>2.9</b> Line plots</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="line-plots.html"><a href="line-plots.html#base-9"><i class="fa fa-check"></i><b>2.9.1</b> base</a></li>
-<li class="chapter" data-level="2.9.2" data-path="line-plots.html"><a href="line-plots.html#ggplot-9"><i class="fa fa-check"></i><b>2.9.2</b> ggplot</a></li>
-</ul></li>
-<li class="chapter" data-level="2.10" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html"><i class="fa fa-check"></i><b>2.10</b> Continuous v. Categorical</a><ul>
-<li class="chapter" data-level="2.10.1" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#dotplotstrip-chart"><i class="fa fa-check"></i><b>2.10.1</b> Dotplot/strip chart</a></li>
-<li class="chapter" data-level="2.10.2" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#grouped-boxplots"><i class="fa fa-check"></i><b>2.10.2</b> Grouped boxplots</a></li>
-<li class="chapter" data-level="2.10.3" data-path="continuous-v-categorical.html"><a href="continuous-v-categorical.html#grouped-histograms"><i class="fa fa-check"></i><b>2.10.3</b> Grouped histograms</a></li>
-</ul></li>
-<li class="chapter" data-level="2.11" data-path="joy-plots-in-progress.html"><a href="joy-plots-in-progress.html"><i class="fa fa-check"></i><b>2.11</b> Joy plots (in progress)</a></li>
-<li class="chapter" data-level="2.12" data-path="faceting-paneling.html"><a href="faceting-paneling.html"><i class="fa fa-check"></i><b>2.12</b> Faceting / paneling</a></li>
-<li class="chapter" data-level="2.13" data-path="other-ways-to-get-multiple-plots-per-window.html"><a href="other-ways-to-get-multiple-plots-per-window.html"><i class="fa fa-check"></i><b>2.13</b> Other ways to get multiple plots per window</a><ul>
-<li class="chapter" data-level="2.13.1" data-path="other-ways-to-get-multiple-plots-per-window.html"><a href="other-ways-to-get-multiple-plots-per-window.html#base-14"><i class="fa fa-check"></i><b>2.13.1</b> base</a></li>
-</ul></li>
-<li class="chapter" data-level="2.14" data-path="multivariate-2-variables.html"><a href="multivariate-2-variables.html"><i class="fa fa-check"></i><b>2.14</b> Multivariate (2+ variables)</a></li>
-<li class="chapter" data-level="2.15" data-path="three-continuous.html"><a href="three-continuous.html"><i class="fa fa-check"></i><b>2.15</b> Three continuous</a></li>
-<li class="chapter" data-level="2.16" data-path="two-categorical-and-one-continuous.html"><a href="two-categorical-and-one-continuous.html"><i class="fa fa-check"></i><b>2.16</b> Two categorical and one continuous</a></li>
-<li class="chapter" data-level="2.17" data-path="two-continuous-and-one-categorical.html"><a href="two-continuous-and-one-categorical.html"><i class="fa fa-check"></i><b>2.17</b> Two continuous and one categorical</a></li>
-<li class="chapter" data-level="2.18" data-path="paneling-on-two-variables.html"><a href="paneling-on-two-variables.html"><i class="fa fa-check"></i><b>2.18</b> Paneling on two variables</a></li>
-<li class="chapter" data-level="2.19" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>2.19</b> Troubleshooting</a></li>
-<li class="chapter" data-level="2.20" data-path="but-what-about.html"><a href="but-what-about.html"><i class="fa fa-check"></i><b>2.20</b> But what about…</a><ul>
-<li class="chapter" data-level="2.20.1" data-path="but-what-about.html"><a href="but-what-about.html#other-plots-not-mentioned"><i class="fa fa-check"></i><b>2.20.1</b> Other plots not mentioned</a></li>
-</ul></li>
-<li class="chapter" data-level="2.21" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>2.21</b> Additional Resources</a></li>
+<li class="chapter" data-level="2.11" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>2.11</b> Additional Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="select-analysis.html"><a href="select-analysis.html"><i class="fa fa-check"></i><b>3</b> Selecting Appropriate Analyses</a></li>
 <li class="part"><span><b>I Regression Modeling</b></span></li>
@@ -231,15 +228,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>8.2.1</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
-<li class="chapter" data-level="8.2.4" data-path="binary-data.html"><a href="binary-data.html#goodness-of-fit"><i class="fa fa-check"></i><b>8.2.4</b> Goodness of Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
-<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
@@ -279,44 +269,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>III Other Topics</b></span></li>
-<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
-<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
+<li class="part"><span><b>III Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
+<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
+<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
+<li class="chapter" data-level="13" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>13</b> Random Intercept Models</a><ul>
+<li class="chapter" data-level="13.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>13.1</b> Pooling</a></li>
+<li class="chapter" data-level="13.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>13.2</b> Mathematical Models</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>13.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="13.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>13.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="13.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>13.2.3</b> Partial Pooling (RI)</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
+<li class="chapter" data-level="13.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>13.3</b> Components of Variance</a></li>
+<li class="chapter" data-level="13.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>13.4</b> Fitting models in R</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>13.4.1</b> Comparison of estimates</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
-<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
-<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
+<li class="chapter" data-level="13.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>13.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="13.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>13.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="13.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>13.7</b> Centering terms</a><ul>
+<li class="chapter" data-level="13.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>13.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
 </ul></li>
-<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
-<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
+<li class="chapter" data-level="13.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>13.8</b> Specifying Correlation Structures</a><ul>
+<li class="chapter" data-level="13.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>13.8.1</b> Specifying different covariance structures in R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
+<li class="chapter" data-level="13.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a><ul>
+<li class="chapter" data-level="13.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>13.9.1</b> Package Vignettes</a></li>
 </ul></li>
-<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>IV Other Topics</b></span></li>
+<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
+<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
+<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
+<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
+<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -339,22 +357,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="example-prescribed-amount-of-missing." class="section level2">
-<h2><span class="header-section-number">12.8</span> Example: Prescribed amount of missing.</h2>
+<h2><span class="header-section-number">14.8</span> Example: Prescribed amount of missing.</h2>
 <p>We will demonstrate using Fisher’s Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to estimate the bias incurred by using these imputation methods.</p>
 <p>For the <code>iris</code> data we set a seed and use the <code>prodNA()</code> function from the <code>missForest</code> package to create 10% missing values in this data set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(missForest)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(missForest)
 <span class="kw">set.seed</span>(<span class="dv">12345</span>) <span class="co"># Note to self: Change the combo on my luggage</span>
 iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <span class="dt">noNA=</span><span class="fl">0.1</span>)
 <span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(iris.mis)))
-## 
-## FALSE  TRUE 
-##   0.9   0.1</code></pre></div>
+<span class="co">## </span>
+<span class="co">## FALSE  TRUE </span>
+<span class="co">##   0.9   0.1</span></code></pre>
 <p>Visualize missing data pattern.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(VIM)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(VIM)
 <span class="kw">aggr</span>(iris.mis, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;darkolivegreen3&#39;</span>,<span class="st">&#39;salmon&#39;</span>),
               <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>,
               <span class="dt">labels=</span><span class="kw">names</span>(iris.mis), <span class="dt">cex.axis=</span>.<span class="dv">7</span>,
-              <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</code></pre></div>
+              <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</code></pre>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <pre><code>## 
 ##  Variables sorted by number of missings: 
@@ -366,31 +384,21 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 ##  Petal.Length 0.08666667</code></pre>
 <p>Here’s another example of where only 10% of the data overall is missing, but it results in only 58% complete cases.</p>
 <div id="multiply-impute-the-missing-data-using-mice" class="section level3">
-<h3><span class="header-section-number">12.8.1</span> Multiply impute the missing data using <code>mice()</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris &lt;-<span class="st"> </span><span class="kw">mice</span>(iris.mis, <span class="dt">m=</span><span class="dv">10</span>, <span class="dt">maxit=</span><span class="dv">25</span>, <span class="dt">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">seed=</span><span class="dv">500</span>, <span class="dt">printFlag=</span><span class="ot">FALSE</span>)
+<h3><span class="header-section-number">14.8.1</span> Multiply impute the missing data using <code>mice()</code></h3>
+<pre class="sourceCode r"><code class="sourceCode r">imp_iris &lt;-<span class="st"> </span><span class="kw">mice</span>(iris.mis, <span class="dt">m=</span><span class="dv">10</span>, <span class="dt">maxit=</span><span class="dv">25</span>, <span class="dt">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="dt">seed=</span><span class="dv">500</span>, <span class="dt">printFlag=</span><span class="ot">FALSE</span>)
 <span class="kw">summary</span>(imp_iris)
-## Multiply imputed data set
-## Call:
-## mice(data = iris.mis, m = 10, method = &quot;pmm&quot;, maxit = 25, printFlag = FALSE, 
-##     seed = 500)
-## Number of multiple imputations:  10
-## Missing cells per column:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##           16           15           13           16           15 
-## Imputation methods:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; 
-## VisitSequence:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##            1            2            3            4            5 
-## PredictorMatrix:
-##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## Sepal.Length            0           1            1           1       1
-## Sepal.Width             1           0            1           1       1
-## Petal.Length            1           1            0           1       1
-## Petal.Width             1           1            1           0       1
-## Species                 1           1            1           1       0
-## Random generator seed value:  500</code></pre></div>
+<span class="co">## Class: mids</span>
+<span class="co">## Number of multiple imputations:  10 </span>
+<span class="co">## Imputation methods:</span>
+<span class="co">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span>
+<span class="co">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; </span>
+<span class="co">## PredictorMatrix:</span>
+<span class="co">##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">## Sepal.Length            0           1            1           1       1</span>
+<span class="co">## Sepal.Width             1           0            1           1       1</span>
+<span class="co">## Petal.Length            1           1            0           1       1</span>
+<span class="co">## Petal.Width             1           1            1           0       1</span>
+<span class="co">## Species                 1           1            1           1       0</span></code></pre>
 
 <div class="rmdnote">
 <p>The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a <strong>very</strong> good idea to understand these controls.</p>
@@ -399,107 +407,100 @@ iris.mis &lt;-<span class="st"> </span><span class="kw">prodNA</span>(iris, <spa
 
 </div>
 <div id="check-the-imputation-method-used-on-each-variable." class="section level3">
-<h3><span class="header-section-number">12.8.2</span> Check the imputation method used on each variable.</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>meth
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</code></pre></div>
+<h3><span class="header-section-number">14.8.2</span> Check the imputation method used on each variable.</h3>
+<pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>meth
+<span class="co">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span>
+<span class="co">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</span></code></pre>
 <p>Predictive mean matching was used for all variables, even <code>Species</code>. This is reasonable because PMM is a hot deck method of imputation.</p>
 </div>
 <div id="check-convergence" class="section level3">
-<h3><span class="header-section-number">12.8.3</span> Check Convergence</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(imp_iris, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>))</code></pre></div>
+<h3><span class="header-section-number">14.8.3</span> Check Convergence</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(imp_iris, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>))</code></pre>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>The variance across chains is no larger than the variance within chains.</p>
 </div>
 <div id="look-at-the-values-generated-for-imputation" class="section level3">
-<h3><span class="header-section-number">12.8.4</span> Look at the values generated for imputation</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>imp<span class="op">$</span>Sepal.Length
-##       1   2   3   4   5   6   7   8   9  10
-## 1   5.0 5.0 5.0 5.8 5.0 5.0 5.5 5.0 5.0 4.9
-## 5   5.1 5.0 4.9 4.9 5.8 5.1 4.8 4.7 5.1 5.3
-## 26  4.9 5.1 5.0 5.0 5.0 4.6 5.1 4.6 4.9 5.1
-## 31  5.1 4.7 5.0 4.9 5.2 4.6 4.6 5.0 4.6 5.0
-## 33  5.2 5.5 6.0 4.9 5.5 5.5 5.5 5.6 5.7 5.7
-## 39  4.4 5.0 4.3 5.0 4.4 5.0 4.4 4.4 4.4 4.9
-## 43  4.7 5.4 4.9 4.9 4.6 4.6 4.9 4.7 4.8 4.6
-## 56  5.8 5.6 6.1 5.4 5.4 5.5 6.2 6.0 5.8 5.8
-## 96  5.8 6.3 5.6 6.5 6.2 6.2 5.8 6.5 6.4 6.6
-## 103 6.5 6.9 6.7 6.8 6.7 7.2 7.4 7.2 6.7 6.8
-## 113 6.3 6.7 6.7 6.7 6.7 6.7 6.7 6.7 6.4 5.9
-## 124 5.7 5.8 6.2 6.1 5.5 6.6 6.2 6.2 6.2 5.5
-## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3
-## 135 6.0 6.4 6.3 6.7 6.7 6.5 6.3 6.4 7.0 5.6
-## 149 6.4 6.5 6.8 7.0 7.0 6.4 6.3 6.3 6.5 6.3
-## 150 6.4 6.1 6.4 6.4 6.3 6.5 6.4 6.1 6.4 6.4</code></pre></div>
+<h3><span class="header-section-number">14.8.4</span> Look at the values generated for imputation</h3>
+<pre class="sourceCode r"><code class="sourceCode r">imp_iris<span class="op">$</span>imp<span class="op">$</span>Sepal.Length
+<span class="co">##       1   2   3   4   5   6   7   8   9  10</span>
+<span class="co">## 1   5.0 5.0 5.0 5.8 5.0 5.1 5.5 5.0 5.0 4.9</span>
+<span class="co">## 5   5.0 5.2 5.0 5.7 5.4 5.1 5.8 4.9 5.1 5.3</span>
+<span class="co">## 26  4.6 5.1 4.9 5.1 5.0 4.6 5.1 4.9 5.0 5.0</span>
+<span class="co">## 31  5.0 4.7 5.0 5.0 4.9 4.6 4.6 5.0 4.6 5.0</span>
+<span class="co">## 33  5.2 5.5 6.0 6.0 5.1 6.0 5.5 5.8 5.7 5.7</span>
+<span class="co">## 39  4.4 4.6 4.4 5.0 4.4 5.0 4.4 4.4 4.9 4.9</span>
+<span class="co">## 43  4.7 4.9 4.9 4.9 4.6 4.6 4.9 4.9 4.8 4.6</span>
+<span class="co">## 56  6.8 6.2 5.4 6.3 5.4 5.5 6.2 6.5 5.8 6.1</span>
+<span class="co">## 96  5.6 6.0 5.6 6.6 6.9 6.2 5.8 6.5 6.4 6.6</span>
+<span class="co">## 103 6.7 7.7 7.3 6.3 6.7 6.7 6.9 6.7 6.9 6.8</span>
+<span class="co">## 113 6.9 6.9 6.7 6.7 6.7 6.7 6.7 6.4 6.4 5.9</span>
+<span class="co">## 124 5.7 5.8 6.2 5.6 6.0 5.5 5.7 5.6 6.2 5.8</span>
+<span class="co">## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3</span>
+<span class="co">## 135 7.0 6.9 7.2 6.7 6.3 6.0 7.7 6.4 7.0 6.0</span>
+<span class="co">## 149 6.4 6.3 6.3 7.0 6.8 6.4 6.3 6.7 6.5 6.3</span>
+<span class="co">## 150 6.6 6.7 6.4 6.0 6.1 6.0 6.4 6.1 6.0 6.3</span></code></pre>
 <p>This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for <code>Sepal.Length</code> was needed. Notice only imputations are shown, no observed data is showing here.</p>
 </div>
 <div id="create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations" class="section level3">
-<h3><span class="header-section-number">12.8.5</span> Create a complete data set by filling in the missing data using the imputations</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="dt">action=</span><span class="dv">1</span>)</code></pre></div>
+<h3><span class="header-section-number">14.8.5</span> Create a complete data set by filling in the missing data using the imputations</h3>
+<pre class="sourceCode r"><code class="sourceCode r">iris_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="dt">action=</span><span class="dv">1</span>)</code></pre>
 <p>Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on.</p>
 <div id="alternative---stack-the-imputed-data-sets-in-long-format." class="section level4">
-<h4><span class="header-section-number">12.8.5.1</span> Alternative - Stack the imputed data sets in <em>long</em> format.</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_long &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</code></pre></div>
+<h4><span class="header-section-number">14.8.5.1</span> Alternative - Stack the imputed data sets in <em>long</em> format.</h4>
+<pre class="sourceCode r"><code class="sourceCode r">iris_long &lt;-<span class="st"> </span><span class="kw">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</code></pre>
 <p>By looking at the <code>names</code> of this new object we can confirm that there are indeed 10 complete data sets with <span class="math inline">\(n=150\)</span> in each.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(iris_long)
-## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; 
-## [5] &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(iris_long)
+<span class="co">## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; </span>
+<span class="co">## [5] &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;</span>
 <span class="kw">table</span>(iris_long<span class="op">$</span>.imp)
-## 
-##   1   2   3   4   5   6   7   8   9  10 
-## 150 150 150 150 150 150 150 150 150 150</code></pre></div>
+<span class="co">## </span>
+<span class="co">##   1   2   3   4   5   6   7   8   9  10 </span>
+<span class="co">## 150 150 150 150 150 150 150 150 150 150</span></code></pre>
 </div>
 </div>
 <div id="visualize-imputations" class="section level3">
-<h3><span class="header-section-number">12.8.6</span> Visualize Imputations</h3>
+<h3><span class="header-section-number">14.8.6</span> Visualize Imputations</h3>
 <p>Let’s compare the imputed values to the observed values to see if they are indeed “plausible” We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed).</p>
 <p><strong>Univariately</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">densityplot</span>(imp_iris)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">densityplot</span>(imp_iris)</code></pre>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" /></p>
 <p><strong>Multivariately</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(imp_iris, Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width <span class="op">|</span><span class="st"> </span>Species, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(imp_iris, Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width <span class="op">|</span><span class="st"> </span>Species, <span class="dt">cex=</span>.<span class="dv">8</span>, <span class="dt">pch=</span><span class="dv">16</span>)</code></pre>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-39-1.png" width="768" /></p>
-<p><strong>Analyze and pool</strong> All of this imputation was done so we could actually perform an analysis!</p>
-<p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>, <code>Petal.Length</code> and <code>Species</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">with</span>(imp_iris, <span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species))
+<p><strong>Analyze and pool</strong>
+All of this imputation was done so we could actually perform an analysis!</p>
+<p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>,
+<code>Petal.Length</code> and <code>Species</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">with</span>(imp_iris, <span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species))
 <span class="kw">summary</span>(<span class="kw">pool</span>(model))
-##                     est         se         t        df     Pr(&gt;|t|)
-## (Intercept)   2.4003660 0.27904211  8.602164 117.11666 4.107825e-14
-## Sepal.Width   0.4635384 0.08556538  5.417359 122.66722 3.066295e-07
-## Petal.Length  0.7126897 0.07046809 10.113652  87.37099 2.220446e-16
-## Species2     -0.7875803 0.23149303 -3.402177 100.83240 9.597852e-04
-## Species3     -1.1614620 0.32513199 -3.572279  69.21508 6.493711e-04
-##                   lo 95      hi 95 nmis        fmi     lambda
-## (Intercept)   1.8477435  2.9529885   NA 0.10362235 0.08844452
-## Sepal.Width   0.2941624  0.6329144   15 0.08849659 0.07375537
-## Petal.Length  0.5726351  0.8527443   13 0.18448110 0.16602439
-## Species2     -1.2468094 -0.3283511   NA 0.14686085 0.13010510
-## Species3     -1.8100466 -0.5128774   NA 0.24332027 0.22176707</code></pre></div>
-<p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>), and a 95% interval.</p>
-<p>Additional information included in this table is the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
+<span class="co">##                     estimate  std.error statistic        df      p.value</span>
+<span class="co">## (Intercept)        2.4075510 0.29296336  8.217925  97.59044 8.895107e-13</span>
+<span class="co">## Sepal.Width        0.4556317 0.09393898  4.850294  78.33099 6.142499e-06</span>
+<span class="co">## Petal.Length       0.7302035 0.07064102 10.336819 101.88212 0.000000e+00</span>
+<span class="co">## Speciesversicolor -0.8433947 0.23754195 -3.550508 101.59155 5.842697e-04</span>
+<span class="co">## Speciesvirginica  -1.2443653 0.31458517 -3.955575 103.59135 1.399700e-04</span></code></pre>
+<p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>). Note that a 95% interval must be calculated manually.</p>
+<p>Digging deeper into the object created by <code>pool(model)</code>, specifically the <code>pooled</code> list, we can pull out additional information including the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">pool</span>(model)<span class="op">$</span>pooled[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">9</span>)], <span class="dt">digits=</span><span class="dv">3</span>)</code></pre>
 <table>
 <thead>
 <tr>
 <th style="text-align:left;">
 </th>
 <th style="text-align:right;">
-est
+estimate
 </th>
 <th style="text-align:right;">
-se
+ubar
+</th>
+<th style="text-align:right;">
+b
 </th>
 <th style="text-align:right;">
 t
 </th>
 <th style="text-align:right;">
-Pr(&gt;|t|)
-</th>
-<th style="text-align:right;">
-lo 95
-</th>
-<th style="text-align:right;">
-hi 95
+lambda
 </th>
 <th style="text-align:right;">
 fmi
@@ -512,25 +513,22 @@ fmi
 (Intercept)
 </td>
 <td style="text-align:right;">
-2.400
+2.408
 </td>
 <td style="text-align:right;">
-0.279
+0.074
 </td>
 <td style="text-align:right;">
-8.602
+0.011
 </td>
 <td style="text-align:right;">
-0.000
+0.086
 </td>
 <td style="text-align:right;">
-1.848
+0.139
 </td>
 <td style="text-align:right;">
-2.953
-</td>
-<td style="text-align:right;">
-0.104
+0.156
 </td>
 </tr>
 <tr>
@@ -538,25 +536,22 @@ fmi
 Sepal.Width
 </td>
 <td style="text-align:right;">
-0.464
+0.456
 </td>
 <td style="text-align:right;">
-0.086
+0.007
 </td>
 <td style="text-align:right;">
-5.417
+0.002
 </td>
 <td style="text-align:right;">
-0.000
+0.009
 </td>
 <td style="text-align:right;">
-0.294
+0.192
 </td>
 <td style="text-align:right;">
-0.633
-</td>
-<td style="text-align:right;">
-0.088
+0.212
 </td>
 </tr>
 <tr>
@@ -564,95 +559,86 @@ Sepal.Width
 Petal.Length
 </td>
 <td style="text-align:right;">
-0.713
+0.730
 </td>
 <td style="text-align:right;">
-0.070
-</td>
-<td style="text-align:right;">
-10.114
-</td>
-<td style="text-align:right;">
-0.000
-</td>
-<td style="text-align:right;">
-0.573
-</td>
-<td style="text-align:right;">
-0.853
-</td>
-<td style="text-align:right;">
-0.184
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Species2
-</td>
-<td style="text-align:right;">
--0.788
-</td>
-<td style="text-align:right;">
-0.231
-</td>
-<td style="text-align:right;">
--3.402
+0.004
 </td>
 <td style="text-align:right;">
 0.001
 </td>
 <td style="text-align:right;">
--1.247
+0.005
 </td>
 <td style="text-align:right;">
--0.328
+0.127
 </td>
 <td style="text-align:right;">
-0.147
+0.144
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Species3
+Speciesversicolor
 </td>
 <td style="text-align:right;">
--1.161
+-0.843
 </td>
 <td style="text-align:right;">
-0.325
+0.049
 </td>
 <td style="text-align:right;">
--3.572
+0.007
 </td>
 <td style="text-align:right;">
-0.001
+0.056
 </td>
 <td style="text-align:right;">
--1.810
+0.128
 </td>
 <td style="text-align:right;">
--0.513
+0.145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Speciesvirginica
 </td>
 <td style="text-align:right;">
-0.243
+-1.244
+</td>
+<td style="text-align:right;">
+0.087
+</td>
+<td style="text-align:right;">
+0.011
+</td>
+<td style="text-align:right;">
+0.099
+</td>
+<td style="text-align:right;">
+0.123
+</td>
+<td style="text-align:right;">
+0.139
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="calculating-bias" class="section level3">
-<h3><span class="header-section-number">12.8.7</span> Calculating bias</h3>
+<h3><span class="header-section-number">14.8.7</span> Calculating bias</h3>
 <p>The iris data set had no missing data to begin with. So we can calculate the “true” parameter estimates…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">true.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Sepal.Width <span class="op">+</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</code></pre>
 <p>and find the difference in coefficients.</p>
 <p>The variance of the multiply imputed estimates is larger because of the between-imputation variance.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forestplot)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forestplot)
 te.mean &lt;-<span class="st"> </span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">1</span>]
 mi.mean &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">1</span>]
 te.ll   &lt;-<span class="st"> </span>te.mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">2</span>]
-mi.ll   &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">6</span>]
+mi.ll   &lt;-<span class="st"> </span>mi.mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">2</span>]
 te.ul   &lt;-<span class="st"> </span>te.mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(true.model)<span class="op">$</span>coefficients[,<span class="dv">2</span>]
-mi.ul   &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">7</span>]
+mi.ul   &lt;-<span class="st"> </span>mi.mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span><span class="kw">summary</span>(<span class="kw">pool</span>(model))[,<span class="dv">2</span>]
 names   &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">coef</span>(true.model))
 
 
@@ -664,8 +650,8 @@ names   &lt;-<span class="st"> </span><span class="kw">names</span>(<span class=
            <span class="dt">upper =</span> <span class="kw">cbind</span>(te.ul, mi.ul), 
            <span class="dt">col=</span><span class="kw">fpColors</span>(<span class="dt">box=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkred&quot;</span>)), 
            <span class="dt">xlab=</span><span class="st">&quot;Regression coefficients&quot;</span>,
-           <span class="dt">boxsize =</span> .<span class="dv">1</span>
-           )</code></pre></div>
+           <span class="dt">boxsize =</span> <span class="fl">.1</span>
+           )</code></pre>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-43-1.png" width="960" /></p>
 </div>
 </div>
@@ -693,10 +679,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -707,9 +694,13 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"history": {
+"link": null,
+"text": null
+},
 "download": null,
 "toc": {
-"collapse": "section"
+"collapse": "subsection"
 }
 });
 });
@@ -720,12 +711,14 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 </body>
 
-<!-- </html> -->
+</html>
