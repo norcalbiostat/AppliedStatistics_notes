@@ -75,6 +75,7 @@ Both Nominal and Ordinal data types can be visualized using the same methods: ta
 #### Tables
 Tables are the most common way to get summary statistics of a categorical variable. The `table()` function produces a frequency table, where each entry represents the number of records in the data set holding the corresponding labeled value. 
 
+
 ```r
 table(dsmall$cut)
 ## 
@@ -137,6 +138,18 @@ ggplot(cut.props, aes(x=Var1, y=Freq)) + geom_col() +
 
 <img src="data_viz_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
+**sjPlot** Another super useful package for plotting is `sjPlot`
+
+
+```r
+library(sjPlot)
+plot_frq(dsmall$cut)
+```
+
+<img src="data_viz_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
+
+
 #### Cleveland Dot Plots
 Another way to visualize categorical data that takes up less ink than bars is a Cleveland dot plot. Here again we are plotting summary data instead of the raw data. This uses the `geom_segment` that draws the lines from x=0 to the value of the proportion (named `Freq` because of the way `data.frame` works).
 
@@ -148,7 +161,7 @@ ggplot(cut.props, aes(x=Freq, y=Var1)) +
   geom_segment(aes(x=0, xend=Freq, y=Var1, yend=Var1), color='grey50')
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 #### Pie Chart
 
@@ -161,7 +174,7 @@ dc <- table(dsmall$cut)
 pie(dc)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Pie charts are my _least_ favorite plotting type. Human eyeballs can't distinguish between angles as well as we can with heights. A mandatory piece needed to make the wedges readable is to add the percentages of each wedge. 
 
@@ -169,7 +182,7 @@ Pie charts are my _least_ favorite plotting type. Human eyeballs can't distingui
 pie(dc, labels = paste0(names(dc), ' (', prop.table(dc)*100, "%)"))
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 **ggplot**
 
@@ -196,7 +209,7 @@ waffle(dc/10, rows=5, size=0.5,
        xlab="1 square == 10 diamonds")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ### Continuous Measures
 Here we can look at the price, carat, and depth of the diamonds. 
@@ -207,7 +220,7 @@ Here we can look at the price, carat, and depth of the diamonds.
 plot(dsmall$depth)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 The base function `plot()` creates a **dotplot** for a continuous variable. The value of the variable is plotted on the y axis, and the index, or row number, is plotted on the x axis. This gives you a nice, quick way to see the values of the data. 
 
@@ -235,7 +248,7 @@ You can make a histogram in base graphics super easy.
 hist(dsmall$depth)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 And it doesn't take too much to clean it up. Here you can specify the number of bins by specifying how many `breaks` should be made in the data (the number of breaks controls the number of bins, and bin width) and use `col` for the fill color. 
 
@@ -243,7 +256,7 @@ And it doesn't take too much to clean it up. Here you can specify the number of 
 hist(dsmall$depth, xlab="depth", main="Histogram of diamond depth", col="cyan", breaks=20)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 **ggplot**
 
@@ -251,7 +264,7 @@ hist(dsmall$depth, xlab="depth", main="Histogram of diamond depth", col="cyan", 
 ggplot(dsmall, aes(x=depth)) + geom_histogram(binwidth = 2.2)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 The binwidth here is set by looking at the cut points above that were used to create 7 bins. Notice that darkgrey is the default fill color, but makes it hard to differentiate between the bars. So we'll make the outline black using `colour`, and `fill` the bars with white. 
 
@@ -260,7 +273,7 @@ ggplot(dsmall, aes(x=depth)) + geom_histogram(colour="black", fill="white") +
   ggtitle("Distribution of diamond depth")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 Note I did **not** specify the `binwidth` argument here. The size of the bins can hide features from your graph, the default value for ggplot2 is range/30 and usually is a good choice. 
 
@@ -274,7 +287,7 @@ To get a better idea of the true shape of the distribution we can "smooth" out t
 plot(density(dsmall$depth))
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 Awesome title huh? (NOT)
 
@@ -285,7 +298,7 @@ Awesome title huh? (NOT)
 ggplot(dsmall, aes(x=depth)) + geom_density()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 #### Histograms + density 
 Often is is more helpful to have the density (or kernel density) plot _on top of_ a histogram plot. 
@@ -299,7 +312,7 @@ hist(dsmall$depth, prob=TRUE)
 lines(density(dsmall$depth), col="blue")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 **ggplot**
 The syntax starts the same, we'll add a new geom, `geom_density` and color the line blue. Then we add the histogram geom using `geom_histogram` but must specify that the y axis should be on the density, not frequency, scale. Note that this has to go inside the aesthetic statement `aes()`. I'm also going to get rid of the fill by using `NA` so it doesn't plot over the density line. 
@@ -309,7 +322,7 @@ ggplot(dsmall, aes(x=depth)) + geom_density(col="blue") +
   geom_histogram(aes(y=..density..), colour="black", fill=NA)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 #### Boxplots
 Another very common way to visualize the distribution of a continuous variable is using a boxplot. Boxplots are useful for quickly identifying where the bulk of your data lie. R specifically draws a "modified" boxplot where values that are considered outliers are plotted as dots. 
@@ -320,7 +333,7 @@ Another very common way to visualize the distribution of a continuous variable i
 boxplot(dsmall$depth)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 Notice that the only axis labeled is the y=axis. Like a dotplot the x axis, or "width", of the boxplot is meaningless here. We can make the axis more readable by flipping the plot on it's side. 
 
@@ -328,7 +341,7 @@ Notice that the only axis labeled is the y=axis. Like a dotplot the x axis, or "
 boxplot(dsmall$depth, horizontal = TRUE, main="Distribution of diamond prices", xlab="Dollars")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 Horizontal is a bit easier to read in my opinion. 
 
@@ -340,7 +353,7 @@ What about ggplot? ggplot doesn't really like to do univariate boxplots. We can 
 ggplot(dsmall, aes(x=1, y=depth)) + geom_boxplot()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 To flip it horizontal you may think to simply swap x and y? Good thinking. Of course it wouldn't be that easy. So let's just flip the whole darned plot on it's coordinate axis. 
 
@@ -349,7 +362,7 @@ To flip it horizontal you may think to simply swap x and y? Good thinking. Of co
 ggplot(dsmall, aes(x=1, y=depth)) + geom_boxplot() + coord_flip()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 #### Violin plots
 
@@ -358,7 +371,7 @@ ggplot(dsmall, aes(x=1, y=depth)) + geom_boxplot() + coord_flip()
 ggplot(dsmall, aes(x=1, y=depth)) + geom_violin()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 #### Boxplot + Violin plots
 Overlaying a boxplot and a violin plot serves a similar purpose to Histograms + Density plots. 
@@ -368,7 +381,7 @@ Overlaying a boxplot and a violin plot serves a similar purpose to Histograms + 
 ggplot(dsmall, aes(x=1, y=depth)) + geom_violin() + geom_boxplot()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 Better appearance - different levels of transparency of the box and violin. 
 
@@ -382,7 +395,7 @@ ggplot(dsmall, aes(x=1, y=depth)) + xlab("") + theme_bw() +
               axis.ticks.x=element_blank())
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 
 
@@ -396,7 +409,7 @@ qqnorm(dsmall$price)
 qqline(dsmall$price, col="red")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 The line I make red because it is a reference line. The closer the points are to following this line, the more "normal" the shape of the distribution is. Price has some pretty strong deviation away from that line. Below I have plotted what a normal distribution looks like as an example of a "perfect" fit. 
 
@@ -407,7 +420,7 @@ qqnorm(z)
 qqline(z, col="blue")
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 **ggplot**
 qq (or qnorm) plots specifically plot the data against a theoretical distribution. That means in the `aes()` aesthetic argument we don't specify either x or y, but instead the `sample=` is the variable we want to plot. 
@@ -416,7 +429,7 @@ qq (or qnorm) plots specifically plot the data against a theoretical distributio
 ggplot(dsmall, aes(sample=price)) + stat_qq()
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 Additional references on making qqplots in ggplot: http://www.sthda.com/english/wiki/ggplot2-qq-plot-quantile-quantile-graph-quick-start-guide-r-software-and-data-visualization
 
@@ -447,6 +460,7 @@ There are 4 Fair diamonds with color D, and 21 Ideal quality diamonds with color
 Choose your percentages depending on your research question. What are you wanting to compare? 
 
 Best practices: 
+
 * Explanatory variable on the rows
 * Response variable on the columns
 * Calculate row %'s as the % of the response for each explanatory group. 
@@ -515,7 +529,7 @@ cc <- table(dsmall$cut, dsmall$color)
 barplot(cc)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 Stacked bars can be difficult to interpret, and very difficult to compare values between groups. A side by side barchart is preferable. 
 The `beside=TRUE` is what controls the placement of the bars. 
@@ -524,19 +538,7 @@ The `beside=TRUE` is what controls the placement of the bars.
 barplot(cc, main="quick side by side barchart using base graphics", beside=TRUE)
 ```
 
-<img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" />
-
-Great, but what do the colors represent? We need to add a legend. 
-And i'm going to customize the colors. 
-
-```r
-barplot(cc, main="quick side by side barchart using base graphics", beside=TRUE, 
-        col=rainbow(5), legend=rownames(cc))
-```
-
 <img src="data_viz_files/figure-html/unnamed-chunk-39-1.png" width="672" />
-
-For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a [great cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf) about using color palettes. 
 
 **ggplot**
 Again plot the cut on the x axis, but then `fill` using the second categorical variable. This has the effect of visualizing the **row** percents from the table above. The percent of color, within each type of cut. 
@@ -563,6 +565,8 @@ ggplot(dsmall, aes(x=color, fill=cut)) + geom_bar(position = "dodge")
 ```
 
 <img src="data_viz_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+
+For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a [great cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf) about using color palettes. 
 
 And this easy change is why we love `ggplot2`. 
 
@@ -683,7 +687,8 @@ ggplot(dsmall, aes(x=carat, y=price)) + geom_point()
 <img src="data_viz_files/figure-html/unnamed-chunk-50-1.png" width="672" />
 
 **Other Resources**
-* http://www.statmethods.net/graphs/scatterplot.html
+
+* http://www.statmethods.net/graphs/scatterplot.html  
 * https://www.r-bloggers.com/scatterplot-matrices/
 
 #### Adding lines to the scatterplots 
@@ -1176,3 +1181,4 @@ For any Google Search -  be sure to limit searches to within the past year or so
     - ggplot2 mailing list http://groups.google.com/group/ggplot2
     - stackoverflow http://stackoverflow.com/tags/ggplot2
     - Chico R users group
+    

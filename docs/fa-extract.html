@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.4 Factor Extraction | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.4 Factor Extraction | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fa-example.html">
-<link rel="next" href="rotating-factors.html">
+<link rel="prev" href="fa-example.html"/>
+<link rel="next" href="rotating-factors.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -55,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -229,7 +227,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
@@ -269,72 +273,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>III Multi-level Modeling</b></span></li>
-<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
-<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
-<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
+<li class="part"><span><b>III Other Topics</b></span></li>
+<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>13</b> Random Intercept Models</a><ul>
-<li class="chapter" data-level="13.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>13.1</b> Pooling</a></li>
-<li class="chapter" data-level="13.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>13.2</b> Mathematical Models</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>13.2.1</b> Complete Pooling</a></li>
-<li class="chapter" data-level="13.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>13.2.2</b> No Pooling</a></li>
-<li class="chapter" data-level="13.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>13.2.3</b> Partial Pooling (RI)</a></li>
+<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>13.3</b> Components of Variance</a></li>
-<li class="chapter" data-level="13.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>13.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>13.4.1</b> Comparison of estimates</a></li>
+<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>13.5</b> Estimation Methods</a></li>
-<li class="chapter" data-level="13.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>13.6</b> Including Covariates</a></li>
-<li class="chapter" data-level="13.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>13.7</b> Centering terms</a><ul>
-<li class="chapter" data-level="13.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>13.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
+<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
+<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="13.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>13.8</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="13.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>13.8.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
+<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="13.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a><ul>
-<li class="chapter" data-level="13.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>13.9.1</b> Package Vignettes</a></li>
+<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
 </ul></li>
-</ul></li>
-<li class="part"><span><b>IV Other Topics</b></span></li>
-<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
-<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
-<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
-<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
-</ul></li>
-<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
+<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -368,10 +344,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Choose the first <span class="math inline">\(m\)</span> principal components and modify them to fit the factor model defined in the previous section.</li>
 <li>They explain the greatest proportion of the variance and are therefore the most important</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">extract_pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(stan.dta)
-var_pc &lt;-<span class="st"> </span>(extract_pca<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span>
-<span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(var_pc), <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">extract_pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(stan.dta)</a>
+<a class="sourceLine" id="cb201-2" title="2">var_pc &lt;-<span class="st"> </span>(extract_pca<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb201-3" title="3"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(var_pc), <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb201-4" title="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>)</a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" /></p>
 <div id="pc-factor-model" class="section level3">
 <h3><span class="header-section-number">11.4.1</span> PC Factor Model</h3>
@@ -432,33 +408,33 @@ X_{i} &amp;=  \sum_{j=1}^{P}a_{ji}C_{j} \\
 <ol style="list-style-type: decimal">
 <li>PC Factor Model using the <code>principal</code> function in the <code>psych</code> package.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(psych)</span>
-pc.extract.norotate &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>)
-<span class="kw">print</span>(pc.extract.norotate)
-<span class="co">## Principal Components Analysis</span>
-<span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span>
-<span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span>
-<span class="co">##     PC1   PC2   h2    u2 com</span>
-<span class="co">## X1 0.53  0.78 0.90 0.104 1.8</span>
-<span class="co">## X2 0.59  0.74 0.89 0.106 1.9</span>
-<span class="co">## X3 0.70 -0.39 0.64 0.360 1.6</span>
-<span class="co">## X4 0.87 -0.38 0.90 0.099 1.4</span>
-<span class="co">## X5 0.92 -0.27 0.91 0.087 1.2</span>
-<span class="co">## </span>
-<span class="co">##                        PC1  PC2</span>
-<span class="co">## SS loadings           2.71 1.53</span>
-<span class="co">## Proportion Var        0.54 0.31</span>
-<span class="co">## Cumulative Var        0.54 0.85</span>
-<span class="co">## Proportion Explained  0.64 0.36</span>
-<span class="co">## Cumulative Proportion 0.64 1.00</span>
-<span class="co">## </span>
-<span class="co">## Mean item complexity =  1.6</span>
-<span class="co">## Test of the hypothesis that 2 components are sufficient.</span>
-<span class="co">## </span>
-<span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span>
-<span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span>
-<span class="co">## </span>
-<span class="co">## Fit based upon off diagonal values = 0.97</span></code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1"><span class="co">#library(psych)</span></a>
+<a class="sourceLine" id="cb202-2" title="2">pc.extract.norotate &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb202-3" title="3"><span class="kw">print</span>(pc.extract.norotate)</a>
+<a class="sourceLine" id="cb202-4" title="4"><span class="co">## Principal Components Analysis</span></a>
+<a class="sourceLine" id="cb202-5" title="5"><span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span></a>
+<a class="sourceLine" id="cb202-6" title="6"><span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span></a>
+<a class="sourceLine" id="cb202-7" title="7"><span class="co">##     PC1   PC2   h2    u2 com</span></a>
+<a class="sourceLine" id="cb202-8" title="8"><span class="co">## X1 0.53  0.78 0.90 0.104 1.8</span></a>
+<a class="sourceLine" id="cb202-9" title="9"><span class="co">## X2 0.59  0.74 0.89 0.106 1.9</span></a>
+<a class="sourceLine" id="cb202-10" title="10"><span class="co">## X3 0.70 -0.39 0.64 0.360 1.6</span></a>
+<a class="sourceLine" id="cb202-11" title="11"><span class="co">## X4 0.87 -0.38 0.90 0.099 1.4</span></a>
+<a class="sourceLine" id="cb202-12" title="12"><span class="co">## X5 0.92 -0.27 0.91 0.087 1.2</span></a>
+<a class="sourceLine" id="cb202-13" title="13"><span class="co">## </span></a>
+<a class="sourceLine" id="cb202-14" title="14"><span class="co">##                        PC1  PC2</span></a>
+<a class="sourceLine" id="cb202-15" title="15"><span class="co">## SS loadings           2.71 1.53</span></a>
+<a class="sourceLine" id="cb202-16" title="16"><span class="co">## Proportion Var        0.54 0.31</span></a>
+<a class="sourceLine" id="cb202-17" title="17"><span class="co">## Cumulative Var        0.54 0.85</span></a>
+<a class="sourceLine" id="cb202-18" title="18"><span class="co">## Proportion Explained  0.64 0.36</span></a>
+<a class="sourceLine" id="cb202-19" title="19"><span class="co">## Cumulative Proportion 0.64 1.00</span></a>
+<a class="sourceLine" id="cb202-20" title="20"><span class="co">## </span></a>
+<a class="sourceLine" id="cb202-21" title="21"><span class="co">## Mean item complexity =  1.6</span></a>
+<a class="sourceLine" id="cb202-22" title="22"><span class="co">## Test of the hypothesis that 2 components are sufficient.</span></a>
+<a class="sourceLine" id="cb202-23" title="23"><span class="co">## </span></a>
+<a class="sourceLine" id="cb202-24" title="24"><span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span></a>
+<a class="sourceLine" id="cb202-25" title="25"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
+<a class="sourceLine" id="cb202-26" title="26"><span class="co">## </span></a>
+<a class="sourceLine" id="cb202-27" title="27"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
 <p><span class="math display">\[
 \begin{equation}
 \begin{aligned}
@@ -473,32 +449,32 @@ X_{5} &amp;=  0.92F_{1} - 0.27F_{2} + e_{5} \\
 <ol start="2" style="list-style-type: decimal">
 <li>Using ML extraction. The <code>cutoff</code> argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">ml.extract.norotate &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;none&quot;</span>)
-<span class="kw">print</span>(ml.extract.norotate, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span><span class="dv">0</span>)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span>
-<span class="co">## </span>
-<span class="co">## Uniquenesses:</span>
-<span class="co">##   X1   X2   X3   X4   X5 </span>
-<span class="co">## 0.37 0.00 0.63 0.06 0.04 </span>
-<span class="co">## </span>
-<span class="co">## Loadings:</span>
-<span class="co">##    Factor1 Factor2</span>
-<span class="co">## X1 -0.06    0.79  </span>
-<span class="co">## X2 -0.07    1.00  </span>
-<span class="co">## X3  0.58    0.19  </span>
-<span class="co">## X4  0.93    0.28  </span>
-<span class="co">## X5  0.90    0.39  </span>
-<span class="co">## </span>
-<span class="co">##                Factor1 Factor2</span>
-<span class="co">## SS loadings       2.02    1.88</span>
-<span class="co">## Proportion Var    0.40    0.38</span>
-<span class="co">## Cumulative Var    0.40    0.78</span>
-<span class="co">## </span>
-<span class="co">## Test of the hypothesis that 2 factors are sufficient.</span>
-<span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span>
-<span class="co">## The p-value is 0.652</span></code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">ml.extract.norotate &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb203-2" title="2"><span class="kw">print</span>(ml.extract.norotate, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb203-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb203-4" title="4"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb203-5" title="5"><span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span></a>
+<a class="sourceLine" id="cb203-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb203-7" title="7"><span class="co">## Uniquenesses:</span></a>
+<a class="sourceLine" id="cb203-8" title="8"><span class="co">##   X1   X2   X3   X4   X5 </span></a>
+<a class="sourceLine" id="cb203-9" title="9"><span class="co">## 0.37 0.00 0.63 0.06 0.04 </span></a>
+<a class="sourceLine" id="cb203-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb203-11" title="11"><span class="co">## Loadings:</span></a>
+<a class="sourceLine" id="cb203-12" title="12"><span class="co">##    Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb203-13" title="13"><span class="co">## X1 -0.06    0.79  </span></a>
+<a class="sourceLine" id="cb203-14" title="14"><span class="co">## X2 -0.07    1.00  </span></a>
+<a class="sourceLine" id="cb203-15" title="15"><span class="co">## X3  0.58    0.19  </span></a>
+<a class="sourceLine" id="cb203-16" title="16"><span class="co">## X4  0.93    0.28  </span></a>
+<a class="sourceLine" id="cb203-17" title="17"><span class="co">## X5  0.90    0.39  </span></a>
+<a class="sourceLine" id="cb203-18" title="18"><span class="co">## </span></a>
+<a class="sourceLine" id="cb203-19" title="19"><span class="co">##                Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb203-20" title="20"><span class="co">## SS loadings       2.02    1.88</span></a>
+<a class="sourceLine" id="cb203-21" title="21"><span class="co">## Proportion Var    0.40    0.38</span></a>
+<a class="sourceLine" id="cb203-22" title="22"><span class="co">## Cumulative Var    0.40    0.78</span></a>
+<a class="sourceLine" id="cb203-23" title="23"><span class="co">## </span></a>
+<a class="sourceLine" id="cb203-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
+<a class="sourceLine" id="cb203-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
+<a class="sourceLine" id="cb203-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
 <p>The uniqueness’s (<span class="math inline">\(u^{2}\)</span>) for X2, X4, X5 are pretty low.
 The factor equations now are:</p>
 <p><span class="math display">\[
@@ -511,9 +487,9 @@ X_{3} &amp;=  0.58F_{1} + 0.19F_{2} + e_{3} \\
 \end{aligned}
 \end{equation}
 \]</span></p>
-<pre class="sourceCode r"><code class="sourceCode r">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
-<span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span>
-<span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb204-2" title="2"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
+<a class="sourceLine" id="cb204-3" title="3"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Notice that neither extraction method reproduced our true hypothetical factor model.
 Rotating the factors will achieve our desired results.</p>
@@ -577,8 +553,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

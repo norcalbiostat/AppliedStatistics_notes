@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.4 Bivariate Visualizations | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.4 Bivariate Visualizations | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="univariate-visualizations.html">
-<link rel="next" href="faceting-paneling.html">
+<link rel="prev" href="univariate-visualizations.html"/>
+<link rel="next" href="faceting-paneling.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -55,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -229,7 +227,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
@@ -269,72 +273,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>III Multi-level Modeling</b></span></li>
-<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
-<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
-<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
+<li class="part"><span><b>III Other Topics</b></span></li>
+<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>13</b> Random Intercept Models</a><ul>
-<li class="chapter" data-level="13.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>13.1</b> Pooling</a></li>
-<li class="chapter" data-level="13.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>13.2</b> Mathematical Models</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>13.2.1</b> Complete Pooling</a></li>
-<li class="chapter" data-level="13.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>13.2.2</b> No Pooling</a></li>
-<li class="chapter" data-level="13.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>13.2.3</b> Partial Pooling (RI)</a></li>
+<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>13.3</b> Components of Variance</a></li>
-<li class="chapter" data-level="13.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>13.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>13.4.1</b> Comparison of estimates</a></li>
+<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>13.5</b> Estimation Methods</a></li>
-<li class="chapter" data-level="13.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>13.6</b> Including Covariates</a></li>
-<li class="chapter" data-level="13.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>13.7</b> Centering terms</a><ul>
-<li class="chapter" data-level="13.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>13.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
+<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
+<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="13.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>13.8</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="13.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>13.8.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
+<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="13.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a><ul>
-<li class="chapter" data-level="13.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>13.9.1</b> Package Vignettes</a></li>
+<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
 </ul></li>
-</ul></li>
-<li class="part"><span><b>IV Other Topics</b></span></li>
-<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
-<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
-<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
-<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
-</ul></li>
-<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
+<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -364,56 +340,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">2.4.1.1</span> Two-way Frequency tables</h4>
 <p>Cross-tabs, cross-tabulations and two-way tables (all the same thing, different names) can be created by using the <code>table()</code> function.</p>
 <p>The frequency table is constructed using the <code>table()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)
-<span class="co">##            </span>
-<span class="co">##              D  E  F  G  H  I  J</span>
-<span class="co">##   Fair       4  5  4  3 10  1  0</span>
-<span class="co">##   Good      13  6 19 16 10 13  6</span>
-<span class="co">##   Very Good 30 60 37 50 26 18  5</span>
-<span class="co">##   Premium   39 42 40 55 46 40 15</span>
-<span class="co">##   Ideal     63 69 52 77 65 40 21</span></code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="co">##              D  E  F  G  H  I  J</span></a>
+<a class="sourceLine" id="cb74-4" title="4"><span class="co">##   Fair       4  5  4  3 10  1  0</span></a>
+<a class="sourceLine" id="cb74-5" title="5"><span class="co">##   Good      13  6 19 16 10 13  6</span></a>
+<a class="sourceLine" id="cb74-6" title="6"><span class="co">##   Very Good 30 60 37 50 26 18  5</span></a>
+<a class="sourceLine" id="cb74-7" title="7"><span class="co">##   Premium   39 42 40 55 46 40 15</span></a>
+<a class="sourceLine" id="cb74-8" title="8"><span class="co">##   Ideal     63 69 52 77 65 40 21</span></a></code></pre></div>
 <p>There are 4 Fair diamonds with color D, and 21 Ideal quality diamonds with color J.</p>
 </div>
 <div id="two-way-proprtion-tables" class="section level4">
 <h4><span class="header-section-number">2.4.1.2</span> Two-way Proprtion tables</h4>
 <p>Choose your percentages depending on your research question. What are you wanting to compare?</p>
-<p>Best practices:
-* Explanatory variable on the rows
-* Response variable on the columns
-* Calculate row %’s as the % of the response for each explanatory group.</p>
+<p>Best practices:</p>
+<ul>
+<li>Explanatory variable on the rows</li>
+<li>Response variable on the columns</li>
+<li>Calculate row %’s as the % of the response for each explanatory group.</li>
+</ul>
 <p>Here are demonstrations of how the interpretation of the percents change depending on what the denominator is.</p>
 <p><strong>Cell proportions</strong></p>
 <p>Wrapping <code>prop.table()</code> around a table gives you the <strong>cell</strong> proportions.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color))
-<span class="co">##            </span>
-<span class="co">##                 D     E     F     G     H     I     J</span>
-<span class="co">##   Fair      0.004 0.005 0.004 0.003 0.010 0.001 0.000</span>
-<span class="co">##   Good      0.013 0.006 0.019 0.016 0.010 0.013 0.006</span>
-<span class="co">##   Very Good 0.030 0.060 0.037 0.050 0.026 0.018 0.005</span>
-<span class="co">##   Premium   0.039 0.042 0.040 0.055 0.046 0.040 0.015</span>
-<span class="co">##   Ideal     0.063 0.069 0.052 0.077 0.065 0.040 0.021</span></code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color))</a>
+<a class="sourceLine" id="cb75-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb75-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb75-4" title="4"><span class="co">##   Fair      0.004 0.005 0.004 0.003 0.010 0.001 0.000</span></a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="co">##   Good      0.013 0.006 0.019 0.016 0.010 0.013 0.006</span></a>
+<a class="sourceLine" id="cb75-6" title="6"><span class="co">##   Very Good 0.030 0.060 0.037 0.050 0.026 0.018 0.005</span></a>
+<a class="sourceLine" id="cb75-7" title="7"><span class="co">##   Premium   0.039 0.042 0.040 0.055 0.046 0.040 0.015</span></a>
+<a class="sourceLine" id="cb75-8" title="8"><span class="co">##   Ideal     0.063 0.069 0.052 0.077 0.065 0.040 0.021</span></a></code></pre></div>
 <p>0.4% of all diamonds are D color and Fair cut, 2.1% are J color and Ideal cut.</p>
 <p><strong>Row proportions</strong></p>
 <p>To get the <strong>row</strong> proportions, you specify <code>margin=1</code>. The percentages now add up to 1 across the rows.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)
-<span class="co">##            </span>
-<span class="co">##                 D     E     F     G     H     I     J</span>
-<span class="co">##   Fair      0.148 0.185 0.148 0.111 0.370 0.037 0.000</span>
-<span class="co">##   Good      0.157 0.072 0.229 0.193 0.120 0.157 0.072</span>
-<span class="co">##   Very Good 0.133 0.265 0.164 0.221 0.115 0.080 0.022</span>
-<span class="co">##   Premium   0.141 0.152 0.144 0.199 0.166 0.144 0.054</span>
-<span class="co">##   Ideal     0.163 0.178 0.134 0.199 0.168 0.103 0.054</span></code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb76-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="co">##   Fair      0.148 0.185 0.148 0.111 0.370 0.037 0.000</span></a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="co">##   Good      0.157 0.072 0.229 0.193 0.120 0.157 0.072</span></a>
+<a class="sourceLine" id="cb76-6" title="6"><span class="co">##   Very Good 0.133 0.265 0.164 0.221 0.115 0.080 0.022</span></a>
+<a class="sourceLine" id="cb76-7" title="7"><span class="co">##   Premium   0.141 0.152 0.144 0.199 0.166 0.144 0.054</span></a>
+<a class="sourceLine" id="cb76-8" title="8"><span class="co">##   Ideal     0.163 0.178 0.134 0.199 0.168 0.103 0.054</span></a></code></pre></div>
 <p>14.8% of all Fair quality diamonds are color D. 5.4% of all Ideal quality diamonds have color J.</p>
 <p><strong>Column proportions</strong></p>
 <p>To get the <strong>column</strong> proportions, you specify <code>margin=2</code>. The percentages now add up to 1 down the columns.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)
-<span class="co">##            </span>
-<span class="co">##                 D     E     F     G     H     I     J</span>
-<span class="co">##   Fair      0.027 0.027 0.026 0.015 0.064 0.009 0.000</span>
-<span class="co">##   Good      0.087 0.033 0.125 0.080 0.064 0.116 0.128</span>
-<span class="co">##   Very Good 0.201 0.330 0.243 0.249 0.166 0.161 0.106</span>
-<span class="co">##   Premium   0.262 0.231 0.263 0.274 0.293 0.357 0.319</span>
-<span class="co">##   Ideal     0.423 0.379 0.342 0.383 0.414 0.357 0.447</span></code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb77-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb77-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb77-4" title="4"><span class="co">##   Fair      0.027 0.027 0.026 0.015 0.064 0.009 0.000</span></a>
+<a class="sourceLine" id="cb77-5" title="5"><span class="co">##   Good      0.087 0.033 0.125 0.080 0.064 0.116 0.128</span></a>
+<a class="sourceLine" id="cb77-6" title="6"><span class="co">##   Very Good 0.201 0.330 0.243 0.249 0.166 0.161 0.106</span></a>
+<a class="sourceLine" id="cb77-7" title="7"><span class="co">##   Premium   0.262 0.231 0.263 0.274 0.293 0.357 0.319</span></a>
+<a class="sourceLine" id="cb77-8" title="8"><span class="co">##   Ideal     0.423 0.379 0.342 0.383 0.414 0.357 0.447</span></a></code></pre></div>
 <p>2.7% of all D color diamonds are of Fair quality. 44.7% of all J color diamonds are of Ideal quality.</p>
 </div>
 <div id="grouped-bar-charts" class="section level4">
@@ -421,82 +399,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To compare proportions of one categorical variable within the same level of another, is to use grouped barcharts.</p>
 <p><strong>base</strong>
 As before, the object to be plotted needs to be the result of a table.</p>
-<pre class="sourceCode r"><code class="sourceCode r">cc &lt;-<span class="st"> </span><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)
-<span class="kw">barplot</span>(cc)</code></pre>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">cc &lt;-<span class="st"> </span><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
+<a class="sourceLine" id="cb78-2" title="2"><span class="kw">barplot</span>(cc)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Stacked bars can be difficult to interpret, and very difficult to compare values between groups. A side by side barchart is preferable.
 The <code>beside=TRUE</code> is what controls the placement of the bars.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(cc, <span class="dt">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="dt">beside=</span><span class="ot">TRUE</span>)</code></pre>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<p>Great, but what do the colors represent? We need to add a legend.
-And i’m going to customize the colors.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(cc, <span class="dt">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="dt">beside=</span><span class="ot">TRUE</span>, 
-        <span class="dt">col=</span><span class="kw">rainbow</span>(<span class="dv">5</span>), <span class="dt">legend=</span><span class="kw">rownames</span>(cc))</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">barplot</span>(cc, <span class="dt">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="dt">beside=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<p>For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">great cheatsheet</a> about using color palettes.</p>
 <p><strong>ggplot</strong>
 Again plot the cut on the x axis, but then <code>fill</code> using the second categorical variable. This has the effect of visualizing the <strong>row</strong> percents from the table above. The percent of color, within each type of cut.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>Again the default is a stacked barchart. So we just specify <code>position=dodge</code> to put the bars side by side.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>And look, an automatic legend. What if I wanted to better compare cut within color group? This is the <strong>column</strong> percentages. Just switch which variable is the x axis and which one is used to fill the colors!</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">great cheatsheet</a> about using color palettes.</p>
 <p>And this easy change is why we love <code>ggplot2</code>.</p>
 </div>
 </div>
 <div id="grouped-bar-charts-with-percentages" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> Grouped bar charts with percentages</h3>
 <p>Not as easy as one would hope, but the solution is to calculate the desired percentages first and then plot the summary data using either <code>geom_bar(stat='identity')</code> or <code>geom_col()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc.props &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(color, cut) <span class="op">%&gt;%</span>
-<span class="st">              </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">              </span><span class="kw">mutate</span>(<span class="dt">pct=</span><span class="kw">round</span>(count<span class="op">/</span><span class="kw">sum</span>(count),<span class="dv">3</span>))
-calc.props
-<span class="co">## # A tibble: 35 x 4</span>
-<span class="co">## # Groups:   color [7]</span>
-<span class="co">##    color cut       count   pct</span>
-<span class="co">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">##  1 D     Fair        163 0.024</span>
-<span class="co">##  2 D     Good        662 0.098</span>
-<span class="co">##  3 D     Very Good  1513 0.223</span>
-<span class="co">##  4 D     Premium    1603 0.237</span>
-<span class="co">##  5 D     Ideal      2834 0.418</span>
-<span class="co">##  6 E     Fair        224 0.023</span>
-<span class="co">##  7 E     Good        933 0.095</span>
-<span class="co">##  8 E     Very Good  2400 0.245</span>
-<span class="co">##  9 E     Premium    2337 0.239</span>
-<span class="co">## 10 E     Ideal      3903 0.398</span>
-<span class="co">## # ... with 25 more rows</span></code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">calc.props &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(color, cut) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="st">              </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-3" title="3"><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">pct=</span><span class="kw">round</span>(count<span class="op">/</span><span class="kw">sum</span>(count),<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb83-4" title="4">calc.props</a>
+<a class="sourceLine" id="cb83-5" title="5"><span class="co">## # A tibble: 35 x 4</span></a>
+<a class="sourceLine" id="cb83-6" title="6"><span class="co">## # Groups:   color [7]</span></a>
+<a class="sourceLine" id="cb83-7" title="7"><span class="co">##    color cut       count   pct</span></a>
+<a class="sourceLine" id="cb83-8" title="8"><span class="co">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb83-9" title="9"><span class="co">##  1 D     Fair        163 0.024</span></a>
+<a class="sourceLine" id="cb83-10" title="10"><span class="co">##  2 D     Good        662 0.098</span></a>
+<a class="sourceLine" id="cb83-11" title="11"><span class="co">##  3 D     Very Good  1513 0.223</span></a>
+<a class="sourceLine" id="cb83-12" title="12"><span class="co">##  4 D     Premium    1603 0.237</span></a>
+<a class="sourceLine" id="cb83-13" title="13"><span class="co">##  5 D     Ideal      2834 0.418</span></a>
+<a class="sourceLine" id="cb83-14" title="14"><span class="co">##  6 E     Fair        224 0.023</span></a>
+<a class="sourceLine" id="cb83-15" title="15"><span class="co">##  7 E     Good        933 0.095</span></a>
+<a class="sourceLine" id="cb83-16" title="16"><span class="co">##  8 E     Very Good  2400 0.245</span></a>
+<a class="sourceLine" id="cb83-17" title="17"><span class="co">##  9 E     Premium    2337 0.239</span></a>
+<a class="sourceLine" id="cb83-18" title="18"><span class="co">## 10 E     Ideal      3903 0.398</span></a>
+<a class="sourceLine" id="cb83-19" title="19"><span class="co">## # ... with 25 more rows</span></a></code></pre></div>
 <p>Since we’re plotting summary data, the height of the bars is specified using <code>y=pct</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span>
-<span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() </code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() </a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Now set some options to the y axis using <code>scale_y_continuous()</code> to make the graph more accurate and readable. The <code>labels=percent</code> comes from the <code>scales</code> package.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)
-<span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span>
-<span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">                  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span>percent)</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(scales)</a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb85-4" title="4"><span class="st">                  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span>percent)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <div id="mosaic-plots" class="section level4">
 <h4><span class="header-section-number">2.4.2.1</span> Mosaic plots</h4>
 <p>But what if you want to know how two categorical variables are related and you don’t want to look at two different barplots? Mosaic plots are a way to visualize the proportions in a table. So here’s the two-way table we’ll be plotting.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)
-<span class="co">##            </span>
-<span class="co">##              D  E  F  G  H  I  J</span>
-<span class="co">##   Fair       4  5  4  3 10  1  0</span>
-<span class="co">##   Good      13  6 19 16 10 13  6</span>
-<span class="co">##   Very Good 30 60 37 50 26 18  5</span>
-<span class="co">##   Premium   39 42 40 55 46 40 15</span>
-<span class="co">##   Ideal     63 69 52 77 65 40 21</span></code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="co">##              D  E  F  G  H  I  J</span></a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="co">##   Fair       4  5  4  3 10  1  0</span></a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="co">##   Good      13  6 19 16 10 13  6</span></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="co">##   Very Good 30 60 37 50 26 18  5</span></a>
+<a class="sourceLine" id="cb86-7" title="7"><span class="co">##   Premium   39 42 40 55 46 40 15</span></a>
+<a class="sourceLine" id="cb86-8" title="8"><span class="co">##   Ideal     63 69 52 77 65 40 21</span></a></code></pre></div>
 <p>The syntax for a mosaic plot uses <em>model notation</em>, which is basically y ~ x where the ~ is read as “twiddle” or “tilde”. It’s to the left of your <strong>1</strong> key.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall)</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>Helpful, ish. Here are two very useful options. In reverse obviousness, <code>color</code> applies shades of gray to one of the factor levels, and <code>shade</code> applies a color gradient scale to the cells in order of what is less than expected (red) to what is more than expected (blue) if these two factors were completely independent.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># display the plots in 1 row and 2 columns</span>
-<span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall, <span class="dt">color=</span><span class="ot">TRUE</span>)
-<span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall, <span class="dt">shade=</span><span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># display the plots in 1 row and 2 columns</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall, <span class="dt">color=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall, <span class="dt">shade=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-48-1.png" width="960" /></p>
 <p>For example, there are fewer ‘Very Good’ cut diamonds that are color ‘G’, and fewer ‘Premium’ cut diamonds that are color ‘H’. As you can see, knowing what your data means when trying to interpret what the plots are telling you is essential.</p>
 <p>That’s about all the ways you can plot categorical variables.
@@ -513,54 +486,57 @@ If you are wondering why there was no 3D barcharts demonstrated see<br />
 <p>The most common method of visualizing the relationship between two continuous variables is by using a scatterplot.</p>
 <p><strong>base</strong>
 Back to the <code>plot()</code> command. Here we use model notation again, so it’s <span class="math inline">\(y~x\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall)</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">plot</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Looks like for the most part as the carat value increases so does price. That makes sense.</p>
 <p><strong>ggplot</strong>
 With ggplot we specify both the x and y variables, and add a point.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
-<p><strong>Other Resources</strong>
-* <a href="http://www.statmethods.net/graphs/scatterplot.html" class="uri">http://www.statmethods.net/graphs/scatterplot.html</a>
-* <a href="https://www.r-bloggers.com/scatterplot-matrices/" class="uri">https://www.r-bloggers.com/scatterplot-matrices/</a></p>
+<p><strong>Other Resources</strong></p>
+<ul>
+<li><a href="http://www.statmethods.net/graphs/scatterplot.html" class="uri">http://www.statmethods.net/graphs/scatterplot.html</a><br />
+</li>
+<li><a href="https://www.r-bloggers.com/scatterplot-matrices/" class="uri">https://www.r-bloggers.com/scatterplot-matrices/</a></li>
+</ul>
 </div>
 <div id="adding-lines-to-the-scatterplots" class="section level4">
 <h4><span class="header-section-number">2.4.3.2</span> Adding lines to the scatterplots</h4>
 <p>Two most common trend lines added to a scatterplots are the “best fit” straight line and the “lowess” smoother line.</p>
 <p><strong>base</strong>
 The best fit line (in blue) gets added by using the <code>abline()</code> function wrapped around the linear model function <code>lm()</code>. Note it uses the same model notation syntax and the <code>data=</code> statement as the <code>plot()</code> function does. The lowess line is added using the <code>lines()</code> function, but the <code>lowess()</code> function itself doesn’t allow for the <code>data=</code> statement so we have to use <code>$</code> sign notation.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall)
-<span class="kw">abline</span>(<span class="kw">lm</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
-<span class="kw">lines</span>(<span class="kw">lowess</span>(dsmall<span class="op">$</span>price<span class="op">~</span>dsmall<span class="op">$</span>carat), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">plot</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall)</a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="kw">abline</span>(<span class="kw">lm</span>(price<span class="op">~</span>carat, <span class="dt">data=</span>dsmall), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="kw">lines</span>(<span class="kw">lowess</span>(dsmall<span class="op">$</span>price<span class="op">~</span>dsmall<span class="op">$</span>carat), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 With ggplot, we just add a <code>geom_smooth()</code> layer.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>() </code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>() </a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Here the point-wise confidence interval for this lowess line is shown in grey. If you want to turn the confidence interval off, use <code>se=FALSE</code>. Also notice that the smoothing geom uses a different function or window than the <code>lowess</code> function used in base graphics.</p>
 <p>Here it is again using the <code>ggplot</code> plotting function and adding another <code>geom_smooth()</code> layer for the <code>lm</code> (linear model) line in blue, and the lowess line (by not specifying a method) in red.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 </div>
 <div id="line-plots" class="section level4">
 <h4><span class="header-section-number">2.4.3.3</span> Line plots</h4>
 <p>Line plots connect each dot with a straight line. This is most often done when measuring trends of the response as the value of x increases (such as a time series)</p>
 <p>We saw earlier that <code>carat</code> and <code>price</code> seemed possibly linear. Let see how the average price changes with carat.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-price.per.carat &lt;-<span class="st"> </span>dsmall <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(carat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(price))</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb94-2" title="2">price.per.carat &lt;-<span class="st"> </span>dsmall <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(carat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(price))</a></code></pre></div>
 <p><strong>base</strong>
 For base graphics, type=‘b’ means both points and lines, ‘l’ gives you just lines and ‘p’ gives you only points. You can find more plotting character options under <code>?pch</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mean<span class="op">~</span>carat, <span class="dt">data=</span>price.per.carat, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">plot</span>(mean<span class="op">~</span>carat, <span class="dt">data=</span>price.per.carat, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 With ggplot we specify that we want a line geometry only.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(price.per.carat, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>mean)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">ggplot</span>(price.per.carat, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>mean)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <p>How does this relationship change with cut of the diamond? First lets
 get the average price per combination of carat and cut.</p>
-<pre class="sourceCode r"><code class="sourceCode r">ppc2 &lt;-<span class="st"> </span>dsmall <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cut, carat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(price))</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">ppc2 &lt;-<span class="st"> </span>dsmall <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cut, carat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(price))</a></code></pre></div>
 <p><strong>base</strong>
 This plot can be created in base graphics, but it takes an advanced
 knowledge of the graphics system to do so. So I do not show it here.</p>
@@ -568,7 +544,7 @@ knowledge of the graphics system to do so. So I do not show it here.</p>
 This is where ggplot starts to excel in it’s ease of creating more
 complex plots. All we have to do is specify that we want the lines
 colored by the cut variable.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(ppc2, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>mean, <span class="dt">col=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">ggplot</span>(ppc2, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>mean, <span class="dt">col=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>And we get one line per cut.</p>
 </div>
@@ -581,14 +557,14 @@ level of the categorical variable.</p>
 <h4><span class="header-section-number">2.4.4.1</span> Dotplot/strip chart</h4>
 <p>Dotplots can be very useful when plotting dots against several categories. They can also be called stripcharts.</p>
 <p><strong>base</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stripchart</span>(carat <span class="op">~</span><span class="st"> </span>cut, <span class="dt">data=</span>dsmall)</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">stripchart</span>(carat <span class="op">~</span><span class="st"> </span>cut, <span class="dt">data=</span>dsmall)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Doesn’t look to pretty, but kinda gets the point across. Few fair quality diamonds in the data set, pretty spread out across the carat range except one high end outlier.</p>
 <p><strong>ggplot</strong>
 We can reproduce the same thing by plotting one continuous variable against one categorical variable, and adding a layer of points. I’d argue that horizontal looks better due to the axis-labels.</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">y=</span>carat, <span class="dt">x=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
-b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">y=</span>cut, <span class="dt">x=</span>carat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
-<span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">y=</span>carat, <span class="dt">x=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb100-2" title="2">b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">y=</span>cut, <span class="dt">x=</span>carat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb100-3" title="3"><span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 </div>
 <div id="grouped-boxplots" class="section level4">
@@ -596,17 +572,17 @@ b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span cla
 <p><strong>base</strong>
 Base graphics plots grouped boxplots with also just the addition of a twiddle (tilde) <code>~</code>.
 Another example of where model notation works.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(carat<span class="op">~</span>color, <span class="dt">data=</span>dsmall)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">boxplot</span>(carat<span class="op">~</span>color, <span class="dt">data=</span>dsmall)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 A simple addition, just define your x and y accordingly.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">y=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">y=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p><strong>Adding violins</strong>
 Violin plots can be overlaid here as well.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">y=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span>
-<span class="st">        </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>, <span class="dt">width=</span>.<span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">y=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-2" title="2"><span class="st">        </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-3" title="3"><span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>, <span class="dt">width=</span>.<span class="dv">2</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 </div>
 <div id="grouped-histograms" class="section level4">
@@ -615,22 +591,22 @@ Violin plots can be overlaid here as well.</p>
 There is no easy way to create grouped histograms in base graphics we will skip it.</p>
 <p><strong>ggplot</strong>
 By default ggplot wants to overlay all plots on the same grid. This doesn’t look to good with histograms. Instead you can overlay density plots</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()
-b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() 
-<span class="kw">grid.arrange</span>(a,b, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb104-2" title="2">b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() </a>
+<a class="sourceLine" id="cb104-3" title="3"><span class="kw">grid.arrange</span>(a,b, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-64-1.png" width="960" /></p>
 <p>The solid fills are still difficult to read, so we can either turn down the alpha (turn up the transparency) or only color the lines and not the fill.</p>
-<pre class="sourceCode r"><code class="sourceCode r">c &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">2</span>)
-d &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">col=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() 
-<span class="kw">grid.arrange</span>(c,d, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">c &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span>.<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb105-2" title="2">d &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">col=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() </a>
+<a class="sourceLine" id="cb105-3" title="3"><span class="kw">grid.arrange</span>(c,d, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-65-1.png" width="960" /></p>
 </div>
 </div>
 <div id="joy-plots-ridgelines" class="section level3">
 <h3><span class="header-section-number">2.4.5</span> Joy plots / Ridgelines</h3>
 <p>Somewhat new (2017), joylines have not been added to the base distribution of <code>ggplot2</code> yet. For now it’s available in the <code>ggjoy</code> package. Really good way to visualize density plots without the overlapping issue.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggjoy)
-<span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_joy</span>()</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1"><span class="kw">library</span>(ggjoy)</a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_joy</span>()</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-66-1.png" width="960" /></p>
 </div>
 </div>
@@ -692,8 +668,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -71,6 +71,7 @@ Both Nominal and Ordinal data types can be visualized using the same methods: ta
 
 #### Tables
 Tables are the most common way to get summary statistics of a categorical variable. The `table()` function produces a frequency table, where each entry represents the number of records in the data set holding the corresponding labeled value. 
+
 ```{r}
 table(dsmall$cut)
 ```
@@ -111,6 +112,15 @@ ggplot(cut.props, aes(x=Var1, y=Freq)) + geom_col() +
   ylab("Proportion") + xlab("Cut type") + 
   ggtitle("Proportion of diamonds by cut type")
 ```
+
+**sjPlot** Another super useful package for plotting is `sjPlot`
+
+```{r}
+library(sjPlot)
+plot_frq(dsmall$cut)
+```
+
+
 
 #### Cleveland Dot Plots
 Another way to visualize categorical data that takes up less ink than bars is a Cleveland dot plot. Here again we are plotting summary data instead of the raw data. This uses the `geom_segment` that draws the lines from x=0 to the value of the proportion (named `Freq` because of the way `data.frame` works).
@@ -339,6 +349,7 @@ There are 4 Fair diamonds with color D, and 21 Ideal quality diamonds with color
 Choose your percentages depending on your research question. What are you wanting to compare? 
 
 Best practices: 
+
 * Explanatory variable on the rows
 * Response variable on the columns
 * Calculate row %'s as the % of the response for each explanatory group. 
@@ -388,15 +399,6 @@ The `beside=TRUE` is what controls the placement of the bars.
 barplot(cc, main="quick side by side barchart using base graphics", beside=TRUE)
 ```
 
-Great, but what do the colors represent? We need to add a legend. 
-And i'm going to customize the colors. 
-```{r}
-barplot(cc, main="quick side by side barchart using base graphics", beside=TRUE, 
-        col=rainbow(5), legend=rownames(cc))
-```
-
-For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a [great cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf) about using color palettes. 
-
 **ggplot**
 Again plot the cut on the x axis, but then `fill` using the second categorical variable. This has the effect of visualizing the **row** percents from the table above. The percent of color, within each type of cut. 
 
@@ -413,6 +415,8 @@ And look, an automatic legend. What if I wanted to better compare cut within col
 ```{r}
 ggplot(dsmall, aes(x=color, fill=cut)) + geom_bar(position = "dodge")
 ```
+
+For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a [great cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf) about using color palettes. 
 
 And this easy change is why we love `ggplot2`. 
 
@@ -491,7 +495,8 @@ ggplot(dsmall, aes(x=carat, y=price)) + geom_point()
 ```
 
 **Other Resources**
-* http://www.statmethods.net/graphs/scatterplot.html
+
+* http://www.statmethods.net/graphs/scatterplot.html  
 * https://www.r-bloggers.com/scatterplot-matrices/
 
 #### Adding lines to the scatterplots 
@@ -874,3 +879,4 @@ For any Google Search -  be sure to limit searches to within the past year or so
     - ggplot2 mailing list http://groups.google.com/group/ggplot2
     - stackoverflow http://stackoverflow.com/tags/ggplot2
     - Chico R users group
+    

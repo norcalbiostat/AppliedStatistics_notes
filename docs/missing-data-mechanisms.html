@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.3 Missing Data Mechanisms | Applied Statistics</title>
+  <title>12.3 Missing Data Mechanisms | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.3 Missing Data Mechanisms | Applied Statistics" />
+  <meta property="og:title" content="12.3 Missing Data Mechanisms | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.3 Missing Data Mechanisms | Applied Statistics" />
+  <meta name="twitter:title" content="12.3 Missing Data Mechanisms | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="effects-of-nonresponse.html">
-<link rel="next" href="general-strategies.html">
+<link rel="prev" href="effects-of-nonresponse.html"/>
+<link rel="next" href="general-strategies.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -55,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -229,7 +227,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
@@ -269,72 +273,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>III Multi-level Modeling</b></span></li>
-<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
-<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
-<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
+<li class="part"><span><b>III Other Topics</b></span></li>
+<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>13</b> Random Intercept Models</a><ul>
-<li class="chapter" data-level="13.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>13.1</b> Pooling</a></li>
-<li class="chapter" data-level="13.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>13.2</b> Mathematical Models</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>13.2.1</b> Complete Pooling</a></li>
-<li class="chapter" data-level="13.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>13.2.2</b> No Pooling</a></li>
-<li class="chapter" data-level="13.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>13.2.3</b> Partial Pooling (RI)</a></li>
+<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>13.3</b> Components of Variance</a></li>
-<li class="chapter" data-level="13.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>13.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>13.4.1</b> Comparison of estimates</a></li>
+<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>13.5</b> Estimation Methods</a></li>
-<li class="chapter" data-level="13.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>13.6</b> Including Covariates</a></li>
-<li class="chapter" data-level="13.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>13.7</b> Centering terms</a><ul>
-<li class="chapter" data-level="13.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>13.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
+<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
+<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="13.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>13.8</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="13.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>13.8.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
+<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="13.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a><ul>
-<li class="chapter" data-level="13.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>13.9.1</b> Package Vignettes</a></li>
+<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
 </ul></li>
-</ul></li>
-<li class="part"><span><b>IV Other Topics</b></span></li>
-<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
-<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
-<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
-<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
-</ul></li>
-<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
+<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -357,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="missing-data-mechanisms" class="section level2">
-<h2><span class="header-section-number">14.3</span> Missing Data Mechanisms</h2>
+<h2><span class="header-section-number">12.3</span> Missing Data Mechanisms</h2>
 <p>Process by which some units observed, some units not observed</p>
 <ul>
 <li><strong>Missing Completely at Random (MCAR)</strong>: The probability that a data point is missing is completely unrelated (independent) of any observed and unobserved data or parameters.
@@ -391,106 +367,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/q.png" /> Write down an example of each.</p>
 <p>Does it matter to inferences? <span style="color:red"><strong>Yes!</strong></span></p>
 <div id="demonstration-via-simulation" class="section level3">
-<h3><span class="header-section-number">14.3.1</span> Demonstration via Simulation</h3>
+<h3><span class="header-section-number">12.3.1</span> Demonstration via Simulation</h3>
 <p>What follows is just <em>one</em> method of approaching this problem via code. Simulation is a frequently used technique to understand the behavior of a process over time or over repeated samples.</p>
 <div id="mcar" class="section level4">
-<h4><span class="header-section-number">14.3.1.1</span> MCAR</h4>
+<h4><span class="header-section-number">12.3.1.1</span> MCAR</h4>
 <ol style="list-style-type: decimal">
 <li>Draw a random sample of size 100 from a standard Normal distribution (Z) and calculate the mean.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">456</span>) <span class="co"># setting a seed ensures the same numbers will be drawn each time</span>
-z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
-mean.z &lt;-<span class="st"> </span><span class="kw">mean</span>(z)
-mean.z
-<span class="co">## [1] 0.1205748</span></code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="kw">set.seed</span>(<span class="dv">456</span>) <span class="co"># setting a seed ensures the same numbers will be drawn each time</span></a>
+<a class="sourceLine" id="cb223-2" title="2">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb223-3" title="3">mean.z &lt;-<span class="st"> </span><span class="kw">mean</span>(z)</a>
+<a class="sourceLine" id="cb223-4" title="4">mean.z</a>
+<a class="sourceLine" id="cb223-5" title="5"><span class="co">## [1] 0.1205748</span></a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Delete data at a rate of <span class="math inline">\(p\)</span> and calculate the complete case (available) mean.
 <ul>
 <li>Sample 100 random Bernoulli (0/1) variables with probability <span class="math inline">\(p\)</span>.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="dt">p=</span>.<span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="dt">p=</span>.<span class="dv">5</span>)</a></code></pre></div>
 <ul>
 <li>Find out which elements are are 1’s</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">delete.these &lt;-<span class="st"> </span><span class="kw">which</span>(x<span class="op">==</span><span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">delete.these &lt;-<span class="st"> </span><span class="kw">which</span>(x<span class="op">==</span><span class="dv">1</span>)</a></code></pre></div>
 <ul>
 <li>Set those elements in <code>z</code> to <code>NA</code>.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">z[delete.these] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">z[delete.these] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <ul>
 <li>Calculate the complete case mean</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-<span class="co">## [1] 0.1377305</span></code></pre></li>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb227-2" title="2"><span class="co">## [1] 0.1377305</span></a></code></pre></div></li>
 <li>Calculate the bias as the sample mean minus the true mean (<span class="math inline">\(E(\hat\theta) - \theta\)</span>).</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z
-<span class="co">## [1] 0.01715565</span></code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="kw">mean</span>(z, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z</a>
+<a class="sourceLine" id="cb228-2" title="2"><span class="co">## [1] 0.01715565</span></a></code></pre></div>
 <p>How does the bias change as a function of the proportion of missing? Let <span class="math inline">\(p\)</span> range from 0% to 99% and plot the bias as a function of <span class="math inline">\(p\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc.bias &lt;-<span class="st"> </span><span class="cf">function</span>(p){ <span class="co"># create a function to handle the repeated calculations</span>
-  <span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, z), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z
-}
-
-p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,.<span class="dv">99</span>,<span class="dt">by=</span>.<span class="dv">01</span>)
-
-<span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Bias&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Proportion of missing&quot;</span>)
-  <span class="kw">points</span>(p, <span class="kw">sapply</span>(p, calc.bias), <span class="dt">pch=</span><span class="dv">16</span>)
-  <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">calc.bias &lt;-<span class="st"> </span><span class="cf">function</span>(p){ <span class="co"># create a function to handle the repeated calculations</span></a>
+<a class="sourceLine" id="cb229-2" title="2">  <span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, z), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span>mean.z</a>
+<a class="sourceLine" id="cb229-3" title="3">}</a>
+<a class="sourceLine" id="cb229-4" title="4"></a>
+<a class="sourceLine" id="cb229-5" title="5">p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,.<span class="dv">99</span>,<span class="dt">by=</span>.<span class="dv">01</span>)</a>
+<a class="sourceLine" id="cb229-6" title="6"></a>
+<a class="sourceLine" id="cb229-7" title="7"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Bias&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Proportion of missing&quot;</span>)</a>
+<a class="sourceLine" id="cb229-8" title="8">  <span class="kw">points</span>(p, <span class="kw">sapply</span>(p, calc.bias), <span class="dt">pch=</span><span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb229-9" title="9">  <span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">0</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p><img src="images/q.png" /> What is the behavior of the bias as <span class="math inline">\(p\)</span> increases? Look specifically at the position/location of the bias, and the variance/variability of the bias.</p>
 </div>
 <div id="nmar-missing-related-to-data" class="section level4">
-<h4><span class="header-section-number">14.3.1.2</span> NMAR: Missing related to data</h4>
+<h4><span class="header-section-number">12.3.1.2</span> NMAR: Missing related to data</h4>
 <p>What if the rate of missing is related to the value of the outcome? Again, let’s setup a simulation to see how this works.</p>
 <ol style="list-style-type: decimal">
 <li>Randomly draw 100 random data points from a Standard Normal distribution to serve as our population, and 100 uniform random values between 0 and 1 to serve as probabilities of the data being missing (<span class="math inline">\(p=P(miss)\)</span>)</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">Z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
-p &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">Z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb230-2" title="2">p &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Sort both in ascending order, shove into a data frame and confirm that <span class="math inline">\(p(miss)\)</span> increases along with <span class="math inline">\(z\)</span>.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">dta &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Z=</span><span class="kw">sort</span>(Z), <span class="dt">p=</span><span class="kw">sort</span>(p))
-<span class="kw">head</span>(dta)
-<span class="co">##           Z           p</span>
-<span class="co">## 1 -2.898122 0.003673455</span>
-<span class="co">## 2 -2.185058 0.013886146</span>
-<span class="co">## 3 -2.076032 0.035447986</span>
-<span class="co">## 4 -1.938288 0.039780643</span>
-<span class="co">## 5 -1.930809 0.051362816</span>
-<span class="co">## 6 -1.905331 0.054639596</span>
-<span class="kw">ggplot</span>(dta, <span class="kw">aes</span>(<span class="dt">x=</span>p, <span class="dt">y=</span>Z)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">dta &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Z=</span><span class="kw">sort</span>(Z), <span class="dt">p=</span><span class="kw">sort</span>(p))</a>
+<a class="sourceLine" id="cb231-2" title="2"><span class="kw">head</span>(dta)</a>
+<a class="sourceLine" id="cb231-3" title="3"><span class="co">##           Z           p</span></a>
+<a class="sourceLine" id="cb231-4" title="4"><span class="co">## 1 -2.898122 0.003673455</span></a>
+<a class="sourceLine" id="cb231-5" title="5"><span class="co">## 2 -2.185058 0.013886146</span></a>
+<a class="sourceLine" id="cb231-6" title="6"><span class="co">## 3 -2.076032 0.035447986</span></a>
+<a class="sourceLine" id="cb231-7" title="7"><span class="co">## 4 -1.938288 0.039780643</span></a>
+<a class="sourceLine" id="cb231-8" title="8"><span class="co">## 5 -1.930809 0.051362816</span></a>
+<a class="sourceLine" id="cb231-9" title="9"><span class="co">## 6 -1.905331 0.054639596</span></a>
+<a class="sourceLine" id="cb231-10" title="10"><span class="kw">ggplot</span>(dta, <span class="kw">aes</span>(<span class="dt">x=</span>p, <span class="dt">y=</span>Z)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-20-1.png" width="384" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Set <span class="math inline">\(Z\)</span> missing with probability equal to the <span class="math inline">\(p\)</span> for that row. Create a new vector <code>dta$z.miss</code> that is either 0, or the value of <code>dta$Z</code> with probability <code>1-dta$p</code>. Then change all the 0’s to <code>NA</code>.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">dta<span class="op">$</span>Z.miss &lt;-<span class="st"> </span>dta<span class="op">$</span>Z <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">rbinom</span>(<span class="kw">NROW</span>(dta), <span class="dv">1</span>, dta<span class="op">$</span>p))
-<span class="kw">head</span>(dta) <span class="co"># see structure of data to understand what is going on</span>
-<span class="co">##           Z           p    Z.miss</span>
-<span class="co">## 1 -2.898122 0.003673455 -2.898122</span>
-<span class="co">## 2 -2.185058 0.013886146 -2.185058</span>
-<span class="co">## 3 -2.076032 0.035447986 -2.076032</span>
-<span class="co">## 4 -1.938288 0.039780643 -1.938288</span>
-<span class="co">## 5 -1.930809 0.051362816 -1.930809</span>
-<span class="co">## 6 -1.905331 0.054639596 -1.905331</span>
-dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class="op">==</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">dta<span class="op">$</span>Z.miss &lt;-<span class="st"> </span>dta<span class="op">$</span>Z <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">rbinom</span>(<span class="kw">NROW</span>(dta), <span class="dv">1</span>, dta<span class="op">$</span>p))</a>
+<a class="sourceLine" id="cb232-2" title="2"><span class="kw">head</span>(dta) <span class="co"># see structure of data to understand what is going on</span></a>
+<a class="sourceLine" id="cb232-3" title="3"><span class="co">##           Z           p    Z.miss</span></a>
+<a class="sourceLine" id="cb232-4" title="4"><span class="co">## 1 -2.898122 0.003673455 -2.898122</span></a>
+<a class="sourceLine" id="cb232-5" title="5"><span class="co">## 2 -2.185058 0.013886146 -2.185058</span></a>
+<a class="sourceLine" id="cb232-6" title="6"><span class="co">## 3 -2.076032 0.035447986 -2.076032</span></a>
+<a class="sourceLine" id="cb232-7" title="7"><span class="co">## 4 -1.938288 0.039780643 -1.938288</span></a>
+<a class="sourceLine" id="cb232-8" title="8"><span class="co">## 5 -1.930809 0.051362816 -1.930809</span></a>
+<a class="sourceLine" id="cb232-9" title="9"><span class="co">## 6 -1.905331 0.054639596 -1.905331</span></a>
+<a class="sourceLine" id="cb232-10" title="10">dta<span class="op">$</span>Z.miss[dta<span class="op">$</span>Z.miss<span class="op">==</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Calculate the complete case mean and the bias</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-<span class="co">## [1] -0.7777319</span>
-<span class="kw">mean</span>(dta<span class="op">$</span>Z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-<span class="co">## [1] 0.6830372</span></code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1"><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb233-2" title="2"><span class="co">## [1] -0.7777319</span></a>
+<a class="sourceLine" id="cb233-3" title="3"><span class="kw">mean</span>(dta<span class="op">$</span>Z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dta<span class="op">$</span>Z.miss, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb233-4" title="4"><span class="co">## [1] 0.6830372</span></a></code></pre></div>
 <p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean? Is the bias positive or negative?</p>
 </div>
 <div id="nmar-pure-censoring" class="section level4">
-<h4><span class="header-section-number">14.3.1.3</span> NMAR: Pure Censoring</h4>
+<h4><span class="header-section-number">12.3.1.3</span> NMAR: Pure Censoring</h4>
 <p>Consider a hypothetical blood test to measure a hormone that is normally distributed in the blood with mean 10<span class="math inline">\(\mu g\)</span> and variance 1. However the test to detect the compound only can detect levels above 10.</p>
-<pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)
-y &lt;-<span class="st"> </span>z
-y[y<span class="op">&lt;</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
-<span class="kw">mean</span>(z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-<span class="co">## [1] -0.6850601</span></code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb234-2" title="2">y &lt;-<span class="st"> </span>z</a>
+<a class="sourceLine" id="cb234-3" title="3">y[y<span class="op">&lt;</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb234-4" title="4"><span class="kw">mean</span>(z) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb234-5" title="5"><span class="co">## [1] -0.6850601</span></a></code></pre></div>
 <p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean?</p>
 
 <div class="rmdnote">
@@ -593,8 +569,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

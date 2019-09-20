@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.4 Interactions | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.4 Interactions | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="moderation.html">
-<link rel="next" href="confounding.html">
+<link rel="prev" href="moderation.html"/>
+<link rel="next" href="confounding.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -55,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -229,7 +227,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a></li>
+<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
@@ -269,72 +273,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>III Multi-level Modeling</b></span></li>
-<li class="chapter" data-level="12" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>12</b> Introduction</a><ul>
-<li class="chapter" data-level="12.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>12.1</b> Example School Data</a></li>
-<li class="chapter" data-level="12.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>12.2</b> Multi-level models</a></li>
+<li class="part"><span><b>III Other Topics</b></span></li>
+<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>13</b> Random Intercept Models</a><ul>
-<li class="chapter" data-level="13.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>13.1</b> Pooling</a></li>
-<li class="chapter" data-level="13.2" data-path="mathematical-models.html"><a href="mathematical-models.html"><i class="fa fa-check"></i><b>13.2</b> Mathematical Models</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="mathematical-models.html"><a href="mathematical-models.html#complete-pooling"><i class="fa fa-check"></i><b>13.2.1</b> Complete Pooling</a></li>
-<li class="chapter" data-level="13.2.2" data-path="mathematical-models.html"><a href="mathematical-models.html#no-pooling"><i class="fa fa-check"></i><b>13.2.2</b> No Pooling</a></li>
-<li class="chapter" data-level="13.2.3" data-path="mathematical-models.html"><a href="mathematical-models.html#partial-pooling-ri"><i class="fa fa-check"></i><b>13.2.3</b> Partial Pooling (RI)</a></li>
+<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="components-of-variance.html"><a href="components-of-variance.html"><i class="fa fa-check"></i><b>13.3</b> Components of Variance</a></li>
-<li class="chapter" data-level="13.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>13.4</b> Fitting models in R</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>13.4.1</b> Comparison of estimates</a></li>
+<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>13.5</b> Estimation Methods</a></li>
-<li class="chapter" data-level="13.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>13.6</b> Including Covariates</a></li>
-<li class="chapter" data-level="13.7" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>13.7</b> Centering terms</a><ul>
-<li class="chapter" data-level="13.7.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>13.7.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
+<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
+<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="13.8" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>13.8</b> Specifying Correlation Structures</a><ul>
-<li class="chapter" data-level="13.8.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#specifying-different-covariance-structures-in-r"><i class="fa fa-check"></i><b>13.8.1</b> Specifying different covariance structures in R</a></li>
+<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
+<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="13.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a><ul>
-<li class="chapter" data-level="13.9.1" data-path="additional-references-1.html"><a href="additional-references-1.html#package-vignettes"><i class="fa fa-check"></i><b>13.9.1</b> Package Vignettes</a></li>
+<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
 </ul></li>
-</ul></li>
-<li class="part"><span><b>IV Other Topics</b></span></li>
-<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
-<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
-<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
-<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
-</ul></li>
-<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
-<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="14.10" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
+<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -371,53 +347,53 @@ which simplifies to
 <span class="math display">\[ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}\]</span></p>
 <p>Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model.</p>
 <p>Interactions are fit in <code>R</code> by simply multiplying <code>*</code> the two variables together in the model statement.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span>
-<span class="co">##     setosa, data = iris)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span>
-<span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span>
-<span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span>
-<span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span>
-<span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb153-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb153-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb153-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb153-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
+<a class="sourceLine" id="cb153-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb153-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb153-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb153-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
+<a class="sourceLine" id="cb153-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb153-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb153-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb153-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
+<a class="sourceLine" id="cb153-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb153-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
+<a class="sourceLine" id="cb153-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
+<a class="sourceLine" id="cb153-17" title="17"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb153-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb153-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb153-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
+<a class="sourceLine" id="cb153-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
+<a class="sourceLine" id="cb153-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>The coefficient <span class="math inline">\(b_{3}\)</span> for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.</p>
 <div id="example-2" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Example</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span>
-<span class="co">##     setosa, data = iris)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span>
-<span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span>
-<span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span>
-<span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span>
-<span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb154-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb154-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb154-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb154-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
+<a class="sourceLine" id="cb154-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb154-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb154-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb154-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
+<a class="sourceLine" id="cb154-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb154-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb154-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb154-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
+<a class="sourceLine" id="cb154-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb154-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
+<a class="sourceLine" id="cb154-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
+<a class="sourceLine" id="cb154-17" title="17"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb154-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb154-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb154-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
+<a class="sourceLine" id="cb154-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
+<a class="sourceLine" id="cb154-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <ul>
 <li>If <span class="math inline">\(x_{2}=0\)</span>, then the effect of <span class="math inline">\(x_{1}\)</span> on <span class="math inline">\(Y\)</span> simplifies to: <span class="math inline">\(\beta_{1}\)</span>
 <ul>
@@ -436,30 +412,30 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 
 <p>Let’s up the game now and look at the full interaction model with a categorical version of species. Recall <span class="math inline">\(x_{1}\)</span> is Sepal Length, <span class="math inline">\(x_{2}\)</span> is the indicator for <em>versicolor</em>, and <span class="math inline">\(x_{3}\)</span> the indicator for <em>virginica</em> .</p>
 <p><span class="math display">\[ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}\]</span></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>Species, <span class="dt">data=</span>iris))
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span>
-<span class="co">##     Species, data = iris)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span>
-<span class="co">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span>
-<span class="co">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span>
-<span class="co">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span>
-<span class="co">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span>
-<span class="co">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.2611 on 144 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span>
-<span class="co">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>Species, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb155-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb155-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb155-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb155-5" title="5"><span class="co">##     Species, data = iris)</span></a>
+<a class="sourceLine" id="cb155-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb155-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb155-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb155-9" title="9"><span class="co">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span></a>
+<a class="sourceLine" id="cb155-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb155-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb155-12" title="12"><span class="co">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb155-13" title="13"><span class="co">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span></a>
+<a class="sourceLine" id="cb155-14" title="14"><span class="co">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span></a>
+<a class="sourceLine" id="cb155-15" title="15"><span class="co">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span></a>
+<a class="sourceLine" id="cb155-16" title="16"><span class="co">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span></a>
+<a class="sourceLine" id="cb155-17" title="17"><span class="co">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span></a>
+<a class="sourceLine" id="cb155-18" title="18"><span class="co">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span></a>
+<a class="sourceLine" id="cb155-19" title="19"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb155-20" title="20"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb155-21" title="21"><span class="co">## </span></a>
+<a class="sourceLine" id="cb155-22" title="22"><span class="co">## Residual standard error: 0.2611 on 144 degrees of freedom</span></a>
+<a class="sourceLine" id="cb155-23" title="23"><span class="co">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span></a>
+<a class="sourceLine" id="cb155-24" title="24"><span class="co">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>The slope of the relationship between sepal length and petal length is calculated as follows, for each species:</p>
 <ul>
 <li><em>setosa</em> <span class="math inline">\((x_{2}=0, x_{3}=0): b_{1}=0.13\)</span></li>
@@ -467,43 +443,43 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 <li><em>virginica</em> <span class="math inline">\((x_{2}=0, x_{3}=1): b_{1} + b_{3} + b_{5} = 0.13+0.62 = 0.75\)</span></li>
 </ul>
 <p>Compare this to the estimates gained from the stratified model:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>)))
-<span class="co">##  (Intercept) Sepal.Length </span>
-<span class="co">##    0.8030518    0.1316317</span>
-<span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;versicolor&quot;</span>)))
-<span class="co">##  (Intercept) Sepal.Length </span>
-<span class="co">##    0.1851155    0.6864698</span>
-<span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>)))
-<span class="co">##  (Intercept) Sepal.Length </span>
-<span class="co">##    0.6104680    0.7500808</span></code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>)))</a>
+<a class="sourceLine" id="cb156-2" title="2"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb156-3" title="3"><span class="co">##    0.8030518    0.1316317</span></a>
+<a class="sourceLine" id="cb156-4" title="4"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;versicolor&quot;</span>)))</a>
+<a class="sourceLine" id="cb156-5" title="5"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb156-6" title="6"><span class="co">##    0.1851155    0.6864698</span></a>
+<a class="sourceLine" id="cb156-7" title="7"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>)))</a>
+<a class="sourceLine" id="cb156-8" title="8"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb156-9" title="9"><span class="co">##    0.6104680    0.7500808</span></a></code></pre></div>
 <p>They’re the same! Proof that an interaction is equivalent to stratification.</p>
 </div>
 <div id="example-3" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Example</h3>
 <p>What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data=</span>iris))
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span>
-<span class="co">##     setosa + Petal.Width, data = iris)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span>
-<span class="co">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span>
-<span class="co">## setosa               1.83713    0.62355   2.946  0.00375 ** </span>
-<span class="co">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span>
-<span class="co">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.2769 on 145 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span>
-<span class="co">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb157-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb157-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb157-5" title="5"><span class="co">##     setosa + Petal.Width, data = iris)</span></a>
+<a class="sourceLine" id="cb157-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb157-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb157-9" title="9"><span class="co">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span></a>
+<a class="sourceLine" id="cb157-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb157-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb157-13" title="13"><span class="co">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span></a>
+<a class="sourceLine" id="cb157-14" title="14"><span class="co">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb157-15" title="15"><span class="co">## setosa               1.83713    0.62355   2.946  0.00375 ** </span></a>
+<a class="sourceLine" id="cb157-16" title="16"><span class="co">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb157-17" title="17"><span class="co">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span></a>
+<a class="sourceLine" id="cb157-18" title="18"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb157-19" title="19"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb157-20" title="20"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-21" title="21"><span class="co">## Residual standard error: 0.2769 on 145 degrees of freedom</span></a>
+<a class="sourceLine" id="cb157-22" title="22"><span class="co">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span></a>
+<a class="sourceLine" id="cb157-23" title="23"><span class="co">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>So far, petal width, and the combination of species and sepal length are both significantly associated with petal length.</p>
 <p><em>Note of caution: Stratification implies that the stratifying variable interacts with all other variables.</em>
 So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would be implying that species interacts with both sepal length and petal width.</p>
@@ -576,8 +552,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

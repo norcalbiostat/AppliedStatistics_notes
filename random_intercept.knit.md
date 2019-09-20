@@ -263,25 +263,25 @@ kable(head(showri))
 <tbody>
   <tr>
    <td style="text-align:left;"> AITKIN </td>
-   <td style="text-align:right;"> -0.2390577 </td>
+   <td style="text-align:right;"> -0.2390574 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
-   <td style="text-align:right;"> -0.4071257 </td>
+   <td style="text-align:right;"> -0.4071256 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BECKER </td>
-   <td style="text-align:right;"> -0.0809978 </td>
+   <td style="text-align:right;"> -0.0809977 </td>
    <td style="text-align:right;"> 1.34983 </td>
    <td style="text-align:right;"> 1.2688325 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BELTRAMI </td>
-   <td style="text-align:right;"> -0.0804278 </td>
+   <td style="text-align:right;"> -0.0804277 </td>
    <td style="text-align:right;"> 1.34983 </td>
    <td style="text-align:right;"> 1.2694025 </td>
   </tr>
@@ -295,7 +295,7 @@ kable(head(showri))
    <td style="text-align:left;"> BIGSTONE </td>
    <td style="text-align:right;"> 0.0582831 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
   </tr>
 </tbody>
 </table>
@@ -329,13 +329,13 @@ kable(head(cmpr.est))
   <tr>
    <td style="text-align:left;"> AITKIN </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
    <td style="text-align:right;"> 0.7149352 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
    <td style="text-align:right;"> 0.8908486 </td>
   </tr>
   <tr>
@@ -359,7 +359,7 @@ kable(head(cmpr.est))
   <tr>
    <td style="text-align:left;"> BIGSTONE </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
    <td style="text-align:right;"> 1.5367889 </td>
   </tr>
 </tbody>
@@ -399,13 +399,13 @@ You can change the fitting algorithm to use the Log Likelihood anyhow, it may be
 <tbody>
   <tr>
    <td style="text-align:left;"> AITKIN </td>
-   <td style="text-align:right;"> 1.1107726 </td>
-   <td style="text-align:right;"> 1.1143652 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
+   <td style="text-align:right;"> 1.1143654 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
-   <td style="text-align:right;"> 0.9427046 </td>
-   <td style="text-align:right;"> 0.9438525 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
+   <td style="text-align:right;"> 0.9438526 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BECKER </td>
@@ -424,8 +424,8 @@ You can change the fitting algorithm to use the Log Likelihood anyhow, it may be
   </tr>
   <tr>
    <td style="text-align:left;"> BIGSTONE </td>
-   <td style="text-align:right;"> 1.4081134 </td>
-   <td style="text-align:right;"> 1.4068867 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
+   <td style="text-align:right;"> 1.4068866 </td>
   </tr>
 </tbody>
 </table>
@@ -457,239 +457,10 @@ Consider the covariate $floor$, which takes on the value $1$ when the radon meas
 Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
 
 
-```r
-ri.with.x <- lmer(log_radon ~ floor + (1 |county), data=radon)
-tab_model(ri.with.x, show.r2=FALSE)
-```
-
-<table style="border-collapse:collapse; border:none;">
-<tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log radon</th>
-</tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.49</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.40&nbsp;&ndash;&nbsp;1.59</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">first floor</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.66</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.80&nbsp;&ndash;&nbsp;-0.53</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
-</tr>
-<tr>
-<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
-</tr>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&sigma;<sup>2</sup></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.53</td>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&tau;<sub>00</sub> <sub>county</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.10</td>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC <sub>county</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.16</td>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">919</td>
-</tr>
-
-</table>
-
-Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the [sjPlot](http://www.strengejacke.de/sjPlot/) package. 
-
-
-```r
-plot_model(ri.with.x, type="re", sort.est = "(Intercept)", y.offset = .4)
-```
-
-<img src="random_intercept_files/figure-html/unnamed-chunk-18-1.png" width="672" />
-
-Function enhancements -- (
-
-* Display the fixed effects by changing `type="est"`. 
-* Plot the slope of the fixed effect for each level of the random effect `sjp.lmer(ri.with.x, type="ri.slope")` -- this is being depreciated in the future but works for now. Eventually I'll figure out how to get this plot out of `plot_model()`. 
-
-## Centering terms
-
-* Sometimes it might be better to measure the effect of a specific level relative to the average within cluster, rather than overall average.
-* The "frog pond" effect
-    - A student with an average IQ may be more confident and excel in a group of students with less than average IQ
-    - But they may be discouraged and not perform to their potential in a group of students with higher than average IQ.
-    
-* If the effect of a specific level of a factor is dependent on where the level is in reference to _other cluster members_, more so than where the level is in reference to _all other participants_, the model should be adjusted for as follows: 
-* Instead of using the actual value in the regression model you would...
-    - calculate the cluster specific average
-    - calculate the difference between individual and specific cluster average
-    - both cluster average (macro) and difference (micro) are included in the model. 
-
-
-### A generic `dplyr` approach to centering. 
-
-```
-group.means <- data %>% group_by(cluster) %>% summarise(c.ave=mean(variable))
-newdata <- data %>% left_join(group.means) %>% mutate(diff = variable - c.ave)
-```
-
-1. Create a new data set that I call `group.means` that
-    - takes the original `data` set and then (`%>%`)...
-    - groups it by the clustering variable so that all subsequent actions are done on each group
-    - makes a new variable that I call `c.ave` that is the average of the `variable` of interest
-2. I then take the original `data` set, and then
-    - merge onto `data`, this `group.means` data set that only contains the clustering variable, and the cluster average variable `c.ave`. 
-    - I also toss in a `mutate` to create a new variable that is the `diff`erence between the `variable` of interest and the group averages. 
-    - and assign all of this to a `newdata` set 
-
-
-
-## Specifying Correlation Structures
-
-* **Independence:** In standard linear models, the assumption on the residuals $\epsilon_{i} \sim \mathcal{N}(0, \sigma_{\epsilon}^{2})$ means that
-
-* The variance of each observation is $\sigma_{\epsilon}^{2}$
-* The covariance between two different observations $0$
-
-Consider $n=4$ observations, $y_{1}, \ldots , y_{4}$. Visually the covariance matrix between these four observations would look like this: 
-
-$$
-\begin{array}{c|cccc}
-  & y_{1} & y_{2} & y_{3} & y_{4}\\
-  \hline 
-  y_{1} & \sigma_{\epsilon}^{2} & 0 & 0 & 0\\ 
-  y_{2} & 0 & \sigma_{\epsilon}^{2} & 0 & 0\\ 
-  y_{3} & 0 & 0 & \sigma_{\epsilon}^{2} & 0\\ 
-  y_{4} & 0& 0 & 0 & \sigma_{\epsilon}^{2} 
-\end{array}
-$$
-
-We can also write the covariance matrix as $\sigma_{\epsilon}^{2}$ times the correlation matrix. 
-
-$$
-\begin{bmatrix} 
-  \sigma_{\epsilon}^{2} & 0 & 0 & 0\\ 
-  0 & \sigma_{\epsilon}^{2} & 0 & 0\\ 
-  0 & 0 & \sigma_{\epsilon}^{2} & 0\\ 
-  0& 0 & 0 & \sigma_{\epsilon}^{2} 
-\end{bmatrix}
-=
-\sigma_{\epsilon}^2 
-\begin{bmatrix} 
-1 & 0 & 0 & 0 \\ 
-& 1 & 0 & 0 \\ 
-& & 1 & 0 \\ 
-& & & 1 
-\end{bmatrix} 
-$$
-
-
-
-* **Compound Symmetry** or **Exchangeable:** The simplest covariance structure that includes correlated errors is compound symmetry (CS). Here we see correlated errors between individuals, and note that these correlations are presumed to be the same for each pair of responses, namely $\rho$. 
-
-$$
-\sigma_{\epsilon}^{2}
-\begin{bmatrix} 
-1 & \rho & \rho & \rho \\ 
-& 1 & \rho & \rho \\ 
-& & 1 & \rho \\ 
-& & & 1 
-\end{bmatrix} 
-$$
-
-* **Autoregressive:** Imagine that $y_{1}, \ldots , y_{4}$ were 4 different time points on the same person. The autoregressive (Lag 1) structure considers correlations to be highest for time adjacent times, and a systematically decreasing correlation with increasing distance between time points. This structure is only applicable for evenly spaced time intervals for the repeated measure.
-
-$$
-\sigma_{\epsilon}^{2}
-\begin{bmatrix} 
-1 & \rho & \rho^{2} & \rho^{3} \\ 
-& 1 & \rho & \rho^{2} \\ 
-& & 1 & \rho \\ 
-& & & 1 
-\end{bmatrix}
-$$
-
-
-* **Unstructured:** The Unstructured covariance structure (UN) is the most complex because it is estimating unique correlations for each pair of observations. It is not uncommon to find out that you are not able to use this structure simply because there are too many parameters to estimate. 
-
-$$
-\begin{bmatrix} 
-\sigma_{1}^{2} & \rho_{12} & \rho_{13} & \rho_{14} \\ 
-& \sigma_{2}^{2} & \rho_{23} & \rho_{24} \\ 
-& & \sigma_{3}^{2} & \rho_{34} \\ 
-& & & \sigma_{4}^{2}
-\end{bmatrix}
-$$
-
-* Random Intercept Model
-
-Let $y_{1}$ and $y_{2}$ be from group 1, and $y_{3}$ and $y_{4}$ be from group 2. 
-
-* error terms between groups are uncorrelated (groups are independent)
-* two different observations from the same group have covariance $\sigma_{\alpha}^{2}$
-* individuals now have the error associated with their own observation but also due to the group 
-  $\sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2}$
-
-
-$$
-\left[
-\begin{array}{cc|cc}
-  \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & \sigma_{\alpha}^{2} & 0 & 0\\ 
- \sigma_{\alpha}^{2} & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & 0 & 0\\ 
- \hline
-  0 & 0 & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} & \sigma_{\alpha}^{2}\\ 
-  0 & 0 & \sigma_{\alpha}^{2} & \sigma_{\epsilon}^{2} + \sigma_{\alpha}^{2} 
-\end{array}
-\right]
-$$
-
-
-### Specifying different covariance structures in R
-
-* Not _easily_ able to do this using `lmer()` from package `lme4`
-* Can do this using `lme()` from package `nlme`. Syntax is similar. 
-* The standard classes of correlation structures available in the `nlme` package can be found in [[this help file]](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/corClasses.html)
-    
-
-```r
-library(nlme)
-model_lme_cs<-lme(log_radon ~ floor,
-               random = ~ 1 | county, 
-               cor=corCompSymm(value=0.159,form=~1|county),data = radon)
-```
-
-Using a different covariance structure can have a large effect on the results. 
-
-* `lmer` using Identity: $\sigma^{2}_{\alpha} = 0.10, \sigma^{2}_{\epsilon} = 0.53$  
-* `nlme` using Identity: $\sigma^{2}_{\alpha} = 0.32^2 = 0.10, \sigma^{2}_{\epsilon} = 0.73^2 = 0.53$  
-* `nlme` using CS: $\sigma^{2}_{\alpha} = 0.14^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61$
-
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Mis-specifying the covariance structure can also have a large effect on the results. </div>\EndKnitrBlock{rmdcaution}
 
 
 
 
 
-## Additional References
-
-* Random effects ANOVA in SAS and R http://stla.github.io/stlapblog/posts/AV1R_SASandR.html
-* ICCs in mixed models https://www.theanalysisfactor.com/the-intraclass-correlation-coefficient-in-mixed-models/
-* Very nice introduction to mixed models in R https://m-clark.github.io/mixed-models-with-R/introduction.html
-* Interesting blog by [Tristan Mahr](https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/) about pooling and shrinkage. 
-* Derivation of the covariance structures http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2 
-
-### Package Vignettes
-* [lme4](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) Functions to fit HLMs
-* [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing output as tables (and plots).
-* Changing covariance structures in `lme4qtl`: [[paper]](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com) [[github]](https://github.com/variani/lme4qtl)
 
 
