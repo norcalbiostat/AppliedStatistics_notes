@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.4 Bivariate Visualizations | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.4 Bivariate Visualizations | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
 
-<meta name="author" content="Robin A. Donatello and Edward A. Roualdes" />
+<meta name="author" content="Robin Donatello, Edward Roualdes" />
 
 
 
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -128,13 +131,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Preparing Data for Analysis</a><ul>
+<li class="part"><span><b>I Preparing Data for Analysis</b></span></li>
+<li class="chapter" data-level="1" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>1</b> Workflow and Data Cleaning</a><ul>
 <li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
 <li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-varible-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming varible names for sanity sake</a></li>
+<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-variable-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming variable names for sanity sake</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
@@ -179,138 +183,158 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>2.11</b> Additional Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="select-analysis.html"><a href="select-analysis.html"><i class="fa fa-check"></i><b>3</b> Selecting Appropriate Analyses</a></li>
-<li class="part"><span><b>I Regression Modeling</b></span></li>
-<li class="chapter" data-level="4" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>4</b> Introduction</a></li>
-<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
-<li class="chapter" data-level="5.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>5.1</b> Mathmatical Model</a></li>
-<li class="chapter" data-level="5.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>5.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="5.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>5.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="5.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>5.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="5.5" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>5.6</b> Example</a></li>
+<li class="part"><span><b>II Statistical Inference</b></span></li>
+<li class="chapter" data-level="4" data-path="bv-intro.html"><a href="bv-intro.html"><i class="fa fa-check"></i><b>4</b> Foundations for Inference</a></li>
+<li class="chapter" data-level="5" data-path="bivariate-analysis.html"><a href="bivariate-analysis.html"><i class="fa fa-check"></i><b>5</b> Bivariate Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="assumption-of-independent-observations.html"><a href="assumption-of-independent-observations.html"><i class="fa fa-check"></i><b>5.1</b> Assumption of Independent Observations</a></li>
+<li class="chapter" data-level="5.2" data-path="choosing-appropriate-bivariate-analysis.html"><a href="choosing-appropriate-bivariate-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Choosing appropriate bivariate analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="bv-ttest.html"><a href="bv-ttest.html"><i class="fa fa-check"></i><b>5.3</b> (Q~B) Two means: T-Test</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="bv-ttest.html"><a href="bv-ttest.html#assumptions"><i class="fa fa-check"></i><b>5.3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="bv-ttest.html"><a href="bv-ttest.html#sampling-distribution-for-the-difference"><i class="fa fa-check"></i><b>5.3.2</b> Sampling Distribution for the difference</a></li>
+<li class="chapter" data-level="5.3.3" data-path="bv-ttest.html"><a href="bv-ttest.html#example-smoking-and-bmi"><i class="fa fa-check"></i><b>5.3.3</b> Example: Smoking and BMI</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>6</b> Multiple Linear Regression</a><ul>
-<li class="chapter" data-level="6.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>6.1</b> Types of X variables</a></li>
-<li class="chapter" data-level="6.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>6.2</b> Mathematical Model</a></li>
-<li class="chapter" data-level="6.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>6.3</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="6.4" data-path="example-1.html"><a href="example-1.html"><i class="fa fa-check"></i><b>6.4</b> Example</a></li>
-<li class="chapter" data-level="6.5" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>6.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="6.6" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>6.6</b> Multicollinearity</a></li>
-<li class="chapter" data-level="6.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>6.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-tabl"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Tabl*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7</b> Model Building</a><ul>
-<li class="chapter" data-level="7.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Predictors</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>7.1.1</b> Factor variable coding</a></li>
-<li class="chapter" data-level="7.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>7.1.2</b> Wald test</a></li>
+<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) <span class="math inline">\(\chi^{2}\)</span></a></li>
+<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>7.2</b> Stratification</a></li>
-<li class="chapter" data-level="7.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>7.3</b> Moderation</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>7.3.1</b> Example 1: Sepal vs Petal Length</a></li>
-<li class="chapter" data-level="7.3.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>7.3.2</b> Example 2: Simpson’s Paradox</a></li>
+<li class="part"><span><b>III Regression Modeling</b></span></li>
+<li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
+<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
+<li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
+<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>7.4</b> Interactions</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>7.4.1</b> Example</a></li>
-<li class="chapter" data-level="7.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>7.4.2</b> Example</a></li>
+<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
+<li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
+<li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="8.4" data-path="example-1.html"><a href="example-1.html"><i class="fa fa-check"></i><b>8.4</b> Example</a></li>
+<li class="chapter" data-level="8.5" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.5</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="8.6" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.6</b> Multicollinearity</a></li>
+<li class="chapter" data-level="8.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.7</b> What to watch out for</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>7.5</b> Confounding</a></li>
-<li class="chapter" data-level="7.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>7.6</b> Variable Selection Process</a><ul>
-<li class="chapter" data-level="7.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>7.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="7.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>7.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
+<li class="chapter" data-level="9" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>9</b> Model Building</a><ul>
+<li class="chapter" data-level="9.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html"><i class="fa fa-check"></i><b>9.1</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="categorical-predictors.html"><a href="categorical-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>9.1.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="9.1.2" data-path="categorical-predictors.html"><a href="categorical-predictors.html#wald-test"><i class="fa fa-check"></i><b>9.1.2</b> Wald test</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>7.7</b> Comparing between models</a></li>
-<li class="chapter" data-level="7.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>7.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>9.2</b> Stratification</a></li>
+<li class="chapter" data-level="9.3" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>9.3</b> Moderation</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>9.3.1</b> Example 1: Sepal vs Petal Length</a></li>
+<li class="chapter" data-level="9.3.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>9.3.2</b> Example 2: Simpson’s Paradox</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Models</a><ul>
-<li class="chapter" data-level="8.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>8.1</b> Fitting GLMs in R</a></li>
-<li class="chapter" data-level="8.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>8.2</b> Binary Data</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>8.2.1</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="8.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="8.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>8.2.3</b> Interpretation</a></li>
+<li class="chapter" data-level="9.4" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>9.4</b> Interactions</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>9.4.1</b> Example</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>9.4.2</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>8.3</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>8.3.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="8.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>8.3.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="8.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>8.3.3</b> Model Performance</a></li>
+<li class="chapter" data-level="9.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.5</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>9.6</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>9.6.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="9.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>9.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.4</b> Categorical Data</a></li>
-<li class="chapter" data-level="8.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>8.5</b> Count Data</a></li>
+<li class="chapter" data-level="9.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>9.7</b> Comparing between models</a></li>
+<li class="chapter" data-level="9.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>9.8</b> What to watch out for</a></li>
 </ul></li>
-<li class="part"><span><b>II Multivariate Analysis</b></span></li>
-<li class="chapter" data-level="9" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
-<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Component Analysis</a><ul>
-<li class="chapter" data-level="10.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>10.1</b> Basic Idea</a></li>
-<li class="chapter" data-level="10.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>10.2</b> More Generally</a></li>
-<li class="chapter" data-level="10.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>10.3</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="10.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>10.4</b> Using the correlation matrix</a></li>
-<li class="chapter" data-level="10.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>10.5</b> Data Reduction</a></li>
-<li class="chapter" data-level="10.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>10.6</b> Example Analysis of depression</a></li>
-<li class="chapter" data-level="10.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>10.7</b> Use in Multiple Regression</a></li>
-<li class="chapter" data-level="10.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>10.8</b> Things to watch out for</a></li>
-<li class="chapter" data-level="10.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>10.9</b> Additional References</a></li>
+<li class="chapter" data-level="10" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>10</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="10.1" data-path="fitting-glms-in-r.html"><a href="fitting-glms-in-r.html"><i class="fa fa-check"></i><b>10.1</b> Fitting GLMs in R</a></li>
+<li class="chapter" data-level="10.2" data-path="binary-data.html"><a href="binary-data.html"><i class="fa fa-check"></i><b>10.2</b> Binary Data</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="binary-data.html"><a href="binary-data.html#example-the-effect-of-gender-on-depression"><i class="fa fa-check"></i><b>10.2.1</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="10.2.2" data-path="binary-data.html"><a href="binary-data.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>10.2.2</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="10.2.3" data-path="binary-data.html"><a href="binary-data.html#interpretation"><i class="fa fa-check"></i><b>10.2.3</b> Interpretation</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>11</b> Factor Analysis</a><ul>
-<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>11.1.1</b> Latent Constructs</a></li>
-<li class="chapter" data-level="11.1.2" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>11.1.2</b> EFA vs CFA</a></li>
+<li class="chapter" data-level="10.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html"><i class="fa fa-check"></i><b>10.3</b> Classification of Binary outcomes</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#calculating-predictions"><i class="fa fa-check"></i><b>10.3.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="10.3.2" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#roc-curves"><i class="fa fa-check"></i><b>10.3.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="10.3.3" data-path="classification-of-binary-outcomes.html"><a href="classification-of-binary-outcomes.html#model-performance"><i class="fa fa-check"></i><b>10.3.3</b> Model Performance</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>11.2</b> Factor Model</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="factor-model.html"><a href="factor-model.html#comparison-with-pca"><i class="fa fa-check"></i><b>11.2.1</b> Comparison with PCA</a></li>
-<li class="chapter" data-level="11.2.2" data-path="factor-model.html"><a href="factor-model.html#implications"><i class="fa fa-check"></i><b>11.2.2</b> Implications</a></li>
-<li class="chapter" data-level="11.2.3" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>11.2.3</b> Two big steps</a></li>
+<li class="chapter" data-level="10.4" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>10.4</b> Categorical Data</a></li>
+<li class="chapter" data-level="10.5" data-path="count-data.html"><a href="count-data.html"><i class="fa fa-check"></i><b>10.5</b> Count Data</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>11.3</b> Example setup</a></li>
-<li class="chapter" data-level="11.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>11.4</b> Factor Extraction</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>11.4.1</b> PC Factor Model</a></li>
-<li class="chapter" data-level="11.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>11.4.2</b> Iterated PC Factor Model</a></li>
-<li class="chapter" data-level="11.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>11.4.3</b> Maximum Likelihood</a></li>
-<li class="chapter" data-level="11.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-4"><i class="fa fa-check"></i><b>11.4.4</b> Example</a></li>
+<li class="part"><span><b>IV Multivariate Analysis</b></span></li>
+<li class="chapter" data-level="11" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>11</b> Introduction</a></li>
+<li class="chapter" data-level="12" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>12</b> Principal Component Analysis</a><ul>
+<li class="chapter" data-level="12.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>12.1</b> Basic Idea</a></li>
+<li class="chapter" data-level="12.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>12.2</b> More Generally</a></li>
+<li class="chapter" data-level="12.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>12.3</b> Generating PC’s using R</a></li>
+<li class="chapter" data-level="12.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>12.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="12.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>12.6</b> Example Analysis of depression</a></li>
+<li class="chapter" data-level="12.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>12.7</b> Use in Multiple Regression</a></li>
+<li class="chapter" data-level="12.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>12.8</b> Things to watch out for</a></li>
+<li class="chapter" data-level="12.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>12.9</b> Additional References</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>11.5</b> Rotating Factors</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>11.5.1</b> Varimax Rotation</a></li>
-<li class="chapter" data-level="11.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>11.5.2</b> Oblique rotation</a></li>
+<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a><ul>
+<li class="chapter" data-level="13.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>13.1</b> Introduction</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>13.1.1</b> Latent Constructs</a></li>
+<li class="chapter" data-level="13.1.2" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>13.1.2</b> EFA vs CFA</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>11.6</b> Factor Scores</a></li>
-<li class="chapter" data-level="11.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>11.7</b> What to watch out for</a></li>
-<li class="chapter" data-level="11.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>11.8</b> Additional Resources</a></li>
+<li class="chapter" data-level="13.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>13.2</b> Factor Model</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="factor-model.html"><a href="factor-model.html#comparison-with-pca"><i class="fa fa-check"></i><b>13.2.1</b> Comparison with PCA</a></li>
+<li class="chapter" data-level="13.2.2" data-path="factor-model.html"><a href="factor-model.html#implications"><i class="fa fa-check"></i><b>13.2.2</b> Implications</a></li>
+<li class="chapter" data-level="13.2.3" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>13.2.3</b> Two big steps</a></li>
 </ul></li>
-<li class="part"><span><b>III Other Topics</b></span></li>
-<li class="chapter" data-level="12" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>12</b> Missing Data</a><ul>
-<li class="chapter" data-level="12.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>12.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>12.1.1</b> Visualize missing patterns</a></li>
+<li class="chapter" data-level="13.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>13.3</b> Example setup</a></li>
+<li class="chapter" data-level="13.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>13.4</b> Factor Extraction</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>13.4.1</b> PC Factor Model</a></li>
+<li class="chapter" data-level="13.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>13.4.2</b> Iterated PC Factor Model</a></li>
+<li class="chapter" data-level="13.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>13.4.3</b> Maximum Likelihood</a></li>
+<li class="chapter" data-level="13.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-4"><i class="fa fa-check"></i><b>13.4.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>12.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="12.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>12.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>12.3.1</b> Demonstration via Simulation</a></li>
+<li class="chapter" data-level="13.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>13.5</b> Rotating Factors</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>13.5.1</b> Varimax Rotation</a></li>
+<li class="chapter" data-level="13.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>13.5.2</b> Oblique rotation</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>12.4</b> General strategies</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>12.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="12.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>12.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="12.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>12.4.3</b> Imputation</a></li>
+<li class="chapter" data-level="13.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>13.6</b> Factor Scores</a></li>
+<li class="chapter" data-level="13.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>13.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="13.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>13.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>12.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="12.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>12.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="12.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>12.6.1</b> Goals</a></li>
-<li class="chapter" data-level="12.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>12.6.2</b> Technique</a></li>
-<li class="chapter" data-level="12.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>12.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="12.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>12.6.4</b> Inference on MI</a></li>
+<li class="part"><span><b>V Other Topics</b></span></li>
+<li class="chapter" data-level="14" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>14</b> Missing Data</a><ul>
+<li class="chapter" data-level="14.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>14.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>14.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="12.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>12.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>12.7.1</b> Overview</a></li>
-<li class="chapter" data-level="12.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>12.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="12.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>12.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="12.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>12.7.4</b> Imputation Methods</a></li>
+<li class="chapter" data-level="14.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>14.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="14.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>14.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>14.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="12.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>12.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>12.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="12.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>12.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="12.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>12.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="12.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>12.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="12.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>12.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="12.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>12.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="12.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>12.8.7</b> Calculating bias</a></li>
+<li class="chapter" data-level="14.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>14.4</b> General strategies</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>14.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="14.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>14.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="14.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>14.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="12.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>12.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="12.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>12.10</b> Additional References</a></li>
+<li class="chapter" data-level="14.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>14.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="14.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>14.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>14.6.1</b> Goals</a></li>
+<li class="chapter" data-level="14.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>14.6.2</b> Technique</a></li>
+<li class="chapter" data-level="14.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>14.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="14.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>14.6.4</b> Inference on MI</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>14.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>14.7.1</b> Overview</a></li>
+<li class="chapter" data-level="14.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>14.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="14.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>14.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="14.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>14.7.4</b> Imputation Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>14.8</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>14.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="14.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>14.8.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="14.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>14.8.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="14.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>14.8.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="14.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>14.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="14.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>14.8.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="14.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>14.8.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>14.9</b> Final thoughts</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -340,14 +364,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">2.4.1.1</span> Two-way Frequency tables</h4>
 <p>Cross-tabs, cross-tabulations and two-way tables (all the same thing, different names) can be created by using the <code>table()</code> function.</p>
 <p>The frequency table is constructed using the <code>table()</code> function.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
-<a class="sourceLine" id="cb74-2" title="2"><span class="co">##            </span></a>
-<a class="sourceLine" id="cb74-3" title="3"><span class="co">##              D  E  F  G  H  I  J</span></a>
-<a class="sourceLine" id="cb74-4" title="4"><span class="co">##   Fair       4  5  4  3 10  1  0</span></a>
-<a class="sourceLine" id="cb74-5" title="5"><span class="co">##   Good      13  6 19 16 10 13  6</span></a>
-<a class="sourceLine" id="cb74-6" title="6"><span class="co">##   Very Good 30 60 37 50 26 18  5</span></a>
-<a class="sourceLine" id="cb74-7" title="7"><span class="co">##   Premium   39 42 40 55 46 40 15</span></a>
-<a class="sourceLine" id="cb74-8" title="8"><span class="co">##   Ideal     63 69 52 77 65 40 21</span></a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="co">##              D  E  F  G  H  I  J</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="co">##   Fair       5  6  7  4  5  4  3</span></a>
+<a class="sourceLine" id="cb73-5" title="5"><span class="co">##   Good      18 23 11 16 17  7  7</span></a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="co">##   Very Good 26 37 46 40 33 25 13</span></a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="co">##   Premium   34 53 43 49 41 24 13</span></a>
+<a class="sourceLine" id="cb73-8" title="8"><span class="co">##   Ideal     54 63 79 92 53 34 15</span></a></code></pre></div>
 <p>There are 4 Fair diamonds with color D, and 21 Ideal quality diamonds with color J.</p>
 </div>
 <div id="two-way-proprtion-tables" class="section level4">
@@ -362,36 +386,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here are demonstrations of how the interpretation of the percents change depending on what the denominator is.</p>
 <p><strong>Cell proportions</strong></p>
 <p>Wrapping <code>prop.table()</code> around a table gives you the <strong>cell</strong> proportions.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color))</a>
-<a class="sourceLine" id="cb75-2" title="2"><span class="co">##            </span></a>
-<a class="sourceLine" id="cb75-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
-<a class="sourceLine" id="cb75-4" title="4"><span class="co">##   Fair      0.004 0.005 0.004 0.003 0.010 0.001 0.000</span></a>
-<a class="sourceLine" id="cb75-5" title="5"><span class="co">##   Good      0.013 0.006 0.019 0.016 0.010 0.013 0.006</span></a>
-<a class="sourceLine" id="cb75-6" title="6"><span class="co">##   Very Good 0.030 0.060 0.037 0.050 0.026 0.018 0.005</span></a>
-<a class="sourceLine" id="cb75-7" title="7"><span class="co">##   Premium   0.039 0.042 0.040 0.055 0.046 0.040 0.015</span></a>
-<a class="sourceLine" id="cb75-8" title="8"><span class="co">##   Ideal     0.063 0.069 0.052 0.077 0.065 0.040 0.021</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color))</a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb74-4" title="4"><span class="co">##   Fair      0.005 0.006 0.007 0.004 0.005 0.004 0.003</span></a>
+<a class="sourceLine" id="cb74-5" title="5"><span class="co">##   Good      0.018 0.023 0.011 0.016 0.017 0.007 0.007</span></a>
+<a class="sourceLine" id="cb74-6" title="6"><span class="co">##   Very Good 0.026 0.037 0.046 0.040 0.033 0.025 0.013</span></a>
+<a class="sourceLine" id="cb74-7" title="7"><span class="co">##   Premium   0.034 0.053 0.043 0.049 0.041 0.024 0.013</span></a>
+<a class="sourceLine" id="cb74-8" title="8"><span class="co">##   Ideal     0.054 0.063 0.079 0.092 0.053 0.034 0.015</span></a></code></pre></div>
 <p>0.4% of all diamonds are D color and Fair cut, 2.1% are J color and Ideal cut.</p>
 <p><strong>Row proportions</strong></p>
 <p>To get the <strong>row</strong> proportions, you specify <code>margin=1</code>. The percentages now add up to 1 across the rows.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb76-2" title="2"><span class="co">##            </span></a>
-<a class="sourceLine" id="cb76-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
-<a class="sourceLine" id="cb76-4" title="4"><span class="co">##   Fair      0.148 0.185 0.148 0.111 0.370 0.037 0.000</span></a>
-<a class="sourceLine" id="cb76-5" title="5"><span class="co">##   Good      0.157 0.072 0.229 0.193 0.120 0.157 0.072</span></a>
-<a class="sourceLine" id="cb76-6" title="6"><span class="co">##   Very Good 0.133 0.265 0.164 0.221 0.115 0.080 0.022</span></a>
-<a class="sourceLine" id="cb76-7" title="7"><span class="co">##   Premium   0.141 0.152 0.144 0.199 0.166 0.144 0.054</span></a>
-<a class="sourceLine" id="cb76-8" title="8"><span class="co">##   Ideal     0.163 0.178 0.134 0.199 0.168 0.103 0.054</span></a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb75-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb75-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb75-4" title="4"><span class="co">##   Fair      0.147 0.176 0.206 0.118 0.147 0.118 0.088</span></a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="co">##   Good      0.182 0.232 0.111 0.162 0.172 0.071 0.071</span></a>
+<a class="sourceLine" id="cb75-6" title="6"><span class="co">##   Very Good 0.118 0.168 0.209 0.182 0.150 0.114 0.059</span></a>
+<a class="sourceLine" id="cb75-7" title="7"><span class="co">##   Premium   0.132 0.206 0.167 0.191 0.160 0.093 0.051</span></a>
+<a class="sourceLine" id="cb75-8" title="8"><span class="co">##   Ideal     0.138 0.162 0.203 0.236 0.136 0.087 0.038</span></a></code></pre></div>
 <p>14.8% of all Fair quality diamonds are color D. 5.4% of all Ideal quality diamonds have color J.</p>
 <p><strong>Column proportions</strong></p>
 <p>To get the <strong>column</strong> proportions, you specify <code>margin=2</code>. The percentages now add up to 1 down the columns.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb77-2" title="2"><span class="co">##            </span></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
-<a class="sourceLine" id="cb77-4" title="4"><span class="co">##   Fair      0.027 0.027 0.026 0.015 0.064 0.009 0.000</span></a>
-<a class="sourceLine" id="cb77-5" title="5"><span class="co">##   Good      0.087 0.033 0.125 0.080 0.064 0.116 0.128</span></a>
-<a class="sourceLine" id="cb77-6" title="6"><span class="co">##   Very Good 0.201 0.330 0.243 0.249 0.166 0.161 0.106</span></a>
-<a class="sourceLine" id="cb77-7" title="7"><span class="co">##   Premium   0.262 0.231 0.263 0.274 0.293 0.357 0.319</span></a>
-<a class="sourceLine" id="cb77-8" title="8"><span class="co">##   Ideal     0.423 0.379 0.342 0.383 0.414 0.357 0.447</span></a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color), <span class="dt">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="co">##            </span></a>
+<a class="sourceLine" id="cb76-3" title="3"><span class="co">##                 D     E     F     G     H     I     J</span></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="co">##   Fair      0.036 0.033 0.038 0.020 0.034 0.043 0.059</span></a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="co">##   Good      0.131 0.126 0.059 0.080 0.114 0.074 0.137</span></a>
+<a class="sourceLine" id="cb76-6" title="6"><span class="co">##   Very Good 0.190 0.203 0.247 0.199 0.221 0.266 0.255</span></a>
+<a class="sourceLine" id="cb76-7" title="7"><span class="co">##   Premium   0.248 0.291 0.231 0.244 0.275 0.255 0.255</span></a>
+<a class="sourceLine" id="cb76-8" title="8"><span class="co">##   Ideal     0.394 0.346 0.425 0.458 0.356 0.362 0.294</span></a></code></pre></div>
 <p>2.7% of all D color diamonds are of Fair quality. 44.7% of all J color diamonds are of Ideal quality.</p>
 </div>
 <div id="grouped-bar-charts" class="section level4">
@@ -399,23 +423,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To compare proportions of one categorical variable within the same level of another, is to use grouped barcharts.</p>
 <p><strong>base</strong>
 As before, the object to be plotted needs to be the result of a table.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">cc &lt;-<span class="st"> </span><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
-<a class="sourceLine" id="cb78-2" title="2"><span class="kw">barplot</span>(cc)</a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">cc &lt;-<span class="st"> </span><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
+<a class="sourceLine" id="cb77-2" title="2"><span class="kw">barplot</span>(cc)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>Stacked bars can be difficult to interpret, and very difficult to compare values between groups. A side by side barchart is preferable.
 The <code>beside=TRUE</code> is what controls the placement of the bars.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">barplot</span>(cc, <span class="dt">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="dt">beside=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">barplot</span>(cc, <span class="dt">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="dt">beside=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 Again plot the cut on the x axis, but then <code>fill</code> using the second categorical variable. This has the effect of visualizing the <strong>row</strong> percents from the table above. The percent of color, within each type of cut.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>Again the default is a stacked barchart. So we just specify <code>position=dodge</code> to put the bars side by side.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">fill=</span>color)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>And look, an automatic legend. What if I wanted to better compare cut within color group? This is the <strong>column</strong> percentages. Just switch which variable is the x axis and which one is used to fill the colors!</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">ggplot</span>(dsmall, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">great cheatsheet</a> about using color palettes.</p>
 <p>And this easy change is why we love <code>ggplot2</code>.</p>
 </div>
@@ -423,46 +447,53 @@ Again plot the cut on the x axis, but then <code>fill</code> using the second ca
 <div id="grouped-bar-charts-with-percentages" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> Grouped bar charts with percentages</h3>
 <p>Not as easy as one would hope, but the solution is to calculate the desired percentages first and then plot the summary data using either <code>geom_bar(stat='identity')</code> or <code>geom_col()</code>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">calc.props &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(color, cut) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb83-2" title="2"><span class="st">              </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb83-3" title="3"><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">pct=</span><span class="kw">round</span>(count<span class="op">/</span><span class="kw">sum</span>(count),<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb83-4" title="4">calc.props</a>
-<a class="sourceLine" id="cb83-5" title="5"><span class="co">## # A tibble: 35 x 4</span></a>
-<a class="sourceLine" id="cb83-6" title="6"><span class="co">## # Groups:   color [7]</span></a>
-<a class="sourceLine" id="cb83-7" title="7"><span class="co">##    color cut       count   pct</span></a>
-<a class="sourceLine" id="cb83-8" title="8"><span class="co">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb83-9" title="9"><span class="co">##  1 D     Fair        163 0.024</span></a>
-<a class="sourceLine" id="cb83-10" title="10"><span class="co">##  2 D     Good        662 0.098</span></a>
-<a class="sourceLine" id="cb83-11" title="11"><span class="co">##  3 D     Very Good  1513 0.223</span></a>
-<a class="sourceLine" id="cb83-12" title="12"><span class="co">##  4 D     Premium    1603 0.237</span></a>
-<a class="sourceLine" id="cb83-13" title="13"><span class="co">##  5 D     Ideal      2834 0.418</span></a>
-<a class="sourceLine" id="cb83-14" title="14"><span class="co">##  6 E     Fair        224 0.023</span></a>
-<a class="sourceLine" id="cb83-15" title="15"><span class="co">##  7 E     Good        933 0.095</span></a>
-<a class="sourceLine" id="cb83-16" title="16"><span class="co">##  8 E     Very Good  2400 0.245</span></a>
-<a class="sourceLine" id="cb83-17" title="17"><span class="co">##  9 E     Premium    2337 0.239</span></a>
-<a class="sourceLine" id="cb83-18" title="18"><span class="co">## 10 E     Ideal      3903 0.398</span></a>
-<a class="sourceLine" id="cb83-19" title="19"><span class="co">## # ... with 25 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">calc.props &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(color, cut) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="st">              </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">pct=</span><span class="kw">round</span>(count<span class="op">/</span><span class="kw">sum</span>(count),<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb82-4" title="4">calc.props</a>
+<a class="sourceLine" id="cb82-5" title="5"><span class="co">## # A tibble: 35 x 4</span></a>
+<a class="sourceLine" id="cb82-6" title="6"><span class="co">## # Groups:   color [7]</span></a>
+<a class="sourceLine" id="cb82-7" title="7"><span class="co">##    color cut       count   pct</span></a>
+<a class="sourceLine" id="cb82-8" title="8"><span class="co">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb82-9" title="9"><span class="co">##  1 D     Fair        163 0.024</span></a>
+<a class="sourceLine" id="cb82-10" title="10"><span class="co">##  2 D     Good        662 0.098</span></a>
+<a class="sourceLine" id="cb82-11" title="11"><span class="co">##  3 D     Very Good  1513 0.223</span></a>
+<a class="sourceLine" id="cb82-12" title="12"><span class="co">##  4 D     Premium    1603 0.237</span></a>
+<a class="sourceLine" id="cb82-13" title="13"><span class="co">##  5 D     Ideal      2834 0.418</span></a>
+<a class="sourceLine" id="cb82-14" title="14"><span class="co">##  6 E     Fair        224 0.023</span></a>
+<a class="sourceLine" id="cb82-15" title="15"><span class="co">##  7 E     Good        933 0.095</span></a>
+<a class="sourceLine" id="cb82-16" title="16"><span class="co">##  8 E     Very Good  2400 0.245</span></a>
+<a class="sourceLine" id="cb82-17" title="17"><span class="co">##  9 E     Premium    2337 0.239</span></a>
+<a class="sourceLine" id="cb82-18" title="18"><span class="co">## 10 E     Ideal      3903 0.398</span></a>
+<a class="sourceLine" id="cb82-19" title="19"><span class="co">## # ... with 25 more rows</span></a></code></pre></div>
 <p>Since we’re plotting summary data, the height of the bars is specified using <code>y=pct</code>.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb84-2" title="2"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() </a></code></pre></div>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() </a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>Now set some options to the y axis using <code>scale_y_continuous()</code> to make the graph more accurate and readable. The <code>labels=percent</code> comes from the <code>scales</code> package.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(scales)</a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb85-3" title="3"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb85-4" title="4"><span class="st">                  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span>percent)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">library</span>(scales)</a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="kw">ggplot</span>(calc.props, <span class="kw">aes</span>(<span class="dt">x=</span>color, <span class="dt">fill=</span>cut, <span class="dt">y=</span>pct)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-3" title="3"><span class="st">                  </span><span class="kw">geom_col</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="st">                  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span>percent)</a></code></pre></div>
+<p><img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div id="sjplot" class="section level4">
+<h4><span class="header-section-number">2.4.2.1</span> <code>sjPlot</code></h4>
+<p>sjPlot does a very nice job of being able to cleanly show not only n’s but percents.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(sjPlot)</a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="kw">sjp.xtab</span>(dsmall<span class="op">$</span>color, dsmall<span class="op">$</span>cut, <span class="dt">margin=</span><span class="st">&quot;row&quot;</span>, <span class="dt">coord.flip =</span> <span class="ot">TRUE</span>) </a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+</div>
 <div id="mosaic-plots" class="section level4">
-<h4><span class="header-section-number">2.4.2.1</span> Mosaic plots</h4>
+<h4><span class="header-section-number">2.4.2.2</span> Mosaic plots</h4>
 <p>But what if you want to know how two categorical variables are related and you don’t want to look at two different barplots? Mosaic plots are a way to visualize the proportions in a table. So here’s the two-way table we’ll be plotting.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">table</span>(dsmall<span class="op">$</span>cut, dsmall<span class="op">$</span>color)</a>
 <a class="sourceLine" id="cb86-2" title="2"><span class="co">##            </span></a>
 <a class="sourceLine" id="cb86-3" title="3"><span class="co">##              D  E  F  G  H  I  J</span></a>
-<a class="sourceLine" id="cb86-4" title="4"><span class="co">##   Fair       4  5  4  3 10  1  0</span></a>
-<a class="sourceLine" id="cb86-5" title="5"><span class="co">##   Good      13  6 19 16 10 13  6</span></a>
-<a class="sourceLine" id="cb86-6" title="6"><span class="co">##   Very Good 30 60 37 50 26 18  5</span></a>
-<a class="sourceLine" id="cb86-7" title="7"><span class="co">##   Premium   39 42 40 55 46 40 15</span></a>
-<a class="sourceLine" id="cb86-8" title="8"><span class="co">##   Ideal     63 69 52 77 65 40 21</span></a></code></pre></div>
+<a class="sourceLine" id="cb86-4" title="4"><span class="co">##   Fair       5  6  7  4  5  4  3</span></a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="co">##   Good      18 23 11 16 17  7  7</span></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="co">##   Very Good 26 37 46 40 33 25 13</span></a>
+<a class="sourceLine" id="cb86-7" title="7"><span class="co">##   Premium   34 53 43 49 41 24 13</span></a>
+<a class="sourceLine" id="cb86-8" title="8"><span class="co">##   Ideal     54 63 79 92 53 34 15</span></a></code></pre></div>
 <p>The syntax for a mosaic plot uses <em>model notation</em>, which is basically y ~ x where the ~ is read as “twiddle” or “tilde”. It’s to the left of your <strong>1</strong> key.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">mosaicplot</span>(cut<span class="op">~</span>color, <span class="dt">data=</span>dsmall)</a></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
@@ -621,11 +652,13 @@ By default ggplot wants to overlay all plots on the same grid. This doesn’t lo
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -655,7 +688,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 }
 });
 });

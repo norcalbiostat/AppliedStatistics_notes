@@ -1,6 +1,8 @@
 # Selecting Appropriate Analyses {#select_analysis}
 
 _In Progress_
+This section covers how to choose appropriate analyses for any number and type of measurements. 
+Think like, flow chart. 
 
 **Considerations:**
 

@@ -113,14 +113,6 @@ ggplot(cut.props, aes(x=Var1, y=Freq)) + geom_col() +
   ggtitle("Proportion of diamonds by cut type")
 ```
 
-**sjPlot** Another super useful package for plotting is `sjPlot`
-
-```{r}
-library(sjPlot)
-plot_frq(dsmall$cut)
-```
-
-
 
 #### Cleveland Dot Plots
 Another way to visualize categorical data that takes up less ink than bars is a Cleveland dot plot. Here again we are plotting summary data instead of the raw data. This uses the `geom_segment` that draws the lines from x=0 to the value of the proportion (named `Freq` because of the way `data.frame` works).
@@ -446,6 +438,15 @@ ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
                   geom_col(position="dodge") + theme_bw() +
                   scale_y_continuous(limits=c(0,1), labels=percent)
 ```   
+
+
+#### `sjPlot` 
+
+sjPlot does a very nice job of being able to cleanly show not only n's but percents. 
+```{r}
+library(sjPlot)
+sjp.xtab(dsmall$color, dsmall$cut, margin="row", coord.flip = TRUE) 
+```
 
 
 #### Mosaic plots

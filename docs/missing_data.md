@@ -591,11 +591,11 @@ aggr(iris.mis, col=c('darkolivegreen3','salmon'),
 ## 
 ##  Variables sorted by number of missings: 
 ##      Variable      Count
-##  Sepal.Length 0.10666667
-##   Petal.Width 0.10666667
-##   Sepal.Width 0.10000000
-##       Species 0.10000000
-##  Petal.Length 0.08666667
+##   Petal.Width 0.14000000
+##  Sepal.Length 0.13333333
+##       Species 0.11333333
+##  Petal.Length 0.06000000
+##   Sepal.Width 0.05333333
 ```
 
 Here's another example of where only 10% of the data overall is missing, but it results in only 58% complete cases. 
@@ -649,22 +649,26 @@ The variance across chains is no larger than the variance within chains.
 ```r
 imp_iris$imp$Sepal.Length
 ##       1   2   3   4   5   6   7   8   9  10
-## 1   5.0 5.0 5.0 5.8 5.0 5.1 5.5 5.0 5.0 4.9
-## 5   5.0 5.2 5.0 5.7 5.4 5.1 5.8 4.9 5.1 5.3
-## 26  4.6 5.1 4.9 5.1 5.0 4.6 5.1 4.9 5.0 5.0
-## 31  5.0 4.7 5.0 5.0 4.9 4.6 4.6 5.0 4.6 5.0
-## 33  5.2 5.5 6.0 6.0 5.1 6.0 5.5 5.8 5.7 5.7
-## 39  4.4 4.6 4.4 5.0 4.4 5.0 4.4 4.4 4.9 4.9
-## 43  4.7 4.9 4.9 4.9 4.6 4.6 4.9 4.9 4.8 4.6
-## 56  6.8 6.2 5.4 6.3 5.4 5.5 6.2 6.5 5.8 6.1
-## 96  5.6 6.0 5.6 6.6 6.9 6.2 5.8 6.5 6.4 6.6
-## 103 6.7 7.7 7.3 6.3 6.7 6.7 6.9 6.7 6.9 6.8
-## 113 6.9 6.9 6.7 6.7 6.7 6.7 6.7 6.4 6.4 5.9
-## 124 5.7 5.8 6.2 5.6 6.0 5.5 5.7 5.6 6.2 5.8
-## 132 7.7 7.7 7.7 7.7 7.7 7.7 7.6 7.6 7.7 7.3
-## 135 7.0 6.9 7.2 6.7 6.3 6.0 7.7 6.4 7.0 6.0
-## 149 6.4 6.3 6.3 7.0 6.8 6.4 6.3 6.7 6.5 6.3
-## 150 6.6 6.7 6.4 6.0 6.1 6.0 6.4 6.1 6.0 6.3
+## 12  5.0 5.1 5.1 5.4 5.1 5.2 5.1 5.1 5.4 5.0
+## 13  4.4 4.9 4.7 4.7 4.4 4.4 4.7 5.0 4.4 4.4
+## 14  4.4 4.7 4.9 4.4 4.5 4.9 4.4 4.7 4.9 4.7
+## 36  4.4 4.4 4.4 4.4 4.4 4.7 4.4 4.4 4.6 4.9
+## 38  5.0 5.0 5.1 5.0 5.0 4.6 5.0 5.0 5.4 5.0
+## 40  4.9 5.0 5.4 5.0 4.9 5.8 5.0 4.7 5.1 5.0
+## 46  4.4 4.4 4.7 4.9 4.4 4.4 4.4 4.6 4.6 4.9
+## 51  6.9 6.5 6.5 6.3 5.9 6.7 6.5 6.7 6.9 6.9
+## 56  6.5 6.6 6.0 5.9 5.8 6.0 6.7 6.6 5.4 5.4
+## 62  5.8 6.3 5.6 6.1 5.6 5.7 5.7 5.6 6.6 5.6
+## 74  6.1 6.5 6.8 6.5 6.3 6.9 6.4 6.3 6.0 5.9
+## 75  6.1 5.7 6.1 6.3 5.7 6.8 6.1 5.6 6.0 6.0
+## 86  6.3 6.1 6.8 6.7 6.6 6.7 6.1 6.0 6.7 5.9
+## 90  5.2 5.5 5.6 6.1 5.5 5.6 5.8 6.0 6.2 6.1
+## 91  5.8 5.7 5.8 6.1 5.7 5.8 5.8 5.6 6.8 5.8
+## 106 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.2 7.3 7.2
+## 124 6.2 5.6 6.0 6.0 6.2 5.6 6.2 5.7 5.7 5.6
+## 142 6.1 6.7 6.3 6.7 5.4 6.6 6.3 6.5 5.9 6.4
+## 145 7.4 6.0 6.0 6.5 6.3 6.9 6.0 6.3 6.3 6.8
+## 148 6.4 6.6 6.0 6.3 5.4 6.5 6.1 6.1 5.6 6.3
 ```
 
 This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
@@ -726,11 +730,11 @@ Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.W
 model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
 ##                     estimate  std.error statistic        df      p.value
-## (Intercept)        2.4075510 0.29296336  8.217925  97.59044 8.895107e-13
-## Sepal.Width        0.4556317 0.09393898  4.850294  78.33099 6.142499e-06
-## Petal.Length       0.7302035 0.07064102 10.336819 101.88212 0.000000e+00
-## Speciesversicolor -0.8433947 0.23754195 -3.550508 101.59155 5.842697e-04
-## Speciesvirginica  -1.2443653 0.31458517 -3.955575 103.59135 1.399700e-04
+## (Intercept)        2.3545749 0.30074385  7.829171  78.77964 1.904299e-11
+## Sepal.Width        0.4299370 0.09267795  4.639043  84.97716 1.258424e-05
+## Petal.Length       0.8040298 0.06995969 11.492758 120.07136 0.000000e+00
+## Speciesversicolor -1.0387902 0.23870303 -4.351810 108.40518 3.067926e-05
+## Speciesvirginica  -1.5565325 0.30847821 -5.045843 123.77749 1.568964e-06
 ```
 
 Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note that a 95% interval must be calculated manually. 
@@ -757,48 +761,48 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 2.408 </td>
-   <td style="text-align:right;"> 0.074 </td>
-   <td style="text-align:right;"> 0.011 </td>
-   <td style="text-align:right;"> 0.086 </td>
-   <td style="text-align:right;"> 0.139 </td>
-   <td style="text-align:right;"> 0.156 </td>
+   <td style="text-align:right;"> 2.355 </td>
+   <td style="text-align:right;"> 0.073 </td>
+   <td style="text-align:right;"> 0.016 </td>
+   <td style="text-align:right;"> 0.090 </td>
+   <td style="text-align:right;"> 0.191 </td>
+   <td style="text-align:right;"> 0.211 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sepal.Width </td>
-   <td style="text-align:right;"> 0.456 </td>
+   <td style="text-align:right;"> 0.430 </td>
    <td style="text-align:right;"> 0.007 </td>
-   <td style="text-align:right;"> 0.002 </td>
+   <td style="text-align:right;"> 0.001 </td>
    <td style="text-align:right;"> 0.009 </td>
+   <td style="text-align:right;"> 0.173 </td>
    <td style="text-align:right;"> 0.192 </td>
-   <td style="text-align:right;"> 0.212 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Petal.Length </td>
-   <td style="text-align:right;"> 0.730 </td>
+   <td style="text-align:right;"> 0.804 </td>
    <td style="text-align:right;"> 0.004 </td>
-   <td style="text-align:right;"> 0.001 </td>
+   <td style="text-align:right;"> 0.000 </td>
    <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 0.127 </td>
-   <td style="text-align:right;"> 0.144 </td>
+   <td style="text-align:right;"> 0.081 </td>
+   <td style="text-align:right;"> 0.096 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Speciesversicolor </td>
-   <td style="text-align:right;"> -0.843 </td>
-   <td style="text-align:right;"> 0.049 </td>
-   <td style="text-align:right;"> 0.007 </td>
-   <td style="text-align:right;"> 0.056 </td>
-   <td style="text-align:right;"> 0.128 </td>
-   <td style="text-align:right;"> 0.145 </td>
+   <td style="text-align:right;"> -1.039 </td>
+   <td style="text-align:right;"> 0.051 </td>
+   <td style="text-align:right;"> 0.006 </td>
+   <td style="text-align:right;"> 0.057 </td>
+   <td style="text-align:right;"> 0.111 </td>
+   <td style="text-align:right;"> 0.127 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Speciesvirginica </td>
-   <td style="text-align:right;"> -1.244 </td>
-   <td style="text-align:right;"> 0.087 </td>
-   <td style="text-align:right;"> 0.011 </td>
-   <td style="text-align:right;"> 0.099 </td>
-   <td style="text-align:right;"> 0.123 </td>
-   <td style="text-align:right;"> 0.139 </td>
+   <td style="text-align:right;"> -1.557 </td>
+   <td style="text-align:right;"> 0.088 </td>
+   <td style="text-align:right;"> 0.006 </td>
+   <td style="text-align:right;"> 0.095 </td>
+   <td style="text-align:right;"> 0.071 </td>
+   <td style="text-align:right;"> 0.085 </td>
   </tr>
 </tbody>
 </table>

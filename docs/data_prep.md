@@ -1,5 +1,7 @@
 
-# Preparing Data for Analysis {#data_prep}
+# (PART) Preparing Data for Analysis {-}
+
+# Workflow and Data Cleaning {#data_prep}
 
 Once the data are available from a study there are still a number of steps that must be undertaken to get them into shape for analysis.
 
@@ -45,7 +47,7 @@ Figure Credits: [Roger Peng](http://www.biostat.jhsph.edu/~rpeng/)
 
 * Programming paradigm introduced by Knuth (1984) 
 * Explain the logic of the program or analysis process in a natural language, 
-* Small code snippets included at each step act as a full set of instructions that can be executed to reproduce the result/analysis being disucssed. 
+* Small code snippets included at each step act as a full set of instructions that can be executed to reproduce the result/analysis being discussed. 
 
 Literate programming tools are integrated into most common statistical packages
 
@@ -61,6 +63,7 @@ be a simple matter of re-compiling all coded instructions using the updated data
 The effort then is reduced to a careful review and update of any written results.
 
 Using literate programming tools create formatted documents
+
 * section headers
 * bold and italicized words
 * tables and graphics with built-in captions
@@ -70,7 +73,7 @@ in a streamlined manner that is fully synchronized with the code itself.
 The author writes the text explanations, interpretations, and code in the statistical software program itself, and the program will execute all commands and combine the text, code and output all together into a final dynamic document. 
 
 
-![q](images/q.png) What stages of the pipeline shown above can we conduct using literate programmign tools? 
+![q](images/q.png) What stages of the pipeline shown above can we conduct using literate programming tools? 
 
 
 ## Import data
@@ -100,7 +103,7 @@ Reference on importing data into SPSS: https://libguides.library.kent.edu/SPSS/I
 
 The absolute first thing you should do is to look at your raw data table. Are the column headers variable names? Did all the rows get read in? Are there any extra columns or rows included? 
 
-### Renaming varible names for sanity sake
+### Renaming variable names for sanity sake
 Turn all variable names to lower case. This is especially frustrating for R and STATA users where syntax is case sensitive. **This is completely optional but helpful**
 
 
@@ -189,12 +192,12 @@ mean(y, na.rm=TRUE)
 ## [1] 3.2
 ```
 
-In R, any arithmetic function (like addition, multipliation) on missing data results in a missing value. The `na.rm=TRUE` toggle tells R to calculate the _complete case_ mean. This is a biased measure of the mean, but missing data is a topic worthy of it's own course. 
+In R, any arithmetic function (like addition, multiplication) on missing data results in a missing value. The `na.rm=TRUE` toggle tells R to calculate the _complete case_ mean. This is a biased measure of the mean, but missing data is a topic worthy of it's own course. 
 
 
 ### Identifying Variable Types
 
-The `str` function is short for _structure_. This shows you the variable names, what data types R thinks each variable are, and some of the raw data. You can also use the `view()` function to open the data as a simliar spreadsheet format, or `head()` to see the top 6 rows of the data. The latter is sometimes less than helpful for a very large data set. 
+The `str` function is short for _structure_. This shows you the variable names, what data types R thinks each variable are, and some of the raw data. You can also use the `view()` function to open the data as a similar spreadsheet format, or `head()` to see the top 6 rows of the data. The latter is sometimes less than helpful for a very large data set. 
 
 ```r
 str(depress)
@@ -443,7 +446,7 @@ table(depress$drink)
 
 #### Sum or Average values across multiple variables
 
-The Center for Epidemiologic Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. `CESD` is calculated as the sum of all 20 component variables, and is already on this data set. Let's create a new variable named `sleep` as subscale for sleep quality by adding up question numbers 5, 11, and 19. 
+The Center for Epidemiological Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. `CESD` is calculated as the sum of all 20 component variables, and is already on this data set. Let's create a new variable named `sleep` as subscale for sleep quality by adding up question numbers 5, 11, and 19. 
 
 Reference: http://cesd-r.com/cesdr/
 

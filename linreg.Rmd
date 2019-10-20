@@ -11,6 +11,8 @@ The goal of linear regression is to
 * Draw inferences regarding this relationship
 * Predict value of $Y$ for a given value of $X$
 
+Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.  
+
 ## Mathmatical Model
 * The mean of $Y$ values at any given $X$ is $\beta_{0} + \beta_{1} X$
 * The variance of $Y$ values at any $X$ is $\sigma^2$ (same for all X)

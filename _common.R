@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 
 list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", "kableExtra",
                       "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot", "gridExtra", "knitr", 
-                      "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", 
-                      "stargazer", "missForest", "forestplot")
+                      "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", "ggjoy",
+                      "stargazer", "missForest", "forestplot", "emo")
 # issues with MKMisk requiring 'limma' which is in bioconductor
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages>0)){install.packages(new.packages)}

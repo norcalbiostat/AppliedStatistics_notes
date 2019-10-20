@@ -208,7 +208,7 @@ $H_{A}$: At least one $\beta_{j}$ is not 0.
 
 
 ```r
-regTermTest(full_model, "employ")
+survey::regTermTest(full_model, "employ")
 ## Wald test for employ
 ##  in lm(formula = cesd ~ age + chronill + employ, data = depress)
 ## F =  4.153971  on  6  and  285  df: p= 0.0005092
@@ -275,7 +275,7 @@ It is unlikely that blood pressure is associated with smoking status, all groups
 
 
 ```r
-regTermTest(bp.mod, "bp_class")
+survey::regTermTest(bp.mod, "bp_class")
 ## Wald test for bp_class
 ##  in glm(formula = smoke ~ female_c + income + bp_class, family = "binomial", 
 ##     data = addhealth)

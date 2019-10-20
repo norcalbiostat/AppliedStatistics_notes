@@ -1,6 +1,6 @@
 --- 
 title: "Applied Statistics"
-author: "Robin A. Donatello and Edward A. Roualdes"
+author: "Robin Donatello, Edward Roualdes"
 date: "Last Updated `r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book

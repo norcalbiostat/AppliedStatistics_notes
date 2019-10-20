@@ -1,0 +1,413 @@
+# Bivariate Analysis
+
+So far we have been concerned with making inference about a single population parameter. 
+Many problems deal with comparing a parameter across two or more groups. Research 
+questions include questions like: 
+
+* Does the average life span differ across subspecies of a particular turtle?
+* Who has a higher percentage of the female vote - Democrats or Republicans?
+
+
+
+A good way to think about all statistical models is that the observed data comes from some true model with some random error.
+
+> DATA = MODEL + RESIDUAL
+
+The `MODEL` is a mathematical formula (like $y = f(x)$). 
+The formulation of the `MODEL` will change depending on the number of, and data types of explanatory variables. One goal of inferential analysis is to explain the variation in our data, using information contained in other measures. 
+
+
+## Assumption of Independent Observations
+
+The primary assumption of most standard statistical procedures is that observations are
+independent of each other. That is, the value of one observation does not change or affect another observation. 
+However, there are many examples where measurements are made 
+on subjects before and after a certain exposure or treatment (pre-post), or an 
+experiment to compare two cell phone packages might use pairs of subjects that 
+are the same age, sex and income level. One subject would be randomly assigned 
+to the first phone package, the other in the pair would get the second phone package. 
+This chapter only deals with non-correlated analyses, leaving that topic for a later chapter. 
+
+## Choosing appropriate bivariate analysis
+
+Choosing which statistical analyses procedure is appropriate completely depending on the data types of the explanatory and response variable. This is a simplified table, only covering the common/standard types of bivariate analysis. 
+
+
+> figure out how to get table here. 
+
+For this set of notes, the variable types are referred to using the first letter, 
+e.g. *Q* for quantitative, *B* for binary, and *C* for categorical. 
+Thus a T-test is a (Q $\sim$ B) analysis, and a correlation analysis is (Q $\sim$ Q) analysis. 
+
+
+Many of the examples in this chapter use the AddHealth data set. 
+```{r}
+load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
+```
+
+
+## (Q~B) Two means: T-Test {#bv-ttest}
+
+
+It is common to compare means from different samples. For instance, we
+might investigate the effectiveness of a certain educational intervention
+by looking for evidence of greater reading ability in the treatment group
+against a control group. That is, our research hypothesis is that reading
+ability of a child is associated with an educational intervention.
+
+The null hypothesis states that there is no relationship, or no effect, of
+the educational intervention (binary explanatory variable) on the reading ability
+of the child (quantitative response variable). This can be written in symbols as follows:
+
+
+$$H_{0}: \mu_{1} = \mu_{2}\mbox{ or }\qquad  H_{0}: \mu_{1} -\mu_{2}=0$$
+
+where $\mu_{1}$ is the average reading score for students in the control group (no intervention)
+and $\mu_{2}$ be the average reading score for students in the intervention group. Notice it can be written as one mean equals the other, but also as the difference between two means equaling zero. 
+The alternative hypothesis $H_{A}$ states that there is a relationship:
+
+$$H_{A}: \mu_{1} \neq \mu_{2} \qquad \mbox{ or } \qquad H_{A}: \mu_{1}-\mu_{2} \neq 0$$
+
+
+### Assumptions
+* The data distribution for each group is approximately normal.
+* The scores are independent within each group.
+* The scores from the two groups are independent of each other (i.e. the two samples are independent).
+
+
+
+### Sampling Distribution for the difference
+
+We use $\bar{x}_1 - \bar{x}_2$ as a point estimate for $\mu_1 - \mu_2$, which has a standard error of
+
+$$
+ SE_{\bar{x}_1 - \bar{x}_2}
+   = \sqrt{SE_{\bar{x}_1}^2 + SE_{\bar{x}_2}^2}
+ 	 = \sqrt{\frac{\sigma^{2}_{1}}{n_1} + \frac{\sigma^{2}_{2}}{n_2}}
+$$
+
+So the equations for a Confidence Interval is, 
+
+$$
+  \left( \bar{x}_{1} - \bar{x}_{2} \right) \pm t_{\frac{\alpha}{2}, df}
+    \sqrt{ \frac{\sigma^{2}_{1}}{n_{1}} + \frac{\sigma^{2}_{2}}{n_{2}} }
+$$ 
+
+and Test Statistic is, 
+
+$$
+  t^{*} =  \frac{\left( \bar{x}_{1} - \bar{x}_{2} \right) - d_{0}}
+       {\left( \sqrt{ \frac{\sigma^{2}_{1}}{n_{1}} + \frac{\sigma^{2}_{2}}{n_{2}} }
+       \right )} 
+$$
+
+
+Typically it is unlikely that the population variances $\sigma^{2}_{1}$ and $\sigma^{2}_{2}$ are known so we will use sample variances $s^{2}_{1}$ and $s^{2}_{2}$ as estimates. 
+
+While you may never hand calculate these equations, it is important to see the format, or structure, of the equations. Equation \ref{2sampCImean} has the same format of 
+
+$$ \mbox{point estimate} \pm 2*\mbox{standard error}$$
+
+regardless what it is we're actually trying to estimate. Thus in a pinch, you can calculate approximate confidence intervals for whatever estimate you are trying to understand, given only the estimate and standard error, even if the computer program does not give it to you easily or directly. 
+
+
+
+### Example: Smoking and BMI
+
+We would like to know, is there convincing evidence that the average BMI differs between those who have ever smoked a cigarette in their life compared to those who have never smoked? This example uses the Addhealth dataset.
+
+
+**1. Identify response and explanatory variables.**
+
+* The quantitative response variable is BMI (variable \R{BMI})
+* The binary explanatory variable is whether the person has ever smoked a cigarette (variable \R{eversmoke\_c})
+
+**2. Visualize and summarize bivariate relationship.**
+
+`r emo::ji("warning")` Using `na.omit()` is dangerous! This will remove ALL rows with ANY missing data in it. Regardless if the missing values are contained in the variables you are interested in. 
+The example below employs a trick/work around to not have NA values show in the output.
+We take the data set `addhealth` _and then_ `select` the variables we want to plot, _and then_ we use `na.omit()` to delete all rows with missing data. Then that is saved as a new, temporary data frame specifically named for this case (`plot.bmi.smoke`). 
+
+> note for later. Move this explanation into data viz section. 
+
+```{r}
+plot.bmi.smoke <- addhealth %>% select(eversmoke_c, BMI) %>% na.omit()
+
+ggplot(plot.bmi.smoke, aes(x=eversmoke_c, y=BMI, fill=eversmoke_c)) +
+      geom_boxplot(width=.3) + geom_violin(alpha=.4) +
+      labs(x="Smoking status") +
+      scale_fill_viridis_d(guide=FALSE) +
+      stat_summary(fun.y="mean", geom="point", size=3, pch=17,
+      position=position_dodge(width=0.75))
+```
+
+```{r}
+plot.bmi.smoke %>% group_by(eversmoke_c) %>%
+ summarise(mean=mean(BMI, na.rm=TRUE),
+             sd = sd(BMI, na.rm=TRUE),
+             IQR = IQR(BMI, na.rm=TRUE))
+```
+
+Smokers have an average BMI of 28.8, smaller than the average BMI of non-smokers at 29.7. Nonsmokers have more variation in their BMIs (sd 7.8 v. 7.3 and IQR 9.98 v. 9.02), but the distributions both look normal, if slightly skewed right.
+
+
+**3. Write the relationship you want to examine in the form of a research question.**
+
+* Null Hypothesis: There is no relationship between BMI and smoking status.
+* Alternate Hypothesis: There is a relationship between BMI and smoking status.
+
+
+**4. Perform an appropriate statistical analysis.**
+
+I. Let $\mu_1$ denote the average BMI for nonsmokers, and $\mu_2$ the average BMI for smokers.
+
+II.
+  $\mu_1 - \mu_2 = 0$ There is no difference in the average BMI between smokers and nonsmokers.
+  $\mu_1 - \mu_2 \neq 0$ There is a difference in the average BMI between smokers and nonsmokers. 
+
+III. We are comparing the means between two independent samples. A Two-Sample T-Test for a difference in means will be conducted. The assumptions that the groups are independent is upheld because each individual can only be either a smoker or nonsmoker. The difference in sample means $\bar{x_1} - \bar{x_2}$ is normally distributed -- this is a valid assumption due to the large sample size and that differences typically are normally distributed. The observations are independent, and the variability is roughly equal (IQR 9.9 v. 9.0).
+
+IV. We use the `t.test` function, but use model notation of the format `outcome` $\sim$ `category`. Here, `BMI` is our continuous outcome that we're testing across the (binary) categorical predictor `eversmoke_c`.
+
+
+```{r}
+t.test(BMI ~ eversmoke_c, data=addhealth)
+```
+
+We have very strong evidence against the null hypothesis, $p = 0.0002$.
+
+**5. Write a conclusion in the context of the problem.**
+
+On average, nonsmokers have a significantly higher BMI by 0.83 (0.39, 1.27) compared to nonsmokers ($p = 0.0002$).
+
+`r emo::ji("warning")` Always check the output against the direction you are testing. R always will calculate a difference as group 1 - group 2, and it defines the groups alphabetically. For example, for a factor variable that has groups A and B, R will automatically calculate the difference as A-B. In this example it is Nonsmoker - Smoker.
+
+
+
+
+## (Q~C) Multiple means: ANOVA {#bv-anova}
+
+Frequently, a researcher wants to compare the means of an outcome across three or more treatments in a single experiment. We might initially think to do pairwise comparisons (1v2, 1v3, 2v3) for a total of three comparisons. However, this strategy can be treacherous. If we have many groups and do many comparisons, it is likely that we will eventually find a difference just by chance, even if there is no difference in the populations.
+
+When we analyze a conventional two-treatment experiment, we are prepared to run a 1 in 20 risk of an apparently significant result arising purely by accident (the 5% chance of a Type I error). We regard such a risk as being fairly unlikely and feel justified in accepting with confidence any significant results we obtain.
+
+Analyzing a single experiment as a series of 10 treatment pairs is a very different proposition. The chance of an apparently significant result arising purely by chance somewhere in the 10 analyses increases dramatically. Using a 5% error rate, the chance of NOT making at Type I error is .95. To not make a Type I error 10 times is $.95^{10} = .6$. That means there is a 40% of making a Type I error! \emph{See: \url{https://xkcd.com/882/}.}
+
+#### Example: Visual Comparison
+Examine the figure below. Compare groups I, II, and III. Can you visually determine if the differences in the group centers is due to chance or not? What about groups IV, V, and VI?
+
+![Side-by-side dot plot for the outcomes for six groups.](images/toyANOVA.png)
+
+So we need some method of comparing treatments for more than two groups at a time. 
+This is done using an Analysis of Variance (ANOVA) model. 
+### Terminology
+
+* **Response Variable**: The response variable in the ANOVA setting is the quantitative (continuous) variable that we want to compare among the different treatments.
+* **Factor/Treatment**: A property or characteristic (categorical variable) that allows us to distinguish the different populations from one another. An independent variable to be studied in an investigation such as temperature, type of plant, color of flower, location.
+* **Factor/Treatment level**: Factors have different levels, such as 3 temperatures, 5 locations, 3 colors, etc.
+* **Within-sample Variation**: Variation within a sample from one population. Individuals who receive the same treatment will experience identical experimental conditions. The variation within each of the treatment groups must therefore be a consequence of solely random variation. 
+* **Between-sample Variation**: Variation between samples. This is the difference between the group means. If some treatments are genuinely more effective than others, then we would expect to see relatively large differences between the treatment means and a relatively large between-treatments variation. 
+
+
+### Formulation of the One-way ANOVA model
+
+ANOVA is a mathematical technique which uses a model based approach to partition the variance in an experiment into different sources of variance. This technique enables us to test if most the variation in the treatment means is due to differences between the groups.
+
+Starting with our generic conceptual understanding of statistical models: 
+
+> DATA = MODEL + RESIDUAL
+
+our MODEL for this situation is the group membership. Does knowing what group an observation is in tell you about the location of the data? The one-way (or one-factor) ANOVA model is
+
+$$
+y_{ij} = \mu_{i} + \epsilon_{ij} \qquad \qquad
+\epsilon_{ij} \overset{iid}{\sim} \mathcal{N}(0,\sigma^{2})
+$$
+
+for $i=1, \ldots, I$ factor levels and $j = 1, \ldots, n_{i}$ subjects within each factor level. The random error terms are independently and identically distributed (iid) normally with common variance. 
+
+The null and alternative hypotheses are always phrased as follows: 
+
+* $H_0$: The mean outcome is the same across all groups. $\mu_1 = \mu_2 = \cdots = \mu_k$
+* $H_A$: At least one mean is different.
+
+How do we compare means using an **AN**alysis **O**f **VA**riance? By comparing the portion of the variance in the outcome that is explained by the groups, to the portion that's leftover due to  unexplained randomness. Essentially we're comparing the ratio of `MODEL` to `RESIDUAL`. 
+
+The total variation of the observed data is broken down into 2 parts:
+
+> Total Variation = Between Group Variation + Within Group Variation
+
+Variation is measured using the Sum of Squares (SS): The sum of the squares within a group (SSE), the sum of squares between groups (SSG), and the total sum of squares (SST).
+
+
+**SSG (Between groups)**: Measures the variation of the $I$ group means around the overall mean.
+$$
+  SSG = \sum_{i=1}^{I}n_{i}(\bar{y}_{i.}-\bar{y}..)^{2} = n_{1}(\bar{y}_{1.}-\bar{y}..)^{2} + n_{2}(\bar{y}_{2.}-\bar{y}..)^{2} + n_{3}(\bar{y}_{3.}-\bar{y}..)^{2}
+$$
+
+**SSE (Within group)**: Measures the variation of each observation around its group mean.
+$$
+SSE = \sum_{i=1}^{I}\sum_{j=1}^{n_{i}}(y_{ij}-\bar{y}_{i.})^{2} = \sum_{i=1}^{I}(n_{i}-1)Var(Y_{i})
+$$
+
+**SST (Total)**: Measures the variation of the $N$ data points around the overall mean.
+$$
+SST =  \sum_{i=1}^{I}\sum_{j=1}^{n_{i}}(y_{ij}-\bar{y}..)^{2} = (N-1)Var(Y)
+$$
+
+### Analysis of Variance Tabl*: 
+
+The results of an analysis of variance test are always summarized in an ANOVA table. The format of an ANOVA table is as follows:
+
++----------+--------+-------+---------------------------+-------+
+| Source   | SS     | df    | MS                        | F     |
++:=========+:======:+:=====:+:=========================:+:=====:+
+| Groups   | SSG    | $I-1$ | MSG = $\frac{SSG}{I-1}$   | $\frac{MSG}{MSE}$ |
++----------+--------+-------+---------------------------+-------+
+| Error    | SSE    | $N-I$ | MSE = $\frac{MSG}{N-I}$   |
++----------+--------+-------+---------------------------+
+|**Total** | **SST**| $N-1$ |       |
++----------+--------+-------+-------+
+
+
+### The F-distribution
+
+The $p$-value of the test is the **area to the right** of the F statistic density curve. This is always to the right because the F-distribution is not symmetric, truncated at 0 and skewed right. This is true regardless of the $df$.
+
+```{r, echo=FALSE, fig.height=5, fig.width=5, fig.align='center', fig.show='hold', fig.pos='!h'}
+curve(df(x,df1=5, df2=10),xlim=c(0,10), main="Example F distribution with df1=5, df2=10", ylab="",xlab=expression(F))
+```
+
+### Assumptions
+
+Generally we must check three conditions on the data before performing ANOVA:
+
+* The observations are independent within and across groups
+* The data within each group are nearly normal
+* The variability across the groups is about equal.
+
+When these three conditions are met, we may perform an ANOVA to determine whether the data provide strong evidence against the null hypothesis that all the $\mu_i$ are equal.
+
+
+### Example: A comparison of plant species under low water conditions
+The `PLANTS1` data file gives the percent of nitrogen in four different species of plants grown in a laboratory. The researchers collected these data in parts of the country where there is very little rainfall. To examine the effect of water, they varied the amount per day from 50mm to 650mm in 100mm increments. There were 9 plants per species-by-water combination. Because the plants are to be used primarily for animal food, with some parts that can be consumed by people, a high nitrogen content is very desirable. Let's formally test to see if the nitrogen content in the plants differ across species.
+
+```{r, echo=FALSE}
+plants1  <- read.table("C:/Box/Data/plants1.txt", sep="\t", header=TRUE)
+plants1$species <- as.factor(plants1$species)
+```
+
+**1. Identify response and explanatory variables.**
+
+* The quantitative response variable is % nitrogen (`pctnit`)
+* The categorical explanatory variable is species (`species`)
+
+**2. Visualize and summarize bivariate relationship.**
+```{r, fig.height=5, fig.width=5, fig.align='center', fig.show='hold', fig.pos='!h', warning=FALSE}
+plot.nitrogen.species <- plants1 %>% select(species, pctnit) %>% na.omit()
+
+ggplot(plot.nitrogen.species, aes(x=species, y = pctnit, fill=species)) +
+      geom_boxplot(width=.3) + geom_violin(alpha=.4) +
+      labs(x="Species") +
+      scale_fill_viridis_d(guide=FALSE) +
+      stat_summary(fun.y="mean", geom="point", size=3, pch=17,
+      position=position_dodge(width=0.75))
+```
+
+```{r}
+plot.nitrogen.species %>% group_by(species) %>%
+ summarise(mean=mean(pctnit, na.rm=TRUE),
+             sd = sd(pctnit, na.rm=TRUE),
+             IQR = IQR(pctnit, na.rm=TRUE)) %>% kable()
+```
+
+While the standard deviations are relatively similar across all species, the means are different (3.04 v. 2.09 v. 3.28 v. 1.20), with species 3 having the largest mean nitrogen content and species 4 the smallest. Species 3 has the highest IQR and species 1 has the lowest 0.506 v.\ 0.269).
+
+**3. Write the relationship you want to examine in the form of a research question.**
+
+* Null Hypothesis: There is no difference in the average nitrogen content among plant species 1 through 4.
+* Alternative Hypothesis: There is a difference in the average nitrogen content among plant species 1 through 4.
+
+**4. Perform an appropriate statistical analysis.**
+
+I. Let $\mu_{1}$, $\ldots$, $\mu_{4}$ be the mean nitrogen content in plant species 1 through 4 respectively.
+
+II.  
+$H_{0}: \mu_{1} = \mu_{2} = \mu_{3} = \mu_{4}$  
+$H_{A}:$ At least one mean is different.  
+
+III. We are comparing means from multiple groups, so an ANOVA is the appropriate procedure. We need to check for independence, approximate normality and approximately equal variances across groups.
+   
+**Independence:** We are assuming that each plant was sampled independently of each other, and that the species themselves are independent of each other.
+ 
+**Normality:** With grouped data it's easier to look at the histograms than qqplots.
+
+```{r, fig.height=3, fig.width=3}
+ggplot(plants1, aes(x=pctnit, fill=species)) + ylab("") + geom_density() + 
+  facet_grid(species~.) +
+  theme(legend.position="bottom") +
+  scale_y_continuous(breaks=NULL) + scale_fill_viridis_d()
+```
+
+The distributions per group tend to follow an approximate normal distribution.
+
+**Equal variances:** One way to assess if the groups have approximately equal variances is by comparing the IQR across groups.
+```{r}
+plants1 %>% group_by(species) %>% summarise(IQR = IQR(pctnit), SD = sd(pctnit)) %>% kable()
+```
+
+The IQRs are similar so assumption of equal variances is not grossly violated. We can proceed with the ANOVA procedure.
+
+IV. We use the `aov(response $\sim$ predictor)` function on the relationship between the nitrogen levels and tree species. We then pipe in `summary()` to make the output display nicely.
+
+```{r}
+aov(pctnit~species, data=plants1) %>% summary()
+```
+
+**5. Write a conclusion in the context of the problem.**
+The results of the ANOVA test indicate that at least one species has a different average nitrogen content than the other varieties ($p<$.001).
+
+
+### Coefficient of determination $R^{2}$
+
+The coefficient of determination is defined as $R^{2} = \frac{SSG}{SST}$ and can be interpreted as the \% of the variation seen in the outcome that is due to subject level variation within each of the treatment groups. The strength of this measure can be thought of in a similar manner as the correlation coefficient $r$: $< .3$ indicates a poor fit, $< .5$ indicates a medium fit, and $> .7$ indicates a good fit.
+
+```{r}
+172.39/(172.39+17.22)*100
+```
+
+A large amount (91%) of the variation seen in nitrogen content in the plant can be explained by the species of plant.
+
+
+### Multiple Comparisons
+Suppose that an ANOVA test reveals that there is a difference in at least one of the means. How can we determine which groups are significantly different without increasing our chance of a Type I error?
+
+Simple! We perform all the pairwise comparisons but using a test statistic that retains a **family-wise error rate** of 0.05 (or our chosen $\alpha$). There are different methods to adjust for multiple comparisons, we will be using the **Tukey HSD (honest significant difference) test**. Continuing on with the analysis of nitrogen across plant species.
+
+```{r}
+TukeyHSD(aov(pctnit~species, data=plants1))
+```
+
+\doublespace
+The results from Tukey's HSD for all pairwise comparisons indicate that the average
+nitrogen content in one species is significantly different from each of the three other
+species. The nice benefit of this procedure is that the difference between the means
+of the two groups are compared, and a 95confidence interval for each difference
+is included. So specifically, species 2 has on average 0.94 (0.82, 1.09) lower percent 
+nitrogen compared to species 1 ($p<.0001$). Also, species 3 has on average 1.19 (1.07, 1.31) 
+higher percent nitrogen compared to species 2 ($p<.0001$).
+
+
+
+
+
+
+
+## (C~C) $\chi^{2}$ {#bv-chisq}
+
+
+
+
+## (Q~Q) Correlation {#bv-corr}
+
+

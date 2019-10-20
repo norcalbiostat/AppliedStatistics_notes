@@ -106,7 +106,7 @@ $H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 
 $H_{A}$: At least one $\beta_{j}$ is not 0. 
 
 ```{r}
-regTermTest(full_model, "employ")
+survey::regTermTest(full_model, "employ")
 ```
 
 * Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
@@ -138,7 +138,7 @@ pander(summary(bp.mod))
 It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let's test that hypothesis formally using a Wald Test. 
 
 ```{r}
-regTermTest(bp.mod, "bp_class")
+survey::regTermTest(bp.mod, "bp_class")
 ```
 
 The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.

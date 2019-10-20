@@ -6,7 +6,10 @@ rmd_files: ["index.Rmd"
             ,"data_prep.Rmd"
             ,"data_viz.Rmd"
             ,"select_analysis.Rmd"
-            
+
+            ,"bivariate_intro.Rmd"
+            ,"bivariate_analysis.Rmd"
+                   
             ,"reg_intro.Rmd"
             ,"linreg.Rmd"
             ,"model_building.Rmd"

@@ -3,11 +3,16 @@ bookdown::gitbook:
   split_by: section
   config:
     toc:
-      collapse: subsection
+      collapse: section
       before: |
         <li><a href="./">Applied Statistics course notes</a></li>
       after: |
         <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
+  sharing:
+    github: yes
+    twitter: no
+    facebook: no
+  
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
