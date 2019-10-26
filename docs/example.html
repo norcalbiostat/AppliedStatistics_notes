@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -199,9 +200,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
 <li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
 <li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) <span class="math inline">\(\chi^{2}\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a></li>
+<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a><ul>
+<li class="chapter" data-level="5.5.1" data-path="bv-chisq.html"><a href="bv-chisq.html#conditions-for-the-sampling-distribution-to-be-normal."><i class="fa fa-check"></i><b>5.5.1</b> Conditions for the sampling distribution to be normal.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="bv-chisq.html"><a href="bv-chisq.html#example-are-mammograms-effective"><i class="fa fa-check"></i><b>5.5.2</b> Example: Are Mammograms effective?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="bv-chisq.html"><a href="bv-chisq.html#example-smoking-and-general-health"><i class="fa fa-check"></i><b>5.5.3</b> Example: Smoking and General Health</a></li>
+<li class="chapter" data-level="5.5.4" data-path="bv-chisq.html"><a href="bv-chisq.html#multiple-comparisons-1"><i class="fa fa-check"></i><b>5.5.4</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="bv-corr.html"><a href="bv-corr.html#example-federal-spending-per-capita-and-poverty-rate"><i class="fa fa-check"></i><b>5.6.1</b> Example: Federal spending per capita and poverty rate</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
@@ -359,53 +369,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example" class="section level2">
 <h2><span class="header-section-number">7.6</span> Example</h2>
 <p>Using a cleaned version of the Lung function data set, lets explore the relationship between height and FEV for fathers in this data set.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">fev &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="kw">qplot</span>(<span class="dt">y=</span>FFEV1, <span class="dt">x=</span>FHEIGHT, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">data=</span>fev, <span class="dt">xlab=</span><span class="st">&quot;Height&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;FEV1&quot;</span>, </a>
-<a class="sourceLine" id="cb140-2" title="2">      <span class="dt">main=</span><span class="st">&quot;Scatter Diagram with Regression (blue) and Lowess (red) Lines </span></a>
-<a class="sourceLine" id="cb140-3" title="3"><span class="st">      of FEV1 Versus Height for Fathers.&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-4" title="4"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-5" title="5"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">fev &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">qplot</span>(<span class="dt">y=</span>FFEV1, <span class="dt">x=</span>FHEIGHT, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">data=</span>fev, <span class="dt">xlab=</span><span class="st">&quot;Height&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;FEV1&quot;</span>, </a>
+<a class="sourceLine" id="cb149-2" title="2">      <span class="dt">main=</span><span class="st">&quot;Scatter Diagram with Regression (blue) and Lowess (red) Lines </span></a>
+<a class="sourceLine" id="cb149-3" title="3"><span class="st">      of FEV1 Versus Height for Fathers.&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-4" title="4"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-5" title="5"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) </a></code></pre></div>
 <p><img src="linreg_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>There does appear to be a tendency for taller men to have higher FEV1. Let’s fit a linear model and report the regression parameter estimates.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)</a>
-<a class="sourceLine" id="cb141-2" title="2"><span class="kw">summary</span>(model)</a>
-<a class="sourceLine" id="cb141-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb141-4" title="4"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb141-5" title="5"><span class="co">## lm(formula = FFEV1 ~ FHEIGHT, data = fev)</span></a>
-<a class="sourceLine" id="cb141-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb141-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb141-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb141-9" title="9"><span class="co">## -1.56688 -0.35290  0.04365  0.34149  1.42555 </span></a>
-<a class="sourceLine" id="cb141-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb141-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb141-12" title="12"><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb141-13" title="13"><span class="co">## (Intercept) -4.08670    1.15198  -3.548 0.000521 ***</span></a>
-<a class="sourceLine" id="cb141-14" title="14"><span class="co">## FHEIGHT      0.11811    0.01662   7.106 4.68e-11 ***</span></a>
-<a class="sourceLine" id="cb141-15" title="15"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb141-16" title="16"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb141-17" title="17"><span class="co">## </span></a>
-<a class="sourceLine" id="cb141-18" title="18"><span class="co">## Residual standard error: 0.5638 on 148 degrees of freedom</span></a>
-<a class="sourceLine" id="cb141-19" title="19"><span class="co">## Multiple R-squared:  0.2544, Adjusted R-squared:  0.2494 </span></a>
-<a class="sourceLine" id="cb141-20" title="20"><span class="co">## F-statistic:  50.5 on 1 and 148 DF,  p-value: 4.677e-11</span></a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)</a>
+<a class="sourceLine" id="cb150-2" title="2"><span class="kw">summary</span>(model)</a>
+<a class="sourceLine" id="cb150-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb150-4" title="4"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb150-5" title="5"><span class="co">## lm(formula = FFEV1 ~ FHEIGHT, data = fev)</span></a>
+<a class="sourceLine" id="cb150-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb150-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb150-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb150-9" title="9"><span class="co">## -1.56688 -0.35290  0.04365  0.34149  1.42555 </span></a>
+<a class="sourceLine" id="cb150-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb150-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb150-12" title="12"><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb150-13" title="13"><span class="co">## (Intercept) -4.08670    1.15198  -3.548 0.000521 ***</span></a>
+<a class="sourceLine" id="cb150-14" title="14"><span class="co">## FHEIGHT      0.11811    0.01662   7.106 4.68e-11 ***</span></a>
+<a class="sourceLine" id="cb150-15" title="15"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb150-16" title="16"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb150-17" title="17"><span class="co">## </span></a>
+<a class="sourceLine" id="cb150-18" title="18"><span class="co">## Residual standard error: 0.5638 on 148 degrees of freedom</span></a>
+<a class="sourceLine" id="cb150-19" title="19"><span class="co">## Multiple R-squared:  0.2544, Adjusted R-squared:  0.2494 </span></a>
+<a class="sourceLine" id="cb150-20" title="20"><span class="co">## F-statistic:  50.5 on 1 and 148 DF,  p-value: 4.677e-11</span></a></code></pre></div>
 <p>The least squares equation is <span class="math inline">\(Y = -4.087 + 0.118X\)</span>.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1"><span class="kw">confint</span>(model)</a>
-<a class="sourceLine" id="cb142-2" title="2"><span class="co">##                   2.5 %     97.5 %</span></a>
-<a class="sourceLine" id="cb142-3" title="3"><span class="co">## (Intercept) -6.36315502 -1.8102499</span></a>
-<a class="sourceLine" id="cb142-4" title="4"><span class="co">## FHEIGHT      0.08526328  0.1509472</span></a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">confint</span>(model)</a>
+<a class="sourceLine" id="cb151-2" title="2"><span class="co">##                   2.5 %     97.5 %</span></a>
+<a class="sourceLine" id="cb151-3" title="3"><span class="co">## (Intercept) -6.36315502 -1.8102499</span></a>
+<a class="sourceLine" id="cb151-4" title="4"><span class="co">## FHEIGHT      0.08526328  0.1509472</span></a></code></pre></div>
 <p>For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p&lt;.0001).<br />
 The correlation between FEV1 and height is <span class="math inline">\(\sqrt{.2544}\)</span> = 0.5.</p>
 <p>Lastly, check assumptions on the residuals to see if the model results are valid.</p>
 <ul>
 <li>Homogeneity of variance</li>
 </ul>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">plot</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT)</a>
-<a class="sourceLine" id="cb143-2" title="2"><span class="kw">lines</span>(<span class="kw">lowess</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">plot</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT)</a>
+<a class="sourceLine" id="cb152-2" title="2"><span class="kw">lines</span>(<span class="kw">lowess</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="linreg_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ul>
 <li>Normal residuals</li>
 </ul>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">qqnorm</span>(model<span class="op">$</span>residuals)</a>
-<a class="sourceLine" id="cb144-2" title="2"><span class="kw">qqline</span>(model<span class="op">$</span>residuals, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">qqnorm</span>(model<span class="op">$</span>residuals)</a>
+<a class="sourceLine" id="cb153-2" title="2"><span class="kw">qqline</span>(model<span class="op">$</span>residuals, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="linreg_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>No major deviations away from what is expected.</p>
 </div>

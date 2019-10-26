@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -199,9 +200,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
 <li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
 <li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) <span class="math inline">\(\chi^{2}\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a></li>
+<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a><ul>
+<li class="chapter" data-level="5.5.1" data-path="bv-chisq.html"><a href="bv-chisq.html#conditions-for-the-sampling-distribution-to-be-normal."><i class="fa fa-check"></i><b>5.5.1</b> Conditions for the sampling distribution to be normal.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="bv-chisq.html"><a href="bv-chisq.html#example-are-mammograms-effective"><i class="fa fa-check"></i><b>5.5.2</b> Example: Are Mammograms effective?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="bv-chisq.html"><a href="bv-chisq.html#example-smoking-and-general-health"><i class="fa fa-check"></i><b>5.5.3</b> Example: Smoking and General Health</a></li>
+<li class="chapter" data-level="5.5.4" data-path="bv-chisq.html"><a href="bv-chisq.html#multiple-comparisons-1"><i class="fa fa-check"></i><b>5.5.4</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="bv-corr.html"><a href="bv-corr.html#example-federal-spending-per-capita-and-poverty-rate"><i class="fa fa-check"></i><b>5.6.1</b> Example: Federal spending per capita and poverty rate</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
@@ -371,53 +381,53 @@ which simplifies to
 <span class="math display">\[ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}\]</span></p>
 <p>Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model.</p>
 <p>Interactions are fit in <code>R</code> by simply multiplying <code>*</code> the two variables together in the model statement.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb162-3" title="3"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb162-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
-<a class="sourceLine" id="cb162-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
-<a class="sourceLine" id="cb162-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb162-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb162-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb162-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
-<a class="sourceLine" id="cb162-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb162-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb162-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb162-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
-<a class="sourceLine" id="cb162-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb162-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
-<a class="sourceLine" id="cb162-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
-<a class="sourceLine" id="cb162-17" title="17"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb162-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb162-19" title="19"><span class="co">## </span></a>
-<a class="sourceLine" id="cb162-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
-<a class="sourceLine" id="cb162-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
-<a class="sourceLine" id="cb162-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb171-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb171-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb171-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb171-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
+<a class="sourceLine" id="cb171-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb171-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb171-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb171-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
+<a class="sourceLine" id="cb171-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb171-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb171-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb171-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
+<a class="sourceLine" id="cb171-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb171-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
+<a class="sourceLine" id="cb171-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
+<a class="sourceLine" id="cb171-17" title="17"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb171-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb171-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb171-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
+<a class="sourceLine" id="cb171-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
+<a class="sourceLine" id="cb171-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>The coefficient <span class="math inline">\(b_{3}\)</span> for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.</p>
 <div id="example-2" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> Example</h3>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
-<a class="sourceLine" id="cb163-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb163-3" title="3"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb163-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
-<a class="sourceLine" id="cb163-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
-<a class="sourceLine" id="cb163-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb163-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb163-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb163-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
-<a class="sourceLine" id="cb163-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb163-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb163-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb163-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
-<a class="sourceLine" id="cb163-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb163-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
-<a class="sourceLine" id="cb163-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
-<a class="sourceLine" id="cb163-17" title="17"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb163-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb163-19" title="19"><span class="co">## </span></a>
-<a class="sourceLine" id="cb163-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
-<a class="sourceLine" id="cb163-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
-<a class="sourceLine" id="cb163-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb172-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb172-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb172-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb172-5" title="5"><span class="co">##     setosa, data = iris)</span></a>
+<a class="sourceLine" id="cb172-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb172-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb172-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb172-9" title="9"><span class="co">## -0.96754 -0.19948 -0.01386  0.22597  1.05479 </span></a>
+<a class="sourceLine" id="cb172-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb172-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb172-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb172-13" title="13"><span class="co">## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***</span></a>
+<a class="sourceLine" id="cb172-14" title="14"><span class="co">## Sepal.Length         1.03189    0.05957  17.322  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb172-15" title="15"><span class="co">## setosa               2.35877    0.88266   2.672  0.00839 ** </span></a>
+<a class="sourceLine" id="cb172-16" title="16"><span class="co">## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***</span></a>
+<a class="sourceLine" id="cb172-17" title="17"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb172-18" title="18"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb172-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb172-20" title="20"><span class="co">## Residual standard error: 0.3929 on 146 degrees of freedom</span></a>
+<a class="sourceLine" id="cb172-21" title="21"><span class="co">## Multiple R-squared:  0.9515, Adjusted R-squared:  0.9505 </span></a>
+<a class="sourceLine" id="cb172-22" title="22"><span class="co">## F-statistic: 954.1 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <ul>
 <li>If <span class="math inline">\(x_{2}=0\)</span>, then the effect of <span class="math inline">\(x_{1}\)</span> on <span class="math inline">\(Y\)</span> simplifies to: <span class="math inline">\(\beta_{1}\)</span>
 <ul>
@@ -436,30 +446,30 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 
 <p>Let’s up the game now and look at the full interaction model with a categorical version of species. Recall <span class="math inline">\(x_{1}\)</span> is Sepal Length, <span class="math inline">\(x_{2}\)</span> is the indicator for <em>versicolor</em>, and <span class="math inline">\(x_{3}\)</span> the indicator for <em>virginica</em> .</p>
 <p><span class="math display">\[ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}\]</span></p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>Species, <span class="dt">data=</span>iris))</a>
-<a class="sourceLine" id="cb164-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb164-3" title="3"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb164-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span></a>
-<a class="sourceLine" id="cb164-5" title="5"><span class="co">##     Species, data = iris)</span></a>
-<a class="sourceLine" id="cb164-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb164-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb164-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb164-9" title="9"><span class="co">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span></a>
-<a class="sourceLine" id="cb164-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb164-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb164-12" title="12"><span class="co">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb164-13" title="13"><span class="co">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span></a>
-<a class="sourceLine" id="cb164-14" title="14"><span class="co">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span></a>
-<a class="sourceLine" id="cb164-15" title="15"><span class="co">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span></a>
-<a class="sourceLine" id="cb164-16" title="16"><span class="co">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span></a>
-<a class="sourceLine" id="cb164-17" title="17"><span class="co">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span></a>
-<a class="sourceLine" id="cb164-18" title="18"><span class="co">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span></a>
-<a class="sourceLine" id="cb164-19" title="19"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb164-20" title="20"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb164-21" title="21"><span class="co">## </span></a>
-<a class="sourceLine" id="cb164-22" title="22"><span class="co">## Residual standard error: 0.2611 on 144 degrees of freedom</span></a>
-<a class="sourceLine" id="cb164-23" title="23"><span class="co">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span></a>
-<a class="sourceLine" id="cb164-24" title="24"><span class="co">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>Species, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb173-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb173-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb173-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb173-5" title="5"><span class="co">##     Species, data = iris)</span></a>
+<a class="sourceLine" id="cb173-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb173-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb173-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb173-9" title="9"><span class="co">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span></a>
+<a class="sourceLine" id="cb173-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb173-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb173-12" title="12"><span class="co">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb173-13" title="13"><span class="co">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span></a>
+<a class="sourceLine" id="cb173-14" title="14"><span class="co">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span></a>
+<a class="sourceLine" id="cb173-15" title="15"><span class="co">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span></a>
+<a class="sourceLine" id="cb173-16" title="16"><span class="co">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span></a>
+<a class="sourceLine" id="cb173-17" title="17"><span class="co">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span></a>
+<a class="sourceLine" id="cb173-18" title="18"><span class="co">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span></a>
+<a class="sourceLine" id="cb173-19" title="19"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb173-20" title="20"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb173-21" title="21"><span class="co">## </span></a>
+<a class="sourceLine" id="cb173-22" title="22"><span class="co">## Residual standard error: 0.2611 on 144 degrees of freedom</span></a>
+<a class="sourceLine" id="cb173-23" title="23"><span class="co">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span></a>
+<a class="sourceLine" id="cb173-24" title="24"><span class="co">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>The slope of the relationship between sepal length and petal length is calculated as follows, for each species:</p>
 <ul>
 <li><em>setosa</em> <span class="math inline">\((x_{2}=0, x_{3}=0): b_{1}=0.13\)</span></li>
@@ -467,43 +477,43 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 <li><em>virginica</em> <span class="math inline">\((x_{2}=0, x_{3}=1): b_{1} + b_{3} + b_{5} = 0.13+0.62 = 0.75\)</span></li>
 </ul>
 <p>Compare this to the estimates gained from the stratified model:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>)))</a>
-<a class="sourceLine" id="cb165-2" title="2"><span class="co">##  (Intercept) Sepal.Length </span></a>
-<a class="sourceLine" id="cb165-3" title="3"><span class="co">##    0.8030518    0.1316317</span></a>
-<a class="sourceLine" id="cb165-4" title="4"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;versicolor&quot;</span>)))</a>
-<a class="sourceLine" id="cb165-5" title="5"><span class="co">##  (Intercept) Sepal.Length </span></a>
-<a class="sourceLine" id="cb165-6" title="6"><span class="co">##    0.1851155    0.6864698</span></a>
-<a class="sourceLine" id="cb165-7" title="7"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>)))</a>
-<a class="sourceLine" id="cb165-8" title="8"><span class="co">##  (Intercept) Sepal.Length </span></a>
-<a class="sourceLine" id="cb165-9" title="9"><span class="co">##    0.6104680    0.7500808</span></a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>)))</a>
+<a class="sourceLine" id="cb174-2" title="2"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb174-3" title="3"><span class="co">##    0.8030518    0.1316317</span></a>
+<a class="sourceLine" id="cb174-4" title="4"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;versicolor&quot;</span>)))</a>
+<a class="sourceLine" id="cb174-5" title="5"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb174-6" title="6"><span class="co">##    0.1851155    0.6864698</span></a>
+<a class="sourceLine" id="cb174-7" title="7"><span class="kw">coef</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length, <span class="dt">data=</span><span class="kw">subset</span>(iris, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>)))</a>
+<a class="sourceLine" id="cb174-8" title="8"><span class="co">##  (Intercept) Sepal.Length </span></a>
+<a class="sourceLine" id="cb174-9" title="9"><span class="co">##    0.6104680    0.7500808</span></a></code></pre></div>
 <p>They’re the same! Proof that an interaction is equivalent to stratification.</p>
 </div>
 <div id="example-3" class="section level3">
 <h3><span class="header-section-number">9.4.2</span> Example</h3>
 <p>What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data=</span>iris))</a>
-<a class="sourceLine" id="cb166-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb166-3" title="3"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb166-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
-<a class="sourceLine" id="cb166-5" title="5"><span class="co">##     setosa + Petal.Width, data = iris)</span></a>
-<a class="sourceLine" id="cb166-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb166-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb166-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb166-9" title="9"><span class="co">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span></a>
-<a class="sourceLine" id="cb166-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb166-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb166-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb166-13" title="13"><span class="co">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span></a>
-<a class="sourceLine" id="cb166-14" title="14"><span class="co">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb166-15" title="15"><span class="co">## setosa               1.83713    0.62355   2.946  0.00375 ** </span></a>
-<a class="sourceLine" id="cb166-16" title="16"><span class="co">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb166-17" title="17"><span class="co">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span></a>
-<a class="sourceLine" id="cb166-18" title="18"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb166-19" title="19"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb166-20" title="20"><span class="co">## </span></a>
-<a class="sourceLine" id="cb166-21" title="21"><span class="co">## Residual standard error: 0.2769 on 145 degrees of freedom</span></a>
-<a class="sourceLine" id="cb166-22" title="22"><span class="co">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span></a>
-<a class="sourceLine" id="cb166-23" title="23"><span class="co">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>setosa <span class="op">+</span><span class="st"> </span>Sepal.Length<span class="op">*</span>setosa <span class="op">+</span><span class="st"> </span>Petal.Width, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb175-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb175-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb175-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></a>
+<a class="sourceLine" id="cb175-5" title="5"><span class="co">##     setosa + Petal.Width, data = iris)</span></a>
+<a class="sourceLine" id="cb175-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb175-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb175-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb175-9" title="9"><span class="co">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span></a>
+<a class="sourceLine" id="cb175-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb175-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb175-12" title="12"><span class="co">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb175-13" title="13"><span class="co">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span></a>
+<a class="sourceLine" id="cb175-14" title="14"><span class="co">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb175-15" title="15"><span class="co">## setosa               1.83713    0.62355   2.946  0.00375 ** </span></a>
+<a class="sourceLine" id="cb175-16" title="16"><span class="co">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb175-17" title="17"><span class="co">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span></a>
+<a class="sourceLine" id="cb175-18" title="18"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb175-19" title="19"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb175-20" title="20"><span class="co">## </span></a>
+<a class="sourceLine" id="cb175-21" title="21"><span class="co">## Residual standard error: 0.2769 on 145 degrees of freedom</span></a>
+<a class="sourceLine" id="cb175-22" title="22"><span class="co">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span></a>
+<a class="sourceLine" id="cb175-23" title="23"><span class="co">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>So far, petal width, and the combination of species and sepal length are both significantly associated with petal length.</p>
 <p><em>Note of caution: Stratification implies that the stratifying variable interacts with all other variables.</em>
 So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would be implying that species interacts with both sepal length and petal width.</p>

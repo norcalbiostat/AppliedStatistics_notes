@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -199,9 +200,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
 <li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
 <li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) <span class="math inline">\(\chi^{2}\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a></li>
+<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a><ul>
+<li class="chapter" data-level="5.5.1" data-path="bv-chisq.html"><a href="bv-chisq.html#conditions-for-the-sampling-distribution-to-be-normal."><i class="fa fa-check"></i><b>5.5.1</b> Conditions for the sampling distribution to be normal.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="bv-chisq.html"><a href="bv-chisq.html#example-are-mammograms-effective"><i class="fa fa-check"></i><b>5.5.2</b> Example: Are Mammograms effective?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="bv-chisq.html"><a href="bv-chisq.html#example-smoking-and-general-health"><i class="fa fa-check"></i><b>5.5.3</b> Example: Smoking and General Health</a></li>
+<li class="chapter" data-level="5.5.4" data-path="bv-chisq.html"><a href="bv-chisq.html#multiple-comparisons-1"><i class="fa fa-check"></i><b>5.5.4</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="bv-corr.html"><a href="bv-corr.html#example-federal-spending-per-capita-and-poverty-rate"><i class="fa fa-check"></i><b>5.6.1</b> Example: Federal spending per capita and poverty rate</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
@@ -368,10 +378,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Choose the first <span class="math inline">\(m\)</span> principal components and modify them to fit the factor model defined in the previous section.</li>
 <li>They explain the greatest proportion of the variance and are therefore the most important</li>
 </ul>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">extract_pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(stan.dta)</a>
-<a class="sourceLine" id="cb210-2" title="2">var_pc &lt;-<span class="st"> </span>(extract_pca<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb210-3" title="3"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(var_pc), <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb210-4" title="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">extract_pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(stan.dta)</a>
+<a class="sourceLine" id="cb219-2" title="2">var_pc &lt;-<span class="st"> </span>(extract_pca<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb219-3" title="3"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(var_pc), <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb219-4" title="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>)</a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" /></p>
 <div id="pc-factor-model" class="section level3">
 <h3><span class="header-section-number">13.4.1</span> PC Factor Model</h3>
@@ -432,33 +442,33 @@ X_{i} &amp;=  \sum_{j=1}^{P}a_{ji}C_{j} \\
 <ol style="list-style-type: decimal">
 <li>PC Factor Model using the <code>principal</code> function in the <code>psych</code> package.</li>
 </ol>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="co">#library(psych)</span></a>
-<a class="sourceLine" id="cb211-2" title="2">pc.extract.norotate &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb211-3" title="3"><span class="kw">print</span>(pc.extract.norotate)</a>
-<a class="sourceLine" id="cb211-4" title="4"><span class="co">## Principal Components Analysis</span></a>
-<a class="sourceLine" id="cb211-5" title="5"><span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span></a>
-<a class="sourceLine" id="cb211-6" title="6"><span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span></a>
-<a class="sourceLine" id="cb211-7" title="7"><span class="co">##     PC1   PC2   h2    u2 com</span></a>
-<a class="sourceLine" id="cb211-8" title="8"><span class="co">## X1 0.53  0.78 0.90 0.104 1.8</span></a>
-<a class="sourceLine" id="cb211-9" title="9"><span class="co">## X2 0.59  0.74 0.89 0.106 1.9</span></a>
-<a class="sourceLine" id="cb211-10" title="10"><span class="co">## X3 0.70 -0.39 0.64 0.360 1.6</span></a>
-<a class="sourceLine" id="cb211-11" title="11"><span class="co">## X4 0.87 -0.38 0.90 0.099 1.4</span></a>
-<a class="sourceLine" id="cb211-12" title="12"><span class="co">## X5 0.92 -0.27 0.91 0.087 1.2</span></a>
-<a class="sourceLine" id="cb211-13" title="13"><span class="co">## </span></a>
-<a class="sourceLine" id="cb211-14" title="14"><span class="co">##                        PC1  PC2</span></a>
-<a class="sourceLine" id="cb211-15" title="15"><span class="co">## SS loadings           2.71 1.53</span></a>
-<a class="sourceLine" id="cb211-16" title="16"><span class="co">## Proportion Var        0.54 0.31</span></a>
-<a class="sourceLine" id="cb211-17" title="17"><span class="co">## Cumulative Var        0.54 0.85</span></a>
-<a class="sourceLine" id="cb211-18" title="18"><span class="co">## Proportion Explained  0.64 0.36</span></a>
-<a class="sourceLine" id="cb211-19" title="19"><span class="co">## Cumulative Proportion 0.64 1.00</span></a>
-<a class="sourceLine" id="cb211-20" title="20"><span class="co">## </span></a>
-<a class="sourceLine" id="cb211-21" title="21"><span class="co">## Mean item complexity =  1.6</span></a>
-<a class="sourceLine" id="cb211-22" title="22"><span class="co">## Test of the hypothesis that 2 components are sufficient.</span></a>
-<a class="sourceLine" id="cb211-23" title="23"><span class="co">## </span></a>
-<a class="sourceLine" id="cb211-24" title="24"><span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span></a>
-<a class="sourceLine" id="cb211-25" title="25"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
-<a class="sourceLine" id="cb211-26" title="26"><span class="co">## </span></a>
-<a class="sourceLine" id="cb211-27" title="27"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="co">#library(psych)</span></a>
+<a class="sourceLine" id="cb220-2" title="2">pc.extract.norotate &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb220-3" title="3"><span class="kw">print</span>(pc.extract.norotate)</a>
+<a class="sourceLine" id="cb220-4" title="4"><span class="co">## Principal Components Analysis</span></a>
+<a class="sourceLine" id="cb220-5" title="5"><span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span></a>
+<a class="sourceLine" id="cb220-6" title="6"><span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span></a>
+<a class="sourceLine" id="cb220-7" title="7"><span class="co">##     PC1   PC2   h2    u2 com</span></a>
+<a class="sourceLine" id="cb220-8" title="8"><span class="co">## X1 0.53  0.78 0.90 0.104 1.8</span></a>
+<a class="sourceLine" id="cb220-9" title="9"><span class="co">## X2 0.59  0.74 0.89 0.106 1.9</span></a>
+<a class="sourceLine" id="cb220-10" title="10"><span class="co">## X3 0.70 -0.39 0.64 0.360 1.6</span></a>
+<a class="sourceLine" id="cb220-11" title="11"><span class="co">## X4 0.87 -0.38 0.90 0.099 1.4</span></a>
+<a class="sourceLine" id="cb220-12" title="12"><span class="co">## X5 0.92 -0.27 0.91 0.087 1.2</span></a>
+<a class="sourceLine" id="cb220-13" title="13"><span class="co">## </span></a>
+<a class="sourceLine" id="cb220-14" title="14"><span class="co">##                        PC1  PC2</span></a>
+<a class="sourceLine" id="cb220-15" title="15"><span class="co">## SS loadings           2.71 1.53</span></a>
+<a class="sourceLine" id="cb220-16" title="16"><span class="co">## Proportion Var        0.54 0.31</span></a>
+<a class="sourceLine" id="cb220-17" title="17"><span class="co">## Cumulative Var        0.54 0.85</span></a>
+<a class="sourceLine" id="cb220-18" title="18"><span class="co">## Proportion Explained  0.64 0.36</span></a>
+<a class="sourceLine" id="cb220-19" title="19"><span class="co">## Cumulative Proportion 0.64 1.00</span></a>
+<a class="sourceLine" id="cb220-20" title="20"><span class="co">## </span></a>
+<a class="sourceLine" id="cb220-21" title="21"><span class="co">## Mean item complexity =  1.6</span></a>
+<a class="sourceLine" id="cb220-22" title="22"><span class="co">## Test of the hypothesis that 2 components are sufficient.</span></a>
+<a class="sourceLine" id="cb220-23" title="23"><span class="co">## </span></a>
+<a class="sourceLine" id="cb220-24" title="24"><span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span></a>
+<a class="sourceLine" id="cb220-25" title="25"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
+<a class="sourceLine" id="cb220-26" title="26"><span class="co">## </span></a>
+<a class="sourceLine" id="cb220-27" title="27"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
 <p><span class="math display">\[
 \begin{equation}
 \begin{aligned}
@@ -473,32 +483,32 @@ X_{5} &amp;=  0.92F_{1} - 0.27F_{2} + e_{5} \\
 <ol start="2" style="list-style-type: decimal">
 <li>Using ML extraction. The <code>cutoff</code> argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed.</li>
 </ol>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">ml.extract.norotate &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="kw">print</span>(ml.extract.norotate, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb212-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb212-4" title="4"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb212-5" title="5"><span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span></a>
-<a class="sourceLine" id="cb212-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb212-7" title="7"><span class="co">## Uniquenesses:</span></a>
-<a class="sourceLine" id="cb212-8" title="8"><span class="co">##   X1   X2   X3   X4   X5 </span></a>
-<a class="sourceLine" id="cb212-9" title="9"><span class="co">## 0.37 0.00 0.63 0.06 0.04 </span></a>
-<a class="sourceLine" id="cb212-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb212-11" title="11"><span class="co">## Loadings:</span></a>
-<a class="sourceLine" id="cb212-12" title="12"><span class="co">##    Factor1 Factor2</span></a>
-<a class="sourceLine" id="cb212-13" title="13"><span class="co">## X1 -0.06    0.79  </span></a>
-<a class="sourceLine" id="cb212-14" title="14"><span class="co">## X2 -0.07    1.00  </span></a>
-<a class="sourceLine" id="cb212-15" title="15"><span class="co">## X3  0.58    0.19  </span></a>
-<a class="sourceLine" id="cb212-16" title="16"><span class="co">## X4  0.93    0.28  </span></a>
-<a class="sourceLine" id="cb212-17" title="17"><span class="co">## X5  0.90    0.39  </span></a>
-<a class="sourceLine" id="cb212-18" title="18"><span class="co">## </span></a>
-<a class="sourceLine" id="cb212-19" title="19"><span class="co">##                Factor1 Factor2</span></a>
-<a class="sourceLine" id="cb212-20" title="20"><span class="co">## SS loadings       2.02    1.88</span></a>
-<a class="sourceLine" id="cb212-21" title="21"><span class="co">## Proportion Var    0.40    0.38</span></a>
-<a class="sourceLine" id="cb212-22" title="22"><span class="co">## Cumulative Var    0.40    0.78</span></a>
-<a class="sourceLine" id="cb212-23" title="23"><span class="co">## </span></a>
-<a class="sourceLine" id="cb212-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
-<a class="sourceLine" id="cb212-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
-<a class="sourceLine" id="cb212-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">ml.extract.norotate &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb221-2" title="2"><span class="kw">print</span>(ml.extract.norotate, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb221-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb221-4" title="4"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb221-5" title="5"><span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span></a>
+<a class="sourceLine" id="cb221-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb221-7" title="7"><span class="co">## Uniquenesses:</span></a>
+<a class="sourceLine" id="cb221-8" title="8"><span class="co">##   X1   X2   X3   X4   X5 </span></a>
+<a class="sourceLine" id="cb221-9" title="9"><span class="co">## 0.37 0.00 0.63 0.06 0.04 </span></a>
+<a class="sourceLine" id="cb221-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb221-11" title="11"><span class="co">## Loadings:</span></a>
+<a class="sourceLine" id="cb221-12" title="12"><span class="co">##    Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb221-13" title="13"><span class="co">## X1 -0.06    0.79  </span></a>
+<a class="sourceLine" id="cb221-14" title="14"><span class="co">## X2 -0.07    1.00  </span></a>
+<a class="sourceLine" id="cb221-15" title="15"><span class="co">## X3  0.58    0.19  </span></a>
+<a class="sourceLine" id="cb221-16" title="16"><span class="co">## X4  0.93    0.28  </span></a>
+<a class="sourceLine" id="cb221-17" title="17"><span class="co">## X5  0.90    0.39  </span></a>
+<a class="sourceLine" id="cb221-18" title="18"><span class="co">## </span></a>
+<a class="sourceLine" id="cb221-19" title="19"><span class="co">##                Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb221-20" title="20"><span class="co">## SS loadings       2.02    1.88</span></a>
+<a class="sourceLine" id="cb221-21" title="21"><span class="co">## Proportion Var    0.40    0.38</span></a>
+<a class="sourceLine" id="cb221-22" title="22"><span class="co">## Cumulative Var    0.40    0.78</span></a>
+<a class="sourceLine" id="cb221-23" title="23"><span class="co">## </span></a>
+<a class="sourceLine" id="cb221-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
+<a class="sourceLine" id="cb221-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
+<a class="sourceLine" id="cb221-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
 <p>The uniqueness’s (<span class="math inline">\(u^{2}\)</span>) for X2, X4, X5 are pretty low.
 The factor equations now are:</p>
 <p><span class="math display">\[
@@ -511,9 +521,9 @@ X_{3} &amp;=  0.58F_{1} + 0.19F_{2} + e_{3} \\
 \end{aligned}
 \end{equation}
 \]</span></p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
-<a class="sourceLine" id="cb213-3" title="3"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb222-2" title="2"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
+<a class="sourceLine" id="cb222-3" title="3"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Notice that neither extraction method reproduced our true hypothetical factor model.
 Rotating the factors will achieve our desired results.</p>
