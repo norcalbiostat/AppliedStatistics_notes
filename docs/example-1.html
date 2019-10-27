@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -374,32 +378,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>What direction do you expect the slope coefficient for age to be? For height?</li>
 </ul>
 <p>Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a <code>+</code>.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">mv_model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FAGE <span class="op">+</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)</a>
-<a class="sourceLine" id="cb154-2" title="2"><span class="kw">summary</span>(mv_model)</a>
-<a class="sourceLine" id="cb154-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb154-4" title="4"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb154-5" title="5"><span class="co">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></a>
-<a class="sourceLine" id="cb154-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb154-7" title="7"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb154-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb154-9" title="9"><span class="co">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></a>
-<a class="sourceLine" id="cb154-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb154-11" title="11"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb154-12" title="12"><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb154-13" title="13"><span class="co">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></a>
-<a class="sourceLine" id="cb154-14" title="14"><span class="co">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></a>
-<a class="sourceLine" id="cb154-15" title="15"><span class="co">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></a>
-<a class="sourceLine" id="cb154-16" title="16"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb154-17" title="17"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb154-18" title="18"><span class="co">## </span></a>
-<a class="sourceLine" id="cb154-19" title="19"><span class="co">## Residual standard error: 0.5348 on 147 degrees of freedom</span></a>
-<a class="sourceLine" id="cb154-20" title="20"><span class="co">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></a>
-<a class="sourceLine" id="cb154-21" title="21"><span class="co">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></a>
-<a class="sourceLine" id="cb154-22" title="22"><span class="kw">confint</span>(mv_model)</a>
-<a class="sourceLine" id="cb154-23" title="23"><span class="co">##                   2.5 %      97.5 %</span></a>
-<a class="sourceLine" id="cb154-24" title="24"><span class="co">## (Intercept) -5.00919751 -0.51229620</span></a>
-<a class="sourceLine" id="cb154-25" title="25"><span class="co">## FAGE        -0.03922545 -0.01405323</span></a>
-<a class="sourceLine" id="cb154-26" title="26"><span class="co">## FHEIGHT      0.08319434  0.14559974</span></a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">mv_model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FAGE <span class="op">+</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)</a>
+<a class="sourceLine" id="cb156-2" title="2"><span class="kw">summary</span>(mv_model)</a>
+<a class="sourceLine" id="cb156-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb156-4" title="4"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb156-5" title="5"><span class="co">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></a>
+<a class="sourceLine" id="cb156-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb156-7" title="7"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb156-8" title="8"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb156-9" title="9"><span class="co">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></a>
+<a class="sourceLine" id="cb156-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb156-11" title="11"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb156-12" title="12"><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb156-13" title="13"><span class="co">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></a>
+<a class="sourceLine" id="cb156-14" title="14"><span class="co">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></a>
+<a class="sourceLine" id="cb156-15" title="15"><span class="co">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></a>
+<a class="sourceLine" id="cb156-16" title="16"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb156-17" title="17"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb156-18" title="18"><span class="co">## </span></a>
+<a class="sourceLine" id="cb156-19" title="19"><span class="co">## Residual standard error: 0.5348 on 147 degrees of freedom</span></a>
+<a class="sourceLine" id="cb156-20" title="20"><span class="co">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></a>
+<a class="sourceLine" id="cb156-21" title="21"><span class="co">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></a>
+<a class="sourceLine" id="cb156-22" title="22"><span class="kw">confint</span>(mv_model)</a>
+<a class="sourceLine" id="cb156-23" title="23"><span class="co">##                   2.5 %      97.5 %</span></a>
+<a class="sourceLine" id="cb156-24" title="24"><span class="co">## (Intercept) -5.00919751 -0.51229620</span></a>
+<a class="sourceLine" id="cb156-25" title="25"><span class="co">## FAGE        -0.03922545 -0.01405323</span></a>
+<a class="sourceLine" id="cb156-26" title="26"><span class="co">## FHEIGHT      0.08319434  0.14559974</span></a></code></pre></div>
 <p>Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p&lt;.0001).</p>
 <p>Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p&lt;.0001).</p>
 <p>For the model that includes age, the coefficient for height is now 0.11, which is interpreted as the rate of change of FEV1 as a function of height <strong>after adjusting for age</strong>. This is also called the <strong>partial regression coefficient</strong> of FEV1 on height after adjusting for age.</p>

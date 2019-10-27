@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -374,13 +378,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Look at tolerance, and its inverse, the Variance Inflation Factor (VIF)</li>
 <li>Need tolerance &lt; 0.01, or VIF &gt; 100.</li>
 </ul>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">car<span class="op">::</span><span class="kw">vif</span>(mv_model)</a>
-<a class="sourceLine" id="cb156-2" title="2"><span class="co">##     FAGE  FHEIGHT </span></a>
-<a class="sourceLine" id="cb156-3" title="3"><span class="co">## 1.003163 1.003163</span></a>
-<a class="sourceLine" id="cb156-4" title="4">tolerance =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>car<span class="op">::</span><span class="kw">vif</span>(mv_model)</a>
-<a class="sourceLine" id="cb156-5" title="5">tolerance</a>
-<a class="sourceLine" id="cb156-6" title="6"><span class="co">##      FAGE   FHEIGHT </span></a>
-<a class="sourceLine" id="cb156-7" title="7"><span class="co">## 0.9968473 0.9968473</span></a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1">car<span class="op">::</span><span class="kw">vif</span>(mv_model)</a>
+<a class="sourceLine" id="cb158-2" title="2"><span class="co">##     FAGE  FHEIGHT </span></a>
+<a class="sourceLine" id="cb158-3" title="3"><span class="co">## 1.003163 1.003163</span></a>
+<a class="sourceLine" id="cb158-4" title="4">tolerance =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>car<span class="op">::</span><span class="kw">vif</span>(mv_model)</a>
+<a class="sourceLine" id="cb158-5" title="5">tolerance</a>
+<a class="sourceLine" id="cb158-6" title="6"><span class="co">##      FAGE   FHEIGHT </span></a>
+<a class="sourceLine" id="cb158-7" title="7"><span class="co">## 0.9968473 0.9968473</span></a></code></pre></div>
 <ul>
 <li>Solution: use variable selection to delete some X variables.</li>
 <li>Alternatively, use dimension reduction techniques such as Principal Components</li>

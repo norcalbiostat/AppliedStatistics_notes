@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -394,32 +398,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-1-sepal-vs-petal-length" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> Example 1: Sepal vs Petal Length</h3>
 <p>We just got done looking at the relationship between the length of an iris’s Sepal, and the length (cm) of it’s petal.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">overall &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-2" title="2"><span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-3" title="3"><span class="st">                </span><span class="kw">theme_bw</span>()</a>
-<a class="sourceLine" id="cb168-4" title="4"></a>
-<a class="sourceLine" id="cb168-5" title="5">by_spec &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length, <span class="dt">col=</span>Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-6" title="6"><span class="st">                  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-7" title="7"><span class="st">                  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>)</a>
-<a class="sourceLine" id="cb168-8" title="8"></a>
-<a class="sourceLine" id="cb168-9" title="9"><span class="kw">library</span>(gridExtra)</a>
-<a class="sourceLine" id="cb168-10" title="10"><span class="kw">grid.arrange</span>(overall, by_spec , <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">overall &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb170-2" title="2"><span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb170-3" title="3"><span class="st">                </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb170-4" title="4"></a>
+<a class="sourceLine" id="cb170-5" title="5">by_spec &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length, <span class="dt">col=</span>Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb170-6" title="6"><span class="st">                  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb170-7" title="7"><span class="st">                  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>)</a>
+<a class="sourceLine" id="cb170-8" title="8"></a>
+<a class="sourceLine" id="cb170-9" title="9"><span class="kw">library</span>(gridExtra)</a>
+<a class="sourceLine" id="cb170-10" title="10"><span class="kw">grid.arrange</span>(overall, by_spec , <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="model_building_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p><img src="images/q.png" alt="q" /> Is the relationship between sepal length and petal length the same within each species?</p>
 <p>Let’s look at the correlation between these two continuous variables</p>
 <p><em>overall</em></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">cor</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length)</a>
-<a class="sourceLine" id="cb169-2" title="2"><span class="co">## [1] 0.8717538</span></a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">cor</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length)</a>
+<a class="sourceLine" id="cb171-2" title="2"><span class="co">## [1] 0.8717538</span></a></code></pre></div>
 <p><em>stratified by species</em></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">by</span>(iris, iris<span class="op">$</span>Species, <span class="cf">function</span>(x) <span class="kw">cor</span>(x<span class="op">$</span>Sepal.Length, x<span class="op">$</span>Petal.Length))</a>
-<a class="sourceLine" id="cb170-2" title="2"><span class="co">## iris$Species: setosa</span></a>
-<a class="sourceLine" id="cb170-3" title="3"><span class="co">## [1] 0.2671758</span></a>
-<a class="sourceLine" id="cb170-4" title="4"><span class="co">## -------------------------------------------------------- </span></a>
-<a class="sourceLine" id="cb170-5" title="5"><span class="co">## iris$Species: versicolor</span></a>
-<a class="sourceLine" id="cb170-6" title="6"><span class="co">## [1] 0.754049</span></a>
-<a class="sourceLine" id="cb170-7" title="7"><span class="co">## -------------------------------------------------------- </span></a>
-<a class="sourceLine" id="cb170-8" title="8"><span class="co">## iris$Species: virginica</span></a>
-<a class="sourceLine" id="cb170-9" title="9"><span class="co">## [1] 0.8642247</span></a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">by</span>(iris, iris<span class="op">$</span>Species, <span class="cf">function</span>(x) <span class="kw">cor</span>(x<span class="op">$</span>Sepal.Length, x<span class="op">$</span>Petal.Length))</a>
+<a class="sourceLine" id="cb172-2" title="2"><span class="co">## iris$Species: setosa</span></a>
+<a class="sourceLine" id="cb172-3" title="3"><span class="co">## [1] 0.2671758</span></a>
+<a class="sourceLine" id="cb172-4" title="4"><span class="co">## -------------------------------------------------------- </span></a>
+<a class="sourceLine" id="cb172-5" title="5"><span class="co">## iris$Species: versicolor</span></a>
+<a class="sourceLine" id="cb172-6" title="6"><span class="co">## [1] 0.754049</span></a>
+<a class="sourceLine" id="cb172-7" title="7"><span class="co">## -------------------------------------------------------- </span></a>
+<a class="sourceLine" id="cb172-8" title="8"><span class="co">## iris$Species: virginica</span></a>
+<a class="sourceLine" id="cb172-9" title="9"><span class="co">## [1] 0.8642247</span></a></code></pre></div>
 <p>There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient <span class="math inline">\(r\)</span> for virginica and veriscolor are similar to the overall <span class="math inline">\(r\)</span> value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.</p>
 <p>The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.</p>
 </div>

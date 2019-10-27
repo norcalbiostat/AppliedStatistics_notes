@@ -1,45 +1,96 @@
 
 
-# Simple Linear Regression
+# Simple Linear Regression {#slr}
 
-The goal of linear regression is to 
+The goal of linear regression is to describe the relationship between an independent variable X and a continuous dependent variable $Y$ as a straight line. 
 
-* Describe the relationship between an independent variable X and a continuous
-  dependent variable $Y$ as a straight line. The textbook discusses two cases: 
-    - Fixed-$X$: values of $X$ are preselected by investigator
-    - Variable-$X$: have random sample of $(X,Y)$ values
-    - Calculations are the same, 
-* Draw inferences regarding this relationship
-* Predict value of $Y$ for a given value of $X$
+Data for this type of model can arise in two ways; 
+  
+* Fixed-$X$: values of $X$ are preselected by investigator
+* Variable-$X$: have random sample of $(X,Y)$ values
+    
+    
+Both Regression and Correlation can be used for two main purposes: 
+
+* **Descriptive**: Draw inferences regarding the relationship 
+* **Predictive**: Predict value of $Y$ for a given value of $X$
 
 Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.  
 
 ## Mathmatical Model
+
+
 * The mean of $Y$ values at any given $X$ is $\beta_{0} + \beta_{1} X$
 * The variance of $Y$ values at any $X$ is $\sigma^2$ (same for all X)
+    - This is known as _homoscedasticity_, or _homogeneity of variance_. 
 * $Y$ values are normally distributed at any given $X$ (need for inference)
 
 ![Figure 6.2](images/slr_graph.png)
 
+
 ## Parameter Estimates
 * Estimate the slope $\beta_{1}$ and intercept $\beta_{0}$ using least-squares methods.
 * The residual mean squared error (RMSE) is an estimate of the variance $s^{2}$
+    - RMSE can also refer to the root mean squared error. 
 * Typically interested in inference on $\beta_{1}$
     - Assume no relationship between $X$ and $Y$ $(H_{0}: \beta_{1}=0)$ 
       until there is reason to believe there is one 
       $(H_{0}: \beta_{1} \neq 0)$
+      
+      
+## Least Squares Regression 
+
+The **Least Squares** Method finds the estimates for the intercept $b_{0}$ and slope $b_{1}$ that minimize the SSE. Let's see how that works: 
+
+See https://paternogbc.shinyapps.io/SS_regression/
+
+**Initial Setup**  
+
+* Set the sample size to 50
+* Set the regression slope to 1
+* Set the standard deviation to 5
+
+**Partitioning the Variance using the Sum of Squares**
+
+* SS Total- how far are the points away from $\bar{y}$? (one sample mean)
+* SS Regression - how far away is the regression line from $\bar{y}$?.
+* SS Error - how far are the points away from the estimated regression line? 
+
+
+Looking at it this way, we are asking "If I know the value of $x$, how much better will I be at predicting $y$ than if I were just to use $\bar{y}$? 
+
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Increase the standard deviation to 30. What happens to SSReg? What about SSE? </div>\EndKnitrBlock{rmdnote}
+      
+
+Here is a [link](https://ryansafner.shinyapps.io/ols_estimation_by_min_sse/) to another interactive app where you can try to fit your own line to minimize the SSE. 
+
+**RMSE** is the Root Mean Squared Error. In the PMA textbook this is denoted as $S$, which is an estimate for $\sigma$. 
+
+$$ S = \sqrt{\frac{SSE}{N-2}}$$
+
 
 ## Interval estimation
 * Everything is estimated with some degree of error
-* Confidence intervals for the mean of $Y$
+* Confidence intervals for the mean of $Y$ at some given value of $X$ (say, $X^*$)
+
+$$
+\hat{Y} \pm tS \bigg[ \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+$$
+
 * Prediction intervals for an individual $Y$ 
 
-Which one is wider? Why?
+$$
+\hat{Y} \pm tS \bigg[ 1+  \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+$$
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Which one is wider? Why?
+  
+How does this relate to the standard deviation of individual $x$'s, and the standard deviation of $\bar{x}$'s? </div>\EndKnitrBlock{rmdnote}
 
 ## Corelation Coefficient
 
-* The correlation coefficient $\rho$ measures the strength of association
-  between $X$ and $Y$ in the _population_.
+* The correlation coefficient $\rho$ measures the strength of association between $X$ and $Y$ in the _population_.
 * $\sigma^{2} = VAR(Y|X)$ is the variance of $Y$ for a specific $X$.
 * $\sigma_{y}^{2} = VAR(Y)$ is the variance of $Y$ for all $X$'s.
 
@@ -86,14 +137,15 @@ fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep=
 
 
 ```r
-qplot(y=FFEV1, x=FHEIGHT, geom="point", data=fev, xlab="Height", ylab="FEV1", 
-      main="Scatter Diagram with Regression (blue) and Lowess (red) Lines 
+ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
+      xlab("Height") + ylab("FEV1") + 
+      ggtitle("Scatter Diagram with Regression (blue) and Lowess (red) Lines 
       of FEV1 Versus Height for Fathers.") + 
       geom_smooth(method="lm", se=FALSE, col="blue") + 
       geom_smooth(se=FALSE, col="red") 
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 There does appear to be a tendency for taller men to have higher FEV1. Let's fit a linear model and report the regression parameter estimates. 
 
@@ -141,7 +193,7 @@ plot(model$residuals ~ fev$FHEIGHT)
 lines(lowess(model$residuals ~ fev$FHEIGHT), col="red")
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 * Normal residuals
 
@@ -150,13 +202,52 @@ qqnorm(model$residuals)
 qqline(model$residuals, col="red")
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 No major deviations away from what is expected.   
 
+### Confidence and Prediction Intervals
+
+If we set the `se` argument in `geom_smooth` to TRUE, the shaded region is the confidence band for the mean. 
+To get the prediction interval, we have to use the `predict` function. 
 
 
-# Multiple Linear Regression
+
+```r
+pred.int <- predict(model, interval="predict") %>% data.frame()
+
+ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
+      geom_smooth(method="lm", se=TRUE, col="blue") + 
+      geom_line(aes(y=pred.int$lwr), linetype="dashed", col="red", lwd=1.5) + 
+      geom_line(aes(y=pred.int$upr), linetype="dashed", col="red", lwd=1.5)
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+## ANOVA for regression
+
+Since an ANOVA is an analysis of the variance due to a model, compared to the unexplained variance, it can be used to test the overall model fit. This will give us the same general answer to the question of "is there an association between X and Y" that testing for a non-zero slope ($\beta \neq 0$). If the mean squared value for the regression is much larger than the mean squared value for the residual error, then the line fits the data better than the simple mean, and thus, the slope of the line is not zero. 
+
+
+```r
+aov(model) %>% pander()
+```
+
+
+--------------------------------------------------------------
+    &nbsp;       Df    Sum Sq   Mean Sq   F value    Pr(>F)   
+--------------- ----- -------- --------- --------- -----------
+  **FHEIGHT**     1    16.05     16.05     50.5     4.677e-11 
+
+ **Residuals**   148   47.05    0.3179      NA         NA     
+--------------------------------------------------------------
+
+Table: Analysis of Variance Model
+
+
+
+
+# Multiple Linear Regression {#mlr}
 
 * Extends simple linear regression.
 * Describes a linear relationship between a single continuous $Y$ variable, and several $X$ variables.
@@ -272,7 +363,7 @@ par(mfrow=c(2,2))
 plot(mv_model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 ## Multicollinearity

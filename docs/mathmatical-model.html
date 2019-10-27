@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="simple-linear-regression.html"/>
+<link rel="prev" href="slr.html"/>
 <link rel="next" href="parameter-estimates.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -370,7 +374,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> Mathmatical Model</h2>
 <ul>
 <li>The mean of <span class="math inline">\(Y\)</span> values at any given <span class="math inline">\(X\)</span> is <span class="math inline">\(\beta_{0} + \beta_{1} X\)</span></li>
-<li>The variance of <span class="math inline">\(Y\)</span> values at any <span class="math inline">\(X\)</span> is <span class="math inline">\(\sigma^2\)</span> (same for all X)</li>
+<li>The variance of <span class="math inline">\(Y\)</span> values at any <span class="math inline">\(X\)</span> is <span class="math inline">\(\sigma^2\)</span> (same for all X)
+<ul>
+<li>This is known as <em>homoscedasticity</em>, or <em>homogeneity of variance</em>.</li>
+</ul></li>
 <li><span class="math inline">\(Y\)</span> values are normally distributed at any given <span class="math inline">\(X\)</span> (need for inference)</li>
 </ul>
 <div class="figure">
@@ -383,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="simple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="slr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="parameter-estimates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

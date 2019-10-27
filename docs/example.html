@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.6 Example | Applied Statistics</title>
+  <title>7.7 Example | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.6 Example | Applied Statistics" />
+  <meta property="og:title" content="7.7 Example | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.6 Example | Applied Statistics" />
+  <meta name="twitter:title" content="7.7 Example | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="assumptions-2.html"/>
-<link rel="next" href="multiple-linear-regression.html"/>
+<link rel="next" href="anova-for-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -367,15 +371,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="example" class="section level2">
-<h2><span class="header-section-number">7.6</span> Example</h2>
+<h2><span class="header-section-number">7.7</span> Example</h2>
 <p>Using a cleaned version of the Lung function data set, lets explore the relationship between height and FEV for fathers in this data set.</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">fev &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">qplot</span>(<span class="dt">y=</span>FFEV1, <span class="dt">x=</span>FHEIGHT, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">data=</span>fev, <span class="dt">xlab=</span><span class="st">&quot;Height&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;FEV1&quot;</span>, </a>
-<a class="sourceLine" id="cb149-2" title="2">      <span class="dt">main=</span><span class="st">&quot;Scatter Diagram with Regression (blue) and Lowess (red) Lines </span></a>
-<a class="sourceLine" id="cb149-3" title="3"><span class="st">      of FEV1 Versus Height for Fathers.&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb149-4" title="4"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb149-5" title="5"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) </a></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">ggplot</span>(fev, <span class="kw">aes</span>(<span class="dt">y=</span>FFEV1, <span class="dt">x=</span>FHEIGHT)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-2" title="2"><span class="st">      </span><span class="kw">xlab</span>(<span class="st">&quot;Height&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;FEV1&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-3" title="3"><span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scatter Diagram with Regression (blue) and Lowess (red) Lines </span></a>
+<a class="sourceLine" id="cb149-4" title="4"><span class="st">      of FEV1 Versus Height for Fathers.&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-5" title="5"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb149-6" title="6"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) </a></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>There does appear to be a tendency for taller men to have higher FEV1. Let’s fit a linear model and report the regression parameter estimates.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(FFEV1 <span class="op">~</span><span class="st"> </span>FHEIGHT, <span class="dt">data=</span>fev)</a>
 <a class="sourceLine" id="cb150-2" title="2"><span class="kw">summary</span>(model)</a>
@@ -410,23 +415,34 @@ The correlation between FEV1 and height is <span class="math inline">\(\sqrt{.25
 </ul>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">plot</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT)</a>
 <a class="sourceLine" id="cb152-2" title="2"><span class="kw">lines</span>(<span class="kw">lowess</span>(model<span class="op">$</span>residuals <span class="op">~</span><span class="st"> </span>fev<span class="op">$</span>FHEIGHT), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <ul>
 <li>Normal residuals</li>
 </ul>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">qqnorm</span>(model<span class="op">$</span>residuals)</a>
 <a class="sourceLine" id="cb153-2" title="2"><span class="kw">qqline</span>(model<span class="op">$</span>residuals, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>No major deviations away from what is expected.</p>
+<div id="confidence-and-prediction-intervals" class="section level3">
+<h3><span class="header-section-number">7.7.1</span> Confidence and Prediction Intervals</h3>
+<p>If we set the <code>se</code> argument in <code>geom_smooth</code> to TRUE, the shaded region is the confidence band for the mean.
+To get the prediction interval, we have to use the <code>predict</code> function.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">pred.int &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">interval=</span><span class="st">&quot;predict&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>()</a>
+<a class="sourceLine" id="cb154-2" title="2"></a>
+<a class="sourceLine" id="cb154-3" title="3"><span class="kw">ggplot</span>(fev, <span class="kw">aes</span>(<span class="dt">y=</span>FFEV1, <span class="dt">x=</span>FHEIGHT)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb154-4" title="4"><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb154-5" title="5"><span class="st">      </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>pred.int<span class="op">$</span>lwr), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb154-6" title="6"><span class="st">      </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>pred.int<span class="op">$</span>upr), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</a></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
-<!-- </div> -->
+</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="assumptions-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="multiple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="anova-for-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

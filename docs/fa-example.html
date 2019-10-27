@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -388,18 +392,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   0.279 &amp; 0.322 &amp; 0.521 &amp; 0.942 &amp; 1
   \end{array}\right)
 \]</span>.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="kw">set.seed</span>(<span class="dv">456</span>)</a>
-<a class="sourceLine" id="cb216-2" title="2">m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="fl">-0.039</span>, <span class="fl">-0.013</span>)</a>
-<a class="sourceLine" id="cb216-3" title="3">s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </a>
-<a class="sourceLine" id="cb216-4" title="4">              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </a>
-<a class="sourceLine" id="cb216-5" title="5">              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </a>
-<a class="sourceLine" id="cb216-6" title="6">              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </a>
-<a class="sourceLine" id="cb216-7" title="7">              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </a>
-<a class="sourceLine" id="cb216-8" title="8">            <span class="dt">nrow=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb216-9" title="9">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))</a>
-<a class="sourceLine" id="cb216-10" title="10"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">set.seed</span>(<span class="dv">456</span>)</a>
+<a class="sourceLine" id="cb218-2" title="2">m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="fl">-0.039</span>, <span class="fl">-0.013</span>)</a>
+<a class="sourceLine" id="cb218-3" title="3">s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </a>
+<a class="sourceLine" id="cb218-4" title="4">              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </a>
+<a class="sourceLine" id="cb218-5" title="5">              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </a>
+<a class="sourceLine" id="cb218-6" title="6">              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </a>
+<a class="sourceLine" id="cb218-7" title="7">              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </a>
+<a class="sourceLine" id="cb218-8" title="8">            <span class="dt">nrow=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb218-9" title="9">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))</a>
+<a class="sourceLine" id="cb218-10" title="10"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <p>Standardize the <span class="math inline">\(X\)</span>’s.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">stan.dta &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(data))</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">stan.dta &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(data))</a></code></pre></div>
 <p>The hypothetical data model is that these 5 variables are generated from 2 underlying factors.</p>
 <p><span class="math display">\[
 \begin{equation}
@@ -418,8 +422,8 @@ X_{5} &amp;=  (0)*F_{1} +    (2)*F_{2} + e_{5} \\
 <li>The first two <span class="math inline">\(X\)</span>’s are inter-correlated, and the last 3 <span class="math inline">\(X\)</span>’s are inter-correlated</li>
 <li>The first 2 <span class="math inline">\(X\)</span>’s are NOT correlated with the last 3 <span class="math inline">\(X\)</span>’s</li>
 </ul>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="co">#library(corrplot)</span></a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="kw">corrplot</span>(<span class="kw">cor</span>(stan.dta), <span class="dt">tl.col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="co">#library(corrplot)</span></a>
+<a class="sourceLine" id="cb220-2" title="2"><span class="kw">corrplot</span>(<span class="kw">cor</span>(stan.dta), <span class="dt">tl.col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
             </section>

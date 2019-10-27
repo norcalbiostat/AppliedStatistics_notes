@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Simple Linear Regression | Applied Statistics</title>
+  <title>7.3 Least Squares Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Simple Linear Regression | Applied Statistics" />
+  <meta property="og:title" content="7.3 Least Squares Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Simple Linear Regression | Applied Statistics" />
+  <meta name="twitter:title" content="7.3 Least Squares Regression | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reg-intro.html"/>
-<link rel="next" href="mathmatical-model.html"/>
+<link rel="prev" href="parameter-estimates.html"/>
+<link rel="next" href="interval-estimation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -366,29 +370,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simple-linear-regression" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Simple Linear Regression</h1>
-<p>The goal of linear regression is to</p>
+<div id="least-squares-regression" class="section level2">
+<h2><span class="header-section-number">7.3</span> Least Squares Regression</h2>
+<p>The <strong>Least Squares</strong> Method finds the estimates for the intercept <span class="math inline">\(b_{0}\)</span> and slope <span class="math inline">\(b_{1}\)</span> that minimize the SSE. Let’s see how that works:</p>
+<p>See <a href="https://paternogbc.shinyapps.io/SS_regression/" class="uri">https://paternogbc.shinyapps.io/SS_regression/</a></p>
+<p><strong>Initial Setup</strong></p>
 <ul>
-<li>Describe the relationship between an independent variable X and a continuous
-dependent variable <span class="math inline">\(Y\)</span> as a straight line. The textbook discusses two cases:
-<ul>
-<li>Fixed-<span class="math inline">\(X\)</span>: values of <span class="math inline">\(X\)</span> are preselected by investigator</li>
-<li>Variable-<span class="math inline">\(X\)</span>: have random sample of <span class="math inline">\((X,Y)\)</span> values</li>
-<li>Calculations are the same,</li>
-</ul></li>
-<li>Draw inferences regarding this relationship</li>
-<li>Predict value of <span class="math inline">\(Y\)</span> for a given value of <span class="math inline">\(X\)</span></li>
+<li>Set the sample size to 50</li>
+<li>Set the regression slope to 1</li>
+<li>Set the standard deviation to 5</li>
 </ul>
-<p>Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.</p> 
+<p><strong>Partitioning the Variance using the Sum of Squares</strong></p>
+<ul>
+<li>SS Total- how far are the points away from <span class="math inline">\(\bar{y}\)</span>? (one sample mean)</li>
+<li>SS Regression - how far away is the regression line from <span class="math inline">\(\bar{y}\)</span>?.</li>
+<li>SS Error - how far are the points away from the estimated regression line?</li>
+</ul>
+<p>Looking at it this way, we are asking "If I know the value of <span class="math inline">\(x\)</span>, how much better will I be at predicting <span class="math inline">\(y\)</span> than if I were just to use <span class="math inline">\(\bar{y}\)</span>?</p>
+
+<div class="rmdnote">
+Increase the standard deviation to 30. What happens to SSReg? What about SSE?
+</div>
+
+<p>Here is a <a href="https://ryansafner.shinyapps.io/ols_estimation_by_min_sse/">link</a> to another interactive app where you can try to fit your own line to minimize the SSE.</p>
+<p><strong>RMSE</strong> is the Root Mean Squared Error. In the PMA textbook this is denoted as <span class="math inline">\(S\)</span>, which is an estimate for <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math display">\[ S = \sqrt{\frac{SSE}{N-2}}\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reg-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mathmatical-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="parameter-estimates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interval-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

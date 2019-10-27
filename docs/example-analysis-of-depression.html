@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -370,51 +374,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.6</span> Example Analysis of depression</h2>
 <p>This example follows <em>Analysis of depression data set</em> section in PMA5 Section 14.5. This survey asks 20 questions on emotional states that relate to depression. Here I use PCA to reduce these 20 correlated variables down to a few uncorrelated variables that explain the most variance.</p>
 <p><strong>1. Read in the data and run <code>princomp</code> on the <code>C1:C20</code> variables.</strong></p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">depress &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/depress_081217.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb210-2" title="2">pc_dep  &lt;-<span class="st"> </span><span class="kw">princomp</span>(depress[,<span class="dv">9</span><span class="op">:</span><span class="dv">28</span>], <span class="dt">cor=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb210-3" title="3"><span class="kw">summary</span>(pc_dep)</a>
-<a class="sourceLine" id="cb210-4" title="4"><span class="co">## Importance of components:</span></a>
-<a class="sourceLine" id="cb210-5" title="5"><span class="co">##                           Comp.1     Comp.2     Comp.3     Comp.4</span></a>
-<a class="sourceLine" id="cb210-6" title="6"><span class="co">## Standard deviation     2.6562036 1.21883931 1.10973409 1.03232021</span></a>
-<a class="sourceLine" id="cb210-7" title="7"><span class="co">## Proportion of Variance 0.3527709 0.07427846 0.06157549 0.05328425</span></a>
-<a class="sourceLine" id="cb210-8" title="8"><span class="co">## Cumulative Proportion  0.3527709 0.42704935 0.48862483 0.54190909</span></a>
-<a class="sourceLine" id="cb210-9" title="9"><span class="co">##                            Comp.5     Comp.6     Comp.7     Comp.8</span></a>
-<a class="sourceLine" id="cb210-10" title="10"><span class="co">## Standard deviation     1.00629648 0.98359581 0.97304489 0.87706188</span></a>
-<a class="sourceLine" id="cb210-11" title="11"><span class="co">## Proportion of Variance 0.05063163 0.04837304 0.04734082 0.03846188</span></a>
-<a class="sourceLine" id="cb210-12" title="12"><span class="co">## Cumulative Proportion  0.59254072 0.64091375 0.68825457 0.72671645</span></a>
-<a class="sourceLine" id="cb210-13" title="13"><span class="co">##                            Comp.9    Comp.10    Comp.11    Comp.12</span></a>
-<a class="sourceLine" id="cb210-14" title="14"><span class="co">## Standard deviation     0.83344885 0.81248191 0.77950975 0.74117295</span></a>
-<a class="sourceLine" id="cb210-15" title="15"><span class="co">## Proportion of Variance 0.03473185 0.03300634 0.03038177 0.02746687</span></a>
-<a class="sourceLine" id="cb210-16" title="16"><span class="co">## Cumulative Proportion  0.76144830 0.79445464 0.82483641 0.85230328</span></a>
-<a class="sourceLine" id="cb210-17" title="17"><span class="co">##                           Comp.13    Comp.14    Comp.15    Comp.16</span></a>
-<a class="sourceLine" id="cb210-18" title="18"><span class="co">## Standard deviation     0.73255278 0.71324438 0.67149280 0.61252016</span></a>
-<a class="sourceLine" id="cb210-19" title="19"><span class="co">## Proportion of Variance 0.02683168 0.02543588 0.02254513 0.01875905</span></a>
-<a class="sourceLine" id="cb210-20" title="20"><span class="co">## Cumulative Proportion  0.87913496 0.90457083 0.92711596 0.94587501</span></a>
-<a class="sourceLine" id="cb210-21" title="21"><span class="co">##                           Comp.17    Comp.18    Comp.19     Comp.20</span></a>
-<a class="sourceLine" id="cb210-22" title="22"><span class="co">## Standard deviation     0.56673129 0.54273638 0.51804873 0.445396635</span></a>
-<a class="sourceLine" id="cb210-23" title="23"><span class="co">## Proportion of Variance 0.01605922 0.01472814 0.01341872 0.009918908</span></a>
-<a class="sourceLine" id="cb210-24" title="24"><span class="co">## Cumulative Proportion  0.96193423 0.97666237 0.99008109 1.000000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">depress &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/depress_081217.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb212-2" title="2">pc_dep  &lt;-<span class="st"> </span><span class="kw">princomp</span>(depress[,<span class="dv">9</span><span class="op">:</span><span class="dv">28</span>], <span class="dt">cor=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb212-3" title="3"><span class="kw">summary</span>(pc_dep)</a>
+<a class="sourceLine" id="cb212-4" title="4"><span class="co">## Importance of components:</span></a>
+<a class="sourceLine" id="cb212-5" title="5"><span class="co">##                           Comp.1     Comp.2     Comp.3     Comp.4</span></a>
+<a class="sourceLine" id="cb212-6" title="6"><span class="co">## Standard deviation     2.6562036 1.21883931 1.10973409 1.03232021</span></a>
+<a class="sourceLine" id="cb212-7" title="7"><span class="co">## Proportion of Variance 0.3527709 0.07427846 0.06157549 0.05328425</span></a>
+<a class="sourceLine" id="cb212-8" title="8"><span class="co">## Cumulative Proportion  0.3527709 0.42704935 0.48862483 0.54190909</span></a>
+<a class="sourceLine" id="cb212-9" title="9"><span class="co">##                            Comp.5     Comp.6     Comp.7     Comp.8</span></a>
+<a class="sourceLine" id="cb212-10" title="10"><span class="co">## Standard deviation     1.00629648 0.98359581 0.97304489 0.87706188</span></a>
+<a class="sourceLine" id="cb212-11" title="11"><span class="co">## Proportion of Variance 0.05063163 0.04837304 0.04734082 0.03846188</span></a>
+<a class="sourceLine" id="cb212-12" title="12"><span class="co">## Cumulative Proportion  0.59254072 0.64091375 0.68825457 0.72671645</span></a>
+<a class="sourceLine" id="cb212-13" title="13"><span class="co">##                            Comp.9    Comp.10    Comp.11    Comp.12</span></a>
+<a class="sourceLine" id="cb212-14" title="14"><span class="co">## Standard deviation     0.83344885 0.81248191 0.77950975 0.74117295</span></a>
+<a class="sourceLine" id="cb212-15" title="15"><span class="co">## Proportion of Variance 0.03473185 0.03300634 0.03038177 0.02746687</span></a>
+<a class="sourceLine" id="cb212-16" title="16"><span class="co">## Cumulative Proportion  0.76144830 0.79445464 0.82483641 0.85230328</span></a>
+<a class="sourceLine" id="cb212-17" title="17"><span class="co">##                           Comp.13    Comp.14    Comp.15    Comp.16</span></a>
+<a class="sourceLine" id="cb212-18" title="18"><span class="co">## Standard deviation     0.73255278 0.71324438 0.67149280 0.61252016</span></a>
+<a class="sourceLine" id="cb212-19" title="19"><span class="co">## Proportion of Variance 0.02683168 0.02543588 0.02254513 0.01875905</span></a>
+<a class="sourceLine" id="cb212-20" title="20"><span class="co">## Cumulative Proportion  0.87913496 0.90457083 0.92711596 0.94587501</span></a>
+<a class="sourceLine" id="cb212-21" title="21"><span class="co">##                           Comp.17    Comp.18    Comp.19     Comp.20</span></a>
+<a class="sourceLine" id="cb212-22" title="22"><span class="co">## Standard deviation     0.56673129 0.54273638 0.51804873 0.445396635</span></a>
+<a class="sourceLine" id="cb212-23" title="23"><span class="co">## Proportion of Variance 0.01605922 0.01472814 0.01341872 0.009918908</span></a>
+<a class="sourceLine" id="cb212-24" title="24"><span class="co">## Cumulative Proportion  0.96193423 0.97666237 0.99008109 1.000000000</span></a></code></pre></div>
 <p><strong>2. Pick a subset of PC’s to work with</strong></p>
 <p>In the cumulative percentage plot below, I drew a horizontal line at 80%. So the first 9 PC’s explain around 75% of the total variance, and the first 10 can explain around 80%.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb211-2" title="2">var_pc &lt;-<span class="st"> </span>(pc_dep<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb211-3" title="3"></a>
-<a class="sourceLine" id="cb211-4" title="4"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span><span class="kw">cumsum</span>(var_pc)<span class="op">/</span><span class="kw">sum</span>(var_pc)<span class="op">*</span><span class="dv">100</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb211-5" title="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Cumulative %&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb211-6" title="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span><span class="dv">80</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb213-2" title="2">var_pc &lt;-<span class="st"> </span>(pc_dep<span class="op">$</span>sdev)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb213-3" title="3"></a>
+<a class="sourceLine" id="cb213-4" title="4"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span><span class="kw">cumsum</span>(var_pc)<span class="op">/</span><span class="kw">sum</span>(var_pc)<span class="op">*</span><span class="dv">100</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb213-5" title="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Cumulative %&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb213-6" title="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span><span class="dv">80</span>))</a></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p><strong>3. Create a <em>Scree plot</em> by plotting the eigenvalue against the PC number.</strong></p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">y=</span>var_pc, <span class="dt">geom=</span><span class="kw">c</span>(<span class="st">&quot;point&quot;</span>, <span class="st">&quot;line&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb214-2" title="2"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;PC number&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Eigenvalue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</a></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p><strong>Option 1</strong>: Take all eigenvalues &gt; 1 (<span class="math inline">\(m=5\)</span>)
 <strong>Option 2</strong>: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. (<span class="math inline">\(m=2\)</span>).</p>
 <p><strong>4. Examine the loadings</strong></p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">pc_dep<span class="op">$</span>loadings[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="co">##       Comp.1      Comp.2     Comp.3       Comp.4      Comp.5</span></a>
-<a class="sourceLine" id="cb213-3" title="3"><span class="co">## c1 0.2774384  0.14497938 0.05770239  0.002723687  0.08826773</span></a>
-<a class="sourceLine" id="cb213-4" title="4"><span class="co">## c2 0.3131829 -0.02713557 0.03162990 -0.247811083  0.02439748</span></a>
-<a class="sourceLine" id="cb213-5" title="5"><span class="co">## c3 0.2677985  0.15471968 0.03459037 -0.247246879 -0.21830547</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">pc_dep<span class="op">$</span>loadings[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="co">##       Comp.1      Comp.2     Comp.3       Comp.4      Comp.5</span></a>
+<a class="sourceLine" id="cb215-3" title="3"><span class="co">## c1 0.2774384  0.14497938 0.05770239  0.002723687  0.08826773</span></a>
+<a class="sourceLine" id="cb215-4" title="4"><span class="co">## c2 0.3131829 -0.02713557 0.03162990 -0.247811083  0.02439748</span></a>
+<a class="sourceLine" id="cb215-5" title="5"><span class="co">## c3 0.2677985  0.15471968 0.03459037 -0.247246879 -0.21830547</span></a></code></pre></div>
 <p>Here</p>
 <ul>
 <li><span class="math inline">\(X_{1}\)</span> = <em>“I felt that I could not shake…”</em></li>
@@ -439,9 +443,9 @@ The full question text for the depression data used here can be found on Table 1
 <li>half the options I use below come from <a href="https://stackoverflow.com/questions/11713563/heatmap-color-key-with-five-different-colors">this SO post</a>. I had no idea what they did, so I took what the solution showed, and played with it (added/changed some to see what they did), and reviewed <code>?heatmap.2</code> to see what options were available.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">library</span>(gplots)</a>
-<a class="sourceLine" id="cb214-2" title="2"><span class="kw">heatmap.2</span>(pc_dep<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">scale=</span><span class="st">&quot;none&quot;</span>, <span class="dt">Rowv=</span><span class="ot">NA</span>, <span class="dt">Colv=</span><span class="ot">NA</span>, <span class="dt">density.info=</span><span class="st">&quot;none&quot;</span>,</a>
-<a class="sourceLine" id="cb214-3" title="3">          <span class="dt">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>, <span class="dt">col=</span><span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">256</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="kw">library</span>(gplots)</a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="kw">heatmap.2</span>(pc_dep<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">scale=</span><span class="st">&quot;none&quot;</span>, <span class="dt">Rowv=</span><span class="ot">NA</span>, <span class="dt">Colv=</span><span class="ot">NA</span>, <span class="dt">density.info=</span><span class="st">&quot;none&quot;</span>,</a>
+<a class="sourceLine" id="cb216-3" title="3">          <span class="dt">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>, <span class="dt">col=</span><span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">256</span>)))</a></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <ul>
 <li>Loadings over 0.5 (red) help us interpret what these components could “mean”

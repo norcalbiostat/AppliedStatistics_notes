@@ -215,15 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Regression Modeling</b></span></li>
 <li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a></li>
-<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="mathmatical-model.html"><a href="mathmatical-model.html"><i class="fa fa-check"></i><b>7.1</b> Mathmatical Model</a></li>
 <li class="chapter" data-level="7.2" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.2</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="7.3" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.3</b> Interval estimation</a></li>
-<li class="chapter" data-level="7.4" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.4</b> Corelation Coefficient</a></li>
-<li class="chapter" data-level="7.5" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.5</b> Assumptions</a></li>
-<li class="chapter" data-level="7.6" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.6</b> Example</a></li>
+<li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
+<li class="chapter" data-level="7.4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.4</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.5" data-path="corelation-coefficient.html"><a href="corelation-coefficient.html"><i class="fa fa-check"></i><b>7.5</b> Corelation Coefficient</a></li>
+<li class="chapter" data-level="7.6" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.6</b> Assumptions</a></li>
+<li class="chapter" data-level="7.7" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.7</b> Example</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="example.html"><a href="example.html#confidence-and-prediction-intervals"><i class="fa fa-check"></i><b>7.7.1</b> Confidence and Prediction Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="8.1" data-path="types-of-x-variables.html"><a href="types-of-x-variables.html"><i class="fa fa-check"></i><b>8.1</b> Types of X variables</a></li>
 <li class="chapter" data-level="8.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
@@ -379,29 +383,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 impute missing values.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">fa.ml.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="dt">scores=</span><span class="st">&quot;regression&quot;</span>)</a>
-<a class="sourceLine" id="cb227-2" title="2"><span class="kw">summary</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
-<a class="sourceLine" id="cb227-3" title="3"><span class="co">##     Factor1            Factor2        </span></a>
-<a class="sourceLine" id="cb227-4" title="4"><span class="co">##  Min.   :-2.32732   Min.   :-2.79312  </span></a>
-<a class="sourceLine" id="cb227-5" title="5"><span class="co">##  1st Qu.:-0.72413   1st Qu.:-0.54362  </span></a>
-<a class="sourceLine" id="cb227-6" title="6"><span class="co">##  Median : 0.09196   Median :-0.02376  </span></a>
-<a class="sourceLine" id="cb227-7" title="7"><span class="co">##  Mean   : 0.00000   Mean   : 0.00000  </span></a>
-<a class="sourceLine" id="cb227-8" title="8"><span class="co">##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  </span></a>
-<a class="sourceLine" id="cb227-9" title="9"><span class="co">##  Max.   : 2.43371   Max.   : 2.18992</span></a>
-<a class="sourceLine" id="cb227-10" title="10"><span class="kw">head</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
-<a class="sourceLine" id="cb227-11" title="11"><span class="co">##          Factor1      Factor2</span></a>
-<a class="sourceLine" id="cb227-12" title="12"><span class="co">## [1,] -1.49174313  0.003612941</span></a>
-<a class="sourceLine" id="cb227-13" title="13"><span class="co">## [2,] -0.26254721  1.090864733</span></a>
-<a class="sourceLine" id="cb227-14" title="14"><span class="co">## [3,]  0.55516045  0.631119886</span></a>
-<a class="sourceLine" id="cb227-15" title="15"><span class="co">## [4,] -1.21028676 -1.281240452</span></a>
-<a class="sourceLine" id="cb227-16" title="16"><span class="co">## [5,] -0.04852211 -1.575691468</span></a>
-<a class="sourceLine" id="cb227-17" title="17"><span class="co">## [6,] -0.53768770  0.661138335</span></a></code></pre></div>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="co">#library(ggforitfy)</span></a>
-<a class="sourceLine" id="cb228-2" title="2"><span class="kw">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">fa.ml.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="dt">scores=</span><span class="st">&quot;regression&quot;</span>)</a>
+<a class="sourceLine" id="cb229-2" title="2"><span class="kw">summary</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
+<a class="sourceLine" id="cb229-3" title="3"><span class="co">##     Factor1            Factor2        </span></a>
+<a class="sourceLine" id="cb229-4" title="4"><span class="co">##  Min.   :-2.32732   Min.   :-2.79312  </span></a>
+<a class="sourceLine" id="cb229-5" title="5"><span class="co">##  1st Qu.:-0.72413   1st Qu.:-0.54362  </span></a>
+<a class="sourceLine" id="cb229-6" title="6"><span class="co">##  Median : 0.09196   Median :-0.02376  </span></a>
+<a class="sourceLine" id="cb229-7" title="7"><span class="co">##  Mean   : 0.00000   Mean   : 0.00000  </span></a>
+<a class="sourceLine" id="cb229-8" title="8"><span class="co">##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  </span></a>
+<a class="sourceLine" id="cb229-9" title="9"><span class="co">##  Max.   : 2.43371   Max.   : 2.18992</span></a>
+<a class="sourceLine" id="cb229-10" title="10"><span class="kw">head</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
+<a class="sourceLine" id="cb229-11" title="11"><span class="co">##          Factor1      Factor2</span></a>
+<a class="sourceLine" id="cb229-12" title="12"><span class="co">## [1,] -1.49174313  0.003612941</span></a>
+<a class="sourceLine" id="cb229-13" title="13"><span class="co">## [2,] -0.26254721  1.090864733</span></a>
+<a class="sourceLine" id="cb229-14" title="14"><span class="co">## [3,]  0.55516045  0.631119886</span></a>
+<a class="sourceLine" id="cb229-15" title="15"><span class="co">## [4,] -1.21028676 -1.281240452</span></a>
+<a class="sourceLine" id="cb229-16" title="16"><span class="co">## [5,] -0.04852211 -1.575691468</span></a>
+<a class="sourceLine" id="cb229-17" title="17"><span class="co">## [6,] -0.53768770  0.661138335</span></a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="co">#library(ggforitfy)</span></a>
+<a class="sourceLine" id="cb230-2" title="2"><span class="kw">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></a></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>To merge these scores back onto the original data set <strong>providing there is no missing data</strong> you can use the <code>bind_cols()</code> function in <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">data.withscores &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(data, <span class="kw">data.frame</span>(fa.ml.varimax<span class="op">$</span>scores))</a>
-<a class="sourceLine" id="cb229-2" title="2"><span class="kw">kable</span>(<span class="kw">head</span>(data.withscores))</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">data.withscores &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(data, <span class="kw">data.frame</span>(fa.ml.varimax<span class="op">$</span>scores))</a>
+<a class="sourceLine" id="cb231-2" title="2"><span class="kw">kable</span>(<span class="kw">head</span>(data.withscores))</a></code></pre></div>
 <table>
 <thead>
 <tr>

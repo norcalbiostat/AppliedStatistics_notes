@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.2 Choosing appropriate bivariate analysis | Applied Statistics</title>
+  <title>Chapter 7 Simple Linear Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.2 Choosing appropriate bivariate analysis | Applied Statistics" />
+  <meta property="og:title" content="Chapter 7 Simple Linear Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.2 Choosing appropriate bivariate analysis | Applied Statistics" />
+  <meta name="twitter:title" content="Chapter 7 Simple Linear Regression | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="assumption-of-independent-observations.html"/>
-<link rel="next" href="bv-ttest.html"/>
+<link rel="prev" href="reg-intro.html"/>
+<link rel="next" href="mathmatical-model.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -370,27 +370,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="choosing-appropriate-bivariate-analysis" class="section level2">
-<h2><span class="header-section-number">5.2</span> Choosing appropriate bivariate analysis</h2>
-<p>Choosing which statistical analyses procedure is appropriate completely depending on the data types of the explanatory and response variable. This is a simplified table, only covering the common/standard types of bivariate analysis.</p>
-<blockquote>
-<p>figure out how to get table here.</p>
-</blockquote>
-<p>For this set of notes, the variable types are referred to using the first letter,
-e.g. <em>Q</em> for quantitative, <em>B</em> for binary, and <em>C</em> for categorical.
-Thus a T-test is a (Q <span class="math inline">\(\sim\)</span> B) analysis, and a correlation analysis is (Q <span class="math inline">\(\sim\)</span> Q) analysis.</p>
-<p>Links to the example data used in this chapter.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata&quot;</span>))</a>
-<a class="sourceLine" id="cb130-2" title="2">county &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/countyComplete.csv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<hr />
+<div id="slr" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Simple Linear Regression</h1>
+<p>The goal of linear regression is to describe the relationship between an independent variable X and a continuous dependent variable <span class="math inline">\(Y\)</span> as a straight line.</p>
+<p>Data for this type of model can arise in two ways;</p>
+<ul>
+<li>Fixed-<span class="math inline">\(X\)</span>: values of <span class="math inline">\(X\)</span> are preselected by investigator</li>
+<li>Variable-<span class="math inline">\(X\)</span>: have random sample of <span class="math inline">\((X,Y)\)</span> values</li>
+</ul>
+<p>Both Regression and Correlation can be used for two main purposes:</p>
+<ul>
+<li><strong>Descriptive</strong>: Draw inferences regarding the relationship</li>
+<li><strong>Predictive</strong>: Predict value of <span class="math inline">\(Y\)</span> for a given value of <span class="math inline">\(X\)</span></li>
+</ul>
+<p>Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.</p> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="assumption-of-independent-observations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bv-ttest.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reg-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mathmatical-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
