@@ -17,7 +17,7 @@ Both Regression and Correlation can be used for two main purposes:
 
 Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.  
 
-## Mathmatical Model
+## Mathematical Model
 
 
 * The mean of $Y$ values at any given $X$ is $\beta_{0} + \beta_{1} X$
@@ -88,7 +88,7 @@ $$
   
 How does this relate to the standard deviation of individual $x$'s, and the standard deviation of $\bar{x}$'s? </div>\EndKnitrBlock{rmdnote}
 
-## Corelation Coefficient
+## Correlation Coefficient
 
 * The correlation coefficient $\rho$ measures the strength of association between $X$ and $Y$ in the _population_.
 * $\sigma^{2} = VAR(Y|X)$ is the variance of $Y$ for a specific $X$.
@@ -98,7 +98,7 @@ $$ \sigma^{2} = \sigma_{y}^{2}(1-\rho^{2})$$
 $$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
 
 * $\rho^{2}$ = reduction in variance of Y associated with knowledge of X/original variance of Y
-* **Coefficient of Determiniation**: $100\rho^{2}$ = % of variance of Y associated with X or explained by X
+* **Coefficient of Determination**: $100\rho^{2}$ = % of variance of Y associated with X or explained by X
 * Caution: association vs. causation.
 
 
@@ -126,14 +126,9 @@ $$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
 
 
 
-## Example
+## Example {#slr-fev}
 
-Using a cleaned version of the Lung function data set, lets explore the relationship between height and FEV for fathers in this data set. 
-
-
-```r
-fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep="\t", header=TRUE)
-```
+Using a cleaned version of the Lung function data set from PMA5, lets explore the relationship between height and FEV for fathers in this data set. 
 
 
 ```r
@@ -145,7 +140,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_smooth(se=FALSE, col="red") 
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 There does appear to be a tendency for taller men to have higher FEV1. Let's fit a linear model and report the regression parameter estimates. 
 
@@ -193,7 +188,7 @@ plot(model$residuals ~ fev$FHEIGHT)
 lines(lowess(model$residuals ~ fev$FHEIGHT), col="red")
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 * Normal residuals
 
@@ -202,7 +197,7 @@ qqnorm(model$residuals)
 qqline(model$residuals, col="red")
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 No major deviations away from what is expected.   
 
@@ -222,7 +217,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_line(aes(y=pred.int$upr), linetype="dashed", col="red", lwd=1.5)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ## ANOVA for regression
 
@@ -307,7 +302,7 @@ The details of methods to calculate the Least Squares estimate of $\beta$'s is l
 
 ## Example 
 
-The analysis in example @slr-ex concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
+The analysis in example \@ref(slr-ex) concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
 
 However, FEV tends to decrease with age for adults, so we should be able to predict it better if we use both height and age as independent variables in a multiple regression equation. 
 
@@ -363,7 +358,7 @@ par(mfrow=c(2,2))
 plot(mv_model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
 ## Multicollinearity

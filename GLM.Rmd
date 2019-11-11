@@ -9,16 +9,15 @@ When your outcome variable $y$ is non-continuous/non-normal, the above assumptio
 
 Generalized Linear Models (GLM) allows for different data type outcomes by allowing the linear portion of the model ($\mathbf{X}\beta$) to be related to the outcome variable $y$ using a _link_ function, that allows the magnitude of the variance of the errors ($\sigma$) to be related to the predicted values themselves. 
 
-There are three overarching types of non-continuous outcomes that can be modeled with GLM's. 
+There are a few overarching types of non-continuous outcomes that can be modeled with GLM's. 
 
 * Binary data: Logistic or Probit regression
+* Log-linear models
 * Multinomial/categorical data: Multinomial or Ordinal Logistic regression. 
 * Count data: Poisson regression
 
-At this time these notes goes into depth for Logistic regression only, due to its commonplace in data analysis tools. 
 
-
-## Fitting GLMs in R
+## Fitting GLMs 
 
 Generalized linear regression models can be fit in R using the `glm()` function. This function can fit an entire _family_ of distributions and can be thought of as $E(Y|X) = C(X)$ where $C$ is the **link** function that relates $Y$ to $X$.
 
@@ -26,25 +25,48 @@ Generalized linear regression models can be fit in R using the `glm()` function.
 * Logistic regression: C = logit function
 * Poisson regression: C = log function
 
+Here is some guidance on code to fit Logistic regression models. 
+
+### R
+
 The general syntax is similar to `lm()`, with the additional required `family=` argument. See `?family` for a list of options. 
 
 ```{r, eval=FALSE}
 glm(y ~ x1 + x2 + x3, data=DATA, family="binomial")
 ```
 
-## Binary Data
+### SPSS 
 
-Goals: 
+File menu: `Regression` --> Binary Logistic. 
 
-* Assess the impact selected covariates have on the probability of an outcome occurring. 
-* Predict the likelihood / chance / probability of an event occurring given a certain covariate pattern.  
+Syntax: 
 
-Binary data can be fit using a _Logistic Model_ or a _Probit Model_.
+```
+logistic regression Y with x1 x2 x3
+   /categorical = x2
+```
 
+https://www.ibm.com/support/knowledgecenter/en/SSLVMB_26.0.0/statistics_reference_project_ddita/spss/regression/syn_logistic_regression_overview.html
+
+### Stata
+
+`logistic Y x1 x2`
+
+https://www.stata.com/features/overview/logistic-regression/
+
+
+## Binary outcome data
 
 Consider an outcome variable $Y$ with two levels: Y = 1 if event, = 0 if no event. 
 
 Let $p_{i} = P(y_{i}=1)$. 
+
+Two goals: 
+
+* Assess the impact selected covariates have on the probability of an outcome occurring. 
+* Predict the probability of an event occurring given a certain covariate pattern. This is covered in section \@ref(binary-classification)
+
+Binary data can be modeled using a _Logistic Model_ or a _Probit Model_. 
 
 The logistic model relates the probability of an event based on a linear combination of X's. 
 
@@ -56,34 +78,60 @@ $$
 
 Since the _odds_ are defined as the probability an event occurs divided by the  probability it does not occur: $(p/(1-p))$, the function $log\left(\frac{p_{i}}{1-p_{i}}\right)$ is also known as the _log odds_, or more commonly called the **_logit_**. This is the _link_ function for the logistic regression model. 
 
-```{r, fig.width=4, fig.height=3, fig.align='center', echo=FALSE}
+```{r, echo=FALSE}
 library(ggplot2)
 p <- seq(0, 1, by=.01)
 logit.p <- log(p/(1-p))
-qplot(logit.p, p, geom="line", xlab = "logit(p)", main="The logit transformation")
+a <- qplot(logit.p, p, geom="line", xlab = "logit(p)", main="The logit transformation")
+probit.p <- qnorm(p)
+b <- qplot(probit.p, p, geom="line", xlab = "probit(p)", main="The probit transformation")
 ```
 
 This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from $-\infty$ to $\infty$, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)
 
-Back solving the logistic model for $p_{i} = e^{\beta X} / (1+e^{\beta X})$ gives us the probability of an event. 
 
-$$
-p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
-{1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
-$$
+The probit function uses the inverse CDF for the normal distribution as the link function. The effect of the transformation is very similar. For social science interpretation of the coefficients, we tend to choose the _logit_ transformation and conduct a Logistic Regression. For classification purposes, often researchers will test out both transformations to see which one gives the best predictions. 
 
-```{block2,  type='rmdtip'}
-The probit function uses the inverse CDF for the normal distribution as the link function. 
+```{r, fig.width=8, fig.height=3, fig.align='center', echo=FALSE}
+gridExtra::grid.arrange(a,b, ncol=2)
 ```
 
 
-### Example: The effect of gender on Depression
+## Logistic Regression
 
-Is gender associated with depression? Read in the `depression` data and recode sex to be an indicator of being male. 
-```{r}
-depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt")
-names(depress) <- tolower(names(depress)) # make all variable names lower case. 
-```
+Since the link between $X$ and $Y$ is no longer linear, a one unit increase in $X_{p}$ is no longer associated with a $b_{p}$ increase in $Y$. The regression coefficients $b_{p}$ from a logistic regression must be _exponentiated_ before interpretation.  
+
+$$OR = e^{b}$$
+
+The Odds Ratio (OR) provides a directly understandable statistic for the relationship between $y$ and a specific $x$ given all other $x$'s in the model are fixed. A later example in \@ref(mlogreg) provides a numeric example of how Odds Ratios are calculated. 
+
+In testing for a relationship between $x$ and $y$, our hypothesis is that $\beta_{p}=0$. Since $e^{0}=1$, the reference value for the Odds Ratio that signifies no relationship, is 1, not 0. 
+
+
+### Interpreting Odds Ratios
+
+Consider a binary outcome with values YES, coded as 1, and NO, coded as 0. 
+
+* **OR = 1** = equal chance of response variable being YES given any explanatory variable value. You are not able to predict participants’ responses by knowing their explanatory variable value. This would be a non significant model when looking at the p-value for the explanatory variable in the parameter estimate table.
+* **OR > 1** = as the explanatory variable value increases, the presence of a YES response is more likely. We can say that when a participant’s response to the explanatory variable is YES (1), they are more likely to have a response that is a YES (1). 
+* **OR <1** = as the explanatory variable value increases, the presence of a YES response is less likely. We can say that when a participant’s response to the explanatory variable is YES (1) they are less likely to have a response that is a YES (1). 
+
+For a continuous variable X with slope coefficient $\beta$, the quantity $e^{b}$ is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X. 
+
+
+**Confidence Intervals**
+
+Confidence intervals are a range for the population’s predicted odds ratio based on the sample data. We are 95% confident that any given population’s odds ratio would range between those two values. 
+
+The OR is **not** a linear function of the $x's$, but $\beta$ is. This means that a CI for the OR is created by calculating a CI for $\beta$, and then exponentiating the endpoints. A 95% CI for the OR is calculated as: 
+
+$$e^{\hat{\beta} \pm 1.96 SE_{\beta}} $$
+
+
+
+### Example: The effect of gender on Depression {#logreg-dep-ex}
+
+This uses a cleaned version of the depression data set from PMAS5. 
 
 * Binary outcome variable: Symptoms of Depression (`cases`)
 * Binary predictor variable: Gender (`sex`) as an indicator of being female
@@ -98,36 +146,26 @@ summary(dep_sex_model)
 We exponentiate the coefficients to back transform the $\beta$ estimates into Odds Ratios
 ```{r}
 exp(coef(dep_sex_model))
-```
-
-Females have 2.8 times the odds of showing signs of depression compared to males. 
-
-**Confidence Intervals**
-The OR is **not** a linear function of the $x's$, but $\beta$ is. This means that a CI for the OR is created by calculating a CI for $\beta$, and then exponentiating the endpoints. A 95% CI for the OR can be calculated as: 
-
-$$e^{\hat{\beta} \pm 1.96 SE_{\beta}} $$
-
-```{r}
 exp(confint(dep_sex_model))
 ```
 
-### Multiple Logistic Regression 
-Just like multiple linear regression, additional predictors are simply included in the model using a `+` symbol. 
+Females have 2.8 (1.4, 6.2) times the odds of showing signs of depression compared to males. 
+
+
+### Multiple Logistic Regression {#mlogreg}
+Let's continue with the depression model, but now also include age and income as potential predictors of symptoms of depression. 
+
 ```{r}
 mvmodel <- glm(cases ~ age + income + sex, data=depress, family="binomial")
 summary(mvmodel)
 ```
 
-* The sign of the $\beta$ coefficients can be interpreted in the same manner as with linear regression. 
+* The sign of the $\beta$ coefficients can be interpreted in the same manner as with linear regression as having a positive or negative relationship.  
 * The odds of being depressed are less if the respondent has a higher income and is older, and higher if the respondent is female. 
 
-### Interpretation
+> The odds of a female being depressed are 2.53 times greater than the odds for Males after adjusting for the effects of age and income (p=.016). 
 
-* The OR provides a directly understandable statistic for the relationship between $y$ and a specific $x$ given all other $x$'s in the model are fixed. 
-* For a continuous variable X with slope coefficient $\beta$, the quantity $e^{b}$ is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X. 
-* $exp(kb)$ is the incremental odds ratio corresponding to an increase of $k$ units in the variable X, assuming that the values of all other X variables remain unchanged. 
-
-**Where does $OR = e^{\beta}$ come from?**
+**Example calculation for $OR = e^{\beta}$**
 
 The full model is: 
 $$log(odds) = -0.676 - 0.02096*age - .03656*income + 0.92945*gender$$
@@ -153,11 +191,11 @@ exp(.92945)
 exp(coef(mvmodel)[4])
 ```
 
-The odds of a female being depressed are 2.53 times greater than the odds for Males after adjusting for the linear effects of age and income (p=.016). 
 
+### Effect of a k unit change
 
-#### Effect of a k unit change
-Sometimes a 1 unit change in a continuous variable is not meaningful. 
+* Sometimes a 1 unit change in a continuous variable is not meaningful. 
+* $exp(kb)$ is the incremental odds ratio corresponding to an increase of $k$ units in the variable X, assuming that the values of all other X variables remain unchanged. 
 
 ```{r}
 exp(coef(mvmodel))
@@ -177,190 +215,85 @@ round(exp(10*confint(mvmodel)[2,]),3)
 
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
-##### Example: The relationship between income, employment status and depression. 
-This example follows PMA5 Ch 12.7
 
-Here I create the binary indicators of lowincome (annual income <$10k/year) and underemployed (part time or unemployed).
+
+## Log-linear models
+
+A *log-linear* model is when the log of the response variable is modeled using a linear combination of predictors. 
+
+$$ln(Y) \sim XB +\epsilon$$
+
+Recall that in statistics, when we refer to the _log_, we mean the natural log _ln_.
+
+This type of model is often use for Poisson models also (Section \@ref(poisson-models)). 
+
+Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed. 
+
+**Interpreting results**
+
+This is hands down the best reference that describes how to interpret the results when your response, predictor, or both variables are log transformed. 
+
+https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/
+
+
+### Example
+We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings `H4EC2` by following the steps below _in order_. 
+
+1. Remove values above 999995 (structural missing). 
+3. Create a new variable called `income`, that sets all values of personal income to be NA if below the federal poverty line. 
+    - First set `income= H4EC2`
+    - Then set income to missing, if `H4EC2 < 10210` (the federal poverty limit from 2008)
+4. Then create a new variable: `logincome` that is the natural log (_ln_) of income. e.g. `addhealth$logincome = log(addhealth$income)`
+
+Why are we transforming income? To achieve normality. 
+```{r}
+par(mfrow=c(2,2))
+hist(addhealth$income, probability = TRUE); lines(density(addhealth$income, na.rm=TRUE), col="red")
+hist(addhealth$logincome, probability = TRUE); lines(density(addhealth$logincome, na.rm=TRUE), col="blue")
+qqnorm(addhealth$income); qqline(addhealth$income, col="red")
+qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
+```
+
+**Identify variables**
+
+* Quantitative outcome that has been log transformed: Income (variable `logincome`)
+* Binary predictor: Ever smoked a cigarette (variable `eversmoke_c`)
+* Binary confounder: Gender (variable `female_c`)
+ 
+The mathematical multivariable model looks like: 
+
+$$ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}$$
+
+
+Similar to logistic regression, we need to _exponentiate_ the regression coefficient before we can interpret the number as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
+
+* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
+* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
+
 
 ```{r}
-depress$lowincome <- ifelse(depress$income < 10, 1, 0)
-table(depress$lowincome, depress$income, useNA="always")
-
-depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
-table(depress$underemployed, depress$employ, useNA="always")
+ln.mod.2 <- lm(logincome~wakeup + female_c, data=addhealth)
+summary(ln.mod.2) %>% pander()
+1-exp(confint(ln.mod.2)[-1,])
 ```
+* For every hour later one wakes up in the morning, one can expect to earn `1-exp(-0.015)` = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender. 
+* Females have on average `1-exp(-0.19)` = 17% percent lower income than males, after controlling for the wake up time. 
 
-The **Main Effects** model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income. 
-
-```{r}
-me_model <- glm(cases ~ lowincome + underemployed, data=depress, family="binomial")
-summary(me_model)
-```
-
-To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
-```{r}
-me_intx_model <- glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial") 
-summary(me_intx_model)
-```
+Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p<.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p<.0001) percent lower income than males. 
 
 
 
-## Classification of Binary outcomes
 
-* Sometimes Odds Ratios can be difficult to interpret or understand. 
-* Sometimes you just want to report the probability of the event occurring. 
-* Or sometimes you want to predict whether or not a new individual is going to have the event. 
+## Categorical outcome data
 
-For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
+If you want to keep the response variable as a categorical variable with more than two levels, the following regression model types are available: 
 
 
-For the main effects model of depression on age, income and gender the predicted probability of depression is: 
-$$
-P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
-{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
-$$
-
-Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
-
-```{r}
-depress %>% summarize(age=mean(age), income=mean(income))
-```
-
-Plug the coefficient estimates and the values of the variables into the equation and calculate. 
-$$
-P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
-{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
-$$
-
-```{r}
-XB.f <- -0.676 - 0.02096*(44.4) - .03656*(20.6) + 0.92945
-exp(XB.f) / (1+exp(XB.f))
-```
-$$
-P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
-{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
-$$
-```{r}
-XB.m <- -0.676 - 0.02096*(44.4) - .03656*(20.6)
-exp(XB.m) / (1+exp(XB.m))
-```
-
-The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
-
-
-
-### Calculating predictions
-
-So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
-
-Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
-
-```{block2,  type='rmdcaution'}
-Any row with missing data on any variable used in the model will NOT get a predicted value.
-```
-
-The `predict()` function can calculate predictions for any GLM. The model object `mvmodel` stores the information that it was a logistic regression. 
-```{r}
-model.pred.prob <- predict(mvmodel, type='response')
-head(model.pred.prob)
-```
-
-#### Distribution of Predictions
-How well does our model do to predict depression? 
-
-```{r}
-plot.mpp <- data.frame(prediction = model.pred.prob, 
-                       truth = factor(mvmodel$y, labels=c("Not Depressed", "Depressed")))
-
-ggplot(plot.mpp, aes(x=truth, y=prediction, fill=truth)) + 
-      geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
-```
-
-![](images/q.png) What things can you infer from this plot?
-
-![](images/q.png) Where should we put the cutoff value? At what probability should we classify a record as "depressed"?
-
-
-
-#### Optimal Cutoff Value
-Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes "high risk". For some models, this could be as low as 30%. It's whatever the probability is that optimally separates the classes. Let's look at two ways to visualize model performance as a function of cutoff.
-
-### ROC Curves
-
-* We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot. 
-* ROC curves show the balance between sensitivity and specificity.
-* We'll use the [[ROCR]](https://rocr.bioinf.mpi-sb.mpg.de/) package. It only takes 3 commands: 
-    - calculate `prediction()` using the model
-    - calculate the model `performance()` on both true positive rate and true negative rate for a whole range of cutoff values. 
-    - `plot` the curve. 
-        - The `colorize` option colors the curve according to the probability cutoff point. 
-
-```{r}
-library(ROCR)
-pr <- prediction(model.pred.prob, mvmodel$y)
-perf <- performance(pr, measure="tpr", x.measure="fpr")
-plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
-abline(a=0, b=1, lty=2)
-```
-
-We can also use the `performance()` function and say we want to evaluate the $f1$ measure
-
-```{r}
-perf.f1 <- performance(pr,measure="f")
-plot(perf.f1)
-```
-
-ROC curves: 
-
-* Can also be used for model comparison: http://yaojenkuo.io/diamondsROC.html
-* The Area under the Curve (auc) also gives you a measure of overall model accuracy. 
-
-```{r}
-auc <- performance(pr, measure='auc')
-auc@y.values
-```
-
-
-### Model Performance
-
-* Say we decide that a value of 0.15 is our optimal cutoff value. 
-* We can use this probability to classify each row into groups. 
-    - The assigned class values must match the data type and levels of the true value.
-    - It also has to be in the same order, so the `0` group needs to come first. 
-* Then we calculate a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix) using the similarly named function from the `caret` package. 
-    - At it's core, this is a 2x2 table containing counts of each combination of predicted value and true value. 
-
-```{r}
-library(caret)
-
-plot.mpp$pred.class <- ifelse(plot.mpp$prediction <0.15, 0,1)
-plot.mpp$pred.class <- factor(plot.mpp$pred.class, labels=c("Not Depressed", "Depressed"))
-
-confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
-```
-
-* 123 people were correctly predicted to not be depressed (True Negative, $n_{11}$)
-* 121 people were incorrectly predicted to be depressed (False Positive, $n_{21}$)
-* 10 people were incorrectly predicted to not be depressed (False Negative, $n_{12}$)
-* 40 people were correctly predicted to be depressed (True Positive, $n_{22}$)
-
-Other terminology: 
-
-* **Sensitivity/Recall/True positive rate**: P(predicted positive | total positive) = `40/(10+40) = .8`
-* **Specificity/true negative rate**: P(predicted negative | total negative) = `123/(123+121) = .504`
-* **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
-* **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
-* **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
-* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
-
-
-## Categorical Data
-
-* Multinomial Regression
 * Ordinal Logistic Regression
+* Multinomial Regression
 
 
-## Count Data
+## Count outcome data
 
 Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
     - e.g. Number of thunderstorms in a year
@@ -380,7 +313,7 @@ $$
 ![Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve](images/poisson.png)
 
 
-#### Poisson Regression
+#### Poisson Regression {#poisson-models}
 
 Just another GLM - we use a $ln$ as the link function. This lets us model the log rates using a linear combination of covariates. 
 
@@ -448,7 +381,6 @@ Also, similar to logistic regression, since the outcome was transformed, the sta
 Let's model the number of siblings someone has, based off their age at Wave 1 (2008).
 
 ```{r, echo=FALSE}
-load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
 addhealth$nsib <- ifelse(addhealth$H4WS1<90,addhealth$H4WS1, NA) 
 ```
 

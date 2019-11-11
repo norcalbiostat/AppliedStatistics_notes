@@ -29,3 +29,13 @@ library(kableExtra)
 options(knitr.kable.NA = '', knitr.table.format = "html")
 theme_set(theme_bw())
 
+# loading data sets used in multiple chapters
+
+depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt")
+names(depress) <- tolower(names(depress))
+
+
+load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
+addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
+
+fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep="\t", header=TRUE)

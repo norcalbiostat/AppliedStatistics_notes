@@ -5,7 +5,429 @@ Model building methods are used mainly in exploratory situations where many inde
 
 This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models. 
 
+## Stratification
 
+Stratified models examine the regression equations for each subgroup of the population and seeing if the relationship between the response and explanatory variables _changed_ for at least one subgroup. 
+
+Consider the relationship between the length of an iris petal, and the length of it's sepal. Earlier we found that the iris species modified this relationship. Lets consider a binary indicator variable for species that groups _veriscolor_ and _virginica_ together. 
+
+
+```r
+iris$setosa <- ifelse(iris$Species=="setosa", 1, 0)
+table(iris$setosa, iris$Species)
+##    
+##     setosa versicolor virginica
+##   0      0         50        50
+##   1     50          0         0
+```
+
+Within the _setosa_ species, there is little to no relationship between sepal and petal length. For the other two species, the relationship looks still significantly positive, but in the combined sample there appears to be a strong positive relationship (blue). 
+
+
+```r
+ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=as.factor(setosa))) + 
+            geom_point() + theme_bw() + theme(legend.position="top") + 
+            scale_color_manual(name="Species setosa", values=c("red", "darkgreen")) + 
+            geom_smooth(se=FALSE, method="lm") + 
+            geom_smooth(aes(x=Sepal.Length, y=Petal.Length), col="blue", se=FALSE, method='lm')
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+The mathematical model describing the relationship between Petal length ($Y$), and Sepal length ($X$), for species _setosa_ ($s$) versus not-setosa ($n$), is written as follows: 
+
+$$ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})$$
+$$ Y_{in} \sim \beta_{0n} + \beta_{1n}*x_{i} + \epsilon_{in} \qquad \epsilon_{in} \sim \mathcal{N}(0,\sigma^{2}_{n}) $$
+
+In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: $\beta_{0}, \beta_{1}$, and $\sigma^{2}$, for a total of 6 for the two models. The more parameters that need to be estimated, the more data we need. 
+
+
+
+## Moderation
+
+Moderation occurs when the relationship between two variables depends on a third variable.
+
+* The third variable is referred to as the moderating variable or simply the moderator. 
+* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
+    - This tends to be an important 
+* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
+    - This is also called a _stratified_ model, or a _subgroup analysis_.
+
+Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
+
+**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
+
+**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
+
+**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
+
+Recall that common analysis methods for analyzing bivariate relationships come in very few flavors: 
+
+* Correlation (Q~Q)
+* Linear Regression (Q~Q)
+* $\chi^{2}$ (C~C)
+* ANOVA (Q~C)
+
+
+### Example 1: Sepal vs Petal Length
+
+We just got done looking at the relationship between the length of an iris's Sepal, and the length (cm) of it's petal. 
+
+```r
+overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
+                geom_point() + geom_smooth(se=FALSE) + 
+                theme_bw()
+
+by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
+                  geom_point() + geom_smooth(se=FALSE) + 
+                  theme_bw() + theme(legend.position="top")
+
+library(gridExtra)
+grid.arrange(overall, by_spec , ncol=2)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+
+![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
+
+Let's look at the correlation between these two continuous variables
+
+_overall_
+
+```r
+cor(iris$Sepal.Length, iris$Petal.Length)
+## [1] 0.8717538
+```
+
+_stratified by species_
+
+```r
+by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
+## iris$Species: setosa
+## [1] 0.2671758
+## -------------------------------------------------------- 
+## iris$Species: versicolor
+## [1] 0.754049
+## -------------------------------------------------------- 
+## iris$Species: virginica
+## [1] 0.8642247
+```
+
+There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
+
+The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
+
+### Example 2: Simpson's Paradox
+
+Sometimes moderating variables can result in what's known as _Simpson's Paradox_
+
+https://en.wikipedia.org/wiki/Simpson%27s_paradox
+
+## Interactions {#interactions}
+
+If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa` . Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}$$
+
+If we evaluate this model for both levels of $x_{2}$, the resulting models are the same as the stratified models. 
+
+When $x_{2} = 0$, the record is on an iris not from the _setosa_ species. 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}(0) + \beta_{3}x_{1i}(0)$$
+which simplifies to 
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i}$$
+
+When $x_{2} = 1$, the record is on an iris of the _setosa_ species. 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}(1) + \beta_{3}x_{1i}(1)$$
+which simplifies to
+$$ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}$$
+
+Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model. 
+
+
+Interactions are fit in `R` by simply multiplying `*` the two variables together in the model statement. 
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
+##     setosa, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
+## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
+## setosa               2.35877    0.88266   2.672  0.00839 ** 
+## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3929 on 146 degrees of freedom
+## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
+## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
+```
+
+The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
+ 
+### Example 1
+
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
+##     setosa, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
+## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
+## setosa               2.35877    0.88266   2.672  0.00839 ** 
+## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3929 on 146 degrees of freedom
+## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
+## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
+```
+
+* If $x_{2}=0$, then the effect of $x_{1}$ on $Y$ simplifies to: $\beta_{1}$
+    * $b_{1}$ The effect of sepal length on petal length **for non-setosa species of iris** (`setosa=0`) 
+    * For non-setosa species, the petal length increases 1.03cm for every additional cm of sepal length. 
+* If $x_{2}=1$, then the effect of $x_{1}$ on $Y$ model simplifies to: $\beta_{1} + \beta_{3}$
+    * For setosa species, the petal length increases by `1.03-0.9=0.13` cm for every additional cm of sepal length. 
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.</div>\EndKnitrBlock{rmdcaution}
+
+Let's up the game now and look at the full interaction model with a categorical version of species. Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}$$
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + Species + Sepal.Length*Species, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * 
+##     Species, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.68611 -0.13442 -0.00856  0.15966  0.79607 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                      0.8031     0.5310   1.512    0.133    
+## Sepal.Length                     0.1316     0.1058   1.244    0.216    
+## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    
+## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    
+## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***
+## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2611 on 144 degrees of freedom
+## Multiple R-squared:  0.9789,	Adjusted R-squared:  0.9781 
+## F-statistic:  1333 on 5 and 144 DF,  p-value: < 2.2e-16
+```
+
+The slope of the relationship between sepal length and petal length is calculated as follows, for each species:   
+
+* _setosa_ $(x_{2}=0, x_{3}=0): b_{1}=0.13$ 
+* _versicolor_ $(x_{2}=1, x_{3}=0): b_{1} + b_{2} + b_{4} = 0.13+0.55 = 0.68$
+* _virginica_ $(x_{2}=0, x_{3}=1): b_{1} + b_{3} + b_{5} = 0.13+0.62 = 0.75$
+
+Compare this to the estimates gained from the stratified model: 
+
+
+```r
+coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="setosa")))
+##  (Intercept) Sepal.Length 
+##    0.8030518    0.1316317
+coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="versicolor")))
+##  (Intercept) Sepal.Length 
+##    0.1851155    0.6864698
+coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
+##  (Intercept) Sepal.Length 
+##    0.6104680    0.7500808
+```
+
+They're the same! Proof that an interaction is equivalent to stratification. 
+
+### Example 2
+
+What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model
+
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa + Petal.Width, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
+##     setosa + Petal.Width, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.83519 -0.18278 -0.01812  0.17004  1.06968 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** 
+## Sepal.Length         0.66181    0.05179  12.779  < 2e-16 ***
+## setosa               1.83713    0.62355   2.946  0.00375 ** 
+## Petal.Width          0.97269    0.07970  12.204  < 2e-16 ***
+## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2769 on 145 degrees of freedom
+## Multiple R-squared:  0.9761,	Adjusted R-squared:  0.9754 
+## F-statistic:  1478 on 4 and 145 DF,  p-value: < 2.2e-16
+```
+
+So far, petal width, and the combination of species and sepal length are both significantly associated with petal length. 
+
+_Note of caution: Stratification implies that the stratifying variable interacts with all other variables._ 
+So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would  be implying that species interacts with both sepal length and petal width. 
+
+E.g. the following stratified model 
+
+* $Y = A + B + C + D + C*D$, when D=1
+* $Y = A + B + C + D + C*D$, when D=0
+
+is the same as the following interaction model: 
+
+* $Y = A + B + C + D + A*D + B*D + C*D$
+
+
+
+### Example 3: The relationship between income, employment status and depression. 
+This example follows PMA5 Ch 12.7 and section \@ref(mlogreg). 
+
+Here I create the binary indicators of `lowincome` (annual income <$10k/year) and underemployed (part time or unemployed).
+
+
+```r
+depress$lowincome <- ifelse(depress$income < 10, 1, 0)
+table(depress$lowincome, depress$income, useNA="always")
+##       
+##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31
+##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1
+##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##   <NA>  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##       
+##        32 35 36 37 42 45 55 65 <NA>
+##   0     1 24  1  1  1 15  9 10    0
+##   1     0  0  0  0  0  0  0  0    0
+##   <NA>  0  0  0  0  0  0  0  0    0
+
+depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
+table(depress$underemployed, depress$employ, useNA="always")
+##       
+##         FT Houseperson In School Other  PT Retired Unemp <NA>
+##   0    167          27         2     4   0      38     0    0
+##   1      0           0         0     0  42       0    14    0
+##   <NA>   0           0         0     0   0       0     0    0
+```
+
+The **Main Effects** model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income. 
+
+
+```r
+me_model <- glm(cases ~ lowincome + underemployed, data=depress, family="binomial")
+summary(me_model)
+## 
+## Call:
+## glm(formula = cases ~ lowincome + underemployed, family = "binomial", 
+##     data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9085  -0.5843  -0.5279  -0.5279   2.0197  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    -1.9003     0.2221  -8.556  < 2e-16 ***
+## lowincome       0.2192     0.3353   0.654  0.51322    
+## underemployed   1.0094     0.3470   2.909  0.00363 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 259.93  on 291  degrees of freedom
+## AIC: 265.93
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
+
+```r
+me_intx_model <- glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial") 
+summary(me_intx_model)
+## 
+## Call:
+## glm(formula = cases ~ lowincome + underemployed + lowincome * 
+##     underemployed, family = "binomial", data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3537  -0.5790  -0.5790  -0.4717   2.1219  
+## 
+## Coefficients:
+##                         Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)              -1.7011     0.2175  -7.822 5.21e-15 ***
+## lowincome                -0.4390     0.4324  -1.015  0.31005    
+## underemployed             0.2840     0.4501   0.631  0.52802    
+## lowincome:underemployed   2.2615     0.7874   2.872  0.00408 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 268.12  on 293  degrees of freedom
+## Residual deviance: 251.17  on 290  degrees of freedom
+## AIC: 259.17
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+
+## Confounding 
+
+One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
+
+As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
+
+**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
+
+
+![All the ways covariates can affect response variables](images/confounder.png)
+
+Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
+
+
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</div>\EndKnitrBlock{rmdnote}
+
+Additional example interpretations from models not shown here. 
+
+> * After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
+> * After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
+ 
 
 ## Categorical Predictors
 
@@ -160,7 +582,6 @@ Consider a model to predict depression using age, employment status and whether 
 
 
 ```r
-depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt", header=TRUE,sep="\t")
 full_model <- lm(cesd ~ age + chronill + employ, data=depress)
 pander(summary(full_model))
 ```
@@ -224,11 +645,6 @@ The p-value of this Wald test is significant, thus employment significantly pred
 #### Example 2: Blood Pressure
 
 
-```r
-load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
-addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
-```
-
 Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
 
 $$
@@ -285,328 +701,6 @@ survey::regTermTest(bp.mod, "bp_class")
 The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.
 
 * This means blood pressure classification should not be included in a model to explain smoking status. 
-
-## Stratification
-
-Stratified models examine the regression equations for each subgroup of the population and seeing if the relationship between the response and explanatory variables _changed_ for at least one subgroup. 
-
-Consider the relationship between the length of an iris petal, and the length of it's sepal. Earlier we found that the iris species modified this relationship. Lets consider a binary indicator variable for species that groups _veriscolor_ and _virginica_ together. 
-
-
-```r
-iris$setosa <- ifelse(iris$Species=="setosa", 1, 0)
-table(iris$setosa, iris$Species)
-##    
-##     setosa versicolor virginica
-##   0      0         50        50
-##   1     50          0         0
-```
-
-Within the _setosa_ species, there is little to no relationship between sepal and petal length. For the other two species, the relationship looks still significantly positive, but in the combined sample there appears to be a strong positive relationship (blue). 
-
-
-```r
-ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=as.factor(setosa))) + 
-            geom_point() + theme_bw() + theme(legend.position="top") + 
-            scale_color_manual(name="Species setosa", values=c("red", "darkgreen")) + 
-            geom_smooth(se=FALSE, method="lm") + 
-            geom_smooth(aes(x=Sepal.Length, y=Petal.Length), col="blue", se=FALSE, method='lm')
-```
-
-<img src="model_building_files/figure-html/unnamed-chunk-12-1.png" width="672" />
-
-The mathematical model describing the relationship between Petal length ($Y$), and Sepal length ($X$), for species _setosa_ ($s$) versus not-setosa ($n$), is written as follows: 
-
-$$ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})$$
-$$ Y_{in} \sim \beta_{0n} + \beta_{1n}*x_{i} + \epsilon_{in} \qquad \epsilon_{in} \sim \mathcal{N}(0,\sigma^{2}_{n}) $$
-
-In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: $\beta_{0}, \beta_{1}$, and $\sigma^{2}$, for a total of 6 for the two models. The more parameters that need to be estimated, the more data we need. 
-
-
-
-## Moderation
-
-Moderation occurs when the relationship between two variables depends on a third variable.
-
-* The third variable is referred to as the moderating variable or simply the moderator. 
-* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
-    - This tends to be an important 
-* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
-    - This is also called a _stratified_ model, or a _subgroup analysis_.
-
-Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
-
-**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
-
-**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
-
-**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
-
-Recall that common analysis methods for analyzing bivariate relationships come in very few flavors: 
-
-* Correlation (Q~Q)
-* Linear Regression (Q~Q)
-* $\chi^{2}$ (C~C)
-* ANOVA (Q~C)
-
-
-### Example 1: Sepal vs Petal Length
-
-We just got done looking at the relationship between the length of an iris's Sepal, and the length (cm) of it's petal. 
-
-```r
-overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
-                geom_point() + geom_smooth(se=FALSE) + 
-                theme_bw()
-
-by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
-                  geom_point() + geom_smooth(se=FALSE) + 
-                  theme_bw() + theme(legend.position="top")
-
-library(gridExtra)
-grid.arrange(overall, by_spec , ncol=2)
-```
-
-<img src="model_building_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-
-![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
-
-Let's look at the correlation between these two continuous variables
-
-_overall_
-
-```r
-cor(iris$Sepal.Length, iris$Petal.Length)
-## [1] 0.8717538
-```
-
-_stratified by species_
-
-```r
-by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
-## iris$Species: setosa
-## [1] 0.2671758
-## -------------------------------------------------------- 
-## iris$Species: versicolor
-## [1] 0.754049
-## -------------------------------------------------------- 
-## iris$Species: virginica
-## [1] 0.8642247
-```
-
-There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
-
-The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
-
-### Example 2: Simpson's Paradox
-
-Sometimes moderating variables can result in what's known as _Simpson's Paradox_
-
-https://en.wikipedia.org/wiki/Simpson%27s_paradox
-
-## Interactions {#interactions}
-
-If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa` . Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}$$
-
-Ifwe evaluate this model for both levels of $x_{2}$, the resulting models are the same as the stratified models. 
-
-When $x_{2} = 0$, the record is on an iris not from the _setosa_ species. 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}(0) + \beta_{3}x_{1i}(0)$$
-which simplifies to 
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i}$$
-
-When $x_{2} = 1$, the record is on an iris of the _setosa_ species. 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}(1) + \beta_{3}x_{1i}(1)$$
-which simplifies to
-$$ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}$$
-
-Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model. 
-
-
-Interactions are fit in `R` by simply multiplying `*` the two variables together in the model statement. 
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
-##     setosa, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
-## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
-## setosa               2.35877    0.88266   2.672  0.00839 ** 
-## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.3929 on 146 degrees of freedom
-## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
-## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
-```
-
-The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
-
-### Example
-
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
-##     setosa, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
-## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
-## setosa               2.35877    0.88266   2.672  0.00839 ** 
-## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.3929 on 146 degrees of freedom
-## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
-## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
-```
-
-* If $x_{2}=0$, then the effect of $x_{1}$ on $Y$ simplifies to: $\beta_{1}$
-    * $b_{1}$ The effect of sepal length on petal length **for non-setosa species of iris** (`setosa=0`) 
-    * For non-setosa species, the petal length increases 1.03cm for every additional cm of sepal length. 
-* If $x_{2}=1$, then the effect of $x_{1}$ on $Y$ model simplifies to: $\beta_{1} + \beta_{3}$
-    * For setosa species, the petal length increases by `1.03-0.9=0.13` cm for every additional cm of sepal length. 
-
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.</div>\EndKnitrBlock{rmdcaution}
-
-Let's up the game now and look at the full interaction model with a categorical version of species. Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}$$
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + Species + Sepal.Length*Species, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * 
-##     Species, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.68611 -0.13442 -0.00856  0.15966  0.79607 
-## 
-## Coefficients:
-##                                Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)                      0.8031     0.5310   1.512    0.133    
-## Sepal.Length                     0.1316     0.1058   1.244    0.216    
-## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    
-## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    
-## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***
-## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.2611 on 144 degrees of freedom
-## Multiple R-squared:  0.9789,	Adjusted R-squared:  0.9781 
-## F-statistic:  1333 on 5 and 144 DF,  p-value: < 2.2e-16
-```
-
-The slope of the relationship between sepal length and petal length is calculated as follows, for each species:   
-
-* _setosa_ $(x_{2}=0, x_{3}=0): b_{1}=0.13$ 
-* _versicolor_ $(x_{2}=1, x_{3}=0): b_{1} + b_{2} + b_{4} = 0.13+0.55 = 0.68$
-* _virginica_ $(x_{2}=0, x_{3}=1): b_{1} + b_{3} + b_{5} = 0.13+0.62 = 0.75$
-
-Compare this to the estimates gained from the stratified model: 
-
-
-```r
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="setosa")))
-##  (Intercept) Sepal.Length 
-##    0.8030518    0.1316317
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="versicolor")))
-##  (Intercept) Sepal.Length 
-##    0.1851155    0.6864698
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
-##  (Intercept) Sepal.Length 
-##    0.6104680    0.7500808
-```
-
-They're the same! Proof that an interaction is equivalent to stratification. 
-
-### Example
-
-What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model
-
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa + Petal.Width, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
-##     setosa + Petal.Width, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.83519 -0.18278 -0.01812  0.17004  1.06968 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** 
-## Sepal.Length         0.66181    0.05179  12.779  < 2e-16 ***
-## setosa               1.83713    0.62355   2.946  0.00375 ** 
-## Petal.Width          0.97269    0.07970  12.204  < 2e-16 ***
-## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.2769 on 145 degrees of freedom
-## Multiple R-squared:  0.9761,	Adjusted R-squared:  0.9754 
-## F-statistic:  1478 on 4 and 145 DF,  p-value: < 2.2e-16
-```
-
-So far, petal width, and the combination of species and sepal length are both significantly associated with petal length. 
-
-_Note of caution: Stratification implies that the stratifying variable interacts with all other variables._ 
-So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would  be implying that species interacts with both sepal length and petal width. 
-
-E.g. the following stratified model 
-
-* $Y = A + B + C + D + C*D$, when D=1
-* $Y = A + B + C + D + C*D$, when D=0
-
-is the same as the following interaction model: 
-
-* $Y = A + B + C + D + A*D + B*D + C*D$
-
-## Confounding 
-
-One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
-
-As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
-
-**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
-
-
-![All the ways covariates can affect response variables](images/confounder.png)
-
-Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
-
-
-
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</div>\EndKnitrBlock{rmdnote}
 
 ## Variable Selection Process
 

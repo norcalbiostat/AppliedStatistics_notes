@@ -4,147 +4,6 @@ Model building methods are used mainly in exploratory situations where many inde
 
 This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models. 
 
-
-
-## Categorical Predictors
-
-Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
-
-```{r}
-summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
-```
-
-Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
-
-```{r, echo=FALSE}
-library(pander)
-a <- model.matrix(Petal.Length ~ Sepal.Length + Species, data=iris)
-b <- data.frame(a, Species=iris$Species)[c(1:2,51:52,101:102),-1]
-pander(b)
-```
-
-### Factor variable coding
-
-* Most commonly known as "Dummy coding". Not an informative term to use. 
-* Better used term: Indicator variable
-* Math notation: **I(gender == "Female")**. 
-* A.k.a reference coding
-* For a nominal X with K categories, define K indicator variables.
-    - Choose a reference (referent) category:
-    - Leave it out
-    - Use remaining K-1 in the regression.
-    - Often, the largest category is chosen as the reference category.
-
-For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
-
-The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
-
-Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
-
-```{r}
-main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
-pander(main.eff.model)
-pander(confint(main.eff.model))
-```
-
-In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
-
-* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
-* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
-* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
-
-
-### Wald test 
-
-The Wald test is used for simultaneous tests of $Q$ variables in a model
-
-Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
-
-* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
-* $H_{A}: Q$ additional variables are useful
-
-The traditional test statistic that we've seen since Intro stats is
-$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
-
-The Wald test generalizes this test _any_ linear combination of predictors. 
-
-$$
-(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
-(R\hat{\theta}_{n}-r)
-\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
-$$
-
-Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
-
-In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
-
-This can be done in R by using the `regTermTest()` function in the `survey` package. 
-
-```{r}
-library(survey)
-regTermTest(main.eff.model, "Species") 
-```
-
-##### Example 1: Employment status on depression score
-Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
-
-```{r}
-depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt", header=TRUE,sep="\t")
-full_model <- lm(cesd ~ age + chronill + employ, data=depress)
-pander(summary(full_model))
-```
-
-The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
-
-Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
-
-But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s are 0. 
-
-$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
-$H_{A}$: At least one $\beta_{j}$ is not 0. 
-
-```{r}
-survey::regTermTest(full_model, "employ")
-```
-
-* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
-    - Employment has 7 levels, so $df=6$. 
-    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
-    
-The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
-
-
-#### Example 2: Blood Pressure
-
-```{r}
-load(url("https://norcalbiostat.netlify.com/data/addhealth_clean.Rdata"))
-addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)
-```
-
-Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
-
-$$
-logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)} 
-+ \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
-$$
-
-```{r}
-bp.mod <- glm(smoke ~ female_c + income + bp_class, data=addhealth, family='binomial')
-pander(summary(bp.mod))
-```
-
-It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let's test that hypothesis formally using a Wald Test. 
-
-```{r}
-survey::regTermTest(bp.mod, "bp_class")
-```
-
-The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.
-
-* This means blood pressure classification should not be included in a model to explain smoking status. 
-
 ## Stratification
 
 Stratified models examine the regression equations for each subgroup of the population and seeing if the relationship between the response and explanatory variables _changed_ for at least one subgroup. 
@@ -247,7 +106,7 @@ If we care about how species _changes_ the relationship between petal and sepal 
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}$$
 
-Ifwe evaluate this model for both levels of $x_{2}$, the resulting models are the same as the stratified models. 
+If we evaluate this model for both levels of $x_{2}$, the resulting models are the same as the stratified models. 
 
 When $x_{2} = 0$, the record is on an iris not from the _setosa_ species. 
 
@@ -270,8 +129,8 @@ summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris
 ```
 
 The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
-
-### Example
+ 
+### Example 1
 
 ```{r}
 summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
@@ -310,7 +169,7 @@ coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
 
 They're the same! Proof that an interaction is equivalent to stratification. 
 
-### Example
+### Example 2
 
 What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model
 
@@ -332,6 +191,35 @@ is the same as the following interaction model:
 
 * $Y = A + B + C + D + A*D + B*D + C*D$
 
+
+
+### Example 3: The relationship between income, employment status and depression. 
+This example follows PMA5 Ch 12.7 and section \@ref(mlogreg). 
+
+Here I create the binary indicators of `lowincome` (annual income <$10k/year) and underemployed (part time or unemployed).
+
+```{r}
+depress$lowincome <- ifelse(depress$income < 10, 1, 0)
+table(depress$lowincome, depress$income, useNA="always")
+
+depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
+table(depress$underemployed, depress$employ, useNA="always")
+```
+
+The **Main Effects** model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income. 
+
+```{r}
+me_model <- glm(cases ~ lowincome + underemployed, data=depress, family="binomial")
+summary(me_model)
+```
+
+To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero. 
+```{r}
+me_intx_model <- glm(cases ~ lowincome + underemployed + lowincome*underemployed, data=depress, family="binomial") 
+summary(me_intx_model)
+```
+
+
 ## Confounding 
 
 One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
@@ -350,6 +238,146 @@ Credit: [A blog about statistical musings](https://significantlystatistical.word
 ```{block2, type='rmdnote'}
 Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/
 ```
+
+Additional example interpretations from models not shown here. 
+
+> * After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
+> * After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
+ 
+
+## Categorical Predictors
+
+Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
+
+```{r}
+summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
+```
+
+Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
+
+```{r, echo=FALSE}
+library(pander)
+a <- model.matrix(Petal.Length ~ Sepal.Length + Species, data=iris)
+b <- data.frame(a, Species=iris$Species)[c(1:2,51:52,101:102),-1]
+pander(b)
+```
+
+### Factor variable coding
+
+* Most commonly known as "Dummy coding". Not an informative term to use. 
+* Better used term: Indicator variable
+* Math notation: **I(gender == "Female")**. 
+* A.k.a reference coding
+* For a nominal X with K categories, define K indicator variables.
+    - Choose a reference (referent) category:
+    - Leave it out
+    - Use remaining K-1 in the regression.
+    - Often, the largest category is chosen as the reference category.
+
+For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
+
+The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
+
+Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
+
+```{r}
+main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
+pander(main.eff.model)
+pander(confint(main.eff.model))
+```
+
+In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
+
+* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
+* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
+* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
+
+
+### Wald test 
+
+The Wald test is used for simultaneous tests of $Q$ variables in a model
+
+Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+
+* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
+* $H_{A}: Q$ additional variables are useful
+
+The traditional test statistic that we've seen since Intro stats is
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+
+The Wald test generalizes this test _any_ linear combination of predictors. 
+
+$$
+(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+$$
+
+Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
+
+This can be done in R by using the `regTermTest()` function in the `survey` package. 
+
+```{r}
+library(survey)
+regTermTest(main.eff.model, "Species") 
+```
+
+##### Example 1: Employment status on depression score
+Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
+
+```{r}
+full_model <- lm(cesd ~ age + chronill + employ, data=depress)
+pander(summary(full_model))
+```
+
+The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
+
+Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
+
+But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s are 0. 
+
+$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
+$H_{A}$: At least one $\beta_{j}$ is not 0. 
+
+```{r}
+survey::regTermTest(full_model, "employ")
+```
+
+* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
+    - Employment has 7 levels, so $df=6$. 
+    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
+    
+The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
+
+
+#### Example 2: Blood Pressure
+
+
+Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
+
+$$
+logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)} 
++ \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
+$$
+
+```{r}
+bp.mod <- glm(smoke ~ female_c + income + bp_class, data=addhealth, family='binomial')
+pander(summary(bp.mod))
+```
+
+It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let's test that hypothesis formally using a Wald Test. 
+
+```{r}
+survey::regTermTest(bp.mod, "bp_class")
+```
+
+The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.
+
+* This means blood pressure classification should not be included in a model to explain smoking status. 
 
 ## Variable Selection Process
 
