@@ -347,6 +347,86 @@ For the model that includes age, the coefficient for height is now 0.11, which i
 
 Both height and age are significantly associated with FEV in fathers (p<.0001 each).
 
+## Example with a binary predictor.
+
+Does gender also play a roll in FEV? Let's look at the separate effects of height and age on FEV1, and visualize how gender plays a roll. 
+
+
+
+```r
+ht.plot <- ggplot(fev_long, aes(x=ht, y=fev1)) + 
+        geom_point(aes(col=gender)) + 
+        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
+        geom_smooth(se=FALSE, col="red", method="lm") + 
+        scale_color_viridis_d() + 
+        theme(legend.position = c(0.15,0.85))
+
+age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) + 
+        geom_point(aes(col=gender)) + 
+        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
+        geom_smooth(se=FALSE, col="red", method="lm") + 
+        scale_color_viridis_d(guide=FALSE)
+        
+grid.arrange(ht.plot, age.plot, ncol=2)
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+* The points are colored by gender
+* Each gender has it's own best fit line in the same color as the points
+* The red line is the best fit line overall - ignoring gender
+
+![q](images/q.png) Is gender a moderator for either height or age? 
+
+Let's compare the models with, and without gender 
+
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">fev1</td></tr>
+<tr><td style="text-align:left"></td><td>W/o gender</td><td>w/ gender</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">age</td><td>-0.02<sup>***</sup> (-0.03, -0.01)</td><td>-0.02<sup>***</sup> (-0.03, -0.02)</td></tr>
+<tr><td style="text-align:left">ht</td><td>0.16<sup>***</sup> (0.15, 0.18)</td><td>0.11<sup>***</sup> (0.08, 0.13)</td></tr>
+<tr><td style="text-align:left">genderF</td><td></td><td>-0.64<sup>***</sup> (-0.79, -0.48)</td></tr>
+<tr><td style="text-align:left">Constant</td><td>-6.74<sup>***</sup> (-7.84, -5.63)</td><td>-2.24<sup>***</sup> (-3.71, -0.77)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>300</td><td>300</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.57</td><td>0.65</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>0.53 (df = 297)</td><td>0.48 (df = 296)</td></tr>
+<tr><td style="text-align:left">F Statistic</td><td>197.57<sup>***</sup> (df = 2; 297)</td><td>182.77<sup>***</sup> (df = 3; 296)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+* Gender is a binary categorical variable, with reference group "Male". 
+    - This is detected because the variable that shows up in the regression model output is `genderF`. So the estimate shown is for males, compared to females. 
+    - More details on how categorical variables are included in multivariable models is covered in section \@ref(cat-predictors). 
+
+
+**Interpretation of Coefficients**
+
+The regression equation for the model without gender is 
+
+$$ y = -6.74 - 0.02 age + 0.16 height $$
+
+* $b_{0}:$ For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.
+* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
+* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+
+
+The regression equation for the model with gender is 
+
+$$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
+
+
+* $b_{0}:$ For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.
+* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
+* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+* $b_{3}:$ Females have 0.64L lower FEV compared to males. 
+
+**Note**: The interpretation of categorical variables still falls under the template language of "for every one unit increase in $X_{p}$, $Y$ changes by $b_{p}$". Here, $X_{3}=0$ for males, and 1 for females. So a 1 "unit" change is females _compared to_ males. 
+
+![q](images/q.png) Which model fits better? What measure are you using to quanitify "fit"? 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on? </div>\EndKnitrBlock{rmdnote}
+
 
 ## Model Diagnostics 
 
@@ -358,7 +438,7 @@ par(mfrow=c(2,2))
 plot(mv_model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
 ## Multicollinearity

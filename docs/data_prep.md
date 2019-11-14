@@ -576,7 +576,7 @@ EXECUTE.
 
 
 
-## Wide vs. Long data
+## Wide vs. Long data {#wide-long}
 
 The data on Lung function originally was recorded in _wide_ format, with separate variables for mother's and father's FEV1 score (`MFEV1` and `FFEV`). In this format, the data is one record per family. 
 
