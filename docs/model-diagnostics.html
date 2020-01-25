@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.6 Model Diagnostics | Applied Statistics</title>
+  <title>8.7 Model Diagnostics | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.6 Model Diagnostics | Applied Statistics" />
+  <meta property="og:title" content="8.7 Model Diagnostics | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.6 Model Diagnostics | Applied Statistics" />
+  <meta name="twitter:title" content="8.7 Model Diagnostics | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="example-with-a-binary-predictor-.html"/>
+<link rel="prev" href="cat-predictors.html"/>
 <link rel="next" href="multicollinearity.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -232,10 +232,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="8.4" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>8.4</b> Example</a></li>
-<li class="chapter" data-level="8.5" data-path="example-with-a-binary-predictor-.html"><a href="example-with-a-binary-predictor-.html"><i class="fa fa-check"></i><b>8.5</b> Example with a binary predictor.</a></li>
-<li class="chapter" data-level="8.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.6</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="8.7" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.7</b> Multicollinearity</a></li>
-<li class="chapter" data-level="8.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="8.5" data-path="binary-predictors-.html"><a href="binary-predictors-.html"><i class="fa fa-check"></i><b>8.5</b> Binary predictors.</a></li>
+<li class="chapter" data-level="8.6" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>8.6</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>8.6.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="8.6.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>8.6.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="8.8" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.8</b> Multicollinearity</a></li>
+<li class="chapter" data-level="8.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a><ul>
 <li class="chapter" data-level="9.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>9.1</b> Fitting GLMs</a><ul>
@@ -253,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>9.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>9.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Categorical outcome data</a></li>
-<li class="chapter" data-level="9.6" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a><ul>
 <li class="chapter" data-level="10.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>10.1</b> Stratification</a></li>
@@ -268,16 +272,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>10.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>10.4</b> Confounding</a></li>
-<li class="chapter" data-level="10.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.5</b> Categorical Predictors</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.5.1</b> Factor variable coding</a></li>
-<li class="chapter" data-level="10.5.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>10.5.2</b> Wald test</a></li>
+<li class="chapter" data-level="10.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.5</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.5.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma6-section-9.6"><i class="fa fa-check"></i><b>10.5.2</b> The lesser of three evils: Best Subsets (PMA6 Section 9.6)</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>10.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
-</ul></li>
-<li class="chapter" data-level="10.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a></li>
-<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.6</b> Comparing between models</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
 <li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
@@ -384,18 +384,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="model-diagnostics" class="section level2">
-<h2><span class="header-section-number">8.6</span> Model Diagnostics</h2>
+<h2><span class="header-section-number">8.7</span> Model Diagnostics</h2>
 <p>The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb157-2" title="2"><span class="kw">plot</span>(mv_model)</a></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb163-2" title="2"><span class="kw">plot</span>(mv_model)</a></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="example-with-a-binary-predictor-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cat-predictors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="multicollinearity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

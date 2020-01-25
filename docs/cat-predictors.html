@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.5 Categorical Predictors | Applied Statistics</title>
+  <title>8.6 Categorical Predictors | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.5 Categorical Predictors | Applied Statistics" />
+  <meta property="og:title" content="8.6 Categorical Predictors | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.5 Categorical Predictors | Applied Statistics" />
+  <meta name="twitter:title" content="8.6 Categorical Predictors | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="confounding.html"/>
-<link rel="next" href="variable-selection-process.html"/>
+<link rel="prev" href="binary-predictors-.html"/>
+<link rel="next" href="model-diagnostics.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -232,10 +232,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="8.4" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>8.4</b> Example</a></li>
-<li class="chapter" data-level="8.5" data-path="example-with-a-binary-predictor-.html"><a href="example-with-a-binary-predictor-.html"><i class="fa fa-check"></i><b>8.5</b> Example with a binary predictor.</a></li>
-<li class="chapter" data-level="8.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.6</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="8.7" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.7</b> Multicollinearity</a></li>
-<li class="chapter" data-level="8.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="8.5" data-path="binary-predictors-.html"><a href="binary-predictors-.html"><i class="fa fa-check"></i><b>8.5</b> Binary predictors.</a></li>
+<li class="chapter" data-level="8.6" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>8.6</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>8.6.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="8.6.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>8.6.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="8.8" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.8</b> Multicollinearity</a></li>
+<li class="chapter" data-level="8.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a><ul>
 <li class="chapter" data-level="9.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>9.1</b> Fitting GLMs</a><ul>
@@ -253,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>9.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>9.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Categorical outcome data</a></li>
-<li class="chapter" data-level="9.6" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a><ul>
 <li class="chapter" data-level="10.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>10.1</b> Stratification</a></li>
@@ -268,16 +272,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>10.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>10.4</b> Confounding</a></li>
-<li class="chapter" data-level="10.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.5</b> Categorical Predictors</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.5.1</b> Factor variable coding</a></li>
-<li class="chapter" data-level="10.5.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>10.5.2</b> Wald test</a></li>
+<li class="chapter" data-level="10.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.5</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.5.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma6-section-9.6"><i class="fa fa-check"></i><b>10.5.2</b> The lesser of three evils: Best Subsets (PMA6 Section 9.6)</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>10.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
-</ul></li>
-<li class="chapter" data-level="10.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a></li>
-<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.6</b> Comparing between models</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
 <li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
@@ -384,29 +384,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="cat-predictors" class="section level2">
-<h2><span class="header-section-number">10.5</span> Categorical Predictors</h2>
+<h2><span class="header-section-number">8.6</span> Categorical Predictors</h2>
 <p>Let’s continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we’ll keep species as a categorical variable. What happens if we just put the variable in the model?</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris))</a>
-<a class="sourceLine" id="cb189-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb189-3" title="3"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb189-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)</span></a>
-<a class="sourceLine" id="cb189-5" title="5"><span class="co">## </span></a>
-<a class="sourceLine" id="cb189-6" title="6"><span class="co">## Residuals:</span></a>
-<a class="sourceLine" id="cb189-7" title="7"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb189-8" title="8"><span class="co">## -0.76390 -0.17875  0.00716  0.17461  0.79954 </span></a>
-<a class="sourceLine" id="cb189-9" title="9"><span class="co">## </span></a>
-<a class="sourceLine" id="cb189-10" title="10"><span class="co">## Coefficients:</span></a>
-<a class="sourceLine" id="cb189-11" title="11"><span class="co">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb189-12" title="12"><span class="co">## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***</span></a>
-<a class="sourceLine" id="cb189-13" title="13"><span class="co">## Sepal.Length       0.63211    0.04527  13.962  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb189-14" title="14"><span class="co">## Speciesversicolor  2.21014    0.07047  31.362  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb189-15" title="15"><span class="co">## Speciesvirginica   3.09000    0.09123  33.870  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb189-16" title="16"><span class="co">## ---</span></a>
-<a class="sourceLine" id="cb189-17" title="17"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb189-18" title="18"><span class="co">## </span></a>
-<a class="sourceLine" id="cb189-19" title="19"><span class="co">## Residual standard error: 0.2826 on 146 degrees of freedom</span></a>
-<a class="sourceLine" id="cb189-20" title="20"><span class="co">## Multiple R-squared:  0.9749, Adjusted R-squared:  0.9744 </span></a>
-<a class="sourceLine" id="cb189-21" title="21"><span class="co">## F-statistic:  1890 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris))</a>
+<a class="sourceLine" id="cb157-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb157-4" title="4"><span class="co">## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)</span></a>
+<a class="sourceLine" id="cb157-5" title="5"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-6" title="6"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb157-7" title="7"><span class="co">##      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb157-8" title="8"><span class="co">## -0.76390 -0.17875  0.00716  0.17461  0.79954 </span></a>
+<a class="sourceLine" id="cb157-9" title="9"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-10" title="10"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb157-11" title="11"><span class="co">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb157-12" title="12"><span class="co">## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***</span></a>
+<a class="sourceLine" id="cb157-13" title="13"><span class="co">## Sepal.Length       0.63211    0.04527  13.962  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb157-14" title="14"><span class="co">## Speciesversicolor  2.21014    0.07047  31.362  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb157-15" title="15"><span class="co">## Speciesvirginica   3.09000    0.09123  33.870  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb157-16" title="16"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb157-17" title="17"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb157-18" title="18"><span class="co">## </span></a>
+<a class="sourceLine" id="cb157-19" title="19"><span class="co">## Residual standard error: 0.2826 on 146 degrees of freedom</span></a>
+<a class="sourceLine" id="cb157-20" title="20"><span class="co">## Multiple R-squared:  0.9749, Adjusted R-squared:  0.9744 </span></a>
+<a class="sourceLine" id="cb157-21" title="21"><span class="co">## F-statistic:  1890 on 3 and 146 DF,  p-value: &lt; 2.2e-16</span></a></code></pre></div>
 <p>Examine the coefficient names, <code>Speciesversicolor</code> and <code>Speciesvirginica</code>. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let’s look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species <em>versicolor</em>, next the binary indicator for if the iris is from species <em>virginica</em>, and lastly the species as a 3 level categorical variable (which is what we’re used to seeing at this point.)</p>
 <table>
 <colgroup>
@@ -471,7 +471,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <div id="factor-variable-coding" class="section level3">
-<h3><span class="header-section-number">10.5.1</span> Factor variable coding</h3>
+<h3><span class="header-section-number">8.6.1</span> Factor variable coding</h3>
 <ul>
 <li>Most commonly known as “Dummy coding”. Not an informative term to use.</li>
 <li>Better used term: Indicator variable</li>
@@ -489,8 +489,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The mathematical model is now written as follows, where <span class="math inline">\(x_{1}\)</span> is Sepal Length, <span class="math inline">\(x_{2}\)</span> is the indicator for <em>versicolor</em>, and <span class="math inline">\(x_{3}\)</span> the indicator for <em>virginica</em></p>
 <p><span class="math display">\[ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}\]</span></p>
 <p>Let’s look at the regression coefficients and their 95% confidence intervals from the main effects model again.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">main.eff.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</a>
-<a class="sourceLine" id="cb190-2" title="2"><span class="kw">pander</span>(main.eff.model)</a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1">main.eff.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb158-2" title="2"><span class="kw">pander</span>(main.eff.model)</a></code></pre></div>
 <table style="width:97%;">
 <caption>Fitting linear model: Petal.Length ~ Sepal.Length + Species</caption>
 <colgroup>
@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="kw">pander</span>(<span class="kw">confint</span>(main.eff.model))</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">pander</span>(<span class="kw">confint</span>(main.eff.model))</a></code></pre></div>
 <table style="width:58%;">
 <colgroup>
 <col width="33%" />
@@ -585,7 +585,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="wald-test" class="section level3">
-<h3><span class="header-section-number">10.5.2</span> Wald test</h3>
+<h3><span class="header-section-number">8.6.2</span> Wald test</h3>
 <p>The Wald test is used for simultaneous tests of <span class="math inline">\(Q\)</span> variables in a model</p>
 <p>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.</p>
 <ul>
@@ -604,16 +604,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Where <span class="math inline">\(\mathbf{R}\)</span> is the vector of coefficients for the <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\hat{V}_{n}\)</span> is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(Q\)</span> and <span class="math inline">\(n-P\)</span> degrees of freedom.</p>
 <p>In the case where we’re testing <span class="math inline">\(\beta_{p}=\beta_{q}=...=0\)</span>, <span class="math inline">\(\mathbf{R}\)</span> is all 1’s.</p>
 <p>This can be done in R by using the <code>regTermTest()</code> function in the <code>survey</code> package.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">library</span>(survey)</a>
-<a class="sourceLine" id="cb192-2" title="2"><span class="kw">regTermTest</span>(main.eff.model, <span class="st">&quot;Species&quot;</span>) </a>
-<a class="sourceLine" id="cb192-3" title="3"><span class="co">## Wald test for Species</span></a>
-<a class="sourceLine" id="cb192-4" title="4"><span class="co">##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)</span></a>
-<a class="sourceLine" id="cb192-5" title="5"><span class="co">## F =  624.9854  on  2  and  146  df: p= &lt; 2.22e-16</span></a></code></pre></div>
-<div id="example-1-employment-status-on-depression-score" class="section level5">
-<h5><span class="header-section-number">10.5.2.0.1</span> Example 1: Employment status on depression score</h5>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">library</span>(survey)</a>
+<a class="sourceLine" id="cb160-2" title="2"><span class="kw">regTermTest</span>(main.eff.model, <span class="st">&quot;Species&quot;</span>) </a>
+<a class="sourceLine" id="cb160-3" title="3"><span class="co">## Wald test for Species</span></a>
+<a class="sourceLine" id="cb160-4" title="4"><span class="co">##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)</span></a>
+<a class="sourceLine" id="cb160-5" title="5"><span class="co">## F =  624.9854  on  2  and  146  df: p= &lt; 2.22e-16</span></a></code></pre></div>
+<div id="example-employment-status-on-depression-score" class="section level5">
+<h5><span class="header-section-number">8.6.2.0.1</span> Example: Employment status on depression score</h5>
 <p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chronill <span class="op">+</span><span class="st"> </span>employ, <span class="dt">data=</span>depress)</a>
-<a class="sourceLine" id="cb193-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(full_model))</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chronill <span class="op">+</span><span class="st"> </span>employ, <span class="dt">data=</span>depress)</a>
+<a class="sourceLine" id="cb161-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(full_model))</a></code></pre></div>
 <table style="width:97%;">
 <colgroup>
 <col width="33%" />
@@ -727,10 +727,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s are 0.</p>
 <p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
 <span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(full_model, <span class="st">&quot;employ&quot;</span>)</a>
-<a class="sourceLine" id="cb194-2" title="2"><span class="co">## Wald test for employ</span></a>
-<a class="sourceLine" id="cb194-3" title="3"><span class="co">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></a>
-<a class="sourceLine" id="cb194-4" title="4"><span class="co">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(full_model, <span class="st">&quot;employ&quot;</span>)</a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="co">## Wald test for employ</span></a>
+<a class="sourceLine" id="cb162-3" title="3"><span class="co">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></a>
+<a class="sourceLine" id="cb162-4" title="4"><span class="co">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></a></code></pre></div>
 <ul>
 <li>Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
 <ul>
@@ -740,107 +740,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The p-value of this Wald test is significant, thus employment significantly predicts CESD score.</p>
 </div>
-<div id="example-2-blood-pressure" class="section level4">
-<h4><span class="header-section-number">10.5.2.1</span> Example 2: Blood Pressure</h4>
-<p>Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (<code>bp_class</code>) as predictors.</p>
-<p><span class="math display">\[
-logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)} 
-+ \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
-\]</span></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">bp.mod &lt;-<span class="st"> </span><span class="kw">glm</span>(smoke <span class="op">~</span><span class="st"> </span>female_c <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>bp_class, <span class="dt">data=</span>addhealth, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>)</a>
-<a class="sourceLine" id="cb195-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(bp.mod))</a></code></pre></div>
-<table style="width:97%;">
-<colgroup>
-<col width="30%" />
-<col width="18%" />
-<col width="18%" />
-<col width="13%" />
-<col width="16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"> </th>
-<th align="center">Estimate</th>
-<th align="center">Std. Error</th>
-<th align="center">z value</th>
-<th align="center">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>(Intercept)</strong></td>
-<td align="center">1.046</td>
-<td align="center">0.1064</td>
-<td align="center">9.836</td>
-<td align="center">7.881e-23</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>female_cFemale</strong></td>
-<td align="center">-0.6182</td>
-<td align="center">0.07617</td>
-<td align="center">-8.117</td>
-<td align="center">4.798e-16</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>income</strong></td>
-<td align="center">-3.929e-06</td>
-<td align="center">1.411e-06</td>
-<td align="center">-2.785</td>
-<td align="center">0.005346</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>bp_classPre-HTN</strong></td>
-<td align="center">0.07289</td>
-<td align="center">0.08206</td>
-<td align="center">0.8882</td>
-<td align="center">0.3745</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>bp_classHTN-I</strong></td>
-<td align="center">-0.02072</td>
-<td align="center">0.1093</td>
-<td align="center">-0.1895</td>
-<td align="center">0.8497</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>bp_classHTN-II</strong></td>
-<td align="center">0.02736</td>
-<td align="center">0.1888</td>
-<td align="center">0.1449</td>
-<td align="center">0.8848</td>
-</tr>
-</tbody>
-</table>
-<p>(Dispersion parameter for binomial family taken to be 1 )</p>
-<table style="width:68%;">
-<colgroup>
-<col width="29%" />
-<col width="38%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="center">Null deviance:</td>
-<td align="center">4853 on 3728 degrees of
-freedom</td>
-</tr>
-<tr class="even">
-<td align="center">Residual deviance:</td>
-<td align="center">4769 on 3723 degrees of
-freedom</td>
-</tr>
-</tbody>
-</table>
-<p>It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let’s test that hypothesis formally using a Wald Test.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</a>
-<a class="sourceLine" id="cb196-2" title="2"><span class="co">## Wald test for bp_class</span></a>
-<a class="sourceLine" id="cb196-3" title="3"><span class="co">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></a>
-<a class="sourceLine" id="cb196-4" title="4"><span class="co">##     data = addhealth)</span></a>
-<a class="sourceLine" id="cb196-5" title="5"><span class="co">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></a></code></pre></div>
-<p>The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.</p>
-<ul>
-<li>This means blood pressure classification should not be included in a model to explain smoking status.</li>
-</ul>
-</div>
 </div>
 </div>
             </section>
@@ -848,8 +747,8 @@ freedom</td>
           </div>
         </div>
       </div>
-<a href="confounding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="variable-selection-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="binary-predictors-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-diagnostics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

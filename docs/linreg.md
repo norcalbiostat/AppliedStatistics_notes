@@ -347,7 +347,7 @@ For the model that includes age, the coefficient for height is now 0.11, which i
 
 Both height and age are significantly associated with FEV in fathers (p<.0001 each).
 
-## Example with a binary predictor.
+## Binary predictors.
 
 Does gender also play a roll in FEV? Let's look at the separate effects of height and age on FEV1, and visualize how gender plays a roll. 
 
@@ -428,6 +428,220 @@ $$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on? </div>\EndKnitrBlock{rmdnote}
 
 
+
+## Categorical Predictors {#cat-predictors}
+
+Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
+
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.76390 -0.17875  0.00716  0.17461  0.79954 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
+## Sepal.Length       0.63211    0.04527  13.962  < 2e-16 ***
+## Speciesversicolor  2.21014    0.07047  31.362  < 2e-16 ***
+## Speciesvirginica   3.09000    0.09123  33.870  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2826 on 146 degrees of freedom
+## Multiple R-squared:  0.9749,	Adjusted R-squared:  0.9744 
+## F-statistic:  1890 on 3 and 146 DF,  p-value: < 2.2e-16
+```
+
+Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
+
+
+----------------------------------------------------------------------------
+ &nbsp;    Sepal.Length   Speciesversicolor   Speciesvirginica    Species   
+--------- -------------- ------------------- ------------------ ------------
+  **1**        5.1                0                  0             setosa   
+
+  **2**        4.9                0                  0             setosa   
+
+ **51**         7                 1                  0           versicolor 
+
+ **52**        6.4                1                  0           versicolor 
+
+ **101**       6.3                0                  1           virginica  
+
+ **102**       5.8                0                  1           virginica  
+----------------------------------------------------------------------------
+
+### Factor variable coding
+
+* Most commonly known as "Dummy coding". Not an informative term to use. 
+* Better used term: Indicator variable
+* Math notation: **I(gender == "Female")**. 
+* A.k.a reference coding
+* For a nominal X with K categories, define K indicator variables.
+    - Choose a reference (referent) category:
+    - Leave it out
+    - Use remaining K-1 in the regression.
+    - Often, the largest category is chosen as the reference category.
+
+For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
+
+The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
+
+Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
+
+
+```r
+main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
+pander(main.eff.model)
+```
+
+
+---------------------------------------------------------------------
+        &nbsp;           Estimate   Std. Error   t value   Pr(>|t|)  
+----------------------- ---------- ------------ --------- -----------
+    **(Intercept)**       -1.702      0.2301     -7.397    1.005e-11 
+
+   **Sepal.Length**       0.6321     0.04527      13.96    1.121e-28 
+
+ **Speciesversicolor**     2.21      0.07047      31.36    9.646e-67 
+
+ **Speciesvirginica**      3.09      0.09123      33.87    4.918e-71 
+---------------------------------------------------------------------
+
+Table: Fitting linear model: Petal.Length ~ Sepal.Length + Species
+
+```r
+pander(confint(main.eff.model))
+```
+
+
+-----------------------------------------
+        &nbsp;           2.5 %    97.5 % 
+----------------------- -------- --------
+    **(Intercept)**      -2.157   -1.248 
+
+   **Sepal.Length**      0.5426   0.7216 
+
+ **Speciesversicolor**   2.071    2.349  
+
+ **Speciesvirginica**     2.91     3.27  
+-----------------------------------------
+
+In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
+
+* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
+* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
+* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
+
+
+### Wald test 
+
+The Wald test is used for simultaneous tests of $Q$ variables in a model
+
+Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+
+* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
+* $H_{A}: Q$ additional variables are useful
+
+The traditional test statistic that we've seen since Intro stats is
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+
+The Wald test generalizes this test _any_ linear combination of predictors. 
+
+$$
+(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+$$
+
+Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
+
+This can be done in R by using the `regTermTest()` function in the `survey` package. 
+
+
+```r
+library(survey)
+regTermTest(main.eff.model, "Species") 
+## Wald test for Species
+##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+## F =  624.9854  on  2  and  146  df: p= < 2.22e-16
+```
+
+##### Example: Employment status on depression score
+Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
+
+
+```r
+full_model <- lm(cesd ~ age + chronill + employ, data=depress)
+pander(summary(full_model))
+```
+
+
+---------------------------------------------------------------------
+        &nbsp;           Estimate   Std. Error   t value   Pr(>|t|)  
+----------------------- ---------- ------------ --------- -----------
+    **(Intercept)**       11.48       1.502       7.646    3.191e-13 
+
+        **age**           -0.133     0.03514     -3.785    0.0001873 
+
+     **chronill**         2.688       1.024       2.625    0.009121  
+
+ **employHouseperson**     6.75       1.797       3.757    0.0002083 
+
+  **employIn School**     1.967       5.995       0.328     0.7431   
+
+    **employOther**       4.897       4.278       1.145     0.2533   
+
+     **employPT**         3.259       1.472       2.214     0.02765  
+
+   **employRetired**      3.233       1.886       1.714     0.08756  
+
+    **employUnemp**       7.632       2.339       3.263    0.001238  
+---------------------------------------------------------------------
+
+
+--------------------------------------------------------------
+ Observations   Residual Std. Error   $R^2$    Adjusted $R^2$ 
+-------------- --------------------- -------- ----------------
+     294               8.385          0.1217      0.09704     
+--------------------------------------------------------------
+
+Table: Fitting linear model: cesd ~ age + chronill + employ
+
+The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
+
+Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
+
+But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s are 0. 
+
+$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
+$H_{A}$: At least one $\beta_{j}$ is not 0. 
+
+
+```r
+survey::regTermTest(full_model, "employ")
+## Wald test for employ
+##  in lm(formula = cesd ~ age + chronill + employ, data = depress)
+## F =  4.153971  on  6  and  285  df: p= 0.0005092
+```
+
+* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
+    - Employment has 7 levels, so $df=6$. 
+    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
+    
+The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
+
+
 ## Model Diagnostics 
 
 The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model. 
@@ -438,7 +652,7 @@ par(mfrow=c(2,2))
 plot(mv_model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 ## Multicollinearity

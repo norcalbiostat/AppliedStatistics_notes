@@ -282,6 +282,65 @@ round(exp(10*confint(mvmodel)[2,]),3)
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
 
+#### Example: Predictors of smoking status
+
+Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
+
+$$
+logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)} 
++ \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
+$$
+
+
+```r
+bp.mod <- glm(smoke ~ female_c + income + bp_class, data=addhealth, family='binomial')
+pander(summary(bp.mod))
+```
+
+
+---------------------------------------------------------------------
+       &nbsp;           Estimate    Std. Error   z value   Pr(>|z|)  
+--------------------- ------------ ------------ --------- -----------
+   **(Intercept)**       1.046        0.1064      9.836    7.881e-23 
+
+ **female_cFemale**     -0.6182      0.07617     -8.117    4.798e-16 
+
+     **income**        -3.929e-06   1.411e-06    -2.785    0.005346  
+
+ **bp_classPre-HTN**    0.07289      0.08206     0.8882     0.3745   
+
+  **bp_classHTN-I**     -0.02072      0.1093     -0.1895    0.8497   
+
+ **bp_classHTN-II**     0.02736       0.1888     0.1449     0.8848   
+---------------------------------------------------------------------
+
+
+(Dispersion parameter for  binomial  family taken to be  1 )
+
+
+-------------------- ---------------------------
+   Null deviance:     4853  on 3728  degrees of 
+                               freedom          
+
+ Residual deviance:   4769  on 3723  degrees of 
+                               freedom          
+-------------------- ---------------------------
+
+It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let's test that hypothesis formally using a Wald Test. 
+
+
+```r
+survey::regTermTest(bp.mod, "bp_class")
+## Wald test for bp_class
+##  in glm(formula = smoke ~ female_c + income + bp_class, family = "binomial", 
+##     data = addhealth)
+## F =  0.428004  on  3  and  3723  df: p= 0.73294
+```
+
+The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.
+
+* This means blood pressure classification should not be included in a model to explain smoking status. 
+
 
 ## Log-linear models
 
@@ -321,7 +380,7 @@ qqnorm(addhealth$income); qqline(addhealth$income, col="red")
 qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 **Identify variables**
 
@@ -379,14 +438,6 @@ Both gender and time one wakes up are significantly associated with the amount o
 
 
 
-
-## Categorical outcome data
-
-If you want to keep the response variable as a categorical variable with more than two levels, the following regression model types are available: 
-
-
-* Ordinal Logistic Regression
-* Multinomial Regression
 
 
 ## Count outcome data
@@ -485,7 +536,7 @@ hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE
 axis(1);axis(2, las=2);box()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 ```r
@@ -552,4 +603,14 @@ kable(exp(betas), digits=3)
   </tr>
 </tbody>
 </table>
+
+
+## Categorical outcome data
+
+If you want to keep the response variable as a categorical variable with more than two levels, the following regression model types are available: 
+
+
+* Ordinal Logistic Regression
+* Multinomial Regression
+
 

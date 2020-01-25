@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.6 Count outcome data | Applied Statistics</title>
+  <title>9.5 Count outcome data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.6 Count outcome data | Applied Statistics" />
+  <meta property="og:title" content="9.5 Count outcome data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.6 Count outcome data | Applied Statistics" />
+  <meta name="twitter:title" content="9.5 Count outcome data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="categorical-outcome-data.html"/>
-<link rel="next" href="model-building.html"/>
+<link rel="prev" href="log-linear-models.html"/>
+<link rel="next" href="categorical-outcome-data.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -232,10 +232,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="8.4" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>8.4</b> Example</a></li>
-<li class="chapter" data-level="8.5" data-path="example-with-a-binary-predictor-.html"><a href="example-with-a-binary-predictor-.html"><i class="fa fa-check"></i><b>8.5</b> Example with a binary predictor.</a></li>
-<li class="chapter" data-level="8.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.6</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="8.7" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.7</b> Multicollinearity</a></li>
-<li class="chapter" data-level="8.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="8.5" data-path="binary-predictors-.html"><a href="binary-predictors-.html"><i class="fa fa-check"></i><b>8.5</b> Binary predictors.</a></li>
+<li class="chapter" data-level="8.6" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>8.6</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>8.6.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="8.6.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>8.6.2</b> Wald test</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="8.8" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.8</b> Multicollinearity</a></li>
+<li class="chapter" data-level="8.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a><ul>
 <li class="chapter" data-level="9.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>9.1</b> Fitting GLMs</a><ul>
@@ -253,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>9.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>9.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Categorical outcome data</a></li>
-<li class="chapter" data-level="9.6" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a><ul>
 <li class="chapter" data-level="10.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>10.1</b> Stratification</a></li>
@@ -268,16 +272,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>10.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>10.4</b> Confounding</a></li>
-<li class="chapter" data-level="10.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.5</b> Categorical Predictors</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.5.1</b> Factor variable coding</a></li>
-<li class="chapter" data-level="10.5.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>10.5.2</b> Wald test</a></li>
+<li class="chapter" data-level="10.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.5</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.5.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.5.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma6-section-9.6"><i class="fa fa-check"></i><b>10.5.2</b> The lesser of three evils: Best Subsets (PMA6 Section 9.6)</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>10.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
-</ul></li>
-<li class="chapter" data-level="10.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a></li>
-<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.6</b> Comparing between models</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
 <li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
@@ -384,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="count-outcome-data" class="section level2">
-<h2><span class="header-section-number">9.6</span> Count outcome data</h2>
+<h2><span class="header-section-number">9.5</span> Count outcome data</h2>
 <p>Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
 - e.g. Number of thunderstorms in a year</p>
 <ul>
@@ -406,7 +406,7 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 <p class="caption">Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve</p>
 </div>
 <div id="poisson-models" class="section level4">
-<h4><span class="header-section-number">9.6.0.1</span> Poisson Regression</h4>
+<h4><span class="header-section-number">9.5.0.1</span> Poisson Regression</h4>
 <p>Just another GLM - we use a <span class="math inline">\(ln\)</span> as the link function. This lets us model the log rates using a linear combination of covariates.</p>
 <p><span class="math display">\[
   ln(\mu) = \mathbf{X}\beta
@@ -435,9 +435,9 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 \]</span></p>
 <p>While this offset will be added to the regression model as if it were another variable, it’s not quite the same because the regression coefficient for the <span class="math inline">\(ln(T)\)</span> term is fixed at 1.</p>
 <p>The generic formula for fitting a poisson model using <code>glm</code> is:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(T)), <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(T)), <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>)</a></code></pre></div>
 <p>or alternatively as an argument</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">offset =</span> <span class="kw">log</span>(T),  <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">offset =</span> <span class="kw">log</span>(T),  <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>)</a></code></pre></div>
 <p>The interpretation of the <span class="math inline">\(\beta\)</span> regression coefficients are differences in the log rate (or the log rate-ratio). So, just like with a logistic regression often we back-transform the coefficients by exponentiating before interpreting. So <span class="math inline">\(e^{\beta}\)</span> is now the rate-ratio.</p>
 <ul>
 <li>The intercept term is not a ratio, but a baseline rate when all covariates are 0</li>
@@ -454,15 +454,15 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 </ol>
 </div>
 <div id="example-modeling-counts-from-the-add-health-data-wave-ivset." class="section level4">
-<h4><span class="header-section-number">9.6.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.</h4>
+<h4><span class="header-section-number">9.5.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.</h4>
 <p><strong>better example forthcoming</strong></p>
 <p>Let’s model the number of siblings someone has, based off their age at Wave 1 (2008).</p>
 <p>Visualize</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">hist</span>(addhealth<span class="op">$</span>nsib, <span class="dt">xlab=</span><span class="st">&quot;Number of siblings&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Count&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))</a>
-<a class="sourceLine" id="cb173-2" title="2"><span class="kw">axis</span>(<span class="dv">1</span>);<span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>);<span class="kw">box</span>()</a></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">nsib.model &lt;-<span class="st"> </span><span class="kw">glm</span>(nsib <span class="op">~</span><span class="st"> </span>agew1 <span class="op">+</span><span class="st"> </span>female, <span class="dt">data=</span>addhealth, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>)</a>
-<a class="sourceLine" id="cb174-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(nsib.model))</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">hist</span>(addhealth<span class="op">$</span>nsib, <span class="dt">xlab=</span><span class="st">&quot;Number of siblings&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Count&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))</a>
+<a class="sourceLine" id="cb181-2" title="2"><span class="kw">axis</span>(<span class="dv">1</span>);<span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>);<span class="kw">box</span>()</a></code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1">nsib.model &lt;-<span class="st"> </span><span class="kw">glm</span>(nsib <span class="op">~</span><span class="st"> </span>agew1 <span class="op">+</span><span class="st"> </span>female, <span class="dt">data=</span>addhealth, <span class="dt">family=</span><span class="st">&quot;poisson&quot;</span>)</a>
+<a class="sourceLine" id="cb182-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(nsib.model))</a></code></pre></div>
 <table style="width:89%;">
 <colgroup>
 <col width="25%" />
@@ -523,8 +523,8 @@ freedom</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">betas &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">coef</span>(nsib.model), <span class="kw">confint</span>(nsib.model))</a>
-<a class="sourceLine" id="cb175-2" title="2"><span class="kw">kable</span>(<span class="kw">exp</span>(betas), <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">betas &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">coef</span>(nsib.model), <span class="kw">confint</span>(nsib.model))</a>
+<a class="sourceLine" id="cb183-2" title="2"><span class="kw">kable</span>(<span class="kw">exp</span>(betas), <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -585,17 +585,15 @@ female
 </tr>
 </tbody>
 </table>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="categorical-outcome-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-building.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="log-linear-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="categorical-outcome-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
