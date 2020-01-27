@@ -431,6 +431,8 @@ Additional example interpretations from models not shown here.
 
 ## Variable Selection Process
 
+> Ref: PMA6 CH 9
+
 We want to choose a set of independent variables that both will yield a good prediction using as few variables as possible. We also need to consider controlling for moderators and confounders.  In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
 
 * previous studies
@@ -441,8 +443,8 @@ The investigator may have prior justification for using certain variables but ma
 The set of independent variables can be broken down into logical subsets
 
 * The usual demographics are entered first (age, gender, ethnicity)
-* A set of variables that other studies have shown to affect the dependent variable
-* A third set of variables that _could_ be associated but the relationship has not yet been examined. 
+* A set of variables that other studies have shown to affect the dependent variable (effect modifiers) 
+* A third set of variables that _could_ be associated but the relationship has not yet been examined. (precision variables)
   
 Partially model-driven regression analysis and partially an exploratory analysis. 
 
@@ -466,7 +468,7 @@ Take home message: Don't use these blindly.
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
 
-### The lesser of three evils: Best Subsets (PMA6 Section 9.6)
+### Best Subsets
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -476,6 +478,112 @@ etc.
 * Compare and choose among the "best subsets" of various sizes.
 
 Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html 
+
+
+### Wald test (General F)
+
+The Wald test is used for simultaneous tests of $Q$ variables in a model
+
+Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+
+* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
+* $H_{A}: Q$ additional variables are useful
+
+The traditional test statistic that we've seen since Intro stats is
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+
+The Wald test generalizes this test _any_ linear combination of predictors. 
+
+$$
+(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+$$
+
+Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
+
+This can be done in R by using the `regTermTest()` function in the `survey` package. 
+
+
+```r
+library(survey)
+```
+
+```r
+main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
+regTermTest(main.eff.model, "Species") 
+## Wald test for Species
+##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+## F =  624.9854  on  2  and  146  df: p= < 2.22e-16
+```
+
+##### Example: Employment status on depression score
+Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
+
+
+```r
+full_model <- lm(cesd ~ age + chronill + employ, data=depress)
+pander(summary(full_model))
+```
+
+
+---------------------------------------------------------------------
+        &nbsp;           Estimate   Std. Error   t value   Pr(>|t|)  
+----------------------- ---------- ------------ --------- -----------
+    **(Intercept)**       11.48       1.502       7.646    3.191e-13 
+
+        **age**           -0.133     0.03514     -3.785    0.0001873 
+
+     **chronill**         2.688       1.024       2.625    0.009121  
+
+ **employHouseperson**     6.75       1.797       3.757    0.0002083 
+
+  **employIn School**     1.967       5.995       0.328     0.7431   
+
+    **employOther**       4.897       4.278       1.145     0.2533   
+
+     **employPT**         3.259       1.472       2.214     0.02765  
+
+   **employRetired**      3.233       1.886       1.714     0.08756  
+
+    **employUnemp**       7.632       2.339       3.263    0.001238  
+---------------------------------------------------------------------
+
+
+--------------------------------------------------------------
+ Observations   Residual Std. Error   $R^2$    Adjusted $R^2$ 
+-------------- --------------------- -------- ----------------
+     294               8.385          0.1217      0.09704     
+--------------------------------------------------------------
+
+Table: Fitting linear model: cesd ~ age + chronill + employ
+
+The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
+
+Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
+
+But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s are 0. 
+
+$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
+$H_{A}$: At least one $\beta_{j}$ is not 0. 
+
+
+```r
+survey::regTermTest(full_model, "employ")
+## Wald test for employ
+##  in lm(formula = cesd ~ age + chronill + employ, data = depress)
+## F =  4.153971  on  6  and  285  df: p= 0.0005092
+```
+
+* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
+    - Employment has 7 levels, so $df=6$. 
+    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
+    
+The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
+
+
 
 ## Comparing between models
 When working with multiple models, how do you choose the optimal model? 

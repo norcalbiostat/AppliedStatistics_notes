@@ -12,8 +12,8 @@ rmd_files: ["index.Rmd"
                    
             ,"reg_intro.Rmd"
             ,"linreg.Rmd"
-            ,"GLM.Rmd"
             ,"model_building.Rmd"
+            ,"GLM.Rmd"
             ,"classification.Rmd"
             
             ,"multivariable_intro.Rmd"
