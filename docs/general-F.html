@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Model Building | Applied Statistics</title>
+  <title>8.6 Wald test (General F) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.6 Wald test (General F) | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.6 Wald test (General F) | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="stratification.html"/>
+<link rel="prev" href="variable-selection-process.html"/>
+<link rel="next" href="lasso.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -390,18 +390,165 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Model Building</h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models.</p> 
+<div id="general-F" class="section level2">
+<h2><span class="header-section-number">8.6</span> Wald test (General F)</h2>
+<p>The Wald test is used for simultaneous tests of <span class="math inline">\(Q\)</span> variables in a model</p>
+<p>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.</p>
+<ul>
+<li><span class="math inline">\(H_{0}: Q\)</span> additional variables are useless, i.e., their <span class="math inline">\(\beta\)</span>’s all = 0<br />
+</li>
+<li><span class="math inline">\(H_{A}: Q\)</span> additional variables are useful</li>
+</ul>
+<p>The traditional test statistic that we’ve seen since Intro stats is
+<span class="math inline">\(\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}\)</span></p>
+<p>The Wald test generalizes this test <em>any</em> linear combination of predictors.</p>
+<p><span class="math display">\[
+(R\hat{\theta}_{n}-r)^{&#39;}[R({\hat{V}}_{n}/n)R^{&#39;}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+\]</span></p>
+<p>Where <span class="math inline">\(\mathbf{R}\)</span> is the vector of coefficients for the <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\hat{V}_{n}\)</span> is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(Q\)</span> and <span class="math inline">\(n-P\)</span> degrees of freedom.</p>
+<p>In the case where we’re testing <span class="math inline">\(\beta_{p}=\beta_{q}=...=0\)</span>, <span class="math inline">\(\mathbf{R}\)</span> is all 1’s.</p>
+<div id="example-employment-status-on-depression-score" class="section level5">
+<h5><span class="header-section-number">8.6.0.0.1</span> Example: Employment status on depression score</h5>
+<p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chronill <span class="op">+</span><span class="st"> </span>employ, <span class="dt">data=</span>depress)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(full_model))</a></code></pre></div>
+<table style="width:97%;">
+<colgroup>
+<col width="33%" />
+<col width="15%" />
+<col width="18%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Estimate</th>
+<th align="center">Std. Error</th>
+<th align="center">t value</th>
+<th align="center">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">11.48</td>
+<td align="center">1.502</td>
+<td align="center">7.646</td>
+<td align="center">3.191e-13</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>age</strong></td>
+<td align="center">-0.133</td>
+<td align="center">0.03514</td>
+<td align="center">-3.785</td>
+<td align="center">0.0001873</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>chronill</strong></td>
+<td align="center">2.688</td>
+<td align="center">1.024</td>
+<td align="center">2.625</td>
+<td align="center">0.009121</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>employHouseperson</strong></td>
+<td align="center">6.75</td>
+<td align="center">1.797</td>
+<td align="center">3.757</td>
+<td align="center">0.0002083</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>employIn School</strong></td>
+<td align="center">1.967</td>
+<td align="center">5.995</td>
+<td align="center">0.328</td>
+<td align="center">0.7431</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>employOther</strong></td>
+<td align="center">4.897</td>
+<td align="center">4.278</td>
+<td align="center">1.145</td>
+<td align="center">0.2533</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>employPT</strong></td>
+<td align="center">3.259</td>
+<td align="center">1.472</td>
+<td align="center">2.214</td>
+<td align="center">0.02765</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>employRetired</strong></td>
+<td align="center">3.233</td>
+<td align="center">1.886</td>
+<td align="center">1.714</td>
+<td align="center">0.08756</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>employUnemp</strong></td>
+<td align="center">7.632</td>
+<td align="center">2.339</td>
+<td align="center">3.263</td>
+<td align="center">0.001238</td>
+</tr>
+</tbody>
+</table>
+<table style="width:88%;">
+<caption>Fitting linear model: cesd ~ age + chronill + employ</caption>
+<colgroup>
+<col width="20%" />
+<col width="30%" />
+<col width="12%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Observations</th>
+<th align="center">Residual Std. Error</th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">294</td>
+<td align="center">8.385</td>
+<td align="center">0.1217</td>
+<td align="center">0.09704</td>
+</tr>
+</tbody>
+</table>
+<p>The results of this model show that age and chronic illness are statistically associated with CESD (each p&lt;.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression?</p>
+<p>Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression <em>compared to</em> being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed.</p>
+<p>But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s related to employment status are 0.</p>
+<p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
+<span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(full_model, <span class="st">&quot;employ&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co">## Wald test for employ</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></a></code></pre></div>
+<ul>
+<li>Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
+<ul>
+<li>Employment has 7 levels, so <span class="math inline">\(df=6\)</span>.</li>
+<li>Or equivalently, the degrees of freedom are the number of <span class="math inline">\(beta\)</span>’s you are testing to be 0.</li>
+</ul></li>
+</ul>
+<p>The p-value of this Wald test is significant, thus employment significantly predicts CESD score.</p>
+<p><img src="images/q.png" alt="q" /> What does the vector of coefficients <span class="math inline">\(R\)</span> look like here?</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="stratification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variable-selection-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lasso.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

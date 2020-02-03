@@ -433,7 +433,9 @@ Additional example interpretations from models not shown here.
 
 > Ref: PMA6 CH 9
 
-We want to choose a set of independent variables that both will yield a good prediction using as few variables as possible. We also need to consider controlling for moderators and confounders.  In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
+Variable selection methods such as the ones described in this section, are most often used when performing an _Exploratory_ analysis, where many independent variables have been measured, but a final model to explain the variability of a dependent variable has not yet been determined. 
+
+When building a model, we want to choose a set of independent variables that both will yield a good prediction using as few variables as possible (_parsimony_). We also need to consider controlling for moderators and confounders. In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
 
 * previous studies
 * accepted theory
@@ -442,33 +444,62 @@ The investigator may have prior justification for using certain variables but ma
 
 The set of independent variables can be broken down into logical subsets
 
-* The usual demographics are entered first (age, gender, ethnicity)
-* A set of variables that other studies have shown to affect the dependent variable (effect modifiers) 
-* A third set of variables that _could_ be associated but the relationship has not yet been examined. (precision variables)
+1. **Factors of primary interest**. (such as an exposure or treatment)
+2. **Potential confounders**. These are measures that could be associated with both the response, and explanatory variables, and which could _explain_ the relationship between the primary factor of interest and the outcome. These are typically a set of demographics such as age, gender, ethnicity, and tend to be factors found to be important in prior studies. 
+3. **Effect Modifiers (Moderators)**. A set of variables that other studies have shown to change or affect the relationship between the explanatory and response variables. 
+4. **Precision variables (covariates)**. Variables associated with the dependent variable, but not the primary factor of interest. 
   
-Partially model-driven regression analysis and partially an exploratory analysis. 
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
+How variables are chosen for inclusion into a model is heavily driven by the purpose of the model: 
+
+* descriptive
+* predictive 
 
 
 ### Automated selection procedures
 
-* Forward selection: X variables added one at a time until optimal model reached
-* Backward elimination: X variables removed one at a time until optimal model reached
-* Stepwise selection: Combination of forward and backward. 
+
+_Forward selection_: Variables are added one at a time until optimal model reached. 
+
+1. Choose the variable with the highest absolute correlation $\mid r \mid$ with the outcome.
+2. Choose the next variable that maximizes the model adjusted $R^{2}$. 
+3. Repeat until adding additional variables does not improve the model fit significantly. 
+
+_Backward elimination_: Variables are removed one at a time until optimal model reached
+
+1. Put all variables into the model. 
+2. Remove the least useful variable in the model. This can be done by choosing the variable with the largest $p$-value. 
+3. Repeat until removing additional variables reduces the model fit significantly. 
+
+
+_Stepwise selection_: Combination of forward and backward. 
+
+0. Start with no variables (just $\bar{Y}$)
+1. Add the variable that results in the greatest improvement in model fit. 
+2. Add another variable that results in the greatest improvement in model fit after controlling for the first. 
+3. Check to see if removing any variable currently in the model improves the fit. 
+4. Add another variable...
+5. Check to remove variables...
+6. Repeat until no variables can be added or removed. 
+
+Most programs have the option to **force** variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect. 
+
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
+
 
 > "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
 > "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
 > _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
 
-Take home message: Don't use these blindly. 
+Warnings: 
 
 * Stopping criteria and algorithm can be different for different software programs. 
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
 
-### Best Subsets
+_Best Subsets_
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -480,7 +511,7 @@ etc.
 Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html 
 
 
-### Wald test (General F)
+## Wald test (General F) {#general-F}
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model
 
@@ -504,20 +535,6 @@ Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{
 
 In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
 
-This can be done in R by using the `regTermTest()` function in the `survey` package. 
-
-
-```r
-library(survey)
-```
-
-```r
-main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
-regTermTest(main.eff.model, "Species") 
-## Wald test for Species
-##  in lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
-## F =  624.9854  on  2  and  146  df: p= < 2.22e-16
-```
 
 ##### Example: Employment status on depression score
 Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
@@ -564,7 +581,8 @@ The results of this model show that age and chronic illness are statistically as
 
 Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
 
-But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s are 0. 
+But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s related to employment status are 0. 
+
 
 $H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
 $H_{A}$: At least one $\beta_{j}$ is not 0. 
@@ -583,49 +601,81 @@ survey::regTermTest(full_model, "employ")
     
 The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
 
+![q](images/q.png) What does the vector of coefficients $R$ look like here? 
 
 
-## Comparing between models
-When working with multiple models, how do you choose the optimal model? 
+
+## Lasso
+
+**L**east **A**bsolute **S**hrinkage and **S**election **O**perator.
+
+Goal is to minimize
+
+$$
+RSS + \lambda \sum_{j}\mid \beta_{j} \ \mid
+$$
+
+where $\lambda$ is a model complexity penalty parameter. 
+
+* Used during cross-validation and AIC/BIC
+* "Shrinks" the coefficients, setting some to exactly 0. 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Appropriate inference after model selection is currently under research. No unifying theory exists yet. </div>\EndKnitrBlock{rmdnote}
+
+* For now, use lasso to choose variables, then fit a model with only those selected variables in the final model. 
+* Variables chosen in this manner are important, yet biased estimates. 
+
+
+
+## Comparing between models {#model-fit-criteria}
+
+The goal: Find the subset of independent variables that optimizes (either minimize or maximize) a certain criteria. In other words, the goal is to find the optimal model. 
 
 ![q](images/q.png) How do we measure "optimal"? 
 
-1. RMSE: Root Mean Squared Error
-How biased are the results? How ``far away" are the estimates $\hat{\theta}$ from the truth $\theta$? 
+
+First we need to look at two quantities: 
+
+### RSS: Residual Sum of Squares
+
+Recall the method of least squares introduced in section \@ref(mlr) minimies the residual sum of squares around the regression plane. This value is central to all following model comparison. How ``far away" are the model estimates from the observed? 
 
 $$
-\sqrt{\operatorname{MSE}(\hat{\theta})} = \sqrt{\operatorname{E}((\hat{\theta}-\theta)^2)}.
+\sum(Y - \bar{Y})^{2}(1-R^{2})  
 $$
 
-2. Maximize the Likelihood function
+
+### Likelihood function
+
 What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
 $$
 \mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
 $$
-* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).
-* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function. 
+
+* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).  
+* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
 * We can compare between models using functions based off the LL. 
 
-
+----
 
 There are several measures we can use to compare between competing models. 
 
+### General F Test
 
-1. **Multiple $R^{2}$**
+Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level.
+
+
+### Multiple $R^{2}$
 If the model explains a large amount of variation in the outcome that's good right? So we could consider using $R^{2}$ as a selection criteria and trying to find the model that maximizes this value. 
 
-The residual sum of squares (RSS in the book or SSE) can be written as $\sum(Y-\hat{Y})^{2}(1-R^{2})$. Therefore minimizing the RSS is equivalent to maximizing the multiple correlation coefficient.  
 
-
-Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
+* Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
     - Ex. 1: N = 100, P = 1, E($R^{2}$) = 0.01
     - Ex. 2: N = 21, P = 10, E($R^{2}$) = 0.5
+* Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
 
 
-Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
-
-
-2. **Adjusted $R^{2}$**
+### Adjusted $R^{2}$
 To alleviate bias use Mean squares instead of SS. 
 
 $R^{2} = 1-\frac{Model MS}{Total MS}$
@@ -636,17 +686,19 @@ $R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}$
 
 Now Adjusted $R^{2}$ is approximately unbiased and won't inflate as $p$ increases. 
 
-3. **Mallows $C_{p}$**
+### Mallows $C_{p}$
 
 $$
     C_{p} = (N-P-1)\left(\frac{RMSE}{\hat{\sigma}^{2}} -1 \right) + (P+1)
 $$
 
+where $RMSE = \frac{RSS}{N-P-1}$. 
+
 * Smaller is better
 * When all variables are chosen, $P+1$ is at it's maximum but the other part of $C_{p}$ is zero since $RMSE$==$\hat{\sigma}^{2}$
 
 
-4. **Akaike Information Criterion (AIC)**
+### Akaike Information Criterion (AIC)
 
 * A penalty is applied to the deviance that increases as the number of parameters $p$ increase. 
 * Tries to find a parsimonious model that is closer to the “truth”.  
@@ -660,14 +712,14 @@ $$ AIC = -2LL + 2p$$
     - So if all models suck, your AIC will just tell you which one sucks less. 
 
 
-5. **Bayesian Information Criterion (BIC)**
+### Bayesian Information Criterion (BIC)
 
 * Similar to AIC. 
 * Tries to find a parsimonious model that is more likely to be the “truth”. The smaller BIC, the better.
 
 $$ BIC = -2LL + ln(N)*(P+1)$$ 
 
-AIC vs BIC
+### AIC vs BIC
 
 * Both are “penalized likelihood” functions
 * Each = -2log likelihood + penalty

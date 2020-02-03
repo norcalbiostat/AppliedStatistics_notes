@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Model Building | Applied Statistics</title>
+  <title>8.8 Comparing between models | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.8 Comparing between models | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.8 Comparing between models | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="stratification.html"/>
+<link rel="prev" href="lasso.html"/>
+<link rel="next" href="what-to-watch-out-for-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -390,18 +390,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Model Building</h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models.</p> 
+<div id="model-fit-criteria" class="section level2">
+<h2><span class="header-section-number">8.8</span> Comparing between models</h2>
+<p>The goal: Find the subset of independent variables that optimizes (either minimize or maximize) a certain criteria. In other words, the goal is to find the optimal model.</p>
+<p><img src="images/q.png" alt="q" /> How do we measure “optimal”?</p>
+<p>First we need to look at two quantities:</p>
+<div id="rss-residual-sum-of-squares" class="section level3">
+<h3><span class="header-section-number">8.8.1</span> RSS: Residual Sum of Squares</h3>
+<p>Recall the method of least squares introduced in section <a href="#mlr"><strong>??</strong></a> minimies the residual sum of squares around the regression plane. This value is central to all following model comparison. How ``far away" are the model estimates from the observed?</p>
+<p><span class="math display">\[
+\sum(Y - \bar{Y})^{2}(1-R^{2})  
+\]</span></p>
+</div>
+<div id="likelihood-function" class="section level3">
+<h3><span class="header-section-number">8.8.2</span> Likelihood function</h3>
+<p>What is the likelihood that we observed the data <span class="math inline">\(x\)</span>, given parameter values <span class="math inline">\(\theta\)</span>.
+<span class="math display">\[
+\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
+\]</span></p>
+<ul>
+<li>For strictly convenient mathematical matters, we tend to work with the <strong>log-likelihood</strong> (LL).<br />
+</li>
+<li>Great because <span class="math inline">\(log\)</span> is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.<br />
+</li>
+<li>We can compare between models using functions based off the LL.</li>
+</ul>
+<hr />
+<p>There are several measures we can use to compare between competing models.</p>
+</div>
+<div id="general-f-test" class="section level3">
+<h3><span class="header-section-number">8.8.3</span> General F Test</h3>
+<p>Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level.</p>
+</div>
+<div id="multiple-r2" class="section level3">
+<h3><span class="header-section-number">8.8.4</span> Multiple <span class="math inline">\(R^{2}\)</span></h3>
+<p>If the model explains a large amount of variation in the outcome that’s good right? So we could consider using <span class="math inline">\(R^{2}\)</span> as a selection criteria and trying to find the model that maximizes this value.</p>
+<ul>
+<li>Problem: The multiple <span class="math inline">\(R^{2}\)</span> <em>always</em> increases as predictors are added to the model.
+<ul>
+<li>Ex. 1: N = 100, P = 1, E(<span class="math inline">\(R^{2}\)</span>) = 0.01</li>
+<li>Ex. 2: N = 21, P = 10, E(<span class="math inline">\(R^{2}\)</span>) = 0.5</li>
+</ul></li>
+<li>Problem: <span class="math inline">\(R^{2} = 1-\frac{Model SS}{Total SS}\)</span> is biased: If population <span class="math inline">\(R^{2}\)</span> is really zero, then E(<span class="math inline">\(R^{2}\)</span>) = P/(N-1).</li>
+</ul>
+</div>
+<div id="adjusted-r2" class="section level3">
+<h3><span class="header-section-number">8.8.5</span> Adjusted <span class="math inline">\(R^{2}\)</span></h3>
+<p>To alleviate bias use Mean squares instead of SS.</p>
+<p><span class="math inline">\(R^{2} = 1-\frac{Model MS}{Total MS}\)</span></p>
+<p>equivalently,</p>
+<p><span class="math inline">\(R^{2}_{adj} = R^{2} - \frac{p(1-R^{2})}{n-p-1}\)</span></p>
+<p>Now Adjusted <span class="math inline">\(R^{2}\)</span> is approximately unbiased and won’t inflate as <span class="math inline">\(p\)</span> increases.</p>
+</div>
+<div id="mallows-c_p" class="section level3">
+<h3><span class="header-section-number">8.8.6</span> Mallows <span class="math inline">\(C_{p}\)</span></h3>
+<p><span class="math display">\[
+    C_{p} = (N-P-1)\left(\frac{RMSE}{\hat{\sigma}^{2}} -1 \right) + (P+1)
+\]</span></p>
+<p>where <span class="math inline">\(RMSE = \frac{RSS}{N-P-1}\)</span>.</p>
+<ul>
+<li>Smaller is better</li>
+<li>When all variables are chosen, <span class="math inline">\(P+1\)</span> is at it’s maximum but the other part of <span class="math inline">\(C_{p}\)</span> is zero since <span class="math inline">\(RMSE\)</span>==<span class="math inline">\(\hat{\sigma}^{2}\)</span></li>
+</ul>
+</div>
+<div id="akaike-information-criterion-aic" class="section level3">
+<h3><span class="header-section-number">8.8.7</span> Akaike Information Criterion (AIC)</h3>
+<ul>
+<li>A penalty is applied to the deviance that increases as the number of parameters <span class="math inline">\(p\)</span> increase.</li>
+<li>Tries to find a parsimonious model that is closer to the “truth”.<br />
+</li>
+<li>Uses an information function, e.g., the likelihood function <span class="math inline">\((LL)\)</span>.</li>
+</ul>
+<p><span class="math display">\[ AIC = -2LL + 2p\]</span></p>
+<ul>
+<li>Smaller is better</li>
+<li>Can also be written as a function of the residual sum of squares (RSS) (in book)</li>
+<li>Estimates the information in one model <em>relative to other models</em>
+<ul>
+<li>So if all models suck, your AIC will just tell you which one sucks less.</li>
+</ul></li>
+</ul>
+</div>
+<div id="bayesian-information-criterion-bic" class="section level3">
+<h3><span class="header-section-number">8.8.8</span> Bayesian Information Criterion (BIC)</h3>
+<ul>
+<li>Similar to AIC.</li>
+<li>Tries to find a parsimonious model that is more likely to be the “truth”. The smaller BIC, the better.</li>
+</ul>
+<p><span class="math display">\[ BIC = -2LL + ln(N)*(P+1)\]</span></p>
+</div>
+<div id="aic-vs-bic" class="section level3">
+<h3><span class="header-section-number">8.8.9</span> AIC vs BIC</h3>
+<ul>
+<li>Both are “penalized likelihood” functions</li>
+<li>Each = -2log likelihood + penalty</li>
+<li>AIC: penalty = 2, BIC: penalty = ln(N)</li>
+<li>For any N &gt; 7, ln(N) &gt; 2</li>
+<li>Thus, BIC penalizes larger models more heavily.</li>
+<li>They often agree.
+<ul>
+<li>When they disagree, AIC chooses a larger model than BIC.</li>
+</ul></li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="stratification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lasso.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="what-to-watch-out-for-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
