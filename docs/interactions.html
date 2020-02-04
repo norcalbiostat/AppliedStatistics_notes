@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.3 Interactions | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.3 Interactions | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,7 +39,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +46,6 @@
 
 
 
-
-
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -248,7 +244,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>8.3.2</b> Example 2</a></li>
 <li class="chapter" data-level="8.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>8.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a></li>
+<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>8.4.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="8.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>8.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>8.5.1</b> Automated selection procedures</a></li>
 </ul></li>
@@ -553,7 +551,7 @@ So if we were to go back to the stratified model where we fit the model of petal
 </div>
 <div id="example-3-the-relationship-between-income-employment-status-and-depression." class="section level3">
 <h3><span class="header-section-number">8.3.3</span> Example 3: The relationship between income, employment status and depression.</h3>
-<p>This example follows PMA5 Ch 12.7 and section <a href="logistic-regression.html#mlogreg">9.3.3</a>.</p>
+<p>This example follows section <a href="logistic-regression.html#mlogreg">9.3.3</a>.</p>
 <p>Here I create the binary indicators of <code>lowincome</code> (annual income &lt;$10k/year) and underemployed (part time or unemployed).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">depress<span class="op">$</span>lowincome &lt;-<span class="st"> </span><span class="kw">ifelse</span>(depress<span class="op">$</span>income <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb11-2" title="2"><span class="kw">table</span>(depress<span class="op">$</span>lowincome, depress<span class="op">$</span>income, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)</a>
@@ -643,13 +641,11 @@ So if we were to go back to the stratified model where we fit the model of petal
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

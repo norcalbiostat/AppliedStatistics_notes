@@ -313,7 +313,7 @@ is the same as the following interaction model:
 
 
 ### Example 3: The relationship between income, employment status and depression. 
-This example follows PMA5 Ch 12.7 and section \@ref(mlogreg). 
+This example follows section \@ref(mlogreg). 
 
 Here I create the binary indicators of `lowincome` (annual income <$10k/year) and underemployed (part time or unemployed).
 
@@ -410,10 +410,6 @@ summary(me_intx_model)
 
 One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
 
-As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
-
-**If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or _confound_, the relationship between $x_{1}$ and $y$.**
-
 
 ![All the ways covariates can affect response variables](images/confounder.png)
 
@@ -423,10 +419,89 @@ Credit: [A blog about statistical musings](https://significantlystatistical.word
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</div>\EndKnitrBlock{rmdnote}
 
+Other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
+
+> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$.
+
+Steps to determine if a variable $x_{2}$ is a confounder. 
+
+1. Fit a regression model on $y \sim x_{1}$. 
+2. If $x_{1}$ is not significantly associated with $y$, STOP. Re-read the "IF" part of the definition of a confounder. 
+3. Fit a regression model on $y \sim x_{1} + x_{2}$. 
+4. Look at the p-value for $x_{1}$. One of two things will have happened. 
+    - If $x_{1}$ is still significant, then $x_{2}$ does NOT confound (or explain) the relationship between $y$ and $x_{1}$. 
+    - If $x_{1}$ is NO LONGER significantly associated with $y$, then $x_{2}$ IS a confounder. 
+    
+    
+Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
+
+### Example: Does smoking affect pulse rate? 
+
+Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate? 
+
+
+
+First we consider the bivariate relationship between pulse rate (`H4PR`) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (`H4TO6`). 
+
+```r
+lm(H4PR ~ H4TO6 , data=addhealth) %>% summary()
+## 
+## Call:
+## lm(formula = H4PR ~ H4TO6, data = addhealth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -30.826  -8.548  -0.687   7.258 120.841 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  73.7702     0.4953 148.936  < 2e-16 ***
+## H4TO6         0.1389     0.0396   3.507 0.000464 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 12.56 on 1761 degrees of freedom
+##   (4741 observations deleted due to missingness)
+## Multiple R-squared:  0.006936,	Adjusted R-squared:  0.006372 
+## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644
+```
+
+As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13. 
+
+However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, "during the past 30 days, on how many days did you smoke cigarettes?" (`H4TO5`). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking `H4TO6` is no longer significant (at the 0.05 level). 
+
+
+```r
+lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
+## 
+## Call:
+## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.682  -8.509  -1.014   7.302 120.320 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 72.78932    0.68037 106.985   <2e-16 ***
+## H4TO5        0.06870    0.03271   2.101   0.0358 *  
+## H4TO6        0.08292    0.04769   1.739   0.0822 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 12.55 on 1760 degrees of freedom
+##   (4741 observations deleted due to missingness)
+## Multiple R-squared:  0.00942,	Adjusted R-squared:  0.008294 
+## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415
+```
+
+Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
+
+
 Additional example interpretations from models not shown here. 
 
-> * After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
-> * After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
+* After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
+* After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
  
 
 ## Variable Selection Process

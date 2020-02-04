@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.6 Wald test (General F) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.6 Wald test (General F) | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,7 +39,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +46,6 @@
 
 
 
-
-
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -248,7 +244,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>8.3.2</b> Example 2</a></li>
 <li class="chapter" data-level="8.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>8.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a></li>
+<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>8.4.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="8.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>8.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>8.5.1</b> Automated selection procedures</a></li>
 </ul></li>
@@ -412,8 +410,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-employment-status-on-depression-score" class="section level5">
 <h5><span class="header-section-number">8.6.0.0.1</span> Example: Employment status on depression score</h5>
 <p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chronill <span class="op">+</span><span class="st"> </span>employ, <span class="dt">data=</span>depress)</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(full_model))</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">full_model &lt;-<span class="st"> </span><span class="kw">lm</span>(cesd <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chronill <span class="op">+</span><span class="st"> </span>employ, <span class="dt">data=</span>depress)</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">pander</span>(<span class="kw">summary</span>(full_model))</a></code></pre></div>
 <table style="width:97%;">
 <colgroup>
 <col width="33%" />
@@ -527,10 +525,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s related to employment status are 0.</p>
 <p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
 <span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(full_model, <span class="st">&quot;employ&quot;</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="co">## Wald test for employ</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">survey<span class="op">::</span><span class="kw">regTermTest</span>(full_model, <span class="st">&quot;employ&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="co">## Wald test for employ</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></a></code></pre></div>
 <ul>
 <li>Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
 <ul>
@@ -553,13 +551,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

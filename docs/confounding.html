@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.4 Confounding | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.4 Confounding | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,7 +39,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +46,6 @@
 
 
 
-
-
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -248,7 +244,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>8.3.2</b> Example 2</a></li>
 <li class="chapter" data-level="8.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>8.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a></li>
+<li class="chapter" data-level="8.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>8.4</b> Confounding</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>8.4.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="8.5" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>8.5</b> Variable Selection Process</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>8.5.1</b> Automated selection procedures</a></li>
 </ul></li>
@@ -393,8 +391,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="confounding" class="section level2">
 <h2><span class="header-section-number">8.4</span> Confounding</h2>
 <p>One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable <span class="math inline">\(x\)</span> and your response variable <span class="math inline">\(y\)</span>, <em>after controlling for other factors</em>.</p>
-<p>As we just discussed, those other factors (characteristics/variables) could also be explaining part of the variability seen in <span class="math inline">\(y\)</span>.</p>
-<p><strong>If the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is bivariately significant, but then no longer significant once <span class="math inline">\(x_{2}\)</span> has been added to the model, then <span class="math inline">\(x_{2}\)</span> is said to explain, or <em>confound</em>, the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span>.</strong></p>
 <div class="figure">
 <img src="images/confounder.png" alt="All the ways covariates can affect response variables" />
 <p class="caption">All the ways covariates can affect response variables</p>
@@ -405,13 +401,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</a>
 </div>
 
-<p>Additional example interpretations from models not shown here.</p>
+<p>Other factors (characteristics/variables) could also be explaining part of the variability seen in <span class="math inline">\(y\)</span>.</p>
 <blockquote>
+<p>If the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is bivariately significant, but then no longer significant once <span class="math inline">\(x_{2}\)</span> has been added to the model, then <span class="math inline">\(x_{2}\)</span> is said to explain, or <strong>confound</strong>, the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span>.</p>
+</blockquote>
+<p>Steps to determine if a variable <span class="math inline">\(x_{2}\)</span> is a confounder.</p>
+<ol style="list-style-type: decimal">
+<li>Fit a regression model on <span class="math inline">\(y \sim x_{1}\)</span>.</li>
+<li>If <span class="math inline">\(x_{1}\)</span> is not significantly associated with <span class="math inline">\(y\)</span>, STOP. Re-read the “IF” part of the definition of a confounder.</li>
+<li>Fit a regression model on <span class="math inline">\(y \sim x_{1} + x_{2}\)</span>.</li>
+<li>Look at the p-value for <span class="math inline">\(x_{1}\)</span>. One of two things will have happened.
+<ul>
+<li>If <span class="math inline">\(x_{1}\)</span> is still significant, then <span class="math inline">\(x_{2}\)</span> does NOT confound (or explain) the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x_{1}\)</span>.</li>
+<li>If <span class="math inline">\(x_{1}\)</span> is NO LONGER significantly associated with <span class="math inline">\(y\)</span>, then <span class="math inline">\(x_{2}\)</span> IS a confounder.</li>
+</ul></li>
+</ol>
+<p>Note that this is a two way relationship. The order of <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span> is invaraiant. If you were to add <span class="math inline">\(x_{2}\)</span> to the model before <span class="math inline">\(x_{1}\)</span> you may see the same thing occur. That is - both variables are explaining the same portion of the variance in <span class="math inline">\(y\)</span>.</p>
+<div id="example-does-smoking-affect-pulse-rate" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Example: Does smoking affect pulse rate?</h3>
+<p>Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate?</p>
+<p>First we consider the bivariate relationship between pulse rate (<code>H4PR</code>) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (<code>H4TO6</code>).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">lm</span>(H4PR <span class="op">~</span><span class="st"> </span>H4TO6 , <span class="dt">data=</span>addhealth) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">## lm(formula = H4PR ~ H4TO6, data = addhealth)</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">## </span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="co">##     Min      1Q  Median      3Q     Max </span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">## -30.826  -8.548  -0.687   7.258 120.841 </span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">## </span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">## (Intercept)  73.7702     0.4953 148.936  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">## H4TO6         0.1389     0.0396   3.507 0.000464 ***</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">## </span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="co">## Residual standard error: 12.56 on 1761 degrees of freedom</span></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="co">##   (4741 observations deleted due to missingness)</span></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="co">## Multiple R-squared:  0.006936,   Adjusted R-squared:  0.006372 </span></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="co">## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644</span></a></code></pre></div>
+<p>As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13.</p>
+<p>However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, “during the past 30 days, on how many days did you smoke cigarettes?” (<code>H4TO5</code>). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking <code>H4TO6</code> is no longer significant (at the 0.05 level).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">lm</span>(H4PR <span class="op">~</span><span class="st"> </span>H4TO5 <span class="op">+</span><span class="st">  </span>H4TO6 , <span class="dt">data=</span>addhealth) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">## </span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">## Residuals:</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">##     Min      1Q  Median      3Q     Max </span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">## -31.682  -8.509  -1.014   7.302 120.320 </span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">## </span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">## Coefficients:</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="co">## (Intercept) 72.78932    0.68037 106.985   &lt;2e-16 ***</span></a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">## H4TO5        0.06870    0.03271   2.101   0.0358 *  </span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="co">## H4TO6        0.08292    0.04769   1.739   0.0822 .  </span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="co">## ---</span></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="co">## </span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="co">## Residual standard error: 12.55 on 1760 degrees of freedom</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="co">##   (4741 observations deleted due to missingness)</span></a>
+<a class="sourceLine" id="cb15-20" title="20"><span class="co">## Multiple R-squared:  0.00942,    Adjusted R-squared:  0.008294 </span></a>
+<a class="sourceLine" id="cb15-21" title="21"><span class="co">## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415</span></a></code></pre></div>
+<p>Thus, the number of days smoked <em>confounds</em> the relationship between the number of cigarettes smoked per day, and the person’s pulse rate.</p>
+<p>Additional example interpretations from models not shown here.</p>
 <ul>
 <li>After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.</li>
 <li>After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender.</li>
 </ul>
-</blockquote>
+</div>
 </div>
             </section>
 
@@ -424,13 +483,11 @@ Easy to read short article from a Gastroenterology journal on how to control con
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
