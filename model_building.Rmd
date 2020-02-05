@@ -364,7 +364,16 @@ etc.
 * Compute adjusted R2, AIC or BIC each time.
 * Compare and choose among the "best subsets" of various sizes.
 
-Ways to conduct best subsets regression in R: https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html 
+
+### Implementation in R
+
+Packages: `leaps`, `stepAIC`, 
+
+Refer to the following refereces
+
+* Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
+* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the stepwise procedures, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
+* Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
 
 
 ## Wald test (General F) {#general-F}
@@ -409,6 +418,8 @@ But what about employment status overall? Not all employment categories are sign
 
 $H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
 $H_{A}$: At least one $\beta_{j}$ is not 0. 
+
+The `regTermTest` function can be found in the `survey` package. The `survey` package has functions that tend to conflict with `dplyr`, so it is recommended that you don't load the package entirely, and use `::` notation to call the function directly. 
 
 ```{r}
 survey::regTermTest(full_model, "employ")
@@ -531,14 +542,16 @@ $$ AIC = -2LL + 2p$$
 * Can also be written as a function of the residual sum of squares (RSS) (in book)
 * Estimates the information in one model _relative to other models_
     - So if all models suck, your AIC will just tell you which one sucks less. 
-
+* Built in `AIC()` function in R
 
 ### Bayesian Information Criterion (BIC)
 
 * Similar to AIC. 
+* Built in `BIC()` function in R
 * Tries to find a parsimonious model that is more likely to be the “truth”. The smaller BIC, the better.
 
 $$ BIC = -2LL + ln(N)*(P+1)$$ 
+
 
 ### AIC vs BIC
 
