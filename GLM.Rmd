@@ -19,20 +19,23 @@ There are a few overarching types of non-continuous outcomes that can be modeled
 
 ## Fitting GLMs 
 
-Generalized linear regression models can be fit in R using the `glm()` function. This function can fit an entire _family_ of distributions and can be thought of as $E(Y|X) = C(X)$ where $C$ is the **link** function that relates $Y$ to $X$.
+All regression models aim to model the expected value of the response variable $Y$ given the observed data $X$, thorugh some link function $C$ 
+
+$$E(Y|X) = C(X)$$ 
+
+Depending on the data type of $Y$, this link function takes different forms. Examples include: 
 
 * Linear regression: C = Identity function (no change)
 * Logistic regression: C = logit function
 * Poisson regression: C = log function
 
-Here is some guidance on code to fit Logistic regression models. 
 
 ### R
 
-The general syntax is similar to `lm()`, with the additional required `family=` argument. See `?family` for a list of options. 
+The general syntax is similar to `lm()`, with the additional required `family=` argument. See `?family` for a list of options. Example for Logistic regression would be: 
 
 ```{r, eval=FALSE}
-glm(y ~ x1 + x2 + x3, data=DATA, family="binomial")
+glm(y ~ x1 + x2 + x3, data=DATA, family="binomial") 
 ```
 
 ### SPSS 

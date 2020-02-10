@@ -282,6 +282,67 @@ Additional example interpretations from models not shown here.
 * After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
 * After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
  
+## Wald test (General F) {#general-F}
+
+The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
+
+1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit
+2. Testing a linear combination of predictors (such as a differnece of differences). _This topic is not discussed yet_
+
+Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
+
+* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
+* $H_{A}: Q$ additional variables are useful to explain/predict $Y$
+
+The traditional test statistic that we've seen since Intro stats is
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+
+The Wald test generalizes this test _any_ linear combination of predictors. 
+
+$$
+(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
+(R\hat{\theta}_{n}-r)
+\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+$$
+
+Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
+
+
+##### Example: Employment status on depression score
+Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
+
+```{r}
+full_model <- lm(cesd ~ age + chronill + employ, data=depress)
+pander(summary(full_model))
+```
+
+The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
+
+Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
+
+But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s related to employment status are 0. 
+
+
+$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
+$H_{A}$: At least one $\beta_{j}$ is not 0. 
+
+The `regTermTest` function can be found in the `survey` package. The `survey` package has functions that tend to conflict with `dplyr`, so it is recommended that you don't load the package entirely, and use `::` notation to call the function directly. 
+
+```{r}
+survey::regTermTest(full_model, "employ")
+```
+
+* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
+    - Employment has 7 levels, so $df=6$. 
+    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
+    
+The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
+
+![q](images/q.png) What does the vector of coefficients $R$ look like here? 
+
+
 
 ## Variable Selection Process
 
@@ -367,8 +428,6 @@ etc.
 
 ### Implementation in R
 
-Packages: `leaps`, `stepAIC`, 
-
 Refer to the following refereces
 
 * Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
@@ -376,66 +435,9 @@ Refer to the following refereces
 * Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
 
 
-## Wald test (General F) {#general-F}
-
-The Wald test is used for simultaneous tests of $Q$ variables in a model
-
-Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
-
-* $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
-* $H_{A}: Q$ additional variables are useful
-
-The traditional test statistic that we've seen since Intro stats is
-$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
-
-The Wald test generalizes this test _any_ linear combination of predictors. 
-
-$$
-(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
-(R\hat{\theta}_{n}-r)
-\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
-$$
-
-Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
-
-In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
 
 
-##### Example: Employment status on depression score
-Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
-
-```{r}
-full_model <- lm(cesd ~ age + chronill + employ, data=depress)
-pander(summary(full_model))
-```
-
-The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
-
-Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
-
-But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s related to employment status are 0. 
-
-
-$H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
-$H_{A}$: At least one $\beta_{j}$ is not 0. 
-
-The `regTermTest` function can be found in the `survey` package. The `survey` package has functions that tend to conflict with `dplyr`, so it is recommended that you don't load the package entirely, and use `::` notation to call the function directly. 
-
-```{r}
-survey::regTermTest(full_model, "employ")
-```
-
-* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
-    - Employment has 7 levels, so $df=6$. 
-    - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
-    
-The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
-
-![q](images/q.png) What does the vector of coefficients $R$ look like here? 
-
-
-
-## Lasso
+### Lasso
 
 **L**east **A**bsolute **S**hrinkage and **S**election **O**perator.
 
@@ -543,6 +545,10 @@ $$ AIC = -2LL + 2p$$
 * Estimates the information in one model _relative to other models_
     - So if all models suck, your AIC will just tell you which one sucks less. 
 * Built in `AIC()` function in R
+* Rule of thumb: Model 1 and Model 2 are considered to have significantly different fit if the difference in AIC values is greater than 2. 
+
+$$\mid AIC_{1} - AIC_{2}\mid > 2$$
+
 
 ### Bayesian Information Criterion (BIC)
 
@@ -563,6 +569,18 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * They often agree.
     - When they disagree, AIC chooses a larger model than BIC.
 
+## General Advice
+
+* Model selection is not a hard science. 
+* Some criteria have "rules of thumb" that can guide your exploration (such as differnce in AIC < 2)
+* _**Use common sense**_: A sub-optimal subset may make more sense than optimal one
+* p-values: When you compare two criteria, often the difference has a known distribution. 
+    - Wald F Test, the difference in RSS between the two models has a F distribution.
+* All criterion should be used as guides.
+* Perform multiple methods of variable selection, find the commonalities. 
+* Let science and the purpose of your model be your ultimate guide
+    - If the purpose of the model is for explanation/interpretation, error on the side of parsimony (smaller model) than being overly complex. 
+    - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
 
 
 ## What to watch out for
@@ -572,7 +590,7 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * Variables not included can bias the results
 * Significance levels are only a guide
 * Perform model diagnostics after selection to check model fit. 
-* _**Use common sense**_: A sub-optimal subset may make more sense than optimal one
+
 
 
 

@@ -503,106 +503,17 @@ Additional example interpretations from models not shown here.
 * After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
 * After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
  
-
-## Variable Selection Process
-
-> Ref: PMA6 CH 9
-
-Variable selection methods such as the ones described in this section, are most often used when performing an _Exploratory_ analysis, where many independent variables have been measured, but a final model to explain the variability of a dependent variable has not yet been determined. 
-
-When building a model, we want to choose a set of independent variables that both will yield a good prediction using as few variables as possible (_parsimony_). We also need to consider controlling for moderators and confounders. In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
-
-* previous studies
-* accepted theory
-
-The investigator may have prior justification for using certain variables but may be open to suggestions for the remaining variables.
-
-The set of independent variables can be broken down into logical subsets
-
-1. **Factors of primary interest**. (such as an exposure or treatment)
-2. **Potential confounders**. These are measures that could be associated with both the response, and explanatory variables, and which could _explain_ the relationship between the primary factor of interest and the outcome. These are typically a set of demographics such as age, gender, ethnicity, and tend to be factors found to be important in prior studies. 
-3. **Effect Modifiers (Moderators)**. A set of variables that other studies have shown to change or affect the relationship between the explanatory and response variables. 
-4. **Precision variables (covariates)**. Variables associated with the dependent variable, but not the primary factor of interest. 
-  
-
-How variables are chosen for inclusion into a model is heavily driven by the purpose of the model: 
-
-* descriptive
-* predictive 
-
-
-### Automated selection procedures
-
-
-_Forward selection_: Variables are added one at a time until optimal model reached. 
-
-1. Choose the variable with the highest absolute correlation $\mid r \mid$ with the outcome.
-2. Choose the next variable that maximizes the model adjusted $R^{2}$. 
-3. Repeat until adding additional variables does not improve the model fit significantly. 
-
-_Backward elimination_: Variables are removed one at a time until optimal model reached
-
-1. Put all variables into the model. 
-2. Remove the least useful variable in the model. This can be done by choosing the variable with the largest $p$-value. 
-3. Repeat until removing additional variables reduces the model fit significantly. 
-
-
-_Stepwise selection_: Combination of forward and backward. 
-
-0. Start with no variables (just $\bar{Y}$)
-1. Add the variable that results in the greatest improvement in model fit. 
-2. Add another variable that results in the greatest improvement in model fit after controlling for the first. 
-3. Check to see if removing any variable currently in the model improves the fit. 
-4. Add another variable...
-5. Check to remove variables...
-6. Repeat until no variables can be added or removed. 
-
-Most programs have the option to **force** variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect. 
-
-
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
-
-
-> "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
-> "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
-> _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
-
-Warnings: 
-
-* Stopping criteria and algorithm can be different for different software programs. 
-* Can reject perfectly plausible models from later consideration
-* Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
-
-
-_Best Subsets_
-
-* Select one X with highest simple $r$ with Y
-* Select two X’s with highest multiple $r$ with Y
-* Select three X’s with highest multiple $r$ with Y
-etc.
-* Compute adjusted R2, AIC or BIC each time.
-* Compare and choose among the "best subsets" of various sizes.
-
-
-### Implementation in R
-
-Packages: `leaps`, `stepAIC`, 
-
-Refer to the following refereces
-
-* Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
-* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the stepwise procedures, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
-* Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
-
-
 ## Wald test (General F) {#general-F}
 
-The Wald test is used for simultaneous tests of $Q$ variables in a model
+The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
+
+1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit
+2. Testing a linear combination of predictors (such as a differnece of differences). _This topic is not discussed yet_
 
 Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
 
 * $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
-* $H_{A}: Q$ additional variables are useful
+* $H_{A}: Q$ additional variables are useful to explain/predict $Y$
 
 The traditional test statistic that we've seen since Intro stats is
 $\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
@@ -691,7 +602,98 @@ The p-value of this Wald test is significant, thus employment significantly pred
 
 
 
-## Lasso
+## Variable Selection Process
+
+> Ref: PMA6 CH 9
+
+Variable selection methods such as the ones described in this section, are most often used when performing an _Exploratory_ analysis, where many independent variables have been measured, but a final model to explain the variability of a dependent variable has not yet been determined. 
+
+When building a model, we want to choose a set of independent variables that both will yield a good prediction using as few variables as possible (_parsimony_). We also need to consider controlling for moderators and confounders. In many situations where regression is used, the investigator has strong justification for including certain variables in the model.
+
+* previous studies
+* accepted theory
+
+The investigator may have prior justification for using certain variables but may be open to suggestions for the remaining variables.
+
+The set of independent variables can be broken down into logical subsets
+
+1. **Factors of primary interest**. (such as an exposure or treatment)
+2. **Potential confounders**. These are measures that could be associated with both the response, and explanatory variables, and which could _explain_ the relationship between the primary factor of interest and the outcome. These are typically a set of demographics such as age, gender, ethnicity, and tend to be factors found to be important in prior studies. 
+3. **Effect Modifiers (Moderators)**. A set of variables that other studies have shown to change or affect the relationship between the explanatory and response variables. 
+4. **Precision variables (covariates)**. Variables associated with the dependent variable, but not the primary factor of interest. 
+  
+
+How variables are chosen for inclusion into a model is heavily driven by the purpose of the model: 
+
+* descriptive
+* predictive 
+
+
+### Automated selection procedures
+
+
+_Forward selection_: Variables are added one at a time until optimal model reached. 
+
+1. Choose the variable with the highest absolute correlation $\mid r \mid$ with the outcome.
+2. Choose the next variable that maximizes the model adjusted $R^{2}$. 
+3. Repeat until adding additional variables does not improve the model fit significantly. 
+
+_Backward elimination_: Variables are removed one at a time until optimal model reached
+
+1. Put all variables into the model. 
+2. Remove the least useful variable in the model. This can be done by choosing the variable with the largest $p$-value. 
+3. Repeat until removing additional variables reduces the model fit significantly. 
+
+
+_Stepwise selection_: Combination of forward and backward. 
+
+0. Start with no variables (just $\bar{Y}$)
+1. Add the variable that results in the greatest improvement in model fit. 
+2. Add another variable that results in the greatest improvement in model fit after controlling for the first. 
+3. Check to see if removing any variable currently in the model improves the fit. 
+4. Add another variable...
+5. Check to remove variables...
+6. Repeat until no variables can be added or removed. 
+
+Most programs have the option to **force** variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect. 
+
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
+
+
+> "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
+> "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
+> _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
+
+Warnings: 
+
+* Stopping criteria and algorithm can be different for different software programs. 
+* Can reject perfectly plausible models from later consideration
+* Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
+
+
+_Best Subsets_
+
+* Select one X with highest simple $r$ with Y
+* Select two X’s with highest multiple $r$ with Y
+* Select three X’s with highest multiple $r$ with Y
+etc.
+* Compute adjusted R2, AIC or BIC each time.
+* Compare and choose among the "best subsets" of various sizes.
+
+
+### Implementation in R
+
+Refer to the following refereces
+
+* Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
+* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the stepwise procedures, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
+* Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
+
+
+
+
+### Lasso
 
 **L**east **A**bsolute **S**hrinkage and **S**election **O**perator.
 
@@ -797,6 +799,10 @@ $$ AIC = -2LL + 2p$$
 * Estimates the information in one model _relative to other models_
     - So if all models suck, your AIC will just tell you which one sucks less. 
 * Built in `AIC()` function in R
+* Rule of thumb: Model 1 and Model 2 are considered to have significantly different fit if the difference in AIC values is greater than 2. 
+
+$$\mid AIC_{1} - AIC_{2}\mid > 2$$
+
 
 ### Bayesian Information Criterion (BIC)
 
@@ -817,6 +823,18 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * They often agree.
     - When they disagree, AIC chooses a larger model than BIC.
 
+## General Advice
+
+* Model selection is not a hard science. 
+* Some criteria have "rules of thumb" that can guide your exploration (such as differnce in AIC < 2)
+* _**Use common sense**_: A sub-optimal subset may make more sense than optimal one
+* p-values: When you compare two criteria, often the difference has a known distribution. 
+    - Wald F Test, the difference in RSS between the two models has a F distribution.
+* All criterion should be used as guides.
+* Perform multiple methods of variable selection, find the commonalities. 
+* Let science and the purpose of your model be your ultimate guide
+    - If the purpose of the model is for explanation/interpretation, error on the side of parsimony (smaller model) than being overly complex. 
+    - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
 
 
 ## What to watch out for
@@ -826,7 +844,7 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * Variables not included can bias the results
 * Significance levels are only a guide
 * Perform model diagnostics after selection to check model fit. 
-* _**Use common sense**_: A sub-optimal subset may make more sense than optimal one
+
 
 
 
