@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="binary-classification.html"/>
-<link rel="next" href="roc-curves.html"/>
+<link rel="next" href="confusion-matrix.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -406,27 +408,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Any row with missing data on any variable used in the model will NOT get a predicted value.
 </div>
 
-<p>The <code>predict()</code> function can calculate predictions for any GLM. The model object <code>mvmodel</code> stores the information that it was a logistic regression.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">mvmodel &lt;-<span class="st"> </span><span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb201-2" title="2">model.pred.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mvmodel, <span class="dt">type=</span><span class="st">&#39;response&#39;</span>)</a>
-<a class="sourceLine" id="cb201-3" title="3"><span class="kw">head</span>(model.pred.prob)</a>
-<a class="sourceLine" id="cb201-4" title="4"><span class="co">##          1          2          3          4          5          6 </span></a>
-<a class="sourceLine" id="cb201-5" title="5"><span class="co">## 0.21108906 0.08014012 0.15266203 0.24527840 0.15208679 0.17056409</span></a></code></pre></div>
+<p>The <code>mvmodel</code> object contains a lot of information. I recommend you look at <code>str(mvmodel)</code> on your own time as it’s too much to print out here. The important pieces for this section is that the data used in the model (all complete case records) are stored.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">mvmodel &lt;-<span class="st"> </span><span class="kw">glm</span>(cases <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>depress, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb203-2" title="2">model.pred.prob &lt;-<span class="st"> </span><span class="kw">predict</span>(mvmodel, <span class="dt">type=</span><span class="st">&#39;response&#39;</span>)</a></code></pre></div>
+<p>Calling <code>dim(model.pred.prob)</code> gives us 294. This matches the number of complete case records used to build the model. This is the same length as <code>mvmodel$y</code>, so we can bind them together in a data frame (useful for plotting).</p>
+<p>The <code>model.pred.prob</code> is a vector of individual predicted probabilities of the outcome (being depressed).
+To classify individual <span class="math inline">\(i\)</span> as being depressed or not, we draw a binary value (<span class="math inline">\(x_{i} = 0 or 1\)</span>), with probability <span class="math inline">\(p_{i}\)</span> by using the <code>rbinom</code> function, with a <code>size=1</code>.</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12345</span>) <span class="co">#reminder: change the combo on my luggage</span></a>
+<a class="sourceLine" id="cb204-2" title="2">plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">pred.prob =</span> model.pred.prob, </a>
+<a class="sourceLine" id="cb204-3" title="3">                       <span class="dt">pred.class =</span> <span class="kw">rbinom</span>(<span class="dt">n=</span><span class="kw">length</span>(model.pred.prob), <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">p=</span>model.pred.prob),</a>
+<a class="sourceLine" id="cb204-4" title="4">                       <span class="dt">truth =</span> mvmodel<span class="op">$</span>y)</a>
+<a class="sourceLine" id="cb204-5" title="5"><span class="kw">head</span>(plot.mpp)</a>
+<a class="sourceLine" id="cb204-6" title="6"><span class="co">##    pred.prob pred.class truth</span></a>
+<a class="sourceLine" id="cb204-7" title="7"><span class="co">## 1 0.21108906          0     0</span></a>
+<a class="sourceLine" id="cb204-8" title="8"><span class="co">## 2 0.08014012          0     0</span></a>
+<a class="sourceLine" id="cb204-9" title="9"><span class="co">## 3 0.15266203          0     0</span></a>
+<a class="sourceLine" id="cb204-10" title="10"><span class="co">## 4 0.24527840          1     0</span></a>
+<a class="sourceLine" id="cb204-11" title="11"><span class="co">## 5 0.15208679          0     0</span></a>
+<a class="sourceLine" id="cb204-12" title="12"><span class="co">## 6 0.17056409          0     0</span></a></code></pre></div>
+<p>Applying class labels and creating a cross table of predicted vs truth:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">plot.mpp &lt;-<span class="st"> </span>plot.mpp <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-2" title="2"><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">pred.class =</span> <span class="kw">factor</span>(pred.class, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)), </a>
+<a class="sourceLine" id="cb205-3" title="3">                    <span class="dt">truth =</span> <span class="kw">factor</span>(truth, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))</a>
+<a class="sourceLine" id="cb205-4" title="4"></a>
+<a class="sourceLine" id="cb205-5" title="5"><span class="kw">table</span>(plot.mpp<span class="op">$</span>pred.class, plot.mpp<span class="op">$</span>truth)</a>
+<a class="sourceLine" id="cb205-6" title="6"><span class="co">##                </span></a>
+<a class="sourceLine" id="cb205-7" title="7"><span class="co">##                 Not Depressed Depressed</span></a>
+<a class="sourceLine" id="cb205-8" title="8"><span class="co">##   Not Depressed           195        35</span></a>
+<a class="sourceLine" id="cb205-9" title="9"><span class="co">##   Depressed                49        15</span></a></code></pre></div>
+<p>The model correctly identified 195 individuals as not depressed and 15 as depressed.
+The model got it wrong 49 + 25 times.</p>
+<p><img src="images/q.png" /> Is this good? What if death were the event?</p>
 <div id="distribution-of-predictions" class="section level4">
 <h4><span class="header-section-number">11.1.0.1</span> Distribution of Predictions</h4>
-<p>How well does our model do to predict depression?</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">plot.mpp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prediction =</span> model.pred.prob, </a>
-<a class="sourceLine" id="cb202-2" title="2">                       <span class="dt">truth =</span> <span class="kw">factor</span>(mvmodel<span class="op">$</span>y, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))</a>
-<a class="sourceLine" id="cb202-3" title="3"></a>
-<a class="sourceLine" id="cb202-4" title="4"><span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>prediction, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb202-5" title="5"><span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><img src="images/q.png" /> What things can you infer from this plot?</p>
-<p><img src="images/q.png" /> Where should we put the cutoff value? At what probability should we classify a record as “depressed”?</p>
-</div>
-<div id="optimal-cutoff-value" class="section level3">
-<h3><span class="header-section-number">11.1.1</span> Optimal Cutoff Value</h3>
-<p>Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes “high risk”. For some models, this could be as low as 30%. It’s whatever the probability is that optimally separates the classes. Let’s look at two ways to visualize model performance as a function of cutoff.</p>
+<p>Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let’s look at a plot:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">ggplot</span>(plot.mpp, <span class="kw">aes</span>(<span class="dt">x=</span>truth, <span class="dt">y=</span>pred.prob, <span class="dt">fill=</span>truth)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb206-2" title="2"><span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">alpha=</span>.<span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="images/q.png" /></p>
+<ul>
+<li>What do you notice in this plot?</li>
+<li>What can you infer?</li>
+</ul>
 </div>
 </div>
             </section>
@@ -435,7 +458,7 @@ Any row with missing data on any variable used in the model will NOT get a predi
         </div>
       </div>
 <a href="binary-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="roc-curves.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="confusion-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

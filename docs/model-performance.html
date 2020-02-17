@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.3 Model Performance | Applied Statistics</title>
+  <title>11.4 Model Performance | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.3 Model Performance | Applied Statistics" />
+  <meta property="og:title" content="11.4 Model Performance | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.3 Model Performance | Applied Statistics" />
+  <meta name="twitter:title" content="11.4 Model Performance | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -398,52 +400,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="model-performance" class="section level2">
-<h2><span class="header-section-number">11.3</span> Model Performance</h2>
+<h2><span class="header-section-number">11.4</span> Model Performance</h2>
 <ul>
-<li>Say we decide that a value of 0.15 is our optimal cutoff value.</li>
+<li>Say we decide that a value of 0.15 is our optimal cutoff value to predict depression using this model.</li>
 <li>We can use this probability to classify each row into groups.
 <ul>
 <li>The assigned class values must match the data type and levels of the true value.</li>
 <li>It also has to be in the same order, so the <code>0</code> group needs to come first.</li>
+<li>I want this matrix to show up like the one in Wikipedia, so I’m leveraging the forcats package to reverse my factor level ordering.</li>
 </ul></li>
-<li>Then we calculate a <a href="https://en.wikipedia.org/wiki/Confusion_matrix">[Confusion Matrix]</a> using the similarly named function from the <code>caret</code> package.
-<ul>
-<li>At it’s core, this is a 2x2 table containing counts of each combination of predicted value and true value.</li>
-</ul></li>
+<li>We can calculate a confusion matrix using the similarly named function from the <code>caret</code> package.</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb206-2" title="2"></a>
-<a class="sourceLine" id="cb206-3" title="3">plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">ifelse</span>(plot.mpp<span class="op">$</span>prediction <span class="op">&lt;</span><span class="fl">0.15</span>, <span class="dv">0</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb206-4" title="4">plot.mpp<span class="op">$</span>pred.class &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.mpp<span class="op">$</span>pred.class, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>))</a>
-<a class="sourceLine" id="cb206-5" title="5"></a>
-<a class="sourceLine" id="cb206-6" title="6"><span class="kw">confusionMatrix</span>(plot.mpp<span class="op">$</span>pred.class, plot.mpp<span class="op">$</span>truth, <span class="dt">positive=</span><span class="st">&quot;Depressed&quot;</span>)</a>
-<a class="sourceLine" id="cb206-7" title="7"><span class="co">## Confusion Matrix and Statistics</span></a>
-<a class="sourceLine" id="cb206-8" title="8"><span class="co">## </span></a>
-<a class="sourceLine" id="cb206-9" title="9"><span class="co">##                Reference</span></a>
-<a class="sourceLine" id="cb206-10" title="10"><span class="co">## Prediction      Not Depressed Depressed</span></a>
-<a class="sourceLine" id="cb206-11" title="11"><span class="co">##   Not Depressed           123        10</span></a>
-<a class="sourceLine" id="cb206-12" title="12"><span class="co">##   Depressed               121        40</span></a>
-<a class="sourceLine" id="cb206-13" title="13"><span class="co">##                                           </span></a>
-<a class="sourceLine" id="cb206-14" title="14"><span class="co">##                Accuracy : 0.5544          </span></a>
-<a class="sourceLine" id="cb206-15" title="15"><span class="co">##                  95% CI : (0.4956, 0.6121)</span></a>
-<a class="sourceLine" id="cb206-16" title="16"><span class="co">##     No Information Rate : 0.8299          </span></a>
-<a class="sourceLine" id="cb206-17" title="17"><span class="co">##     P-Value [Acc &gt; NIR] : 1               </span></a>
-<a class="sourceLine" id="cb206-18" title="18"><span class="co">##                                           </span></a>
-<a class="sourceLine" id="cb206-19" title="19"><span class="co">##                   Kappa : 0.1615          </span></a>
-<a class="sourceLine" id="cb206-20" title="20"><span class="co">##                                           </span></a>
-<a class="sourceLine" id="cb206-21" title="21"><span class="co">##  Mcnemar&#39;s Test P-Value : &lt;2e-16          </span></a>
-<a class="sourceLine" id="cb206-22" title="22"><span class="co">##                                           </span></a>
-<a class="sourceLine" id="cb206-23" title="23"><span class="co">##             Sensitivity : 0.8000          </span></a>
-<a class="sourceLine" id="cb206-24" title="24"><span class="co">##             Specificity : 0.5041          </span></a>
-<a class="sourceLine" id="cb206-25" title="25"><span class="co">##          Pos Pred Value : 0.2484          </span></a>
-<a class="sourceLine" id="cb206-26" title="26"><span class="co">##          Neg Pred Value : 0.9248          </span></a>
-<a class="sourceLine" id="cb206-27" title="27"><span class="co">##              Prevalence : 0.1701          </span></a>
-<a class="sourceLine" id="cb206-28" title="28"><span class="co">##          Detection Rate : 0.1361          </span></a>
-<a class="sourceLine" id="cb206-29" title="29"><span class="co">##    Detection Prevalence : 0.5476          </span></a>
-<a class="sourceLine" id="cb206-30" title="30"><span class="co">##       Balanced Accuracy : 0.6520          </span></a>
-<a class="sourceLine" id="cb206-31" title="31"><span class="co">##                                           </span></a>
-<a class="sourceLine" id="cb206-32" title="32"><span class="co">##        &#39;Positive&#39; Class : Depressed       </span></a>
-<a class="sourceLine" id="cb206-33" title="33"><span class="co">## </span></a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb213-2" title="2"></a>
+<a class="sourceLine" id="cb213-3" title="3">plot.mpp<span class="op">$</span>pred.class2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(plot.mpp<span class="op">$</span>pred.prob <span class="op">&lt;</span><span class="fl">0.15</span>, <span class="dv">0</span>,<span class="dv">1</span>) </a>
+<a class="sourceLine" id="cb213-4" title="4">plot.mpp<span class="op">$</span>pred.class2 &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.mpp<span class="op">$</span>pred.class2, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)) <span class="op">%&gt;%</span><span class="st">   </span></a>
+<a class="sourceLine" id="cb213-5" title="5"><span class="st">                        </span>forcats<span class="op">::</span><span class="kw">fct_rev</span>()</a>
+<a class="sourceLine" id="cb213-6" title="6"></a>
+<a class="sourceLine" id="cb213-7" title="7"><span class="kw">confusionMatrix</span>(plot.mpp<span class="op">$</span>pred.class2, forcats<span class="op">::</span><span class="kw">fct_rev</span>(plot.mpp<span class="op">$</span>truth), <span class="dt">positive=</span><span class="st">&quot;Depressed&quot;</span>)</a>
+<a class="sourceLine" id="cb213-8" title="8"><span class="co">## Confusion Matrix and Statistics</span></a>
+<a class="sourceLine" id="cb213-9" title="9"><span class="co">## </span></a>
+<a class="sourceLine" id="cb213-10" title="10"><span class="co">##                Reference</span></a>
+<a class="sourceLine" id="cb213-11" title="11"><span class="co">## Prediction      Depressed Not Depressed</span></a>
+<a class="sourceLine" id="cb213-12" title="12"><span class="co">##   Depressed            40           121</span></a>
+<a class="sourceLine" id="cb213-13" title="13"><span class="co">##   Not Depressed        10           123</span></a>
+<a class="sourceLine" id="cb213-14" title="14"><span class="co">##                                           </span></a>
+<a class="sourceLine" id="cb213-15" title="15"><span class="co">##                Accuracy : 0.5544          </span></a>
+<a class="sourceLine" id="cb213-16" title="16"><span class="co">##                  95% CI : (0.4956, 0.6121)</span></a>
+<a class="sourceLine" id="cb213-17" title="17"><span class="co">##     No Information Rate : 0.8299          </span></a>
+<a class="sourceLine" id="cb213-18" title="18"><span class="co">##     P-Value [Acc &gt; NIR] : 1               </span></a>
+<a class="sourceLine" id="cb213-19" title="19"><span class="co">##                                           </span></a>
+<a class="sourceLine" id="cb213-20" title="20"><span class="co">##                   Kappa : 0.1615          </span></a>
+<a class="sourceLine" id="cb213-21" title="21"><span class="co">##                                           </span></a>
+<a class="sourceLine" id="cb213-22" title="22"><span class="co">##  Mcnemar&#39;s Test P-Value : &lt;2e-16          </span></a>
+<a class="sourceLine" id="cb213-23" title="23"><span class="co">##                                           </span></a>
+<a class="sourceLine" id="cb213-24" title="24"><span class="co">##             Sensitivity : 0.8000          </span></a>
+<a class="sourceLine" id="cb213-25" title="25"><span class="co">##             Specificity : 0.5041          </span></a>
+<a class="sourceLine" id="cb213-26" title="26"><span class="co">##          Pos Pred Value : 0.2484          </span></a>
+<a class="sourceLine" id="cb213-27" title="27"><span class="co">##          Neg Pred Value : 0.9248          </span></a>
+<a class="sourceLine" id="cb213-28" title="28"><span class="co">##              Prevalence : 0.1701          </span></a>
+<a class="sourceLine" id="cb213-29" title="29"><span class="co">##          Detection Rate : 0.1361          </span></a>
+<a class="sourceLine" id="cb213-30" title="30"><span class="co">##    Detection Prevalence : 0.5476          </span></a>
+<a class="sourceLine" id="cb213-31" title="31"><span class="co">##       Balanced Accuracy : 0.6520          </span></a>
+<a class="sourceLine" id="cb213-32" title="32"><span class="co">##                                           </span></a>
+<a class="sourceLine" id="cb213-33" title="33"><span class="co">##        &#39;Positive&#39; Class : Depressed       </span></a>
+<a class="sourceLine" id="cb213-34" title="34"><span class="co">## </span></a></code></pre></div>
 <ul>
 <li>123 people were correctly predicted to not be depressed (True Negative, <span class="math inline">\(n_{11}\)</span>)</li>
 <li>121 people were incorrectly predicted to be depressed (False Positive, <span class="math inline">\(n_{21}\)</span>)</li>

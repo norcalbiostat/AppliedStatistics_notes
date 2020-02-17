@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -413,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
 {1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
 \]</span></p>
-<p>Consider the main effects model of depression on age, income and gender from section @ref{logreg-dep-ex}</p>
+<p>Consider the main effects model of depression on age, income and gender from section <a href="logistic-regression.html#logreg-dep-ex">10.3.2</a></p>
 <table style="width:89%;">
 <colgroup>
 <col width="25%" />
@@ -467,30 +469,31 @@ freedom</td>
 </tr>
 </tbody>
 </table>
-<p>The predicted probability of depression is:
+<p>The predicted probability of depression is calcualted as:
 <span class="math display">\[
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 \]</span></p>
+<p>Notice you can’t get a “generic” probability for all individuals. It entirely depends on their <em>covariate profile</em>. In other words, what value X take on for each record.</p>
 <p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))</a>
-<a class="sourceLine" id="cb198-2" title="2"><span class="co">##        age   income</span></a>
-<a class="sourceLine" id="cb198-3" title="3"><span class="co">## 1 44.41497 20.57483</span></a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">depress <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">age=</span><span class="kw">mean</span>(age), <span class="dt">income=</span><span class="kw">mean</span>(income))</a>
+<a class="sourceLine" id="cb200-2" title="2"><span class="co">##        age   income</span></a>
+<a class="sourceLine" id="cb200-3" title="3"><span class="co">## 1 44.41497 20.57483</span></a></code></pre></div>
 <p>Plug the coefficient estimates and the values of the variables into the equation and calculate.
 <span class="math display">\[
 P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
 {1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
 \]</span></p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">XB.f &lt;-<span class="st"> </span><span class="fl">-0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span><span class="fl">.03656</span><span class="op">*</span>(<span class="fl">20.6</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.92945</span></a>
-<a class="sourceLine" id="cb199-2" title="2"><span class="kw">exp</span>(XB.f) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.f))</a>
-<a class="sourceLine" id="cb199-3" title="3"><span class="co">## [1] 0.1930504</span></a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">XB.f &lt;-<span class="st"> </span><span class="fl">-0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span><span class="fl">.03656</span><span class="op">*</span>(<span class="fl">20.6</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.92945</span></a>
+<a class="sourceLine" id="cb201-2" title="2"><span class="kw">exp</span>(XB.f) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.f))</a>
+<a class="sourceLine" id="cb201-3" title="3"><span class="co">## [1] 0.1930504</span></a></code></pre></div>
 <p><span class="math display">\[
 P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
 {1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
 \]</span></p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">XB.m &lt;-<span class="st"> </span><span class="fl">-0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span><span class="fl">.03656</span><span class="op">*</span>(<span class="fl">20.6</span>)</a>
-<a class="sourceLine" id="cb200-2" title="2"><span class="kw">exp</span>(XB.m) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.m))</a>
-<a class="sourceLine" id="cb200-3" title="3"><span class="co">## [1] 0.08629312</span></a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">XB.m &lt;-<span class="st"> </span><span class="fl">-0.676</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.02096</span><span class="op">*</span>(<span class="fl">44.4</span>) <span class="op">-</span><span class="st"> </span><span class="fl">.03656</span><span class="op">*</span>(<span class="fl">20.6</span>)</a>
+<a class="sourceLine" id="cb202-2" title="2"><span class="kw">exp</span>(XB.m) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(XB.m))</a>
+<a class="sourceLine" id="cb202-3" title="3"><span class="co">## [1] 0.08629312</span></a></code></pre></div>
 <p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p> 
 </div>
             </section>

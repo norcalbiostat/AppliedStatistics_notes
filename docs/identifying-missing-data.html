@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -403,59 +405,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Missing data in <code>R</code> is denoted as <code>NA</code></li>
 <li>Arithmetic functions on missing data will return missing</li>
 </ul>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">survey &lt;-<span class="st"> </span>MASS<span class="op">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></a>
-<a class="sourceLine" id="cb234-2" title="2"><span class="kw">head</span>(survey<span class="op">$</span>Pulse)</a>
-<a class="sourceLine" id="cb234-3" title="3"><span class="co">## [1]  92 104  87  NA  35  64</span></a>
-<a class="sourceLine" id="cb234-4" title="4"><span class="kw">mean</span>(survey<span class="op">$</span>Pulse)</a>
-<a class="sourceLine" id="cb234-5" title="5"><span class="co">## [1] NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">survey &lt;-<span class="st"> </span>MASS<span class="op">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></a>
+<a class="sourceLine" id="cb241-2" title="2"><span class="kw">head</span>(survey<span class="op">$</span>Pulse)</a>
+<a class="sourceLine" id="cb241-3" title="3"><span class="co">## [1]  92 104  87  NA  35  64</span></a>
+<a class="sourceLine" id="cb241-4" title="4"><span class="kw">mean</span>(survey<span class="op">$</span>Pulse)</a>
+<a class="sourceLine" id="cb241-5" title="5"><span class="co">## [1] NA</span></a></code></pre></div>
 <p>The <code>summary()</code> function will always show missing.</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1"><span class="kw">summary</span>(survey<span class="op">$</span>Pulse)</a>
-<a class="sourceLine" id="cb235-2" title="2"><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></a>
-<a class="sourceLine" id="cb235-3" title="3"><span class="co">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></a></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="kw">summary</span>(survey<span class="op">$</span>Pulse)</a>
+<a class="sourceLine" id="cb242-2" title="2"><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></a>
+<a class="sourceLine" id="cb242-3" title="3"><span class="co">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></a></code></pre></div>
 <p>The <code>is.na()</code> function is helpful to identify rows with missing data</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1"><span class="kw">table</span>(<span class="kw">is.na</span>(survey<span class="op">$</span>Pulse))</a>
-<a class="sourceLine" id="cb236-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb236-3" title="3"><span class="co">## FALSE  TRUE </span></a>
-<a class="sourceLine" id="cb236-4" title="4"><span class="co">##   192    45</span></a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="kw">table</span>(<span class="kw">is.na</span>(survey<span class="op">$</span>Pulse))</a>
+<a class="sourceLine" id="cb243-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb243-3" title="3"><span class="co">## FALSE  TRUE </span></a>
+<a class="sourceLine" id="cb243-4" title="4"><span class="co">##   192    45</span></a></code></pre></div>
 <p>The function <code>table()</code> will not show NA by default.</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1"><span class="kw">table</span>(survey<span class="op">$</span>M.I)</a>
-<a class="sourceLine" id="cb237-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb237-3" title="3"><span class="co">## Imperial   Metric </span></a>
-<a class="sourceLine" id="cb237-4" title="4"><span class="co">##       68      141</span></a>
-<a class="sourceLine" id="cb237-5" title="5"><span class="kw">table</span>(survey<span class="op">$</span>M.I, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)</a>
-<a class="sourceLine" id="cb237-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb237-7" title="7"><span class="co">## Imperial   Metric     &lt;NA&gt; </span></a>
-<a class="sourceLine" id="cb237-8" title="8"><span class="co">##       68      141       28</span></a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">table</span>(survey<span class="op">$</span>M.I)</a>
+<a class="sourceLine" id="cb244-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb244-3" title="3"><span class="co">## Imperial   Metric </span></a>
+<a class="sourceLine" id="cb244-4" title="4"><span class="co">##       68      141</span></a>
+<a class="sourceLine" id="cb244-5" title="5"><span class="kw">table</span>(survey<span class="op">$</span>M.I, <span class="dt">useNA=</span><span class="st">&quot;always&quot;</span>)</a>
+<a class="sourceLine" id="cb244-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb244-7" title="7"><span class="co">## Imperial   Metric     &lt;NA&gt; </span></a>
+<a class="sourceLine" id="cb244-8" title="8"><span class="co">##       68      141       28</span></a></code></pre></div>
 <ul>
 <li>What percent of the data set is missing?</li>
 </ul>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(survey)))<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb238-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb238-3" title="3"><span class="co">## FALSE  TRUE </span></a>
-<a class="sourceLine" id="cb238-4" title="4"><span class="co">##  96.2   3.8</span></a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1"><span class="kw">round</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(<span class="kw">is.na</span>(survey)))<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb245-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb245-3" title="3"><span class="co">## FALSE  TRUE </span></a>
+<a class="sourceLine" id="cb245-4" title="4"><span class="co">##  96.2   3.8</span></a></code></pre></div>
 <p>4% of the data points are missing.</p>
 <ul>
 <li>How much missing is there per variable?</li>
 </ul>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">prop.miss &lt;-<span class="st"> </span><span class="kw">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(x))<span class="op">/</span><span class="kw">NROW</span>(x),<span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb239-2" title="2">prop.miss</a>
-<a class="sourceLine" id="cb239-3" title="3"><span class="co">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height </span></a>
-<a class="sourceLine" id="cb239-4" title="4"><span class="co">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 </span></a>
-<a class="sourceLine" id="cb239-5" title="5"><span class="co">##    M.I    Age </span></a>
-<a class="sourceLine" id="cb239-6" title="6"><span class="co">## 0.1181 0.0000</span></a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1">prop.miss &lt;-<span class="st"> </span><span class="kw">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(x))<span class="op">/</span><span class="kw">NROW</span>(x),<span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb246-2" title="2">prop.miss</a>
+<a class="sourceLine" id="cb246-3" title="3"><span class="co">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height </span></a>
+<a class="sourceLine" id="cb246-4" title="4"><span class="co">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 </span></a>
+<a class="sourceLine" id="cb246-5" title="5"><span class="co">##    M.I    Age </span></a>
+<a class="sourceLine" id="cb246-6" title="6"><span class="co">## 0.1181 0.0000</span></a></code></pre></div>
 <p>The amount of missing data per variable varies from 0 to 19%.</p>
 <div id="visualize-missing-patterns" class="section level3">
 <h3><span class="header-section-number">15.1.1</span> Visualize missing patterns</h3>
 <p>Using <code>ggplot2</code></p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1">pmpv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">variable =</span> <span class="kw">names</span>(survey), <span class="dt">pct.miss =</span>prop.miss)</a>
-<a class="sourceLine" id="cb240-2" title="2"></a>
-<a class="sourceLine" id="cb240-3" title="3"><span class="kw">ggplot</span>(pmpv, <span class="kw">aes</span>(<span class="dt">x=</span>variable, <span class="dt">y=</span>pct.miss)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb240-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent, <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb240-5" title="5"><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data=</span>pmpv, <span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(<span class="kw">round</span>(pct.miss<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="dt">y=</span>pct.miss<span class="fl">+.025</span>), <span class="dt">size=</span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">pmpv &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">variable =</span> <span class="kw">names</span>(survey), <span class="dt">pct.miss =</span>prop.miss)</a>
+<a class="sourceLine" id="cb247-2" title="2"></a>
+<a class="sourceLine" id="cb247-3" title="3"><span class="kw">ggplot</span>(pmpv, <span class="kw">aes</span>(<span class="dt">x=</span>variable, <span class="dt">y=</span>pct.miss)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb247-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent, <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb247-5" title="5"><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data=</span>pmpv, <span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(<span class="kw">round</span>(pct.miss<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="dt">y=</span>pct.miss<span class="fl">+.025</span>), <span class="dt">size=</span><span class="dv">4</span>)</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Using <code>mice</code></p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="kw">library</span>(mice)</a>
-<a class="sourceLine" id="cb241-2" title="2"><span class="kw">md.pattern</span>(survey)</a></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1"><span class="kw">library</span>(mice)</a>
+<a class="sourceLine" id="cb248-2" title="2"><span class="kw">md.pattern</span>(survey)</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre><code>##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
 ## 168    1    1   1   1      1      1     1    1     1      1   1     1   0
@@ -469,11 +471,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107</code></pre>
 <p>This somewhat ugly output tells us that 168 records have no missing data, 38 records are missing only <code>Pulse</code> and 20 are missing both <code>Height</code> and <code>M.I</code>.</p>
 <p>Using <code>VIM</code></p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="kw">library</span>(VIM)</a>
-<a class="sourceLine" id="cb243-2" title="2"><span class="kw">aggr</span>(survey, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</a>
-<a class="sourceLine" id="cb243-3" title="3">              <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb243-4" title="4">              <span class="dt">labels=</span><span class="kw">names</span>(survey), <span class="dt">cex.axis=</span>.<span class="dv">7</span>,</a>
-<a class="sourceLine" id="cb243-5" title="5">              <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="kw">library</span>(VIM)</a>
+<a class="sourceLine" id="cb250-2" title="2"><span class="kw">aggr</span>(survey, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</a>
+<a class="sourceLine" id="cb250-3" title="3">              <span class="dt">numbers=</span><span class="ot">TRUE</span>, <span class="dt">sortVars=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb250-4" title="4">              <span class="dt">labels=</span><span class="kw">names</span>(survey), <span class="dt">cex.axis=</span>.<span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb250-5" title="5">              <span class="dt">gap=</span><span class="dv">3</span>, <span class="dt">ylab=</span><span class="kw">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
 <p>The plot on the left is a simplified, and ordered version of the ggplot from above, except the bars appear to be inflated because the y-axis goes up to 15% instead of 100%.</p>
 <p>The plot on the right shows the missing data patterns, and indicate that 71% of the records has complete cases, and that everyone who is missing <code>M.I.</code> is also missing Height.</p>
@@ -486,7 +488,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>The darkred text indicates how many records are missing on both.</li>
 </ul>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">marginplot</span>(survey[,<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">marginplot</span>(survey[,<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</a></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate.</p>
 </div>

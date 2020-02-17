@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -400,40 +402,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="generating-pcs-using-r" class="section level2">
 <h2><span class="header-section-number">13.3</span> Generating PC’s using R</h2>
 <p>Calculating the principal components in R can be done using a call to the function <code>prcomp()</code>. <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/">STHDA</a> has a good overview of the difference between <code>prcomp()</code> and <code>princomp()</code>.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">pr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data)</a>
-<a class="sourceLine" id="cb208-2" title="2"><span class="kw">summary</span>(pr)</a>
-<a class="sourceLine" id="cb208-3" title="3"><span class="co">## Importance of components:</span></a>
-<a class="sourceLine" id="cb208-4" title="4"><span class="co">##                            Comp.1    Comp.2</span></a>
-<a class="sourceLine" id="cb208-5" title="5"><span class="co">## Standard deviation     11.4019265 4.2236767</span></a>
-<a class="sourceLine" id="cb208-6" title="6"><span class="co">## Proportion of Variance  0.8793355 0.1206645</span></a>
-<a class="sourceLine" id="cb208-7" title="7"><span class="co">## Cumulative Proportion   0.8793355 1.0000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">pr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data)</a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="kw">summary</span>(pr)</a>
+<a class="sourceLine" id="cb215-3" title="3"><span class="co">## Importance of components:</span></a>
+<a class="sourceLine" id="cb215-4" title="4"><span class="co">##                            Comp.1    Comp.2</span></a>
+<a class="sourceLine" id="cb215-5" title="5"><span class="co">## Standard deviation     11.4019265 4.2236767</span></a>
+<a class="sourceLine" id="cb215-6" title="6"><span class="co">## Proportion of Variance  0.8793355 0.1206645</span></a>
+<a class="sourceLine" id="cb215-7" title="7"><span class="co">## Cumulative Proportion   0.8793355 1.0000000</span></a></code></pre></div>
 <ul>
 <li>The summary output above shows the first PC (<code>Comp.1</code>) explains the highest proportion of variance.</li>
 <li>The values for the matrix <span class="math inline">\(\mathbf{A}\)</span> is contained in <code>pr$loadings</code>.</li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">pr<span class="op">$</span>loadings</a>
-<a class="sourceLine" id="cb209-2" title="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb209-3" title="3"><span class="co">## Loadings:</span></a>
-<a class="sourceLine" id="cb209-4" title="4"><span class="co">##    Comp.1 Comp.2</span></a>
-<a class="sourceLine" id="cb209-5" title="5"><span class="co">## X1  0.854  0.519</span></a>
-<a class="sourceLine" id="cb209-6" title="6"><span class="co">## X2  0.519 -0.854</span></a>
-<a class="sourceLine" id="cb209-7" title="7"><span class="co">## </span></a>
-<a class="sourceLine" id="cb209-8" title="8"><span class="co">##                Comp.1 Comp.2</span></a>
-<a class="sourceLine" id="cb209-9" title="9"><span class="co">## SS loadings       1.0    1.0</span></a>
-<a class="sourceLine" id="cb209-10" title="10"><span class="co">## Proportion Var    0.5    0.5</span></a>
-<a class="sourceLine" id="cb209-11" title="11"><span class="co">## Cumulative Var    0.5    1.0</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">pr<span class="op">$</span>loadings</a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb216-3" title="3"><span class="co">## Loadings:</span></a>
+<a class="sourceLine" id="cb216-4" title="4"><span class="co">##    Comp.1 Comp.2</span></a>
+<a class="sourceLine" id="cb216-5" title="5"><span class="co">## X1  0.854  0.519</span></a>
+<a class="sourceLine" id="cb216-6" title="6"><span class="co">## X2  0.519 -0.854</span></a>
+<a class="sourceLine" id="cb216-7" title="7"><span class="co">## </span></a>
+<a class="sourceLine" id="cb216-8" title="8"><span class="co">##                Comp.1 Comp.2</span></a>
+<a class="sourceLine" id="cb216-9" title="9"><span class="co">## SS loadings       1.0    1.0</span></a>
+<a class="sourceLine" id="cb216-10" title="10"><span class="co">## Proportion Var    0.5    0.5</span></a>
+<a class="sourceLine" id="cb216-11" title="11"><span class="co">## Cumulative Var    0.5    1.0</span></a></code></pre></div>
 <p>To visualize these new axes, we plot the centered data.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">a &lt;-<span class="st"> </span>pr<span class="op">$</span>loadings</a>
-<a class="sourceLine" id="cb210-2" title="2">x1 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X1))</a>
-<a class="sourceLine" id="cb210-3" title="3">x2 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X2))</a>
-<a class="sourceLine" id="cb210-4" title="4"></a>
-<a class="sourceLine" id="cb210-5" title="5"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;x2&quot;</span>)</a>
-<a class="sourceLine" id="cb210-6" title="6"><span class="kw">points</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">pch=</span><span class="dv">16</span>)</a>
-<a class="sourceLine" id="cb210-7" title="7"><span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="kw">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="kw">expression</span>(C[<span class="dv">1</span>]))</a>
-<a class="sourceLine" id="cb210-8" title="8"><span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="kw">text</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="kw">expression</span>(C[<span class="dv">2</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">a &lt;-<span class="st"> </span>pr<span class="op">$</span>loadings</a>
+<a class="sourceLine" id="cb217-2" title="2">x1 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X1))</a>
+<a class="sourceLine" id="cb217-3" title="3">x2 &lt;-<span class="st"> </span><span class="kw">with</span>(data, X2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(X2))</a>
+<a class="sourceLine" id="cb217-4" title="4"></a>
+<a class="sourceLine" id="cb217-5" title="5"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;x2&quot;</span>)</a>
+<a class="sourceLine" id="cb217-6" title="6"><span class="kw">points</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">pch=</span><span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb217-7" title="7"><span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="kw">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="kw">expression</span>(C[<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb217-8" title="8"><span class="kw">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="kw">text</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="kw">expression</span>(C[<span class="dv">2</span>]))</a></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">biplot</span>(pr)</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">biplot</span>(pr)</a></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
             </section>

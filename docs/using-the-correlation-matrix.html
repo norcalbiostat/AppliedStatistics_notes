@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -416,14 +418,14 @@ Using correlation matrix vs covariance matrix will generate different PC’s
 </div>
 
 <p>This makes sense given the difference in matricies:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">cov</span>(data) <span class="co">#Covariance Matrix</span></a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="co">##           X1       X2</span></a>
-<a class="sourceLine" id="cb212-3" title="3"><span class="co">## X1 100.74146 50.29187</span></a>
-<a class="sourceLine" id="cb212-4" title="4"><span class="co">## X2  50.29187 48.59528</span></a>
-<a class="sourceLine" id="cb212-5" title="5"><span class="kw">cor</span>(data) <span class="co">#Correlation Matrix</span></a>
-<a class="sourceLine" id="cb212-6" title="6"><span class="co">##           X1        X2</span></a>
-<a class="sourceLine" id="cb212-7" title="7"><span class="co">## X1 1.0000000 0.7187811</span></a>
-<a class="sourceLine" id="cb212-8" title="8"><span class="co">## X2 0.7187811 1.0000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">cov</span>(data) <span class="co">#Covariance Matrix</span></a>
+<a class="sourceLine" id="cb219-2" title="2"><span class="co">##           X1       X2</span></a>
+<a class="sourceLine" id="cb219-3" title="3"><span class="co">## X1 100.74146 50.29187</span></a>
+<a class="sourceLine" id="cb219-4" title="4"><span class="co">## X2  50.29187 48.59528</span></a>
+<a class="sourceLine" id="cb219-5" title="5"><span class="kw">cor</span>(data) <span class="co">#Correlation Matrix</span></a>
+<a class="sourceLine" id="cb219-6" title="6"><span class="co">##           X1        X2</span></a>
+<a class="sourceLine" id="cb219-7" title="7"><span class="co">## X1 1.0000000 0.7187811</span></a>
+<a class="sourceLine" id="cb219-8" title="8"><span class="co">## X2 0.7187811 1.0000000</span></a></code></pre></div>
 <p>Standardizing your data prior to analysis aids the interpretation of the PC’s in a few ways</p>
 <ol style="list-style-type: decimal">
 <li>The total variance is the number of variables <span class="math inline">\(P\)</span></li>
@@ -432,13 +434,13 @@ Using correlation matrix vs covariance matrix will generate different PC’s
 </ol>
 <p>This last point means that for any given <span class="math inline">\(C_{i}\)</span> we can quantify the relative degree of dependence of the PC on each of the standardized variables. This is a.k.a. the <strong>factor loading</strong> (we will return to this key term later).</p>
 <p>To calculate the principal components using the correlation matrix, you just need to specify that you want <code>cor=TRUE</code>.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">pr_corr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data, <span class="dt">cor=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="kw">summary</span>(pr_corr)</a>
-<a class="sourceLine" id="cb213-3" title="3"><span class="co">## Importance of components:</span></a>
-<a class="sourceLine" id="cb213-4" title="4"><span class="co">##                           Comp.1    Comp.2</span></a>
-<a class="sourceLine" id="cb213-5" title="5"><span class="co">## Standard deviation     1.3110229 0.5303008</span></a>
-<a class="sourceLine" id="cb213-6" title="6"><span class="co">## Proportion of Variance 0.8593906 0.1406094</span></a>
-<a class="sourceLine" id="cb213-7" title="7"><span class="co">## Cumulative Proportion  0.8593906 1.0000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">pr_corr &lt;-<span class="st"> </span><span class="kw">princomp</span>(data, <span class="dt">cor=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb220-2" title="2"><span class="kw">summary</span>(pr_corr)</a>
+<a class="sourceLine" id="cb220-3" title="3"><span class="co">## Importance of components:</span></a>
+<a class="sourceLine" id="cb220-4" title="4"><span class="co">##                           Comp.1    Comp.2</span></a>
+<a class="sourceLine" id="cb220-5" title="5"><span class="co">## Standard deviation     1.3110229 0.5303008</span></a>
+<a class="sourceLine" id="cb220-6" title="6"><span class="co">## Proportion of Variance 0.8593906 0.1406094</span></a>
+<a class="sourceLine" id="cb220-7" title="7"><span class="co">## Cumulative Proportion  0.8593906 1.0000000</span></a></code></pre></div>
 <ul>
 <li>If we use the covariance matrix and change the scale of a variable (i.e. in to cm) that will change the results of the PC’s</li>
 <li>Many researchers prefer to use the correlation matrix

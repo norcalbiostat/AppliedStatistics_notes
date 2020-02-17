@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.2 ROC Curves | Applied Statistics</title>
+  <title>11.3 ROC Curves | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.2 ROC Curves | Applied Statistics" />
+  <meta property="og:title" content="11.3 ROC Curves | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.2 ROC Curves | Applied Statistics" />
+  <meta name="twitter:title" content="11.3 ROC Curves | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="calculating-predictions.html"/>
+<link rel="prev" href="confusion-matrix.html"/>
 <link rel="next" href="model-performance.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -286,6 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
 <li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
 <li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
@@ -294,11 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.3</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.4" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.4</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
@@ -398,9 +400,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="roc-curves" class="section level2">
-<h2><span class="header-section-number">11.2</span> ROC Curves</h2>
+<h2><span class="header-section-number">11.3</span> ROC Curves</h2>
 <ul>
-<li>We can create a Receiver operating characteristic (ROC) curve to help find that sweet spot.</li>
 <li>ROC curves show the balance between sensitivity and specificity.</li>
 <li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
 <ul>
@@ -412,32 +413,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="kw">library</span>(ROCR)</a>
-<a class="sourceLine" id="cb203-2" title="2">pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)</a>
-<a class="sourceLine" id="cb203-3" title="3">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)</a>
-<a class="sourceLine" id="cb203-4" title="4"><span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))</a>
-<a class="sourceLine" id="cb203-5" title="5"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>We can also use the <code>performance()</code> function and say we want to evaluate the <span class="math inline">\(f1\)</span> measure</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)</a>
-<a class="sourceLine" id="cb204-2" title="2"><span class="kw">plot</span>(perf.f1)</a></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"><span class="kw">library</span>(ROCR)</a>
+<a class="sourceLine" id="cb209-2" title="2">pr &lt;-<span class="st"> </span><span class="kw">prediction</span>(model.pred.prob, mvmodel<span class="op">$</span>y)</a>
+<a class="sourceLine" id="cb209-3" title="3">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="dt">x.measure=</span><span class="st">&quot;fpr&quot;</span>)</a>
+<a class="sourceLine" id="cb209-4" title="4"><span class="kw">plot</span>(perf, <span class="dt">colorize=</span><span class="ot">TRUE</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">print.cutoffs.at=</span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>)))</a>
+<a class="sourceLine" id="cb209-5" title="5"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>We can also use the <code>performance()</code> function to evaluate the <span class="math inline">\(f1\)</span> measure</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">perf.f1 &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;f&quot;</span>)</a>
+<a class="sourceLine" id="cb210-2" title="2">perf.acc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr,<span class="dt">measure=</span><span class="st">&quot;acc&quot;</span>)</a>
+<a class="sourceLine" id="cb210-3" title="3"></a>
+<a class="sourceLine" id="cb210-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb210-5" title="5"><span class="kw">plot</span>(perf.f1)</a>
+<a class="sourceLine" id="cb210-6" title="6"><span class="kw">plot</span>(perf.acc)</a></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>We can dig into the <code>perf.acc</code> object to get the maximum accuracy value (<code>y.value</code>), then find the row where that value occurs, and link it to the corresponding cutoff value of x.</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">(max.f1 &lt;-<span class="st"> </span><span class="kw">max</span>(perf.acc<span class="op">@</span>y.values[[<span class="dv">1</span>]], <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb211-2" title="2"><span class="co">## [1] 0.8333333</span></a>
+<a class="sourceLine" id="cb211-3" title="3">(row.with.max &lt;-<span class="st"> </span><span class="kw">which</span>(perf.acc<span class="op">@</span>y.values[[<span class="dv">1</span>]]<span class="op">==</span>max.f1))</a>
+<a class="sourceLine" id="cb211-4" title="4"><span class="co">## [1] 2 8</span></a>
+<a class="sourceLine" id="cb211-5" title="5">(cutoff.value &lt;-<span class="st"> </span>perf.acc<span class="op">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</a>
+<a class="sourceLine" id="cb211-6" title="6"><span class="co">##       124       256 </span></a>
+<a class="sourceLine" id="cb211-7" title="7"><span class="co">## 0.4508171 0.3946273</span></a></code></pre></div>
+<p>A cutoff of 0.42 provides the maximum accuracy measure.</p>
+<p>You can do the same process with other measures of optimization such as the <span class="math inline">\(f1\)</span> score.</p>
 <p>ROC curves:</p>
 <ul>
 <li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
 <li>The Area under the Curve (auc) also gives you a measure of overall model accuracy.</li>
 </ul>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&#39;auc&#39;</span>)</a>
-<a class="sourceLine" id="cb205-2" title="2">auc<span class="op">@</span>y.values</a>
-<a class="sourceLine" id="cb205-3" title="3"><span class="co">## [[1]]</span></a>
-<a class="sourceLine" id="cb205-4" title="4"><span class="co">## [1] 0.695041</span></a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">auc &lt;-<span class="st"> </span><span class="kw">performance</span>(pr, <span class="dt">measure=</span><span class="st">&#39;auc&#39;</span>)</a>
+<a class="sourceLine" id="cb212-2" title="2">auc<span class="op">@</span>y.values</a>
+<a class="sourceLine" id="cb212-3" title="3"><span class="co">## [[1]]</span></a>
+<a class="sourceLine" id="cb212-4" title="4"><span class="co">## [1] 0.695041</span></a></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="calculating-predictions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="confusion-matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="model-performance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

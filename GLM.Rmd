@@ -19,7 +19,7 @@ There are a few overarching types of non-continuous outcomes that can be modeled
 
 ## Fitting GLMs 
 
-All regression models aim to model the expected value of the response variable $Y$ given the observed data $X$, thorugh some link function $C$ 
+All regression models aim to model the expected value of the response variable $Y$ given the observed data $X$, through some link function $C$ 
 
 $$E(Y|X) = C(X)$$ 
 
@@ -262,6 +262,42 @@ kable(or.out[-1,], digits=2) %>%
   kable_styling(full_width = FALSE, "striped") %>% 
   add_header_above(c(" "=2, "95% CI"=2, " "=1))
 ```
+
+### Model Fit 
+
+`r emo::ji("book")` PMA6 12.8
+
+#### Pseudo $R^{2}$
+
+Recall in linear regression, the coefficient of determination $R^{2}$ could be used as a measure of model fit, as it represents the proportion of variance in the outcome explained by the model. This statistic can't be calculated for Logistic regression, but several versions of a _Pseudo $R^{2}$_ have been proposed, and are printed as part of the output for many statistical packages such as Stata. 
+
+
+#### Goodness of Fit
+
+Another way to assess model fit for the entire model is to perform a _goodness-of-fit_ test. The one developed by Hosmer and Lemeshow (1980) is the most commonly used GoF test. In this approach,
+
+1. the predicted probability of belonging to the event group (y=1) is calculated for every observation. 
+2. these probabilities are sorted in ascending order, then divided into $j$ equal sized subgroups, typically deciles to create 10 'bins'. 
+3. For each 'bin', or range of probabilities, count the observed number of individuals with the event (y=1) ($O_{j}$).
+4. For each 'bin', calculate the expected number of events by adding the predicted probabilities in that bin. ($E_{j}$)
+
+The goodness of fit statistic is then calculated as follows: 
+
+$$ GoF \chi^{2} = \sum_{j} \frac{(O_{j}-E_{j})^2}{E_{j}} $$
+
+which approximately follows a $\chi_{J-2}^{2}$ distribution under relatively large sample sizes. 
+
+> A large GoF statistic (or small p-value) indicate that the fit may *NOT* be good
+
+R package: `MKmisc`, function `HLgof.test`. 
+
+```
+Mkmisc::HLgof.test(fit=fitted(model), obs=model$y)
+```
+
+#### Accurate predictions
+
+Since the logistic regression is all about modeling the probability of an event occurring, we can use that model to create predicted probabilities. The next chapter discusses how to use a logistic regression model for prediction, and what measures of fit are used to assess how "accurate" the model is. 
 
 
 
