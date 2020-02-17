@@ -219,7 +219,7 @@ round(exp(10*confint(mvmodel)[2,]),3)
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
 
-#### Example: Predictors of smoking status
+### Example: Predictors of smoking status
 
 Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
 
@@ -242,6 +242,27 @@ survey::regTermTest(bp.mod, "bp_class")
 The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.
 
 * This means blood pressure classification should not be included in a model to explain smoking status. 
+
+### Reporting 
+
+The following code can be used to create a nice table of odds ratios and their confidence intervals. 
+
+```{r}
+or.out <- data.frame(
+  OR  = exp(coef(bp.mod)),
+  LCL = exp(confint(bp.mod))[,1],
+  UCL = exp(confint(bp.mod))[,2], 
+  p = format.pval(coef(summary(bp.mod))[,4], digits=1, eps=.001)
+  )
+rownames(or.out) <- c("drop", "Female", "Income",
+                      "Pre-HTN vs Normal", "HTN-I vs Normal", 
+                      "HTN-II vs Normal")
+# library(kableExtra)
+kable(or.out[-1,], digits=2) %>% 
+  kable_styling(full_width = FALSE, "striped") %>% 
+  add_header_above(c(" "=2, "95% CI"=2, " "=1))
+```
+
 
 
 ## Log-linear models

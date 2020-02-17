@@ -285,7 +285,7 @@ round(exp(10*confint(mvmodel)[2,]),3)
 Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them. 
 
 
-#### Example: Predictors of smoking status
+### Example: Predictors of smoking status
 
 Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (`bp_class`) as predictors. 
 
@@ -344,6 +344,82 @@ The Wald Test has a large p-value of 0.73, thus blood pressure classification is
 
 * This means blood pressure classification should not be included in a model to explain smoking status. 
 
+### Reporting 
+
+The following code can be used to create a nice table of odds ratios and their confidence intervals. 
+
+
+```r
+or.out <- data.frame(
+  OR  = exp(coef(bp.mod)),
+  LCL = exp(confint(bp.mod))[,1],
+  UCL = exp(confint(bp.mod))[,2], 
+  p = format.pval(coef(summary(bp.mod))[,4], digits=1, eps=.001)
+  )
+rownames(or.out) <- c("drop", "Female", "Income",
+                      "Pre-HTN vs Normal", "HTN-I vs Normal", 
+                      "HTN-II vs Normal")
+# library(kableExtra)
+kable(or.out[-1,], digits=2) %>% 
+  kable_styling(full_width = FALSE, "striped") %>% 
+  add_header_above(c(" "=2, "95% CI"=2, " "=1))
+```
+
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="2"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">95% CI</div></th>
+<th style="border-bottom:hidden" colspan="1"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> OR </th>
+   <th style="text-align:right;"> LCL </th>
+   <th style="text-align:right;"> UCL </th>
+   <th style="text-align:left;"> p </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:right;"> 0.54 </td>
+   <td style="text-align:right;"> 0.46 </td>
+   <td style="text-align:right;"> 0.63 </td>
+   <td style="text-align:left;"> &lt;0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Income </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:left;"> 0.005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pre-HTN vs Normal </td>
+   <td style="text-align:right;"> 1.08 </td>
+   <td style="text-align:right;"> 0.92 </td>
+   <td style="text-align:right;"> 1.26 </td>
+   <td style="text-align:left;"> 0.374 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> HTN-I vs Normal </td>
+   <td style="text-align:right;"> 0.98 </td>
+   <td style="text-align:right;"> 0.79 </td>
+   <td style="text-align:right;"> 1.21 </td>
+   <td style="text-align:left;"> 0.850 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> HTN-II vs Normal </td>
+   <td style="text-align:right;"> 1.03 </td>
+   <td style="text-align:right;"> 0.71 </td>
+   <td style="text-align:right;"> 1.50 </td>
+   <td style="text-align:left;"> 0.885 </td>
+  </tr>
+</tbody>
+</table>
+
+
 
 ## Log-linear models
 
@@ -383,7 +459,7 @@ qqnorm(addhealth$income); qqline(addhealth$income, col="red")
 qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 **Identify variables**
 
@@ -539,7 +615,7 @@ hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE
 axis(1);axis(2, las=2);box()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 ```r
