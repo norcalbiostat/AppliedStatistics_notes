@@ -374,9 +374,7 @@ Fill in missing values, analyze completed data set
 4. Combine final estimates in a manner that accounts for the between, and within imputation variance. 
 
 
-![](http://www.stefvanbuuren.nl/mi/image/flow.png)
-
-_Credit: http://www.stefvanbuuren.nl_
+![Diagram of Multiple Imputation process. Credit: https://stefvanbuuren.name/fimd/sec-nutshell.html](https://stefvanbuuren.name/fimd/fig/ch01-miflow-1.png)
 
 
 
