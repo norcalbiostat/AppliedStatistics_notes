@@ -7,6 +7,9 @@ Missing Data happens. Not always
 * Unit non-response: Records have some background data on all units, but some units don’t respond to any question. 
 * Monotonone missing data: Variables can be ordered such that one block of variables more observed than the next. 
 
+> This is a very brief, and very rough overview of identification and treatment of missing data. For more details (enough for an entire class) see Flexible Imputation of Missing Data, 2nd Ed, by Stef van Buuren: https://stefvanbuuren.name/fimd/ 
+
+
 
 ## Identifying missing data
 
@@ -457,9 +460,7 @@ Fill in missing values, analyze completed data set
 4. Combine final estimates in a manner that accounts for the between, and within imputation variance. 
 
 
-![](http://www.stefvanbuuren.nl/mi/image/flow.png)
-
-_Credit: http://www.stefvanbuuren.nl_
+![Diagram of Multiple Imputation process. Credit: https://stefvanbuuren.name/fimd/sec-nutshell.html](https://stefvanbuuren.name/fimd/fig/ch01-miflow-1.png)
 
 
 
@@ -511,8 +512,11 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 * A separate univariate imputation model can be specified for each column. 
 * The default imputation method depends on the measurement level of the target column. 
 
-\BeginKnitrBlock{rmdtip}<div class="rmdtip">Your best reference guide to this section of the notes is the mice: Multivariate Imputation by Chained Equations in R article in the Journal of Statistical Software by Stef van Buuren.
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">Your best reference guide to this section of the notes is the bookdown version of Flexible Imputation of Missing Data, by Stef van Buuren: 
 
+https://stefvanbuuren.name/fimd/ch-multivariate.html
+
+For a more technical details about how the `mice` function works in R, see: 
 https://www.jstatsoft.org/article/view/v045i03 </div>\EndKnitrBlock{rmdtip}
 
 ### Process / Algorithm 
@@ -543,7 +547,10 @@ How many imputations ($m$) should we create and how many iterations ($L$) should
 
 \BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Mandatory Reading**
   
-Read 4.3: Assessing Convergence in the [JSS article on mice](https://www.jstatsoft.org/article/view/v045i03)</div>\EndKnitrBlock{rmdimportant}
+Read 6.5.2: Convergence https://stefvanbuuren.name/fimd/sec-algoptions.html</div>\EndKnitrBlock{rmdimportant}
+
+
+
 
 ### Imputation Methods
 
@@ -558,6 +565,15 @@ Some built-in imputation methods in the `mice` package are:
 * _lda_: Linear discriminant analysis (factor, >= 2 categories)
 * _cart_: Classification and regression trees (any)
 * _rf_: Random forest imputations (any)
+
+## Diagnostics
+
+Q: How do I know if the imputed values are plausible? 
+A: Create diagnostic graphics that plot the observed and imputed values together. 
+
+https://stefvanbuuren.name/fimd/sec-diagnostics.html
+
+
 
 
 ## Example: Prescribed amount of missing.
