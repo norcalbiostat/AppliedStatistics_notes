@@ -225,6 +225,45 @@ caret::confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed"
 * 10 people were incorrectly predicted to not be depressed (False Negative)
 * 15 people were correctly predicted to be depressed (True Positive)
 
+## Vocabulary terms
+Also other names for the same term, and formulas.
+
+* True positive ($n_{11}$)
+* True negative ($n_{22}$)
+* False positive, Type I error ($n_{12}$)
+* False negative, Type II error ($n_{21}$)
+* True positive rate (TPR), Recall, Sensitivity, probability of detection, power. 
+$\frac{\# True Positive}{\#Condition Positive}$
+
+* False positive rate (FPR), fall-out, probability of false alarm. 
+$\frac{\# False Positive}{\# Condition Negative}$
+
+* False negative rate (FNR), miss rate. 
+$\frac{\# False Negative}{\# Condition Positive}$
+
+* True negative rate (TNR), Specificity, selectivity. 
+$\frac{\# True Negative}{\# Condition Negative}$
+
+* Prevalence. 
+$\frac{\# Condition Positive}{\# Total Population}$
+
+* Accuracy. 
+$\frac{\# True Positive + \# True Negative}{\# Total Population}$
+
+* Positive Predictive Value (PPV), Precision. 
+$\frac{\# True Positive}{\# Predicted Condition Positive}$
+
+* False discovery rate (FDR). 
+$\frac{\# False Positive}{\# Predicted Condition Positive}$
+
+* False omission rate (FOR). 
+$\frac{\# False Negative}{\# Predicted Condition Negative}$
+
+* Negative predictive value (NPV). 
+$\frac{\# True Negative}{\# Predicted Condition Negative}$
+
+* F1 score. $\frac{2 * (Precision * Recall)}{Precision + Recall}$
+
 <!---
 Other terminology: 
 
