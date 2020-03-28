@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.1 The syntax of ggplot | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.1 The syntax of ggplot | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -341,50 +344,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>V Multi-level Modeling</b></span></li>
-<li class="chapter" data-level="15" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>15</b> Introduction</a><ul>
-<li class="chapter" data-level="15.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>15.1</b> Example School Data</a></li>
-<li class="chapter" data-level="15.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>15.2</b> Multi-level models</a></li>
+<li class="part"><span><b>V Other Topics</b></span></li>
+<li class="chapter" data-level="15" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>15</b> Missing Data</a><ul>
+<li class="chapter" data-level="15.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>15.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>15.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="part"><span><b>VI Other Topics</b></span></li>
-<li class="chapter" data-level="16" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>16</b> Missing Data</a><ul>
-<li class="chapter" data-level="16.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>16.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>16.1.1</b> Visualize missing patterns</a></li>
+<li class="chapter" data-level="15.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>15.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="15.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>15.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>15.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>16.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="16.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>16.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>16.3.1</b> Demonstration via Simulation</a></li>
+<li class="chapter" data-level="15.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>15.4</b> General strategies</a><ul>
+<li class="chapter" data-level="15.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>15.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="15.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>15.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="15.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>15.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>16.4</b> General strategies</a><ul>
-<li class="chapter" data-level="16.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>16.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="16.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="16.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>16.4.3</b> Imputation</a></li>
+<li class="chapter" data-level="15.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>15.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="15.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>15.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="15.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>15.6.1</b> Goals</a></li>
+<li class="chapter" data-level="15.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>15.6.2</b> Technique</a></li>
+<li class="chapter" data-level="15.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>15.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="15.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>15.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="16.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>16.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="16.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>16.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="16.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>16.6.1</b> Goals</a></li>
-<li class="chapter" data-level="16.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>16.6.2</b> Technique</a></li>
-<li class="chapter" data-level="16.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>16.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="16.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>16.6.4</b> Inference on MI</a></li>
+<li class="chapter" data-level="15.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>15.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="15.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>15.7.1</b> Overview</a></li>
+<li class="chapter" data-level="15.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>15.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="15.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>15.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="15.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>15.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="16.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>16.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="16.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>16.7.1</b> Overview</a></li>
-<li class="chapter" data-level="16.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>16.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="16.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>16.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="16.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>16.7.4</b> Imputation Methods</a></li>
+<li class="chapter" data-level="15.8" data-path="diagnostics.html"><a href="diagnostics.html"><i class="fa fa-check"></i><b>15.8</b> Diagnostics</a></li>
+<li class="chapter" data-level="15.9" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>15.9</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="15.9.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>15.9.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="15.9.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>15.9.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="15.9.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>15.9.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="15.9.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>15.9.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="15.9.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>15.9.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="15.9.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>15.9.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="15.9.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>15.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="16.8" data-path="diagnostics.html"><a href="diagnostics.html"><i class="fa fa-check"></i><b>16.8</b> Diagnostics</a></li>
-<li class="chapter" data-level="16.9" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>16.9</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="16.9.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>16.9.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="16.9.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>16.9.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="16.9.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>16.9.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="16.9.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>16.9.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="16.9.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>16.9.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="16.9.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>16.9.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="16.9.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>16.9.7</b> Calculating bias</a></li>
-</ul></li>
-<li class="chapter" data-level="16.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>16.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="16.11" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>16.11</b> Additional References</a></li>
+<li class="chapter" data-level="15.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>15.10</b> Final thoughts</a></li>
+<li class="chapter" data-level="15.11" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>15.11</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -446,11 +444,13 @@ points with a line? Use <code>geom_lines()</code>. We will see many varieties in
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
