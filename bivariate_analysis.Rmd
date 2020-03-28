@@ -296,7 +296,7 @@ When these three conditions are met, we may perform an ANOVA to determine whethe
 The `PLANTS1` data file gives the percent of nitrogen in four different species of plants grown in a laboratory. The researchers collected these data in parts of the country where there is very little rainfall. To examine the effect of water, they varied the amount per day from 50mm to 650mm in 100mm increments. There were 9 plants per species-by-water combination. Because the plants are to be used primarily for animal food, with some parts that can be consumed by people, a high nitrogen content is very desirable. Let's formally test to see if the nitrogen content in the plants differ across species.
 
 ```{r, echo=FALSE}
-plants1  <- read.table("C:/Box/Data/plants1.txt", sep="\t", header=TRUE)
+plants1  <- read.table("C:/users/rdonatello/Box/Data/plants1.txt", sep="\t", header=TRUE)
 plants1$species <- as.factor(plants1$species)
 ```
 

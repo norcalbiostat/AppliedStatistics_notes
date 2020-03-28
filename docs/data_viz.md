@@ -615,7 +615,7 @@ sjPlot does a very nice job of being able to cleanly show not only n's but perce
 
 ```r
 library(sjPlot)
-sjp.xtab(dsmall$color, dsmall$cut, margin="row", coord.flip = TRUE) 
+plot_xtab(dsmall$color, dsmall$cut, margin="row", coord.flip = TRUE) 
 ```
 
 <img src="data_viz_files/figure-html/unnamed-chunk-45-1.png" width="672" />

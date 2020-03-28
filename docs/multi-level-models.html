@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.5 Example with a binary predictor. | Applied Statistics</title>
+  <title>15.2 Multi-level models | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.5 Example with a binary predictor. | Applied Statistics" />
+  <meta property="og:title" content="15.2 Multi-level models | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.5 Example with a binary predictor. | Applied Statistics" />
+  <meta name="twitter:title" content="15.2 Multi-level models | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="example.html"/>
-<link rel="next" href="model-diagnostics.html"/>
+<link rel="prev" href="example-school-data.html"/>
+<link rel="next" href="mda.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -39,9 +39,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
 
 
 
@@ -232,72 +229,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>8.2</b> Mathematical Model</a></li>
 <li class="chapter" data-level="8.3" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>8.3</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="8.4" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>8.4</b> Example</a></li>
-<li class="chapter" data-level="8.5" data-path="example-with-a-binary-predictor-.html"><a href="example-with-a-binary-predictor-.html"><i class="fa fa-check"></i><b>8.5</b> Example with a binary predictor.</a></li>
-<li class="chapter" data-level="8.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.6</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="8.7" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.7</b> Multicollinearity</a></li>
-<li class="chapter" data-level="8.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="8.5" data-path="binary-predictors-.html"><a href="binary-predictors-.html"><i class="fa fa-check"></i><b>8.5</b> Binary predictors.</a></li>
+<li class="chapter" data-level="8.6" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>8.6</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>8.6.1</b> Factor variable coding</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a><ul>
-<li class="chapter" data-level="9.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>9.1</b> Fitting GLMs</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="fitting-glms.html"><a href="fitting-glms.html#r"><i class="fa fa-check"></i><b>9.1.1</b> R</a></li>
-<li class="chapter" data-level="9.1.2" data-path="fitting-glms.html"><a href="fitting-glms.html#spss"><i class="fa fa-check"></i><b>9.1.2</b> SPSS</a></li>
-<li class="chapter" data-level="9.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>9.1.3</b> Stata</a></li>
+<li class="chapter" data-level="8.7" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>8.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="8.8" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>8.8</b> Multicollinearity</a></li>
+<li class="chapter" data-level="8.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>8.9</b> What to watch out for</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>9.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="9.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>9.3</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>9.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="9.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>9.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="9.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>9.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="9.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>9.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="9" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>9</b> Model Building</a><ul>
+<li class="chapter" data-level="9.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>9.1</b> Stratification</a></li>
+<li class="chapter" data-level="9.2" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>9.2</b> Moderation</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>9.2.1</b> Example 1: Sepal vs Petal Length</a></li>
+<li class="chapter" data-level="9.2.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>9.2.2</b> Example 2: Simpson’s Paradox</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>9.4</b> Log-linear models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>9.4.1</b> Example</a></li>
+<li class="chapter" data-level="9.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>9.3</b> Interactions</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="interactions.html"><a href="interactions.html#example-1"><i class="fa fa-check"></i><b>9.3.1</b> Example 1</a></li>
+<li class="chapter" data-level="9.3.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>9.3.2</b> Example 2</a></li>
+<li class="chapter" data-level="9.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>9.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>9.5</b> Categorical outcome data</a></li>
-<li class="chapter" data-level="9.6" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>9.6</b> Count outcome data</a></li>
+<li class="chapter" data-level="9.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.4</b> Confounding</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.4.1</b> Example: Does smoking affect pulse rate?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a><ul>
-<li class="chapter" data-level="10.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>10.1</b> Stratification</a></li>
-<li class="chapter" data-level="10.2" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>10.2</b> Moderation</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="moderation.html"><a href="moderation.html#example-1-sepal-vs-petal-length"><i class="fa fa-check"></i><b>10.2.1</b> Example 1: Sepal vs Petal Length</a></li>
-<li class="chapter" data-level="10.2.2" data-path="moderation.html"><a href="moderation.html#example-2-simpsons-paradox"><i class="fa fa-check"></i><b>10.2.2</b> Example 2: Simpson’s Paradox</a></li>
+<li class="chapter" data-level="9.5" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>9.5</b> Wald test (General F)</a></li>
+<li class="chapter" data-level="9.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>9.6</b> Variable Selection Process</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>9.6.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="9.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>9.6.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="9.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>9.6.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#example-1-1"><i class="fa fa-check"></i><b>10.3.1</b> Example 1</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.2</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-3-the-relationship-between-income-employment-status-and-depression."><i class="fa fa-check"></i><b>10.3.3</b> Example 3: The relationship between income, employment status and depression.</a></li>
+<li class="chapter" data-level="9.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>9.7</b> Comparing between models</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>9.7.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="9.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>9.7.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="9.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>9.7.3</b> General F Test</a></li>
+<li class="chapter" data-level="9.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>9.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="9.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>9.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="9.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>9.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="9.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>9.7.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="9.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>9.7.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="9.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>9.7.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>10.4</b> Confounding</a></li>
-<li class="chapter" data-level="10.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.5</b> Categorical Predictors</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.5.1</b> Factor variable coding</a></li>
-<li class="chapter" data-level="10.5.2" data-path="cat-predictors.html"><a href="cat-predictors.html#wald-test"><i class="fa fa-check"></i><b>10.5.2</b> Wald test</a></li>
+<li class="chapter" data-level="9.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>9.8</b> General Advice</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#the-lesser-of-three-evils-best-subsets-pma5-section-8.7"><i class="fa fa-check"></i><b>10.6.2</b> The lesser of three evils: Best Subsets (PMA5 Section 8.7)</a></li>
+<li class="chapter" data-level="10" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>10</b> Generalized Linear Models</a><ul>
+<li class="chapter" data-level="10.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>10.1</b> Fitting GLMs</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="fitting-glms.html"><a href="fitting-glms.html#r"><i class="fa fa-check"></i><b>10.1.1</b> R</a></li>
+<li class="chapter" data-level="10.1.2" data-path="fitting-glms.html"><a href="fitting-glms.html#spss"><i class="fa fa-check"></i><b>10.1.2</b> SPSS</a></li>
+<li class="chapter" data-level="10.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>10.1.3</b> Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="comparing-between-models.html"><a href="comparing-between-models.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a></li>
-<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>10.2</b> Binary outcome data</a></li>
+<li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>10.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="10.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>10.3.2</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="10.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>10.3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="10.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>10.3.4</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="10.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>10.3.5</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="10.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>10.3.6</b> Reporting</a></li>
+<li class="chapter" data-level="10.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>10.3.7</b> Model Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>10.4</b> Log-linear models</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-3"><i class="fa fa-check"></i><b>10.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>10.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="10.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>10.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>11</b> Classification of Binary outcomes</a><ul>
-<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html#optimal-cutoff-value"><i class="fa fa-check"></i><b>11.1.1</b> Optimal Cutoff Value</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.2</b> ROC Curves</a></li>
-<li class="chapter" data-level="11.3" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.3</b> Model Performance</a></li>
+<li class="chapter" data-level="11.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>11.1</b> Calculating predictions</a></li>
+<li class="chapter" data-level="11.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>11.2</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="11.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>11.3</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="11.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>11.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="11.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>11.5</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="12" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>12</b> Introduction</a></li>
 <li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Component Analysis</a><ul>
-<li class="chapter" data-level="13.1" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>13.1</b> Basic Idea</a></li>
-<li class="chapter" data-level="13.2" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>13.2</b> More Generally</a></li>
-<li class="chapter" data-level="13.3" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>13.3</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="13.4" data-path="using-the-correlation-matrix.html"><a href="using-the-correlation-matrix.html"><i class="fa fa-check"></i><b>13.4</b> Using the correlation matrix</a></li>
+<li class="chapter" data-level="13.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>13.1</b> When is Principal Components Analysis (PCA) used?</a></li>
+<li class="chapter" data-level="13.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>13.2</b> Basic Idea - change of coordinates</a></li>
+<li class="chapter" data-level="13.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>13.3</b> More Generally</a></li>
+<li class="chapter" data-level="13.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>13.4</b> Generating PC’s using R</a></li>
 <li class="chapter" data-level="13.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>13.5</b> Data Reduction</a></li>
-<li class="chapter" data-level="13.6" data-path="example-analysis-of-depression.html"><a href="example-analysis-of-depression.html"><i class="fa fa-check"></i><b>13.6</b> Example Analysis of depression</a></li>
-<li class="chapter" data-level="13.7" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>13.7</b> Use in Multiple Regression</a></li>
-<li class="chapter" data-level="13.8" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>13.8</b> Things to watch out for</a></li>
-<li class="chapter" data-level="13.9" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>13.9</b> Additional References</a></li>
+<li class="chapter" data-level="13.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>13.6</b> Standardizing</a></li>
+<li class="chapter" data-level="13.7" data-path="example-4.html"><a href="example-4.html"><i class="fa fa-check"></i><b>13.7</b> Example</a></li>
+<li class="chapter" data-level="13.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>13.8</b> Use in Multiple Regression</a><ul>
+<li class="chapter" data-level="13.8.1" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html#example-modeling-acute-illness"><i class="fa fa-check"></i><b>13.8.1</b> Example: Modeling acute illness</a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="things-to-watch-out-for.html"><a href="things-to-watch-out-for.html"><i class="fa fa-check"></i><b>13.9</b> Things to watch out for</a></li>
+<li class="chapter" data-level="13.10" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>13.10</b> Additional References</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a><ul>
 <li class="chapter" data-level="14.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a><ul>
@@ -314,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4.1" data-path="fa-extract.html"><a href="fa-extract.html#pc-factor-model"><i class="fa fa-check"></i><b>14.4.1</b> PC Factor Model</a></li>
 <li class="chapter" data-level="14.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-pc-factor-model"><i class="fa fa-check"></i><b>14.4.2</b> Iterated PC Factor Model</a></li>
 <li class="chapter" data-level="14.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>14.4.3</b> Maximum Likelihood</a></li>
-<li class="chapter" data-level="14.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-3"><i class="fa fa-check"></i><b>14.4.4</b> Example</a></li>
+<li class="chapter" data-level="14.4.4" data-path="fa-extract.html"><a href="fa-extract.html#example-5"><i class="fa fa-check"></i><b>14.4.4</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>14.5</b> Rotating Factors</a><ul>
 <li class="chapter" data-level="14.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>14.5.1</b> Varimax Rotation</a></li>
@@ -324,44 +341,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
 </ul></li>
-<li class="part"><span><b>V Other Topics</b></span></li>
-<li class="chapter" data-level="15" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>15</b> Missing Data</a><ul>
-<li class="chapter" data-level="15.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>15.1</b> Identifying missing data</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>15.1.1</b> Visualize missing patterns</a></li>
+<li class="part"><span><b>V Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>15</b> Introduction</a><ul>
+<li class="chapter" data-level="15.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>15.1</b> Example School Data</a></li>
+<li class="chapter" data-level="15.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>15.2</b> Multi-level models</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>15.2</b> Effects of Nonresponse</a></li>
-<li class="chapter" data-level="15.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>15.3</b> Missing Data Mechanisms</a><ul>
-<li class="chapter" data-level="15.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>15.3.1</b> Demonstration via Simulation</a></li>
+<li class="part"><span><b>VI Other Topics</b></span></li>
+<li class="chapter" data-level="16" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>16</b> Missing Data</a><ul>
+<li class="chapter" data-level="16.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>16.1</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>16.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="15.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>15.4</b> General strategies</a><ul>
-<li class="chapter" data-level="15.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>15.4.1</b> Complete cases analysis</a></li>
-<li class="chapter" data-level="15.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>15.4.2</b> Available-case analysis</a></li>
-<li class="chapter" data-level="15.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>15.4.3</b> Imputation</a></li>
+<li class="chapter" data-level="16.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>16.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="16.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>16.3</b> Missing Data Mechanisms</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>16.3.1</b> Demonstration via Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="15.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>15.5</b> Imputation Methods</a></li>
-<li class="chapter" data-level="15.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>15.6</b> Multiple Imputation (MI)</a><ul>
-<li class="chapter" data-level="15.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>15.6.1</b> Goals</a></li>
-<li class="chapter" data-level="15.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>15.6.2</b> Technique</a></li>
-<li class="chapter" data-level="15.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>15.6.3</b> MI as a paradigm</a></li>
-<li class="chapter" data-level="15.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>15.6.4</b> Inference on MI</a></li>
+<li class="chapter" data-level="16.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>16.4</b> General strategies</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>16.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="16.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>16.4.3</b> Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="15.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>15.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
-<li class="chapter" data-level="15.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>15.7.1</b> Overview</a></li>
-<li class="chapter" data-level="15.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>15.7.2</b> Process / Algorithm</a></li>
-<li class="chapter" data-level="15.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>15.7.3</b> Convergence</a></li>
-<li class="chapter" data-level="15.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>15.7.4</b> Imputation Methods</a></li>
+<li class="chapter" data-level="16.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>16.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="16.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>16.6</b> Multiple Imputation (MI)</a><ul>
+<li class="chapter" data-level="16.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>16.6.1</b> Goals</a></li>
+<li class="chapter" data-level="16.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>16.6.2</b> Technique</a></li>
+<li class="chapter" data-level="16.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>16.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="16.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>16.6.4</b> Inference on MI</a></li>
 </ul></li>
-<li class="chapter" data-level="15.8" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>15.8</b> Example: Prescribed amount of missing.</a><ul>
-<li class="chapter" data-level="15.8.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>15.8.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
-<li class="chapter" data-level="15.8.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>15.8.2</b> Check the imputation method used on each variable.</a></li>
-<li class="chapter" data-level="15.8.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>15.8.3</b> Check Convergence</a></li>
-<li class="chapter" data-level="15.8.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>15.8.4</b> Look at the values generated for imputation</a></li>
-<li class="chapter" data-level="15.8.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>15.8.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
-<li class="chapter" data-level="15.8.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>15.8.6</b> Visualize Imputations</a></li>
-<li class="chapter" data-level="15.8.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>15.8.7</b> Calculating bias</a></li>
+<li class="chapter" data-level="16.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>16.7</b> Multiple Imputation using Chained Equations (MICE)</a><ul>
+<li class="chapter" data-level="16.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>16.7.1</b> Overview</a></li>
+<li class="chapter" data-level="16.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>16.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="16.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>16.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="16.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>16.7.4</b> Imputation Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="15.9" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>15.9</b> Final thoughts</a></li>
-<li class="chapter" data-level="15.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>15.10</b> Additional References</a></li>
+<li class="chapter" data-level="16.8" data-path="diagnostics.html"><a href="diagnostics.html"><i class="fa fa-check"></i><b>16.8</b> Diagnostics</a></li>
+<li class="chapter" data-level="16.9" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html"><i class="fa fa-check"></i><b>16.9</b> Example: Prescribed amount of missing.</a><ul>
+<li class="chapter" data-level="16.9.1" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>16.9.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="16.9.2" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>16.9.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="16.9.3" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#check-convergence"><i class="fa fa-check"></i><b>16.9.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="16.9.4" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>16.9.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="16.9.5" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>16.9.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="16.9.6" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#visualize-imputations"><i class="fa fa-check"></i><b>16.9.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="16.9.7" data-path="example-prescribed-amount-of-missing-.html"><a href="example-prescribed-amount-of-missing-.html#calculating-bias"><i class="fa fa-check"></i><b>16.9.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="16.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>16.10</b> Final thoughts</a></li>
+<li class="chapter" data-level="16.11" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>16.11</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -383,203 +406,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="example-with-a-binary-predictor." class="section level2">
-<h2><span class="header-section-number">8.5</span> Example with a binary predictor.</h2>
-<p>Does gender also play a roll in FEV? Let’s look at the separate effects of height and age on FEV1, and visualize how gender plays a roll.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">ht.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(fev_long, <span class="kw">aes</span>(<span class="dt">x=</span>ht, <span class="dt">y=</span>fev1)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-2" title="2"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>gender)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-3" title="3"><span class="st">        </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="kw">aes</span>(<span class="dt">col=</span>gender), <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-4" title="4"><span class="st">        </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-5" title="5"><span class="st">        </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-6" title="6"><span class="st">        </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.85</span>))</a>
-<a class="sourceLine" id="cb156-7" title="7"></a>
-<a class="sourceLine" id="cb156-8" title="8">age.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(fev_long, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>fev1)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-9" title="9"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>gender)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-10" title="10"><span class="st">        </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="kw">aes</span>(<span class="dt">col=</span>gender), <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-11" title="11"><span class="st">        </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-12" title="12"><span class="st">        </span><span class="kw">scale_color_viridis_d</span>(<span class="dt">guide=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb156-13" title="13">        </a>
-<a class="sourceLine" id="cb156-14" title="14"><span class="kw">grid.arrange</span>(ht.plot, age.plot, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div id="multi-level-models" class="section level2">
+<h2><span class="header-section-number">15.2</span> Multi-level models</h2>
+<p>Here we specify separate models for the the fixed micro level effect of SES and the random macro level school effect.</p>
+<p><span class="math display">\[\begin{equation*}
+  \begin{aligned}
+  MathScore_{ij} &amp; = \beta_{0j} + \beta_{1}SES_{ij} + \epsilon_{ij}, &amp; \qquad i = 1, \ldots, n_{j}\\
+  \beta_{0j} &amp; = \gamma_{00} + U_{0j}, &amp; \qquad j=1, \ldots, 23
+  \end{aligned}
+\end{equation*}\]</span></p>
+<p>where</p>
 <ul>
-<li>The points are colored by gender</li>
-<li>Each gender has it’s own best fit line in the same color as the points</li>
-<li>The red line is the best fit line overall - ignoring gender</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the average intercept across all schools</li>
+<li><span class="math inline">\(U_{0j}\)</span> is the difference between the intercept for school <span class="math inline">\(j\)</span> and the average intercept across all schools (random effect of school)</li>
 </ul>
-<p><img src="images/q.png" alt="q" /> Is gender a moderator for either height or age?</p>
-<p>Let’s compare the models with, and without gender</p>
-<table style="text-align:center">
-<tr>
-<td colspan="3" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td colspan="2">
-<em>Dependent variable:</em>
-</td>
-</tr>
-<tr>
-<td>
-</td>
-<td colspan="2" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td colspan="2">
-fev1
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-W/o gender
-</td>
-<td>
-w/ gender
-</td>
-</tr>
-<tr>
-<td colspan="3" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-age
-</td>
-<td>
--0.02<sup>***</sup> (-0.03, -0.01)
-</td>
-<td>
--0.02<sup>***</sup> (-0.03, -0.02)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-ht
-</td>
-<td>
-0.16<sup>***</sup> (0.15, 0.18)
-</td>
-<td>
-0.11<sup>***</sup> (0.08, 0.13)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-genderF
-</td>
-<td>
-</td>
-<td>
--0.64<sup>***</sup> (-0.79, -0.48)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Constant
-</td>
-<td>
--6.74<sup>***</sup> (-7.84, -5.63)
-</td>
-<td>
--2.24<sup>***</sup> (-3.71, -0.77)
-</td>
-</tr>
-<tr>
-<td colspan="3" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Observations
-</td>
-<td>
-300
-</td>
-<td>
-300
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Adjusted R<sup>2</sup>
-</td>
-<td>
-0.57
-</td>
-<td>
-0.65
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Residual Std. Error
-</td>
-<td>
-0.53 (df = 297)
-</td>
-<td>
-0.48 (df = 296)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-F Statistic
-</td>
-<td>
-197.57<sup>***</sup> (df = 2; 297)
-</td>
-<td>
-182.77<sup>***</sup> (df = 3; 296)
-</td>
-</tr>
-<tr>
-<td colspan="3" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-<em>Note:</em>
-</td>
-<td colspan="2" style="text-align:right">
-<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
-</td>
-</tr>
-</table>
+<p>If we substitute the intercept <span class="math inline">\(\beta_{0j}\)</span> in the first model with the information from the second model,</p>
+<p><span class="math display">\[
+  MathScore_{ij} = \overbrace{\gamma_{00} + \beta_{1}SES_{ij}}^{^{\mbox{fixed part}}} + \overbrace{U_{0j} + \epsilon_{ij}}^{\mbox{random part}}
+\]</span></p>
+<p>Instead of assuming that there is an overall average of math scores (<span class="math inline">\(\beta_0\)</span>) from which each school deviates by a fixed amount, the above model assumes that the adjusted average school math scores are normally distributed and are centered at <span class="math inline">\(\gamma_{00}\)</span>.</p>
+<p>Because we assume that there is a <em>distribution of intercepts</em>, this model is also called a <strong>Random intercept model</strong>.</p>
+<p>We’ll look at this type of model more closely in the next section using a different example, and using the concept of <em>pooling</em> information.</p>
+<p><img src="images/q.png" /> Random Slopes</p>
+<p>More complex models are possible. That’s a constant theme in all of statistical modeling. Just remember that</p>
 <ul>
-<li>Gender is a binary categorical variable, with reference group “Male”.
-<ul>
-<li>This is detected because the variable that shows up in the regression model output is <code>genderF</code>. So the estimate shown is for males, compared to females.</li>
-<li>More details on how categorical variables are included in multivariable models is covered in section <a href="cat-predictors.html#cat-predictors">10.5</a>.</li>
-</ul></li>
+<li>the underlying complex effects being modeled must be strong enough that a simpler model that doesn’t account for these effects will be invalid</li>
+<li>you have to have enough data to estimate any additional parameters</li>
+<li>you have to be able to explain the model and results to an audience</li>
 </ul>
-<p><strong>Interpretation of Coefficients</strong></p>
-<p>The regression equation for the model without gender is</p>
-<p><span class="math display">\[ y = -6.74 - 0.02 age + 0.16 height \]</span></p>
-<ul>
-<li><span class="math inline">\(b_{0}:\)</span> For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.</li>
-<li><span class="math inline">\(b_{1}:\)</span> For every additional year older an individual is, their FEV1 decreases by 0.02L.</li>
-<li><span class="math inline">\(b_{2}:\)</span> For every additional cm taller an individual is, their FEV1 increases by 0.16L.</li>
-</ul>
-<p>The regression equation for the model with gender is</p>
-<p><span class="math display">\[ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF \]</span></p>
-<ul>
-<li><span class="math inline">\(b_{0}:\)</span> For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.</li>
-<li><span class="math inline">\(b_{1}:\)</span> For every additional year older an individual is, their FEV1 decreases by 0.02L.</li>
-<li><span class="math inline">\(b_{2}:\)</span> For every additional cm taller an individual is, their FEV1 increases by 0.16L.</li>
-<li><span class="math inline">\(b_{3}:\)</span> Females have 0.64L lower FEV compared to males.</li>
-</ul>
-<p><strong>Note</strong>: The interpretation of categorical variables still falls under the template language of “for every one unit increase in <span class="math inline">\(X_{p}\)</span>, <span class="math inline">\(Y\)</span> changes by <span class="math inline">\(b_{p}\)</span>”. Here, <span class="math inline">\(X_{3}=0\)</span> for males, and 1 for females. So a 1 “unit” change is females <em>compared to</em> males.</p>
-<p><img src="images/q.png" alt="q" /> Which model fits better? What measure are you using to quanitify “fit”?</p>
+<p>We are not going to cover models that have random slopes, or interactions between fixed and random effects in this notebook.</p>
 
-<div class="rmdnote">
-What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on?
 </div>
+<!-- </div> -->
+
+
+
 
 </div>
             </section>
@@ -587,19 +448,17 @@ What part of the model (intercept, or one of the slope parameters) did adding ge
           </div>
         </div>
       </div>
-<a href="example.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-diagnostics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="example-school-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

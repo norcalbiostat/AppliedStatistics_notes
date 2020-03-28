@@ -445,7 +445,7 @@ ggplot(calc.props, aes(x=color, fill=cut, y=pct)) +
 sjPlot does a very nice job of being able to cleanly show not only n's but percents. 
 ```{r}
 library(sjPlot)
-sjp.xtab(dsmall$color, dsmall$cut, margin="row", coord.flip = TRUE) 
+plot_xtab(dsmall$color, dsmall$cut, margin="row", coord.flip = TRUE) 
 ```
 
 

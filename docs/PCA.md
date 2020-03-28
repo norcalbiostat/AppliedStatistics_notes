@@ -1,6 +1,9 @@
 
 
+
 # Principal Component Analysis {#pca}
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Corresponding reading: PMA6 Ch 14</div>\EndKnitrBlock{rmdnote}
 
 More nomenclature tidbits: It's **"Principal"** Components (adjective), not **"Principle"** Components (noun)
 
@@ -16,6 +19,24 @@ From [Grammerist](http://grammarist.com/spelling/principle-principal/):
 
 This third definition (3) is the context in which we will be using this term. 
 
+
+## When is Principal Components Analysis (PCA) used? 
+
+* simplify the description of a set of interrelated variables. 
+* transform a set of correlated variables, to a new set of uncorrelated variables
+* dimension reduction: collapse many variables into a few number of variables while maintaining the same amount of variation present in the data. 
+    - Statistical modeling is all about explaining variance in an outcome based on the variance in predictors. 
+    - The new variables are called principal components, and they are ordered by the amount of variance they contain. 
+    - So the first few principal components, may contain the same amount of variance (information) contained in a much larger set of original variables. 
+* multivariable outlier detection
+    - individual records that have high values on the principal components variables are candidates for outliers or blunders on multiple variables. 
+* as a solution for multicollinearity
+    - often is it useful to obtain the first few principal components corresponding to a set of highly correlated X variables, and then conduct regression analysis on the selected components. 
+* as a step towards factor analysis (next section)
+* as an exploratory technique that may be used in gaining a better understanding of the relationships between measures. 
+
+
+
 **Not variable selection**
 
 Principal Components Analysis (PCA) differs from variable selection in two ways:
@@ -27,7 +48,7 @@ We are trying to understand a phenomenon by collecting a series of component mea
 
 
 
-## Basic Idea
+## Basic Idea - change of coordinates {#basic-idea}
 
 Consider a hypothetical data set that consists of 100 random pairs of observations $X_{1}$ and $X_{2}$ that are correlated. Let $X_{1} \sim \mathcal{N}(100, 100)$, $X_{2} \sim \mathcal{N}(50, 50)$, with $\rho_{12} = \frac{1}{\sqrt{2}}$. 
 
@@ -57,7 +78,7 @@ colnames(data) <- c("X1", "X2")
 plot(X2 ~ X1, data=data, pch=16)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 Goal: Create two new variables $C_{1}$ and $C_{2}$ as linear combinations of $\mathbf{x_{1}}$ and $\mathbf{x_{2}}$ 
@@ -70,13 +91,14 @@ or more simply $\mathbf{C = aX}$, where
 * The $\mathbf{x}$'s have been centered by subtracting their mean ($\mathbf{x_{1}} = x_{1}-\bar{x_{1}}$)
 * $Var(C_{1})$ is as large as possible 
 
-Graphically we're creating two new axes, where now $C_{1}$ and $C_{2}$ are uncorrelated.
+Graphically we're creating two new axes, where now $C_{1}$ and $C_{2}$ are uncorrelated. 
 
 > PCA is mathematically defined as an orthogonal linear transformation that transforms the data to a new coordinate system such that the greatest variance by some projection of the data comes to lie on the first coordinate (called the first principal component), the second greatest variance on the second coordinate, and so on.  [Wikipedia](https://en.wikipedia.org/wiki/Principal_component_analysis)
 
 
 ![](images/pca_coord_rotate.png)
 
+In Linear Algebra terms, this is a [change of basis](https://en.wikipedia.org/wiki/Change_of_basis). We are changing from a coordinate system of $(x_{1},x_{2})$ to $(c_{1}, c_{2})$. If you want to see more about this concept, here is a good [[YouTube Video]](https://www.youtube.com/watch?v=P2LTAUO1TdA&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=13). 
 
 ## More Generally
 
@@ -124,6 +146,7 @@ $$
 * Hotelling (1933) showed that the $a_{ij}$'s are solutions to $(\mathbf{\Sigma} -\lambda\mathbf{I})\mathbf{a}=\mathbf{0}$. 
     - $\mathbf{\Sigma}$ is the variance-covariance matrix of the $\mathbf{X}$ variables.  
 * This means $\lambda$ is an eigenvalue and $\mathbf{a}$ an eigenvector of the covariance matrix $\mathbf{\Sigma}$.
+    - (Optional) Learn more about eigenvalues [[in this video]](https://www.youtube.com/watch?v=PFDu9oVAE-g&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=14). 
 * Problem: There are infinite number of possible $\mathbf{a}$'s
 * Solution: Choose $a_{ij}$'s such that the sum of the squares of the coefficients for any one
   eigenvector is = 1. 
@@ -137,7 +160,12 @@ Which gives us
 
 ## Generating PC's using R
 
-Calculating the principal components in R can be done using a call to the function `prcomp()`.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) has a good overview of the difference between `prcomp()` and `princomp()`. 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Corresponding reading: PMA6 Ch 14.3-14.4</div>\EndKnitrBlock{rmdnote}
+
+Calculating the principal components in R can be done using the function `prcomp()` and `princomp()`. This section of notes uses `princomp()`, not for any specific reason.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) has a good overview of the difference between `prcomp()` and `princomp()`. It appears that `prcomp()` may have some more post-analysis fancy visualizations available. 
+
+* Requirements of `data`: This must be a numeric matrix. Since I made up this example by generating data in section \@ref(basic-idea), I know they are numeric. 
 
 ```r
 pr <- princomp(data)
@@ -179,7 +207,7 @@ abline(0, a[2,1]/a[1,1]); text(30, 10, expression(C[1]))
 abline(0, a[2,2]/a[1,2]); text(-10, 20, expression(C[2]))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
 
 
 Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at. 
@@ -189,14 +217,39 @@ Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated.
 biplot(pr)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
-## Using the correlation matrix
+
+## Data Reduction
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Corresponding reading: PMA6 Ch 14.5</div>\EndKnitrBlock{rmdnote}
+
+* Keep first $m$ principal components as representatives of original P variables
+* Keep enough to explain a large percentage of original total variance.
+* Ideally you want a small number of PC's that explain a large percentage of the total variance. 
+
+**Choosing $m$**
+
+* Rely on existing theory 
+* Explain a given % of variance (cumulative percentage plot)
+* All eigenvalues > 1 (Scree plot)
+* Elbow rule (Scree Plot)
+
+These are best understood using an example, but there is one more thing to consider first and that is how the data is prepared before calculating the principal components. 
+
+
+## Standardizing
+
+Often researchers will standardize the $x$ variables before conducting a PCA. 
 
 * Standardizing: Take $X$ and divide each element by $\sigma_{x}$. 
-    - $Z = X/\sigma_{X}$
-* Side note: Standardizing and centering == normalizing
-    - $Z = (X-\bar{X})/\sigma_{X}$
+
+  $$\frac{X}{\sigma_{X}}$$
+
+* Normalizing: Centering and standardizing. 
+  
+  $$Z = \frac{(X-\bar{X})}{\sigma_{X}}$$
+    
 * Equivalent to analyzing the correlation matrix ($\mathbf{R}$) instead of covariance matrix ($\mathbf{\Sigma}$).
 
 
@@ -216,7 +269,7 @@ cor(data) #Correlation Matrix
 ## X2 0.7187811 1.0000000
 ```
 
-Standardizing your data prior to analysis aids the interpretation of the PC's in a few ways
+Standardizing your data prior to analysis (using $\mathbf{R}$ instead of $\mathbf{\Sigma}$) aids the interpretation of the PC's in a few ways
 
 1. The total variance is the number of variables $P$
 2. The proportion explained by each PC is the corresponding eigenvalue / $P$
@@ -224,7 +277,7 @@ Standardizing your data prior to analysis aids the interpretation of the PC's in
 
 This last point means that for any given $C_{i}$ we can quantify the relative degree of dependence of the PC on each of the standardized variables. This is a.k.a. the **factor loading** (we will return to this key term later).
 
-To calculate the principal components using the correlation matrix, you just need to specify that you want `cor=TRUE`. 
+To calculate the principal components using the correlation matrix using `princomp`, set the `cor` argument to `TRUE`. 
 
 
 ```r
@@ -242,30 +295,35 @@ summary(pr_corr)
     - It compensates for the units of measurements for the different variables. 
     - Interpretations are made in terms of the standardized variables. 
 
-## Data Reduction
 
-* Keep first $m$ principal components as representatives of original P variables
-* Keep enough to explain a large percentage of original total variance.
-* Ideally you want a small number of PC's that explain a large percentage of the total variance. 
+## Example
 
-**Choosing $m$**
-
-* Rely on existing theory 
-* Explain a given % of variance (cumulative percentage plot)
-* All eigenvalues > 1 (Scree plot)
-* Elbow rule (Scree Plot)
-
-These last two will be best explained using an example. 
+This example follows _Analysis of depression data set_ section in PMA6 Section 14.5. This survey asks 20 questions on emotional states that relate to depression. The data is recorded as numeric, but are categorical in nature where 0 - "rarely or none of the time", 1 - "some or a little of the time" and so forth. 
 
 
-## Example Analysis of depression 
+```r
+depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt", header=TRUE)
+table(depress$c1)
+## 
+##   0   1   2   3 
+## 225  43  14  12
+```
 
-This example follows _Analysis of depression data set_ section in PMA5 Section 14.5. This survey asks 20 questions on emotional states that relate to depression. Here I use PCA to reduce these 20 correlated variables down to a few uncorrelated variables that explain the most variance. 
+These questions are typical of what is asked in survey research, and often are thought of, or treated as _pseudo-continuous_. They are ordinal categorical variables, but they are not truly interval measures since the "distance" between 0 and 1 (rarely and some of the time), would not be considered the same as the distance between 2 (moderately) and 3 (most or all of the time). And "moderately" wouldn't be necessarily considered as "twice" the amount of "rarely". 
+
+Our options to use these ordinal variables in a model come down to three options. 
+
+* convert to a factor and include it as a categorical (series of indicators) variable. 
+    - This can be even more problematic when there are 20 categorical variables. You run out of degrees of freedom very fast with that many predictors. 
+* leave it as numeric and treat it as pseudo-continuous ordinal measure. Where you can interpret as "as x increases y changes by...", but 
+* aggregate across multiple likert-type-ordinal variables and create a new calculated scale variable that can be treated as continuous.
+    - This is what PCA does by creating new variables $C_{1}$ that are linear combinations of the original $x's$. 
+
+In this example I use PCA to reduce these 20 correlated variables down to a few uncorrelated variables that explain the most variance. 
 
 **1. Read in the data and run `princomp` on the `C1:C20` variables.**
 
 ```r
-depress <- read.delim("https://norcalbiostat.netlify.com/data/depress_081217.txt", header=TRUE)
 pc_dep  <- princomp(depress[,9:28], cor=TRUE)
 summary(pc_dep)
 ## Importance of components:
@@ -305,7 +363,7 @@ qplot(x=1:20, y=cumsum(var_pc)/sum(var_pc)*100, geom="point") +
   geom_hline(aes(yintercept=80))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;" />
 
 **3. Create a _Scree plot_ by plotting the eigenvalue against the PC number.**
 
@@ -315,10 +373,10 @@ qplot(x=1:20, y=var_pc, geom=c("point", "line")) +
   xlab("PC number") + ylab("Eigenvalue") + ylim(c(0,8))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-17-1.png" width="384" style="display: block; margin: auto;" />
 
-**Option 1**: Take all eigenvalues > 1 ($m=5$)
-**Option 2**: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. ($m=2$). 
+* **Option 1**: Take all eigenvalues > 1 ($m=5$)  
+* **Option 2**: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. ($m=2$). 
 
 **4. Examine the loadings**
 
@@ -345,7 +403,7 @@ C_{2} = -0.1449x_{1} + 0.0271x_{2} + \ldots
 
 etc...
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">The full question text for the depression data used here can be found on Table 15.7 in the PMA5 textbook.</div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">The full question text for the depression data used here can be found on Table 14.2 in the PMA6 textbook.</div>\EndKnitrBlock{rmdnote}
 
 **5. Interpret the PC's**
 
@@ -360,7 +418,7 @@ heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="n
           dendrogram="none", trace="none", col=rev(heat.colors(256)))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 * Loadings over 0.5 (red) help us interpret what these components could "mean"
     - Must know exact wording of component questions
@@ -379,13 +437,141 @@ etc.
     - Ex: several measures of behavior. 
     - Use PC$_{1}$ or PC$_{1}$ and PC$_{2}$ as summary measures of all.
 
+### Example: Modeling acute illness
+
+The 20 depression questions `C1:C20` were designed to be added together to create the CESD scale directly. While this is a validate measure, what if some components (e.g. had crying spells) contributes more to someones level of depression than another measure (e.g. people were unfriendly). Since the PC's are linear combinations of the $x$'s, the coefficients $a$, or the loadings, aren't all equal as we've seen. So let's see if the first two PC's (since that's what was chosen from the scree plot) can predict chronic illness better than the straight summative score of `cesd`. 
+
+**1. Extract PC scores and attach them to the data. **
+
+The scores for each PC for each observation is stored in the `scores` list object in the `pc_dep` object. 
+
+
+```r
+dim(pc_dep$scores); kable(pc_dep$scores[1:5, 1:5])
+## [1] 294  20
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Comp.1 </th>
+   <th style="text-align:right;"> Comp.2 </th>
+   <th style="text-align:right;"> Comp.3 </th>
+   <th style="text-align:right;"> Comp.4 </th>
+   <th style="text-align:right;"> Comp.5 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> -2.446342 </td>
+   <td style="text-align:right;"> 0.6236068 </td>
+   <td style="text-align:right;"> 0.1288289 </td>
+   <td style="text-align:right;"> -0.2546597 </td>
+   <td style="text-align:right;"> -0.1624772 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -1.452116 </td>
+   <td style="text-align:right;"> -0.1763085 </td>
+   <td style="text-align:right;"> 0.5861563 </td>
+   <td style="text-align:right;"> -0.6781969 </td>
+   <td style="text-align:right;"> -0.3225529 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -1.468211 </td>
+   <td style="text-align:right;"> -0.4350019 </td>
+   <td style="text-align:right;"> 0.2893955 </td>
+   <td style="text-align:right;"> -0.3243790 </td>
+   <td style="text-align:right;"> -0.2513590 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -1.324852 </td>
+   <td style="text-align:right;"> 1.7766419 </td>
+   <td style="text-align:right;"> 1.0833599 </td>
+   <td style="text-align:right;"> 1.2651869 </td>
+   <td style="text-align:right;"> -1.1339350 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> -1.449606 </td>
+   <td style="text-align:right;"> 2.3576522 </td>
+   <td style="text-align:right;"> -0.7489288 </td>
+   <td style="text-align:right;"> 1.9464680 </td>
+   <td style="text-align:right;"> 1.2229057 </td>
+  </tr>
+</tbody>
+</table>
+
+```r
+depress$pc1 <- pc_dep$scores[,1]
+depress$pc2 <- pc_dep$scores[,2]
+```
+
+**2. Fit a model using those PC scores as covariates** 
+
+Along with any other covariates chosen by other methods. 
+
+
+```r
+glm(acuteill~pc1+pc2, data=depress, family='binomial') %>% summary()
+## 
+## Call:
+## glm(formula = acuteill ~ pc1 + pc2, family = "binomial", data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3289  -0.8242  -0.7894   1.4447   1.6898  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -0.87695    0.12901  -6.798 1.06e-11 ***
+## pc1          0.07921    0.04608   1.719   0.0856 .  
+## pc2          0.10321    0.10409   0.992   0.3214    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 357.13  on 293  degrees of freedom
+## Residual deviance: 353.09  on 291  degrees of freedom
+## AIC: 359.09
+## 
+## Number of Fisher Scoring iterations: 4
+glm(acuteill~cesd, data=depress, family='binomial') %>% summary()
+## 
+## Call:
+## glm(formula = acuteill ~ cesd, family = "binomial", data = depress)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.1354  -0.8356  -0.7840   1.4622   1.6645  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -1.09721    0.18479  -5.938 2.89e-09 ***
+## cesd         0.02494    0.01392   1.792   0.0731 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 357.13  on 293  degrees of freedom
+## Residual deviance: 353.97  on 292  degrees of freedom
+## AIC: 357.97
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+
+In this example, the model using the PC's and the model using `cesd` were very similar. However, this is an example where an aggregate measure such as `cesd` has already been figured out scientifically and validated. This is not often the case, expecially in exploratory data analysis when you are not sure -how- the measures are correlated. 
+
+
+
 ## Things to watch out for
 * Eigenvalues are estimated variances of the PC's and so are subject to large sample variations. 
 * The size of variance of last few principal components can be useful as indicator of multicollinearity among original variables
 * Principal components derived from standardized variables differ from those derived from original variables
 * Important that measurements are accurate, especially for detection of collinearity
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Arbitrary cutoff points should not be taken too seriously</div>\EndKnitrBlock{rmdcaution}
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Arbitrary cutoff points should not be taken too seriously.</div>\EndKnitrBlock{rmdcaution}
 
 ## Additional References
 
