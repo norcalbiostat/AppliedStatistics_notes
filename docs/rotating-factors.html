@@ -331,7 +331,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.1" data-path="fa-extract.html"><a href="fa-extract.html#principal-components-pc-factor-model"><i class="fa fa-check"></i><b>13.4.1</b> Principal components (PC Factor model)</a></li>
 <li class="chapter" data-level="13.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-components"><i class="fa fa-check"></i><b>13.4.2</b> Iterated components</a></li>
 <li class="chapter" data-level="13.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>13.4.3</b> Maximum Likelihood</a></li>
-<li class="chapter" data-level="13.4.4" data-path="fa-extract.html"><a href="fa-extract.html#r-code-2"><i class="fa fa-check"></i><b>13.4.4</b> R code</a></li>
+<li class="chapter" data-level="13.4.4" data-path="fa-extract.html"><a href="fa-extract.html#uniqueness"><i class="fa fa-check"></i><b>13.4.4</b> Uniqueness</a></li>
+<li class="chapter" data-level="13.4.5" data-path="fa-extract.html"><a href="fa-extract.html#resulting-factors"><i class="fa fa-check"></i><b>13.4.5</b> Resulting factors</a></li>
 </ul></li>
 <li class="chapter" data-level="13.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>13.5</b> Rotating Factors</a><ul>
 <li class="chapter" data-level="13.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>13.5.1</b> Varimax Rotation</a></li>
@@ -443,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb8-24" title="24"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
 <a class="sourceLine" id="cb8-25" title="25"><span class="co">## </span></a>
 <a class="sourceLine" id="cb8-26" title="26"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
-<p>Varimax rotation with maximum likelihood extraction.</p>
+<p>Varimax rotation with maximum likelihood extraction. Here i’m using the cutoff argument to only show the values of loadings over 0.3.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">ml.extract.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>)</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="kw">print</span>(ml.extract.varimax, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span>.<span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">## </span></a>
@@ -470,9 +471,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb9-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
 <a class="sourceLine" id="cb9-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
 <a class="sourceLine" id="cb9-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
-<ul>
-<li>communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations.</li>
-</ul>
+<p>Communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations.</p>
 </div>
 <div id="oblique-rotation" class="section level3">
 <h3><span class="header-section-number">13.5.2</span> Oblique rotation</h3>
@@ -488,17 +487,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>promax</em> is computationally faster than <em>direct oblimin</em>, so good for very large datasets</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">pc.extract.oblimin &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;oblimin&quot;</span>)</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">pc.extract.quartimin &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;quartimin&quot;</span>)</a>
 <a class="sourceLine" id="cb10-2" title="2">ml.extract.promax&lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;promax&quot;</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">plot</span>(pc.extract.norotate)</a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="kw">plot</span>(pc.extract.varimax)</a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="kw">plot</span>(pc.extract.oblimin)</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">plot</span>(pc.extract.norotate, <span class="dt">title=</span><span class="st">&quot;PC + norotate&quot;</span>)</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">plot</span>(pc.extract.varimax, <span class="dt">title=</span><span class="st">&quot;PC + Varimax&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="kw">plot</span>(pc.extract.quartimin, <span class="dt">title=</span><span class="st">&quot;PC + quartimin&quot;</span>)</a>
 <a class="sourceLine" id="cb11-5" title="5"></a>
 <a class="sourceLine" id="cb11-6" title="6"></a>
 <a class="sourceLine" id="cb11-7" title="7">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + norotate&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + norotate&quot;</span>)</a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load))</a>
 <a class="sourceLine" id="cb11-10" title="10"></a>
 <a class="sourceLine" id="cb11-11" title="11">load &lt;-<span class="st"> </span>ml.extract.varimax<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb11-12" title="12"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + Varimax&quot;</span>) </a>

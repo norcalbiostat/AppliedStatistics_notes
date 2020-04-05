@@ -83,7 +83,7 @@ X_{P} = l_{P1}F_{1} + l_{P2}F_{2} + \ldots + l_{Pm}F_{m} + e_{P}
     - They are uncorreclated and each having mean 0 and variance 1
 * $l_{ij}$ 	= coefficients of common factors 	= factor loadings
 * $e_{i}$ 	= unique factors relating to one of the original variables. 
-    - $e_{i}’s and $F_{j}$’s are uncorrelated
+    - $e_{i}$’s and $F_{j}$’s are uncorrelated
 
 
 
@@ -192,20 +192,10 @@ corrplot(cor(stan.dta), tl.col="black")
 
 Methods
 
-1. principal components
-2. Iterated components
+1. Principal Components
+2. Iterated Components
 3. Maximum Likelihood
 
-* Choose the first $m$ principal components and modify them to fit the factor model defined in the previous section. 
-* They explain the greatest proportion of the variance and are therefore the most important
-
-
-```{r, fig.height=3, fig.width=3, fig.align='center'}
-extract_pca <- princomp(stan.dta)
-var_pc <- (extract_pca$sdev)^2
-qplot(x=1:length(var_pc), y=var_pc, geom=c("point", "line")) +
-  xlab("PC number") + ylab("Eigenvalue")
-```
 
 ### Principal components (PC Factor model)
 
@@ -249,9 +239,11 @@ $l_{ij}$ is the correlation coefficient between variable $i$ and factor $j$
 This is similar to $a_{ij}$ in PCA. 
 
 
+
 #### R code
 
-Principal components using the `principal` function in the `psych` package. 
+
+Factor extraction via principal components can be done using the `principal` function in the `psych` package. We choose `nfactors=2` here because we know there are 2 underlying factors in the data generation model. 
 
 ```{r}
 #library(psych)
@@ -271,6 +263,7 @@ X_{5} &=  0.92F_{1} - 0.27F_{2} + e_{5} \\
 \end{equation}
 $$
 
+These equations come from the top of the output, under _Standardized loadings_. 
 
 ### Iterated components
 
@@ -282,8 +275,7 @@ Select common factors to maximize the total communality
 4. Rinse and repeat
 5. Stop when no appreciable changes occur. 
 
-#### R code
-Not shown, but can be obtained using the `factanal` package in R. 
+R code not shown, but can be obtained using the `factanal` package in R. 
 
 
 ### Maximum Likelihood
@@ -292,16 +284,15 @@ Not shown, but can be obtained using the `factanal` package in R.
 * Use Maximum Likelihood to estimate the parameters
 
 
-### R code 
+#### R code 
 
-The `cutoff` argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed.
+The `cutoff` argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed. I encourage you to adjust this cutoff value in practice to see how it can be useful in reducing cognitave load of looking through a grid of numbers. 
 
 ```{r}
 ml.extract.norotate <- factanal(stan.dta, factors=2, rotation="none")
 print(ml.extract.norotate, digits=2, cutoff=0)
 ```
 
-The uniqueness's ($u^{2}$) for X2, X4, X5 are pretty low. 
 The factor equations now are: 
 
 $$
@@ -315,17 +306,49 @@ X_{3} &=  0.58F_{1} + 0.19F_{2} + e_{3} \\
 \end{equation}
 $$
 
+
+### Uniqueness
+
+Recall Factor analysis splits the variance of the observed X's into a part due to the communality $h_{i}^{2}$ and specificity $u_{i}^{2}$. This last term is the portion of the variance that is due to the _unique_ factor. Let's look at how those differ depending on the extraction method: 
+
 ```{r}
-load <- ml.extract.norotate$loadings[,1:2]
-plot(load, type="n") # set up the plot but don't put points down
-text(load, labels=rownames(load)) # put names instead of points
+pc.extract.norotate$uniquenesses
+ml.extract.norotate$uniquenesses
 ```
 
+Here we see that the uniqueness for X2, X4 and X5 under ML is pretty low compared to the PC extraction method, but that's almost offset by a much higher uniqueness for x1 and X3. 
+
+Ideally we want the variance in the X's to be captured by the factors. So we want to see a low unique variance. 
 
 
-Notice that neither extraction method reproduced our true hypothetical factor model. 
-Rotating the factors will achieve our desired results. 
+### Resulting factors
 
+```{r, fig.width=12}
+par(mfrow=c(1,2)) # grid of 2 columns and 1 row
+
+pc.load <- pc.extract.norotate$loadings[,1:2]
+plot(pc.load, type="n", main="PCA Extraction") # set up the plot but don't put points down
+text(pc.load, labels=rownames(pc.load)) # put names instead of points
+
+ml.load <- ml.extract.norotate$loadings[,1:2]
+plot(ml.load, type="n", main="ML Extraction") 
+text(ml.load, labels=rownames(ml.load))
+```
+
+PCA Extraction
+
+* X1 and X2 load high on PC1, and low on PC1. 
+* X3, 4 and 5 are negative on PC2, and moderate to high on PC1. 
+* PC1 is not highly correlated with X3
+
+
+ML Extraction
+
+* Same overall split, X3 still not loading high on Factor 1. 
+* X1 loading lower on Factor 2 compared to PCA extraction method. 
+
+
+> Neither extraction method reproduced our true hypothetical factor model. Rotating the factors will achieve our desired results. 
 
 
 ## Rotating Factors
@@ -349,14 +372,14 @@ pc.extract.varimax <- principal(stan.dta, nfactors=2, rotate="varimax")
 print(pc.extract.varimax)
 ```
 
-Varimax rotation with maximum likelihood extraction.
+Varimax rotation with maximum likelihood extraction. Here i'm using the cutoff argument to only show the values of loadings over 0.3. 
 ```{r}
 ml.extract.varimax <- factanal(stan.dta, factors=2, rotation="varimax")
 print(ml.extract.varimax, digits=2, cutoff=.3)
 ```
 
 
-* communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations. 
+Communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations. 
 
 
 ### Oblique rotation
@@ -371,21 +394,21 @@ print(ml.extract.varimax, digits=2, cutoff=.3)
     - _promax_ is computationally faster than _direct oblimin_, so good for very large datasets
 
 ```{r}
-pc.extract.oblimin <- principal(stan.dta, nfactors=2, rotate="oblimin")
+pc.extract.quartimin <- principal(stan.dta, nfactors=2, rotate="quartimin")
 ml.extract.promax<- factanal(stan.dta, factors=2, rotation="promax")
 ```
 
 
 ```{r}
 par(mfrow=c(2,3))
-plot(pc.extract.norotate)
-plot(pc.extract.varimax)
-plot(pc.extract.oblimin)
+plot(pc.extract.norotate, title="PC + norotate")
+plot(pc.extract.varimax, title="PC + Varimax")
+plot(pc.extract.quartimin, title="PC + quartimin")
 
 
 load <- ml.extract.norotate$loadings[,1:2]
-plot(load, type="n", main="ML + norotate") # set up the plot but don't put points down
-text(load, labels=rownames(load)) # put names instead of points
+plot(load, type="n", main="ML + norotate")
+text(load, labels=rownames(load))
 
 load <- ml.extract.varimax$loadings[,1:2]
 plot(load, type="n", main="ML + Varimax") 
