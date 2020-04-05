@@ -2,44 +2,26 @@
 
 # Factor Analysis {#fa}
 
+
+Observed events tend to co-occur for a reason. Consider physical symptoms such as a fever, cough, sore through etc. These are often observed characteristics of an underlying event such as a viral infection. Now, not all individuals express the same symptoms, or event the same severity of symptoms, but we would say that there is a strong correlation between symptoms and underlying disease.  
+
+Factor analysis aims to understand the patterns of correlations between the underlying disease, and observed symptoms. 
+
 ## Introduction
 
-Setting the stage with some examples. 
-
-**Example 1**
-
-An investigator has asked each respondent in a survey whether he or she strongly agrees, agrees, is undecided, disagrees, or strongly disagrees with 15 statements concerning attitudes toward inflation. 
-
-As a first step, the investigator will do a factor analysis on the resulting data to determine which statements belong together in sets that are uncorrelated with other sets. 
-
-The particular statements that form a single set will be examined to obtain a better understanding of attitudes toward inflation. Scores derived from each set or factor will be used in subsequent analysis to predict consumer spending.
-
-**Example 2** 
-
-There are Fifty test questions
-
-* Each is a function of 3 factors: 
-* Verbal, quantitative, analytical skills
-
-You are interested in measuring the gain in analytical skills over the course of a week after doing some task. 
+This intro comes from [A gentle non-technical introduction to factor analysis](https://assessingpsyche.wordpress.com/2014/01/13/a-gentle-non-technical-introduction-to-factor-analysis/)
 
 
 
-> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2 and the links in the [Additional Resources](#help) section for more information. 
-
-So far this may sound like PCA, but there is a major theoretical difference. Factor analysis tries to identify and explain underlying latent constructs that resulted in the observed values of measured variables. 
+No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2 and the links in the [Additional Resources](#help) section for more information. 
 
 
 ### Latent Constructs
 
-Latent variables are ones that cannot be measured directly; e.g. Depression, Anxiety, Mathematical ability. 
-They drive how we would respond to various tasks and questions that _can_ be measured; vocabulary, arithmetic, statistical reasoning. 
+Latent variables are ones that cannot be measured directly; e.g. Depression, Anxiety, Mathematical ability. They drive how we would respond to various tasks and questions that _can_ be measured; vocabulary, arithmetic, statistical reasoning. 
 
-![](images/hfa.png)
 
-How can the correlation in responses to questions help us measure these latent constructs? 
-
-> Factor Analysis aims to
+Factor Analysis aims to
 
 * Generalize of principal components analysis
 * Explain interrelationships among a set of variables
