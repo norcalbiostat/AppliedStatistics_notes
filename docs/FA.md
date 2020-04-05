@@ -32,6 +32,8 @@ library(ggfortify) # plots scores from `factanal()`
 library(GPArotation) # to do oblimin rotation
 ```
 
+> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2
+
 
 ### Latent Constructs
 
@@ -50,49 +52,6 @@ How can the correlation in responses to questions help us measure these latent c
 * Can perform additional analyses to improve interpretation
 
 
-### EFA vs CFA
-
-**Exploratory Factor Analysis**
-
-* Explore the possible underlying factor structure of a set of observed variables
-* Does not impose a preconceived structure on the outcome. 
-
-
-**Confirmatory Factor Analysis**
-
-* Verifies the theoretical factor structure of a set of observed variables
-* Test the relationship between observed variables and theoretical underlying latent constructs
-* Variable groupings are determined ahead of time. 
-
-
-
-## Factor Model
-
-* Start with P **standardized** variables. That is $\frac{(x_{i}-\bar{x})}{s_{i}}$. 
-    - So for the rest of these FA notes, understand that each $X$ written has already been standardized. 
-* Express each variable as (its own) linear combination of $m$ common factors plus a unique factor $e$. 
-* $m << P$. Ideally $m$ is known in advance
-
-\[ 
-X_{1} = l_{11}F_{1} + l_{12}F_{2} + \ldots + l_{1m}F_{m} + e_{1} \\
-X_{2} = l_{21}F_{1} + l_{22}F_{2} + \ldots + l_{2m}F_{m} + e_{1} \\
-\vdots  \\
-X_{P} = l_{P1}F_{1} + l_{P2}F_{2} + \ldots + l_{Pm}F_{m} + e_{P}
-\]
-
-
-* $X_{i}    = \sum l_{ij} F_{j}+ \epsilon_{i}$
-* $F_{j}$ 	= common or latent factors 
-* $e_{i}$ 	= unique factors
-* $l_{ij}$ 	= coefficients of common factors 	= factor loadings
-
-
-* Each $F_{j}$ has mean 0 and variance 1
-* $F_{j}$’s are uncorrelated
-* $e_{i}’s and $F_{j}$’s are uncorrelated
-
-> How does this compare to the equations for Principal Components? 
-
 ### Comparison with PCA
 * Similar in that no dependent variable
 * PCA: 
@@ -110,26 +69,75 @@ X_{P} = l_{P1}F_{1} + l_{P2}F_{2} + \ldots + l_{Pm}F_{m} + e_{P}
     - Each $X$ is expressed as a linear combination of Factors
 
 
-### Implications
+### EFA vs CFA
 
-* Variance of any original $X$ is composed of
-    - **communality**: part due to common factors
-    - **specificity**: part due to a unique factor
-    - = 1 when $X$'s are standardized. 
+**Exploratory Factor Analysis**
+
+* Explore the possible underlying factor structure of a set of observed variables
+* Does not impose a preconceived structure on the outcome. 
+
+
+**Confirmatory Factor Analysis**
+
+* Verifies the theoretical factor structure of a set of observed variables
+* Test the relationship between observed variables and theoretical underlying latent constructs
+* Variable groupings are determined ahead of time. 
+
+
+## Factor Model
+
+* Start with P **standardized** variables. That is $\frac{(x_{i}-\bar{x})}{s_{i}}$. 
+    - So for the rest of these FA notes, understand that each $X$ written has already been standardized. 
+* Express each variable as (its own) linear combination of $m$ common factors plus a unique factor $e$. 
+
+\[ 
+X_{1} = l_{11}F_{1} + l_{12}F_{2} + \ldots + l_{1m}F_{m} + e_{1} \\
+X_{2} = l_{21}F_{1} + l_{22}F_{2} + \ldots + l_{2m}F_{m} + e_{1} \\
+\vdots  \\
+X_{P} = l_{P1}F_{1} + l_{P2}F_{2} + \ldots + l_{Pm}F_{m} + e_{P}
+\]
+
+* $m$ is the number of common factors, typicall $m << P$. Somemtimes, $m$ is known in advance. 
+* $X_{i}    = \sum l_{ij} F_{j}+ \epsilon_{i}$
+* $F_{j}$ 	= common or latent factors. 
+    - They are uncorreclated and each having mean 0 and variance 1
+* $l_{ij}$ 	= coefficients of common factors 	= factor loadings
+* $e_{i}$ 	= unique factors relating to one of the original variables. 
+    - $e_{i}’s and $F_{j}$’s are uncorrelated
+
+
+
+
+### Components of Variance
+
+Recall that $x_{i}$ is standardized, so $Var(X)=1$. 
+
+Since each response variable $x_{i}$ is broken into two parts, so is the variance. 
+
+* **communality**: part due to common factors. Denoted as $h^{2}_{i}$.
+* **specificity**: part due to a unique factor. Denoted as $u^{2}_{i}$.
+
     
 \[    
-V(X_{i}) = communality + specificity \\
-\qquad   = h^{2}_{i} + u^{2}_{i} 
+V(X_{i}) = h^{2}_{i} + u^{2}_{i} 
 \]
+
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">If the number $m$ of common factors is not known (EFA), it is recommended that you start with the default option available in the softare program. Often this is the number of factors with eigenvalues greater than 1. 
+
+Since the results are highly dependent on $m$, you should always try several factors to gain further insight into the data. </div>\EndKnitrBlock{rmdnote}
+
 
 ### Two big steps
 
-1. Initial factor extraction: estimate loadings and communalities
-2. Factor "rotations" to improve interpretation
+1. The first step is to numerical find estimates of the loadings $l_{ij}$, and the communalities $h^{2}_{i}$. 
+This process is called _initial factor extraction_. There are a number of methods to solve, we will explore three: principal components, iterated components, and maximum likelihood. The mathematical details of each are left in the textbook for interested readers. 
 
+2. The second step is to obtain a new set of factors, called _rotated factors_ which is done to improve interpretation. 
 
+We will first explore these steps using simulated data. 
 
-## Example setup {#fa-example}
+## Example data setup {#fa-example}
 
 Generate 100 data points from the following multivariate normal distribution: 
 
@@ -201,14 +209,14 @@ $$
 corrplot(cor(stan.dta), tl.col="black")
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
-## Factor Extraction {#fa-extract}
+## Factor Extraction Methods {#fa-extract}
 
 Methods
 
-1. PC Factor Model
-2. Iterated PC Factor Model
+1. principal components
+2. Iterated components
 3. Maximum Likelihood
 
 * Choose the first $m$ principal components and modify them to fit the factor model defined in the previous section. 
@@ -223,13 +231,13 @@ qplot(x=1:length(var_pc), y=var_pc, geom=c("point", "line")) +
   xlab("PC number") + ylab("Eigenvalue")
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" />
+<img src="FA_files/figure-html/unnamed-chunk-8-1.png" width="288" style="display: block; margin: auto;" />
 
-### PC Factor Model
+### Principal components (PC Factor model)
 
 Recall that $\mathbf{C} = \mathbf{A}\mathbf{X}$,  C's are a function of X
 
-$$ X_{1} = a_{11}C_{1} + a_{12}C_{2} + \ldots + a_{1P}C_{p} $$
+$$ C_{1} = a_{11}X_{1} + a_{12}X_{2} + \ldots + a_{1P}X_{p} $$
 
 We want the reverse: X's are a function of F's. 
 
@@ -262,25 +270,12 @@ $$
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">$l_{ij}$ is the correlation coefficient between variable $i$ and factor $j$</div>\EndKnitrBlock{rmdnote}
 
-### Iterated PC Factor Model
-
-* Select common factors to maximize the total communality
-
-1. Get initial communality estimates
-2. Use these (instead of original variances) to get the PC's and factor loadings
-3. Get new communality estimates
-4. Rinse and repeat
-5. Stop when no appreciable changes occur. 
-
-### Maximum Likelihood
-
-* Assume that all the variables are normally distributed
-* Use Maximum Likelihood to estimate the parameters
+This is similar to $a_{ij}$ in PCA. 
 
 
-### Example
+#### R code
 
-1. PC Factor Model using the `principal` function in the `psych` package. 
+Principal components using the `principal` function in the `psych` package. 
 
 
 ```r
@@ -326,7 +321,29 @@ X_{5} &=  0.92F_{1} - 0.27F_{2} + e_{5} \\
 $$
 
 
-2. Using ML extraction. The `cutoff` argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed.
+### Iterated components
+
+Select common factors to maximize the total communality
+
+1. Get initial communality estimates
+2. Use these (instead of original variances) to get the PC's and factor loadings
+3. Get new communality estimates
+4. Rinse and repeat
+5. Stop when no appreciable changes occur. 
+
+#### R code
+Not shown, but can be obtained using the `factanal` package in R. 
+
+
+### Maximum Likelihood
+
+* Assume that all the variables are normally distributed
+* Use Maximum Likelihood to estimate the parameters
+
+
+### R code 
+
+The `cutoff` argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed.
 
 
 ```r
@@ -379,7 +396,9 @@ plot(load, type="n") # set up the plot but don't put points down
 text(load, labels=rownames(load)) # put names instead of points
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+
 
 Notice that neither extraction method reproduced our true hypothetical factor model. 
 Rotating the factors will achieve our desired results. 
@@ -390,7 +409,10 @@ Rotating the factors will achieve our desired results.
 
 * Find new factors that are easier to interpret
 * For each $X$, we want some high/large (near 1) loadings and some low/small (near zero)
-* Two common rotation methods
+* Two common rotation methods: Varimax rotation, and oblique rotation. 
+
+Same(ish) goal as PCA, find a new set of axes to represent the factors. 
+
 
 ### Varimax Rotation
 
@@ -398,6 +420,7 @@ Rotating the factors will achieve our desired results.
 * Maximizes the sum of the variances of the squared factor loadings within each factor $\sum Var(l_{ij}^{2}|F_{j})$
 * Interpretations slightly less clear
 
+Varimax rotation with principal components extraction.
 
 ```r
 pc.extract.varimax <- principal(stan.dta, nfactors=2, rotate="varimax")
@@ -428,6 +451,7 @@ print(pc.extract.varimax)
 ## Fit based upon off diagonal values = 0.97
 ```
 
+Varimax rotation with maximum likelihood extraction.
 
 ```r
 ml.extract.varimax <- factanal(stan.dta, factors=2, rotation="varimax")
@@ -459,11 +483,13 @@ print(ml.extract.varimax, digits=2, cutoff=.3)
 ```
 
 
+* communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations. 
 
 
 ### Oblique rotation
 
 * Same idea as varimax, but drop the orthogonality requirement
+* less restrictions allow for greater flexibility
 * Factors are still correlated
 * Better interpretation
 * Methods: 
@@ -499,7 +525,7 @@ plot(load, type="n", main= "ML + Promax")
 text(load, labels=rownames(load)) 
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 Varimax vs oblique here doesn't make much of a difference, and typically this is the case. You almost always use some sort of rotation. Recall, this is a hypothetical example and we set up the variables in a distinct two-factor model. So this example will look nice. 
 
@@ -542,7 +568,7 @@ head(fa.ml.varimax$scores)
 autoplot(fa.ml.varimax) # see vignette for more info. Link at bottom
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 To merge these scores back onto the original data set **providing there is no missing data** you can use the `bind_cols()` function in `dplyr`. 
 
@@ -640,7 +666,7 @@ kable(head(data.withscores))
 * Tutorial by a Psych 253 student at Stanford https://web.stanford.edu/class/psych253/tutorials/FactorAnalysis.html 
 * `ggfortify` vignette for the `autoplot()` function https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html 
 
-The `FactomineR` looks promising, it has some helpful graphics for determining/confirming variable groupings and aiding interpretations. However it looks more like for CFA - when you know the theoretical groupings. 
+The `FactomineR` looks promising, it has some helpful graphics for determining/confirming variable groupings and aiding interpretations. 
 
 * FactominR: http://factominer.free.fr/ 
 * STHDA tutorial using FactominR http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/116-mfa-multiple-factor-analysis-in-r-essentials/ 
