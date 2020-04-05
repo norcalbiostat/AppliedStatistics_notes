@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.3 Example data setup | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.3 Example data setup | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -423,18 +426,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   0.279 &amp; 0.322 &amp; 0.521 &amp; 0.942 &amp; 1
   \end{array}\right)
 \]</span>.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="kw">set.seed</span>(<span class="dv">456</span>)</a>
-<a class="sourceLine" id="cb231-2" title="2">m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="fl">-0.039</span>, <span class="fl">-0.013</span>)</a>
-<a class="sourceLine" id="cb231-3" title="3">s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </a>
-<a class="sourceLine" id="cb231-4" title="4">              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </a>
-<a class="sourceLine" id="cb231-5" title="5">              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </a>
-<a class="sourceLine" id="cb231-6" title="6">              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </a>
-<a class="sourceLine" id="cb231-7" title="7">              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </a>
-<a class="sourceLine" id="cb231-8" title="8">            <span class="dt">nrow=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb231-9" title="9">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))</a>
-<a class="sourceLine" id="cb231-10" title="10"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">set.seed</span>(<span class="dv">456</span>)</a>
+<a class="sourceLine" id="cb230-2" title="2">m &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="fl">-0.039</span>, <span class="fl">-0.013</span>)</a>
+<a class="sourceLine" id="cb230-3" title="3">s &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </a>
+<a class="sourceLine" id="cb230-4" title="4">              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </a>
+<a class="sourceLine" id="cb230-5" title="5">              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </a>
+<a class="sourceLine" id="cb230-6" title="6">              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </a>
+<a class="sourceLine" id="cb230-7" title="7">              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </a>
+<a class="sourceLine" id="cb230-8" title="8">            <span class="dt">nrow=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb230-9" title="9">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">mu=</span>m, <span class="dt">Sigma=</span>s))</a>
+<a class="sourceLine" id="cb230-10" title="10"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <p>Standardize the <span class="math inline">\(X\)</span>’s.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">stan.dta &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(data))</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">stan.dta &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(data))</a></code></pre></div>
 <p>The hypothetical data model is that these 5 variables are generated from 2 underlying factors.</p>
 <p><span class="math display">\[
 \begin{equation}
@@ -453,9 +456,9 @@ X_{5} &amp;=  (0)*F_{1} +    (2)*F_{2} + e_{5} \\
 <li>The first two <span class="math inline">\(X\)</span>’s are inter-correlated, and the last 3 <span class="math inline">\(X\)</span>’s are inter-correlated</li>
 <li>The first 2 <span class="math inline">\(X\)</span>’s are NOT correlated with the last 3 <span class="math inline">\(X\)</span>’s</li>
 </ul>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1"><span class="co">#library(corrplot)</span></a>
-<a class="sourceLine" id="cb233-2" title="2"><span class="kw">corrplot</span>(<span class="kw">cor</span>(stan.dta), <span class="dt">tl.col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
-<p><img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="co">#library(corrplot)</span></a>
+<a class="sourceLine" id="cb232-2" title="2"><span class="kw">corrplot</span>(<span class="kw">cor</span>(stan.dta), <span class="dt">tl.col=</span><span class="st">&quot;black&quot;</span>)</a></code></pre></div>
+<p><img src="FA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
             </section>
 
@@ -468,11 +471,13 @@ X_{5} &amp;=  (0)*F_{1} +    (2)*F_{2} + e_{5} \\
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

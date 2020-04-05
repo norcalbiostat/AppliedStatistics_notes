@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.5 Rotating Factors | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.5 Rotating Factors | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -417,59 +420,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Interpretations slightly less clear</li>
 </ul>
 <p>Varimax rotation with principal components extraction.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">pc.extract.varimax &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;varimax&quot;</span>)</a>
-<a class="sourceLine" id="cb238-2" title="2"><span class="kw">print</span>(pc.extract.varimax)</a>
-<a class="sourceLine" id="cb238-3" title="3"><span class="co">## Principal Components Analysis</span></a>
-<a class="sourceLine" id="cb238-4" title="4"><span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;varimax&quot;)</span></a>
-<a class="sourceLine" id="cb238-5" title="5"><span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span></a>
-<a class="sourceLine" id="cb238-6" title="6"><span class="co">##     RC1  RC2   h2    u2 com</span></a>
-<a class="sourceLine" id="cb238-7" title="7"><span class="co">## X1 0.07 0.94 0.90 0.104 1.0</span></a>
-<a class="sourceLine" id="cb238-8" title="8"><span class="co">## X2 0.13 0.94 0.89 0.106 1.0</span></a>
-<a class="sourceLine" id="cb238-9" title="9"><span class="co">## X3 0.80 0.02 0.64 0.360 1.0</span></a>
-<a class="sourceLine" id="cb238-10" title="10"><span class="co">## X4 0.94 0.11 0.90 0.099 1.0</span></a>
-<a class="sourceLine" id="cb238-11" title="11"><span class="co">## X5 0.93 0.23 0.91 0.087 1.1</span></a>
-<a class="sourceLine" id="cb238-12" title="12"><span class="co">## </span></a>
-<a class="sourceLine" id="cb238-13" title="13"><span class="co">##                        RC1  RC2</span></a>
-<a class="sourceLine" id="cb238-14" title="14"><span class="co">## SS loadings           2.41 1.83</span></a>
-<a class="sourceLine" id="cb238-15" title="15"><span class="co">## Proportion Var        0.48 0.37</span></a>
-<a class="sourceLine" id="cb238-16" title="16"><span class="co">## Cumulative Var        0.48 0.85</span></a>
-<a class="sourceLine" id="cb238-17" title="17"><span class="co">## Proportion Explained  0.57 0.43</span></a>
-<a class="sourceLine" id="cb238-18" title="18"><span class="co">## Cumulative Proportion 0.57 1.00</span></a>
-<a class="sourceLine" id="cb238-19" title="19"><span class="co">## </span></a>
-<a class="sourceLine" id="cb238-20" title="20"><span class="co">## Mean item complexity =  1</span></a>
-<a class="sourceLine" id="cb238-21" title="21"><span class="co">## Test of the hypothesis that 2 components are sufficient.</span></a>
-<a class="sourceLine" id="cb238-22" title="22"><span class="co">## </span></a>
-<a class="sourceLine" id="cb238-23" title="23"><span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span></a>
-<a class="sourceLine" id="cb238-24" title="24"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
-<a class="sourceLine" id="cb238-25" title="25"><span class="co">## </span></a>
-<a class="sourceLine" id="cb238-26" title="26"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">pc.extract.varimax &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;varimax&quot;</span>)</a>
+<a class="sourceLine" id="cb237-2" title="2"><span class="kw">print</span>(pc.extract.varimax)</a>
+<a class="sourceLine" id="cb237-3" title="3"><span class="co">## Principal Components Analysis</span></a>
+<a class="sourceLine" id="cb237-4" title="4"><span class="co">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;varimax&quot;)</span></a>
+<a class="sourceLine" id="cb237-5" title="5"><span class="co">## Standardized loadings (pattern matrix) based upon correlation matrix</span></a>
+<a class="sourceLine" id="cb237-6" title="6"><span class="co">##     RC1  RC2   h2    u2 com</span></a>
+<a class="sourceLine" id="cb237-7" title="7"><span class="co">## X1 0.07 0.94 0.90 0.104 1.0</span></a>
+<a class="sourceLine" id="cb237-8" title="8"><span class="co">## X2 0.13 0.94 0.89 0.106 1.0</span></a>
+<a class="sourceLine" id="cb237-9" title="9"><span class="co">## X3 0.80 0.02 0.64 0.360 1.0</span></a>
+<a class="sourceLine" id="cb237-10" title="10"><span class="co">## X4 0.94 0.11 0.90 0.099 1.0</span></a>
+<a class="sourceLine" id="cb237-11" title="11"><span class="co">## X5 0.93 0.23 0.91 0.087 1.1</span></a>
+<a class="sourceLine" id="cb237-12" title="12"><span class="co">## </span></a>
+<a class="sourceLine" id="cb237-13" title="13"><span class="co">##                        RC1  RC2</span></a>
+<a class="sourceLine" id="cb237-14" title="14"><span class="co">## SS loadings           2.41 1.83</span></a>
+<a class="sourceLine" id="cb237-15" title="15"><span class="co">## Proportion Var        0.48 0.37</span></a>
+<a class="sourceLine" id="cb237-16" title="16"><span class="co">## Cumulative Var        0.48 0.85</span></a>
+<a class="sourceLine" id="cb237-17" title="17"><span class="co">## Proportion Explained  0.57 0.43</span></a>
+<a class="sourceLine" id="cb237-18" title="18"><span class="co">## Cumulative Proportion 0.57 1.00</span></a>
+<a class="sourceLine" id="cb237-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb237-20" title="20"><span class="co">## Mean item complexity =  1</span></a>
+<a class="sourceLine" id="cb237-21" title="21"><span class="co">## Test of the hypothesis that 2 components are sufficient.</span></a>
+<a class="sourceLine" id="cb237-22" title="22"><span class="co">## </span></a>
+<a class="sourceLine" id="cb237-23" title="23"><span class="co">## The root mean square of the residuals (RMSR) is  0.08 </span></a>
+<a class="sourceLine" id="cb237-24" title="24"><span class="co">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></a>
+<a class="sourceLine" id="cb237-25" title="25"><span class="co">## </span></a>
+<a class="sourceLine" id="cb237-26" title="26"><span class="co">## Fit based upon off diagonal values = 0.97</span></a></code></pre></div>
 <p>Varimax rotation with maximum likelihood extraction.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">ml.extract.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>)</a>
-<a class="sourceLine" id="cb239-2" title="2"><span class="kw">print</span>(ml.extract.varimax, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span>.<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb239-3" title="3"><span class="co">## </span></a>
-<a class="sourceLine" id="cb239-4" title="4"><span class="co">## Call:</span></a>
-<a class="sourceLine" id="cb239-5" title="5"><span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;varimax&quot;)</span></a>
-<a class="sourceLine" id="cb239-6" title="6"><span class="co">## </span></a>
-<a class="sourceLine" id="cb239-7" title="7"><span class="co">## Uniquenesses:</span></a>
-<a class="sourceLine" id="cb239-8" title="8"><span class="co">##   X1   X2   X3   X4   X5 </span></a>
-<a class="sourceLine" id="cb239-9" title="9"><span class="co">## 0.37 0.00 0.63 0.06 0.04 </span></a>
-<a class="sourceLine" id="cb239-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb239-11" title="11"><span class="co">## Loadings:</span></a>
-<a class="sourceLine" id="cb239-12" title="12"><span class="co">##    Factor1 Factor2</span></a>
-<a class="sourceLine" id="cb239-13" title="13"><span class="co">## X1         0.79   </span></a>
-<a class="sourceLine" id="cb239-14" title="14"><span class="co">## X2         0.99   </span></a>
-<a class="sourceLine" id="cb239-15" title="15"><span class="co">## X3 0.61           </span></a>
-<a class="sourceLine" id="cb239-16" title="16"><span class="co">## X4 0.97           </span></a>
-<a class="sourceLine" id="cb239-17" title="17"><span class="co">## X5 0.96           </span></a>
-<a class="sourceLine" id="cb239-18" title="18"><span class="co">## </span></a>
-<a class="sourceLine" id="cb239-19" title="19"><span class="co">##                Factor1 Factor2</span></a>
-<a class="sourceLine" id="cb239-20" title="20"><span class="co">## SS loadings       2.26    1.64</span></a>
-<a class="sourceLine" id="cb239-21" title="21"><span class="co">## Proportion Var    0.45    0.33</span></a>
-<a class="sourceLine" id="cb239-22" title="22"><span class="co">## Cumulative Var    0.45    0.78</span></a>
-<a class="sourceLine" id="cb239-23" title="23"><span class="co">## </span></a>
-<a class="sourceLine" id="cb239-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
-<a class="sourceLine" id="cb239-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
-<a class="sourceLine" id="cb239-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">ml.extract.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>)</a>
+<a class="sourceLine" id="cb238-2" title="2"><span class="kw">print</span>(ml.extract.varimax, <span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">cutoff=</span>.<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb238-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb238-4" title="4"><span class="co">## Call:</span></a>
+<a class="sourceLine" id="cb238-5" title="5"><span class="co">## factanal(x = stan.dta, factors = 2, rotation = &quot;varimax&quot;)</span></a>
+<a class="sourceLine" id="cb238-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb238-7" title="7"><span class="co">## Uniquenesses:</span></a>
+<a class="sourceLine" id="cb238-8" title="8"><span class="co">##   X1   X2   X3   X4   X5 </span></a>
+<a class="sourceLine" id="cb238-9" title="9"><span class="co">## 0.37 0.00 0.63 0.06 0.04 </span></a>
+<a class="sourceLine" id="cb238-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb238-11" title="11"><span class="co">## Loadings:</span></a>
+<a class="sourceLine" id="cb238-12" title="12"><span class="co">##    Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb238-13" title="13"><span class="co">## X1         0.79   </span></a>
+<a class="sourceLine" id="cb238-14" title="14"><span class="co">## X2         0.99   </span></a>
+<a class="sourceLine" id="cb238-15" title="15"><span class="co">## X3 0.61           </span></a>
+<a class="sourceLine" id="cb238-16" title="16"><span class="co">## X4 0.97           </span></a>
+<a class="sourceLine" id="cb238-17" title="17"><span class="co">## X5 0.96           </span></a>
+<a class="sourceLine" id="cb238-18" title="18"><span class="co">## </span></a>
+<a class="sourceLine" id="cb238-19" title="19"><span class="co">##                Factor1 Factor2</span></a>
+<a class="sourceLine" id="cb238-20" title="20"><span class="co">## SS loadings       2.26    1.64</span></a>
+<a class="sourceLine" id="cb238-21" title="21"><span class="co">## Proportion Var    0.45    0.33</span></a>
+<a class="sourceLine" id="cb238-22" title="22"><span class="co">## Cumulative Var    0.45    0.78</span></a>
+<a class="sourceLine" id="cb238-23" title="23"><span class="co">## </span></a>
+<a class="sourceLine" id="cb238-24" title="24"><span class="co">## Test of the hypothesis that 2 factors are sufficient.</span></a>
+<a class="sourceLine" id="cb238-25" title="25"><span class="co">## The chi square statistic is 0.2 on 1 degree of freedom.</span></a>
+<a class="sourceLine" id="cb238-26" title="26"><span class="co">## The p-value is 0.652</span></a></code></pre></div>
 <ul>
 <li>communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations.</li>
 </ul>
@@ -488,26 +491,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>promax</em> is computationally faster than <em>direct oblimin</em>, so good for very large datasets</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1">pc.extract.oblimin &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;oblimin&quot;</span>)</a>
-<a class="sourceLine" id="cb240-2" title="2">ml.extract.promax&lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;promax&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb241-2" title="2"><span class="kw">plot</span>(pc.extract.norotate)</a>
-<a class="sourceLine" id="cb241-3" title="3"><span class="kw">plot</span>(pc.extract.varimax)</a>
-<a class="sourceLine" id="cb241-4" title="4"><span class="kw">plot</span>(pc.extract.oblimin)</a>
-<a class="sourceLine" id="cb241-5" title="5"></a>
-<a class="sourceLine" id="cb241-6" title="6"></a>
-<a class="sourceLine" id="cb241-7" title="7">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb241-8" title="8"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + norotate&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
-<a class="sourceLine" id="cb241-9" title="9"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a>
-<a class="sourceLine" id="cb241-10" title="10"></a>
-<a class="sourceLine" id="cb241-11" title="11">load &lt;-<span class="st"> </span>ml.extract.varimax<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb241-12" title="12"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + Varimax&quot;</span>) </a>
-<a class="sourceLine" id="cb241-13" title="13"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) </a>
-<a class="sourceLine" id="cb241-14" title="14"></a>
-<a class="sourceLine" id="cb241-15" title="15">load &lt;-<span class="st"> </span>ml.extract.promax<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb241-16" title="16"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span> <span class="st">&quot;ML + Promax&quot;</span>) </a>
-<a class="sourceLine" id="cb241-17" title="17"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) </a></code></pre></div>
-<p><img src="FA_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">pc.extract.oblimin &lt;-<span class="st"> </span><span class="kw">principal</span>(stan.dta, <span class="dt">nfactors=</span><span class="dv">2</span>, <span class="dt">rotate=</span><span class="st">&quot;oblimin&quot;</span>)</a>
+<a class="sourceLine" id="cb239-2" title="2">ml.extract.promax&lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;promax&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb240-2" title="2"><span class="kw">plot</span>(pc.extract.norotate)</a>
+<a class="sourceLine" id="cb240-3" title="3"><span class="kw">plot</span>(pc.extract.varimax)</a>
+<a class="sourceLine" id="cb240-4" title="4"><span class="kw">plot</span>(pc.extract.oblimin)</a>
+<a class="sourceLine" id="cb240-5" title="5"></a>
+<a class="sourceLine" id="cb240-6" title="6"></a>
+<a class="sourceLine" id="cb240-7" title="7">load &lt;-<span class="st"> </span>ml.extract.norotate<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb240-8" title="8"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + norotate&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></a>
+<a class="sourceLine" id="cb240-9" title="9"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) <span class="co"># put names instead of points</span></a>
+<a class="sourceLine" id="cb240-10" title="10"></a>
+<a class="sourceLine" id="cb240-11" title="11">load &lt;-<span class="st"> </span>ml.extract.varimax<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb240-12" title="12"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="st">&quot;ML + Varimax&quot;</span>) </a>
+<a class="sourceLine" id="cb240-13" title="13"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) </a>
+<a class="sourceLine" id="cb240-14" title="14"></a>
+<a class="sourceLine" id="cb240-15" title="15">load &lt;-<span class="st"> </span>ml.extract.promax<span class="op">$</span>loadings[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb240-16" title="16"><span class="kw">plot</span>(load, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span> <span class="st">&quot;ML + Promax&quot;</span>) </a>
+<a class="sourceLine" id="cb240-17" title="17"><span class="kw">text</span>(load, <span class="dt">labels=</span><span class="kw">rownames</span>(load)) </a></code></pre></div>
+<p><img src="FA_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Varimax vs oblique here doesn’t make much of a difference, and typically this is the case. You almost always use some sort of rotation. Recall, this is a hypothetical example and we set up the variables in a distinct two-factor model. So this example will look nice.</p>
 </div>
 </div>
@@ -522,11 +525,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

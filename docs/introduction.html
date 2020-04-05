@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.1 Introduction | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.1 Introduction | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -403,19 +406,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction" class="section level2">
 <h2><span class="header-section-number">14.1</span> Introduction</h2>
-
-<div class="rmdnote">
-This set of notes uses functions from several new packages.
-See the links in the <a href="help.html#help">Additional Resources</a> section for more information
-</div>
-
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">library</span>(corrplot)</a>
-<a class="sourceLine" id="cb230-2" title="2"><span class="kw">library</span>(psych)</a>
-<a class="sourceLine" id="cb230-3" title="3"><span class="kw">library</span>(ggfortify) <span class="co"># plots scores from `factanal()`</span></a>
-<a class="sourceLine" id="cb230-4" title="4"><span class="kw">library</span>(GPArotation) <span class="co"># to do oblimin rotation</span></a></code></pre></div>
+<p>Setting the stage with some examples.</p>
+<p><strong>Example 1</strong></p>
+<p>An investigator has asked each respondent in a survey whether he or she strongly agrees, agrees, is undecided, disagrees, or strongly disagrees with 15 statements concerning attitudes toward inflation.</p>
+<p>As a first step, the investigator will do a factor analysis on the resulting data to determine which statements belong together in sets that are uncorrelated with other sets.</p>
+<p>The particular statements that form a single set will be examined to obtain a better understanding of attitudes toward inflation. Scores derived from each set or factor will be used in subsequent analysis to predict consumer spending.</p>
+<p><strong>Example 2</strong></p>
+<p>There are Fifty test questions</p>
+<ul>
+<li>Each is a function of 3 factors:</li>
+<li>Verbal, quantitative, analytical skills</li>
+</ul>
+<p>You are interested in measuring the gain in analytical skills over the course of a week after doing some task.</p>
 <blockquote>
-<p>No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2</p>
+<p>No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2 and the links in the <a href="help.html#help">Additional Resources</a> section for more information.</p>
 </blockquote>
+<p>So far this may sound like PCA, but there is a major theoretical difference. Factor analysis tries to identify and explain underlying latent constructs that resulted in the observed values of measured variables.</p>
 <div id="latent-constructs" class="section level3">
 <h3><span class="header-section-number">14.1.1</span> Latent Constructs</h3>
 <p>Latent variables are ones that cannot be measured directly; e.g. Depression, Anxiety, Mathematical ability.
@@ -485,11 +491,13 @@ essential information contained in the original set of variables.</li>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

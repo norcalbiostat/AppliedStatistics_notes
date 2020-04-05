@@ -1,0 +1,12 @@
+base
+ggplot2
+gridExtra
+dplyr
+pander
+knitr
+kableExtra
+waffle
+scales
+sjPlot
+ggridges
+ggjoy

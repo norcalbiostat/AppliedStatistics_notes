@@ -1,0 +1,11 @@
+base
+ggplot2
+gridExtra
+dplyr
+pander
+knitr
+kableExtra
+gplots
+ROCR
+lattice
+caret

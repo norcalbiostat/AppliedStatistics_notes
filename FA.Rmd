@@ -1,6 +1,10 @@
 
 # Factor Analysis {#fa}
 
+## Introduction
+
+Setting the stage with some examples. 
+
 **Example 1**
 
 An investigator has asked each respondent in a survey whether he or she strongly agrees, agrees, is undecided, disagrees, or strongly disagrees with 15 statements concerning attitudes toward inflation. 
@@ -18,21 +22,15 @@ There are Fifty test questions
 
 You are interested in measuring the gain in analytical skills over the course of a week after doing some task. 
 
-## Introduction
-
-```{block2, type='rmdnote'}
-This set of notes uses functions from several new packages. 
-See the links in the [Additional Resources](#help) section for more information
-```
-
-```{r}
+```{r, echo=FALSE}
 library(corrplot)
 library(psych)
 library(ggfortify) # plots scores from `factanal()`
-library(GPArotation) # to do oblimin rotation
 ```
 
-> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2
+> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2 and the links in the [Additional Resources](#help) section for more information. 
+
+So far this may sound like PCA, but there is a major theoretical difference. Factor analysis tries to identify and explain underlying latent constructs that resulted in the observed values of measured variables. 
 
 
 ### Latent Constructs

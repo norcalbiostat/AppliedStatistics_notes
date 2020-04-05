@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.6 Factor Scores | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.6 Factor Scores | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -414,29 +417,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 impute missing values.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1">fa.ml.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="dt">scores=</span><span class="st">&quot;regression&quot;</span>)</a>
-<a class="sourceLine" id="cb242-2" title="2"><span class="kw">summary</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
-<a class="sourceLine" id="cb242-3" title="3"><span class="co">##     Factor1            Factor2        </span></a>
-<a class="sourceLine" id="cb242-4" title="4"><span class="co">##  Min.   :-2.32732   Min.   :-2.79312  </span></a>
-<a class="sourceLine" id="cb242-5" title="5"><span class="co">##  1st Qu.:-0.72413   1st Qu.:-0.54362  </span></a>
-<a class="sourceLine" id="cb242-6" title="6"><span class="co">##  Median : 0.09196   Median :-0.02376  </span></a>
-<a class="sourceLine" id="cb242-7" title="7"><span class="co">##  Mean   : 0.00000   Mean   : 0.00000  </span></a>
-<a class="sourceLine" id="cb242-8" title="8"><span class="co">##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  </span></a>
-<a class="sourceLine" id="cb242-9" title="9"><span class="co">##  Max.   : 2.43371   Max.   : 2.18992</span></a>
-<a class="sourceLine" id="cb242-10" title="10"><span class="kw">head</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
-<a class="sourceLine" id="cb242-11" title="11"><span class="co">##          Factor1      Factor2</span></a>
-<a class="sourceLine" id="cb242-12" title="12"><span class="co">## [1,] -1.49174313  0.003612941</span></a>
-<a class="sourceLine" id="cb242-13" title="13"><span class="co">## [2,] -0.26254721  1.090864733</span></a>
-<a class="sourceLine" id="cb242-14" title="14"><span class="co">## [3,]  0.55516045  0.631119886</span></a>
-<a class="sourceLine" id="cb242-15" title="15"><span class="co">## [4,] -1.21028676 -1.281240452</span></a>
-<a class="sourceLine" id="cb242-16" title="16"><span class="co">## [5,] -0.04852211 -1.575691468</span></a>
-<a class="sourceLine" id="cb242-17" title="17"><span class="co">## [6,] -0.53768770  0.661138335</span></a></code></pre></div>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="co">#library(ggforitfy)</span></a>
-<a class="sourceLine" id="cb243-2" title="2"><span class="kw">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></a></code></pre></div>
-<p><img src="FA_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">fa.ml.varimax &lt;-<span class="st"> </span><span class="kw">factanal</span>(stan.dta, <span class="dt">factors=</span><span class="dv">2</span>, <span class="dt">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="dt">scores=</span><span class="st">&quot;regression&quot;</span>)</a>
+<a class="sourceLine" id="cb241-2" title="2"><span class="kw">summary</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
+<a class="sourceLine" id="cb241-3" title="3"><span class="co">##     Factor1            Factor2        </span></a>
+<a class="sourceLine" id="cb241-4" title="4"><span class="co">##  Min.   :-2.32732   Min.   :-2.79312  </span></a>
+<a class="sourceLine" id="cb241-5" title="5"><span class="co">##  1st Qu.:-0.72413   1st Qu.:-0.54362  </span></a>
+<a class="sourceLine" id="cb241-6" title="6"><span class="co">##  Median : 0.09196   Median :-0.02376  </span></a>
+<a class="sourceLine" id="cb241-7" title="7"><span class="co">##  Mean   : 0.00000   Mean   : 0.00000  </span></a>
+<a class="sourceLine" id="cb241-8" title="8"><span class="co">##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  </span></a>
+<a class="sourceLine" id="cb241-9" title="9"><span class="co">##  Max.   : 2.43371   Max.   : 2.18992</span></a>
+<a class="sourceLine" id="cb241-10" title="10"><span class="kw">head</span>(fa.ml.varimax<span class="op">$</span>scores)</a>
+<a class="sourceLine" id="cb241-11" title="11"><span class="co">##          Factor1      Factor2</span></a>
+<a class="sourceLine" id="cb241-12" title="12"><span class="co">## [1,] -1.49174313  0.003612941</span></a>
+<a class="sourceLine" id="cb241-13" title="13"><span class="co">## [2,] -0.26254721  1.090864733</span></a>
+<a class="sourceLine" id="cb241-14" title="14"><span class="co">## [3,]  0.55516045  0.631119886</span></a>
+<a class="sourceLine" id="cb241-15" title="15"><span class="co">## [4,] -1.21028676 -1.281240452</span></a>
+<a class="sourceLine" id="cb241-16" title="16"><span class="co">## [5,] -0.04852211 -1.575691468</span></a>
+<a class="sourceLine" id="cb241-17" title="17"><span class="co">## [6,] -0.53768770  0.661138335</span></a></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="co">#library(ggforitfy)</span></a>
+<a class="sourceLine" id="cb242-2" title="2"><span class="kw">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></a></code></pre></div>
+<p><img src="FA_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>To merge these scores back onto the original data set <strong>providing there is no missing data</strong> you can use the <code>bind_cols()</code> function in <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1">data.withscores &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(data, <span class="kw">data.frame</span>(fa.ml.varimax<span class="op">$</span>scores))</a>
-<a class="sourceLine" id="cb244-2" title="2"><span class="kw">kable</span>(<span class="kw">head</span>(data.withscores))</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1">data.withscores &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(data, <span class="kw">data.frame</span>(fa.ml.varimax<span class="op">$</span>scores))</a>
+<a class="sourceLine" id="cb243-2" title="2"><span class="kw">kable</span>(<span class="kw">head</span>(data.withscores))</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -616,11 +619,13 @@ Factor2
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

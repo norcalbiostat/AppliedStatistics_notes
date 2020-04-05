@@ -2,6 +2,10 @@
 
 # Factor Analysis {#fa}
 
+## Introduction
+
+Setting the stage with some examples. 
+
 **Example 1**
 
 An investigator has asked each respondent in a survey whether he or she strongly agrees, agrees, is undecided, disagrees, or strongly disagrees with 15 statements concerning attitudes toward inflation. 
@@ -19,20 +23,11 @@ There are Fifty test questions
 
 You are interested in measuring the gain in analytical skills over the course of a week after doing some task. 
 
-## Introduction
-
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">This set of notes uses functions from several new packages. 
-See the links in the [Additional Resources](#help) section for more information</div>\EndKnitrBlock{rmdnote}
 
 
-```r
-library(corrplot)
-library(psych)
-library(ggfortify) # plots scores from `factanal()`
-library(GPArotation) # to do oblimin rotation
-```
+> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2 and the links in the [Additional Resources](#help) section for more information. 
 
-> No attempt will be made to present a comprehensive treatment of this subject. For more detail see the references mentioned in PMA6 Chapter 15.2
+So far this may sound like PCA, but there is a major theoretical difference. Factor analysis tries to identify and explain underlying latent constructs that resulted in the observed values of measured variables. 
 
 
 ### Latent Constructs
@@ -209,7 +204,7 @@ $$
 corrplot(cor(stan.dta), tl.col="black")
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ## Factor Extraction Methods {#fa-extract}
 
@@ -231,7 +226,7 @@ qplot(x=1:length(var_pc), y=var_pc, geom=c("point", "line")) +
   xlab("PC number") + ylab("Eigenvalue")
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-8-1.png" width="288" style="display: block; margin: auto;" />
+<img src="FA_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" />
 
 ### Principal components (PC Factor model)
 
@@ -396,7 +391,7 @@ plot(load, type="n") # set up the plot but don't put points down
 text(load, labels=rownames(load)) # put names instead of points
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 
 
@@ -525,7 +520,7 @@ plot(load, type="n", main= "ML + Promax")
 text(load, labels=rownames(load)) 
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 Varimax vs oblique here doesn't make much of a difference, and typically this is the case. You almost always use some sort of rotation. Recall, this is a hypothetical example and we set up the variables in a distinct two-factor model. So this example will look nice. 
 
@@ -568,7 +563,7 @@ head(fa.ml.varimax$scores)
 autoplot(fa.ml.varimax) # see vignette for more info. Link at bottom
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 To merge these scores back onto the original data set **providing there is no missing data** you can use the `bind_cols()` function in `dplyr`. 
 
