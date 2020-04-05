@@ -20,7 +20,7 @@ rmd_files: ["index.Rmd"
             ,"PCA.Rmd"
             ,"FA.Rmd"
             
-            ,"MLM_intro.Rmd"
+#            ,"MLM_intro.Rmd"
 #            ,"random_intercept.Rmd"
 #            ,"longitudinal.Rmd"
 #            ,"spatial.Rmd"
