@@ -1,0 +1,421 @@
+# Cluster Analysis {#cluster}
+
+```{block2, type='rmdnote'}
+Corresponding reading: PMA6 Chapter 16
+```
+
+The goal of cluster analysis is to combine _observations_ into groups, when the group membership is not known in advance. 
+
+This is different from Principal Components and Factor Analysis, which aims to group _variables_.
+
+This is still a **Multivariate** analysis technique. That means there is no response variable. 
+
+
+## When is cluster analysis used? 
+
+* Biology: species taxonomy. Living things are classified into arbitrary groups based on observed characteristics. 
+* Types of depression (Andreasen and Grove, 1982, Das-Munshi et al. 2008)
+* Properties of dwarf galaxies (Chattopadhyay et.al, 2012)
+* Important tool in _Data Mining_ and Marketing research. Consumers can be clustered on the basis of their choice of purchases. 
+* State level demographics - how do states cluster on measures such as health indicators, racial and socioeconomic disparities. 
+
+
+
+### Data used in this chapter
+
+Suuuuuuper old financial performance data for three different industries in from _Forbes_ in 1981. Bonus points for someone who can get me updated data. 
+
+```{block2, type='rmdnote'}
+These variables are described in detail in Chapter 9.3 and 16.3 in PMA6. You can download the tab delimited [[data file from this link]](data/chem_16_1.txt) and the [[codebook from this link.]](data/Chemical_161_Codebook.txt)
+```
+
+```{r}
+chem <- read.table("data/chem_16_1.txt", sep="\t", header=TRUE)
+```
+
+### Packages used in this chapter
+
+```{r, eval=1:2}
+library(factoextra)  # any function that starts with fviz_
+library(tidyr)       # for pivot_wider
+library(ggplot2)
+library(gridExtra)   # for multi plot ggplots
+library(dplyr)
+library(cluster)     # for gap statistic
+library(kableExtra)  # side by side tables
+```
+
+
+## Graphical Methods
+
+When there are only a moderate number of variables under consideration, a **profile diagram** or a **parallel coordinates plot** can be informative. 
+
+This diagram plots the _standardized_ values of several variables (on the x-axis), with one line per observation. 
+
+To do this in `ggplot`, we need to transform the data to long format. Here I use the `pivot_longer` function in `tidyr`. 
+
+```{r, fig.width=12}
+stan.chem <- cbind(chem[,1:3], scale(chem[,4:10]))
+stan.chem.long <- tidyr::pivot_longer(data=stan.chem, cols=ROR5:PAYOUTR1, 
+                               names_to = "measure", values_to = "value") 
+stan.chem.long$measure <- factor(stan.chem.long$measure, 
+              levels=c("ROR5", "DE", "SALESGR5", "EPS5", "NPM1", "PE", "PAYOUTR1"))
+
+stan.chem.long %>% filter(NUM %in% c(15:21)) %>% 
+    ggplot(aes(x=measure, y=value, group=SYMBOL, col=SYMBOL)) + geom_line(size=1.5) + 
+           theme_bw(base_size = 14) + ylim(-3, 4) 
+```
+
+
+```{block2, type='rmdimportant'}
+This plot is the corrected version of Figure 16.4. 
+```
+
+Companies that follow similar patterns: 
+
+* `hca`, `nme`, `hum`
+* `lks`, `win` 
+* `ahs` is similar to `lks` & `win` for `ROR5` through `SALESGR5`, but diverges after. 
+* `ami` is more similar to `hca` than the others, but not on all measures. 
+
+Obvious limitation to creating a profile plot is that it could be difficult to pick out patterns as number of observations increases. The plot below shows all 25 observations in this data set. 
+
+```{r}
+ggplot(stan.chem.long, aes(x=measure, y=value, group=SYMBOL)) + 
+    geom_line() + theme_bw() + ylim(-3, 4) 
+```
+
+
+
+```{block2, type='rmdtip'}
+If the x-axis were time this type of plot is also known as a "spaghetti" plot. See Figure 4.18b in PMA6 as an example. 
+```
+
+We can do better than looking at profile plots and trying to see which observations behave "similarly". Let's leverage some math concepts and introduce measures of "distance" between two observations. 
+
+For cluster analysis, we need to use the wide data set, where each variable is it's own column, and only the numeric variables containing the measurements. Not the row information such as symbol. Here I set the row names of this numeric matrix to the symbols. This lets the clusters to be 'named' instead of numbered by row number in plots. 
+
+```{r}
+cluster.dta <- stan.chem %>% select(ROR5:PAYOUTR1)
+rownames(cluster.dta) <- stan.chem$SYMBOL 
+```
+
+
+## Distance Measures
+
+Let's start with 2 dimensions, and the most familiar type of distance: **Euclidean distance**. 
+
+![Credit: Wikipedia](images/500px-Euclidean_distance_2d.svg.png)
+
+Recalling the [Pythagorean formula](https://en.wikipedia.org/wiki/Pythagorean_theorem), the Euclidean distance between two points $(p_{1}, p_{2})$ and $(q_{1}, q_{2})$ is
+
+$$ d_{euc} =  \sqrt{(q_{1} - p_{1})^{2} + (q_{2} - p_{2})^{2} }$$
+
+This formula is generalizable to $p$ dimensions, so we can calculate the distance between observations on $p$ numeric variables. The details of calculating a multivariate Euclidean distance is left to a third semester of calculus, but the concept is the same. This measure is commonly referred to as the [Euclidean norm](https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm), or L2 norm. 
+
+
+```{block2, type='rmdcaution'}
+Distance measures are **not** invariant to changes in scale (units of measurement). Distances between measures that are in the thousands, are much larger than distances between measures that are in the micrograms. This is why you always need to scale the data prior to analysis. 
+```
+
+### Other measures of distance
+
+* Euclidean distance tends to be the default in most algorithms. 
+* Manhattan distance is similar, calculated using the sum of the absolute value distances:  
+
+$$ d_{man} =  |(q_{1} - p_{1})| + |(q_{2} - p_{2})| $$
+
+* Correlation-based distances. Pearson, Spearman, Kendall to name a few. 
+    - Widely used for gene expression data
+    - distance is defined by subtracting the correlation coefficient from 1. 
+
+
+When discussing the _closeness_ of records, we are meaning the minimum distance on all $p$ dimensions under consideration. For this class we will default to using the Euclidean distance unless otherwise specified. 
+
+### Creating the distance matrix. 
+
+```{r}
+d <- dist(cluster.dta, method="euclidean")
+```
+
+We can visualize these distances using a heatmap, where here i've changed the gradient to show the darker the color, the closer the records are to each other. The diagonal is black, because each record has 0 distance from itself.  You can change these colors. 
+```{r}
+fviz_dist(d, order=TRUE, show_labels=TRUE, 
+          gradient=list(low="black", mid="blue", high="white"))
+```
+
+* `order=TRUE` sorts the distances, so notice `hum` is furthest away from almost all other companies except `nme`. 
+* `win` and `lks` seem to be a bit 'further' away from others. 
+
+
+We will explore two methods of clustering: hierarchical and non-hierarchical
+
+## Hierarchical clustering
+
+
+We can visualize clusters calculated using hierarchical methods using **dendograms**. These are awesome tree-based visualizations, similar to visualizations created for decision trees and random forest models (leafs, nodes, stems, roots). 
+
+![PMA6 Figure 16.7](images/fig16-7.png){width=70%}
+
+
+
+There are two main approaches to linking records into clusters: 
+
+**Agglomerative** is a bottom-up approach. This begins with $N$ clusters (each observation is a cluster), and at each step two observations that are the most similar are combined until all observations are in a single cluster. Good at identifying small clusters.  AKA AGNES (agglomerative nesting)
+
+**Devisive** is a top-down approach. This begins with one cluster containing all the observations, and splits off cases that are most dissimilar to the rest until each observation is in it's own cluster. Good at identifying large clusters. Not that common, so will not be discussed further.  AKA DIANA (divise analysis).
+
+
+
+### Linkages
+At each step in agglomerative clustering, the clusters with the smallest **linkage distance** between the two clusters are combined. This linkage distance can be computed using several linkage methods. 
+
+
+**Centroid linkage (PMA6 Fig 16.5).**
+
+* The closest two records are combined, and their centroid is calculated. The **centroid** is calculated as the mean of the length $p$-vector, for our 2 dimensional example in the last section this would be $(\bar{p}, \bar{q})$. 
+    - This centroid point/vector takes the place of the original records in the data set. 
+* Then the next closest set of points are combined, and their centroid calculated. 
+* The centroid need not be an actual measured observation in the data set.
+
+
+**Single Linkage**
+
+* Each step clusters are combined that contain the closest pair of points, not yet in the same cluster as each other. 
+
+**Complete Linkage**
+
+* Calculate all pairwise distances between points in each cluster. 
+* The distance between clusters is the maximum value of the pairwise differences. I.e. the pair of points in each cluster that are the furthest away from each other. 
+* At each step, the two clusters that are separated by the shortest maximum distance are combined. 
+
+**Ward's D**
+
+* Minimizes the within-cluster variance. 
+* Within cluster variance is calculated as the weighted squared distance between clusters. 
+    - For the initial step, this is the squared euclidean distance between all points. 
+* At each step the pair of clusters that lead to the smallest increase in the total within-cluster variance are merged. 
+
+
+### Comparing Linkage methods
+
+
+```{r, fig.height=10, fig.width=10}
+par(mfrow=c(2,2))
+hclust(d, method="centroid") %>% plot(main="Centroid Linkage")
+hclust(d, method="single") %>% plot(main="Single Linkage")
+hclust(d, method="complete") %>% plot(main="Complete Linkage")
+hclust(d, method="ward.D") %>% plot(main="Ward's Method")
+```
+
+In these plots, "height" is a measure of similarity/distance. Also, the longer the "stem" the greater the distance.  
+
+Things I picked out from these plots. 
+
+* `hum` is the last company to be added to any cluster using any methods. 
+* `rei` also seems to stand alone as being different from the others. 
+* Ward's method seems to create more distinct clusters compared to the other methods
+* common companies that are grouped in all methods: 
+    - `nme`, `hca`, `ami` 
+    - `uk`, `ald`, `roh`
+    - `sf`, `dia`, `dow`
+    - `gra`, `hpc`, `acy`, and sometimes `mtc`. 
+
+
+
+### Dendogram extras
+
+If we say there are 4 clusters, we can use `fviz_dend` to color the dendogram by those clusters. 
+```{r}
+clust.ward <- hclust(d, method="ward.D")
+
+a <- fviz_dend(clust.ward, rect=TRUE, k=4)
+b <- fviz_dend(clust.ward,  k =4, rect = TRUE, color_labels_by_k = TRUE, 
+               rect_border = c("red", "green", "blue", "purple"), 
+               rect_fill = TRUE, lower_rect = -1)
+grid.arrange(a, b, ncol=2)
+```
+
+Other options
+
+```{r}
+fviz_dend(clust.ward, k = 4, k_colors = "RdBu", type = "phylogenic", relep = TRUE , 
+          phylo_layout = "layout_as_tree")
+fviz_dend(clust.ward, cex = 0.6, k = 4, type = "circular", rect = TRUE)
+```
+
+
+
+## Non Hierarchical clustering
+
+$K$-means clustering
+
+1. Divide the data into $K$ clusters. 
+2. Calculate the centroid for each cluster. 
+3. Calculate the distance from each point to each cluster centroid. 
+4. Assign each point to be in the cluster for which it's closest to that cluster's centroid. 
+5. Repeat until no points move clusters. 
+
+![Figure 16.8](images/fig16-8.png){width=80%}
+
+
+```{r}
+k <- kmeans(cluster.dta, centers=3)
+k
+```
+
+
+Interpreting the output: 
+
+* First table shows the mean of each variable for each cluster. Each row is that 'centroid' vector. 
+* The `clustering vector` shows the assigned cluster for each record (company)
+
+The `kmeans` procedure has an `nstart` argument that lets you choose different starting configurations, and lets you choose the best one. Here I iterate through 10 different configurations and compare the cluster assignment results to the first trial where only one configuration was used. 
+
+
+```{r}
+set.seed(4567)
+k2 <- kmeans(cluster.dta, centers=3, nstart=10)
+rbind(k$cluster, k2$cluster)
+```
+
+Things to note
+
+* I set a seed. That means there's a random process going on here. I set a seed so each time i compile the notes i get the same results. 
+* The cluster numbers are invariant. There are still 3 clusters, with `hum:ami` showing up in one cluster (numbered 2 in the first row, numbered 1 in the second row). Basically the cluster labels 1 and 2 have been swapped. 
+
+
+### Visualizations k-means
+
+
+Using `fviz_cluster` from the `factoextra` package lets you visualize clusters on two dimensions. 
+
+```{r}
+fviz_cluster(object=k2, data=cluster.dta, choose.vars = c("ROR5", "DE")) + 
+      theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
+```
+
+If you omit the `choose.vars` argument, this function will create clusters using the first two principal components instead of the original, standardized data. 
+
+```{r}
+fviz_cluster(object=k2, data=cluster.dta) + 
+  theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
+```
+
+
+
+
+## Choosing K
+
+### Visually
+
+```{r, fig.width=10, fig.height=8}
+nclust.2 <- kmeans(cluster.dta, centers=2, nstart=10) %>%
+              fviz_cluster(data=cluster.dta, geom="point") + theme_bw() + 
+              ggtitle("2 clusters")+ 
+              scale_colour_viridis_d() + scale_fill_viridis_d()
+nclust.3 <- kmeans(cluster.dta, centers=3, nstart=10) %>%
+              fviz_cluster(data=cluster.dta, geom="point") + theme_bw() + 
+              ggtitle("3 clusters")+ 
+              scale_colour_viridis_d() + scale_fill_viridis_d()
+nclust.4 <- kmeans(cluster.dta, centers=4, nstart=10) %>%
+              fviz_cluster(data=cluster.dta, geom="point") + theme_bw() + 
+              ggtitle("4 clusters")+ 
+              scale_colour_viridis_d() + scale_fill_viridis_d()
+nclust.5 <- kmeans(cluster.dta, centers=5, nstart=10) %>%
+              fviz_cluster(data=cluster.dta, geom="point") + theme_bw() + 
+              ggtitle("5 clusters")+ 
+              scale_colour_viridis_d() + scale_fill_viridis_d()
+
+gridExtra::grid.arrange(nclust.2, nclust.3, nclust.4, nclust.5, nrow=2)
+```
+
+* Three clusters provides the best appearing groupings. 
+* The cluster on the right stands out (high on PC2) on it's own regardless of what happens with the other clusters. 
+* Cluster #2 in both the 3 and 4 cluster models is the same points. 
+
+### Elbow method
+
+Similar to the scree plot, choose the number of clusters that minimizes the within cluster variance. 
+
+```{r}
+fviz_nbclust(cluster.dta, kmeans, method="wss")
+```
+
+No real "elbow".. but $k=7$ is where i'd say the change point in the slope is at. 
+
+
+### Gap statistic
+
+> FIX THIS SECTION 
+
+* This can be used for both hierarchical and non-hierarchical clustering. 
+* Compares total intracluster variation with the expected value under a null distribution of no clustering. 
+* See [Tibshirani et.all](http://web.stanford.edu/~hastie/Papers/gap.pdf) for more details. 
+
+```{r}
+set.seed(12345)
+fviz_nbclust(cluster.dta, kmeans, method="gap_stat")
+fviz_nbclust(cluster.dta, hcut, method="gap_stat")
+```
+
+
+
+## Assigning Cluster labels
+
+* For hierarchical clustering, you can use the `cutree` function to cut the tree at a certain height to create clusters
+* For kmeans clustering, the clustering assignments is contained in the `cluster` object. 
+
+
+Both can be added back to the original data set, as long as the ordering has not changed
+```{r}
+chem$pred.clust.ward <- cutree(clust.ward, k=3)
+chem$pred.clust.kmeans <- kmeans(cluster.dta, 3, nstart=20)$cluster
+```
+
+
+In this sample, we *know* the true clusters, so we can compare how well these methods did at capturing the similarities in companies. 
+
+```{r}
+list(
+  table(chem$TYPE, chem$pred.clust.ward), 
+  table(chem$TYPE, chem$pred.clust.kmeans)
+  ) %>% 
+  kable(booktabs=TRUE, valign='t', 
+        caption="True cluster vs hierarchical (left) and kmeans (right) clustering.")
+```
+
+* Both methods clustered 4 out of 5 Health care companies together.
+* Both got grocery stores half wrong
+* Similar performance for clustering the chemical companies. 
+
+
+## What to watch out for
+
+* $K$ means clustering requires the number of clusters to be specified up front. Hierarchical clustering does not have this restriction. 
+* The agglomerative coefficient increases with the number of rows. You can NOT use it to compare between two datasets that are very different in size. 
+* Cluster analysis methods are sensitive to outliers
+* Different results can occur if you change the order of the data. 
+* The centroid does not have to be part of the data set. Alternative methods such as k-medians or k-medoids restrict the centroids to be an actual record that is 'closest' to the calculated mean. 
+* Number of clusters depends on the desired level of similarity. 
+* Since different algorithms can produce different results, this is especially true across software programs. See PMA6 Table 16.4 as an example of comparing cluster analysis results on the chemical data set in SAS, R and Stata. 
+
+
+
+
+## Additional References
+
+* Chapter 20 and 21 from [Hands on machine learning with R](https://bradleyboehmke.github.io/HOML/) book.
+* University of Cincinatti - Business Analytics R Programming Guide (same author as above HOML book)
+    - https://uc-r.github.io/kmeans_clustering
+    - https://uc-r.github.io/hc_clustering
+* R Vignette for [dendextend](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) provides a good visual comparison of different linkage methods on small and large dimensional datasets. 
+* [Lecture notes from Data Analysis in the Geosciences, GEOL 830 at University of Georgia.](http://strata.uga.edu/8370/lecturenotes/clusterAnalysis.html)
+* STHDA on different ways to visualize clusters 
+    - [using built in denodgrams](http://www.sthda.com/english/wiki/beautiful-dendrogram-visualizations-in-r-5-must-known-methods-unsupervised-machine-learning)
+    - [using the `factoextra` package](http://www.sthda.com/english/wiki/factoextra-r-package-easy-multivariate-data-analyses-and-elegant-visualization#cluster-analysis-and-factoextra)
+
+
+
+
+
