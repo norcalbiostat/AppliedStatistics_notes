@@ -366,6 +366,8 @@ fviz_cluster(object=k2, data=cluster.dta) +
 
 ## Choosing K
 
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">This section is under construction</div>\EndKnitrBlock{rmdcaution}
+
 ### Visually
 
 
@@ -390,7 +392,7 @@ nclust.5 <- kmeans(cluster.dta, centers=5, nstart=10) %>%
 gridExtra::grid.arrange(nclust.2, nclust.3, nclust.4, nclust.5, nrow=2)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-21-1.png" width="960" />
+<img src="cluster_files/figure-html/unnamed-chunk-22-1.png" width="960" />
 
 * Three clusters provides the best appearing groupings. 
 * The cluster on the right stands out (high on PC2) on it's own regardless of what happens with the other clusters. 
@@ -405,15 +407,14 @@ Similar to the scree plot, choose the number of clusters that minimizes the with
 fviz_nbclust(cluster.dta, kmeans, method="wss")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 No real "elbow".. but $k=7$ is where i'd say the change point in the slope is at. 
 
 
 ### Gap statistic
 
-> FIX THIS SECTION 
-
+xxxxx
 * This can be used for both hierarchical and non-hierarchical clustering. 
 * Compares total intracluster variation with the expected value under a null distribution of no clustering. 
 * See [Tibshirani et.all](http://web.stanford.edu/~hastie/Papers/gap.pdf) for more details. 
@@ -424,13 +425,13 @@ set.seed(12345)
 fviz_nbclust(cluster.dta, kmeans, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 ```r
 fviz_nbclust(cluster.dta, hcut, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-23-2.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-24-2.png" width="672" />
 
 
 
@@ -461,7 +462,7 @@ list(
 ```
 
 <table class="kable_wrapper">
-<caption>(\#tab:unnamed-chunk-25)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
+<caption>(\#tab:unnamed-chunk-26)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
 <tbody>
   <tr>
    <td> 

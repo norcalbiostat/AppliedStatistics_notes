@@ -307,6 +307,10 @@ fviz_cluster(object=k2, data=cluster.dta) +
 
 ## Choosing K
 
+```{block2, type='rmdcaution'}
+This section is under construction
+```
+
 ### Visually
 
 ```{r, fig.width=10, fig.height=8}
@@ -347,8 +351,7 @@ No real "elbow".. but $k=7$ is where i'd say the change point in the slope is at
 
 ### Gap statistic
 
-> FIX THIS SECTION 
-
+xxxxx
 * This can be used for both hierarchical and non-hierarchical clustering. 
 * Compares total intracluster variation with the expected value under a null distribution of no clustering. 
 * See [Tibshirani et.all](http://web.stanford.edu/~hastie/Papers/gap.pdf) for more details. 
