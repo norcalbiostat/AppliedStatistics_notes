@@ -24,11 +24,11 @@ This is still a **Multivariate** analysis technique. That means there is no resp
 
 Suuuuuuper old financial performance data for three different industries in from _Forbes_ in 1981. Bonus points for someone who can get me updated data. 
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">These variables are described in detail in Chapter 9.3 and 16.3 in PMA6. You can download the tab delimited [[data file from this link]](data/chem_16_1.txt) and the [[codebook from this link.]](data/Chemical_161_Codebook.txt)</div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">These variables are described in detail in Chapter 9.3 and 16.3 in PMA6. You can download the tab delimited [[data file from this link]](data/Cluster.txt) and the [[codebook from this link.]](data/ClusterCodebook.txt)</div>\EndKnitrBlock{rmdnote}
 
 
 ```r
-chem <- read.table("data/chem_16_1.txt", sep="\t", header=TRUE)
+chem <- read.table("data/Cluster.txt", sep="\t", header=TRUE)
 ```
 
 ### Packages used in this chapter
@@ -51,25 +51,26 @@ When there are only a moderate number of variables under consideration, a **prof
 
 This diagram plots the _standardized_ values of several variables (on the x-axis), with one line per observation. 
 
-To do this in `ggplot`, we need to transform the data to long format. Here I use the `pivot_longer` function in `tidyr`. 
+To do this in `ggplot`, we need to transform the data to long format. Here I use the `pivot_longer` function in `tidyr`. To match Table 16.2  and Figure 16.4 in the text, the signs of RRO5 and PAYOUTR1 are reversed to avoid lines crossing. 
 
 
 ```r
 stan.chem <- cbind(chem[,1:3], scale(chem[,4:10]))
+stan.chem$ROR5 <- -stan.chem$ROR5
+stan.chem$PAYOUTR1 <- -stan.chem$PAYOUTR1
 stan.chem.long <- tidyr::pivot_longer(data=stan.chem, cols=ROR5:PAYOUTR1, 
                                names_to = "measure", values_to = "value") 
 stan.chem.long$measure <- factor(stan.chem.long$measure, 
               levels=c("ROR5", "DE", "SALESGR5", "EPS5", "NPM1", "PE", "PAYOUTR1"))
 
-stan.chem.long %>% filter(NUM %in% c(15:21)) %>% 
+
+stan.chem.long %>% filter(OBSNO %in% c(15:21)) %>% 
     ggplot(aes(x=measure, y=value, group=SYMBOL, col=SYMBOL)) + geom_line(size=1.5) + 
-           theme_bw(base_size = 14) + ylim(-3, 4) 
+           theme_bw(base_size = 14) + ylim(-3.1, 4) 
 ```
 
 <img src="cluster_files/figure-html/unnamed-chunk-6-1.png" width="1152" />
 
-
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">This plot is the corrected version of Figure 16.4. </div>\EndKnitrBlock{rmdimportant}
 
 Companies that follow similar patterns: 
 
@@ -86,8 +87,7 @@ ggplot(stan.chem.long, aes(x=measure, y=value, group=SYMBOL)) +
     geom_line() + theme_bw() + ylim(-3, 4) 
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
+<img src="cluster_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 \BeginKnitrBlock{rmdtip}<div class="rmdtip">If the x-axis were time this type of plot is also known as a "spaghetti" plot. See Figure 4.18b in PMA6 as an example. </div>\EndKnitrBlock{rmdtip}
@@ -146,7 +146,7 @@ fviz_dist(d, order=TRUE, show_labels=TRUE,
           gradient=list(low="black", mid="blue", high="white"))
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 * `order=TRUE` sorts the distances, so notice `hum` is furthest away from almost all other companies except `nme`. 
 * `win` and `lks` seem to be a bit 'further' away from others. 
@@ -213,7 +213,7 @@ hclust(d, method="complete") %>% plot(main="Complete Linkage")
 hclust(d, method="ward.D") %>% plot(main="Ward's Method")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="960" />
+<img src="cluster_files/figure-html/unnamed-chunk-13-1.png" width="960" />
 
 In these plots, "height" is a measure of similarity/distance. Also, the longer the "stem" the greater the distance.  
 
@@ -244,7 +244,7 @@ b <- fviz_dend(clust.ward,  k =4, rect = TRUE, color_labels_by_k = TRUE,
 grid.arrange(a, b, ncol=2)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 Other options
 
@@ -254,13 +254,13 @@ fviz_dend(clust.ward, k = 4, k_colors = "RdBu", type = "phylogenic", relep = TRU
           phylo_layout = "layout_as_tree")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 ```r
 fviz_dend(clust.ward, cex = 0.6, k = 4, type = "circular", rect = TRUE)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-15-2.png" width="672" />
 
 
 
@@ -285,22 +285,22 @@ k
 ## 
 ## Cluster means:
 ##         ROR5         DE   SALESGR5        EPS5       NPM1         PE
-## 1 -0.5959748  1.4185646  1.9308011  1.54316849  0.6882745  2.0643489
-## 2  1.3246523 -0.4541930 -0.1171821  0.02674634  0.4116164 -0.1788732
-## 3 -0.4920477 -0.1782077 -0.4930664 -0.45427845 -0.4024581 -0.5003774
+## 1  0.5959748  1.4185646  1.9308011  1.54316849  0.6882745  2.0643489
+## 2 -1.3246523 -0.4541930 -0.1171821  0.02674634  0.4116164 -0.1788732
+## 3  0.4920477 -0.1782077 -0.4930664 -0.45427845 -0.4024581 -0.5003774
 ##      PAYOUTR1
-## 1 -0.94785669
-## 2  0.45244177
-## 3  0.04459531
+## 1  0.94802477
+## 2 -0.45122839
+## 3 -0.04525003
 ## 
 ## Clustering vector:
-## dia dow stf  dd  uk psm gra hpc mtc acy  cz ald roh rei hum hca nme ami 
+## dia dow stf  dd  uk psm gra hpc mtc acy  cz ald rom rei hum hca nme ami 
 ##   2   2   2   2   3   3   3   3   3   3   3   3   3   3   1   1   1   1 
 ## ahs lks win sgl slc  kr  sa 
 ##   2   2   2   3   3   3   3 
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 14.22801 21.16421 43.56686
+## [1] 14.22540 21.15603 43.58324
 ##  (between_SS / total_SS =  53.0 %)
 ## 
 ## Available components:
@@ -324,7 +324,7 @@ The `kmeans` procedure has an `nstart` argument that lets you choose different s
 set.seed(4567)
 k2 <- kmeans(cluster.dta, centers=3, nstart=10)
 rbind(k$cluster, k2$cluster)
-##      dia dow stf dd uk psm gra hpc mtc acy cz ald roh rei hum hca nme ami
+##      dia dow stf dd uk psm gra hpc mtc acy cz ald rom rei hum hca nme ami
 ## [1,]   2   2   2  2  3   3   3   3   3   3  3   3   3   3   1   1   1   1
 ## [2,]   1   1   1  1  3   3   3   3   3   3  3   3   3   3   2   2   2   2
 ##      ahs lks win sgl slc kr sa
@@ -349,7 +349,7 @@ fviz_cluster(object=k2, data=cluster.dta, choose.vars = c("ROR5", "DE")) +
       theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 If you omit the `choose.vars` argument, this function will create clusters using the first two principal components instead of the original, standardized data. 
 
@@ -359,7 +359,7 @@ fviz_cluster(object=k2, data=cluster.dta) +
   theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
 
@@ -392,7 +392,7 @@ nclust.5 <- kmeans(cluster.dta, centers=5, nstart=10) %>%
 gridExtra::grid.arrange(nclust.2, nclust.3, nclust.4, nclust.5, nrow=2)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-22-1.png" width="960" />
+<img src="cluster_files/figure-html/unnamed-chunk-21-1.png" width="960" />
 
 * Three clusters provides the best appearing groupings. 
 * The cluster on the right stands out (high on PC2) on it's own regardless of what happens with the other clusters. 
@@ -407,7 +407,7 @@ Similar to the scree plot, choose the number of clusters that minimizes the with
 fviz_nbclust(cluster.dta, kmeans, method="wss")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 No real "elbow".. but $k=7$ is where i'd say the change point in the slope is at. 
 
@@ -425,13 +425,13 @@ set.seed(12345)
 fviz_nbclust(cluster.dta, kmeans, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 ```r
 fviz_nbclust(cluster.dta, hcut, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-24-2.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-23-2.png" width="672" />
 
 
 
@@ -462,7 +462,7 @@ list(
 ```
 
 <table class="kable_wrapper">
-<caption>(\#tab:unnamed-chunk-26)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
+<caption>(\#tab:unnamed-chunk-25)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
 <tbody>
   <tr>
    <td> 

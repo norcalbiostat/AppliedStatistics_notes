@@ -1,0 +1,46 @@
+Codebook for the financial performance cluster analysis data (Cluster.txt)
+
+Variable    Variable
+Name        Coding            Description
+-------------------------------------------------------------------------------
+TYPE                          Industry type
+            Chem              Chem=Chemical company
+            Heal              Heal=Health care company
+            Groc              Groc=Supermarket company
+            
+SYMBOL      Character         Individual symbol for company
+
+OBSNO       1 to 25           Sequential observation number
+
+ROR5        Continuous        Per cent rate of return on total capital 
+                              (invested plus debt) averaged over the past 
+                              five years.
+
+DE          Continuous        Debt-to-equity (invested capital) ratio for 
+                              the past year. It indicates the extent to 
+                              which management is using borrowed 
+                              funds to operate the company.
+
+SALESGR5    Continuous        Per cent annual compound growth rate of sales, 
+                              computed from the most recent five years compared 
+                              with the previous five years.
+
+EPS5        Continuous        Per cent annual compound growth in earnings per 
+                              share, computed from the most recent five years 
+                              compared with the preceding five years.
+
+NPM1        Continuous        Per cent net profit margin: the net profits 
+                              divided by the net sales for the past year, 
+                              expressed as a percentage.
+
+PE          Continuous        Price-to-earnings ratio: the price of 
+                              one share of common stock divided by the 
+                              earnings per share for the past year. 
+                              It is the dollar amount investors are 
+                              willing to pay for the stock per dollar 
+                              of current earnings of the company.
+
+PAYOUTR1    Continuous        Annual dividend divided by the latest 12-month 
+                              earnings per share. It represents the proportion 
+                              of earnings paid out to shareholders rather than 
+                              retained to operate and expand the company.
