@@ -346,7 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="graphical-methods.html"><a href="graphical-methods.html"><i class="fa fa-check"></i><b>14.2</b> Graphical Methods</a></li>
 <li class="chapter" data-level="14.3" data-path="distance-measures.html"><a href="distance-measures.html"><i class="fa fa-check"></i><b>14.3</b> Distance Measures</a><ul>
 <li class="chapter" data-level="14.3.1" data-path="distance-measures.html"><a href="distance-measures.html#other-measures-of-distance"><i class="fa fa-check"></i><b>14.3.1</b> Other measures of distance</a></li>
-<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.2</b> Creating the distance matrix.</a></li>
+<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#gowerss-dissimilarity-measure-as-a-distance-measures-for-binary-data"><i class="fa fa-check"></i><b>14.3.2</b> Gowers’s dissimilarity measure as a distance measures for binary data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.3</b> Creating the distance matrix.</a></li>
 </ul></li>
 <li class="chapter" data-level="14.4" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>14.4</b> Hierarchical clustering</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#linkages"><i class="fa fa-check"></i><b>14.4.1</b> Linkages</a></li>
@@ -362,8 +363,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.6.3" data-path="choosing-k.html"><a href="choosing-k.html#gap-statistic"><i class="fa fa-check"></i><b>14.6.3</b> Gap statistic</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="assigning-cluster-labels.html"><a href="assigning-cluster-labels.html"><i class="fa fa-check"></i><b>14.7</b> Assigning Cluster labels</a></li>
-<li class="chapter" data-level="14.8" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.8</b> What to watch out for</a></li>
-<li class="chapter" data-level="14.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
+<li class="chapter" data-level="14.8" data-path="exploring-clusters.html"><a href="exploring-clusters.html"><i class="fa fa-check"></i><b>14.8</b> Exploring clusters</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="exploring-clusters.html"><a href="exploring-clusters.html#univariate-distribution-of-clusters"><i class="fa fa-check"></i><b>14.8.1</b> Univariate distribution of clusters</a></li>
+<li class="chapter" data-level="14.8.2" data-path="exploring-clusters.html"><a href="exploring-clusters.html#bivariate-plots"><i class="fa fa-check"></i><b>14.8.2</b> Bivariate plots</a></li>
+<li class="chapter" data-level="14.8.3" data-path="exploring-clusters.html"><a href="exploring-clusters.html#multivariate-plots"><i class="fa fa-check"></i><b>14.8.3</b> Multivariate plots</a></li>
+<li class="chapter" data-level="14.8.4" data-path="exploring-clusters.html"><a href="exploring-clusters.html#still-too-many-records-variables"><i class="fa fa-check"></i><b>14.8.4</b> Still too many records / variables</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="part"><span><b>V Other Topics</b></span></li>
 <li class="chapter" data-level="15" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>15</b> Missing Data</a><ul>
@@ -456,13 +463,24 @@ Distance measures are <strong>not</strong> invariant to changes in scale (units 
 </ul>
 <p>When discussing the <em>closeness</em> of records, we are meaning the minimum distance on all <span class="math inline">\(p\)</span> dimensions under consideration. For this class we will default to using the Euclidean distance unless otherwise specified.</p>
 </div>
+<div id="gowerss-dissimilarity-measure-as-a-distance-measures-for-binary-data" class="section level3">
+<h3><span class="header-section-number">14.3.2</span> Gowers’s dissimilarity measure as a distance measures for binary data</h3>
+<p>When your data is only 0/1, the concept of distance between records (vectors) is not quite the same. In this case you are going to need to use a different type of distance, or <em>dissimilarity</em> measure called the Gower distance. This is created as follows, and used in the same way any other distance matrix is used.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">gower.d &lt;-<span class="st"> </span><span class="kw">daisy</span>(<span class="dt">x =</span> cluster.dta, <span class="dt">metric =</span> <span class="st">&quot;gower&quot;</span>)</a></code></pre></div>
+
+<div class="rmdnote">
+<p>This information has not been read through in great detail, but reading thorough the following document, the information looks credible and there is a reference to an original paper. I’ll trust it.</p>
+<a href="https://rstudio-pubs-static.s3.amazonaws.com/423873_adfdb38bce8d47579f6dc916dd67ae75.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/423873_adfdb38bce8d47579f6dc916dd67ae75.html</a>
+</div>
+
+</div>
 <div id="creating-the-distance-matrix." class="section level3">
-<h3><span class="header-section-number">14.3.2</span> Creating the distance matrix.</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">d &lt;-<span class="st"> </span><span class="kw">dist</span>(cluster.dta, <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>)</a></code></pre></div>
-<p>We can visualize these distances using a heatmap, where here i’ve changed the gradient to show the darker the color, the closer the records are to each other. The diagonal is black, because each record has 0 distance from itself. You can change these colors.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">fviz_dist</span>(d, <span class="dt">order=</span><span class="ot">TRUE</span>, <span class="dt">show_labels=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb7-2" title="2">          <span class="dt">gradient=</span><span class="kw">list</span>(<span class="dt">low=</span><span class="st">&quot;black&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">high=</span><span class="st">&quot;white&quot;</span>))</a></code></pre></div>
-<p><img src="cluster_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<h3><span class="header-section-number">14.3.3</span> Creating the distance matrix.</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">d &lt;-<span class="st"> </span><span class="kw">dist</span>(cluster.dta, <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>)</a></code></pre></div>
+<p>We can visualize these distances using a heatmap, where here I’ve changed the gradient to show the darker the color, the closer the records are to each other. The diagonal is black, because each record has 0 distance from itself. You can change these colors.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">fviz_dist</span>(d, <span class="dt">order=</span><span class="ot">TRUE</span>, <span class="dt">show_labels=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb8-2" title="2">          <span class="dt">gradient=</span><span class="kw">list</span>(<span class="dt">low=</span><span class="st">&quot;black&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">high=</span><span class="st">&quot;white&quot;</span>))</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
 <li><code>order=TRUE</code> sorts the distances, so notice <code>hum</code> is furthest away from almost all other companies except <code>nme</code>.</li>
 <li><code>win</code> and <code>lks</code> seem to be a bit ‘further’ away from others.</li>

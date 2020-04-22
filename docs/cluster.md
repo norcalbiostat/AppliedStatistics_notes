@@ -17,7 +17,10 @@ This is still a **Multivariate** analysis technique. That means there is no resp
 * Properties of dwarf galaxies (Chattopadhyay et.al, 2012)
 * Important tool in _Data Mining_ and Marketing research. Consumers can be clustered on the basis of their choice of purchases. 
 * State level demographics - how do states cluster on measures such as health indicators, racial and socioeconomic disparities. 
-
+* Fraud detection in insurance claims
+* Credit scoring in banking
+* Organize information held in text documents. 
+* Fantasy football - what other players have similar characteristics to a star player? 
 
 
 ### Data used in this chapter
@@ -132,6 +135,19 @@ $$ d_{man} =  |(q_{1} - p_{1})| + |(q_{2} - p_{2})| $$
 
 When discussing the _closeness_ of records, we are meaning the minimum distance on all $p$ dimensions under consideration. For this class we will default to using the Euclidean distance unless otherwise specified. 
 
+### Gowers's dissimilarity measure as a distance measures for binary data
+
+When your data is only 0/1, the concept of distance between records (vectors) is not quite the same. In this case you are going to need to use a different type of distance, or _dissimilarity_ measure called the Gower distance. This is created as follows, and used in the same way any other distance matrix is used. 
+
+
+```r
+gower.d <- daisy(x = cluster.dta, metric = "gower")
+```
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This information has not been read through in great detail, but reading thorough the following document, the information looks credible and there is a reference to an original paper. I'll trust it. 
+
+https://rstudio-pubs-static.s3.amazonaws.com/423873_adfdb38bce8d47579f6dc916dd67ae75.html</div>\EndKnitrBlock{rmdnote}
+
 ### Creating the distance matrix. 
 
 
@@ -139,14 +155,14 @@ When discussing the _closeness_ of records, we are meaning the minimum distance 
 d <- dist(cluster.dta, method="euclidean")
 ```
 
-We can visualize these distances using a heatmap, where here i've changed the gradient to show the darker the color, the closer the records are to each other. The diagonal is black, because each record has 0 distance from itself.  You can change these colors. 
+We can visualize these distances using a heatmap, where here I've changed the gradient to show the darker the color, the closer the records are to each other. The diagonal is black, because each record has 0 distance from itself.  You can change these colors. 
 
 ```r
 fviz_dist(d, order=TRUE, show_labels=TRUE, 
           gradient=list(low="black", mid="blue", high="white"))
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 * `order=TRUE` sorts the distances, so notice `hum` is furthest away from almost all other companies except `nme`. 
 * `win` and `lks` seem to be a bit 'further' away from others. 
@@ -213,7 +229,7 @@ hclust(d, method="complete") %>% plot(main="Complete Linkage")
 hclust(d, method="ward.D") %>% plot(main="Ward's Method")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-13-1.png" width="960" />
+<img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="960" />
 
 In these plots, "height" is a measure of similarity/distance. Also, the longer the "stem" the greater the distance.  
 
@@ -244,7 +260,7 @@ b <- fviz_dend(clust.ward,  k =4, rect = TRUE, color_labels_by_k = TRUE,
 grid.arrange(a, b, ncol=2)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 Other options
 
@@ -254,13 +270,13 @@ fviz_dend(clust.ward, k = 4, k_colors = "RdBu", type = "phylogenic", relep = TRU
           phylo_layout = "layout_as_tree")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ```r
 fviz_dend(clust.ward, cex = 0.6, k = 4, type = "circular", rect = TRUE)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-17-2.png" width="672" />
 
 
 
@@ -349,7 +365,7 @@ fviz_cluster(object=k2, data=cluster.dta, choose.vars = c("ROR5", "DE")) +
       theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 If you omit the `choose.vars` argument, this function will create clusters using the first two principal components instead of the original, standardized data. 
 
@@ -359,14 +375,14 @@ fviz_cluster(object=k2, data=cluster.dta) +
   theme_bw() + scale_colour_viridis_d() + scale_fill_viridis_d()
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 
 
 
 ## Choosing K
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">This section is under construction</div>\EndKnitrBlock{rmdcaution}
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">This section is under construction. I'm not overly happy with getting different results with the same gap statistic. </div>\EndKnitrBlock{rmdcaution}
 
 ### Visually
 
@@ -392,7 +408,7 @@ nclust.5 <- kmeans(cluster.dta, centers=5, nstart=10) %>%
 gridExtra::grid.arrange(nclust.2, nclust.3, nclust.4, nclust.5, nrow=2)
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-21-1.png" width="960" />
+<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="960" />
 
 * Three clusters provides the best appearing groupings. 
 * The cluster on the right stands out (high on PC2) on it's own regardless of what happens with the other clusters. 
@@ -407,14 +423,14 @@ Similar to the scree plot, choose the number of clusters that minimizes the with
 fviz_nbclust(cluster.dta, kmeans, method="wss")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
-No real "elbow".. but $k=7$ is where i'd say the change point in the slope is at. 
+No real "elbow".. but $k=7$ is where I'd say the change point in the slope is at. 
 
 
 ### Gap statistic
 
-xxxxx
+
 * This can be used for both hierarchical and non-hierarchical clustering. 
 * Compares total intracluster variation with the expected value under a null distribution of no clustering. 
 * See [Tibshirani et.all](http://web.stanford.edu/~hastie/Papers/gap.pdf) for more details. 
@@ -425,13 +441,13 @@ set.seed(12345)
 fviz_nbclust(cluster.dta, kmeans, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 ```r
 fviz_nbclust(cluster.dta, hcut, method="gap_stat")
 ```
 
-<img src="cluster_files/figure-html/unnamed-chunk-23-2.png" width="672" />
+<img src="cluster_files/figure-html/unnamed-chunk-25-2.png" width="672" />
 
 
 
@@ -462,7 +478,7 @@ list(
 ```
 
 <table class="kable_wrapper">
-<caption>(\#tab:unnamed-chunk-25)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
+<caption>(\#tab:unnamed-chunk-27)True cluster vs hierarchical (left) and kmeans (right) clustering.</caption>
 <tbody>
   <tr>
    <td> 
@@ -542,6 +558,105 @@ list(
 * Similar performance for clustering the chemical companies. 
 
 
+## Exploring clusters
+
+In the example with the companies, there were few enough records that I could see the labels on the visualization itself. When you have lots of records, it can be impossible to identify individual records. 
+
+But do you need to? 
+
+One of the goals is to identify *if* there are clusters of individuals. Then if there are, you may (or may not) be interested in identifying what makes the clusters similar. If you're really interested in the characteristics in individuals being close to each other you can use existing plotting techniques that we've used for bivarate plots, and for PCA. 
+
+Cluster analysis is an exploratory technique. We can use some existing summary tools to explore what the groups, or clusters, are like. 
+
+### Univariate distribution of clusters 
+
+What's the distribution of clusters? This could be answered with a a table or barchart. 
+
+```r
+table(chem$pred.clust.kmeans)
+## 
+##  1  2  3 
+##  4 14  7
+```
+
+### Bivariate plots
+
+If you have some variables of interest that you think might be contributing to your clustering, create a bivariate plot of those measures against cluster. 
+
+
+```r
+ggplot(chem, aes(x=PAYOUTR1, col=as.factor(pred.clust.kmeans))) + 
+        geom_density() + theme_bw()
+```
+
+<img src="cluster_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+
+If you want to see how the clusters vary across two or more dimensions, you could create scatterplots
+
+
+```r
+ggplot(chem, aes(x=PAYOUTR1, y=SALESGR5, col=as.factor(pred.clust.kmeans))) + 
+        geom_point() + theme_bw() + 
+        stat_ellipse(aes(group=pred.clust.kmeans), type="norm")
+```
+
+<img src="cluster_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
+
+### Multivariate plots
+
+or scatterplot matrices. This one lets me see that PE does a good job of separating out group 1, and possibly ROR5 pulls out group 3. 
+
+
+```r
+caret::featurePlot(x = chem[,c(4:10)], 
+                   y = as.factor(chem$pred.clust.kmeans), 
+                   plot = "ellipse", auto.key=list(columns=3))
+```
+
+<img src="cluster_files/figure-html/unnamed-chunk-31-1.png" width="1152" />
+
+or heatmaps, 
+
+
+```r
+library(dendextend)
+# not run, just a reminder where clust.ward came from
+# clust.ward <- hclust(d, method="ward.D")
+
+dend.heatmap <- clust.ward %>%  as.dendrogram() %>% ladderize %>% color_branches(k=3)
+
+
+gplots::heatmap.2(as.matrix(d), 
+          srtCol = 60,
+          dendrogram = "row",
+          Rowv = dend.heatmap,
+          Colv = "Rowv", # order the columns like the rows
+          trace="none",          
+          margins =c(3,6),      
+          denscol = "grey",
+          density.info = "density",
+          col = colorspace::diverge_hcl(10, palette="Green-Brown")
+         )
+```
+
+<img src="cluster_files/figure-html/unnamed-chunk-32-1.png" width="1152" />
+
+Note that this plot is almost identical to when we visualized the distance matrix `d` using the `fviz_dist` function in 14.3.2. That's what the colors are, is the distances. The difference here is that the rows (and columns) are ordered according to their cluster (with the dendogram on the left.)
+
+  - `colorspace` vignette: https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html
+  - `dendextend` vignette: https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html
+
+### Still too many records / variables
+
+So take a sample. 
+
+- Filter on just one cluster and l👀k at your data. 
+- Select groups of variables that hang together well as shown by PCA and only cluster on those. 
+- Select groups of variables that _mean something_ scientifically, or that you want to know _if_ they are meaningful contributions to clusters. 
+
+
+
 ## What to watch out for
 
 * $K$ means clustering requires the number of clusters to be specified up front. Hierarchical clustering does not have this restriction. 
@@ -551,7 +666,7 @@ list(
 * The centroid does not have to be part of the data set. Alternative methods such as k-medians or k-medoids restrict the centroids to be an actual record that is 'closest' to the calculated mean. 
 * Number of clusters depends on the desired level of similarity. 
 * Since different algorithms can produce different results, this is especially true across software programs. See PMA6 Table 16.4 as an example of comparing cluster analysis results on the chemical data set in SAS, R and Stata. 
-
+* Sample size. You can cluster on datasets with thousands of records, but know that the dendogram leafs will not be readable. In these cases 
 
 
 

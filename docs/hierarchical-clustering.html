@@ -346,7 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="graphical-methods.html"><a href="graphical-methods.html"><i class="fa fa-check"></i><b>14.2</b> Graphical Methods</a></li>
 <li class="chapter" data-level="14.3" data-path="distance-measures.html"><a href="distance-measures.html"><i class="fa fa-check"></i><b>14.3</b> Distance Measures</a><ul>
 <li class="chapter" data-level="14.3.1" data-path="distance-measures.html"><a href="distance-measures.html#other-measures-of-distance"><i class="fa fa-check"></i><b>14.3.1</b> Other measures of distance</a></li>
-<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.2</b> Creating the distance matrix.</a></li>
+<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#gowerss-dissimilarity-measure-as-a-distance-measures-for-binary-data"><i class="fa fa-check"></i><b>14.3.2</b> Gowers’s dissimilarity measure as a distance measures for binary data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.3</b> Creating the distance matrix.</a></li>
 </ul></li>
 <li class="chapter" data-level="14.4" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>14.4</b> Hierarchical clustering</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#linkages"><i class="fa fa-check"></i><b>14.4.1</b> Linkages</a></li>
@@ -362,8 +363,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.6.3" data-path="choosing-k.html"><a href="choosing-k.html#gap-statistic"><i class="fa fa-check"></i><b>14.6.3</b> Gap statistic</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="assigning-cluster-labels.html"><a href="assigning-cluster-labels.html"><i class="fa fa-check"></i><b>14.7</b> Assigning Cluster labels</a></li>
-<li class="chapter" data-level="14.8" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.8</b> What to watch out for</a></li>
-<li class="chapter" data-level="14.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
+<li class="chapter" data-level="14.8" data-path="exploring-clusters.html"><a href="exploring-clusters.html"><i class="fa fa-check"></i><b>14.8</b> Exploring clusters</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="exploring-clusters.html"><a href="exploring-clusters.html#univariate-distribution-of-clusters"><i class="fa fa-check"></i><b>14.8.1</b> Univariate distribution of clusters</a></li>
+<li class="chapter" data-level="14.8.2" data-path="exploring-clusters.html"><a href="exploring-clusters.html#bivariate-plots"><i class="fa fa-check"></i><b>14.8.2</b> Bivariate plots</a></li>
+<li class="chapter" data-level="14.8.3" data-path="exploring-clusters.html"><a href="exploring-clusters.html#multivariate-plots"><i class="fa fa-check"></i><b>14.8.3</b> Multivariate plots</a></li>
+<li class="chapter" data-level="14.8.4" data-path="exploring-clusters.html"><a href="exploring-clusters.html#still-too-many-records-variables"><i class="fa fa-check"></i><b>14.8.4</b> Still too many records / variables</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="part"><span><b>V Other Topics</b></span></li>
 <li class="chapter" data-level="15" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>15</b> Missing Data</a><ul>
@@ -469,12 +476,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="comparing-linkage-methods" class="section level3">
 <h3><span class="header-section-number">14.4.2</span> Comparing Linkage methods</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;centroid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Centroid Linkage&quot;</span>)</a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;single&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Single Linkage&quot;</span>)</a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;complete&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Complete Linkage&quot;</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Ward&#39;s Method&quot;</span>)</a></code></pre></div>
-<p><img src="cluster_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;centroid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Centroid Linkage&quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;single&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Single Linkage&quot;</span>)</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;complete&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Complete Linkage&quot;</span>)</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">main=</span><span class="st">&quot;Ward&#39;s Method&quot;</span>)</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
 <p>In these plots, “height” is a measure of similarity/distance. Also, the longer the “stem” the greater the distance.</p>
 <p>Things I picked out from these plots.</p>
 <ul>
@@ -493,20 +500,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dendogram-extras" class="section level3">
 <h3><span class="header-section-number">14.4.3</span> Dendogram extras</h3>
 <p>If we say there are 4 clusters, we can use <code>fviz_dend</code> to color the dendogram by those clusters.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">clust.ward &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"></a>
-<a class="sourceLine" id="cb9-3" title="3">a &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">rect=</span><span class="ot">TRUE</span>, <span class="dt">k=</span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb9-4" title="4">b &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(clust.ward,  <span class="dt">k =</span><span class="dv">4</span>, <span class="dt">rect =</span> <span class="ot">TRUE</span>, <span class="dt">color_labels_by_k =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb9-5" title="5">               <span class="dt">rect_border =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>), </a>
-<a class="sourceLine" id="cb9-6" title="6">               <span class="dt">rect_fill =</span> <span class="ot">TRUE</span>, <span class="dt">lower_rect =</span> <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="cluster_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">clust.ward &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method=</span><span class="st">&quot;ward.D&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3">a &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">rect=</span><span class="ot">TRUE</span>, <span class="dt">k=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4">b &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(clust.ward,  <span class="dt">k =</span><span class="dv">4</span>, <span class="dt">rect =</span> <span class="ot">TRUE</span>, <span class="dt">color_labels_by_k =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb10-5" title="5">               <span class="dt">rect_border =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>), </a>
+<a class="sourceLine" id="cb10-6" title="6">               <span class="dt">rect_fill =</span> <span class="ot">TRUE</span>, <span class="dt">lower_rect =</span> <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="kw">grid.arrange</span>(a, b, <span class="dt">ncol=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Other options</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">k =</span> <span class="dv">4</span>, <span class="dt">k_colors =</span> <span class="st">&quot;RdBu&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;phylogenic&quot;</span>, <span class="dt">relep =</span> <span class="ot">TRUE</span> , </a>
-<a class="sourceLine" id="cb10-2" title="2">          <span class="dt">phylo_layout =</span> <span class="st">&quot;layout_as_tree&quot;</span>)</a></code></pre></div>
-<p><img src="cluster_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">k =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">&quot;circular&quot;</span>, <span class="dt">rect =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="cluster_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">k =</span> <span class="dv">4</span>, <span class="dt">k_colors =</span> <span class="st">&quot;RdBu&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;phylogenic&quot;</span>, <span class="dt">relep =</span> <span class="ot">TRUE</span> , </a>
+<a class="sourceLine" id="cb11-2" title="2">          <span class="dt">phylo_layout =</span> <span class="st">&quot;layout_as_tree&quot;</span>)</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">fviz_dend</span>(clust.ward, <span class="dt">cex =</span> <span class="fl">0.6</span>, <span class="dt">k =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">&quot;circular&quot;</span>, <span class="dt">rect =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
 </div>
 </div>
             </section>

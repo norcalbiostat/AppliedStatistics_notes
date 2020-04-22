@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.8 What to watch out for | Applied Statistics</title>
+  <title>14.9 What to watch out for | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.8 What to watch out for | Applied Statistics" />
+  <meta property="og:title" content="14.9 What to watch out for | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.8 What to watch out for | Applied Statistics" />
+  <meta name="twitter:title" content="14.9 What to watch out for | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="assigning-cluster-labels.html"/>
+<link rel="prev" href="exploring-clusters.html"/>
 <link rel="next" href="additional-references-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -346,7 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="graphical-methods.html"><a href="graphical-methods.html"><i class="fa fa-check"></i><b>14.2</b> Graphical Methods</a></li>
 <li class="chapter" data-level="14.3" data-path="distance-measures.html"><a href="distance-measures.html"><i class="fa fa-check"></i><b>14.3</b> Distance Measures</a><ul>
 <li class="chapter" data-level="14.3.1" data-path="distance-measures.html"><a href="distance-measures.html#other-measures-of-distance"><i class="fa fa-check"></i><b>14.3.1</b> Other measures of distance</a></li>
-<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.2</b> Creating the distance matrix.</a></li>
+<li class="chapter" data-level="14.3.2" data-path="distance-measures.html"><a href="distance-measures.html#gowerss-dissimilarity-measure-as-a-distance-measures-for-binary-data"><i class="fa fa-check"></i><b>14.3.2</b> Gowers’s dissimilarity measure as a distance measures for binary data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="distance-measures.html"><a href="distance-measures.html#creating-the-distance-matrix."><i class="fa fa-check"></i><b>14.3.3</b> Creating the distance matrix.</a></li>
 </ul></li>
 <li class="chapter" data-level="14.4" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>14.4</b> Hierarchical clustering</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#linkages"><i class="fa fa-check"></i><b>14.4.1</b> Linkages</a></li>
@@ -362,8 +363,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.6.3" data-path="choosing-k.html"><a href="choosing-k.html#gap-statistic"><i class="fa fa-check"></i><b>14.6.3</b> Gap statistic</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="assigning-cluster-labels.html"><a href="assigning-cluster-labels.html"><i class="fa fa-check"></i><b>14.7</b> Assigning Cluster labels</a></li>
-<li class="chapter" data-level="14.8" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.8</b> What to watch out for</a></li>
-<li class="chapter" data-level="14.9" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.9</b> Additional References</a></li>
+<li class="chapter" data-level="14.8" data-path="exploring-clusters.html"><a href="exploring-clusters.html"><i class="fa fa-check"></i><b>14.8</b> Exploring clusters</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="exploring-clusters.html"><a href="exploring-clusters.html#univariate-distribution-of-clusters"><i class="fa fa-check"></i><b>14.8.1</b> Univariate distribution of clusters</a></li>
+<li class="chapter" data-level="14.8.2" data-path="exploring-clusters.html"><a href="exploring-clusters.html#bivariate-plots"><i class="fa fa-check"></i><b>14.8.2</b> Bivariate plots</a></li>
+<li class="chapter" data-level="14.8.3" data-path="exploring-clusters.html"><a href="exploring-clusters.html#multivariate-plots"><i class="fa fa-check"></i><b>14.8.3</b> Multivariate plots</a></li>
+<li class="chapter" data-level="14.8.4" data-path="exploring-clusters.html"><a href="exploring-clusters.html#still-too-many-records-variables"><i class="fa fa-check"></i><b>14.8.4</b> Still too many records / variables</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="what-to-watch-out-for-3.html"><a href="what-to-watch-out-for-3.html"><i class="fa fa-check"></i><b>14.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.10" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>14.10</b> Additional References</a></li>
 </ul></li>
 <li class="part"><span><b>V Other Topics</b></span></li>
 <li class="chapter" data-level="15" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>15</b> Missing Data</a><ul>
@@ -426,7 +433,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="what-to-watch-out-for-3" class="section level2">
-<h2><span class="header-section-number">14.8</span> What to watch out for</h2>
+<h2><span class="header-section-number">14.9</span> What to watch out for</h2>
 <ul>
 <li><span class="math inline">\(K\)</span> means clustering requires the number of clusters to be specified up front. Hierarchical clustering does not have this restriction.</li>
 <li>The agglomerative coefficient increases with the number of rows. You can NOT use it to compare between two datasets that are very different in size.</li>
@@ -435,6 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The centroid does not have to be part of the data set. Alternative methods such as k-medians or k-medoids restrict the centroids to be an actual record that is ‘closest’ to the calculated mean.</li>
 <li>Number of clusters depends on the desired level of similarity.</li>
 <li>Since different algorithms can produce different results, this is especially true across software programs. See PMA6 Table 16.4 as an example of comparing cluster analysis results on the chemical data set in SAS, R and Stata.</li>
+<li>Sample size. You can cluster on datasets with thousands of records, but know that the dendogram leafs will not be readable. In these cases</li>
 </ul>
 </div>
             </section>
@@ -442,7 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="assigning-cluster-labels.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exploring-clusters.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="additional-references-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

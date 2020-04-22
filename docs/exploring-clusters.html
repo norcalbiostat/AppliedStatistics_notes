@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.10 Additional References | Applied Statistics</title>
+  <title>14.8 Exploring clusters | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.10 Additional References | Applied Statistics" />
+  <meta property="og:title" content="14.8 Exploring clusters | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.10 Additional References | Applied Statistics" />
+  <meta name="twitter:title" content="14.8 Exploring clusters | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for-3.html"/>
-<link rel="next" href="mda.html"/>
+<link rel="prev" href="assigning-cluster-labels.html"/>
+<link rel="next" href="what-to-watch-out-for-3.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -432,38 +432,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-references-1" class="section level2">
-<h2><span class="header-section-number">14.10</span> Additional References</h2>
+<div id="exploring-clusters" class="section level2">
+<h2><span class="header-section-number">14.8</span> Exploring clusters</h2>
+<p>In the example with the companies, there were few enough records that I could see the labels on the visualization itself. When you have lots of records, it can be impossible to identify individual records.</p>
+<p>But do you need to?</p>
+<p>One of the goals is to identify <em>if</em> there are clusters of individuals. Then if there are, you may (or may not) be interested in identifying what makes the clusters similar. If you’re really interested in the characteristics in individuals being close to each other you can use existing plotting techniques that we’ve used for bivarate plots, and for PCA.</p>
+<p>Cluster analysis is an exploratory technique. We can use some existing summary tools to explore what the groups, or clusters, are like.</p>
+<div id="univariate-distribution-of-clusters" class="section level3">
+<h3><span class="header-section-number">14.8.1</span> Univariate distribution of clusters</h3>
+<p>What’s the distribution of clusters? This could be answered with a a table or barchart.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">table</span>(chem<span class="op">$</span>pred.clust.kmeans)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="co">## </span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co">##  1  2  3 </span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">##  4 14  7</span></a></code></pre></div>
+</div>
+<div id="bivariate-plots" class="section level3">
+<h3><span class="header-section-number">14.8.2</span> Bivariate plots</h3>
+<p>If you have some variables of interest that you think might be contributing to your clustering, create a bivariate plot of those measures against cluster.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">ggplot</span>(chem, <span class="kw">aes</span>(<span class="dt">x=</span>PAYOUTR1, <span class="dt">col=</span><span class="kw">as.factor</span>(pred.clust.kmeans))) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">        </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>If you want to see how the clusters vary across two or more dimensions, you could create scatterplots</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">ggplot</span>(chem, <span class="kw">aes</span>(<span class="dt">x=</span>PAYOUTR1, <span class="dt">y=</span>SALESGR5, <span class="dt">col=</span><span class="kw">as.factor</span>(pred.clust.kmeans))) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="st">        </span><span class="kw">stat_ellipse</span>(<span class="kw">aes</span>(<span class="dt">group=</span>pred.clust.kmeans), <span class="dt">type=</span><span class="st">&quot;norm&quot;</span>)</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="multivariate-plots" class="section level3">
+<h3><span class="header-section-number">14.8.3</span> Multivariate plots</h3>
+<p>or scatterplot matrices. This one lets me see that PE does a good job of separating out group 1, and possibly ROR5 pulls out group 3.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(<span class="dt">x =</span> chem[,<span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">10</span>)], </a>
+<a class="sourceLine" id="cb26-2" title="2">                   <span class="dt">y =</span> <span class="kw">as.factor</span>(chem<span class="op">$</span>pred.clust.kmeans), </a>
+<a class="sourceLine" id="cb26-3" title="3">                   <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>, <span class="dt">auto.key=</span><span class="kw">list</span>(<span class="dt">columns=</span><span class="dv">3</span>))</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-31-1.png" width="1152" /></p>
+<p>or heatmaps,</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">library</span>(dendextend)</a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="co"># not run, just a reminder where clust.ward came from</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="co"># clust.ward &lt;- hclust(d, method=&quot;ward.D&quot;)</span></a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">dend.heatmap &lt;-<span class="st"> </span>clust.ward <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">as.dendrogram</span>() <span class="op">%&gt;%</span><span class="st"> </span>ladderize <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">color_branches</span>(<span class="dt">k=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7"></a>
+<a class="sourceLine" id="cb27-8" title="8">gplots<span class="op">::</span><span class="kw">heatmap.2</span>(<span class="kw">as.matrix</span>(d), </a>
+<a class="sourceLine" id="cb27-9" title="9">          <span class="dt">srtCol =</span> <span class="dv">60</span>,</a>
+<a class="sourceLine" id="cb27-10" title="10">          <span class="dt">dendrogram =</span> <span class="st">&quot;row&quot;</span>,</a>
+<a class="sourceLine" id="cb27-11" title="11">          <span class="dt">Rowv =</span> dend.heatmap,</a>
+<a class="sourceLine" id="cb27-12" title="12">          <span class="dt">Colv =</span> <span class="st">&quot;Rowv&quot;</span>, <span class="co"># order the columns like the rows</span></a>
+<a class="sourceLine" id="cb27-13" title="13">          <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>,          </a>
+<a class="sourceLine" id="cb27-14" title="14">          <span class="dt">margins =</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>),      </a>
+<a class="sourceLine" id="cb27-15" title="15">          <span class="dt">denscol =</span> <span class="st">&quot;grey&quot;</span>,</a>
+<a class="sourceLine" id="cb27-16" title="16">          <span class="dt">density.info =</span> <span class="st">&quot;density&quot;</span>,</a>
+<a class="sourceLine" id="cb27-17" title="17">          <span class="dt">col =</span> colorspace<span class="op">::</span><span class="kw">diverge_hcl</span>(<span class="dv">10</span>, <span class="dt">palette=</span><span class="st">&quot;Green-Brown&quot;</span>)</a>
+<a class="sourceLine" id="cb27-18" title="18">         )</a></code></pre></div>
+<p><img src="cluster_files/figure-html/unnamed-chunk-32-1.png" width="1152" /></p>
+<p>Note that this plot is almost identical to when we visualized the distance matrix <code>d</code> using the <code>fviz_dist</code> function in 14.3.2. That’s what the colors are, is the distances. The difference here is that the rows (and columns) are ordered according to their cluster (with the dendogram on the left.)</p>
 <ul>
-<li>Chapter 20 and 21 from <a href="https://bradleyboehmke.github.io/HOML/">Hands on machine learning with R</a> book.</li>
-<li>University of Cincinatti - Business Analytics R Programming Guide (same author as above HOML book)
+<li><code>colorspace</code> vignette: <a href="https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html" class="uri">https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html</a>
 <ul>
-<li><a href="https://uc-r.github.io/kmeans_clustering" class="uri">https://uc-r.github.io/kmeans_clustering</a></li>
-<li><a href="https://uc-r.github.io/hc_clustering" class="uri">https://uc-r.github.io/hc_clustering</a></li>
-</ul></li>
-<li>R Vignette for <a href="https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html">dendextend</a> provides a good visual comparison of different linkage methods on small and large dimensional datasets.</li>
-<li><a href="http://strata.uga.edu/8370/lecturenotes/clusterAnalysis.html">Lecture notes from Data Analysis in the Geosciences, GEOL 830 at University of Georgia.</a></li>
-<li>STHDA on different ways to visualize clusters
-<ul>
-<li><a href="http://www.sthda.com/english/wiki/beautiful-dendrogram-visualizations-in-r-5-must-known-methods-unsupervised-machine-learning">using built in denodgrams</a></li>
-<li><a href="http://www.sthda.com/english/wiki/factoextra-r-package-easy-multivariate-data-analyses-and-elegant-visualization#cluster-analysis-and-factoextra">using the <code>factoextra</code> package</a></li>
+<li><code>dendextend</code> vignette: <a href="https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html" class="uri">https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html</a></li>
 </ul></li>
 </ul>
-
 </div>
-<!-- </div> -->
-
-
-
-
+<div id="still-too-many-records-variables" class="section level3">
+<h3><span class="header-section-number">14.8.4</span> Still too many records / variables</h3>
+<p>So take a sample.</p>
+<ul>
+<li>Filter on just one cluster and l👀k at your data.</li>
+<li>Select groups of variables that hang together well as shown by PCA and only cluster on those.</li>
+<li>Select groups of variables that <em>mean something</em> scientifically, or that you want to know <em>if</em> they are meaningful contributions to clusters.</li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="assigning-cluster-labels.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="what-to-watch-out-for-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
