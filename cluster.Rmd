@@ -137,7 +137,7 @@ When discussing the _closeness_ of records, we are meaning the minimum distance 
 
 When your data is only 0/1, the concept of distance between records (vectors) is not quite the same. In this case you are going to need to use a different type of distance, or _dissimilarity_ measure called the Gower distance. This is created as follows, and used in the same way any other distance matrix is used. 
 
-```{r}
+```{r, eval=FALSE}
 gower.d <- daisy(x = cluster.dta, metric = "gower")
 ```
 

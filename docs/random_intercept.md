@@ -1,3 +1,4 @@
+
 # Random Intercept Models {#RI}
 
 <span style="color:blue">**Example Data**</span>
@@ -6,12 +7,20 @@ Radon is a radioactive gas that naturally occurs in soils around the U.S. As rad
 
 This example uses a dataset named `radon` from the `rstanarm` package. The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Our goal is to build a model to predict $log(radon)$.
 
-```{r}
+
+```r
 data(radon, package="rstanarm")
 head(radon)
+##   floor county  log_radon log_uranium
+## 1     1 AITKIN 0.83290912  -0.6890476
+## 2     0 AITKIN 0.83290912  -0.6890476
+## 3     0 AITKIN 1.09861229  -0.6890476
+## 4     0 AITKIN 0.09531018  -0.6890476
+## 5     0  ANOKA 1.16315081  -0.8473129
+## 6     0  ANOKA 0.95551145  -0.8473129
 ```
 
-## Pooling
+## Pooling  {#pooling}
 
 To highlight the benefits of random intercepts models we will compare three linear regression models: 
 
@@ -38,48 +47,20 @@ Each county should get a _unique intercept_ such that the collection of county i
 
 Because all county intercepts are randomly sampled from the same theoretical population, $N(0, \sigma^2_{\alpha})$, information is shared among the counties.  This sharing of information is generally referred to as **shrinkage**, and should be thought of as a means to reduce variation in estimates among the counties.  When a county has little information to offer, it's estimated intercept will be shrunk towards to overall mean of all counties.
 
-```{r, echo=FALSE}
-library(lme4)
-fit_nopool <- lm(log_radon~-1+county, data=radon)
-fitted_nopool <- dplyr::bind_cols(radon,
-                                       data.frame(.fitted=predict(fit_nopool)))
 
-fit_partpool <- lmer(log_radon ~ (1 |county), data=radon)
-fitted_partpool <- dplyr::bind_cols(radon,
-                                    data.frame(.fitted=predict(fit_partpool),
-                                               .fixed=lme4::fixef(fit_partpool)))
-
-```
 
 The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation among the counties, and the variation within the counties.  
 
 
-```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
-
-county_idx <- sample(unique(radon$county), 8, replace=FALSE)
-fitted_nopool %>%
-    filter(county %in% county_idx) %>%
-    ggplot(aes(x=county, y=.fitted, colour="not pooled")) +
-    geom_jitter() +
-    geom_point(data=filter(fitted_partpool, county %in% county_idx),
-               aes(y=.fitted, colour="partially pooled")) +
-    geom_hline(data=fitted_partpool, aes(yintercept=mean(.fixed), colour="completely pooled")) +
-    labs(y="Estimated county means", x="County") +
-    theme(axis.text.x=element_text(angle=35, hjust=1)) +
-    guides(colour=guide_legend(title="Model"))
-
-
-```
+<img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" />
 
 Generally, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  
 
-```{block2, type="rmdcaution"}
-The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county. 
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The fitted values corresponding to different observations within each county of the no-pooling model are jittered to help the eye determine approximate sample size within each county. 
 
-Estimates of variation within each county should not be determined from this arbitrary jittering of points.
-```
+Estimates of variation within each county should not be determined from this arbitrary jittering of points.</div>\EndKnitrBlock{rmdcaution}
 
-## Mathematical Models
+## Mathematical Models  {#mathri}
 
 The three models considered set $y_n=log(radon)$, and $x_n$ records floor (0=basement, 1=first floor) for homes $n=1, \ldots, N$.  
 
@@ -155,9 +136,12 @@ $$
 $$
 
 * When $\rho$ is large, a lot of the variance is at the macro level
-* units within each group are very similar
+    - units within each group are very similar
 * If $\rho$ is small enough, one may ask if fitting a multi-level model is worth the complexity. 
-* no hard and fast rule to say "is it large enough?", rules of thumb include if it's under 10% (0.1) then a single level analysis may still be appropriate, if it's over 10\% (0.1) then a multilevel model can be justified. 
+* No hard and fast rule to say "is it large enough?"
+    - rules of thumb include
+        - under 10% (0.1) then a single level analysis may still be appropriate, 
+        - over 10\% (0.1) then a multilevel model can be justified. 
   
 
 ## Fitting models in R {#fitri}
@@ -165,24 +149,42 @@ $$
 **Complete Pooling**
 
 The complete pooling model is fit with the function `lm`, and is only modeled by `1` and no covariates. This is the simple mean model, and is equivelant to estimating the mean. 
-```{r}
+
+```r
 fit_completepool <- lm(log_radon ~ 1, data=radon)
 fit_completepool
+## 
+## Call:
+## lm(formula = log_radon ~ 1, data = radon)
+## 
+## Coefficients:
+## (Intercept)  
+##       1.265
 mean(radon$log_radon)
+## [1] 1.264779
 ```
 
 **No Pooling**
 
 The no pooling model is also fit with the function `lm`, but gives each county a unique intercept in the model. 
 
-```{r, results='asis', echo=1:2}
+
+```r
 fit_nopool <- lm(log_radon ~ -1 + county, data=radon)
 fit_nopool.withint <- lm(log_radon ~ county, data=radon)
-stargazer::stargazer(fit_nopool, fit_nopool.withint, 
-                     type="html", single.row=TRUE, omit.stat="all", p=NULL,
-                     intercept.top=TRUE, intercept.bottom=FALSE, 
-                     keep=c("Constant", "countyAITKIN", "countyANOKA", "countyBECKER"))
 ```
+
+
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">log_radon</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Constant</td><td></td><td>0.715<sup>*</sup> (0.383)</td></tr>
+<tr><td style="text-align:left">countyAITKIN</td><td>0.715<sup>*</sup> (0.383)</td><td></td></tr>
+<tr><td style="text-align:left">countyANOKA</td><td>0.891<sup>***</sup> (0.106)</td><td>0.176 (0.398)</td></tr>
+<tr><td style="text-align:left">countyBECKER</td><td>1.090<sup>**</sup> (0.443)</td><td>0.375 (0.585)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
 
 * The first model (`fit_nopool`) is coded as `lm(log_radon ~ -1 + county, data=radon)`, and so does not have the global intercept (that's what the `-1` does). Each $\beta$ coefficient is the estimate of the mean `log_radon` for that county. 
 * The second model (`fit_nopool.withint`) is coded as `lm(log_radon ~ county, data=radon)` and is what we are typically used to fitting.      
@@ -196,28 +198,52 @@ stargazer::stargazer(fit_nopool, fit_nopool.withint,
 * The partial pooling model is fit with the function `lmer()`, which is part of the **[`lme4`](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf)** package.
 * The extra notation around the input variable `(1|county)` dictates that each county should get its own unique intercept $\alpha_{j[n]}$. 
 
-```{r}
-library(lme4)
+
+```r
 fit_partpool <- lmer(log_radon ~ (1 |county), data=radon)
 ```
 
 The fixed effects portion of the model output of `lmer` is similar to output from `lm`, except no p-values are displayed.  The fact that no p-values are displayed is a much discussed topic.  The author of the library `lme4`, Douglas Bates, believes that there is no "obviously correct" solution to calculating p-values for models with randomly varying intercepts (or slopes); see **[here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)** for a general discussion. 
 
-```{r}
+
+```r
 summary(fit_partpool)
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_radon ~ (1 | county)
+##    Data: radon
+## 
+## REML criterion at convergence: 2184.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.6880 -0.5884  0.0323  0.6444  3.4186 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  county   (Intercept) 0.08861  0.2977  
+##  Residual             0.58686  0.7661  
+## Number of obs: 919, groups:  county, 85
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    1.350      0.047   28.72
 ```
 
 * The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
 * The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of `log_radon`. 
 * The random intercepts aren't automatically shown in this output. We can visualize these using what some call a _forest plot_. A very easy way to accomplish this is to use the [sjPlot](http://www.strengejacke.de/sjPlot/) package. We use the `plot_model()` function, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
 
-```{r}
+
+```r
 plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-Notice that these effects are centered around 0. Refering back to Section 10.2 in this notebook, the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
+<img src="random_intercept_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
-```{r}
+Notice that these effects are centered around 0. Refering back \ref(@mathri), the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
+
+
+```r
 showri <- data.frame(Random_Effect   = unlist(ranef(fit_partpool)), 
                      Fixed_Intercept = fixef(fit_partpool), 
                      RandomIntercept = unlist(ranef(fit_partpool))+fixef(fit_partpool))
@@ -226,28 +252,119 @@ rownames(showri) <- rownames(coef(fit_partpool)$county)
 kable(head(showri))
 ```
 
-```{r,eval=FALSE,echo=FALSE}
-# confirm this behavior. 
-a <- unlist(ranef(fit_partpool))
-b <- unlist(coef(fit_partpool)$county)
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Random_Effect </th>
+   <th style="text-align:right;"> Fixed_Intercept </th>
+   <th style="text-align:right;"> RandomIntercept </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> -0.2390577 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.1107726 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> -0.4071257 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 0.9427046 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> -0.0809978 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> -0.0804278 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> -0.0254506 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 0.0582831 </td>
+   <td style="text-align:right;"> 1.34983 </td>
+   <td style="text-align:right;"> 1.4081134 </td>
+  </tr>
+</tbody>
+</table>
 
-diff <- data.frame(re=a, fe =fixef(fit_partpool), coef=b, tot = a+fe)
-rownames(diff) <- rownames(coef(fit_partpool)$county)
-head(diff)
-```
+
 
 ### Comparison of estimates
 
 * By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties. 
-* Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section 1.11. 
+* Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section \ref(@pool). 
 
-```{r}
+
+```r
 cmpr.est <- data.frame(Mean_Model       = coef(fit_completepool), 
                        Random_Intercept = unlist(ranef(fit_partpool))+fixef(fit_partpool), 
                        Fixed_Effects    = coef(fit_nopool))
 rownames(cmpr.est) <- rownames(coef(fit_partpool)$county)
 kable(head(cmpr.est))
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Mean_Model </th>
+   <th style="text-align:right;"> Random_Intercept </th>
+   <th style="text-align:right;"> Fixed_Effects </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 0.7149352 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.8908486 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+   <td style="text-align:right;"> 1.0900084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+   <td style="text-align:right;"> 1.1933029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+   <td style="text-align:right;"> 1.2822379 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 1.264779 </td>
+   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.5367889 </td>
+  </tr>
+</tbody>
+</table>
 
 
 
@@ -272,18 +389,59 @@ Details of REML are beyond the scope of this class, but knowing the estimation m
 
 You can change the fitting algorithm to use the Log Likelihood anyhow, it may be slightly slower but for simple models the estimates are going to be very close to the REML estimate. Below is a table showing the estimates for the random intercepts, 
 
-```{r, echo=FALSE}
-fit_partpool_MLE <- lmer(log_radon ~ (1 |county), data=radon, REML=FALSE)
-RIs <- data.frame(coef(fit_partpool)$county,coef(fit_partpool_MLE)$county)
-colnames(RIs) <- c("REML", "MLE")
-library(kableExtra)
-kable(head(RIs), "html") %>% kable_styling(full_width=FALSE)
-```
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> REML </th>
+   <th style="text-align:right;"> MLE </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> AITKIN </td>
+   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 1.1143652 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ANOKA </td>
+   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.9438525 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BECKER </td>
+   <td style="text-align:right;"> 1.2688325 </td>
+   <td style="text-align:right;"> 1.2700351 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BELTRAMI </td>
+   <td style="text-align:right;"> 1.2694025 </td>
+   <td style="text-align:right;"> 1.2702493 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BENTON </td>
+   <td style="text-align:right;"> 1.3243796 </td>
+   <td style="text-align:right;"> 1.3245917 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIGSTONE </td>
+   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.4068867 </td>
+  </tr>
+</tbody>
+</table>
 
 and the same estimates for the variance terms. 
-```{r}
+
+```r
 VarCorr(fit_partpool)
+##  Groups   Name        Std.Dev.
+##  county   (Intercept) 0.29767 
+##  Residual             0.76607
 VarCorr(fit_partpool_MLE)
+##  Groups   Name        Std.Dev.
+##  county   (Intercept) 0.29390 
+##  Residual             0.76607
 ```
 
 So does it matter? Yes and no. In general you want to fit the models using REML, but if you really want to use a Likelihood Ratio **test** to compare models then you need to fit the models using ML. 
@@ -295,52 +453,86 @@ A similar sort of shrinkage effect is seen with covariates included in the model
 
 Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
-```{r, echo=FALSE, fig.width=8, fig.height=5, fig.align="center"}
-
-radon$floor <- factor(radon$floor, labels=c("basement", "first floor"))
-fit_nopool <- lm(log_radon ~ floor + county, data=radon)
-fitted_nopool <- dplyr::bind_cols(radon,
-                                  data.frame(.fitted=predict(fit_nopool)))
-
-
-fit_partpool <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
-fitted_partpool <- dplyr::bind_cols(radon,
-                                    data.frame(.fitted=predict(fit_partpool),
-                                               .fixed=predict(fit_partpool, re.form=NA)))
-
-county_idx <- c("BLUEEARTH", "DAKOTA", "FARIBAULT", "HENNEPIN",
-                "LACQUIPARLE", "MARSHALL", "PINE", "WASECA")
-
-fitted_nopool %>%
-    filter(county %in% county_idx) %>%
-    ggplot(aes(x=county, y=.fitted, colour="not pooled")) +
-    geom_jitter() +
-    geom_point(data=filter(fitted_partpool, county %in% county_idx), aes(y=.fitted, colour="partially pooled")) +
-    geom_hline(data=filter(fitted_partpool, county %in% county_idx), aes(yintercept=.fixed, colour="completely pooled")) +
-    facet_grid(.~floor) +
-    labs(y="Estimated county means", x="County") +
-    theme(axis.text.x=element_text(angle=35, hjust=1)) +
-    guides(colour=guide_legend(title="Model"))
-
-```
+<img src="random_intercept_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" />
 
 Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
 
-```{r}
+
+```r
 ri.with.x <- lmer(log_radon ~ floor + (1 |county), data=radon)
 tab_model(ri.with.x, show.r2=FALSE)
 ```
 
+<table style="border-collapse:collapse; border:none;">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log radon</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.49</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.40&nbsp;&ndash;&nbsp;1.59</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">floor [first floor]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.80&nbsp;&ndash;&nbsp;-0.53</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
+</tr>
+<tr>
+<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&sigma;<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.53</td>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&tau;<sub>00</sub> <sub>county</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.10</td>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.16</td>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>county</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">85</td>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">919</td>
+</tr>
+
+</table>
+
 Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the [sjPlot](http://www.strengejacke.de/sjPlot/) package. 
 
-```{r}
+
+```r
 plot_model(ri.with.x, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-Function enhancements -- (
+<img src="random_intercept_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+Function enhancements -- 
 
 * Display the fixed effects by changing `type="est"`. 
 * Plot the slope of the fixed effect for each level of the random effect `sjp.lmer(ri.with.x, type="ri.slope")` -- this is being depreciated in the future but works for now. Eventually I'll figure out how to get this plot out of `plot_model()`. 
+
+## More Random Effects
+
+What if you think the slope along some $x$ should vary (such as over time)? 
+
+> This section has not been built yet. Reference this set of notes in the meantime: https://m-clark.github.io/mixed-models-with-R/random_slopes.html
+
+
 
 ## Centering terms
 
@@ -474,17 +666,24 @@ $$
 $$
 
 
-### Specifying different covariance structures in R
+### Changing covariance structures in R
 
-* Not _easily_ able to do this using `lmer()` from package `lme4`
+> This is very hard to do as the model becomes more complex. 
+> These types of models is where Bayesian statistics has a much easier time fitting models. 
+> this section has been commented out of the notes until figured out in a cleaner manner. 
+
+<!---
+
+* Very hard (read - don't bother) to do this using `lmer()` from package `lme4`
 * Can do this using `lme()` from package `nlme`. Syntax is similar. 
 * The standard classes of correlation structures available in the `nlme` package can be found in [[this help file]](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/corClasses.html)
-    
-```{r}
+
+
+```r
 library(nlme)
-model_lme_cs<-lme(log_radon ~ floor,
-               random = ~ 1 | county, 
-               cor=corCompSymm(value=0.159,form=~1|county),data = radon)
+model_lme_cs <- lme(log_radon ~ floor,
+                     random = ~ 1 | county, 
+                     cor=corCompSymm(value=0.159,form=~1|county),data = radon)
 ```
 
 Using a different covariance structure can have a large effect on the results. 
@@ -493,13 +692,27 @@ Using a different covariance structure can have a large effect on the results.
 * `nlme` using Identity: $\sigma^{2}_{\alpha} = 0.32^2 = 0.10, \sigma^{2}_{\epsilon} = 0.73^2 = 0.53$  
 * `nlme` using CS: $\sigma^{2}_{\alpha} = 0.14^2 = 0.02, \sigma^{2}_{\epsilon} = 0.78^2 = 0.61$
 
-```{block2, type="rmdcaution"}
-Mis-specifying the covariance structure can also have a large effect on the results. 
-```
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Mis-specifying the covariance structure can also have a large effect on the results. </div>\EndKnitrBlock{rmdcaution}
+
+#### Autoregressive 
 
 
+The AR1 structure specifies that the correlations between the repeated measurements of each subject decrease with the time lag, i.e., the distance in time between the measurements. The data is assumed to be in sort order, where $y_{it}$ and $y_{i(t+1)}$ are in sequential rows. To sort by time within id in dplyr looks like: `arrange(id, time)`. 
 
 
+* **Equally spaced items**
+`lme(..., correlation = corAR1())` which is equivelant to `lme(..., correlation = corAR1(form = ~ 1 | id))` 
+
+* **Not equally spaced items**
+`lme(..., correlation = corAR1(form = ~ time | id))`, the `time` variable is used to determine how far apart the measurements are (the time lag). 
+
+* **Discrete vs continuous time**
+corAR1() works with discrete time. There is also corCAR1() that works with continuous time.
+
+Ref: https://stats.stackexchange.com/questions/367957/autoregression-in-nlme-undestanding-how-to-specify-corar1
+
+
+---> 
 
 ## Additional References
 
@@ -508,10 +721,15 @@ Mis-specifying the covariance structure can also have a large effect on the resu
 * Very nice introduction to mixed models in R https://m-clark.github.io/mixed-models-with-R/introduction.html
 * Interesting blog by [Tristan Mahr](https://tjmahr.github.io/plotting-partial-pooling-in-mixed-effects-models/) about pooling and shrinkage. 
 * Derivation of the covariance structures http://www.bristol.ac.uk/cmm/learning/videos/correlation.html#matrix2 
+* Mixed models with R - Michael Clark https://m-clark.github.io/mixed-models-with-R/
+
+
+### Lecture notes from other classes found on the interwebs
+
+* [BIOL 202: Ecological Statistics from Stanford](https://fukamilab.github.io/BIO202/04-A-mixed-models.html) This is a graduate level class. 
+
 
 ### Package Vignettes
 * [lme4](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) Functions to fit HLMs
 * [sjPlot](http://strengejacke.de/sjPlot/sjt.lmer/) **Really** nice way of printing output as tables (and plots).
-* Changing covariance structures in `lme4qtl`: [[paper]](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2057-x?site=bmcbioinformatics.biomedcentral.com) [[github]](https://github.com/variani/lme4qtl)
-
 

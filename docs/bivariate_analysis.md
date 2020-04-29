@@ -156,7 +156,7 @@ plot.bmi.smoke %>% group_by(eversmoke_c) %>%
              IQR = IQR(BMI, na.rm=TRUE))
 ## # A tibble: 2 x 4
 ##   eversmoke_c  mean    sd   IQR
-##   <fct>       <dbl> <dbl> <dbl>
+## * <fct>       <dbl> <dbl> <dbl>
 ## 1 Non Smoker   29.7  7.76  9.98
 ## 2 Smoker       28.8  7.32  9.02
 ```

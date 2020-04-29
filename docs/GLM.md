@@ -1,4 +1,5 @@
 
+
 # Generalized Linear Models {#glm}
 
 
@@ -90,7 +91,7 @@ This in essence takes a binary outcome 0/1 variable, turns it into a continuous 
 
 The probit function uses the inverse CDF for the normal distribution as the link function. The effect of the transformation is very similar. For social science interpretation of the coefficients, we tend to choose the _logit_ transformation and conduct a Logistic Regression. For classification purposes, often researchers will test out both transformations to see which one gives the best predictions. 
 
-<img src="GLM_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" />
+<img src="GLM_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" />
 
 
 ## Logistic Regression
@@ -495,7 +496,7 @@ qqnorm(addhealth$income); qqline(addhealth$income, col="red")
 qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 **Identify variables**
 
@@ -651,7 +652,7 @@ hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE
 axis(1);axis(2, las=2);box()
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
 ```r
