@@ -19,9 +19,10 @@ rmd_files: ["index.Rmd"
             ,"multivariate_intro.Rmd"
             ,"PCA.Rmd"
             ,"FA.Rmd"
+            ,"cluster.Rmd"
             
-#            ,"MLM_intro.Rmd"
-#            ,"random_intercept.Rmd"
+            ,"MLM_intro.Rmd"
+            ,"random_intercept.Rmd"
 #            ,"longitudinal.Rmd"
 #            ,"spatial.Rmd"
             
