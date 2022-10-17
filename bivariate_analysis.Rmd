@@ -258,7 +258,7 @@ $$
 SST =  \sum_{i=1}^{I}\sum_{j=1}^{n_{i}}(y_{ij}-\bar{y}..)^{2} = (N-1)Var(Y)
 $$
 
-### Analysis of Variance Tabl*: 
+### Analysis of Variance Table*: 
 
 The results of an analysis of variance test are always summarized in an ANOVA table. The format of an ANOVA table is as follows:
 
