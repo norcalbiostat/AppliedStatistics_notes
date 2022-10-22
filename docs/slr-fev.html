@@ -553,17 +553,104 @@ This section uses functions from the <code>broom</code>, and <code>performance</
 <p>There does appear to be a tendency for taller men to have higher FEV1. The trend is linear, the red lowess trend line follows the blue linear fit line quite well.</p>
 <p>Let’s fit a linear model and report the regression parameter estimates.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="slr-fev.html#cb4-1" aria-hidden="true" tabindex="-1"></a>fev.dad.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FHEIGHT, <span class="at">data=</span>fev)</span>
-<span id="cb4-2"><a href="slr-fev.html#cb4-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(fev.dad.model)</span>
-<span id="cb4-3"><a href="slr-fev.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
-<span id="cb4-4"><a href="slr-fev.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   term        estimate std.error statistic  p.value</span></span>
-<span id="cb4-5"><a href="slr-fev.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-6"><a href="slr-fev.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 (Intercept)   -4.09     1.15       -3.55 5.21e- 4</span></span>
-<span id="cb4-7"><a href="slr-fev.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 FHEIGHT        0.118    0.0166      7.11 4.68e-11</span></span></code></pre></div>
+<span id="cb4-2"><a href="slr-fev.html#cb4-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-4.087
+</td>
+<td style="text-align:right;">
+1.152
+</td>
+<td style="text-align:right;">
+-3.548
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FHEIGHT
+</td>
+<td style="text-align:right;">
+0.118
+</td>
+<td style="text-align:right;">
+0.017
+</td>
+<td style="text-align:right;">
+7.106
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
 <p>The least squares equation is <span class="math inline">\(Y = -4.09 + 0.118X\)</span>. We can calculate the confidence interval for that estimate using the <code>confint</code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="slr-fev.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fev.dad.model)</span>
-<span id="cb5-2"><a href="slr-fev.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2.5 %     97.5 %</span></span>
-<span id="cb5-3"><a href="slr-fev.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -6.36315502 -1.8102499</span></span>
-<span id="cb5-4"><a href="slr-fev.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.08526328  0.1509472</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="slr-fev.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-6.363
+</td>
+<td style="text-align:right;">
+-1.810
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FHEIGHT
+</td>
+<td style="text-align:right;">
+0.085
+</td>
+<td style="text-align:right;">
+0.151
+</td>
+</tr>
+</tbody>
+</table>
 <p>For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p&lt;.0001).</p>
 <p>Lastly, we need to check assumptions on the residuals to see if the model results are valid.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="slr-fev.html#cb6-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fev.dad.model, </span>

@@ -539,12 +539,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="anova-for-regression" class="section level2 hasAnchor" number="7.7">
 <h2><span class="header-section-number">7.7</span> ANOVA for regression<a href="anova-for-regression.html#anova-for-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Since an ANOVA is an analysis of the variance due to a model, compared to the unexplained variance, it can be used to test the overall model fit. This will give us the same general answer to the question of “is there an association between X and Y” that testing for a non-zero slope (<span class="math inline">\(\beta \neq 0\)</span>). If the mean squared value for the regression is much larger than the mean squared value for the residual error, then the line fits the data better than the simple mean, and thus, the slope of the line is not zero.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="anova-for-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb8-2"><a href="anova-for-regression.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
-<span id="cb8-3"><a href="anova-for-regression.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT       1  16.05  16.053    50.5 4.68e-11 ***</span></span>
-<span id="cb8-4"><a href="anova-for-regression.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   148  47.05   0.318                     </span></span>
-<span id="cb8-5"><a href="anova-for-regression.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb8-6"><a href="anova-for-regression.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="anova-for-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">summary</span>() <span class="sc">|&gt;</span> <span class="fu">pander</span>()</span></code></pre></div>
+<table style="width:87%;">
+<caption>Analysis of Variance Model</caption>
+<colgroup>
+<col width="22%" />
+<col width="8%" />
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Df</th>
+<th align="center">Sum Sq</th>
+<th align="center">Mean Sq</th>
+<th align="center">F value</th>
+<th align="center">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FHEIGHT</strong></td>
+<td align="center">1</td>
+<td align="center">16.05</td>
+<td align="center">16.05</td>
+<td align="center">50.5</td>
+<td align="center">4.677e-11</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Residuals</strong></td>
+<td align="center">148</td>
+<td align="center">47.05</td>
+<td align="center">0.3179</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <!-- </div> -->
             </section>

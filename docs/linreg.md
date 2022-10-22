@@ -210,23 +210,65 @@ Let's fit a linear model and report the regression parameter estimates.
 
 ```r
 fev.dad.model <- lm(FFEV1 ~ FHEIGHT, data=fev)
-broom::tidy(fev.dad.model)
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   -4.09     1.15       -3.55 5.21e- 4
-## 2 FHEIGHT        0.118    0.0166      7.11 4.68e-11
+broom::tidy(fev.dad.model) |> kable(digits=3)
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -4.087 </td>
+   <td style="text-align:right;"> 1.152 </td>
+   <td style="text-align:right;"> -3.548 </td>
+   <td style="text-align:right;"> 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FHEIGHT </td>
+   <td style="text-align:right;"> 0.118 </td>
+   <td style="text-align:right;"> 0.017 </td>
+   <td style="text-align:right;"> 7.106 </td>
+   <td style="text-align:right;"> 0.000 </td>
+  </tr>
+</tbody>
+</table>
 
 The least squares equation is $Y = -4.09 + 0.118X$. We can calculate the confidence interval for that estimate using the `confint` function. 
 
 
 ```r
-confint(fev.dad.model)
-##                   2.5 %     97.5 %
-## (Intercept) -6.36315502 -1.8102499
-## FHEIGHT      0.08526328  0.1509472
+confint(fev.dad.model) |> kable(digits=3)
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> 2.5 % </th>
+   <th style="text-align:right;"> 97.5 % </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -6.363 </td>
+   <td style="text-align:right;"> -1.810 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FHEIGHT </td>
+   <td style="text-align:right;"> 0.085 </td>
+   <td style="text-align:right;"> 0.151 </td>
+  </tr>
+</tbody>
+</table>
 
 For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p<.0001).  
 
@@ -282,13 +324,19 @@ Since an ANOVA is an analysis of the variance due to a model, compared to the un
 
 
 ```r
-aov(fev.dad.model) |> summary()
-##              Df Sum Sq Mean Sq F value   Pr(>F)    
-## FHEIGHT       1  16.05  16.053    50.5 4.68e-11 ***
-## Residuals   148  47.05   0.318                     
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+aov(fev.dad.model) |> summary() |> pander()
 ```
+
+
+--------------------------------------------------------------
+    &nbsp;       Df    Sum Sq   Mean Sq   F value    Pr(>F)   
+--------------- ----- -------- --------- --------- -----------
+  **FHEIGHT**     1    16.05     16.05     50.5     4.677e-11 
+
+ **Residuals**   148   47.05    0.3179      NA         NA     
+--------------------------------------------------------------
+
+Table: Analysis of Variance Model
 
 
 

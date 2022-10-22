@@ -206,13 +206,13 @@ There does appear to be a tendency for taller men to have higher FEV1. The trend
 Let's fit a linear model and report the regression parameter estimates. 
 ```{r}
 fev.dad.model <- lm(FFEV1 ~ FHEIGHT, data=fev)
-broom::tidy(fev.dad.model)
+broom::tidy(fev.dad.model) |> kable(digits=3)
 ```
 
 The least squares equation is $Y = -4.09 + 0.118X$. We can calculate the confidence interval for that estimate using the `confint` function. 
 
 ```{r}
-confint(fev.dad.model)
+confint(fev.dad.model) |> kable(digits=3)
 ```
 
 For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p<.0001).  
@@ -265,7 +265,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
 Since an ANOVA is an analysis of the variance due to a model, compared to the unexplained variance, it can be used to test the overall model fit. This will give us the same general answer to the question of "is there an association between X and Y" that testing for a non-zero slope ($\beta \neq 0$). If the mean squared value for the regression is much larger than the mean squared value for the residual error, then the line fits the data better than the simple mean, and thus, the slope of the line is not zero. 
 
 ```{r}
-aov(fev.dad.model) |> summary()
+aov(fev.dad.model) |> summary() |> pander()
 ```
 
 
