@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.4 Assumptions | Applied Statistics</title>
+  <title>8.5 Binary predictors. | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.4 Assumptions | Applied Statistics" />
+  <meta property="og:title" content="8.5 Binary predictors. | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.4 Assumptions | Applied Statistics" />
+  <meta name="twitter:title" content="8.5 Binary predictors. | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="least-squares-regression.html"/>
-<link rel="next" href="slr-fev.html"/>
+<link rel="prev" href="example-1.html"/>
+<link rel="next" href="cat-predictors.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -536,51 +536,211 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="assumptions-2" class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> Assumptions<a href="assumptions-2.html#assumptions-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Many of the assumptions for regression are on the form of the residuals, which can’t be assessed until <em>after</em> the model has been fit.</p>
-<p><strong>Assumptions to check before modeling</strong></p>
+<div id="binary-predictors." class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Binary predictors.<a href="binary-predictors..html#binary-predictors." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Does gender also play a roll in FEV? Let’s look at the separate effects of height and age on FEV1, and visualize how gender plays a roll.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="binary-predictors..html#cb10-1" aria-hidden="true" tabindex="-1"></a>ht.plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fev_long, <span class="fu">aes</span>(<span class="at">x=</span>ht, <span class="at">y=</span>fev1)) <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="binary-predictors..html#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>gender)) <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="binary-predictors..html#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">col=</span>gender), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="binary-predictors..html#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="binary-predictors..html#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="binary-predictors..html#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.85</span>))</span>
+<span id="cb10-7"><a href="binary-predictors..html#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="binary-predictors..html#cb10-8" aria-hidden="true" tabindex="-1"></a>age.plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fev_long, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>fev1)) <span class="sc">+</span> </span>
+<span id="cb10-9"><a href="binary-predictors..html#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>gender)) <span class="sc">+</span> </span>
+<span id="cb10-10"><a href="binary-predictors..html#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">col=</span>gender), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-11"><a href="binary-predictors..html#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-12"><a href="binary-predictors..html#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_viridis_d</span>(<span class="at">guide=</span><span class="cn">FALSE</span>)</span>
+<span id="cb10-13"><a href="binary-predictors..html#cb10-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-14"><a href="binary-predictors..html#cb10-14" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(ht.plot, age.plot, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
-<li>Randomness / Independence
+<li>The points are colored by gender</li>
+<li>Each gender has it’s own best fit line in the same color as the points</li>
+<li>The red line is the best fit line overall - ignoring gender</li>
+</ul>
+<p><img src="images/q.png" alt="q" /> Is gender a moderator for either height or age?</p>
+<p>Let’s compare the models with, and without gender</p>
+<table style="text-align:center">
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="2">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="2">
+fev1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+W/o gender
+</td>
+<td>
+w/ gender
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+age
+</td>
+<td>
+-0.02<sup>***</sup> (-0.03, -0.01)
+</td>
+<td>
+-0.02<sup>***</sup> (-0.03, -0.02)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+ht
+</td>
+<td>
+0.16<sup>***</sup> (0.15, 0.18)
+</td>
+<td>
+0.11<sup>***</sup> (0.08, 0.13)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+genderF
+</td>
+<td>
+</td>
+<td>
+-0.64<sup>***</sup> (-0.79, -0.48)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-6.74<sup>***</sup> (-7.84, -5.63)
+</td>
+<td>
+-2.24<sup>***</sup> (-3.71, -0.77)
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+300
+</td>
+<td>
+300
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.57
+</td>
+<td>
+0.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+0.53 (df = 297)
+</td>
+<td>
+0.48 (df = 296)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+197.57<sup>***</sup> (df = 2; 297)
+</td>
+<td>
+182.77<sup>***</sup> (df = 3; 296)
+</td>
+</tr>
+<tr>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="2" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
 <ul>
-<li>Very serious</li>
-<li>Can use hierarchical models for clustered samples</li>
-<li>No real good way to “test” for independence. Need to know how the sample was obtained.</li>
-</ul></li>
-<li>Linear relationship
+<li>Gender is a binary categorical variable, with reference group “Male”.
 <ul>
-<li>Slight departures OK</li>
-<li>Can use transformations to achieve it</li>
-<li>Graphical assessment: Simple scatterplot of <span class="math inline">\(y\)</span> vs <span class="math inline">\(x\)</span>.
-Looking for linearity in the relationship.
-Should be done prior to any analysis.</li>
+<li>This is detected because the variable that shows up in the regression model output is <code>genderF</code>. So the estimate shown is for males, compared to females.</li>
+<li>More details on how categorical variables are included in multivariable models is covered in section <a href="cat-predictors.html#cat-predictors">8.6</a>.</li>
 </ul></li>
 </ul>
-<p><strong>Assumptions to check after modeling</strong></p>
+<p><strong>Interpretation of Coefficients</strong></p>
+<p>The regression equation for the model without gender is</p>
+<p><span class="math display">\[ y = -6.74 - 0.02 age + 0.16 height \]</span></p>
 <ul>
-<li>Homogeneity of variance (same <span class="math inline">\(\sigma^{2}\)</span>)
-<ul>
-<li>Not extremely serious</li>
-<li>Can use transformations to achieve it</li>
-<li>Graphical assessment: Plot the residuals against the x variable, add a lowess line.
-This assumption is upheld if there is no relationship/trend between the residuals and
-the predictor.</li>
-</ul></li>
-<li>Normal residuals
-<ul>
-<li>Slight departures OK</li>
-<li>Can use transformations to achieve it</li>
-<li>Graphical assessment: normal qqplot of the model residuals.</li>
-</ul></li>
+<li><span class="math inline">\(b_{0}:\)</span> For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.</li>
+<li><span class="math inline">\(b_{1}:\)</span> For every additional year older an individual is, their FEV1 decreases by 0.02L.</li>
+<li><span class="math inline">\(b_{2}:\)</span> For every additional cm taller an individual is, their FEV1 increases by 0.16L.</li>
 </ul>
+<p>The regression equation for the model with gender is</p>
+<p><span class="math display">\[ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF \]</span></p>
+<ul>
+<li><span class="math inline">\(b_{0}:\)</span> For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.</li>
+<li><span class="math inline">\(b_{1}:\)</span> For every additional year older an individual is, their FEV1 decreases by 0.02L.</li>
+<li><span class="math inline">\(b_{2}:\)</span> For every additional cm taller an individual is, their FEV1 increases by 0.16L.</li>
+<li><span class="math inline">\(b_{3}:\)</span> Females have 0.64L lower FEV compared to males.</li>
+</ul>
+<p><strong>Note</strong>: The interpretation of categorical variables still falls under the template language of “for every one unit increase in <span class="math inline">\(X_{p}\)</span>, <span class="math inline">\(Y\)</span> changes by <span class="math inline">\(b_{p}\)</span>”. Here, <span class="math inline">\(X_{3}=0\)</span> for males, and 1 for females. So a 1 “unit” change is females <em>compared to</em> males.</p>
+<p><img src="images/q.png" alt="q" /> Which model fits better? What measure are you using to quanitify “fit”?</p>
+
+<div class="rmdnote">
+What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on?
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="least-squares-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="slr-fev.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="example-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cat-predictors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

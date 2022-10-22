@@ -1,5 +1,4 @@
 
-
 # Simple Linear Regression {#slr}
 
 The goal of linear regression is to describe the relationship between an independent variable X and a continuous dependent variable $Y$ as a straight line. 
@@ -17,30 +16,98 @@ Both Regression and Correlation can be used for two main purposes:
 
 Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.  
 
+## Example
+
+Lung function data were obtained from an epidemiological study of households living in four areas with different amounts and types of air pollution. The data set used in this book is a subset of the total data. In this chapter we use only the data taken on the fathers, all of whom are nonsmokers (see PMA6 Appendix A for more details). 
+
+
+```r
+# Read in the data from a version stored online. 
+fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep="\t", header=TRUE)
+```
+
+One of the major early indicators of reduced respiratory function is FEV1 or forced expiratory volume in the first second (amount of air exhaled in 1 second). Since it is known that taller males tend to have higher FEV1, we wish to determine the relationship between height and FEV1. We can use regression analysis for both a descriptive and predictive purpose. 
+
+* **Descriptive**: Describing the relationship between FEV1 and height
+* **Predictive**: Use the equation to determine expected or normal FEV1 for a given height
+
+
+
+```r
+ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
+      xlab("Height") + ylab("FEV1") + 
+      ggtitle("Scatterplot and Regression line of FEV1 Versus Height for Males.") + 
+      geom_smooth(method="lm", se=FALSE, col="blue") 
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+In this graph, height is given on the horizontal axis since it is the independent or predictor variable and FEV1 is given on the vertical axis since it is the dependent or outcome variable.
+
+**Interpretation**: There does appear to be a tendency for taller men to have higher FEV1. The **regression line** is also added to the graph. The line is tilted upwards, indicating that we expect larger values of FEV1 with larger values of height.
+
+Specifically the equation of the regression line is 
+$$
+Y = -4.087 + 0.118 X
+$$
+
+The quantity 0.118 in front of $X$ is greater than zero, indicating that as we increase $X, Y$ will increase. For example, we would expect a father who is 70 inches tall to have an FEV1 value of
+
+$$\mbox{FEV1} = -4.087 + (0.118) (70) = 4.173$$
+
+If the height was 66 inches then we would expect an FEV1 value of only 3.70.
+
+### Caution on out of range predictions
+
+To take an extreme example, suppose a father was 2 feet tall. Then the equation would predict a negative value of FEV1 ($-1.255$).
+
+A safe policy is to restrict the use of the equation to the range of the $X$ observed in the sample.
+
+
 ## Mathematical Model
 
+The mathematical model that we use for regression has three features.
 
-* The mean of $Y$ values at any given $X$ is $\beta_{0} + \beta_{1} X$
-* The variance of $Y$ values at any $X$ is $\sigma^2$ (same for all X)
-    - This is known as _homoscedasticity_, or _homogeneity of variance_. 
-* $Y$ values are normally distributed at any given $X$ (need for inference)
+1. $Y$ values are normally distributed at any given $X$ 
+2. The mean of $Y$ values at any given $X$ follows a straight line $Y = \beta_{0} + \beta_{1} X$. 
+2. The variance of $Y$ values at any $X$ is $\sigma^2$ (same for all X). This is known as _homoscedasticity_, or _homogeneity of variance_. 
+
+
+Mathematically this is written as: 
+
+$$
+Y|X \sim N(\mu_{Y|X}, \sigma^{2}) \\
+\mu_{Y|X} = \beta_{0} + \beta_{1} X \\
+Var(Y|X) = \sigma^{2} 
+$$
+
+and can be visualized as: 
 
 ![Figure 6.2](images/slr_graph.png)
 
+### Unifying model framework
 
-## Parameter Estimates
-* Estimate the slope $\beta_{1}$ and intercept $\beta_{0}$ using least-squares methods.
+The mathematical model above describes the theoretical relationship between $Y$ and $X$. So in our unifying model framework to describe observed data, 
+
+> DATA = MODEL + RESIDUAL
+
+Our observed data values $y_{i}$ can be modeled as being centered on $\mu_{Y|X}$, with normally distributed residuals. 
+
+$$
+y_{i} = \beta_{0} + \beta_{1} X + \epsilon_{i} \\
+\epsilon_{i} \sim N(0, \sigma^{2})
+$$
+
+
+### Parameter Estimates
+* Estimate the slope $\beta_{1}$ and intercept $\beta_{0}$ using a method called **Least Squares**.
 * The residual mean squared error (RMSE) is an estimate of the variance $s^{2}$
     - RMSE can also refer to the root mean squared error. 
-* Typically interested in inference on $\beta_{1}$
-    - Assume no relationship between $X$ and $Y$ $(H_{0}: \beta_{1}=0)$ 
-      until there is reason to believe there is one 
-      $(H_{0}: \beta_{1} \neq 0)$
-      
-      
+  
+  
 ## Least Squares Regression 
 
-The **Least Squares** Method finds the estimates for the intercept $b_{0}$ and slope $b_{1}$ that minimize the SSE. Let's see how that works: 
+The **Least Squares** method finds the estimates for the intercept $b_{0}$ and slope $b_{1}$ that minimize the SSE (Sum of squared errors). Let's see how that works: 
 
 See https://paternogbc.shinyapps.io/SS_regression/
 
@@ -59,6 +126,7 @@ See https://paternogbc.shinyapps.io/SS_regression/
 
 Looking at it this way, we are asking "If I know the value of $x$, how much better will I be at predicting $y$ than if I were just to use $\bar{y}$? 
 
+_This is the same partitioning of variance that is happens with ANOVA!_
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">Increase the standard deviation to 30. What happens to SSReg? What about SSE? </div>\EndKnitrBlock{rmdnote}
       
@@ -69,6 +137,112 @@ Here is a [link](https://ryansafner.shinyapps.io/ols_estimation_by_min_sse/) to 
 
 $$ S = \sqrt{\frac{SSE}{N-2}}$$
 
+
+<!---
+## Correlation Coefficient
+
+* The correlation coefficient $\rho$ measures the strength of association between $X$ and $Y$ in the _population_.
+* $\sigma^{2} = VAR(Y|X)$ is the variance of $Y$ for a specific $X$.
+* $\sigma_{y}^{2} = VAR(Y)$ is the variance of $Y$ for all $X$'s.
+
+$$ \sigma^{2} = \sigma_{y}^{2}(1-\rho^{2})$$
+$$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
+
+* $\rho^{2}$ = reduction in variance of Y associated with knowledge of X/original variance of Y
+* **Coefficient of Determination**: $100\rho^{2}$ = % of variance of Y associated with X or explained by X
+* Caution: association vs. causation.
+--->
+
+## Assumptions
+
+Many of the assumptions for regression are on the form of the residuals, which can't be assessed until _after_ the model has been fit. 
+
+**Assumptions to check before modeling**
+
+* Randomness / Independence
+    - Very serious
+    - Can use hierarchical models for clustered samples
+    - No real good way to "test" for independence. Need to know how the sample was obtained. 
+* Linear relationship
+    - Slight departures OK
+    - Can use transformations to achieve it
+    - Graphical assessment: Simple scatterplot of $y$ vs $x$. 
+      Looking for linearity in the relationship. 
+      Should be done prior to any analysis. 
+
+**Assumptions to check after modeling**
+
+* Homogeneity of variance (same $\sigma^{2}$)
+    - Not extremely serious
+    - Can use transformations to achieve it
+    - Graphical assessment: Plot the residuals against the x variable, add a lowess line. 
+      This assumption is upheld if there is no relationship/trend between the residuals and
+      the predictor. 
+* Normal residuals
+    - Slight departures OK
+    - Can use transformations to achieve it
+    - Graphical assessment: normal qqplot of the model residuals. 
+
+
+
+
+## Example {#slr-fev}
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `broom`, and `performance` packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
+
+Returning to the Lung function data set from PMA6, lets analyze the relationship between height and FEV for fathers in this data set. 
+
+
+```r
+ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
+      xlab("Height") + ylab("FEV1") + 
+      ggtitle("Scatter Diagram with Regression (blue) and Lowess (red) Lines 
+      of FEV1 Versus Height for Fathers.") + 
+      geom_smooth(method="lm", se=FALSE, col="blue") + 
+      geom_smooth(se=FALSE, col="red") 
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+There does appear to be a tendency for taller men to have higher FEV1. The trend is linear, the red lowess trend line follows the blue linear fit line quite well. 
+
+Let's fit a linear model and report the regression parameter estimates. 
+
+```r
+fev.dad.model <- lm(FFEV1 ~ FHEIGHT, data=fev)
+broom::tidy(fev.dad.model)
+## # A tibble: 2 × 5
+##   term        estimate std.error statistic  p.value
+##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)   -4.09     1.15       -3.55 5.21e- 4
+## 2 FHEIGHT        0.118    0.0166      7.11 4.68e-11
+```
+
+The least squares equation is $Y = -4.09 + 0.118X$. We can calculate the confidence interval for that estimate using the `confint` function. 
+
+
+```r
+confint(fev.dad.model)
+##                   2.5 %     97.5 %
+## (Intercept) -6.36315502 -1.8102499
+## FHEIGHT      0.08526328  0.1509472
+```
+
+For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p<.0001).  
+
+
+Lastly, we need to check assumptions on the residuals to see if the model results are valid. 
+
+
+```r
+performance::check_model(fev.dad.model, 
+        check = c("qq", "linearity", "homogeneity", "pp_check"))
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+
+No major deviations away from what is expected.   
 
 ## Interval estimation
 * Everything is estimated with some degree of error
@@ -88,128 +262,11 @@ $$
   
 How does this relate to the standard deviation of individual $x$'s, and the standard deviation of $\bar{x}$'s? </div>\EndKnitrBlock{rmdnote}
 
-## Correlation Coefficient
-
-* The correlation coefficient $\rho$ measures the strength of association between $X$ and $Y$ in the _population_.
-* $\sigma^{2} = VAR(Y|X)$ is the variance of $Y$ for a specific $X$.
-* $\sigma_{y}^{2} = VAR(Y)$ is the variance of $Y$ for all $X$'s.
-
-$$ \sigma^{2} = \sigma_{y}^{2}(1-\rho^{2})$$
-$$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
-
-* $\rho^{2}$ = reduction in variance of Y associated with knowledge of X/original variance of Y
-* **Coefficient of Determination**: $100\rho^{2}$ = % of variance of Y associated with X or explained by X
-* Caution: association vs. causation.
-
-
-## Assumptions
-* Homogeneity of variance (same $\sigma^{2}$)
-    - Not extremely serious
-    - Can use transformations to achieve it
-    - Graphical assessment: Plot the residuals against the x variable, add a lowess line. 
-      This assumption is upheld if there is no relationship/trend between the residuals and
-      the predictor. 
-* Normal residuals
-    - Slight departures OK
-    - Can use transformations to achieve it
-    - Graphical assessment: normal qqplot of the model residuals. 
-* Randomness / Independence
-    - Very serious
-    - Can use hierarchical models for clustered samples
-    - No real good way to "test" for independence. Need to know how the sample was obtained. 
-* Linear relationship
-    - Slight departures OK
-    - Can use transformations to achieve it
-    - Graphical assessment: Simple scatterplot of $y$ vs $x$. 
-      Looking for linearity in the relationship. 
-      Should be done prior to any analysis. 
-
-
-
-## Example {#slr-fev}
-
-Using a cleaned version of the Lung function data set from PMA5, lets explore the relationship between height and FEV for fathers in this data set. 
+If we set the `se` argument in `geom_smooth` to TRUE, the shaded region is the confidence band for the mean. To get the prediction interval, we have use the `predict` function to calculate the prediction interval, and then we can add that onto the plot as additional `geom_lines`.
 
 
 ```r
-ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
-      xlab("Height") + ylab("FEV1") + 
-      ggtitle("Scatter Diagram with Regression (blue) and Lowess (red) Lines 
-      of FEV1 Versus Height for Fathers.") + 
-      geom_smooth(method="lm", se=FALSE, col="blue") + 
-      geom_smooth(se=FALSE, col="red") 
-```
-
-<img src="linreg_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-
-There does appear to be a tendency for taller men to have higher FEV1. Let's fit a linear model and report the regression parameter estimates. 
-
-```r
-model <- lm(FFEV1 ~ FHEIGHT, data=fev)
-summary(model)
-## 
-## Call:
-## lm(formula = FFEV1 ~ FHEIGHT, data = fev)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.56688 -0.35290  0.04365  0.34149  1.42555 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -4.08670    1.15198  -3.548 0.000521 ***
-## FHEIGHT      0.11811    0.01662   7.106 4.68e-11 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.5638 on 148 degrees of freedom
-## Multiple R-squared:  0.2544,	Adjusted R-squared:  0.2494 
-## F-statistic:  50.5 on 1 and 148 DF,  p-value: 4.677e-11
-```
-The least squares equation is $Y = -4.087 + 0.118X$.
-
-
-```r
-confint(model)
-##                   2.5 %     97.5 %
-## (Intercept) -6.36315502 -1.8102499
-## FHEIGHT      0.08526328  0.1509472
-```
-For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p<.0001).  
-The correlation between FEV1 and height is $\sqrt{.2544}$ = 0.5. 
-
-
-Lastly, check assumptions on the residuals to see if the model results are valid. 
-
-* Homogeneity of variance 
-
-```r
-plot(model$residuals ~ fev$FHEIGHT)
-lines(lowess(model$residuals ~ fev$FHEIGHT), col="red")
-```
-
-<img src="linreg_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-
-* Normal residuals
-
-```r
-qqnorm(model$residuals)
-qqline(model$residuals, col="red")
-```
-
-<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-No major deviations away from what is expected.   
-
-### Confidence and Prediction Intervals
-
-If we set the `se` argument in `geom_smooth` to TRUE, the shaded region is the confidence band for the mean. 
-To get the prediction interval, we have to use the `predict` function. 
-
-
-
-```r
-pred.int <- predict(model, interval="predict") %>% data.frame()
+pred.int <- predict(fev.dad.model, interval="predict") |> data.frame()
 
 ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() + 
       geom_smooth(method="lm", se=TRUE, col="blue") + 
@@ -217,7 +274,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_line(aes(y=pred.int$upr), linetype="dashed", col="red", lwd=1.5)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ## ANOVA for regression
 
@@ -225,20 +282,13 @@ Since an ANOVA is an analysis of the variance due to a model, compared to the un
 
 
 ```r
-aov(model) %>% pander()
+aov(fev.dad.model) |> summary()
+##              Df Sum Sq Mean Sq F value   Pr(>F)    
+## FHEIGHT       1  16.05  16.053    50.5 4.68e-11 ***
+## Residuals   148  47.05   0.318                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
---------------------------------------------------------------
-    &nbsp;       Df    Sum Sq   Mean Sq   F value    Pr(>F)   
---------------- ----- -------- --------- --------- -----------
-  **FHEIGHT**     1    16.05     16.05     50.5     4.677e-11 
-
- **Residuals**   148   47.05    0.3179      NA         NA     
---------------------------------------------------------------
-
-Table: Analysis of Variance Model
-
 
 
 
@@ -367,10 +417,10 @@ age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) +
         geom_smooth(se=FALSE, col="red", method="lm") + 
         scale_color_viridis_d(guide=FALSE)
         
-grid.arrange(ht.plot, age.plot, ncol=2)
+gridExtra::grid.arrange(ht.plot, age.plot, ncol=2)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 * The points are colored by gender
 * Each gender has it's own best fit line in the same color as the points
@@ -552,7 +602,7 @@ par(mfrow=c(2,2))
 plot(mv_model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
 ## Multicollinearity

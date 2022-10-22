@@ -626,14 +626,12 @@ The proportion of those who have never smoked and report being in Excellent heal
 
 ## (Q~Q) Correlation {#bv-corr}
 
+The **correlation coefficient** is designated by $r$ for the sample correlation, and $\rho$ for the population correlation. The correlation is a measure of the strength and direction of a _linear relationship_ between two variables. 
 
-Recall the definition of **correlation** between two continuous variables. 
-The **correlation coefficient** is designated by $r$ for the sample correlation, and $\rho$ for the population correlation. The correlation is a measure of the strength and direction of a linear relationship between two variables. 
-
-The correlation ranges from +1 to -1. A correlation of +1 means that there is a perfect,
-positive linear relationship between the two variables. A correlation of -1 means there is a perfect,
-negative linear relationship between the two variables.
+The correlation ranges from +1 to -1. A correlation of +1 means that there is a perfect, positive linear relationship between the two variables. A correlation of -1 means there is a perfect, negative linear relationship between the two variables.
 In both cases, knowing the value of one variable, you can perfectly predict the value of the second.
+
+### Strength of the correlation
 
 Here are rough estimates for interpreting the strengths of correlations based on the magnitude of $r$.
 
@@ -653,13 +651,10 @@ ggplot(county, aes(x=poverty, y=fed_spend00)) +
 cor(county$poverty, county$fed_spend00, use="complete.obs")
 ```
 
-
-There is a negligible, positive, linear relationship between poverty rate and per capita federal
-spending ($r = 0.03$). Let $\rho$ denote the true correlation between poverty rate and federal
-spending per capita. Our null hypothesis is that there is no correlation between poverty rate and
-federal spending ($\rho = 0$), and the alternative hypothesis is that they are
-correlated ($\rho \neq 0$). We can use the `cor.test()` function to analyze the evidence in 
-favor of this alternative hypothesis. 
+* There is a negligible, positive, linear relationship between poverty rate and per capita federal spending ($r = 0.03$). 
+* Let $\rho$ denote the true correlation between poverty rate and federal spending per capita. 
+* Our null hypothesis is that there is no correlation between poverty rate and federal spending ($\rho = 0$), and the alternative hypothesis is that they are correlated ($\rho \neq 0$). 
+* We can use the `cor.test()` function to analyze the evidence in  favor of this alternative hypothesis. 
 
 ```{r}
 cor.test(county$poverty, county$fed_spend00)

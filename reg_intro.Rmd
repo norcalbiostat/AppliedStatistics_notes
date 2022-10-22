@@ -54,3 +54,12 @@ The general purpose of regression is to learn more about the relationship betwee
 
 This chapter starts by recapping notation and topics for simple linear regression, when there is only one predictor. Then we move into generalization of these concepts to many predictors, and model building topics such as stratification, interactions, and categorical predictors. 
 
+
+## Opening Remarks
+
+The PMA6 textbook (Chapter 7) goes into great detail on this topic, since regression is typically the basis for all advanced models. 
+
+The book also distinguishes between a "fixed-x" case, where the values of the explanatory variable $x$ only take on pre-specified values, and a "variable-x" case, where the values of $x$ are observations from a population distribution of X's. 
+
+This latter case is what we will be concerning ourselves with. 
+
