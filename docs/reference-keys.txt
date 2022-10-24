@@ -298,3 +298,8 @@ visualize-imputations
 calculating-bias
 final-thoughts
 additional-references-3
+prediction
+predict-the-average-value-of-y-haty-based-on-the-model
+confidence-intervals-for-the-predicted-mean
+predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x
+predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x

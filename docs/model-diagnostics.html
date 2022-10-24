@@ -250,7 +250,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
 <li class="chapter" data-level="7.4" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.4</b> Assumptions</a></li>
 <li class="chapter" data-level="7.5" data-path="slr-fev.html"><a href="slr-fev.html"><i class="fa fa-check"></i><b>7.5</b> Example</a></li>
-<li class="chapter" data-level="7.6" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.6</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.6" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7.6</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty-based-on-the-model"><i class="fa fa-check"></i><b>7.6.1</b> Predict the <em>average</em> value of Y (<span class="math inline">\(\hat{y}\)</span>) based on the model</a></li>
+<li class="chapter" data-level="7.6.2" data-path="prediction.html"><a href="prediction.html#confidence-intervals-for-the-predicted-mean"><i class="fa fa-check"></i><b>7.6.2</b> Confidence intervals for the predicted mean</a></li>
+<li class="chapter" data-level="7.6.3" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.3</b> Predict the <em>average</em> value of Y <span class="math inline">\((\hat{y_{i}})\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+<li class="chapter" data-level="7.6.4" data-path="prediction.html"><a href="prediction.html#predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.4</b> Predict a <em>new</em> value of Y <span class="math inline">\(\hat{y_{i}}\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="7.7" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.7</b> ANOVA for regression</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a>
@@ -539,9 +545,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="model-diagnostics" class="section level2 hasAnchor" number="8.7">
 <h2><span class="header-section-number">8.7</span> Model Diagnostics<a href="model-diagnostics.html#model-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="model-diagnostics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb14-2"><a href="model-diagnostics.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mv_model)</span></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="model-diagnostics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb19-2"><a href="model-diagnostics.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mv_model)</span></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
             </section>
 

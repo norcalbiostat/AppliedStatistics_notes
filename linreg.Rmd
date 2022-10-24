@@ -228,24 +228,72 @@ performance::check_model(fev.dad.model,
 
 No major deviations away from what is expected.   
 
-## Interval estimation
-* Everything is estimated with some degree of error
-* Confidence intervals for the mean of $Y$ at some given value of $X$ (say, $X^*$)
+## Prediction 
+The `predict` function is used to create model based predictions. 
+
+### Predict the _average_ value of Y ($\hat{y}$) based on the model
+
+Create predictions for all observations in the data based on the model, and then take the mean of those $n$ predictions. 
 
 $$
-\hat{Y} \pm tS \bigg[ \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+\hat{y_{i}} = b_{0} + b_{1}x_{i} \\
+\hat{\mu} = \frac{1}{n}\hat{y_{i}}
 $$
 
-* Prediction intervals for an individual $Y$ 
+```{r}
+predict(fev.dad.model) |> mean()
+```
+
+### Confidence intervals for the predicted mean
+We can leverage the `t.test()` function to give us the confidence interval for $\hat{\mu}$
+
+```{r}
+t.test(predict(fev.dad.model))
+```
+
+This model predicts that fathers will have FEV1 measurements of 4.09 (95% CI 4.04, 4.14) on average. 
+
+### Predict the _average_ value of Y $(\hat{y_{i}})$ for a certain value of $x^{*}$
+
+This is also called the _fitted_ value. 
+
+$$\hat{y_{i}} = b_{0} + b_{1}x^{*}_{i}$$
+
+We create a new `data.frame` that holds the values of the data we want to predict. $x^{*}=60$ in the first example,  $x^{*}=65$ and $68$ in the second example. 
+
+```{r}
+predict(fev.dad.model, newdata = data.frame(FHEIGHT = 60))
+predict(fev.dad.model, newdata = data.frame(FHEIGHT = c(65, 68)))
+```
+
+The confidence interval for the fitted value $\hat{y_{i}}$ is
 
 $$
-\hat{Y} \pm tS \bigg[ 1+  \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+\hat{Y} \pm t_{\frac{\alpha}{2}}S \bigg[ \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
 $$
 
-```{block2,  type='rmdnote'}
-Which one is wider? Why?
-  
-How does this relate to the standard deviation of individual $x$'s, and the standard deviation of $\bar{x}$'s? 
+where $S$ is the sample estimated variance (RMSE). We can use the `interval` argument to `predict` to calculate this interval. 
+
+```{r}
+predict(fev.dad.model, 
+        newdata = data.frame(FHEIGHT = c(65, 68)),
+        interval = "confidence")
+```
+
+### Predict a _new_ value of Y $\hat{y_{i}}$ for a certain value of $x^{*}$
+
+The point estimate of $\hat{y_{i}}$ is calculated the same, but the prediction interval is wider. This is because individual $y$'s are more variable than the average. This is the same concept that we saw when studying sampling distributions. The standard deviation of the mean $\mu_{Y}$, is smaller than the standard deviation of the individual data points $y_{i}$.
+
+$$
+\hat{Y} \pm t_{\frac{\alpha}{2}}S \bigg[ 1+  \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+$$
+
+This is obtained in R by modifying the value of the `interval` argument. 
+
+```{r}
+predict(fev.dad.model, 
+        newdata = data.frame(FHEIGHT = c(65, 68)),
+        interval = "prediction")
 ```
 
 If we set the `se` argument in `geom_smooth` to TRUE, the shaded region is the confidence band for the mean. To get the prediction interval, we have use the `predict` function to calculate the prediction interval, and then we can add that onto the plot as additional `geom_lines`.

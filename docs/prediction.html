@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.3 Parameter Estimation | Applied Statistics</title>
+  <title>7.6 Prediction | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.3 Parameter Estimation | Applied Statistics" />
+  <meta property="og:title" content="7.6 Prediction | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.3 Parameter Estimation | Applied Statistics" />
+  <meta name="twitter:title" content="7.6 Prediction | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mathematical-model-1.html"/>
-<link rel="next" href="example-1.html"/>
+<link rel="prev" href="slr-fev.html"/>
+<link rel="next" href="anova-for-regression.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -542,30 +542,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="parameter-estimation" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Parameter Estimation<a href="parameter-estimation.html#parameter-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The goal of regression analysis is to minimize the residual error.
-That is, to minimize the difference between the value of the dependent
-variable predicted by the model and the true value of the dependent variable.</p>
-<p><span class="math display">\[ \epsilon_{i} = \hat{y_{i}} - y_{i}\]</span></p>
-<p>The method of Least Squares accomplishes this by finding parameter estimates
-<span class="math inline">\(\beta_{0}\)</span> and <span class="math inline">\(\beta_{1}\)</span> that minimized the sum of the squared residuals:</p>
-<p><span class="math display">\[ \sum_{i=1}^{n} \epsilon_{i} \]</span></p>
-<p>For simple linear regression the regression coefficient estimates that minimize the sum of squared errors can be calculated as:
-<span class="math display">\[ \hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}}\bar{x} \quad \mbox{  and  } \quad  \hat{\beta_{1}} = r\frac{s_{y}}{s_{x}} \]</span></p>
-<p>For multiple linear regression, the fitted values <span class="math inline">\(\hat{y_{i}}\)</span> are calculated as the linear combination of x’s and <span class="math inline">\(\beta\)</span>’s, <span class="math inline">\(\sum_{i=1}^{p}X_{ij}\beta_{j}\)</span>. The sum of the squared residual errors (the distance between the observed point <span class="math inline">\(y_{i}\)</span> and the fitted value) now has the following form:</p>
-<p><span class="math display">\[ \sum_{i=1}^{n} |y_{i} - \sum_{i=1}^{p}X_{ij}\beta_{j}|^{2}\]</span></p>
-<p>Or in matrix notation</p>
-<p><span class="math display">\[ || \mathbf{y} - \mathbf{X}\mathbf{\beta} ||^{2} \]</span></p>
-<p>The details of methods to calculate the Least Squares estimate of <span class="math inline">\(\beta\)</span>’s is left to a course in mathematical statistics.</p>
+<div id="prediction" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Prediction<a href="prediction.html#prediction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>predict</code> function is used to create model based predictions.</p>
+<div id="predict-the-average-value-of-y-haty-based-on-the-model" class="section level3 hasAnchor" number="7.6.1">
+<h3><span class="header-section-number">7.6.1</span> Predict the <em>average</em> value of Y (<span class="math inline">\(\hat{y}\)</span>) based on the model<a href="prediction.html#predict-the-average-value-of-y-haty-based-on-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create predictions for all observations in the data based on the model, and then take the mean of those <span class="math inline">\(n\)</span> predictions.</p>
+<p><span class="math display">\[
+\hat{y_{i}} = b_{0} + b_{1}x_{i} \\
+\hat{\mu} = \frac{1}{n}\hat{y_{i}}
+\]</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="prediction.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">mean</span>()</span>
+<span id="cb7-2"><a href="prediction.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4.093267</span></span></code></pre></div>
+</div>
+<div id="confidence-intervals-for-the-predicted-mean" class="section level3 hasAnchor" number="7.6.2">
+<h3><span class="header-section-number">7.6.2</span> Confidence intervals for the predicted mean<a href="prediction.html#confidence-intervals-for-the-predicted-mean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can leverage the <code>t.test()</code> function to give us the confidence interval for <span class="math inline">\(\hat{\mu}\)</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="prediction.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">predict</span>(fev.dad.model))</span>
+<span id="cb8-2"><a href="prediction.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-3"><a href="prediction.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  One Sample t-test</span></span>
+<span id="cb8-4"><a href="prediction.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-5"><a href="prediction.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  predict(fev.dad.model)</span></span>
+<span id="cb8-6"><a href="prediction.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## t = 152.73, df = 149, p-value &lt; 2.2e-16</span></span>
+<span id="cb8-7"><a href="prediction.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true mean is not equal to 0</span></span>
+<span id="cb8-8"><a href="prediction.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 95 percent confidence interval:</span></span>
+<span id="cb8-9"><a href="prediction.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4.040309 4.146225</span></span>
+<span id="cb8-10"><a href="prediction.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## sample estimates:</span></span>
+<span id="cb8-11"><a href="prediction.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## mean of x </span></span>
+<span id="cb8-12"><a href="prediction.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  4.093267</span></span></code></pre></div>
+<p>This model predicts that fathers will have FEV1 measurements of 4.09 (95% CI 4.04, 4.14) on average.</p>
+</div>
+<div id="predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x" class="section level3 hasAnchor" number="7.6.3">
+<h3><span class="header-section-number">7.6.3</span> Predict the <em>average</em> value of Y <span class="math inline">\((\hat{y_{i}})\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span><a href="prediction.html#predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is also called the <em>fitted</em> value.</p>
+<p><span class="math display">\[\hat{y_{i}} = b_{0} + b_{1}x^{*}_{i}\]</span></p>
+<p>We create a new <code>data.frame</code> that holds the values of the data we want to predict. <span class="math inline">\(x^{*}=60\)</span> in the first example, <span class="math inline">\(x^{*}=65\)</span> and <span class="math inline">\(68\)</span> in the second example.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="prediction.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fev.dad.model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">FHEIGHT =</span> <span class="dv">60</span>))</span>
+<span id="cb9-2"><a href="prediction.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">##        1 </span></span>
+<span id="cb9-3"><a href="prediction.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.999612</span></span>
+<span id="cb9-4"><a href="prediction.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fev.dad.model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">FHEIGHT =</span> <span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">68</span>)))</span>
+<span id="cb9-5"><a href="prediction.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">##        1        2 </span></span>
+<span id="cb9-6"><a href="prediction.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.590138 3.944454</span></span></code></pre></div>
+<p>The confidence interval for the fitted value <span class="math inline">\(\hat{y_{i}}\)</span> is</p>
+<p><span class="math display">\[
+\hat{Y} \pm t_{\frac{\alpha}{2}}S \bigg[ \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+\]</span></p>
+<p>where <span class="math inline">\(S\)</span> is the sample estimated variance (RMSE). We can use the <code>interval</code> argument to <code>predict</code> to calculate this interval.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="prediction.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fev.dad.model, </span>
+<span id="cb10-2"><a href="prediction.html#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">FHEIGHT =</span> <span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">68</span>)),</span>
+<span id="cb10-3"><a href="prediction.html#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb10-4"><a href="prediction.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        fit      lwr      upr</span></span>
+<span id="cb10-5"><a href="prediction.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 3.590138 3.423257 3.757019</span></span>
+<span id="cb10-6"><a href="prediction.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 3.944454 3.844515 4.044393</span></span></code></pre></div>
+</div>
+<div id="predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x" class="section level3 hasAnchor" number="7.6.4">
+<h3><span class="header-section-number">7.6.4</span> Predict a <em>new</em> value of Y <span class="math inline">\(\hat{y_{i}}\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span><a href="prediction.html#predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The point estimate of <span class="math inline">\(\hat{y_{i}}\)</span> is calculated the same, but the prediction interval is wider. This is because individual <span class="math inline">\(y\)</span>’s are more variable than the average. This is the same concept that we saw when studying sampling distributions. The standard deviation of the mean <span class="math inline">\(\mu_{Y}\)</span>, is smaller than the standard deviation of the individual data points <span class="math inline">\(y_{i}\)</span>.</p>
+<p><span class="math display">\[
+\hat{Y} \pm t_{\frac{\alpha}{2}}S \bigg[ 1+  \frac{1}{N} + \sqrt{\frac{(X^* - \bar{X})^{2}}{\sum(X - \bar{X})^{2}}} \quad  \bigg]
+\]</span></p>
+<p>This is obtained in R by modifying the value of the <code>interval</code> argument.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="prediction.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fev.dad.model, </span>
+<span id="cb11-2"><a href="prediction.html#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">FHEIGHT =</span> <span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">68</span>)),</span>
+<span id="cb11-3"><a href="prediction.html#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb11-4"><a href="prediction.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        fit      lwr      upr</span></span>
+<span id="cb11-5"><a href="prediction.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 3.590138 2.463568 4.716709</span></span>
+<span id="cb11-6"><a href="prediction.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 3.944454 2.825839 5.063069</span></span></code></pre></div>
+<p>If we set the <code>se</code> argument in <code>geom_smooth</code> to TRUE, the shaded region is the confidence band for the mean. To get the prediction interval, we have use the <code>predict</code> function to calculate the prediction interval, and then we can add that onto the plot as additional <code>geom_lines</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="prediction.html#cb12-1" aria-hidden="true" tabindex="-1"></a>pred.int <span class="ot">&lt;-</span> <span class="fu">predict</span>(fev.dad.model, <span class="at">interval=</span><span class="st">&quot;predict&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">data.frame</span>()</span>
+<span id="cb12-2"><a href="prediction.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="prediction.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fev, <span class="fu">aes</span>(<span class="at">y=</span>FFEV1, <span class="at">x=</span>FHEIGHT)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="prediction.html#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb12-5"><a href="prediction.html#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>pred.int<span class="sc">$</span>lwr), <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span> </span>
+<span id="cb12-6"><a href="prediction.html#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>pred.int<span class="sc">$</span>upr), <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="mathematical-model-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="example-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="slr-fev.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anova-for-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

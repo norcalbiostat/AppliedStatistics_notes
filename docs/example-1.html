@@ -250,7 +250,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
 <li class="chapter" data-level="7.4" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.4</b> Assumptions</a></li>
 <li class="chapter" data-level="7.5" data-path="slr-fev.html"><a href="slr-fev.html"><i class="fa fa-check"></i><b>7.5</b> Example</a></li>
-<li class="chapter" data-level="7.6" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.6</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.6" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7.6</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty-based-on-the-model"><i class="fa fa-check"></i><b>7.6.1</b> Predict the <em>average</em> value of Y (<span class="math inline">\(\hat{y}\)</span>) based on the model</a></li>
+<li class="chapter" data-level="7.6.2" data-path="prediction.html"><a href="prediction.html#confidence-intervals-for-the-predicted-mean"><i class="fa fa-check"></i><b>7.6.2</b> Confidence intervals for the predicted mean</a></li>
+<li class="chapter" data-level="7.6.3" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.3</b> Predict the <em>average</em> value of Y <span class="math inline">\((\hat{y_{i}})\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+<li class="chapter" data-level="7.6.4" data-path="prediction.html"><a href="prediction.html#predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.4</b> Predict a <em>new</em> value of Y <span class="math inline">\(\hat{y_{i}}\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="7.7" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.7</b> ANOVA for regression</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a>
@@ -544,32 +550,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>What direction do you expect the slope coefficient for age to be? For height?</li>
 </ul>
 <p>Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a <code>+</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="example-1.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mv_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FAGE <span class="sc">+</span> FHEIGHT, <span class="at">data=</span>fev)</span>
-<span id="cb9-2"><a href="example-1.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mv_model)</span>
-<span id="cb9-3"><a href="example-1.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-4"><a href="example-1.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb9-5"><a href="example-1.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></span>
-<span id="cb9-6"><a href="example-1.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-7"><a href="example-1.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb9-8"><a href="example-1.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb9-9"><a href="example-1.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></span>
-<span id="cb9-10"><a href="example-1.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-11"><a href="example-1.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb9-12"><a href="example-1.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb9-13"><a href="example-1.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></span>
-<span id="cb9-14"><a href="example-1.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></span>
-<span id="cb9-15"><a href="example-1.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></span>
-<span id="cb9-16"><a href="example-1.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb9-17"><a href="example-1.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb9-18"><a href="example-1.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-19"><a href="example-1.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.5348 on 147 degrees of freedom</span></span>
-<span id="cb9-20"><a href="example-1.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></span>
-<span id="cb9-21"><a href="example-1.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></span>
-<span id="cb9-22"><a href="example-1.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mv_model)</span>
-<span id="cb9-23"><a href="example-1.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2.5 %      97.5 %</span></span>
-<span id="cb9-24"><a href="example-1.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -5.00919751 -0.51229620</span></span>
-<span id="cb9-25"><a href="example-1.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.03922545 -0.01405323</span></span>
-<span id="cb9-26"><a href="example-1.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.08319434  0.14559974</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="example-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a>mv_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FAGE <span class="sc">+</span> FHEIGHT, <span class="at">data=</span>fev)</span>
+<span id="cb14-2"><a href="example-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mv_model)</span>
+<span id="cb14-3"><a href="example-1.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-4"><a href="example-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb14-5"><a href="example-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></span>
+<span id="cb14-6"><a href="example-1.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-7"><a href="example-1.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb14-8"><a href="example-1.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb14-9"><a href="example-1.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></span>
+<span id="cb14-10"><a href="example-1.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-11"><a href="example-1.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb14-12"><a href="example-1.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb14-13"><a href="example-1.html#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></span>
+<span id="cb14-14"><a href="example-1.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></span>
+<span id="cb14-15"><a href="example-1.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></span>
+<span id="cb14-16"><a href="example-1.html#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb14-17"><a href="example-1.html#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb14-18"><a href="example-1.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-19"><a href="example-1.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.5348 on 147 degrees of freedom</span></span>
+<span id="cb14-20"><a href="example-1.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></span>
+<span id="cb14-21"><a href="example-1.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></span>
+<span id="cb14-22"><a href="example-1.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mv_model)</span>
+<span id="cb14-23"><a href="example-1.html#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2.5 %      97.5 %</span></span>
+<span id="cb14-24"><a href="example-1.html#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -5.00919751 -0.51229620</span></span>
+<span id="cb14-25"><a href="example-1.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.03922545 -0.01405323</span></span>
+<span id="cb14-26"><a href="example-1.html#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.08319434  0.14559974</span></span></code></pre></div>
 <p>Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p&lt;.0001).</p>
 <p>Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p&lt;.0001).</p>
 <p>For the model that includes age, the coefficient for height is now 0.11, which is interpreted as the rate of change of FEV1 as a function of height <strong>after adjusting for age</strong>. This is also called the <strong>partial regression coefficient</strong> of FEV1 on height after adjusting for age.</p>

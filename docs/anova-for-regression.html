@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="interval-estimation.html"/>
+<link rel="prev" href="prediction.html"/>
 <link rel="next" href="mlr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -250,7 +250,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="least-squares-regression.html"><a href="least-squares-regression.html"><i class="fa fa-check"></i><b>7.3</b> Least Squares Regression</a></li>
 <li class="chapter" data-level="7.4" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.4</b> Assumptions</a></li>
 <li class="chapter" data-level="7.5" data-path="slr-fev.html"><a href="slr-fev.html"><i class="fa fa-check"></i><b>7.5</b> Example</a></li>
-<li class="chapter" data-level="7.6" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>7.6</b> Interval estimation</a></li>
+<li class="chapter" data-level="7.6" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7.6</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty-based-on-the-model"><i class="fa fa-check"></i><b>7.6.1</b> Predict the <em>average</em> value of Y (<span class="math inline">\(\hat{y}\)</span>) based on the model</a></li>
+<li class="chapter" data-level="7.6.2" data-path="prediction.html"><a href="prediction.html#confidence-intervals-for-the-predicted-mean"><i class="fa fa-check"></i><b>7.6.2</b> Confidence intervals for the predicted mean</a></li>
+<li class="chapter" data-level="7.6.3" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.3</b> Predict the <em>average</em> value of Y <span class="math inline">\((\hat{y_{i}})\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+<li class="chapter" data-level="7.6.4" data-path="prediction.html"><a href="prediction.html#predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.6.4</b> Predict a <em>new</em> value of Y <span class="math inline">\(\hat{y_{i}}\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="7.7" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.7</b> ANOVA for regression</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression</a>
@@ -539,7 +545,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="anova-for-regression" class="section level2 hasAnchor" number="7.7">
 <h2><span class="header-section-number">7.7</span> ANOVA for regression<a href="anova-for-regression.html#anova-for-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Since an ANOVA is an analysis of the variance due to a model, compared to the unexplained variance, it can be used to test the overall model fit. This will give us the same general answer to the question of “is there an association between X and Y” that testing for a non-zero slope (<span class="math inline">\(\beta \neq 0\)</span>). If the mean squared value for the regression is much larger than the mean squared value for the residual error, then the line fits the data better than the simple mean, and thus, the slope of the line is not zero.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="anova-for-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">summary</span>() <span class="sc">|&gt;</span> <span class="fu">pander</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="anova-for-regression.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(fev.dad.model) <span class="sc">|&gt;</span> <span class="fu">summary</span>() <span class="sc">|&gt;</span> <span class="fu">pander</span>()</span></code></pre></div>
 <table style="width:87%;">
 <caption>Analysis of Variance Model</caption>
 <colgroup>
@@ -586,7 +592,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="interval-estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prediction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="mlr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
