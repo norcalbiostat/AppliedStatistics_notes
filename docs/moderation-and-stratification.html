@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.1 Example | Applied Statistics</title>
+  <title>Chapter 8 Moderation and Stratification | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.1 Example | Applied Statistics" />
+  <meta property="og:title" content="Chapter 8 Moderation and Stratification | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.1 Example | Applied Statistics" />
+  <meta name="twitter:title" content="Chapter 8 Moderation and Stratification | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="slr.html"/>
-<link rel="next" href="mathematical-model.html"/>
+<link rel="prev" href="correlation-coefficient.html"/>
+<link rel="next" href="moderation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,43 +560,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="example" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Example<a href="example.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lung function data were obtained from an epidemiological study of households living in four areas with different amounts and types of air pollution. The data set used in this book is a subset of the total data. In this chapter we use only the data taken on the fathers, all of whom are nonsmokers (see PMA6 Appendix A for more details).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="example.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data from a version stored online. </span></span>
-<span id="cb1-2"><a href="example.html#cb1-2" aria-hidden="true" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p>One of the major early indicators of reduced respiratory function is FEV1 or forced expiratory volume in the first second (amount of air exhaled in 1 second). Since it is known that taller males tend to have higher FEV1, we wish to determine the relationship between height and FEV1. We can use regression analysis for both a descriptive and predictive purpose.</p>
-<ul>
-<li><strong>Descriptive</strong>: Describing the relationship between FEV1 and height</li>
-<li><strong>Predictive</strong>: Use the equation to determine expected or normal FEV1 for a given height</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="example.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fev, <span class="fu">aes</span>(<span class="at">y=</span>FFEV1, <span class="at">x=</span>FHEIGHT)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-2"><a href="example.html#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlab</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;FEV1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="example.html#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggtitle</span>(<span class="st">&quot;Scatterplot and Regression line of FEV1 Versus Height for Males.&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="example.html#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) </span></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>In this graph, height is given on the horizontal axis since it is the independent or predictor variable and FEV1 is given on the vertical axis since it is the dependent or outcome variable.</p>
-<p><strong>Interpretation</strong>: There does appear to be a tendency for taller men to have higher FEV1. The <strong>regression line</strong> is also added to the graph. The line is tilted upwards, indicating that we expect larger values of FEV1 with larger values of height.</p>
-<p>Specifically the equation of the regression line is
-<span class="math display">\[
-Y = -4.087 + 0.118 X
-\]</span></p>
-<p>The quantity 0.118 in front of <span class="math inline">\(X\)</span> is greater than zero, indicating that as we increase <span class="math inline">\(X, Y\)</span> will increase. For example, we would expect a father who is 70 inches tall to have an FEV1 value of</p>
-<p><span class="math display">\[\mbox{FEV1} = -4.087 + (0.118) (70) = 4.173\]</span></p>
-<p>If the height was 66 inches then we would expect an FEV1 value of only 3.70.</p>
-<div id="caution-on-out-of-range-predictions" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Caution on out of range predictions<a href="example.html#caution-on-out-of-range-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To take an extreme example, suppose a father was 2 feet tall. Then the equation would predict a negative value of FEV1 (<span class="math inline">\(-1.255\)</span>).</p>
-<p>A safe policy is to restrict the use of the equation to the range of the <span class="math inline">\(X\)</span> observed in the sample.</p>
-</div>
+<div id="moderation-and-stratification" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Moderation and Stratification<a href="moderation-and-stratification.html#moderation-and-stratification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Sometimes the relationship between X and Y may change depending on the value of a third variable. This section provides some motivation for why we need a single model formation that can accommodate more than a single predictor.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="slr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mathematical-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="correlation-coefficient.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="moderation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

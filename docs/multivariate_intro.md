@@ -1,4 +1,3 @@
-
 # (PART) Multivariate Analysis {-}
 
 # Introduction {#mv-intro}
@@ -8,7 +7,7 @@ There is an important distinction between _multivariable_ and _multivariate_ mod
 * _multivariable_ : Multiple predictor variables ($\mathbf{x}$). 
 * _multivariate_: Multiple response variables ($\mathbf{Y}$). 
 
-Often analysts will misuse  _multivaraite_  when they really  mean _multivariable_. 
+Often analysts will misuse  _multivariate_  when they really  mean _multivariable_. 
 
 Multivariate techniques are
 

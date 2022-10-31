@@ -15,7 +15,8 @@ list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pan
                       "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot", "gridExtra", "knitr", 
                       "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", "ggjoy",
                       "stargazer", "missForest", "forestplot", "emo", "tidyr", "factoextra", 
-                      "performance", "broom", "dotwhisker", "survey", "marginaleffects")
+                      "performance", "broom", "dotwhisker", "survey", "marginaleffects", "gtsummary", 
+                      "sjPlot")
 
 # issues with MKMisk requiring 'limma' which is in bioconductor
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]

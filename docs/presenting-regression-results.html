@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.1 Example | Applied Statistics</title>
+  <title>9.4 Presenting regression results | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.1 Example | Applied Statistics" />
+  <meta property="og:title" content="9.4 Presenting regression results | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.1 Example | Applied Statistics" />
+  <meta name="twitter:title" content="9.4 Presenting regression results | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="slr.html"/>
-<link rel="next" href="mathematical-model.html"/>
+<link rel="prev" href="mlr-fev.html"/>
+<link rel="next" href="model-diagnostics-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,43 +560,546 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="example" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Example<a href="example.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lung function data were obtained from an epidemiological study of households living in four areas with different amounts and types of air pollution. The data set used in this book is a subset of the total data. In this chapter we use only the data taken on the fathers, all of whom are nonsmokers (see PMA6 Appendix A for more details).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="example.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data from a version stored online. </span></span>
-<span id="cb1-2"><a href="example.html#cb1-2" aria-hidden="true" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p>One of the major early indicators of reduced respiratory function is FEV1 or forced expiratory volume in the first second (amount of air exhaled in 1 second). Since it is known that taller males tend to have higher FEV1, we wish to determine the relationship between height and FEV1. We can use regression analysis for both a descriptive and predictive purpose.</p>
+<div id="presenting-regression-results" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Presenting regression results<a href="presenting-regression-results.html#presenting-regression-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The direct software output always tells you more information than what you are wanting to share with an audience. Here are some ways to “prettify” your regression output.</p>
 <ul>
-<li><strong>Descriptive</strong>: Describing the relationship between FEV1 and height</li>
-<li><strong>Predictive</strong>: Use the equation to determine expected or normal FEV1 for a given height</li>
+<li>Using <code>tidy</code> and <code>kable</code></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="example.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fev, <span class="fu">aes</span>(<span class="at">y=</span>FFEV1, <span class="at">x=</span>FHEIGHT)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-2"><a href="example.html#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlab</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;FEV1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="example.html#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggtitle</span>(<span class="st">&quot;Scatterplot and Regression line of FEV1 Versus Height for Males.&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb2-4"><a href="example.html#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) </span></code></pre></div>
-<p><img src="linreg_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>In this graph, height is given on the horizontal axis since it is the independent or predictor variable and FEV1 is given on the vertical axis since it is the dependent or outcome variable.</p>
-<p><strong>Interpretation</strong>: There does appear to be a tendency for taller men to have higher FEV1. The <strong>regression line</strong> is also added to the graph. The line is tilted upwards, indicating that we expect larger values of FEV1 with larger values of height.</p>
-<p>Specifically the equation of the regression line is
-<span class="math display">\[
-Y = -4.087 + 0.118 X
-\]</span></p>
-<p>The quantity 0.118 in front of <span class="math inline">\(X\)</span> is greater than zero, indicating that as we increase <span class="math inline">\(X, Y\)</span> will increase. For example, we would expect a father who is 70 inches tall to have an FEV1 value of</p>
-<p><span class="math display">\[\mbox{FEV1} = -4.087 + (0.118) (70) = 4.173\]</span></p>
-<p>If the height was 66 inches then we would expect an FEV1 value of only 3.70.</p>
-<div id="caution-on-out-of-range-predictions" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Caution on out of range predictions<a href="example.html#caution-on-out-of-range-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To take an extreme example, suppose a father was 2 feet tall. Then the equation would predict a negative value of FEV1 (<span class="math inline">\(-1.255\)</span>).</p>
-<p>A safe policy is to restrict the use of the equation to the range of the <span class="math inline">\(X\)</span> observed in the sample.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="presenting-regression-results.html#cb28-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(mlr.dad.model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-2.761
+</td>
+<td style="text-align:right;">
+1.138
+</td>
+<td style="text-align:right;">
+-2.427
+</td>
+<td style="text-align:right;">
+0.016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FAGE
+</td>
+<td style="text-align:right;">
+-0.027
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+<td style="text-align:right;">
+-4.183
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FHEIGHT
+</td>
+<td style="text-align:right;">
+0.114
+</td>
+<td style="text-align:right;">
+0.016
+</td>
+<td style="text-align:right;">
+7.245
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Using <a href="https://www.danieldsjoberg.com/gtsummary/"><code>gtsummary</code></a></li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="presenting-regression-results.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb29-2"><a href="presenting-regression-results.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mlr.dad.model)</span></code></pre></div>
+<div id="lgqvbanrpc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#lgqvbanrpc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lgqvbanrpc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lgqvbanrpc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lgqvbanrpc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lgqvbanrpc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lgqvbanrpc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lgqvbanrpc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lgqvbanrpc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lgqvbanrpc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lgqvbanrpc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lgqvbanrpc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lgqvbanrpc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lgqvbanrpc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lgqvbanrpc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lgqvbanrpc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lgqvbanrpc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lgqvbanrpc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_left {
+  text-align: left;
+}
+
+#lgqvbanrpc .gt_center {
+  text-align: center;
+}
+
+#lgqvbanrpc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lgqvbanrpc .gt_font_normal {
+  font-weight: normal;
+}
+
+#lgqvbanrpc .gt_font_bold {
+  font-weight: bold;
+}
+
+#lgqvbanrpc .gt_font_italic {
+  font-style: italic;
+}
+
+#lgqvbanrpc .gt_super {
+  font-size: 65%;
+}
+
+#lgqvbanrpc .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#lgqvbanrpc .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#lgqvbanrpc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lgqvbanrpc .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#lgqvbanrpc .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#lgqvbanrpc .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">FAGE</td>
+<td class="gt_row gt_center">-0.03</td>
+<td class="gt_row gt_center">-0.04, -0.01</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">FHEIGHT</td>
+<td class="gt_row gt_center">0.11</td>
+<td class="gt_row gt_center">0.08, 0.15</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
 </div>
+<ul>
+<li>Using <code>dwplot</code> from the <a href="https://cran.r-project.org/web/packages/dotwhisker/vignettes/dotwhisker-vignette.html"><code>dotwhisker</code></a> package to create a <em>forest plot</em>.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="presenting-regression-results.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
+<span id="cb30-2"><a href="presenting-regression-results.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dwplot</span>(mlr.dad.model)</span></code></pre></div>
+<p><img src="linreg_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="slr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mathematical-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mlr-fev.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-diagnostics-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

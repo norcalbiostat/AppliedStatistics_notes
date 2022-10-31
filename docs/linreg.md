@@ -16,6 +16,10 @@ Both Regression and Correlation can be used for two main purposes:
 
 Simple Linear Regression is an example of a Bivariate analysis since there is only one covariate (explanatory variable) under consideration.  
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gridExtra`, `sjPlot`, `broom`, `performance` and `ggdist` packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
+
+
+
 ## Example
 
 Lung function data were obtained from an epidemiological study of households living in four areas with different amounts and types of air pollution. The data set used in this book is a subset of the total data. In this chapter we use only the data taken on the fathers, all of whom are nonsmokers (see PMA6 Appendix A for more details). 
@@ -40,7 +44,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_smooth(method="lm", se=FALSE, col="blue") 
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 In this graph, height is given on the horizontal axis since it is the independent or predictor variable and FEV1 is given on the vertical axis since it is the dependent or outcome variable.
 
@@ -99,15 +103,12 @@ y_{i} = \beta_{0} + \beta_{1} X + \epsilon_{i} \\
 $$
 
 
-### Parameter Estimates
+## Parameter Estimates
 * Estimate the slope $\beta_{1}$ and intercept $\beta_{0}$ using a method called **Least Squares**.
 * The residual mean squared error (RMSE) is an estimate of the variance $s^{2}$
     - RMSE can also refer to the root mean squared error. 
-  
-  
-## Least Squares Regression 
 
-The **Least Squares** method finds the estimates for the intercept $b_{0}$ and slope $b_{1}$ that minimize the SSE (Sum of squared errors). Let's see how that works: 
+The **Least Squares** method finds the estimates for the intercept $b_{0}$ and slope $b_{1}$ that minimize the SSE (Sum of squared errors). Let's explore that visually: 
 
 See https://paternogbc.shinyapps.io/SS_regression/
 
@@ -117,12 +118,23 @@ See https://paternogbc.shinyapps.io/SS_regression/
 * Set the regression slope to 1
 * Set the standard deviation to 5
 
-**Partitioning the Variance using the Sum of Squares**
+
+The method of Least Squares finds the best estimates for $\beta_{0}$ and $\beta_{1}$ that minimized the sum of the squared residuals:
+
+$$ \sum_{i=1}^{n} \epsilon_{i} $$
+
+For simple linear regression the regression coefficient estimates that minimize the sum of squared errors can be calculated as: 
+
+$$ \hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}}\bar{x} \quad \mbox{  and  } \quad  \hat{\beta_{1}} = r\frac{s_{y}}{s_{x}} $$
+
+
+### Sum of Squares
+
+Partitioning the Variance using the Sum of Squares:
 
 * SS Total- how far are the points away from $\bar{y}$? (one sample mean)
 * SS Regression - how far away is the regression line from $\bar{y}$?.
 * SS Error - how far are the points away from the estimated regression line? 
-
 
 Looking at it this way, we are asking "If I know the value of $x$, how much better will I be at predicting $y$ than if I were just to use $\bar{y}$? 
 
@@ -136,22 +148,6 @@ Here is a [link](https://ryansafner.shinyapps.io/ols_estimation_by_min_sse/) to 
 **RMSE** is the Root Mean Squared Error. In the PMA textbook this is denoted as $S$, which is an estimate for $\sigma$. 
 
 $$ S = \sqrt{\frac{SSE}{N-2}}$$
-
-
-<!---
-## Correlation Coefficient
-
-* The correlation coefficient $\rho$ measures the strength of association between $X$ and $Y$ in the _population_.
-* $\sigma^{2} = VAR(Y|X)$ is the variance of $Y$ for a specific $X$.
-* $\sigma_{y}^{2} = VAR(Y)$ is the variance of $Y$ for all $X$'s.
-
-$$ \sigma^{2} = \sigma_{y}^{2}(1-\rho^{2})$$
-$$ \rho^{2} = \frac{\sigma_{y}^{2} - \sigma^{2}}{\sigma_{y}^{2}}$$
-
-* $\rho^{2}$ = reduction in variance of Y associated with knowledge of X/original variance of Y
-* **Coefficient of Determination**: $100\rho^{2}$ = % of variance of Y associated with X or explained by X
-* Caution: association vs. causation.
---->
 
 ## Assumptions
 
@@ -188,8 +184,6 @@ Many of the assumptions for regression are on the form of the residuals, which c
 
 ## Example {#slr-fev}
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `broom`, and `performance` packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
-
 Returning to the Lung function data set from PMA6, lets analyze the relationship between height and FEV for fathers in this data set. 
 
 
@@ -202,7 +196,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_smooth(se=FALSE, col="red") 
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 There does appear to be a tendency for taller men to have higher FEV1. The trend is linear, the red lowess trend line follows the blue linear fit line quite well. 
 
@@ -272,19 +266,24 @@ confint(fev.dad.model) |> kable(digits=3)
 
 For ever inch taller a father is, his FEV1 measurement significantly increases by .12 (95%CI: .09, .15, p<.0001).  
 
+## Model Diagnostics
 
-Lastly, we need to check assumptions on the residuals to see if the model results are valid. 
+> See PMA6 Section 7.8
+
+Lastly, we need to check assumptions on the residuals to see if the model results are valid. We can use the [`check_model`](https://easystats.github.io/performance/reference/check_model.html) function from the [`performance`](https://easystats.github.io/performance/) package to do the heavy lifting. 
 
 
 ```r
-performance::check_model(fev.dad.model, 
-        check = c("qq", "linearity", "homogeneity", "pp_check"))
+library(performance)
+check_model(fev.dad.model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
+<img src="linreg_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 No major deviations away from what is expected.   
+
+
+
 
 ## Prediction 
 The `predict` function is used to create model based predictions. 
@@ -393,7 +392,7 @@ ggplot(fev, aes(y=FFEV1, x=FHEIGHT)) + geom_point() +
       geom_line(aes(y=pred.int$upr), linetype="dashed", col="red", lwd=1.5)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 ## ANOVA for regression
 
@@ -415,27 +414,344 @@ aov(fev.dad.model) |> summary() |> pander()
 
 Table: Analysis of Variance Model
 
+## Correlation Coefficient
+
+The correlation coefficient $\rho$ (Section  \@ref(bv-corr)) measures the strength of association between $X$ and $Y$ in the _population_. 
+
+It also has a second interpretation as the **Coefficient of Determination**: $100\rho^{2}$ = % of variance of $Y$ associated with $\mathbf{X}$ or explained by $\mathbf{X}$ (the model). 
+
+In other words, $\rho^{2}$ is reduction in variance of Y associated with knowledge of $\mathbf{X}$. 
+
+
+# Moderation and Stratification
+
+Sometimes the relationship between X and Y may change depending on the value of a third variable. This section provides some motivation for why we need a single model formation that can accommodate more than a single predictor. 
+
+## Moderation
+
+Moderation occurs when the relationship between two variables depends on a third variable.
+
+* The third variable is referred to as the moderating variable or simply the moderator. 
+* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
+    - This tends to be an important 
+* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
+    - This is also called a _stratified_ model, or a _subgroup analysis_.
+
+### Example 1: Simpson's Paradox
+
+Sometimes moderating variables can result in what's known as _Simpson's Paradox_. This has had legal consequences in the past at UC Berkeley. 
+
+https://en.wikipedia.org/wiki/Simpson%27s_paradox
+
+### Example 2: Sepal vs Petal Length in Iris flowers
+
+Let's explore the relationship between the length of the sepal in an iris flower, and the length (cm) of it's petal. 
+
+
+```r
+overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
+                geom_point() + geom_smooth(se=FALSE) + 
+                theme_bw()
+
+by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
+                  geom_point() + geom_smooth(se=FALSE) + 
+                  theme_bw() + theme(legend.position="top")
+
+gridExtra::grid.arrange(overall, by_spec , ncol=2)
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
+
+
+## Stratification
+
+Stratified models fit the regression equations (or any other bivariate analysis) for each subgroup of the population. 
+
+The mathematical model describing the relationship between Petal length ($Y$), and Sepal length ($X$) for each of the species separately would be written as follows: 
+
+$$ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})$$
+$$ Y_{iv} \sim \beta_{0v} + \beta_{1v}*x_{i} + \epsilon_{iv} \qquad \epsilon_{iv} \sim \mathcal{N}(0,\sigma^{2}_{v}) $$
+$$ Y_{ir} \sim \beta_{0r} + \beta_{1r}*x_{i} + \epsilon_{ir} \qquad \epsilon_{ir} \sim \mathcal{N}(0,\sigma^{2}_{r}) $$
+
+where $s, v, r$ indicates species _setosa, versicolor_ and _virginica_ respectively. 
+  
+
+In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: $\beta_{0}, \beta_{1}$, and $\sigma^{2}$, for a total of 9 for the three models. The more parameters that need to be estimated, the more data we need. 
+
+
+
+## Identifying a moderator
+
+Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
+
+**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
+
+**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
+
+**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
+
+
+### What to look for in each type of analysis
+
+* **ANOVA** - look at the $p$-value, $r$-squared, means, and the graph of the ANOVA and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is moderator or not.
+* **Chi-Square** - look at the $p$-value, the percents for the columns in the crosstab table, and the graph for the Chi-Square and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.
+* **Correlation and Linear Regression** - look at the correlation coefficient ($r$), $p$-value, regression coefficients, $r$-squared, and the scatterplot. Compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.
+
+
+## Example 2 (cont.) Correlation & Regression
+
+![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
+
+
+Let's look at the correlation between these two continuous variables
+
+**overall**
+
+```r
+cor(iris$Sepal.Length, iris$Petal.Length)
+## [1] 0.8717538
+```
+
+**stratified by species**
+
+```r
+by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
+## iris$Species: setosa
+## [1] 0.2671758
+## ------------------------------------------------------------ 
+## iris$Species: versicolor
+## [1] 0.754049
+## ------------------------------------------------------------ 
+## iris$Species: virginica
+## [1] 0.8642247
+```
+
+There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
+
+
+![q](images/q.png) How does the species change the regression equation? 
+
+**overall**
+
+```r
+lm(iris$Petal.Length ~ iris$Sepal.Length) |> summary() |> tidy()
+## # A tibble: 2 × 5
+##   term              estimate std.error statistic  p.value
+##   <chr>                <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)          -7.10    0.507      -14.0 6.13e-29
+## 2 iris$Sepal.Length     1.86    0.0859      21.6 1.04e-47
+```
+
+**stratified by species**
+
+```r
+by(iris, iris$Species, function(x) {
+  lm(x$Petal.Length ~ x$Sepal.Length) |> summary() |> tidy()
+  })
+## iris$Species: setosa
+## # A tibble: 2 × 5
+##   term           estimate std.error statistic p.value
+##   <chr>             <dbl>     <dbl>     <dbl>   <dbl>
+## 1 (Intercept)       0.803    0.344       2.34  0.0238
+## 2 x$Sepal.Length    0.132    0.0685      1.92  0.0607
+## ------------------------------------------------------------ 
+## iris$Species: versicolor
+## # A tibble: 2 × 5
+##   term           estimate std.error statistic  p.value
+##   <chr>             <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)       0.185    0.514      0.360 7.20e- 1
+## 2 x$Sepal.Length    0.686    0.0863     7.95  2.59e-10
+## ------------------------------------------------------------ 
+## iris$Species: virginica
+## # A tibble: 2 × 5
+##   term           estimate std.error statistic  p.value
+##   <chr>             <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)       0.610    0.417       1.46 1.50e- 1
+## 2 x$Sepal.Length    0.750    0.0630     11.9  6.30e-16
+```
+
+* Overall: -7.1 + 1.86x, significant positive slope p = 1.04x10-47
+* Setosa: 0.08 + 0.13x, non-significant slope, p=.06
+* Versicolor: 0.19 + 0.69x, significant positive slope p=2.6x10-10
+* Virginica: 0.61 + 0.75x, significant positive slope p= 6.3x10-16
+
+
+So we can say that iris specis **moderates** the relationship between sepal and petal length. 
+
+## Example 3: ANOVA
+
+Is the relationship between flipper length and species the same for each sex of penguin? 
+
+
+```r
+ggplot(pen, aes(x=flipper_length_mm, y=species, fill=species)) + 
+      stat_slab(alpha=.5, justification = 0) + 
+      geom_boxplot(width = .2,  outlier.shape = NA) + 
+      geom_jitter(alpha = 0.5, height = 0.05) +
+      stat_summary(fun="mean", geom="point", col="red", size=4, pch=17) + 
+      theme_bw() + 
+      labs(x="Flipper Length (mm)", y = "Species", title = "Overall") + 
+      theme(legend.position = "none")
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+
+```r
+pen %>% select(flipper_length_mm, species, sex) %>% na.omit() %>%
+ggplot(aes(x=flipper_length_mm, y=species, fill=species)) + 
+      stat_slab(alpha=.5, justification = 0) + 
+      geom_boxplot(width = .2,  outlier.shape = NA) + 
+      geom_jitter(alpha = 0.5, height = 0.05) +
+      stat_summary(fun="mean", geom="point", col="red", size=4, pch=17) + 
+      theme_bw() + 
+      labs(x="Flipper Length (mm)", y = "Species", title = "Overall") + 
+      theme(legend.position = "none") + 
+  facet_wrap(~sex)
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+
+The pattern of distributions of flipper length by species seems the same for both sexes of penguin. Sex is likely not a moderator. Let's check the ANOVA anyhow
+
+**Overall**
+
+```r
+aov(pen$flipper_length_mm ~ pen$species) |> summary()
+##              Df Sum Sq Mean Sq F value Pr(>F)    
+## pen$species   2  52473   26237   594.8 <2e-16 ***
+## Residuals   339  14953      44                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 2 observations deleted due to missingness
+```
+
+**By Sex**
+
+```r
+by(pen, pen$sex, function(x) {
+  aov(x$flipper_length_mm ~ x$species) |> summary()
+  })
+##              Df  Sum Sq Mean Sq F value    Pr(>F)    
+## x$species     2 21415.6   10708  411.79 < 2.2e-16 ***
+## Residuals   162  4212.6      26                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## ------------------------------------------------------------ 
+##              Df  Sum Sq Mean Sq F value    Pr(>F)    
+## x$species     2 29098.4 14549.2  384.37 < 2.2e-16 ***
+## Residuals   165  6245.6    37.9                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Sex is **not** a modifier, the relationship between species and flipper length is the same within male and female penguins. 
+
+
+## Example 4: Chi-Squared
+
+**Identify response, explanatory, and moderating variables**
+
+* Categorical response variable = Ever smoked (variable `eversmoke_c`
+* Categorical explanatory variable = General Health (variable `genhealth`
+* Categorical Potential Moderator = Gender (variable `female5_c`
+  
+**Visualize the relationship between smoking and general health across the entire sample.**
+
+
+```r
+plot_xtab(addhealth$genhealth, addhealth$eversmoke_c, 
+          show.total = FALSE, margin = "row") + 
+  ggtitle("Overall")
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+
+```r
+fem <- addhealth %>% filter(female_c == "Female")
+mal <- addhealth %>% filter(female_c == "Male")
+
+fem.plot <- plot_xtab(fem$genhealth, fem$eversmoke_c, 
+          show.total = FALSE, margin = "row") + 
+  ggtitle("Females only")
+mal.plot <- plot_xtab(mal$genhealth, mal$eversmoke_c, 
+          show.total = FALSE, margin = "row") + 
+  ggtitle("Males only")
+
+gridExtra::grid.arrange(fem.plot, mal.plot)
+```
+
+<img src="linreg_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+
+A general pattern is seen where the proportion of smokers increases as the level of general health decreases. This pattern is similar within males and females, but it is noteworthy that a higher proportion of  non smokers are female. 
+
+
+![q](images/q.png)  Does being female change the relationship between smoking and general health? Is the distribution of smoking status (proportion of those who have ever smoked)  equal across all levels of general health, for both males and females?
+
+**Fit both the original, and stratified models.**
+
+**original**
+
+```r
+chisq.test(addhealth$eversmoke_c, addhealth$genhealth)
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  addhealth$eversmoke_c and addhealth$genhealth
+## X-squared = 30.795, df = 4, p-value = 3.371e-06
+```
+
+**stratified**
+
+```r
+by(addhealth, addhealth$female_c, function(x) chisq.test(x$eversmoke_c, x$genhealth))
+## addhealth$female_c: Male
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  x$eversmoke_c and x$genhealth
+## X-squared = 19.455, df = 4, p-value = 0.0006395
+## 
+## ------------------------------------------------------------ 
+## addhealth$female_c: Female
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  x$eversmoke_c and x$genhealth
+## X-squared = 19.998, df = 4, p-value = 0.0004998
+```
+
+**Determine if the Third Variable is a moderator or not.**
+
+The relationship between smoking status and general health is significant in both the main effects and the stratified model. The distribution of smoking status across general health categories does not differ between females and males. Gender is **not** a moderator for this analysis. 
 
 
 # Multiple Linear Regression {#mlr}
 
+Hopefully by now you have some motivation for why we need to have a robust model that can incorporate information from multiple variables at the same time. Multiple linear regression is our tool to expand our MODEL to better fit the DATA. 
+
 * Extends simple linear regression.
 * Describes a linear relationship between a single continuous $Y$ variable, and several $X$ variables.
 * Predicts $Y$ from $X_{1}, X_{2}, \ldots , X_{P}$.
+* X's can be continuous or discrete (categorical)
+* X's can be transformations of other X's, e.g., $log(x), x^{2}$. 
+
 
 Now it's no longer a 2D regression _line_, but a $p$ dimensional regression plane. 
 
 ![](images/regression_plane.png)
 
-## Types of X variables
-* Fixed: The levels of $X$ are selected in advance with the intent to measure the affect on an outcome $Y$. 
-* Variable: Random sample of individuals from the population is taken and $X$ and $Y$ are measured on each individual.
-* X's can be continuous or discrete (categorical)
-* X's can be transformations of other X's, e.g., $log(x), x^{2}$. 
 
 ## Mathematical Model
 
+The mathematical model for multiple linear regression equates the value of the continuous outcome $y_{i}$ to a **linear combination** of multiple predictors $x_{1} \ldots x_{p}$ each with their own slope coefficient $\beta_{1} \ldots \beta_{p}$. 
+
 $$ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \ldots + \beta_{p}x_{pi} + \epsilon_{i}$$
+
+where $i$ indexes the observations $i = 1 \ldots n$, and $j$ indexes the number of parameters $j=1 \ldots p$. This linear combination is often written using _summation notation_: $\sum_{i=1}^{p}X_{ij}\beta_{j}$. 
 
 The assumptions on the residuals $\epsilon_{i}$ still hold:   
 
@@ -443,52 +759,55 @@ The assumptions on the residuals $\epsilon_{i}$ still hold:
 * They are homoscedastic, that is all have the same finite variance: $Var(\epsilon_{i})=\sigma^{2}<\infty$  
 * Distinct error terms are uncorrelated: (Independent) $\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.$  
 
-The regression model relates $y$ to a function of $\textbf{X}$ and $\mathbf{\beta}$, where $\textbf{X}$ is a $nxp$ matrix of $p$ covariates on $n$ observations and $\mathbf{\beta}$ is a length $p$ vector of regression coefficients.
 
-In matrix notation this looks like: 
+In matrix notation the linear combination of $X$'s and $\beta$'s is written as $\mathbf{x}_{i}^{'}\mathbf{\beta}$, (the inner product between the vectors $\mathbf{x}_{i}$ and $\mathbf{\beta}$). Then the model is written as: 
 
-$$ \textbf{y} = \textbf{X} \mathbf{\beta} + \mathbf{\epsilon} $$
+$$ \textbf{y} = \textbf{X} \mathbf{\beta} + \mathbf{\epsilon} ,$$ 
+
+and we say the regression model relates $y$ to a function of $\textbf{X}$ and $\mathbf{\beta}$, where $\textbf{X}$ is a $nxp$ matrix of $p$ covariates on $n$ observations and $\mathbf{\beta}$ is a length $p$ vector of regression coefficients.
+
+_Note: Knowledge of Matricies or Linear Algebra is not required to conduct or understand multiple regression, but it is foundational and essential for Statistics and Data Science majors to understand the theory behind linear models._
+
+_Learners in other domains should attempt to understand matricies at a high level, as some of the places models can fail is due to problems doing math on matricies._
 
 ## Parameter Estimation
-The goal of regression analysis is to minimize the residual error. 
-That is, to minimize the difference between the value of the dependent
-variable predicted by the model and the true value of the dependent variable.
 
-$$ \epsilon_{i} = \hat{y_{i}} - y_{i}$$
+Recall the goal of regression analysis is to minimize the unexplained/residual error. That is, to minimize the difference between the value of the dependent variable predicted by the model and the true value of the dependent variable.
 
-The method of Least Squares accomplishes this by finding parameter estimates 
-$\beta_{0}$ and $\beta_{1}$ that minimized the sum of the squared residuals:
+$$ \hat{y_{i}} - y_{i}, $$
 
-$$ \sum_{i=1}^{n} \epsilon_{i} $$
+where the predicted values $\hat{y}_{i}$ are calculated as 
 
-For simple linear regression the regression coefficient estimates that minimize the sum of squared errors can be calculated as: 
-$$ \hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}}\bar{x} \quad \mbox{  and  } \quad  \hat{\beta_{1}} = r\frac{s_{y}}{s_{x}} $$
+$$\hat{y}_{i}  = \sum_{i=1}^{p}X_{ij}\beta_{j}$$
 
-For multiple linear regression, the fitted values $\hat{y_{i}}$ are calculated as the linear combination of x's and $\beta$'s, $\sum_{i=1}^{p}X_{ij}\beta_{j}$. The sum of the squared residual errors (the distance between the observed point $y_{i}$ and the fitted value) now has the following form: 
+
+
+The sum of the squared residual errors (the distance between the observed point $y_{i}$ and the fitted value) now has the following form: 
 
 $$ \sum_{i=1}^{n} |y_{i} - \sum_{i=1}^{p}X_{ij}\beta_{j}|^{2}$$
 
 Or in matrix notation
 
-$$ || \mathbf{y} - \mathbf{X}\mathbf{\beta} ||^{2} $$ 
+$$ || \mathbf{Y} - \mathbf{X}\mathbf{\beta} ||^{2} $$ 
 
-The details of methods to calculate the Least Squares estimate of $\beta$'s is left to a course in mathematical statistics. 
+Solving this least squares problem for multiple regression requires knowledge of multivariable calculus and linear algebra, and so is left to a course in mathematical statistics. 
 
 
-## Example 
 
-The analysis in example \@ref(slr-ex) concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
+## Example {#mlr-fev}
+
+The analysis in example \@ref(slr-fev) concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
 
 However, FEV tends to decrease with age for adults, so we should be able to predict it better if we use both height and age as independent variables in a multiple regression equation. 
 
-*  What direction do you expect the slope coefficient for age to be? For height? 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">What direction do you expect the slope coefficient for age to be? For height?</div>\EndKnitrBlock{rmdnote}
 
 Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a `+`. 
 
 
 ```r
-mv_model <- lm(FFEV1 ~ FAGE + FHEIGHT, data=fev)
-summary(mv_model)
+mlr.dad.model <- lm(FFEV1 ~ FAGE + FHEIGHT, data=fev)
+summary(mlr.dad.model)
 ## 
 ## Call:
 ## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)
@@ -508,12 +827,15 @@ summary(mv_model)
 ## Residual standard error: 0.5348 on 147 degrees of freedom
 ## Multiple R-squared:  0.3337,	Adjusted R-squared:  0.3247 
 ## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13
-confint(mv_model)
+confint(mlr.dad.model)
 ##                   2.5 %      97.5 %
 ## (Intercept) -5.00919751 -0.51229620
 ## FAGE        -0.03922545 -0.01405323
 ## FHEIGHT      0.08319434  0.14559974
 ```
+
+**Interpretations**
+
 Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p<.0001).
 
 Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p<.0001). 
@@ -522,199 +844,510 @@ For the model that includes age, the coefficient for height is now 0.11, which i
 
 Both height and age are significantly associated with FEV in fathers (p<.0001 each).
 
-## Binary predictors.
+## Presenting regression results
+The direct software output always tells you more information than what you are wanting to share with an audience. Here are some ways to "prettify" your regression output. 
 
-Does gender also play a roll in FEV? Let's look at the separate effects of height and age on FEV1, and visualize how gender plays a roll. 
 
-
+* Using `tidy` and `kable` 
 
 ```r
-ht.plot <- ggplot(fev_long, aes(x=ht, y=fev1)) + 
-        geom_point(aes(col=gender)) + 
-        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
-        geom_smooth(se=FALSE, col="red", method="lm") + 
-        scale_color_viridis_d() + 
-        theme(legend.position = c(0.15,0.85))
-
-age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) + 
-        geom_point(aes(col=gender)) + 
-        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
-        geom_smooth(se=FALSE, col="red", method="lm") + 
-        scale_color_viridis_d(guide=FALSE)
-        
-gridExtra::grid.arrange(ht.plot, age.plot, ncol=2)
+broom::tidy(mlr.dad.model) |> kable(digits=3)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-18-1.png" width="672" />
-
-* The points are colored by gender
-* Each gender has it's own best fit line in the same color as the points
-* The red line is the best fit line overall - ignoring gender
-
-![q](images/q.png) Is gender a moderator for either height or age? 
-
-Let's compare the models with, and without gender 
-
-<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
-<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
-<tr><td style="text-align:left"></td><td colspan="2">fev1</td></tr>
-<tr><td style="text-align:left"></td><td>W/o gender</td><td>w/ gender</td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">age</td><td>-0.02<sup>***</sup> (-0.03, -0.01)</td><td>-0.02<sup>***</sup> (-0.03, -0.02)</td></tr>
-<tr><td style="text-align:left">ht</td><td>0.16<sup>***</sup> (0.15, 0.18)</td><td>0.11<sup>***</sup> (0.08, 0.13)</td></tr>
-<tr><td style="text-align:left">genderF</td><td></td><td>-0.64<sup>***</sup> (-0.79, -0.48)</td></tr>
-<tr><td style="text-align:left">Constant</td><td>-6.74<sup>***</sup> (-7.84, -5.63)</td><td>-2.24<sup>***</sup> (-3.71, -0.77)</td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>300</td><td>300</td></tr>
-<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.57</td><td>0.65</td></tr>
-<tr><td style="text-align:left">Residual Std. Error</td><td>0.53 (df = 297)</td><td>0.48 (df = 296)</td></tr>
-<tr><td style="text-align:left">F Statistic</td><td>197.57<sup>***</sup> (df = 2; 297)</td><td>182.77<sup>***</sup> (df = 3; 296)</td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -2.761 </td>
+   <td style="text-align:right;"> 1.138 </td>
+   <td style="text-align:right;"> -2.427 </td>
+   <td style="text-align:right;"> 0.016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FAGE </td>
+   <td style="text-align:right;"> -0.027 </td>
+   <td style="text-align:right;"> 0.006 </td>
+   <td style="text-align:right;"> -4.183 </td>
+   <td style="text-align:right;"> 0.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FHEIGHT </td>
+   <td style="text-align:right;"> 0.114 </td>
+   <td style="text-align:right;"> 0.016 </td>
+   <td style="text-align:right;"> 7.245 </td>
+   <td style="text-align:right;"> 0.000 </td>
+  </tr>
+</tbody>
 </table>
 
-* Gender is a binary categorical variable, with reference group "Male". 
-    - This is detected because the variable that shows up in the regression model output is `genderF`. So the estimate shown is for males, compared to females. 
-    - More details on how categorical variables are included in multivariable models is covered in section \@ref(cat-predictors). 
+* Using [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/)
 
+```r
+library(gtsummary)
+tbl_regression(mlr.dad.model)
+```
 
-**Interpretation of Coefficients**
+```{=html}
+<div id="lgqvbanrpc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
-The regression equation for the model without gender is 
+#lgqvbanrpc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
-$$ y = -6.74 - 0.02 age + 0.16 height $$
+#lgqvbanrpc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-* $b_{0}:$ For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.
-* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
-* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+#lgqvbanrpc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
 
+#lgqvbanrpc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
 
-The regression equation for the model with gender is 
+#lgqvbanrpc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
 
-$$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
+#lgqvbanrpc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
+#lgqvbanrpc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
 
-* $b_{0}:$ For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.
-* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
-* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
-* $b_{3}:$ Females have 0.64L lower FEV compared to males. 
+#lgqvbanrpc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
 
-**Note**: The interpretation of categorical variables still falls under the template language of "for every one unit increase in $X_{p}$, $Y$ changes by $b_{p}$". Here, $X_{3}=0$ for males, and 1 for females. So a 1 "unit" change is females _compared to_ males. 
+#lgqvbanrpc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
 
-![q](images/q.png) Which model fits better? What measure are you using to quanitify "fit"? 
+#lgqvbanrpc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on? </div>\EndKnitrBlock{rmdnote}
+#lgqvbanrpc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
 
+#lgqvbanrpc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
 
+#lgqvbanrpc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
 
-## Categorical Predictors {#cat-predictors}
+#lgqvbanrpc .gt_from_md > :first-child {
+  margin-top: 0;
+}
 
-Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
+#lgqvbanrpc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lgqvbanrpc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lgqvbanrpc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lgqvbanrpc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lgqvbanrpc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lgqvbanrpc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lgqvbanrpc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgqvbanrpc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgqvbanrpc .gt_left {
+  text-align: left;
+}
+
+#lgqvbanrpc .gt_center {
+  text-align: center;
+}
+
+#lgqvbanrpc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lgqvbanrpc .gt_font_normal {
+  font-weight: normal;
+}
+
+#lgqvbanrpc .gt_font_bold {
+  font-weight: bold;
+}
+
+#lgqvbanrpc .gt_font_italic {
+  font-style: italic;
+}
+
+#lgqvbanrpc .gt_super {
+  font-size: 65%;
+}
+
+#lgqvbanrpc .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#lgqvbanrpc .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#lgqvbanrpc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lgqvbanrpc .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#lgqvbanrpc .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#lgqvbanrpc .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">FAGE</td>
+<td class="gt_row gt_center">-0.03</td>
+<td class="gt_row gt_center">-0.04, -0.01</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">FHEIGHT</td>
+<td class="gt_row gt_center">0.11</td>
+<td class="gt_row gt_center">0.08, 0.15</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+* Using `dwplot` from the [`dotwhisker`](https://cran.r-project.org/web/packages/dotwhisker/vignettes/dotwhisker-vignette.html) package to create a _forest plot_. 
 
 
 ```r
-summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.76390 -0.17875  0.00716  0.17461  0.79954 
-## 
-## Coefficients:
-##                   Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
-## Sepal.Length       0.63211    0.04527  13.962  < 2e-16 ***
-## Speciesversicolor  2.21014    0.07047  31.362  < 2e-16 ***
-## Speciesvirginica   3.09000    0.09123  33.870  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.2826 on 146 degrees of freedom
-## Multiple R-squared:  0.9749,	Adjusted R-squared:  0.9744 
-## F-statistic:  1890 on 3 and 146 DF,  p-value: < 2.2e-16
+library(dotwhisker)
+dwplot(mlr.dad.model)
 ```
 
-Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
-
-
-----------------------------------------------------------------------------
- &nbsp;    Sepal.Length   Speciesversicolor   Speciesvirginica    Species   
---------- -------------- ------------------- ------------------ ------------
-  **1**        5.1                0                  0             setosa   
-
-  **2**        4.9                0                  0             setosa   
-
- **51**         7                 1                  0           versicolor 
-
- **52**        6.4                1                  0           versicolor 
-
- **101**       6.3                0                  1           virginica  
-
- **102**       5.8                0                  1           virginica  
-----------------------------------------------------------------------------
-
-### Factor variable coding
-
-* Most commonly known as "Dummy coding". Not an informative term to use. 
-* Better used term: Indicator variable
-* Math notation: **I(gender == "Female")**. 
-* A.k.a reference coding
-* For a nominal X with K categories, define K indicator variables.
-    - Choose a reference (referent) category:
-    - Leave it out
-    - Use remaining K-1 in the regression.
-    - Often, the largest category is chosen as the reference category.
-
-For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
-
-The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
-
-Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
-
-
-```r
-main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
-pander(main.eff.model)
-```
-
-
----------------------------------------------------------------------
-        &nbsp;           Estimate   Std. Error   t value   Pr(>|t|)  
------------------------ ---------- ------------ --------- -----------
-    **(Intercept)**       -1.702      0.2301     -7.397    1.005e-11 
-
-   **Sepal.Length**       0.6321     0.04527      13.96    1.121e-28 
-
- **Speciesversicolor**     2.21      0.07047      31.36    9.646e-67 
-
- **Speciesvirginica**      3.09      0.09123      33.87    4.918e-71 
----------------------------------------------------------------------
-
-Table: Fitting linear model: Petal.Length ~ Sepal.Length + Species
-
-```r
-pander(confint(main.eff.model))
-```
-
-
------------------------------------------
-        &nbsp;           2.5 %    97.5 % 
------------------------ -------- --------
-    **(Intercept)**      -2.157   -1.248 
-
-   **Sepal.Length**      0.5426   0.7216 
-
- **Speciesversicolor**   2.071    2.349  
-
- **Speciesvirginica**     2.91     3.27  
------------------------------------------
-
-In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
-
-* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
-* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
-* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
+<img src="linreg_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 
 ## Model Diagnostics 
@@ -723,36 +1356,105 @@ The same set of regression diagnostics can be examined to identify any potential
 
 
 ```r
-par(mfrow=c(2,2))
-plot(mv_model)
+check_model(mlr.dad.model)
 ```
 
-<img src="linreg_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="linreg_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 
-## Multicollinearity
+## Confounding 
 
-* Occurs when some of the X variables are highly intercorrelated.
-* Affects estimates and their SE's (p. 143)
-* Look at tolerance, and its inverse, the Variance Inflation Factor (VIF)
-* Need tolerance < 0.01, or VIF > 100.
+One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
+
+
+![All the ways covariates can affect response variables](images/confounder.png)
+
+Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
+
+
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</div>\EndKnitrBlock{rmdnote}
+
+Other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
+
+> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$.
+
+Steps to determine if a variable $x_{2}$ is a confounder. 
+
+1. Fit a regression model on $y \sim x_{1}$. 
+2. If $x_{1}$ is not significantly associated with $y$, STOP. Re-read the "IF" part of the definition of a confounder. 
+3. Fit a regression model on $y \sim x_{1} + x_{2}$. 
+4. Look at the p-value for $x_{1}$. One of two things will have happened. 
+    - If $x_{1}$ is still significant, then $x_{2}$ does NOT confound (or explain) the relationship between $y$ and $x_{1}$. 
+    - If $x_{1}$ is NO LONGER significantly associated with $y$, then $x_{2}$ IS a confounder. 
+    
+    
+Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
+
+### Example: Does smoking affect pulse rate? 
+
+Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate? 
+
+
+
+First we consider the bivariate relationship between pulse rate (`H4PR`) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (`H4TO6`). 
+
+```r
+lm(H4PR ~ H4TO6 , data=addhealth) %>% summary()
+## 
+## Call:
+## lm(formula = H4PR ~ H4TO6, data = addhealth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -30.826  -8.548  -0.687   7.258 120.841 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  73.7702     0.4953 148.936  < 2e-16 ***
+## H4TO6         0.1389     0.0396   3.507 0.000464 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 12.56 on 1761 degrees of freedom
+##   (4741 observations deleted due to missingness)
+## Multiple R-squared:  0.006936,	Adjusted R-squared:  0.006372 
+## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644
+```
+
+As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13. 
+
+However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, "during the past 30 days, on how many days did you smoke cigarettes?" (`H4TO5`). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking `H4TO6` is no longer significant (at the 0.05 level). 
 
 
 ```r
-car::vif(mv_model)
-##     FAGE  FHEIGHT 
-## 1.003163 1.003163
-tolerance = 1/car::vif(mv_model)
-tolerance
-##      FAGE   FHEIGHT 
-## 0.9968473 0.9968473
+lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
+## 
+## Call:
+## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.682  -8.509  -1.014   7.302 120.320 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 72.78932    0.68037 106.985   <2e-16 ***
+## H4TO5        0.06870    0.03271   2.101   0.0358 *  
+## H4TO6        0.08292    0.04769   1.739   0.0822 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 12.55 on 1760 degrees of freedom
+##   (4741 observations deleted due to missingness)
+## Multiple R-squared:  0.00942,	Adjusted R-squared:  0.008294 
+## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415
 ```
 
-* Solution: use variable selection to delete some X variables.
-* Alternatively, use dimension reduction techniques such as Principal Components
+Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
 
 
-
+ 
 ## What to watch out for
 * Representative sample 
 * Range of prediction should match observed range of X in sample
