@@ -1,4 +1,3 @@
-
 # Classification of Binary outcomes {#binary-classification}
 
 > This section will be expanded to discuss classification for more than two groups. 
@@ -153,7 +152,7 @@ ggplot(plot.mpp, aes(x=truth, y=pred.prob, fill=truth)) +
       geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ![](images/q.png) 
 
@@ -294,7 +293,7 @@ plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 We can also use the `performance()` function to evaluate the $f1$ measure
 
@@ -308,7 +307,7 @@ plot(perf.f1)
 plot(perf.acc)
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 We can dig into the `perf.acc` object to get the maximum accuracy value (`y.value`), then find the row where that value occurs, and link it to the corresponding cutoff value of x.
 

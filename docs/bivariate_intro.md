@@ -1,4 +1,3 @@
-
 # (PART) Statistical Inference {-}
 
 # Foundations for Inference {#bv-intro}

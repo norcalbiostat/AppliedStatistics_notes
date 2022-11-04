@@ -1,0 +1,204 @@
+# Multiple Linear Regression {#mlr}
+
+Hopefully by now you have some motivation for why we need to have a robust model that can incorporate information from multiple variables at the same time. Multiple linear regression is our tool to expand our MODEL to better fit the DATA. 
+
+* Extends simple linear regression.
+* Describes a linear relationship between a single continuous $Y$ variable, and several $X$ variables.
+* Predicts $Y$ from $X_{1}, X_{2}, \ldots , X_{P}$.
+* X's can be continuous or discrete (categorical)
+* X's can be transformations of other X's, e.g., $log(x), x^{2}$. 
+
+
+Now it's no longer a 2D regression _line_, but a $p$ dimensional regression plane. 
+
+![](images/regression_plane.png)
+
+```{block2,  type='rmdnote'}
+This section uses functions from the `dotwhisker` and `gtsummary` visualize results from multiple regression models. 
+```
+
+```{r, echo=FALSE}
+library(performance) 
+```
+
+## Mathematical Model
+
+The mathematical model for multiple linear regression equates the value of the continuous outcome $y_{i}$ to a **linear combination** of multiple predictors $x_{1} \ldots x_{p}$ each with their own slope coefficient $\beta_{1} \ldots \beta_{p}$. 
+
+$$ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \ldots + \beta_{p}x_{pi} + \epsilon_{i}$$
+
+where $i$ indexes the observations $i = 1 \ldots n$, and $j$ indexes the number of parameters $j=1 \ldots p$. This linear combination is often written using _summation notation_: $\sum_{i=1}^{p}X_{ij}\beta_{j}$. 
+
+The assumptions on the residuals $\epsilon_{i}$ still hold:   
+
+* They have mean zero  
+* They are homoscedastic, that is all have the same finite variance: $Var(\epsilon_{i})=\sigma^{2}<\infty$  
+* Distinct error terms are uncorrelated: (Independent) $\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.$  
+
+
+In matrix notation the linear combination of $X$'s and $\beta$'s is written as $\mathbf{x}_{i}^{'}\mathbf{\beta}$, (the inner product between the vectors $\mathbf{x}_{i}$ and $\mathbf{\beta}$). Then the model is written as: 
+
+$$ \textbf{y} = \textbf{X} \mathbf{\beta} + \mathbf{\epsilon} ,$$ 
+
+and we say the regression model relates $y$ to a function of $\textbf{X}$ and $\mathbf{\beta}$, where $\textbf{X}$ is a $nxp$ matrix of $p$ covariates on $n$ observations and $\mathbf{\beta}$ is a length $p$ vector of regression coefficients.
+
+_Note: Knowledge of Matricies or Linear Algebra is not required to conduct or understand multiple regression, but it is foundational and essential for Statistics and Data Science majors to understand the theory behind linear models._
+
+_Learners in other domains should attempt to understand matricies at a high level, as some of the places models can fail is due to problems doing math on matricies._
+
+## Parameter Estimation
+
+Recall the goal of regression analysis is to minimize the unexplained/residual error. That is, to minimize the difference between the value of the dependent variable predicted by the model and the true value of the dependent variable.
+
+$$ \hat{y_{i}} - y_{i}, $$
+
+where the predicted values $\hat{y}_{i}$ are calculated as 
+
+$$\hat{y}_{i}  = \sum_{i=1}^{p}X_{ij}\beta_{j}$$
+
+
+
+The sum of the squared residual errors (the distance between the observed point $y_{i}$ and the fitted value) now has the following form: 
+
+$$ \sum_{i=1}^{n} |y_{i} - \sum_{i=1}^{p}X_{ij}\beta_{j}|^{2}$$
+
+Or in matrix notation
+
+$$ || \mathbf{Y} - \mathbf{X}\mathbf{\beta} ||^{2} $$ 
+
+Solving this least squares problem for multiple regression requires knowledge of multivariable calculus and linear algebra, and so is left to a course in mathematical statistics. 
+
+
+
+## Example {#mlr-fev}
+
+The analysis in example \@ref(slr-fev) concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
+
+However, FEV tends to decrease with age for adults, so we should be able to predict it better if we use both height and age as independent variables in a multiple regression equation. 
+
+```{block2,  type='rmdnote'}
+What direction do you expect the slope coefficient for age to be? For height?
+```
+
+Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a `+`. 
+
+```{r}
+mlr.dad.model <- lm(FFEV1 ~ FAGE + FHEIGHT, data=fev)
+summary(mlr.dad.model)
+confint(mlr.dad.model)
+```
+
+**Interpretations**
+
+Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p<.0001).
+
+Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p<.0001). 
+
+For the model that includes age, the coefficient for height is now `r round(mlr.dad.model$coefficients[3],2)`, which is interpreted as the rate of change of FEV1 as a function of height **after adjusting for age**. This is also called the **partial regression coefficient** of FEV1 on height after adjusting for age. 
+
+Both height and age are significantly associated with FEV in fathers (p<.0001 each).
+
+## Presenting regression results
+The direct software output always tells you more information than what you are wanting to share with an audience. Here are some ways to "prettify" your regression output. 
+
+
+* Using `tidy` and `kable` 
+```{r}
+broom::tidy(mlr.dad.model) |> kable(digits=3)
+```
+
+* Using [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/)
+```{r}
+library(gtsummary)
+tbl_regression(mlr.dad.model)
+```
+
+* Using `dwplot` from the [`dotwhisker`](https://cran.r-project.org/web/packages/dotwhisker/vignettes/dotwhisker-vignette.html) package to create a _forest plot_. 
+
+```{r}
+library(dotwhisker)
+dwplot(mlr.dad.model)
+```
+
+
+## Model Diagnostics 
+
+The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model. 
+
+```{r}
+check_model(mlr.dad.model)
+```
+
+
+## Confounding 
+
+One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
+
+
+![All the ways covariates can affect response variables](images/confounder.png)
+
+Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
+
+
+
+```{block2, type='rmdnote'}
+Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/
+```
+
+Other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
+
+> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$.
+
+Steps to determine if a variable $x_{2}$ is a confounder. 
+
+1. Fit a regression model on $y \sim x_{1}$. 
+2. If $x_{1}$ is not significantly associated with $y$, STOP. Re-read the "IF" part of the definition of a confounder. 
+3. Fit a regression model on $y \sim x_{1} + x_{2}$. 
+4. Look at the p-value for $x_{1}$. One of two things will have happened. 
+    - If $x_{1}$ is still significant, then $x_{2}$ does NOT confound (or explain) the relationship between $y$ and $x_{1}$. 
+    - If $x_{1}$ is NO LONGER significantly associated with $y$, then $x_{2}$ IS a confounder. 
+    
+    
+Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
+
+### Example: Does smoking affect pulse rate? 
+
+Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate? 
+
+```{r, echo=FALSE}
+addhealth$H4TO5[addhealth$H4TO5 > 30 | addhealth$H4TO5==0] <- NA
+addhealth$H4TO6[addhealth$H4TO6 > 30] <- NA
+addhealth$H4PR[addhealth$H4PR > 200] <- NA
+```
+
+First we consider the bivariate relationship between pulse rate (`H4PR`) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (`H4TO6`). 
+```{r}
+lm(H4PR ~ H4TO6 , data=addhealth) %>% summary()
+```
+
+As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13. 
+
+However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, "during the past 30 days, on how many days did you smoke cigarettes?" (`H4TO5`). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking `H4TO6` is no longer significant (at the 0.05 level). 
+
+```{r}
+lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
+```
+
+Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
+
+
+ 
+## What to watch out for
+* Representative sample 
+* Range of prediction should match observed range of X in sample
+* Use of nominal or ordinal, rather than interval or ratio data
+* Errors-in-variables
+* Correlation does not imply causation 
+* Violation of assumptions
+* Influential points
+* Appropriate model
+* Multicollinearity
+
+
+
+

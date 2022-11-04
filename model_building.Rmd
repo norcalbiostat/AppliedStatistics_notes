@@ -4,9 +4,14 @@ Model building methods are used mainly in exploratory situations where many inde
 
 This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit. 
 
-```{r, eval=FALSE}
-# Read in the data from a version stored online. 
-fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", sep="\t", header=TRUE)
+
+```{block2,  type='rmdnote'}
+This section uses functions from the `gtsummary`, and `survey`...packages to help tidy and visualize results from regression models. 
+```
+
+```{r, echo=FALSE}
+library(gtsummary)
+pen <- palmerpenguins::penguins
 ```
 
 ## Binary predictors
@@ -103,10 +108,9 @@ summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
 Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
 
 ```{r, echo=FALSE}
-library(pander)
 a <- model.matrix(Petal.Length ~ Sepal.Length + Species, data=iris)
 b <- data.frame(a, Species=iris$Species)[c(1:2,51:52,101:102),-1]
-pander(b)
+kable(b)
 ```
 
 ### Factor variable coding
@@ -130,9 +134,7 @@ $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \e
 Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
 
 ```{r}
-main.eff.model <- lm(Petal.Length ~ Sepal.Length + Species, data=iris)
-pander(main.eff.model)
-pander(confint(main.eff.model))
+lm(Petal.Length ~ Sepal.Length + Species, data=iris) |> tbl_regression()
 ```
 
 In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
@@ -143,7 +145,7 @@ In this _main effects_ model, Species only changes the intercept. The effect of 
 
 ## Interactions {#interactions}
 
-If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa` . Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
+If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa`. Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}$$
 
@@ -163,19 +165,16 @@ $$ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}$$
 
 Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model. 
 
-
+### Fitting interaction models & interpreting coefficients
 Interactions are fit in `R` by simply multiplying `*` the two variables together in the model statement. 
 ```{r}
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
+iris$setosa <- ifelse(iris$Species == "setosa", 1, 0)
+lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl_regression()
 ```
 
-The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
+The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length. Thus, species is a **moderator** (Chapter \@ref(mod-strat)).
  
-### Example 1
-
-```{r}
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
-```
+**Interpreting Coefficients**
 
 * If $x_{2}=0$, then the effect of $x_{1}$ on $Y$ simplifies to: $\beta_{1}$
     * $b_{1}$ The effect of sepal length on petal length **for non-setosa species of iris** (`setosa=0`) 
@@ -187,9 +186,13 @@ summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris
 The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.
 ```
 
-Let's up the game now and look at the full interaction model with a categorical version of species. Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . 
+### Categorical Interaction variables
+
+Let's up the game now and look at the full interaction model with a categorical version of species. 
+Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . Refer to \@ref(cat-predictors) for information on how to interpret categorical predictors as main effects. 
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}$$
+
 ```{r}
 summary(lm(Petal.Length ~ Sepal.Length + Species + Sepal.Length*Species, data=iris))
 ```
@@ -203,9 +206,9 @@ The slope of the relationship between sepal length and petal length is calculate
 Compare this to the estimates gained from the stratified model: 
 
 ```{r}
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="setosa")))
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="versicolor")))
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
+by(iris, iris$Species, function(x){
+  lm(Petal.Length ~ Sepal.Length, data=x) %>% coef()
+})
 ```
 
 They're the same! Proof that an interaction is equivalent to stratification. 
@@ -234,8 +237,10 @@ is the same as the following interaction model:
 
 
 
-### Example 3: The relationship between income, employment status and depression. 
-This example follows section \@ref(mlogreg). 
+### Example 3: 
+
+Let's explore the relationship between income, employment status and depression. 
+This example follows a logistic regression example from section \@ref(mlogreg). 
 
 Here I create the binary indicators of `lowincome` (annual income <$10k/year) and underemployed (part time or unemployed).
 
@@ -261,13 +266,12 @@ summary(me_intx_model)
 ```
 
 
- 
 ## Wald test (General F) {#general-F}
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 
 1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit
-2. Testing a linear combination of predictors (such as a differnece of differences). _This topic is not discussed yet_
+2. Testing a linear combination of predictors (such as a difference of differences). _This topic is not discussed yet_
 
 Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
 
@@ -294,8 +298,8 @@ In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all
 Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
 
 ```{r}
-full_model <- lm(cesd ~ age + chronill + employ, data=depress)
-pander(summary(full_model))
+employ.depression.model <- lm(cesd ~ age + chronill + employ, data=depress)
+tbl_regression(employ.depression.model)
 ```
 
 The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
@@ -311,7 +315,7 @@ $H_{A}$: At least one $\beta_{j}$ is not 0.
 The `regTermTest` function can be found in the `survey` package. The `survey` package has functions that tend to conflict with `dplyr`, so it is recommended that you don't load the package entirely, and use `::` notation to call the function directly. 
 
 ```{r}
-survey::regTermTest(full_model, "employ")
+survey::regTermTest(employ.depression.model, "employ")
 ```
 
 * Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
@@ -332,14 +336,12 @@ The p-value of this Wald test is significant, thus employment significantly pred
 * Need tolerance < 0.01, or VIF > 100.
 
 ```{r}
-car::vif(mv_model)
-tolerance = 1/car::vif(mv_model)
-tolerance
+big.pen.model <- lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm, data=pen) 
+performance::check_collinearity(big.pen.model) |> plot()
 ```
 
 * Solution: use variable selection to delete some X variables.
-* Alternatively, use dimension reduction techniques such as Principal Components
-
+* Alternatively, use dimension reduction techniques such as Principal Components (Chaper @\ref(pca)).
 
 
 ## Variable Selection Process

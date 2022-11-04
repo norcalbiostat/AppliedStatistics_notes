@@ -1,4 +1,3 @@
-
 # Selecting Appropriate Analyses {#select_analysis}
 
 _In Progress_

@@ -1,9 +1,4 @@
-
-
-
 # Principal Component Analysis {#pca}
-
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">Corresponding reading: PMA6 Ch 14</div>\EndKnitrBlock{rmdnote}
 
 More nomenclature tidbits: It's **"Principal"** Components (adjective), not **"Principle"** Components (noun)
 
@@ -78,7 +73,7 @@ colnames(data) <- c("X1", "X2")
 plot(X2 ~ X1, data=data, pch=16)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 
 Goal: Create two new variables $C_{1}$ and $C_{2}$ as linear combinations of $\mathbf{x_{1}}$ and $\mathbf{x_{2}}$ 
@@ -207,7 +202,7 @@ abline(0, a[2,1]/a[1,1]); text(30, 10, expression(C[1]))
 abline(0, a[2,2]/a[1,2]); text(-10, 20, expression(C[2]))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
 
 Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at. 
@@ -217,7 +212,7 @@ Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated.
 biplot(pr)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 ## Data Reduction
@@ -327,26 +322,22 @@ In this example I use PCA to reduce these 20 correlated variables down to a few 
 pc_dep  <- princomp(depress[,9:28], cor=TRUE)
 summary(pc_dep)
 ## Importance of components:
-##                           Comp.1     Comp.2     Comp.3     Comp.4
-## Standard deviation     2.6562036 1.21883931 1.10973409 1.03232021
-## Proportion of Variance 0.3527709 0.07427846 0.06157549 0.05328425
-## Cumulative Proportion  0.3527709 0.42704935 0.48862483 0.54190909
-##                            Comp.5     Comp.6     Comp.7     Comp.8
-## Standard deviation     1.00629648 0.98359581 0.97304489 0.87706188
-## Proportion of Variance 0.05063163 0.04837304 0.04734082 0.03846188
-## Cumulative Proportion  0.59254072 0.64091375 0.68825457 0.72671645
-##                            Comp.9    Comp.10    Comp.11    Comp.12
-## Standard deviation     0.83344885 0.81248191 0.77950975 0.74117295
-## Proportion of Variance 0.03473185 0.03300634 0.03038177 0.02746687
-## Cumulative Proportion  0.76144830 0.79445464 0.82483641 0.85230328
-##                           Comp.13    Comp.14    Comp.15    Comp.16
-## Standard deviation     0.73255278 0.71324438 0.67149280 0.61252016
-## Proportion of Variance 0.02683168 0.02543588 0.02254513 0.01875905
-## Cumulative Proportion  0.87913496 0.90457083 0.92711596 0.94587501
-##                           Comp.17    Comp.18    Comp.19     Comp.20
-## Standard deviation     0.56673129 0.54273638 0.51804873 0.445396635
-## Proportion of Variance 0.01605922 0.01472814 0.01341872 0.009918908
-## Cumulative Proportion  0.96193423 0.97666237 0.99008109 1.000000000
+##                           Comp.1     Comp.2     Comp.3     Comp.4     Comp.5
+## Standard deviation     2.6562036 1.21883931 1.10973409 1.03232021 1.00629648
+## Proportion of Variance 0.3527709 0.07427846 0.06157549 0.05328425 0.05063163
+## Cumulative Proportion  0.3527709 0.42704935 0.48862483 0.54190909 0.59254072
+##                            Comp.6     Comp.7     Comp.8     Comp.9    Comp.10
+## Standard deviation     0.98359581 0.97304489 0.87706188 0.83344885 0.81248191
+## Proportion of Variance 0.04837304 0.04734082 0.03846188 0.03473185 0.03300634
+## Cumulative Proportion  0.64091375 0.68825457 0.72671645 0.76144830 0.79445464
+##                           Comp.11    Comp.12    Comp.13    Comp.14    Comp.15
+## Standard deviation     0.77950975 0.74117295 0.73255278 0.71324438 0.67149280
+## Proportion of Variance 0.03038177 0.02746687 0.02683168 0.02543588 0.02254513
+## Cumulative Proportion  0.82483641 0.85230328 0.87913496 0.90457083 0.92711596
+##                           Comp.16    Comp.17    Comp.18    Comp.19     Comp.20
+## Standard deviation     0.61252016 0.56673129 0.54273638 0.51804873 0.445396635
+## Proportion of Variance 0.01875905 0.01605922 0.01472814 0.01341872 0.009918908
+## Cumulative Proportion  0.94587501 0.96193423 0.97666237 0.99008109 1.000000000
 ```
 
 **2. Pick a subset of PC's to work with**
@@ -363,7 +354,7 @@ qplot(x=1:20, y=cumsum(var_pc)/sum(var_pc)*100, geom="point") +
   geom_hline(aes(yintercept=80))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;" />
 
 **3. Create a _Scree plot_ by plotting the eigenvalue against the PC number.**
 
@@ -373,7 +364,7 @@ qplot(x=1:20, y=var_pc, geom=c("point", "line")) +
   xlab("PC number") + ylab("Eigenvalue") + ylim(c(0,8))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-17-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;" />
 
 * **Option 1**: Take all eigenvalues > 1 ($m=5$)  
 * **Option 2**: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. ($m=2$). 
@@ -418,7 +409,7 @@ heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="n
           dendrogram="none", trace="none", col=rev(heat.colors(256)))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 * Loadings over 0.5 (red) help us interpret what these components could "mean"
     - Must know exact wording of component questions
