@@ -1,4 +1,3 @@
-
 # (PART) Preparing Data for Analysis {-}
 
 # Workflow and Data Cleaning {#data_prep}
@@ -295,7 +294,7 @@ boxplot(depress$age)
 hist(depress$age)
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-6-1.png" width="960" />
+<img src="data_prep_files/figure-html/unnamed-chunk-5-1.png" width="960" />
 
 Just looking at the data graphically raises no red flags. The boxplot shows no outlying values and the histogram does not look wildly skewed. This is where knowledge about the data set is essential. The codebook does not provide a valid range for the data, but the description of the data starting on page 3 in the textbook clarifies that this data set is on adults. In the research world, this specifies 18 years or older. 
 
@@ -318,7 +317,7 @@ Here we look at boxplots of income across marital status category.
 ggplot(depress, aes(y=income, x=marital)) + geom_boxplot()
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="data_prep_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 While there are a few potential outliers (denoted by the dots), there are none so far away from the rest of the group (or at values such as 99 or -99 that may indicate missing codes) that we need to be concerned about. 
 
@@ -481,7 +480,7 @@ hist(depress$income, prob=TRUE, xlab="Annual income (in thousands)",
 lines(density(depress$income), col="blue")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="data_prep_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ```r
 summary(depress$income)
@@ -514,7 +513,7 @@ Another common method of assessing normality is to create a normal probability (
 qqnorm(depress$income);qqline(depress$income, col="red")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="data_prep_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or `U` shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created. 
 
@@ -540,7 +539,7 @@ qqnorm(loginc, main = "Natural Log"); qqline(loginc, col="blue")
 qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-19-1.png" width="960" />
+<img src="data_prep_files/figure-html/unnamed-chunk-18-1.png" width="960" />
 
 
 ## Saving your changes
@@ -585,34 +584,27 @@ The data on Lung function originally was recorded in _wide_ format, with separat
 fev <- read.delim("https://norcalbiostat.netlify.com/data/Lung_081217.txt", 
                     sep="\t", header=TRUE)
 head(fev)
-##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT
-## 1  1    1    1   53      61     161  391  3.23    2   43      62     136
-## 2  2    1    1   40      72     198  441  3.95    2   38      66     160
-## 3  3    1    1   26      69     210  445  3.47    2   27      59     114
-## 4  4    1    1   34      68     187  433  3.74    2   36      58     123
-## 5  5    1    1   46      61     121  354  2.90    2   39      62     128
-## 6  6    1    1   44      72     153  610  4.91    2   36      66     125
-##   MFVC MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE
-## 1  370  3.31     2    12       59      115   296   2.79    NA    NA
-## 2  411  3.47     1    10       56       66   323   2.39    NA    NA
-## 3  309  2.65     1     8       50       59   114   1.11    NA    NA
-## 4  265  2.06     2    11       57      106   256   1.85     1     9
-## 5  245  2.33     1    16       61       88   260   2.47     2    12
-## 6  349  3.06     1    15       67      100   389   3.55     1    13
-##   MCHEIGHT MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC
-## 1       NA       NA    NA     NA    NA    NA       NA       NA    NA
-## 2       NA       NA    NA     NA    NA    NA       NA       NA    NA
-## 3       NA       NA    NA     NA    NA    NA       NA       NA    NA
-## 4       49       56   159   1.30    NA    NA       NA       NA    NA
-## 5       60       85   268   2.34     2    10       50       53   154
-## 6       57       87   276   2.37     2    10       55       72   195
-##   YCFEV1
-## 1     NA
-## 2     NA
-## 3     NA
-## 4     NA
-## 5   1.43
-## 6   1.69
+##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT MFVC
+## 1  1    1    1   53      61     161  391  3.23    2   43      62     136  370
+## 2  2    1    1   40      72     198  441  3.95    2   38      66     160  411
+## 3  3    1    1   26      69     210  445  3.47    2   27      59     114  309
+## 4  4    1    1   34      68     187  433  3.74    2   36      58     123  265
+## 5  5    1    1   46      61     121  354  2.90    2   39      62     128  245
+## 6  6    1    1   44      72     153  610  4.91    2   36      66     125  349
+##   MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE MCHEIGHT
+## 1  3.31     2    12       59      115   296   2.79    NA    NA       NA
+## 2  3.47     1    10       56       66   323   2.39    NA    NA       NA
+## 3  2.65     1     8       50       59   114   1.11    NA    NA       NA
+## 4  2.06     2    11       57      106   256   1.85     1     9       49
+## 5  2.33     1    16       61       88   260   2.47     2    12       60
+## 6  3.06     1    15       67      100   389   3.55     1    13       57
+##   MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC YCFEV1
+## 1       NA    NA     NA    NA    NA       NA       NA    NA     NA
+## 2       NA    NA     NA    NA    NA       NA       NA    NA     NA
+## 3       NA    NA     NA    NA    NA       NA       NA    NA     NA
+## 4       56   159   1.30    NA    NA       NA       NA    NA     NA
+## 5       85   268   2.34     2    10       50       53   154   1.43
+## 6       87   276   2.37     2    10       55       72   195   1.69
 ```
 
 To analyze the effect of gender on FEV, the data need to be in _long_ format, with a single variable for `fev` and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females. 

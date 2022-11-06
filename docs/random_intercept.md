@@ -1,4 +1,3 @@
-
 # Random Intercept Models {#RI}
 
 <span style="color:blue">**Example Data**</span>
@@ -52,7 +51,7 @@ Because all county intercepts are randomly sampled from the same theoretical pop
 The plot below displays the overall mean as the complete pooling estimate (solid, horizontal line), the no pooling and partial pooling estimates for 8 randomly selected counties contained in the radon data.  The amount of shrinkage from the partial pooling fit is determined by a data dependent compromise between the county level sample size, the variation among the counties, and the variation within the counties.  
 
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" />
 
 Generally, we can see that counties with smaller sample sizes are shrunk more towards the overall mean, while counties with larger sample sizes are shrunk less.  
 
@@ -231,14 +230,14 @@ summary(fit_partpool)
 
 * The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
 * The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of `log_radon`. 
-* The random intercepts aren't automatically shown in this output. We can visualize these using what some call a _forest plot_. A very easy way to accomplish this is to use the [sjPlot](http://www.strengejacke.de/sjPlot/) package. We use the `plot_model()` function, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
+* The random intercepts aren't automatically shown in this output. We can visualize these using a forestplot. We use the `plot_model()` function from the `sjPlot` package, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
 
 
 ```r
-plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
+sjPlot::plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 Notice that these effects are centered around 0. Refering back \ref(@mathri), the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
 
@@ -264,25 +263,25 @@ kable(head(showri))
 <tbody>
   <tr>
    <td style="text-align:left;"> AITKIN </td>
-   <td style="text-align:right;"> -0.2390577 </td>
+   <td style="text-align:right;"> -0.2390574 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
-   <td style="text-align:right;"> -0.4071257 </td>
+   <td style="text-align:right;"> -0.4071256 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BECKER </td>
-   <td style="text-align:right;"> -0.0809978 </td>
+   <td style="text-align:right;"> -0.0809977 </td>
    <td style="text-align:right;"> 1.34983 </td>
    <td style="text-align:right;"> 1.2688325 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BELTRAMI </td>
-   <td style="text-align:right;"> -0.0804278 </td>
+   <td style="text-align:right;"> -0.0804277 </td>
    <td style="text-align:right;"> 1.34983 </td>
    <td style="text-align:right;"> 1.2694025 </td>
   </tr>
@@ -296,7 +295,7 @@ kable(head(showri))
    <td style="text-align:left;"> BIGSTONE </td>
    <td style="text-align:right;"> 0.0582831 </td>
    <td style="text-align:right;"> 1.34983 </td>
-   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
   </tr>
 </tbody>
 </table>
@@ -330,13 +329,13 @@ kable(head(cmpr.est))
   <tr>
    <td style="text-align:left;"> AITKIN </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 1.1107726 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
    <td style="text-align:right;"> 0.7149352 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 0.9427046 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
    <td style="text-align:right;"> 0.8908486 </td>
   </tr>
   <tr>
@@ -360,7 +359,7 @@ kable(head(cmpr.est))
   <tr>
    <td style="text-align:left;"> BIGSTONE </td>
    <td style="text-align:right;"> 1.264779 </td>
-   <td style="text-align:right;"> 1.4081134 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
    <td style="text-align:right;"> 1.5367889 </td>
   </tr>
 </tbody>
@@ -400,13 +399,13 @@ You can change the fitting algorithm to use the Log Likelihood anyhow, it may be
 <tbody>
   <tr>
    <td style="text-align:left;"> AITKIN </td>
-   <td style="text-align:right;"> 1.1107726 </td>
-   <td style="text-align:right;"> 1.1143652 </td>
+   <td style="text-align:right;"> 1.1107728 </td>
+   <td style="text-align:right;"> 1.1143654 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ANOKA </td>
-   <td style="text-align:right;"> 0.9427046 </td>
-   <td style="text-align:right;"> 0.9438525 </td>
+   <td style="text-align:right;"> 0.9427047 </td>
+   <td style="text-align:right;"> 0.9438526 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BECKER </td>
@@ -425,8 +424,8 @@ You can change the fitting algorithm to use the Log Likelihood anyhow, it may be
   </tr>
   <tr>
    <td style="text-align:left;"> BIGSTONE </td>
-   <td style="text-align:right;"> 1.4081134 </td>
-   <td style="text-align:right;"> 1.4068867 </td>
+   <td style="text-align:right;"> 1.4081133 </td>
+   <td style="text-align:right;"> 1.4068866 </td>
   </tr>
 </tbody>
 </table>
@@ -453,7 +452,7 @@ A similar sort of shrinkage effect is seen with covariates included in the model
 
 Consider the covariate $floor$, which takes on the value $1$ when the radon measurement was read within the first floor of the house and $0$ when the measurement was taken in the basement. In this case, county means are shrunk towards the mean of the response, $log(radon)$, within each level of the covariate.
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" />
 
 Covariates are fit using standard `+` notation outside the random effects specification, i.e. `(1|county)`. 
 
@@ -478,13 +477,13 @@ tab_model(ri.with.x, show.r2=FALSE)
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.49</td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.40&nbsp;&ndash;&nbsp;1.59</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">floor [first floor]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.66</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.80&nbsp;&ndash;&nbsp;-0.53</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;0.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;0.80&nbsp;&ndash;&nbsp;-0.53</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
 </tr>
 <tr>
 <td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
@@ -493,6 +492,7 @@ tab_model(ri.with.x, show.r2=FALSE)
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&sigma;<sup>2</sup></td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.53</td>
+</tr>
 
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">&tau;<sub>00</sub> <sub>county</sub></td>
@@ -519,7 +519,7 @@ Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2
 plot_model(ri.with.x, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
-<img src="random_intercept_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="random_intercept_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 Function enhancements -- 
 

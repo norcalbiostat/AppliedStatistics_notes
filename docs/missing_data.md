@@ -1,4 +1,3 @@
-
 # Missing Data {#mda}
 
 Missing Data happens. Not always
@@ -70,10 +69,10 @@ round(prop.table(table(is.na(survey)))*100,1)
 ```r
 prop.miss <- apply(survey, 2, function(x) round(sum(is.na(x))/NROW(x),4))
 prop.miss
-##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height 
-## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 
-##    M.I    Age 
-## 0.1181 0.0000
+##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height    M.I 
+## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 0.1181 
+##    Age 
+## 0.0000
 ```
 
 The amount of missing data per variable varies from 0 to 19%. 
@@ -91,7 +90,7 @@ ggplot(pmpv, aes(x=variable, y=pct.miss)) +
   geom_text(data=pmpv, aes(label=paste0(round(pct.miss*100,1),"%"), y=pct.miss+.025), size=4)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Using `mice`
 
@@ -100,7 +99,7 @@ library(mice)
 md.pattern(survey)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ```
 ##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
@@ -127,7 +126,7 @@ aggr(survey, col=c('chartreuse3','mediumvioletred'),
               gap=3, ylab=c("Missing data","Pattern"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="768" />
 
 The plot on the left is a simplified, and ordered version of the ggplot from above, except the bars appear to be inflated because the y-axis goes up to 15% instead of 100%. 
 
@@ -145,7 +144,7 @@ Another plot that can be helpful to identify patterns of missing data is a `marg
 marginplot(survey[,c(6,10)])
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate. 
 
@@ -276,7 +275,7 @@ plot(c(0,1), c(-1, 1), type="n", ylab="Bias", xlab="Proportion of missing")
   abline(h=0, lty=2, col="blue")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 ![](images/q.png) What is the behavior of the bias as $p$ increases? Look specifically at the position/location of the bias, and the variance/variability of the bias. 
@@ -306,7 +305,7 @@ head(dta)
 ggplot(dta, aes(x=p, y=Z)) + geom_point() + xlab("P(missing)") + ylab("Z~Normal(0,1)")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-20-1.png" width="384" />
+<img src="missing_data_files/figure-html/unnamed-chunk-19-1.png" width="384" />
 
 3. Set $Z$ missing with probability equal to the $p$ for that row. Create a new vector `dta$z.miss` that is either 0, or the value of `dta$Z` with probability `1-dta$p`. Then change all the 0's to `NA`.
 
@@ -601,7 +600,7 @@ aggr(iris.mis, col=c('darkolivegreen3','salmon'),
               gap=3, ylab=c("Missing data","Pattern"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 ```
 ## 
@@ -656,7 +655,7 @@ Predictive mean matching was used for all variables, even `Species`. This is rea
 plot(imp_iris, c("Sepal.Length", "Sepal.Width", "Petal.Length"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 The variance across chains is no larger than the variance within chains. 
 
@@ -665,26 +664,26 @@ The variance across chains is no larger than the variance within chains.
 ```r
 imp_iris$imp$Sepal.Length
 ##       1   2   3   4   5   6   7   8   9  10
-## 12  5.0 5.1 5.1 5.4 5.1 5.2 5.1 5.1 5.4 5.0
-## 13  4.4 4.9 4.7 4.7 4.4 4.4 4.7 5.0 4.4 4.4
-## 14  4.4 4.7 4.9 4.4 4.5 4.9 4.4 4.7 4.9 4.7
-## 36  4.4 4.4 4.4 4.4 4.4 4.7 4.4 4.4 4.6 4.9
-## 38  5.0 5.0 5.1 5.0 5.0 4.6 5.0 5.0 5.4 5.0
-## 40  4.9 5.0 5.4 5.0 4.9 5.8 5.0 4.7 5.1 5.0
-## 46  4.4 4.4 4.7 4.9 4.4 4.4 4.4 4.6 4.6 4.9
-## 51  6.9 6.5 6.5 6.3 5.9 6.7 6.5 6.7 6.9 6.9
-## 56  6.5 6.6 6.0 5.9 5.8 6.0 6.7 6.6 5.4 5.4
-## 62  5.8 6.3 5.6 6.1 5.6 5.7 5.7 5.6 6.6 5.6
-## 74  6.1 6.5 6.8 6.5 6.3 6.9 6.4 6.3 6.0 5.9
-## 75  6.1 5.7 6.1 6.3 5.7 6.8 6.1 5.6 6.0 6.0
-## 86  6.3 6.1 6.8 6.7 6.6 6.7 6.1 6.0 6.7 5.9
-## 90  5.2 5.5 5.6 6.1 5.5 5.6 5.8 6.0 6.2 6.1
-## 91  5.8 5.7 5.8 6.1 5.7 5.8 5.8 5.6 6.8 5.8
-## 106 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.2 7.3 7.2
-## 124 6.2 5.6 6.0 6.0 6.2 5.6 6.2 5.7 5.7 5.6
-## 142 6.1 6.7 6.3 6.7 5.4 6.6 6.3 6.5 5.9 6.4
-## 145 7.4 6.0 6.0 6.5 6.3 6.9 6.0 6.3 6.3 6.8
-## 148 6.4 6.6 6.0 6.3 5.4 6.5 6.1 6.1 5.6 6.3
+## 12  5.4 5.2 5.3 5.0 5.4 4.9 5.1 4.9 5.4 5.4
+## 13  4.7 4.4 5.0 4.4 4.6 4.4 4.9 4.9 5.0 4.9
+## 14  4.4 4.4 4.7 4.5 4.4 4.9 4.4 4.4 4.4 4.4
+## 36  4.4 4.4 4.7 4.9 4.7 4.4 4.4 4.4 4.9 4.7
+## 38  5.1 5.2 5.4 5.0 5.1 4.6 4.6 5.0 4.7 5.0
+## 40  5.2 5.0 5.4 5.4 4.6 5.0 4.8 5.0 4.6 5.1
+## 46  4.9 4.4 4.4 4.9 4.7 4.4 4.7 4.7 5.0 5.5
+## 51  6.9 6.4 6.8 6.8 6.7 6.3 6.5 6.4 6.8 6.9
+## 56  6.0 5.8 5.4 5.8 6.1 5.4 5.4 5.9 6.0 6.0
+## 62  6.3 5.8 6.3 5.8 5.7 5.7 6.8 5.8 5.8 6.2
+## 74  6.7 5.4 6.4 6.1 6.9 6.8 6.5 6.1 6.4 6.7
+## 75  6.2 6.2 5.6 5.8 6.2 6.0 6.7 6.7 5.8 5.7
+## 86  6.4 6.0 6.5 6.9 6.1 6.3 6.9 6.8 6.3 6.5
+## 90  5.2 5.6 5.5 5.2 5.2 6.0 6.2 5.2 4.9 5.8
+## 91  5.6 6.2 6.2 5.6 6.1 5.8 6.0 6.2 5.8 6.2
+## 106 7.7 7.9 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.7
+## 124 6.7 6.2 5.7 5.7 6.2 5.7 5.6 5.7 5.6 5.7
+## 142 6.2 6.1 6.0 6.1 6.9 6.6 6.1 6.5 6.6 5.8
+## 145 6.3 6.4 6.4 6.7 6.3 6.3 6.4 6.3 6.7 6.5
+## 148 6.4 6.5 5.6 6.4 6.7 6.0 6.4 6.5 6.4 5.6
 ```
 
 This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
@@ -707,8 +706,8 @@ By looking at the `names` of this new object we can confirm that there are indee
 
 ```r
 names(iris_long)
-## [1] ".imp"         ".id"          "Sepal.Length" "Sepal.Width" 
-## [5] "Petal.Length" "Petal.Width"  "Species"
+## [1] ".imp"         ".id"          "Sepal.Length" "Sepal.Width"  "Petal.Length"
+## [6] "Petal.Width"  "Species"
 table(iris_long$.imp)
 ## 
 ##   1   2   3   4   5   6   7   8   9  10 
@@ -725,7 +724,7 @@ Let's compare the imputed values to the observed values to see if they are indee
 densityplot(imp_iris)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-37-1.png" width="768" />
 
 **Multivariately**
 
@@ -733,7 +732,7 @@ densityplot(imp_iris)
 xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Species, cex=.8, pch=16)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-39-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" />
 
 **Analyze and pool**
 All of this imputation was done so we could actually perform an analysis! 
@@ -745,12 +744,12 @@ Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.W
 ```r
 model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
-##                     estimate  std.error statistic        df      p.value
-## (Intercept)        2.3545749 0.30074385  7.829171  78.77964 1.904299e-11
-## Sepal.Width        0.4299370 0.09267795  4.639043  84.97716 1.258424e-05
-## Petal.Length       0.8040298 0.06995969 11.492758 120.07136 0.000000e+00
-## Speciesversicolor -1.0387902 0.23870303 -4.351810 108.40518 3.067926e-05
-## Speciesvirginica  -1.5565325 0.30847821 -5.045843 123.77749 1.568964e-06
+##                term   estimate  std.error statistic        df      p.value
+## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.942002e-12
+## 2       Sepal.Width  0.4324051 0.09212873  4.693488  88.97127 9.678996e-06
+## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 0.000000e+00
+## 4 Speciesversicolor -1.0848839 0.24416495 -4.443242  96.69963 2.360206e-05
+## 5  Speciesvirginica -1.6001933 0.31893115 -5.017363 103.29187 2.189018e-06
 ```
 
 Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note that a 95% interval must be calculated manually. 
@@ -765,60 +764,54 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 <table>
  <thead>
   <tr>
-   <th style="text-align:left;">   </th>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> m </th>
    <th style="text-align:right;"> estimate </th>
    <th style="text-align:right;"> ubar </th>
-   <th style="text-align:right;"> b </th>
-   <th style="text-align:right;"> t </th>
-   <th style="text-align:right;"> lambda </th>
-   <th style="text-align:right;"> fmi </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> riv </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 2.355 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 2.329 </td>
    <td style="text-align:right;"> 0.073 </td>
-   <td style="text-align:right;"> 0.016 </td>
-   <td style="text-align:right;"> 0.090 </td>
-   <td style="text-align:right;"> 0.191 </td>
-   <td style="text-align:right;"> 0.211 </td>
+   <td style="text-align:right;"> 100.483 </td>
+   <td style="text-align:right;"> 0.151 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sepal.Width </td>
-   <td style="text-align:right;"> 0.430 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.432 </td>
    <td style="text-align:right;"> 0.007 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> 0.009 </td>
-   <td style="text-align:right;"> 0.173 </td>
-   <td style="text-align:right;"> 0.192 </td>
+   <td style="text-align:right;"> 88.971 </td>
+   <td style="text-align:right;"> 0.193 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Petal.Length </td>
-   <td style="text-align:right;"> 0.804 </td>
-   <td style="text-align:right;"> 0.004 </td>
-   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.817 </td>
    <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 0.081 </td>
-   <td style="text-align:right;"> 0.096 </td>
+   <td style="text-align:right;"> 107.171 </td>
+   <td style="text-align:right;"> 0.129 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Speciesversicolor </td>
-   <td style="text-align:right;"> -1.039 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> -1.085 </td>
    <td style="text-align:right;"> 0.051 </td>
-   <td style="text-align:right;"> 0.006 </td>
-   <td style="text-align:right;"> 0.057 </td>
-   <td style="text-align:right;"> 0.111 </td>
-   <td style="text-align:right;"> 0.127 </td>
+   <td style="text-align:right;"> 96.700 </td>
+   <td style="text-align:right;"> 0.164 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Speciesvirginica </td>
-   <td style="text-align:right;"> -1.557 </td>
-   <td style="text-align:right;"> 0.088 </td>
-   <td style="text-align:right;"> 0.006 </td>
-   <td style="text-align:right;"> 0.095 </td>
-   <td style="text-align:right;"> 0.071 </td>
-   <td style="text-align:right;"> 0.085 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> -1.600 </td>
+   <td style="text-align:right;"> 0.089 </td>
+   <td style="text-align:right;"> 103.292 </td>
+   <td style="text-align:right;"> 0.141 </td>
   </tr>
 </tbody>
 </table>
@@ -858,7 +851,7 @@ forestplot(names,
            )
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-43-1.png" width="960" />
+<img src="missing_data_files/figure-html/unnamed-chunk-42-1.png" width="960" />
 
 
 

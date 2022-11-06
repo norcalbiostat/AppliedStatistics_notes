@@ -1,5 +1,3 @@
-
-
 # Factor Analysis {#fa}
 
 
@@ -186,7 +184,7 @@ $$
 corrplot(cor(stan.dta), tl.col="black")
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 ## Factor Extraction Methods {#fa-extract}
 
@@ -389,7 +387,7 @@ plot(ml.load, type="n", main="ML Extraction")
 text(ml.load, labels=rownames(ml.load))
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-11-1.png" width="1152" />
+<img src="FA_files/figure-html/unnamed-chunk-10-1.png" width="1152" />
 
 PCA Extraction
 
@@ -527,7 +525,7 @@ plot(load, type="n", main= "ML + Promax")
 text(load, labels=rownames(load)) 
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 Varimax vs oblique here doesn't make much of a difference, and typically this is the case. You almost always use some sort of rotation. Recall, this is a hypothetical example and we set up the variables in a distinct two-factor model. So this example will look nice. 
 
@@ -579,7 +577,7 @@ head(fa.ml.varimax$scores)
 autoplot(fa.ml.varimax) # see vignette for more info. Link at bottom
 ```
 
-<img src="FA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="FA_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 To merge these scores back onto the original data set **providing there is no missing data** you can use the `bind_cols()` function in `dplyr`. 
 

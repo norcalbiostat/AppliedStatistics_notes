@@ -1,4 +1,3 @@
-
 # Bivariate Analysis
 
 So far we have been concerned with making inference about a single population parameter. 
@@ -146,7 +145,7 @@ ggplot(plot.bmi.smoke, aes(x=eversmoke_c, y=BMI, fill=eversmoke_c)) +
       position=position_dodge(width=0.75))
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
 ```r
@@ -154,9 +153,9 @@ plot.bmi.smoke %>% group_by(eversmoke_c) %>%
  summarise(mean=mean(BMI, na.rm=TRUE),
              sd = sd(BMI, na.rm=TRUE),
              IQR = IQR(BMI, na.rm=TRUE))
-## # A tibble: 2 x 4
+## # A tibble: 2 × 4
 ##   eversmoke_c  mean    sd   IQR
-## * <fct>       <dbl> <dbl> <dbl>
+##   <fct>       <dbl> <dbl> <dbl>
 ## 1 Non Smoker   29.7  7.76  9.98
 ## 2 Smoker       28.8  7.32  9.02
 ```
@@ -191,7 +190,7 @@ t.test(BMI ~ eversmoke_c, data=addhealth)
 ## 
 ## data:  BMI by eversmoke_c
 ## t = 3.6937, df = 3395.3, p-value = 0.0002245
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true difference in means between group Non Smoker and group Smoker is not equal to 0
 ## 95 percent confidence interval:
 ##  0.3906204 1.2744780
 ## sample estimates:
@@ -281,7 +280,7 @@ $$
 SST =  \sum_{i=1}^{I}\sum_{j=1}^{n_{i}}(y_{ij}-\bar{y}..)^{2} = (N-1)Var(Y)
 $$
 
-### Analysis of Variance Tabl*: 
+### Analysis of Variance Table*: 
 
 The results of an analysis of variance test are always summarized in an ANOVA table. The format of an ANOVA table is as follows:
 
@@ -300,7 +299,7 @@ The results of an analysis of variance test are always summarized in an ANOVA ta
 
 The $p$-value of the test is the **area to the right** of the F statistic density curve. This is always to the right because the F-distribution is not symmetric, truncated at 0 and skewed right. This is true regardless of the $df$.
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" />
 
 ### Assumptions
 
@@ -336,7 +335,7 @@ ggplot(plot.nitrogen.species, aes(x=species, y = pctnit, fill=species)) +
       position=position_dodge(width=0.75))
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" />
 
 
 ```r
@@ -412,7 +411,7 @@ ggplot(plants1, aes(x=pctnit, fill=species)) + ylab("") + geom_density() +
   scale_y_continuous(breaks=NULL) + scale_fill_viridis_d()
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-10-1.png" width="288" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-9-1.png" width="288" />
 
 The distributions per group tend to follow an approximate normal distribution.
 
@@ -716,7 +715,7 @@ Like every other statistical test, large values of test statistics correspond to
 Below is a picture of the distribution for the current example. The p-value is reported on the left (vertically), the purple shaded area denotes the rejection region if we were using a hard cutoff of 0.05. (The rejection region is the area where the test statistic had to be at for a p-value to be smaller than .05.). For this example the test statistic was 0.017, which corresponds to a p-value of 0.895. Thus, this study does not provide enough evidence to support the claim that mammograms decrease the rate of deaths by breast cancer. 
 
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" />
 
 ### Example: Smoking and General Health
 
@@ -739,7 +738,7 @@ sjPlot::plot_xtab(grp=addhealth$eversmoke_c, x=addhealth$genhealth,
                   show.total = FALSE, margin="row", legend.title="") 
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-19-1.png" width="768" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-18-1.png" width="768" />
 
 The percentage of smokers seems to increase as the general health status decreases. Almost three-quarters (73%, n=40) of those reporting poor health have smoked an entire cigarette at least once in their life compared to 59% (n=573) of those reporting excellent health. 
 
@@ -811,7 +810,7 @@ ggplot(plot.residuals, aes(x=addhealth.genhealth, y=addhealth.eversmoke_c)) +
        geom_raster(aes(fill=Freq)) +  scale_fill_viridis_c()
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" />
 
 The proportion of those who have never smoked and report being in Excellent health is higher than expected if these two measures were independent (high positive residual means observed is greater than expected). A lower percent of people reporting Good health never smoked, which is lower than expected if smoking and health status were independent. So these two categories are likely to be the groups that have a different proportion of lifetime smoker $p_{i}$ compared to the other groups. 
 
@@ -819,14 +818,12 @@ The proportion of those who have never smoked and report being in Excellent heal
 
 ## (Q~Q) Correlation {#bv-corr}
 
+The **correlation coefficient** is designated by $r$ for the sample correlation, and $\rho$ for the population correlation. The correlation is a measure of the strength and direction of a _linear relationship_ between two variables. 
 
-Recall the definition of **correlation** between two continuous variables. 
-The **correlation coefficient** is designated by $r$ for the sample correlation, and $\rho$ for the population correlation. The correlation is a measure of the strength and direction of a linear relationship between two variables. 
-
-The correlation ranges from +1 to -1. A correlation of +1 means that there is a perfect,
-positive linear relationship between the two variables. A correlation of -1 means there is a perfect,
-negative linear relationship between the two variables.
+The correlation ranges from +1 to -1. A correlation of +1 means that there is a perfect, positive linear relationship between the two variables. A correlation of -1 means there is a perfect, negative linear relationship between the two variables.
 In both cases, knowing the value of one variable, you can perfectly predict the value of the second.
+
+### Strength of the correlation
 
 Here are rough estimates for interpreting the strengths of correlations based on the magnitude of $r$.
 
@@ -846,20 +843,17 @@ ggplot(county, aes(x=poverty, y=fed_spend00)) +
   xlab("poverty rate")
 ```
 
-<img src="bivariate_analysis_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="bivariate_analysis_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 cor(county$poverty, county$fed_spend00, use="complete.obs")
 ## [1] 0.03484461
 ```
 
-
-There is a negligible, positive, linear relationship between poverty rate and per capita federal
-spending ($r = 0.03$). Let $\rho$ denote the true correlation between poverty rate and federal
-spending per capita. Our null hypothesis is that there is no correlation between poverty rate and
-federal spending ($\rho = 0$), and the alternative hypothesis is that they are
-correlated ($\rho \neq 0$). We can use the `cor.test()` function to analyze the evidence in 
-favor of this alternative hypothesis. 
+* There is a negligible, positive, linear relationship between poverty rate and per capita federal spending ($r = 0.03$). 
+* Let $\rho$ denote the true correlation between poverty rate and federal spending per capita. 
+* Our null hypothesis is that there is no correlation between poverty rate and federal spending ($\rho = 0$), and the alternative hypothesis is that they are correlated ($\rho \neq 0$). 
+* We can use the `cor.test()` function to analyze the evidence in  favor of this alternative hypothesis. 
 
 
 ```r

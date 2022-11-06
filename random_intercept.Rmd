@@ -6,7 +6,8 @@ Radon is a radioactive gas that naturally occurs in soils around the U.S. As rad
 
 This example uses a dataset named `radon` from the `rstanarm` package. The dataset contains $N=919$ observations, each measurement taken within a home that is located within one of the $J=85$ sampled counties in Minnesota.  The first six rows of the dataframe show us that the county Aitkin has variable levels of $log(radon)$. Our goal is to build a model to predict $log(radon)$.
 
-```{r}
+```{r, echo=-1}
+library(sjPlot)
 data(radon, package="rstanarm")
 head(radon)
 ```
@@ -211,10 +212,10 @@ summary(fit_partpool)
 
 * The random effects portion of the `lmer` output provides a point estimate of the variance of component $\sigma^2_{\alpha} = 0.09$ and the model's residual variance, $\sigma_\epsilon = 0.57$.
 * The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of `log_radon`. 
-* The random intercepts aren't automatically shown in this output. We can visualize these using what some call a _forest plot_. A very easy way to accomplish this is to use the [sjPlot](http://www.strengejacke.de/sjPlot/) package. We use the `plot_model()` function, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
+* The random intercepts aren't automatically shown in this output. We can visualize these using a forestplot. We use the `plot_model()` function from the `sjPlot` package, on the `fit_partpool` model, we want to see the random effects (`type="re"`), and we want to sort on the name of the random variable, here it's `"(Intercept)"`. 
 
 ```{r, fig.height=12}
-plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
+sjPlot::plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset = .4)
 ```
 
 Notice that these effects are centered around 0. Refering back \ref(@mathri), the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
@@ -301,13 +302,11 @@ Consider the covariate $floor$, which takes on the value $1$ when the radon meas
 
 radon$floor <- factor(radon$floor, labels=c("basement", "first floor"))
 fit_nopool <- lm(log_radon ~ floor + county, data=radon)
-fitted_nopool <- dplyr::bind_cols(radon,
-                                  data.frame(.fitted=predict(fit_nopool)))
+fitted_nopool <- bind_cols(radon,data.frame(.fitted=predict(fit_nopool)))
 
 
-fit_partpool <- lme4::lmer(log_radon ~ floor + (1 |county), data=radon)
-fitted_partpool <- dplyr::bind_cols(radon,
-                                    data.frame(.fitted=predict(fit_partpool),
+fit_partpool <- lmer(log_radon ~ floor + (1 |county), data=radon)
+fitted_partpool <- bind_cols(radon, data.frame(.fitted=predict(fit_partpool),
                                                .fixed=predict(fit_partpool, re.form=NA)))
 
 county_idx <- c("BLUEEARTH", "DAKOTA", "FARIBAULT", "HENNEPIN",

@@ -28,6 +28,8 @@ library(dplyr)
 library(pander)
 library(knitr)
 library(kableExtra)
+library(sjPlot)
+library(broom)
 
 options(knitr.kable.NA = '', knitr.table.format = "html")
 theme_set(theme_bw())

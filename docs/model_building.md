@@ -1,131 +1,1150 @@
-
 # Model Building {#model-building}
 
 Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable. 
 
-This chapter introduces different types of covariates that can be used, stratified models, confounding and moderation. We then conclude with measures of model fit and methods to compare between competing models. 
+This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit. 
 
-## Stratification
 
-Stratified models examine the regression equations for each subgroup of the population and seeing if the relationship between the response and explanatory variables _changed_ for at least one subgroup. 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gtsummary`, and `survey`...packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
 
-Consider the relationship between the length of an iris petal, and the length of it's sepal. Earlier we found that the iris species modified this relationship. Lets consider a binary indicator variable for species that groups _veriscolor_ and _virginica_ together. 
+
+
+## Binary predictors
+
+Does gender also play a roll in FEV? Let's look at the separate effects of height and age on FEV1, and visualize how gender plays a roll. 
+
 
 
 ```r
-iris$setosa <- ifelse(iris$Species=="setosa", 1, 0)
-table(iris$setosa, iris$Species)
-##    
-##     setosa versicolor virginica
-##   0      0         50        50
-##   1     50          0         0
-```
+ht.plot <- ggplot(fev_long, aes(x=ht, y=fev1)) + 
+        geom_point(aes(col=gender)) + 
+        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
+        geom_smooth(se=FALSE, col="red", method="lm") + 
+        scale_color_viridis_d() + 
+        theme(legend.position = c(0.15,0.85))
 
-Within the _setosa_ species, there is little to no relationship between sepal and petal length. For the other two species, the relationship looks still significantly positive, but in the combined sample there appears to be a strong positive relationship (blue). 
-
-
-```r
-ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=as.factor(setosa))) + 
-            geom_point() + theme_bw() + theme(legend.position="top") + 
-            scale_color_manual(name="Species setosa", values=c("red", "darkgreen")) + 
-            geom_smooth(se=FALSE, method="lm") + 
-            geom_smooth(aes(x=Sepal.Length, y=Petal.Length), col="blue", se=FALSE, method='lm')
-```
-
-<img src="model_building_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
-The mathematical model describing the relationship between Petal length ($Y$), and Sepal length ($X$), for species _setosa_ ($s$) versus not-setosa ($n$), is written as follows: 
-
-$$ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})$$
-$$ Y_{in} \sim \beta_{0n} + \beta_{1n}*x_{i} + \epsilon_{in} \qquad \epsilon_{in} \sim \mathcal{N}(0,\sigma^{2}_{n}) $$
-
-In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: $\beta_{0}, \beta_{1}$, and $\sigma^{2}$, for a total of 6 for the two models. The more parameters that need to be estimated, the more data we need. 
-
-
-
-## Moderation
-
-Moderation occurs when the relationship between two variables depends on a third variable.
-
-* The third variable is referred to as the moderating variable or simply the moderator. 
-* The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
-    - This tends to be an important 
-* When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
-    - This is also called a _stratified_ model, or a _subgroup analysis_.
-
-Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
-
-**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
-
-**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
-
-**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
-
-Recall that common analysis methods for analyzing bivariate relationships come in very few flavors: 
-
-* Correlation (Q~Q)
-* Linear Regression (Q~Q)
-* $\chi^{2}$ (C~C)
-* ANOVA (Q~C)
-
-
-### Example 1: Sepal vs Petal Length
-
-We just got done looking at the relationship between the length of an iris's Sepal, and the length (cm) of it's petal. 
-
-```r
-overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
-                geom_point() + geom_smooth(se=FALSE) + 
-                theme_bw()
-
-by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
-                  geom_point() + geom_smooth(se=FALSE) + 
-                  theme_bw() + theme(legend.position="top")
-
-library(gridExtra)
-grid.arrange(overall, by_spec , ncol=2)
+age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) + 
+        geom_point(aes(col=gender)) + 
+        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
+        geom_smooth(se=FALSE, col="red", method="lm") + 
+        scale_color_viridis_d(guide=FALSE)
+        
+gridExtra::grid.arrange(ht.plot, age.plot, ncol=2)
 ```
 
 <img src="model_building_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
-![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
+* The points are colored by gender
+* Each gender has it's own best fit line in the same color as the points
+* The red line is the best fit line overall - ignoring gender
 
-Let's look at the correlation between these two continuous variables
+![q](images/q.png) Is gender a moderator for either height or age? 
 
-_overall_
-
-```r
-cor(iris$Sepal.Length, iris$Petal.Length)
-## [1] 0.8717538
-```
-
-_stratified by species_
+Let's compare the models with, and without gender 
 
 ```r
-by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
-## iris$Species: setosa
-## [1] 0.2671758
-## -------------------------------------------------------- 
-## iris$Species: versicolor
-## [1] 0.754049
-## -------------------------------------------------------- 
-## iris$Species: virginica
-## [1] 0.8642247
+gmod1 <- lm(fev1 ~ age + ht, data=fev_long)
+gmod2 <- lm(fev1 ~ age + ht + gender, data=fev_long)
+
+tbl_merge(
+  tbls = list(tbl_regression(gmod1), 
+              tbl_regression(gmod2)), 
+  tab_spanner = c("**Model 1**", "**Model 2**")
+)
 ```
 
-There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
+```{=html}
+<div id="nzlsebiube" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
-The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
+#nzlsebiube .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
-### Example 2: Simpson's Paradox
+#nzlsebiube .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-Sometimes moderating variables can result in what's known as _Simpson's Paradox_
+#nzlsebiube .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
 
-https://en.wikipedia.org/wiki/Simpson%27s_paradox
+#nzlsebiube .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nzlsebiube .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nzlsebiube .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nzlsebiube .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nzlsebiube .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nzlsebiube .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nzlsebiube .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nzlsebiube .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nzlsebiube .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nzlsebiube .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nzlsebiube .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nzlsebiube .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nzlsebiube .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nzlsebiube .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nzlsebiube .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nzlsebiube .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nzlsebiube .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nzlsebiube .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nzlsebiube .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nzlsebiube .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nzlsebiube .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nzlsebiube .gt_left {
+  text-align: left;
+}
+
+#nzlsebiube .gt_center {
+  text-align: center;
+}
+
+#nzlsebiube .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nzlsebiube .gt_font_normal {
+  font-weight: normal;
+}
+
+#nzlsebiube .gt_font_bold {
+  font-weight: bold;
+}
+
+#nzlsebiube .gt_font_italic {
+  font-style: italic;
+}
+
+#nzlsebiube .gt_super {
+  font-size: 65%;
+}
+
+#nzlsebiube .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#nzlsebiube .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#nzlsebiube .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nzlsebiube .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#nzlsebiube .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#nzlsebiube .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner"><strong>Model 1</strong></span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner"><strong>Model 2</strong></span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">age</td>
+<td class="gt_row gt_center">-0.02</td>
+<td class="gt_row gt_center">-0.03, -0.01</td>
+<td class="gt_row gt_center"><0.001</td>
+<td class="gt_row gt_center">-0.02</td>
+<td class="gt_row gt_center">-0.03, -0.02</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">ht</td>
+<td class="gt_row gt_center">0.16</td>
+<td class="gt_row gt_center">0.15, 0.18</td>
+<td class="gt_row gt_center"><0.001</td>
+<td class="gt_row gt_center">0.11</td>
+<td class="gt_row gt_center">0.08, 0.13</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">gender</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center">-0.64</td>
+<td class="gt_row gt_center">-0.79, -0.48</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+* Gender is a binary categorical variable, with reference group "Male".
+    - This is detected because the variable that shows up in the regression model output is `genderF`. So the estimate shown is for males, compared to females. 
+    - More details on how categorical variables are included in multivariable models is covered in section \@ref(cat-predictors). 
+
+
+
+**Interpretation of Coefficients**
+
+The regression equation for the model without gender is 
+
+$$ y = -6.74 - 0.02 age + 0.16 height $$
+
+* $b_{0}:$ For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.
+* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
+* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+
+
+The regression equation for the model with gender is 
+
+$$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
+
+
+* $b_{0}:$ For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.
+* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
+* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+* $b_{3}:$ Females have 0.64L lower FEV compared to males. 
+
+**Note**: The interpretation of categorical variables still falls under the template language of "for every one unit increase in $X_{p}$, $Y$ changes by $b_{p}$". Here, $X_{3}=0$ for males, and 1 for females. So a 1 "unit" change is females _compared to_ males. 
+
+![q](images/q.png) Which model fits better? What measure are you using to quanitify "fit"? 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on? </div>\EndKnitrBlock{rmdnote}
+
+
+
+## Categorical Predictors {#cat-predictors}
+
+Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
+
+
+```r
+summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.76390 -0.17875  0.00716  0.17461  0.79954 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
+## Sepal.Length       0.63211    0.04527  13.962  < 2e-16 ***
+## Speciesversicolor  2.21014    0.07047  31.362  < 2e-16 ***
+## Speciesvirginica   3.09000    0.09123  33.870  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2826 on 146 degrees of freedom
+## Multiple R-squared:  0.9749,	Adjusted R-squared:  0.9744 
+## F-statistic:  1890 on 3 and 146 DF,  p-value: < 2.2e-16
+```
+
+Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Sepal.Length </th>
+   <th style="text-align:right;"> Speciesversicolor </th>
+   <th style="text-align:right;"> Speciesvirginica </th>
+   <th style="text-align:left;"> Species </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 5.1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> setosa </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:right;"> 4.9 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> setosa </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 51 </td>
+   <td style="text-align:right;"> 7.0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> versicolor </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 52 </td>
+   <td style="text-align:right;"> 6.4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> versicolor </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 101 </td>
+   <td style="text-align:right;"> 6.3 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> virginica </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 102 </td>
+   <td style="text-align:right;"> 5.8 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> virginica </td>
+  </tr>
+</tbody>
+</table>
+
+### Factor variable coding
+
+* Most commonly known as "Dummy coding". Not an informative term to use. 
+* Better used term: Indicator variable
+* Math notation: **I(gender == "Female")**. 
+* A.k.a reference coding
+* For a nominal X with K categories, define K indicator variables.
+    - Choose a reference (referent) category:
+    - Leave it out
+    - Use remaining K-1 in the regression.
+    - Often, the largest category is chosen as the reference category.
+
+For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
+
+The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
+
+Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
+
+
+```r
+lm(Petal.Length ~ Sepal.Length + Species, data=iris) |> tbl_regression()
+```
+
+```{=html}
+<div id="mvpocqplki" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mvpocqplki .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mvpocqplki .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mvpocqplki .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mvpocqplki .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mvpocqplki .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mvpocqplki .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mvpocqplki .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mvpocqplki .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mvpocqplki .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mvpocqplki .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mvpocqplki .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mvpocqplki .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mvpocqplki .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvpocqplki .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mvpocqplki .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mvpocqplki .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvpocqplki .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mvpocqplki .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvpocqplki .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mvpocqplki .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvpocqplki .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mvpocqplki .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvpocqplki .gt_left {
+  text-align: left;
+}
+
+#mvpocqplki .gt_center {
+  text-align: center;
+}
+
+#mvpocqplki .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mvpocqplki .gt_font_normal {
+  font-weight: normal;
+}
+
+#mvpocqplki .gt_font_bold {
+  font-weight: bold;
+}
+
+#mvpocqplki .gt_font_italic {
+  font-style: italic;
+}
+
+#mvpocqplki .gt_super {
+  font-size: 65%;
+}
+
+#mvpocqplki .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#mvpocqplki .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#mvpocqplki .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mvpocqplki .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#mvpocqplki .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#mvpocqplki .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Sepal.Length</td>
+<td class="gt_row gt_center">0.63</td>
+<td class="gt_row gt_center">0.54, 0.72</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">Species</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">setosa</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">versicolor</td>
+<td class="gt_row gt_center">2.2</td>
+<td class="gt_row gt_center">2.1, 2.3</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">virginica</td>
+<td class="gt_row gt_center">3.1</td>
+<td class="gt_row gt_center">2.9, 3.3</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
+
+* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
+* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
+* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
 
 ## Interactions {#interactions}
 
-If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa` . Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
+If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa`. Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}$$
 
@@ -145,63 +1164,464 @@ $$ Y_{i} \sim (\beta_{0} + \beta_{2}) + (\beta_{1} + \beta_{3})x_{i}$$
 
 Each subgroup model has a different intercept and slope, but we had to estimate 4 parameters in the interaction model, and 6 for the fully stratified model. 
 
-
+### Fitting interaction models & interpreting coefficients
 Interactions are fit in `R` by simply multiplying `*` the two variables together in the model statement. 
 
 ```r
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
-##     setosa, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
-## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
-## setosa               2.35877    0.88266   2.672  0.00839 ** 
-## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.3929 on 146 degrees of freedom
-## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
-## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
+iris$setosa <- ifelse(iris$Species == "setosa", 1, 0)
+lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl_regression()
 ```
 
-The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length.
+```{=html}
+<div id="htlqvwvaoj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#htlqvwvaoj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#htlqvwvaoj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#htlqvwvaoj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#htlqvwvaoj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#htlqvwvaoj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#htlqvwvaoj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#htlqvwvaoj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#htlqvwvaoj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#htlqvwvaoj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#htlqvwvaoj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#htlqvwvaoj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#htlqvwvaoj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#htlqvwvaoj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htlqvwvaoj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#htlqvwvaoj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#htlqvwvaoj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htlqvwvaoj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#htlqvwvaoj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htlqvwvaoj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#htlqvwvaoj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htlqvwvaoj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htlqvwvaoj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htlqvwvaoj .gt_left {
+  text-align: left;
+}
+
+#htlqvwvaoj .gt_center {
+  text-align: center;
+}
+
+#htlqvwvaoj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#htlqvwvaoj .gt_font_normal {
+  font-weight: normal;
+}
+
+#htlqvwvaoj .gt_font_bold {
+  font-weight: bold;
+}
+
+#htlqvwvaoj .gt_font_italic {
+  font-style: italic;
+}
+
+#htlqvwvaoj .gt_super {
+  font-size: 65%;
+}
+
+#htlqvwvaoj .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#htlqvwvaoj .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#htlqvwvaoj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#htlqvwvaoj .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#htlqvwvaoj .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#htlqvwvaoj .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Sepal.Length</td>
+<td class="gt_row gt_center">1.0</td>
+<td class="gt_row gt_center">0.91, 1.1</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">setosa</td>
+<td class="gt_row gt_center">2.4</td>
+<td class="gt_row gt_center">0.61, 4.1</td>
+<td class="gt_row gt_center">0.008</td></tr>
+    <tr><td class="gt_row gt_left">Sepal.Length * setosa</td>
+<td class="gt_row gt_center">-0.90</td>
+<td class="gt_row gt_center">-1.2, -0.56</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+The coefficient $b_{3}$ for the interaction term is significant, confirming that species changes the relationship between sepal length and petal length. Thus, species is a **moderator** (Chapter \@ref(mod-strat)).
  
-### Example 1
-
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * 
-##     setosa, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.96754 -0.19948 -0.01386  0.22597  1.05479 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         -1.55571    0.37509  -4.148 5.68e-05 ***
-## Sepal.Length         1.03189    0.05957  17.322  < 2e-16 ***
-## setosa               2.35877    0.88266   2.672  0.00839 ** 
-## Sepal.Length:setosa -0.90026    0.17000  -5.296 4.28e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.3929 on 146 degrees of freedom
-## Multiple R-squared:  0.9515,	Adjusted R-squared:  0.9505 
-## F-statistic: 954.1 on 3 and 146 DF,  p-value: < 2.2e-16
-```
+**Interpreting Coefficients**
 
 * If $x_{2}=0$, then the effect of $x_{1}$ on $Y$ simplifies to: $\beta_{1}$
     * $b_{1}$ The effect of sepal length on petal length **for non-setosa species of iris** (`setosa=0`) 
@@ -211,9 +1631,13 @@ summary(lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.</div>\EndKnitrBlock{rmdcaution}
 
-Let's up the game now and look at the full interaction model with a categorical version of species. Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . 
+### Categorical Interaction variables
+
+Let's up the game now and look at the full interaction model with a categorical version of species. 
+Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . Refer to \@ref(cat-predictors) for information on how to interpret categorical predictors as main effects. 
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}$$
+
 
 ```r
 summary(lm(Petal.Length ~ Sepal.Length + Species + Sepal.Length*Species, data=iris))
@@ -252,13 +1676,18 @@ Compare this to the estimates gained from the stratified model:
 
 
 ```r
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="setosa")))
+by(iris, iris$Species, function(x){
+  lm(Petal.Length ~ Sepal.Length, data=x) %>% coef()
+})
+## iris$Species: setosa
 ##  (Intercept) Sepal.Length 
-##    0.8030518    0.1316317
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="versicolor")))
+##    0.8030518    0.1316317 
+## ------------------------------------------------------------ 
+## iris$Species: versicolor
 ##  (Intercept) Sepal.Length 
-##    0.1851155    0.6864698
-coef(lm(Petal.Length ~ Sepal.Length, data=subset(iris, Species=="virginica")))
+##    0.1851155    0.6864698 
+## ------------------------------------------------------------ 
+## iris$Species: virginica
 ##  (Intercept) Sepal.Length 
 ##    0.6104680    0.7500808
 ```
@@ -312,8 +1741,10 @@ is the same as the following interaction model:
 
 
 
-### Example 3: The relationship between income, employment status and depression. 
-This example follows section \@ref(mlogreg). 
+### Example 3: 
+
+Let's explore the relationship between income, employment status and depression. 
+This example follows a logistic regression example from section \@ref(mlogreg). 
 
 Here I create the binary indicators of `lowincome` (annual income <$10k/year) and underemployed (part time or unemployed).
 
@@ -322,15 +1753,15 @@ Here I create the binary indicators of `lowincome` (annual income <$10k/year) an
 depress$lowincome <- ifelse(depress$income < 10, 1, 0)
 table(depress$lowincome, depress$income, useNA="always")
 ##       
-##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31
-##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1
-##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
-##   <NA>  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31 32 35
+##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1  1 24
+##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+##   <NA>  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 ##       
-##        32 35 36 37 42 45 55 65 <NA>
-##   0     1 24  1  1  1 15  9 10    0
-##   1     0  0  0  0  0  0  0  0    0
-##   <NA>  0  0  0  0  0  0  0  0    0
+##        36 37 42 45 55 65 <NA>
+##   0     1  1  1 15  9 10    0
+##   1     0  0  0  0  0  0    0
+##   <NA>  0  0  0  0  0  0    0
 
 depress$underemployed <- ifelse(depress$employ %in% c("PT", "Unemp"), 1, 0 )
 table(depress$underemployed, depress$employ, useNA="always")
@@ -406,109 +1837,12 @@ summary(me_intx_model)
 ```
 
 
-## Confounding 
-
-One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
-
-
-![All the ways covariates can affect response variables](images/confounder.png)
-
-Credit: [A blog about statistical musings](https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/)
-
-
-
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">Easy to read short article from a Gastroenterology journal on how to control confounding effects by statistical analysis. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4017459/</div>\EndKnitrBlock{rmdnote}
-
-Other factors (characteristics/variables) could also be explaining part of the variability seen in $y$. 
-
-> If the relationship between $x_{1}$ and $y$ is bivariately significant, but then no longer significant once $x_{2}$ has been added to the model, then $x_{2}$ is said to explain, or **confound**, the relationship between $x_{1}$ and $y$.
-
-Steps to determine if a variable $x_{2}$ is a confounder. 
-
-1. Fit a regression model on $y \sim x_{1}$. 
-2. If $x_{1}$ is not significantly associated with $y$, STOP. Re-read the "IF" part of the definition of a confounder. 
-3. Fit a regression model on $y \sim x_{1} + x_{2}$. 
-4. Look at the p-value for $x_{1}$. One of two things will have happened. 
-    - If $x_{1}$ is still significant, then $x_{2}$ does NOT confound (or explain) the relationship between $y$ and $x_{1}$. 
-    - If $x_{1}$ is NO LONGER significantly associated with $y$, then $x_{2}$ IS a confounder. 
-    
-    
-Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
-
-### Example: Does smoking affect pulse rate? 
-
-Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate? 
-
-
-
-First we consider the bivariate relationship between pulse rate (`H4PR`) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (`H4TO6`). 
-
-```r
-lm(H4PR ~ H4TO6 , data=addhealth) %>% summary()
-## 
-## Call:
-## lm(formula = H4PR ~ H4TO6, data = addhealth)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -30.826  -8.548  -0.687   7.258 120.841 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  73.7702     0.4953 148.936  < 2e-16 ***
-## H4TO6         0.1389     0.0396   3.507 0.000464 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 12.56 on 1761 degrees of freedom
-##   (4741 observations deleted due to missingness)
-## Multiple R-squared:  0.006936,	Adjusted R-squared:  0.006372 
-## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644
-```
-
-As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13. 
-
-However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, "during the past 30 days, on how many days did you smoke cigarettes?" (`H4TO5`). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking `H4TO6` is no longer significant (at the 0.05 level). 
-
-
-```r
-lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
-## 
-## Call:
-## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -31.682  -8.509  -1.014   7.302 120.320 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 72.78932    0.68037 106.985   <2e-16 ***
-## H4TO5        0.06870    0.03271   2.101   0.0358 *  
-## H4TO6        0.08292    0.04769   1.739   0.0822 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 12.55 on 1760 degrees of freedom
-##   (4741 observations deleted due to missingness)
-## Multiple R-squared:  0.00942,	Adjusted R-squared:  0.008294 
-## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415
-```
-
-Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
-
-
-Additional example interpretations from models not shown here. 
-
-* After adjusting for the potential confounding factor of gender, being overweight (OR 0.920, CI 0.822 – 1.028, p = .1420) was not significantly associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 0.920 times less likely to participate in an active sport. Based on these analyses, gender is a confounding factor because the association between being overweight and active sport participation is no longer significant after accounting for gender.
-* After adjusting for the potential confounding factor of gender, being overweight (OR 3.65, CI 1.573 – 4.891, p = .0001) was significantly and positively associated with the likelihood of participating in an active sport. In this analysis, the odds ratio tells us that those adolescents who are overweight are 3.65 times more likely to participate in an active sport. Based on these analyses, gender is not a confounding factor because the association between being overweight and active sport participation is still significant after accounting for gender. 
- 
 ## Wald test (General F) {#general-F}
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 
 1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit
-2. Testing a linear combination of predictors (such as a differnece of differences). _This topic is not discussed yet_
+2. Testing a linear combination of predictors (such as a difference of differences). _This topic is not discussed yet_
 
 Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
 
@@ -536,41 +1870,484 @@ Consider a model to predict depression using age, employment status and whether 
 
 
 ```r
-full_model <- lm(cesd ~ age + chronill + employ, data=depress)
-pander(summary(full_model))
+employ.depression.model <- lm(cesd ~ age + chronill + employ, data=depress)
+tbl_regression(employ.depression.model)
 ```
 
+```{=html}
+<div id="bkxhluoykw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
----------------------------------------------------------------------
-        &nbsp;           Estimate   Std. Error   t value   Pr(>|t|)  
------------------------ ---------- ------------ --------- -----------
-    **(Intercept)**       11.48       1.502       7.646    3.191e-13 
+#bkxhluoykw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
-        **age**           -0.133     0.03514     -3.785    0.0001873 
+#bkxhluoykw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-     **chronill**         2.688       1.024       2.625    0.009121  
+#bkxhluoykw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
 
- **employHouseperson**     6.75       1.797       3.757    0.0002083 
+#bkxhluoykw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
 
-  **employIn School**     1.967       5.995       0.328     0.7431   
+#bkxhluoykw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
 
-    **employOther**       4.897       4.278       1.145     0.2533   
+#bkxhluoykw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
 
-     **employPT**         3.259       1.472       2.214     0.02765  
+#bkxhluoykw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
 
-   **employRetired**      3.233       1.886       1.714     0.08756  
+#bkxhluoykw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
 
-    **employUnemp**       7.632       2.339       3.263    0.001238  
----------------------------------------------------------------------
+#bkxhluoykw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
 
+#bkxhluoykw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
 
---------------------------------------------------------------
- Observations   Residual Std. Error   $R^2$    Adjusted $R^2$ 
--------------- --------------------- -------- ----------------
-     294               8.385          0.1217      0.09704     
---------------------------------------------------------------
+#bkxhluoykw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
 
-Table: Fitting linear model: cesd ~ age + chronill + employ
+#bkxhluoykw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkxhluoykw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkxhluoykw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bkxhluoykw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bkxhluoykw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bkxhluoykw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkxhluoykw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bkxhluoykw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bkxhluoykw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkxhluoykw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bkxhluoykw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkxhluoykw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bkxhluoykw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkxhluoykw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkxhluoykw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkxhluoykw .gt_left {
+  text-align: left;
+}
+
+#bkxhluoykw .gt_center {
+  text-align: center;
+}
+
+#bkxhluoykw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bkxhluoykw .gt_font_normal {
+  font-weight: normal;
+}
+
+#bkxhluoykw .gt_font_bold {
+  font-weight: bold;
+}
+
+#bkxhluoykw .gt_font_italic {
+  font-style: italic;
+}
+
+#bkxhluoykw .gt_super {
+  font-size: 65%;
+}
+
+#bkxhluoykw .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#bkxhluoykw .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#bkxhluoykw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bkxhluoykw .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#bkxhluoykw .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#bkxhluoykw .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">age</td>
+<td class="gt_row gt_center">-0.13</td>
+<td class="gt_row gt_center">-0.20, -0.06</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">chronill</td>
+<td class="gt_row gt_center">2.7</td>
+<td class="gt_row gt_center">0.67, 4.7</td>
+<td class="gt_row gt_center">0.009</td></tr>
+    <tr><td class="gt_row gt_left">employ</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">FT</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Houseperson</td>
+<td class="gt_row gt_center">6.8</td>
+<td class="gt_row gt_center">3.2, 10</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">In School</td>
+<td class="gt_row gt_center">2.0</td>
+<td class="gt_row gt_center">-9.8, 14</td>
+<td class="gt_row gt_center">0.7</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Other</td>
+<td class="gt_row gt_center">4.9</td>
+<td class="gt_row gt_center">-3.5, 13</td>
+<td class="gt_row gt_center">0.3</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">PT</td>
+<td class="gt_row gt_center">3.3</td>
+<td class="gt_row gt_center">0.36, 6.2</td>
+<td class="gt_row gt_center">0.028</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Retired</td>
+<td class="gt_row gt_center">3.2</td>
+<td class="gt_row gt_center">-0.48, 6.9</td>
+<td class="gt_row gt_center">0.088</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unemp</td>
+<td class="gt_row gt_center">7.6</td>
+<td class="gt_row gt_center">3.0, 12</td>
+<td class="gt_row gt_center">0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
 
 The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
 
@@ -586,7 +2363,7 @@ The `regTermTest` function can be found in the `survey` package. The `survey` pa
 
 
 ```r
-survey::regTermTest(full_model, "employ")
+survey::regTermTest(employ.depression.model, "employ")
 ## Wald test for employ
 ##  in lm(formula = cesd ~ age + chronill + employ, data = depress)
 ## F =  4.153971  on  6  and  285  df: p= 0.0005092
@@ -600,6 +2377,25 @@ The p-value of this Wald test is significant, thus employment significantly pred
 
 ![q](images/q.png) What does the vector of coefficients $R$ look like here? 
 
+
+
+## Multicollinearity
+
+* Occurs when some of the X variables are highly intercorrelated.
+* Affects estimates and their SE's (p. 143)
+* Look at tolerance, and its inverse, the Variance Inflation Factor (VIF)
+* Need tolerance < 0.01, or VIF > 100.
+
+
+```r
+big.pen.model <- lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm, data=pen) 
+performance::check_collinearity(big.pen.model) |> plot()
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
+* Solution: use variable selection to delete some X variables.
+* Alternatively, use dimension reduction techniques such as Principal Components (Chaper @\ref(pca)).
 
 
 ## Variable Selection Process
@@ -826,7 +2622,7 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 ## General Advice
 
 * Model selection is not a hard science. 
-* Some criteria have "rules of thumb" that can guide your exploration (such as differnce in AIC < 2)
+* Some criteria have "rules of thumb" that can guide your exploration (such as difference in AIC < 2)
 * _**Use common sense**_: A sub-optimal subset may make more sense than optimal one
 * p-values: When you compare two criteria, often the difference has a known distribution. 
     - Wald F Test, the difference in RSS between the two models has a F distribution.

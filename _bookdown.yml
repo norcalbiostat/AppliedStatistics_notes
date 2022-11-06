@@ -6,20 +6,22 @@ rmd_files: ["index.Rmd"
             ,"data_prep.Rmd"
             ,"data_viz.Rmd"
             ,"select_analysis.Rmd"
-
+             
             ,"bivariate_intro.Rmd"
             ,"bivariate_analysis.Rmd"
-                   
+                    
             ,"reg_intro.Rmd"
-            ,"linreg.Rmd"
+            ,"slr.Rmd"
+            ,"moderation_stratification.Rmd"
+            ,"mlr.Rmd"
             ,"model_building.Rmd"
             ,"GLM.Rmd"
             ,"classification.Rmd"
             
-            ,"multivariate_intro.Rmd"
-            ,"PCA.Rmd"
-            ,"FA.Rmd"
-            ,"cluster.Rmd"
+             ,"multivariate_intro.Rmd"
+             #,"PCA.Rmd"
+             ,"FA.Rmd"
+#            ,"cluster.Rmd"
             
             ,"MLM_intro.Rmd"
             ,"random_intercept.Rmd"
