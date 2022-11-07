@@ -52,8 +52,6 @@ where the predicted values $\hat{y}_{i}$ are calculated as
 
 $$\hat{y}_{i}  = \sum_{i=1}^{p}X_{ij}\beta_{j}$$
 
-
-
 The sum of the squared residual errors (the distance between the observed point $y_{i}$ and the fitted value) now has the following form: 
 
 $$ \sum_{i=1}^{n} |y_{i} - \sum_{i=1}^{p}X_{ij}\beta_{j}|^{2}$$
@@ -621,19 +619,6 @@ dwplot(mlr.dad.model)
 
 <img src="mlr_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
-
-## Model Diagnostics 
-
-The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model. 
-
-
-```r
-check_model(mlr.dad.model)
-```
-
-<img src="mlr_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-
 ## Confounding 
 
 One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
@@ -660,7 +645,9 @@ Steps to determine if a variable $x_{2}$ is a confounder.
     - If $x_{1}$ is still significant, then $x_{2}$ does NOT confound (or explain) the relationship between $y$ and $x_{1}$. 
     - If $x_{1}$ is NO LONGER significantly associated with $y$, then $x_{2}$ IS a confounder. 
     
-    
+
+This means that the third variable is explaining the relationship between the explanatory variable and the response variable.
+        
 Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
 
 ### Example: Does smoking affect pulse rate? 
@@ -724,6 +711,19 @@ lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
 ```
 
 Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
+
+
+
+## Model Diagnostics 
+
+The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model. 
+
+
+```r
+check_model(mlr.dad.model)
+```
+
+<img src="mlr_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
  
