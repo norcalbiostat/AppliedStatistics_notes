@@ -131,19 +131,59 @@ The mathematical model is now written as follows, where $x_{1}$ is Sepal Length,
 
 $$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
 
-Let's look at the regression coefficients and their 95% confidence intervals from the main effects model again. 
+When the species is _setosa_, $x_{2} =0$ and $x_{3}=0$, so the model then is
+
+$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}$$
+
+When the species is _versicolor_, $x_{2} =1$ and $x_{3}=0$, so the model then is
+
+$$ 
+Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2} + \epsilon_{i} \\
+Y_{i} \sim (\beta_{0} + \beta_{2}) + \beta_{1}x_{i} +  \epsilon_{i}
+$$
+
+and similarly for species _virginica_. 
+
+When the species is _virginica_., $x_{2} =0$ and $x_{3}=1$, so the model then is
+
+$$ 
+Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{3} + \epsilon_{i} \\
+Y_{i} \sim (\beta_{0} + \beta_{3}) + \beta_{1}x_{i} +  \epsilon_{i}
+$$
+
+In summary, each species gets it's own intercept, but still has a common slope for Sepal length. 
+
+$$
+y_{i.setosa} = -1.70 + 0.632(Sepal.Length_{i}) \\
+y_{i.versicolor} = (-1.70 + 2.21) + 0.632(Sepal.Length_{i}) \longrightarrow 0.51 + 0.632(Sepal.Length_{i})\\
+y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 + 0.632(Sepal.Length_{i}) \\
+$$
+
+ 
+Let's look interpret the regression coefficients and their 95% confidence intervals from the main effects model again. 
 
 ```{r}
 lm(Petal.Length ~ Sepal.Length + Species, data=iris) |> tbl_regression()
 ```
 
-In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. The interpretations are the following: 
-
 * $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
 * $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
 * $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
 
+> Beta coefficients for categorical variables are always interpreted as the difference between that particular level and the reference group
+
+
+
 ## Interactions {#interactions}
+
+In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. Reviewing the scatterplot below, do you think this is a reasonable model to fit the observed relationship?
+
+```{r}
+ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, color = Species)) + 
+  geom_point() + geom_smooth(method="lm", se=FALSE)
+```
+
+
 
 If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa`. Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
 
