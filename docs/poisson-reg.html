@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Generalized Linear Models | Applied Statistics</title>
+  <title>11.5 Count outcome data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta property="og:title" content="11.5 Count outcome data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta name="twitter:title" content="11.5 Count outcome data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for-1.html"/>
-<link rel="next" href="fitting-glms.html"/>
+<link rel="prev" href="log-linear.html"/>
+<link rel="next" href="multinomial-reg.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -504,22 +504,522 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="glm" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Generalized Linear Models<a href="glm.html#glm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely:</p>
-<p><span class="math display">\[ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j \]</span></p>
-<p>When your outcome variable <span class="math inline">\(y\)</span> is non-continuous/non-normal, the above assumption fails dramatically.</p>
-<p>Generalized Linear Models (GLM) allows for different data type outcomes by allowing the linear portion of the model (<span class="math inline">\(\mathbf{X}\beta\)</span>) to be related to the outcome variable <span class="math inline">\(y\)</span> using a <em>link</em> function, that allows the magnitude of the variance of the errors (<span class="math inline">\(\sigma\)</span>) to be related to the predicted values themselves.</p>
-<p>There are a few overarching types of non-continuous outcomes that can be modeled with GLM’s.</p>
+<div id="poisson-reg" class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> Count outcome data<a href="poisson-reg.html#poisson-reg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
+- e.g. Number of thunderstorms in a year</p>
 <ul>
-<li>Binary data: Logistic or Probit regression (<a href="logreg.html#logreg">11.3</a>)</li>
-<li>Log-linear models (<a href="log-linear.html#log-linear">11.4</a>)</li>
-<li>Multinomial/categorical data: Multinomial or Ordinal Logistic regression. (<a href="multinomial-reg.html#multinomial-reg">11.6</a>)</li>
-<li>Count data: Poisson regression (<a href="poisson-reg.html#poisson-reg">11.5</a>)</li>
+<li>If we assume:
+<ul>
+<li>Rate (<span class="math inline">\(\mu\)</span>) is fixed over time</li>
+<li>Successive occurrences independent of each other</li>
+</ul></li>
 </ul>
+<p>Then we can use the <strong>Poisson distribution</strong>.</p>
+<p><span class="math display">\[
+P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
+\]</span></p>
+<ul>
+<li>The Poisson distribution has a distinct feature where the mean of the distribution <span class="math inline">\(\mu\)</span>, is also the variance.</li>
+</ul>
+<div class="figure">
+<img src="images/poisson.png" alt="" />
+<p class="caption">Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve</p>
+</div>
+<div id="poisson-regression" class="section level4 hasAnchor" number="11.5.0.1">
+<h4><span class="header-section-number">11.5.0.1</span> Poisson Regression<a href="poisson-reg.html#poisson-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 
 <div class="rmdnote">
-This section uses functions from the following additional packages: <code>gtsummary</code>,<code>MKmisc</code>, <code>survey</code>.
+This section is still under development
+</div>
+<p>Just another GLM - we use a <span class="math inline">\(ln\)</span> as the link function. This lets us model the log rates using a linear combination of covariates.</p>
+<p><span class="math display">\[
+  ln(\mu) = \mathbf{X}\beta
+\]</span></p>
+<p>Then the expected rate of events per unit of time is:</p>
+<p><span class="math display">\[
+  \mu = e^{\mathbf{X}\beta}
+\]</span></p>
+<p>This model assumes that the time of “exposure” for each record is identical.</p>
+<ul>
+<li>Number of cigarettes per month</li>
+<li>Number of epileptic seizures per week</li>
+<li>Number of people with lung cancer in four cities</li>
+</ul>
+<p>If this is not the case (often), then this model needs to include an <em>offset</em>.</p>
+<ul>
+<li>e.g. observing each patient for epileptic seizures for a different number of days</li>
+<li>accounting for different sizes or structures of populations of interest (e.g. different cities with lung cancer)</li>
+</ul>
+<p>What actually gets fit in <code>glm</code> is the model of expected <em>counts</em>, rather than rates, with an offset for the time period <span class="math inline">\(T\)</span>.</p>
+<ul>
+<li>If all time periods are the same, then T is constant, and a linear combination of the intercept, thus dropped from the model.</li>
+</ul>
+<p><span class="math display">\[
+  ln(\lambda) = \mathbf{X}\beta + ln(T)
+\]</span></p>
+<p>While this offset will be added to the regression model as if it were another variable, it’s not quite the same because the regression coefficient for the <span class="math inline">\(ln(T)\)</span> term is fixed at 1.</p>
+<p>The generic formula for fitting a poisson model using <code>glm</code> is:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="poisson-reg.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> <span class="fu">offset</span>(<span class="fu">log</span>(T)), <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
+<p>or alternatively as an argument</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="poisson-reg.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">offset =</span> <span class="fu">log</span>(T),  <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
+<p>The interpretation of the <span class="math inline">\(\beta\)</span> regression coefficients are differences in the log rate (or the log rate-ratio). So, just like with a logistic regression often we back-transform the coefficients by exponentiating before interpreting. So <span class="math inline">\(e^{\beta}\)</span> is now the rate-ratio.</p>
+<ul>
+<li>The intercept term is not a ratio, but a baseline rate when all covariates are 0</li>
+<li>For other covariates, the coefficient is the relative change <em>per unit</em> change in the covariate.
+<ul>
+<li>one year older</li>
+<li>males vs females</li>
+</ul></li>
+</ul>
+<p>Also, similar to logistic regression, since the outcome was transformed, the standard errors are not useful or interpretable as is. To calculate confidence intervals for the rate ratios,</p>
+<ol style="list-style-type: decimal">
+<li>calculate the CI for <span class="math inline">\(\beta\)</span></li>
+<li>exponentiate each end point.</li>
+</ol>
+</div>
+<div id="example-modeling-counts-from-the-add-health-wave-iv-dataset." class="section level4 hasAnchor" number="11.5.0.2">
+<h4><span class="header-section-number">11.5.0.2</span> Example: Modeling counts from the Add Health Wave IV dataset.<a href="poisson-reg.html#example-modeling-counts-from-the-add-health-wave-iv-dataset." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s model the number of siblings someone has, based off their age at Wave 1 (2008).</p>
+<p>Visualize</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="poisson-reg.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(addhealth, <span class="fu">aes</span>(<span class="at">x=</span>nsib)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="poisson-reg.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of siblings&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="poisson-reg.html#cb19-1" aria-hidden="true" tabindex="-1"></a>nsib.model <span class="ot">&lt;-</span> <span class="fu">glm</span>(nsib <span class="sc">~</span> agew1 <span class="sc">+</span> female, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb19-2"><a href="poisson-reg.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(nsib.model, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="mxjtzxkmpu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mxjtzxkmpu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mxjtzxkmpu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mxjtzxkmpu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mxjtzxkmpu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mxjtzxkmpu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxjtzxkmpu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxjtzxkmpu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mxjtzxkmpu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mxjtzxkmpu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mxjtzxkmpu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mxjtzxkmpu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mxjtzxkmpu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mxjtzxkmpu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mxjtzxkmpu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_left {
+  text-align: left;
+}
+
+#mxjtzxkmpu .gt_center {
+  text-align: center;
+}
+
+#mxjtzxkmpu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mxjtzxkmpu .gt_font_normal {
+  font-weight: normal;
+}
+
+#mxjtzxkmpu .gt_font_bold {
+  font-weight: bold;
+}
+
+#mxjtzxkmpu .gt_font_italic {
+  font-style: italic;
+}
+
+#mxjtzxkmpu .gt_super {
+  font-size: 65%;
+}
+
+#mxjtzxkmpu .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#mxjtzxkmpu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mxjtzxkmpu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mxjtzxkmpu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mxjtzxkmpu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mxjtzxkmpu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mxjtzxkmpu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>IRR</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">agew1</td>
+<td class="gt_row gt_center">1.05</td>
+<td class="gt_row gt_center">1.03, 1.06</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">female</td>
+<td class="gt_row gt_center">1.10</td>
+<td class="gt_row gt_center">1.06, 1.14</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> IRR = Incidence Rate Ratio, CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
 </div>
 </div>
             </section>
@@ -527,8 +1027,8 @@ This section uses functions from the following additional packages: <code>gtsumm
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fitting-glms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="log-linear.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multinomial-reg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

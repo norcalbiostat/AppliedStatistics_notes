@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Generalized Linear Models | Applied Statistics</title>
+  <title>11.6 Categorical outcome data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta property="og:title" content="11.6 Categorical outcome data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta name="twitter:title" content="11.6 Categorical outcome data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for-1.html"/>
-<link rel="next" href="fitting-glms.html"/>
+<link rel="prev" href="poisson-reg.html"/>
+<link rel="next" href="binary-classification.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -504,31 +504,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="glm" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Generalized Linear Models<a href="glm.html#glm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely:</p>
-<p><span class="math display">\[ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j \]</span></p>
-<p>When your outcome variable <span class="math inline">\(y\)</span> is non-continuous/non-normal, the above assumption fails dramatically.</p>
-<p>Generalized Linear Models (GLM) allows for different data type outcomes by allowing the linear portion of the model (<span class="math inline">\(\mathbf{X}\beta\)</span>) to be related to the outcome variable <span class="math inline">\(y\)</span> using a <em>link</em> function, that allows the magnitude of the variance of the errors (<span class="math inline">\(\sigma\)</span>) to be related to the predicted values themselves.</p>
-<p>There are a few overarching types of non-continuous outcomes that can be modeled with GLM’s.</p>
-<ul>
-<li>Binary data: Logistic or Probit regression (<a href="logreg.html#logreg">11.3</a>)</li>
-<li>Log-linear models (<a href="log-linear.html#log-linear">11.4</a>)</li>
-<li>Multinomial/categorical data: Multinomial or Ordinal Logistic regression. (<a href="multinomial-reg.html#multinomial-reg">11.6</a>)</li>
-<li>Count data: Poisson regression (<a href="poisson-reg.html#poisson-reg">11.5</a>)</li>
-</ul>
+<div id="multinomial-reg" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Categorical outcome data<a href="multinomial-reg.html#multinomial-reg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 <div class="rmdnote">
-This section uses functions from the following additional packages: <code>gtsummary</code>,<code>MKmisc</code>, <code>survey</code>.
+This section is still under development
 </div>
+<p>If you want to keep the response variable as a categorical variable with more than two levels, the following regression model types are available:</p>
+<ul>
+<li><a href="https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/">Ordinal Logistic Regression</a></li>
+<li><a href="https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/">Multinomial Regression</a></li>
+</ul>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fitting-glms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="poisson-reg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="binary-classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

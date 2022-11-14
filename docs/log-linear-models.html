@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.4 Log-linear models | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.4 Log-linear models | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="logistic-regression.html"/>
+<link rel="prev" href="logreg.html"/>
 <link rel="next" href="count-outcome-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -214,13 +213,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -279,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -289,11 +289,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
 <li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.5</b> Confounding</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.5.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.5.1</b> Example: Does smoking affect pulse rate?</a></li>
 </ul></li>
+<li class="chapter" data-level="9.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.6</b> Model Diagnostics</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -342,15 +342,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
@@ -527,12 +527,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Then create a new variable: <code>logincome</code> that is the natural log (<em>ln</em>) of income. e.g. <code>addhealth$logincome = log(addhealth$income)</code></li>
 </ol>
 <p>Why are we transforming income? To achieve normality.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="log-linear-models.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb208-2"><a href="log-linear-models.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb208-3"><a href="log-linear-models.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb208-4"><a href="log-linear-models.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb208-5"><a href="log-linear-models.html#cb208-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="log-linear-models.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="log-linear-models.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-3"><a href="log-linear-models.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb13-4"><a href="log-linear-models.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-5"><a href="log-linear-models.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p><strong>Identify variables</strong></p>
 <ul>
 <li>Quantitative outcome that has been log transformed: Income (variable <code>logincome</code>)</li>
@@ -546,8 +546,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><span class="math inline">\(b_{j}&lt;1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(1 - e^{b_{j}}\)</span> percent <em>lower</em> than when <span class="math inline">\(x=1\)</span></li>
 <li><strong><span class="math inline">\(b_{j} \geq 1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(e^{b_{j}}\)</span> percent <em>higher</em> than when <span class="math inline">\(x=1\)</span></li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="log-linear-models.html#cb209-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
-<span id="cb209-2"><a href="log-linear-models.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="log-linear-models.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
+<span id="cb14-2"><a href="log-linear-models.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
 <table style="width:93%;">
 <colgroup>
 <col width="29%" />
@@ -614,10 +614,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="log-linear-models.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
-<span id="cb210-2"><a href="log-linear-models.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
-<span id="cb210-3"><a href="log-linear-models.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
-<span id="cb210-4"><a href="log-linear-models.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="log-linear-models.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
+<span id="cb15-2"><a href="log-linear-models.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
+<span id="cb15-3"><a href="log-linear-models.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
+<span id="cb15-4"><a href="log-linear-models.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
 <ul>
 <li>For every hour later one wakes up in the morning, one can expect to earn <code>1-exp(-0.015)</code> = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender.</li>
 <li>Females have on average <code>1-exp(-0.19)</code> = 17% percent lower income than males, after controlling for the wake up time.</li>
@@ -630,7 +630,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="logistic-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logreg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="count-outcome-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -691,7 +691,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
