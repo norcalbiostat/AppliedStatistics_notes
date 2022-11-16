@@ -1269,18 +1269,38 @@ $$ln(Y) \sim XB +\epsilon$$
 
 Recall that in statistics, when we refer to the _log_, we mean the natural log _ln_.
 
-This type of model is often use for Poisson models also (Section \@ref(poisson-models)). 
+This type of model is often use to model count data using the Poisson distribution (Section \@ref(poisson-reg)).
 
 Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed. 
 
 **Interpreting results**
 
-This is hands down the best reference that describes how to interpret the results when your response, predictor, or both variables are log transformed. 
+Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to _exponentiate_ the regression coefficient before interpreting. 
 
-https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/
+When using log transformed outcomes, the effect on Y becomes **multiplicative** instead of additive. 
+
+* **Additive** For every 1 unit increase in X, y increases by b1
+* **Multiplicative** For every 1 unit increase in X, y is multiplied by $e^{b1}$
+
+Example, let $b_{1} = 0.2$. 
+
+* **Additive** For every 1 unit increase in X, y increases by 0.2 units.
+* **Multiplicative** For every 1 unit increase in X, y changes by $e^{0.2} = 1.22$ = 22%
+
+
+Thus we interpret the coefficient as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
+
+* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
+* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
+
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">This UCLA resource is my "go-to" reference on how to interpret the results when your response, predictor, or both variables are log transformed. 
+
+https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</div>\EndKnitrBlock{rmdtip}
 
 
 ### Example
+
 We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings `H4EC2` by following the steps below _in order_. 
 
 1. Remove values above 999995 (structural missing). 
@@ -1299,7 +1319,7 @@ qqnorm(addhealth$income); qqline(addhealth$income, col="red")
 qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 **Identify variables**
 
@@ -1311,12 +1331,7 @@ The mathematical multivariable model looks like:
 
 $$ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}$$
 
-
-Similar to logistic regression, we need to _exponentiate_ the regression coefficient before we can interpret the number as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
-
-* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
-* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
-
+**Fit a linear regression model**
 
 
 ```r
@@ -1351,12 +1366,12 @@ Table: Fitting linear model: logincome ~ wakeup + female_c
 ## female_cFemale 0.20231394 0.147326777
 ```
 
+**Interpret the results**
+
 * For every hour later one wakes up in the morning, one can expect to earn `1-exp(-0.015)` = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender. 
 * Females have on average `1-exp(-0.19)` = 17% percent lower income than males, after controlling for the wake up time. 
 
 Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p<.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p<.0001) percent lower income than males. 
-
-
 
 
 
@@ -1457,7 +1472,7 @@ ggplot(addhealth, aes(x=nsib)) + geom_histogram() +
   xlab("Number of siblings") + ylab("Count")
 ```
 
-<img src="GLM_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="GLM_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
 ```r

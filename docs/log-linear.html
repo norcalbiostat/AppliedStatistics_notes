@@ -509,11 +509,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A <em>log-linear</em> model is when the log of the response variable is modeled using a linear combination of predictors.</p>
 <p><span class="math display">\[ln(Y) \sim XB +\epsilon\]</span></p>
 <p>Recall that in statistics, when we refer to the <em>log</em>, we mean the natural log <em>ln</em>.</p>
-<p>This type of model is often use for Poisson models also (Section <a href="#poisson-models"><strong>??</strong></a>).</p>
+<p>This type of model is often use to model count data using the Poisson distribution (Section <a href="poisson-reg.html#poisson-reg">11.5</a>).</p>
 <p>Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed.</p>
 <p><strong>Interpreting results</strong></p>
-<p>This is hands down the best reference that describes how to interpret the results when your response, predictor, or both variables are log transformed.</p>
-<p><a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</a></p>
+<p>Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to <em>exponentiate</em> the regression coefficient before interpreting.</p>
+<p>When using log transformed outcomes, the effect on Y becomes <strong>multiplicative</strong> instead of additive.</p>
+<ul>
+<li><strong>Additive</strong> For every 1 unit increase in X, y increases by b1</li>
+<li><strong>Multiplicative</strong> For every 1 unit increase in X, y is multiplied by <span class="math inline">\(e^{b1}\)</span></li>
+</ul>
+<p>Example, let <span class="math inline">\(b_{1} = 0.2\)</span>.</p>
+<ul>
+<li><strong>Additive</strong> For every 1 unit increase in X, y increases by 0.2 units.</li>
+<li><strong>Multiplicative</strong> For every 1 unit increase in X, y changes by <span class="math inline">\(e^{0.2} = 1.22\)</span> = 22%</li>
+</ul>
+<p>Thus we interpret the coefficient as a <strong>percentage</strong> change in <span class="math inline">\(Y\)</span> for a unit increase in <span class="math inline">\(x_{j}\)</span>.</p>
+<ul>
+<li><strong><span class="math inline">\(b_{j}&lt;1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(1 - e^{b_{j}}\)</span> percent <em>lower</em> than when <span class="math inline">\(x=1\)</span></li>
+<li><strong><span class="math inline">\(b_{j} \geq 1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(e^{b_{j}}\)</span> percent <em>higher</em> than when <span class="math inline">\(x=1\)</span></li>
+</ul>
+
+<div class="rmdtip">
+<p>This UCLA resource is my “go-to” reference on how to interpret the results when your response, predictor, or both variables are log transformed.</p>
+<a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</a>
+</div>
 <div id="example-1" class="section level3 hasAnchor" number="11.4.1">
 <h3><span class="header-section-number">11.4.1</span> Example<a href="log-linear.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings <code>H4EC2</code> by following the steps below <em>in order</em>.</p>
@@ -532,7 +551,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-3"><a href="log-linear.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
 <span id="cb13-4"><a href="log-linear.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
 <span id="cb13-5"><a href="log-linear.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><strong>Identify variables</strong></p>
 <ul>
 <li>Quantitative outcome that has been log transformed: Income (variable <code>logincome</code>)</li>
@@ -541,11 +560,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The mathematical multivariable model looks like:</p>
 <p><span class="math display">\[ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}\]</span></p>
-<p>Similar to logistic regression, we need to <em>exponentiate</em> the regression coefficient before we can interpret the number as a <strong>percentage</strong> change in <span class="math inline">\(Y\)</span> for a unit increase in <span class="math inline">\(x_{j}\)</span>.</p>
-<ul>
-<li><strong><span class="math inline">\(b_{j}&lt;1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(1 - e^{b_{j}}\)</span> percent <em>lower</em> than when <span class="math inline">\(x=1\)</span></li>
-<li><strong><span class="math inline">\(b_{j} \geq 1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(e^{b_{j}}\)</span> percent <em>higher</em> than when <span class="math inline">\(x=1\)</span></li>
-</ul>
+<p><strong>Fit a linear regression model</strong></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="log-linear.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
 <span id="cb14-2"><a href="log-linear.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
 <table style="width:93%;">
@@ -618,6 +633,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-2"><a href="log-linear.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
 <span id="cb15-3"><a href="log-linear.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
 <span id="cb15-4"><a href="log-linear.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
+<p><strong>Interpret the results</strong></p>
 <ul>
 <li>For every hour later one wakes up in the morning, one can expect to earn <code>1-exp(-0.015)</code> = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender.</li>
 <li>Females have on average <code>1-exp(-0.19)</code> = 17% percent lower income than males, after controlling for the wake up time.</li>

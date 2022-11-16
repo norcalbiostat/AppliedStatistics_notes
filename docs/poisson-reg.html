@@ -584,7 +584,7 @@ This section is still under development
 <p>Visualize</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="poisson-reg.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(addhealth, <span class="fu">aes</span>(<span class="at">x=</span>nsib)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
 <span id="cb18-2"><a href="poisson-reg.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of siblings&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="poisson-reg.html#cb19-1" aria-hidden="true" tabindex="-1"></a>nsib.model <span class="ot">&lt;-</span> <span class="fu">glm</span>(nsib <span class="sc">~</span> agew1 <span class="sc">+</span> female, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
 <span id="cb19-2"><a href="poisson-reg.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(nsib.model, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="mxjtzxkmpu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
