@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.5 Count outcome data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.5 Count outcome data | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -214,13 +213,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -279,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -289,11 +289,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
 <li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.5</b> Confounding</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.5.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.5.1</b> Example: Does smoking affect pulse rate?</a></li>
 </ul></li>
+<li class="chapter" data-level="9.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.6</b> Model Diagnostics</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -342,15 +342,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
@@ -528,6 +528,10 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 </div>
 <div id="poisson-models" class="section level4 hasAnchor" number="11.5.0.1">
 <h4><span class="header-section-number">11.5.0.1</span> Poisson Regression<a href="count-outcome-data.html#poisson-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+
+<div class="rmdnote">
+This section is still under development
+</div>
 <p>Just another GLM - we use a <span class="math inline">\(ln\)</span> as the link function. This lets us model the log rates using a linear combination of covariates.</p>
 <p><span class="math display">\[
   ln(\mu) = \mathbf{X}\beta
@@ -556,9 +560,9 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 \]</span></p>
 <p>While this offset will be added to the regression model as if it were another variable, it’s not quite the same because the regression coefficient for the <span class="math inline">\(ln(T)\)</span> term is fixed at 1.</p>
 <p>The generic formula for fitting a poisson model using <code>glm</code> is:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="count-outcome-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> <span class="fu">offset</span>(<span class="fu">log</span>(T)), <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="count-outcome-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> <span class="fu">offset</span>(<span class="fu">log</span>(T)), <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
 <p>or alternatively as an argument</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="count-outcome-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">offset =</span> <span class="fu">log</span>(T),  <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="count-outcome-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">offset =</span> <span class="fu">log</span>(T),  <span class="at">family=</span><span class="st">&#39;poisson&#39;</span>)</span></code></pre></div>
 <p>The interpretation of the <span class="math inline">\(\beta\)</span> regression coefficients are differences in the log rate (or the log rate-ratio). So, just like with a logistic regression often we back-transform the coefficients by exponentiating before interpreting. So <span class="math inline">\(e^{\beta}\)</span> is now the rate-ratio.</p>
 <ul>
 <li>The intercept term is not a ratio, but a baseline rate when all covariates are 0</li>
@@ -574,138 +578,448 @@ P(Y=y) = e^{-\mu}\frac{\mu^{y}}{y!}
 <li>exponentiate each end point.</li>
 </ol>
 </div>
-<div id="example-modeling-counts-from-the-add-health-data-wave-ivset." class="section level4 hasAnchor" number="11.5.0.2">
-<h4><span class="header-section-number">11.5.0.2</span> Example: Modeling counts from the Add Health data Wave IVset.<a href="count-outcome-data.html#example-modeling-counts-from-the-add-health-data-wave-ivset." class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><strong>better example forthcoming</strong></p>
+<div id="example-modeling-counts-from-the-add-health-wave-iv-dataset." class="section level4 hasAnchor" number="11.5.0.2">
+<h4><span class="header-section-number">11.5.0.2</span> Example: Modeling counts from the Add Health Wave IV dataset.<a href="count-outcome-data.html#example-modeling-counts-from-the-add-health-wave-iv-dataset." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s model the number of siblings someone has, based off their age at Wave 1 (2008).</p>
 <p>Visualize</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="count-outcome-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>nsib, <span class="at">xlab=</span><span class="st">&quot;Number of siblings&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Count&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>,<span class="at">axes=</span><span class="cn">FALSE</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">3000</span>))</span>
-<span id="cb213-2"><a href="count-outcome-data.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>);<span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las=</span><span class="dv">2</span>);<span class="fu">box</span>()</span></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="count-outcome-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a>nsib.model <span class="ot">&lt;-</span> <span class="fu">glm</span>(nsib <span class="sc">~</span> agew1 <span class="sc">+</span> female, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb214-2"><a href="count-outcome-data.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">summary</span>(nsib.model))</span></code></pre></div>
-<table style="width:89%;">
-<colgroup>
-<col width="25%" />
-<col width="15%" />
-<col width="18%" />
-<col width="13%" />
-<col width="16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"> </th>
-<th align="center">Estimate</th>
-<th align="center">Std. Error</th>
-<th align="center">z value</th>
-<th align="center">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>(Intercept)</strong></td>
-<td align="center">0.2647</td>
-<td align="center">0.1014</td>
-<td align="center">2.611</td>
-<td align="center">0.009019</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>agew1</strong></td>
-<td align="center">0.0443</td>
-<td align="center">0.005989</td>
-<td align="center">7.397</td>
-<td align="center">1.39e-13</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>female</strong></td>
-<td align="center">0.0969</td>
-<td align="center">0.01909</td>
-<td align="center">5.076</td>
-<td align="center">3.851e-07</td>
-</tr>
-</tbody>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="count-outcome-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(addhealth, <span class="fu">aes</span>(<span class="at">x=</span>nsib)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="count-outcome-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of siblings&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="count-outcome-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a>nsib.model <span class="ot">&lt;-</span> <span class="fu">glm</span>(nsib <span class="sc">~</span> agew1 <span class="sc">+</span> female, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb19-2"><a href="count-outcome-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(nsib.model, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="mxjtzxkmpu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mxjtzxkmpu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mxjtzxkmpu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mxjtzxkmpu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mxjtzxkmpu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mxjtzxkmpu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mxjtzxkmpu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxjtzxkmpu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mxjtzxkmpu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mxjtzxkmpu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mxjtzxkmpu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mxjtzxkmpu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mxjtzxkmpu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mxjtzxkmpu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mxjtzxkmpu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mxjtzxkmpu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mxjtzxkmpu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mxjtzxkmpu .gt_left {
+  text-align: left;
+}
+
+#mxjtzxkmpu .gt_center {
+  text-align: center;
+}
+
+#mxjtzxkmpu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mxjtzxkmpu .gt_font_normal {
+  font-weight: normal;
+}
+
+#mxjtzxkmpu .gt_font_bold {
+  font-weight: bold;
+}
+
+#mxjtzxkmpu .gt_font_italic {
+  font-style: italic;
+}
+
+#mxjtzxkmpu .gt_super {
+  font-size: 65%;
+}
+
+#mxjtzxkmpu .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#mxjtzxkmpu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mxjtzxkmpu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mxjtzxkmpu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mxjtzxkmpu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mxjtzxkmpu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mxjtzxkmpu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>IRR</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">agew1</td>
+<td class="gt_row gt_center">1.05</td>
+<td class="gt_row gt_center">1.03, 1.06</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">female</td>
+<td class="gt_row gt_center">1.10</td>
+<td class="gt_row gt_center">1.06, 1.14</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> IRR = Incidence Rate Ratio, CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
 </table>
-<p>(Dispersion parameter for poisson family taken to be 1 )</p>
-<table style="width:68%;">
-<colgroup>
-<col width="29%" />
-<col width="38%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="center">Null deviance:</td>
-<td align="center">6411 on 3917 degrees of
-freedom</td>
-</tr>
-<tr class="even">
-<td align="center">Residual deviance:</td>
-<td align="center">6335 on 3915 degrees of
-freedom</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="count-outcome-data.html#cb215-1" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(nsib.model), <span class="fu">confint</span>(nsib.model))</span>
-<span id="cb215-2"><a href="count-outcome-data.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">exp</span>(betas), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-</th>
-<th style="text-align:right;">
-2.5 %
-</th>
-<th style="text-align:right;">
-97.5 %
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-1.303
-</td>
-<td style="text-align:right;">
-1.068
-</td>
-<td style="text-align:right;">
-1.589
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-agew1
-</td>
-<td style="text-align:right;">
-1.045
-</td>
-<td style="text-align:right;">
-1.033
-</td>
-<td style="text-align:right;">
-1.058
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-female
-</td>
-<td style="text-align:right;">
-1.102
-</td>
-<td style="text-align:right;">
-1.061
-</td>
-<td style="text-align:right;">
-1.144
-</td>
-</tr>
-</tbody>
-</table>
+</div>
 </div>
 </div>
             </section>
@@ -774,7 +1088,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

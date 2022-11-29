@@ -11,11 +11,19 @@ Generalized Linear Models (GLM) allows for different data type outcomes by allow
 
 There are a few overarching types of non-continuous outcomes that can be modeled with GLM's. 
 
-* Binary data: Logistic or Probit regression
-* Log-linear models
-* Multinomial/categorical data: Multinomial or Ordinal Logistic regression. 
-* Count data: Poisson regression
+* Binary data: Logistic or Probit regression (\@ref(logreg))
+* Log-linear models (\@ref(log-linear))
+* Multinomial/categorical data: Multinomial or Ordinal Logistic regression.  (\@ref(multinomial-reg))
+* Count data: Poisson regression (\@ref(poisson-reg))
 
+
+```{block2,  type='rmdnote'}
+This section uses functions from the following additional packages: `gtsummary`,`MKmisc`, `survey`. 
+```
+
+```{r, echo=FALSE}
+library(gtsummary)
+```
 
 ## Fitting GLMs 
 
@@ -100,7 +108,7 @@ gridExtra::grid.arrange(a,b, ncol=2)
 ```
 
 
-## Logistic Regression
+## Logistic Regression {#logreg}
 
 Since the link between $X$ and $Y$ is no longer linear, a one unit increase in $X_{p}$ is no longer associated with a $b_{p}$ increase in $Y$. The regression coefficients $b_{p}$ from a logistic regression must be _exponentiated_ before interpretation.  
 
@@ -122,7 +130,7 @@ Consider a binary outcome with values YES, coded as 1, and NO, coded as 0.
 For a continuous variable X with slope coefficient $\beta$, the quantity $e^{b}$ is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X. 
 
 
-**Confidence Intervals**
+### Confidence Intervals {#or-ci}
 
 Confidence intervals are a range for the population’s predicted odds ratio based on the sample data. We are 95% confident that any given population’s odds ratio would range between those two values. 
 
@@ -131,10 +139,12 @@ The OR is **not** a linear function of the $x's$, but $\beta$ is. This means tha
 $$e^{\hat{\beta} \pm 1.96 SE_{\beta}} $$
 
 
+This math holds for any $k$ unit change in x. The linearity of the confidence interval only applies at the untransformed level of the $\beta$'s. NOT the odds ratio. 
+
 
 ### Example: The effect of gender on Depression {#logreg-dep-ex}
 
-This uses a cleaned version of the depression data set from PMAS5. 
+This uses a cleaned version of the depression data set from PMAS6. 
 
 * Binary outcome variable: Symptoms of Depression (`cases`)
 * Binary predictor variable: Gender (`sex`) as an indicator of being female
@@ -194,24 +204,29 @@ exp(.92945)
 exp(coef(mvmodel)[4])
 ```
 
-
-### Effect of a k unit change
+### Effect of a k unit change 
 
 * Sometimes a 1 unit change in a continuous variable is not meaningful. 
 * $exp(kb)$ is the incremental odds ratio corresponding to an increase of $k$ units in the variable X, assuming that the values of all other X variables remain unchanged. 
 
 ```{r}
-exp(coef(mvmodel))
-exp(confint(mvmodel))
+tbl_regression(mvmodel, exponentiate=TRUE)
 ```
 
 * The Adjusted odds ratio (AOR) for increase of 1 year of age is 0.98 (95%CI .96, 1.0)
 * How about a 10 year increase in age? $e^{10*\beta_{age}} = e^{-.21} = .81$
 
+In generalized linear models, the assumptions on $\beta$ having a normal distribution
+
+Refer back to equation \@ref(or-ci), the linearity of the relationship is on the $\beta$ level, not the odds ratio. Do all transformations on the $\beta$'s, then the last step is the non-linear transformation of exponentiation. 
+
+So the mathmatical order of operations is important! First use `coef` to extract the coefficients out of the model object (here named `mvmodel`), then pull the 2nd item out `coef(mvmodel)[2]`, then multiply it by 10, then lastly exponentiate this value. 
+
 ```{r}
 exp(10*coef(mvmodel)[2])
 ```
-with a confidence interval of
+
+Do the same to calculate the confidence interval for a 10 year time span. 
 ```{r}
 round(exp(10*confint(mvmodel)[2,]),3)
 ```
@@ -230,7 +245,7 @@ $$
 
 ```{r}
 bp.mod <- glm(smoke ~ female_c + income + bp_class, data=addhealth, family='binomial')
-pander(summary(bp.mod))
+tbl_regression(bp.mod, exponentiate=TRUE)
 ```
 
 It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let's test that hypothesis formally using a Wald Test. 
@@ -243,25 +258,6 @@ The Wald Test has a large p-value of 0.73, thus blood pressure classification is
 
 * This means blood pressure classification should not be included in a model to explain smoking status. 
 
-### Reporting 
-
-The following code can be used to create a nice table of odds ratios and their confidence intervals. 
-
-```{r}
-or.out <- data.frame(
-  OR  = exp(coef(bp.mod)),
-  LCL = exp(confint(bp.mod))[,1],
-  UCL = exp(confint(bp.mod))[,2], 
-  p = format.pval(coef(summary(bp.mod))[,4], digits=1, eps=.001)
-  )
-rownames(or.out) <- c("drop", "Female", "Income",
-                      "Pre-HTN vs Normal", "HTN-I vs Normal", 
-                      "HTN-II vs Normal")
-# library(kableExtra)
-kable(or.out[-1,], digits=2) %>% 
-  kable_styling(full_width = FALSE, "striped") %>% 
-  add_header_above(c(" "=2, "95% CI"=2, " "=1))
-```
 
 ### Model Fit 
 
@@ -301,7 +297,7 @@ Since the logistic regression is all about modeling the probability of an event 
 
 
 
-## Log-linear models
+## Log-linear models {#log-linear}
 
 A *log-linear* model is when the log of the response variable is modeled using a linear combination of predictors. 
 
@@ -309,18 +305,40 @@ $$ln(Y) \sim XB +\epsilon$$
 
 Recall that in statistics, when we refer to the _log_, we mean the natural log _ln_.
 
-This type of model is often use for Poisson models also (Section \@ref(poisson-models)). 
+This type of model is often use to model count data using the Poisson distribution (Section \@ref(poisson-reg)).
 
 Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed. 
 
 **Interpreting results**
 
-This is hands down the best reference that describes how to interpret the results when your response, predictor, or both variables are log transformed. 
+Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to _exponentiate_ the regression coefficient before interpreting. 
+
+When using log transformed outcomes, the effect on Y becomes **multiplicative** instead of additive. 
+
+* **Additive** For every 1 unit increase in X, y increases by b1
+* **Multiplicative** For every 1 unit increase in X, y is multiplied by $e^{b1}$
+
+Example, let $b_{1} = 0.2$. 
+
+* **Additive** For every 1 unit increase in X, y increases by 0.2 units.
+* **Multiplicative** For every 1 unit increase in X, y changes by $e^{0.2} = 1.22$ = 22%
+
+
+Thus we interpret the coefficient as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
+
+* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
+* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
+
+
+```{block2,  type='rmdtip'}
+This UCLA resource is my "go-to" reference on how to interpret the results when your response, predictor, or both variables are log transformed. 
 
 https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/
+```
 
 
 ### Example
+
 We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings `H4EC2` by following the steps below _in order_. 
 
 1. Remove values above 999995 (structural missing). 
@@ -348,18 +366,16 @@ The mathematical multivariable model looks like:
 
 $$ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}$$
 
-
-Similar to logistic regression, we need to _exponentiate_ the regression coefficient before we can interpret the number as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
-
-* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
-* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
-
+**Fit a linear regression model**
 
 ```{r}
 ln.mod.2 <- lm(logincome~wakeup + female_c, data=addhealth)
 summary(ln.mod.2) %>% pander()
 1-exp(confint(ln.mod.2)[-1,])
 ```
+
+**Interpret the results**
+
 * For every hour later one wakes up in the morning, one can expect to earn `1-exp(-0.015)` = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender. 
 * Females have on average `1-exp(-0.19)` = 17% percent lower income than males, after controlling for the wake up time. 
 
@@ -367,9 +383,7 @@ Both gender and time one wakes up are significantly associated with the amount o
 
 
 
-
-
-## Count outcome data
+## Count outcome data {#poisson-reg}
 
 Lets consider modeling the distribution of the number of of occurrences of a rare event in a specified period of time
     - e.g. Number of thunderstorms in a year
@@ -389,7 +403,12 @@ $$
 ![Plot of Histogram of a Poisson Distribution with a Mean of 5 and a Normal Curve](images/poisson.png)
 
 
-#### Poisson Regression {#poisson-models}
+#### Poisson Regression 
+
+```{block2,  type='rmdnote'}
+This section is still under development
+```
+
 
 Just another GLM - we use a $ln$ as the link function. This lets us model the log rates using a linear combination of covariates. 
 
@@ -405,7 +424,7 @@ $$
 
 This model assumes that the time of "exposure" for each record is identical. 
 
-*  Number of cigarettes per month
+* Number of cigarettes per month
 * Number of epileptic seizures per week
 * Number of people with lung cancer in four cities
     
@@ -450,9 +469,7 @@ Also, similar to logistic regression, since the outcome was transformed, the sta
 
 
 
-#### Example: Modeling counts from the Add Health data Wave IVset. 
-
-**better example forthcoming**
+#### Example: Modeling counts from the Add Health Wave IV dataset. 
 
 Let's model the number of siblings someone has, based off their age at Wave 1 (2008).
 
@@ -462,27 +479,26 @@ addhealth$nsib <- ifelse(addhealth$H4WS1<90,addhealth$H4WS1, NA)
 
 Visualize
 ```{r}
-hist(addhealth$nsib, xlab="Number of siblings", ylab="Count", main="",axes=FALSE, ylim=c(0,3000))
-axis(1);axis(2, las=2);box()
+ggplot(addhealth, aes(x=nsib)) + geom_histogram() + 
+  xlab("Number of siblings") + ylab("Count")
 ```
 
 ```{r}
 nsib.model <- glm(nsib ~ agew1 + female, data=addhealth, family="poisson")
-pander(summary(nsib.model))
-```
-
-```{r}
-betas <- cbind(coef(nsib.model), confint(nsib.model))
-kable(exp(betas), digits=3)
+tbl_regression(nsib.model, exponentiate = TRUE)
 ```
 
 
-## Categorical outcome data
+## Categorical outcome data {#multinomial-reg}
+
+
+```{block2,  type='rmdnote'}
+This section is still under development
+```
+
 
 If you want to keep the response variable as a categorical variable with more than two levels, the following regression model types are available: 
 
 
-* Ordinal Logistic Regression
-* Multinomial Regression
-
-
+* [Ordinal Logistic Regression](https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/)
+* [Multinomial Regression](https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/)

@@ -274,3 +274,10 @@ final-thoughts
 additional-references-1
 terminology
 autoregressive
+or-ci
+example-modeling-counts-from-the-add-health-wave-iv-dataset.
+logreg
+log-linear
+poisson-reg
+poisson-regression
+multinomial-reg

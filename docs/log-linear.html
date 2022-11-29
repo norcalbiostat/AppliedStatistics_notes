@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Generalized Linear Models | Applied Statistics</title>
+  <title>11.4 Log-linear models | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta property="og:title" content="11.4 Log-linear models | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Generalized Linear Models | Applied Statistics" />
+  <meta name="twitter:title" content="11.4 Log-linear models | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for-1.html"/>
-<link rel="next" href="fitting-glms.html"/>
+<link rel="prev" href="logreg.html"/>
+<link rel="next" href="poisson-reg.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -504,22 +504,141 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="glm" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Generalized Linear Models<a href="glm.html#glm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>One of the primary assumptions with linear regression, is that the error terms have a specific distribution. Namely:</p>
-<p><span class="math display">\[ \epsilon_{i} \sim \mathcal{N}(0, \sigma^{2}) \qquad i=1, \ldots, n, \quad \mbox{and } \epsilon_{i} \perp \epsilon_{j}, i \neq j \]</span></p>
-<p>When your outcome variable <span class="math inline">\(y\)</span> is non-continuous/non-normal, the above assumption fails dramatically.</p>
-<p>Generalized Linear Models (GLM) allows for different data type outcomes by allowing the linear portion of the model (<span class="math inline">\(\mathbf{X}\beta\)</span>) to be related to the outcome variable <span class="math inline">\(y\)</span> using a <em>link</em> function, that allows the magnitude of the variance of the errors (<span class="math inline">\(\sigma\)</span>) to be related to the predicted values themselves.</p>
-<p>There are a few overarching types of non-continuous outcomes that can be modeled with GLM’s.</p>
+<div id="log-linear" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Log-linear models<a href="log-linear.html#log-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <em>log-linear</em> model is when the log of the response variable is modeled using a linear combination of predictors.</p>
+<p><span class="math display">\[ln(Y) \sim XB +\epsilon\]</span></p>
+<p>Recall that in statistics, when we refer to the <em>log</em>, we mean the natural log <em>ln</em>.</p>
+<p>This type of model is often use to model count data using the Poisson distribution (Section <a href="poisson-reg.html#poisson-reg">11.5</a>).</p>
+<p>Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed.</p>
+<p><strong>Interpreting results</strong></p>
+<p>Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to <em>exponentiate</em> the regression coefficient before interpreting.</p>
+<p>When using log transformed outcomes, the effect on Y becomes <strong>multiplicative</strong> instead of additive.</p>
 <ul>
-<li>Binary data: Logistic or Probit regression (<a href="logreg.html#logreg">11.3</a>)</li>
-<li>Log-linear models (<a href="log-linear.html#log-linear">11.4</a>)</li>
-<li>Multinomial/categorical data: Multinomial or Ordinal Logistic regression. (<a href="multinomial-reg.html#multinomial-reg">11.6</a>)</li>
-<li>Count data: Poisson regression (<a href="poisson-reg.html#poisson-reg">11.5</a>)</li>
+<li><strong>Additive</strong> For every 1 unit increase in X, y increases by b1</li>
+<li><strong>Multiplicative</strong> For every 1 unit increase in X, y is multiplied by <span class="math inline">\(e^{b1}\)</span></li>
+</ul>
+<p>Example, let <span class="math inline">\(b_{1} = 0.2\)</span>.</p>
+<ul>
+<li><strong>Additive</strong> For every 1 unit increase in X, y increases by 0.2 units.</li>
+<li><strong>Multiplicative</strong> For every 1 unit increase in X, y changes by <span class="math inline">\(e^{0.2} = 1.22\)</span> = 22%</li>
+</ul>
+<p>Thus we interpret the coefficient as a <strong>percentage</strong> change in <span class="math inline">\(Y\)</span> for a unit increase in <span class="math inline">\(x_{j}\)</span>.</p>
+<ul>
+<li><strong><span class="math inline">\(b_{j}&lt;1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(1 - e^{b_{j}}\)</span> percent <em>lower</em> than when <span class="math inline">\(x=1\)</span></li>
+<li><strong><span class="math inline">\(b_{j} \geq 1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(e^{b_{j}}\)</span> percent <em>higher</em> than when <span class="math inline">\(x=1\)</span></li>
 </ul>
 
-<div class="rmdnote">
-This section uses functions from the following additional packages: <code>gtsummary</code>,<code>MKmisc</code>, <code>survey</code>.
+<div class="rmdtip">
+<p>This UCLA resource is my “go-to” reference on how to interpret the results when your response, predictor, or both variables are log transformed.</p>
+<a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</a>
+</div>
+<div id="example-1" class="section level3 hasAnchor" number="11.4.1">
+<h3><span class="header-section-number">11.4.1</span> Example<a href="log-linear.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings <code>H4EC2</code> by following the steps below <em>in order</em>.</p>
+<ol style="list-style-type: decimal">
+<li>Remove values above 999995 (structural missing).</li>
+<li>Create a new variable called <code>income</code>, that sets all values of personal income to be NA if below the federal poverty line.
+<ul>
+<li>First set <code>income= H4EC2</code></li>
+<li>Then set income to missing, if <code>H4EC2 &lt; 10210</code> (the federal poverty limit from 2008)</li>
+</ul></li>
+<li>Then create a new variable: <code>logincome</code> that is the natural log (<em>ln</em>) of income. e.g. <code>addhealth$logincome = log(addhealth$income)</code></li>
+</ol>
+<p>Why are we transforming income? To achieve normality.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="log-linear.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="log-linear.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-3"><a href="log-linear.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb13-4"><a href="log-linear.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-5"><a href="log-linear.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><strong>Identify variables</strong></p>
+<ul>
+<li>Quantitative outcome that has been log transformed: Income (variable <code>logincome</code>)</li>
+<li>Binary predictor: Ever smoked a cigarette (variable <code>eversmoke_c</code>)</li>
+<li>Binary confounder: Gender (variable <code>female_c</code>)</li>
+</ul>
+<p>The mathematical multivariable model looks like:</p>
+<p><span class="math display">\[ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}\]</span></p>
+<p><strong>Fit a linear regression model</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="log-linear.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
+<span id="cb14-2"><a href="log-linear.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
+<table style="width:93%;">
+<colgroup>
+<col width="29%" />
+<col width="15%" />
+<col width="18%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Estimate</th>
+<th align="center">Std. Error</th>
+<th align="center">t value</th>
+<th align="center">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">10.65</td>
+<td align="center">0.026</td>
+<td align="center">409.8</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>wakeup</strong></td>
+<td align="center">-0.01491</td>
+<td align="center">0.003218</td>
+<td align="center">-4.633</td>
+<td align="center">3.73e-06</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>female_cFemale</strong></td>
+<td align="center">-0.1927</td>
+<td align="center">0.017</td>
+<td align="center">-11.34</td>
+<td align="center">2.564e-29</td>
+</tr>
+</tbody>
+</table>
+<table style="width:89%;">
+<caption>Fitting linear model: logincome ~ wakeup + female_c</caption>
+<colgroup>
+<col width="20%" />
+<col width="30%" />
+<col width="13%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Observations</th>
+<th align="center">Residual Std. Error</th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3813</td>
+<td align="center">0.5233</td>
+<td align="center">0.03611</td>
+<td align="center">0.0356</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="log-linear.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
+<span id="cb15-2"><a href="log-linear.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
+<span id="cb15-3"><a href="log-linear.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
+<span id="cb15-4"><a href="log-linear.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
+<p><strong>Interpret the results</strong></p>
+<ul>
+<li>For every hour later one wakes up in the morning, one can expect to earn <code>1-exp(-0.015)</code> = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender.</li>
+<li>Females have on average <code>1-exp(-0.19)</code> = 17% percent lower income than males, after controlling for the wake up time.</li>
+</ul>
+<p>Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p&lt;.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p&lt;.0001) percent lower income than males.</p>
 </div>
 </div>
             </section>
@@ -527,8 +646,8 @@ This section uses functions from the following additional packages: <code>gtsumm
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fitting-glms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="logreg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="poisson-reg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
