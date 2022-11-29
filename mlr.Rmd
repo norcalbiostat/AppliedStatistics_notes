@@ -102,7 +102,8 @@ The direct software output always tells you more information than what you are w
 
 * Using `tidy` and `kable` 
 ```{r}
-broom::tidy(mlr.dad.model) |> kable(digits=3)
+library(broom)
+tidy(mlr.dad.model) |> kable(digits=3)
 ```
 
 * Using [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/)
@@ -117,6 +118,40 @@ tbl_regression(mlr.dad.model)
 library(dotwhisker)
 dwplot(mlr.dad.model)
 ```
+
+* Improvement on `dwplot` - extract the point estimate & CI into a data table, then add it as a `geom_text` layer. 
+
+```{r}
+text <- data.frame(                               # create a data frame
+  estimate = coef(mlr.dad.model),                 # by extracting the coefficients,
+  CI.low = confint(mlr.dad.model)[,1],            # with their lower
+  CI.high = confint(mlr.dad.model)[,2]) %>%       # and upper confidence interval values
+  round(2)                                        # round digits
+
+# create the string for the label
+text$label <- paste0(text$estimate, "(", text$CI.low, ", " , text$CI.high, ")")
+
+text                                              # view the results to check for correctness
+text <- text[-1, ]                                # drop the intercept row
+
+# ---- create plot ------
+mlr.dad.model %>%                                  # start with a model
+  tidy() %>%                                       # tidy up the output
+  relabel_predictors("(Intercept)" = "Intercept",  # convert to sensible names
+                     FAGE = "Age", 
+                     FHEIGHT = "Height") %>% 
+  filter(term != "Intercept") %>%                  # drop the intercept 
+  dwplot() +                                       # create the ggplot 
+  geom_text(aes(x=text$estimate, y = term,         # add the estimates and CI's
+                label = text$label), 
+            nudge_y = .1) +                        # move it up a smidge
+  geom_vline(xintercept = 0, col = "grey",         # add a reference line at 0
+             lty = "dashed", size=1.2) +           # make it dashed and a little larger
+  scale_x_continuous(limits = c(-.15, .15))        # expand the x axis limits for readability
+
+```
+
+
 
 ## Confounding 
 

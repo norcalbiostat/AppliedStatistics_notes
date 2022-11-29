@@ -121,7 +121,8 @@ The direct software output always tells you more information than what you are w
 * Using `tidy` and `kable` 
 
 ```r
-broom::tidy(mlr.dad.model) |> kable(digits=3)
+library(broom)
+tidy(mlr.dad.model) |> kable(digits=3)
 ```
 
 <table>
@@ -619,6 +620,46 @@ dwplot(mlr.dad.model)
 
 <img src="mlr_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
+* Improvement on `dwplot` - extract the point estimate & CI into a data table, then add it as a `geom_text` layer. 
+
+
+```r
+text <- data.frame(                               # create a data frame
+  estimate = coef(mlr.dad.model),                 # by extracting the coefficients,
+  CI.low = confint(mlr.dad.model)[,1],            # with their lower
+  CI.high = confint(mlr.dad.model)[,2]) %>%       # and upper confidence interval values
+  round(2)                                        # round digits
+
+# create the string for the label
+text$label <- paste0(text$estimate, "(", text$CI.low, ", " , text$CI.high, ")")
+
+text                                              # view the results to check for correctness
+##             estimate CI.low CI.high               label
+## (Intercept)    -2.76  -5.01   -0.51 -2.76(-5.01, -0.51)
+## FAGE           -0.03  -0.04   -0.01 -0.03(-0.04, -0.01)
+## FHEIGHT         0.11   0.08    0.15    0.11(0.08, 0.15)
+text <- text[-1, ]                                # drop the intercept row
+
+# ---- create plot ------
+mlr.dad.model %>%                                  # start with a model
+  tidy() %>%                                       # tidy up the output
+  relabel_predictors("(Intercept)" = "Intercept",  # convert to sensible names
+                     FAGE = "Age", 
+                     FHEIGHT = "Height") %>% 
+  filter(term != "Intercept") %>%                  # drop the intercept 
+  dwplot() +                                       # create the ggplot 
+  geom_text(aes(x=text$estimate, y = term,         # add the estimates and CI's
+                label = text$label), 
+            nudge_y = .1) +                        # move it up a smidge
+  geom_vline(xintercept = 0, col = "grey",         # add a reference line at 0
+             lty = "dashed", size=1.2) +           # make it dashed and a little larger
+  scale_x_continuous(limits = c(-.15, .15))        # expand the x axis limits for readability
+```
+
+<img src="mlr_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+
+
 ## Confounding 
 
 One primary purpose of a multivariable model is to assess the relationship between a particular explanatory variable $x$ and your response variable $y$, _after controlling for other factors_. 
@@ -723,7 +764,7 @@ The same set of regression diagnostics can be examined to identify any potential
 check_model(mlr.dad.model)
 ```
 
-<img src="mlr_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="mlr_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
  

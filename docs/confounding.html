@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -538,49 +538,49 @@ Easy to read short article from a Gastroenterology journal on how to control con
 <h3><span class="header-section-number">9.5.1</span> Example: Does smoking affect pulse rate?<a href="confounding.html#example-does-smoking-affect-pulse-rate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate?</p>
 <p>First we consider the bivariate relationship between pulse rate (<code>H4PR</code>) and cigarette smoking as measured by the quantity of cigarettes smoked each day during the past 30 days (<code>H4TO6</code>).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="confounding.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(H4PR <span class="sc">~</span> H4TO6 , <span class="at">data=</span>addhealth) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
-<span id="cb5-2"><a href="confounding.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-3"><a href="confounding.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb5-4"><a href="confounding.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = H4PR ~ H4TO6, data = addhealth)</span></span>
-<span id="cb5-5"><a href="confounding.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-6"><a href="confounding.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb5-7"><a href="confounding.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb5-8"><a href="confounding.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -30.826  -8.548  -0.687   7.258 120.841 </span></span>
-<span id="cb5-9"><a href="confounding.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-10"><a href="confounding.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb5-11"><a href="confounding.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb5-12"><a href="confounding.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  73.7702     0.4953 148.936  &lt; 2e-16 ***</span></span>
-<span id="cb5-13"><a href="confounding.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO6         0.1389     0.0396   3.507 0.000464 ***</span></span>
-<span id="cb5-14"><a href="confounding.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb5-15"><a href="confounding.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb5-16"><a href="confounding.html#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-17"><a href="confounding.html#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 12.56 on 1761 degrees of freedom</span></span>
-<span id="cb5-18"><a href="confounding.html#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   (4741 observations deleted due to missingness)</span></span>
-<span id="cb5-19"><a href="confounding.html#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.006936,   Adjusted R-squared:  0.006372 </span></span>
-<span id="cb5-20"><a href="confounding.html#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644</span></span></code></pre></div>
-<p>As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13.</p>
-<p>However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, “during the past 30 days, on how many days did you smoke cigarettes?” (<code>H4TO5</code>). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking <code>H4TO6</code> is no longer significant (at the 0.05 level).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="confounding.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(H4PR <span class="sc">~</span> H4TO5 <span class="sc">+</span>  H4TO6 , <span class="at">data=</span>addhealth) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="confounding.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(H4PR <span class="sc">~</span> H4TO6 , <span class="at">data=</span>addhealth) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
 <span id="cb6-2"><a href="confounding.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb6-3"><a href="confounding.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb6-4"><a href="confounding.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)</span></span>
+<span id="cb6-4"><a href="confounding.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = H4PR ~ H4TO6, data = addhealth)</span></span>
 <span id="cb6-5"><a href="confounding.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb6-6"><a href="confounding.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
 <span id="cb6-7"><a href="confounding.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb6-8"><a href="confounding.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -31.682  -8.509  -1.014   7.302 120.320 </span></span>
+<span id="cb6-8"><a href="confounding.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -30.826  -8.548  -0.687   7.258 120.841 </span></span>
 <span id="cb6-9"><a href="confounding.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb6-10"><a href="confounding.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb6-11"><a href="confounding.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb6-12"><a href="confounding.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 72.78932    0.68037 106.985   &lt;2e-16 ***</span></span>
-<span id="cb6-13"><a href="confounding.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO5        0.06870    0.03271   2.101   0.0358 *  </span></span>
-<span id="cb6-14"><a href="confounding.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO6        0.08292    0.04769   1.739   0.0822 .  </span></span>
-<span id="cb6-15"><a href="confounding.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-16"><a href="confounding.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb6-17"><a href="confounding.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-18"><a href="confounding.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 12.55 on 1760 degrees of freedom</span></span>
-<span id="cb6-19"><a href="confounding.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   (4741 observations deleted due to missingness)</span></span>
-<span id="cb6-20"><a href="confounding.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.00942,    Adjusted R-squared:  0.008294 </span></span>
-<span id="cb6-21"><a href="confounding.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415</span></span></code></pre></div>
+<span id="cb6-12"><a href="confounding.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  73.7702     0.4953 148.936  &lt; 2e-16 ***</span></span>
+<span id="cb6-13"><a href="confounding.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO6         0.1389     0.0396   3.507 0.000464 ***</span></span>
+<span id="cb6-14"><a href="confounding.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb6-15"><a href="confounding.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-16"><a href="confounding.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-17"><a href="confounding.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 12.56 on 1761 degrees of freedom</span></span>
+<span id="cb6-18"><a href="confounding.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   (4741 observations deleted due to missingness)</span></span>
+<span id="cb6-19"><a href="confounding.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.006936,   Adjusted R-squared:  0.006372 </span></span>
+<span id="cb6-20"><a href="confounding.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  12.3 on 1 and 1761 DF,  p-value: 0.0004644</span></span></code></pre></div>
+<p>As the number of cigarettes smoked each day increases by one, a persons pulse rate significantly increases by 0.13.</p>
+<p>However, there are more ways to assess the amount someone smokes. Consider a different measure of smoking, “during the past 30 days, on how many days did you smoke cigarettes?” (<code>H4TO5</code>). So here we are measuring the # of days smoked, not the # of cigarettes per day. If we include both in the model, we note that the earlier measure of smoking <code>H4TO6</code> is no longer significant (at the 0.05 level).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="confounding.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(H4PR <span class="sc">~</span> H4TO5 <span class="sc">+</span>  H4TO6 , <span class="at">data=</span>addhealth) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb7-2"><a href="confounding.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-3"><a href="confounding.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb7-4"><a href="confounding.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = H4PR ~ H4TO5 + H4TO6, data = addhealth)</span></span>
+<span id="cb7-5"><a href="confounding.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-6"><a href="confounding.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb7-7"><a href="confounding.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb7-8"><a href="confounding.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -31.682  -8.509  -1.014   7.302 120.320 </span></span>
+<span id="cb7-9"><a href="confounding.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-10"><a href="confounding.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb7-11"><a href="confounding.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb7-12"><a href="confounding.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 72.78932    0.68037 106.985   &lt;2e-16 ***</span></span>
+<span id="cb7-13"><a href="confounding.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO5        0.06870    0.03271   2.101   0.0358 *  </span></span>
+<span id="cb7-14"><a href="confounding.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## H4TO6        0.08292    0.04769   1.739   0.0822 .  </span></span>
+<span id="cb7-15"><a href="confounding.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb7-16"><a href="confounding.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb7-17"><a href="confounding.html#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-18"><a href="confounding.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 12.55 on 1760 degrees of freedom</span></span>
+<span id="cb7-19"><a href="confounding.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   (4741 observations deleted due to missingness)</span></span>
+<span id="cb7-20"><a href="confounding.html#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.00942,    Adjusted R-squared:  0.008294 </span></span>
+<span id="cb7-21"><a href="confounding.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 8.368 on 2 and 1760 DF,  p-value: 0.0002415</span></span></code></pre></div>
 <p>Thus, the number of days smoked <em>confounds</em> the relationship between the number of cigarettes smoked per day, and the person’s pulse rate.</p>
 </div>
 </div>

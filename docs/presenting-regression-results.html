@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -511,7 +511,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Using <code>tidy</code> and <code>kable</code></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="presenting-regression-results.html#cb2-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(mlr.dad.model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="presenting-regression-results.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-2"><a href="presenting-regression-results.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mlr.dad.model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1037,6 +1038,40 @@ FHEIGHT
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="presenting-regression-results.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
 <span id="cb4-2"><a href="presenting-regression-results.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dwplot</span>(mlr.dad.model)</span></code></pre></div>
 <p><img src="mlr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Improvement on <code>dwplot</code> - extract the point estimate &amp; CI into a data table, then add it as a <code>geom_text</code> layer.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="presenting-regression-results.html#cb5-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(                               <span class="co"># create a data frame</span></span>
+<span id="cb5-2"><a href="presenting-regression-results.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> <span class="fu">coef</span>(mlr.dad.model),                 <span class="co"># by extracting the coefficients,</span></span>
+<span id="cb5-3"><a href="presenting-regression-results.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">CI.low =</span> <span class="fu">confint</span>(mlr.dad.model)[,<span class="dv">1</span>],            <span class="co"># with their lower</span></span>
+<span id="cb5-4"><a href="presenting-regression-results.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">CI.high =</span> <span class="fu">confint</span>(mlr.dad.model)[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span>       <span class="co"># and upper confidence interval values</span></span>
+<span id="cb5-5"><a href="presenting-regression-results.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)                                        <span class="co"># round digits</span></span>
+<span id="cb5-6"><a href="presenting-regression-results.html#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="presenting-regression-results.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create the string for the label</span></span>
+<span id="cb5-8"><a href="presenting-regression-results.html#cb5-8" aria-hidden="true" tabindex="-1"></a>text<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(text<span class="sc">$</span>estimate, <span class="st">&quot;(&quot;</span>, text<span class="sc">$</span>CI.low, <span class="st">&quot;, &quot;</span> , text<span class="sc">$</span>CI.high, <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb5-9"><a href="presenting-regression-results.html#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="presenting-regression-results.html#cb5-10" aria-hidden="true" tabindex="-1"></a>text                                              <span class="co"># view the results to check for correctness</span></span>
+<span id="cb5-11"><a href="presenting-regression-results.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             estimate CI.low CI.high               label</span></span>
+<span id="cb5-12"><a href="presenting-regression-results.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    -2.76  -5.01   -0.51 -2.76(-5.01, -0.51)</span></span>
+<span id="cb5-13"><a href="presenting-regression-results.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE           -0.03  -0.04   -0.01 -0.03(-0.04, -0.01)</span></span>
+<span id="cb5-14"><a href="presenting-regression-results.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT         0.11   0.08    0.15    0.11(0.08, 0.15)</span></span>
+<span id="cb5-15"><a href="presenting-regression-results.html#cb5-15" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> text[<span class="sc">-</span><span class="dv">1</span>, ]                                <span class="co"># drop the intercept row</span></span>
+<span id="cb5-16"><a href="presenting-regression-results.html#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="presenting-regression-results.html#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- create plot ------</span></span>
+<span id="cb5-18"><a href="presenting-regression-results.html#cb5-18" aria-hidden="true" tabindex="-1"></a>mlr.dad.model <span class="sc">%&gt;%</span>                                  <span class="co"># start with a model</span></span>
+<span id="cb5-19"><a href="presenting-regression-results.html#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span>                                       <span class="co"># tidy up the output</span></span>
+<span id="cb5-20"><a href="presenting-regression-results.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relabel_predictors</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intercept&quot;</span>,  <span class="co"># convert to sensible names</span></span>
+<span id="cb5-21"><a href="presenting-regression-results.html#cb5-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">FAGE =</span> <span class="st">&quot;Age&quot;</span>, </span>
+<span id="cb5-22"><a href="presenting-regression-results.html#cb5-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">FHEIGHT =</span> <span class="st">&quot;Height&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-23"><a href="presenting-regression-results.html#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;Intercept&quot;</span>) <span class="sc">%&gt;%</span>                  <span class="co"># drop the intercept </span></span>
+<span id="cb5-24"><a href="presenting-regression-results.html#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dwplot</span>() <span class="sc">+</span>                                       <span class="co"># create the ggplot </span></span>
+<span id="cb5-25"><a href="presenting-regression-results.html#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>text<span class="sc">$</span>estimate, <span class="at">y =</span> term,         <span class="co"># add the estimates and CI&#39;s</span></span>
+<span id="cb5-26"><a href="presenting-regression-results.html#cb5-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> text<span class="sc">$</span>label), </span>
+<span id="cb5-27"><a href="presenting-regression-results.html#cb5-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> .<span class="dv">1</span>) <span class="sc">+</span>                        <span class="co"># move it up a smidge</span></span>
+<span id="cb5-28"><a href="presenting-regression-results.html#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>,         <span class="co"># add a reference line at 0</span></span>
+<span id="cb5-29"><a href="presenting-regression-results.html#cb5-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">lty =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size=</span><span class="fl">1.2</span>) <span class="sc">+</span>           <span class="co"># make it dashed and a little larger</span></span>
+<span id="cb5-30"><a href="presenting-regression-results.html#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">15</span>, .<span class="dv">15</span>))        <span class="co"># expand the x axis limits for readability</span></span></code></pre></div>
+<p><img src="mlr_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
             </section>
 
