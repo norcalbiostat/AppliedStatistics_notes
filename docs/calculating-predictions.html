@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.1 Calculating predictions | Applied Statistics</title>
+  <title>12.2 Calculating predictions | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.1 Calculating predictions | Applied Statistics" />
+  <meta property="og:title" content="12.2 Calculating predictions | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.1 Calculating predictions | Applied Statistics" />
+  <meta name="twitter:title" content="12.2 Calculating predictions | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="binary-classification.html"/>
+<link rel="prev" href="predicted-probabilities.html"/>
 <link rel="next" href="confusion-matrix.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -214,13 +214,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -289,11 +290,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
 <li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.5</b> Confounding</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.5.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.5.1</b> Example: Does smoking affect pulse rate?</a></li>
 </ul></li>
+<li class="chapter" data-level="9.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.6</b> Model Diagnostics</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -310,7 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
 <li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
+<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="general-F.html"><a href="general-F.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+</ul></li>
 <li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
 <li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
 <ul>
@@ -342,30 +346,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.2</b> Calculating predictions</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -504,51 +509,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="calculating-predictions" class="section level2 hasAnchor" number="12.1">
-<h2><span class="header-section-number">12.1</span> Calculating predictions<a href="calculating-predictions.html#calculating-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="calculating-predictions" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Calculating predictions<a href="calculating-predictions.html#calculating-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>So what if you want to get the model predicted probability of the event for all individuals in the data set? There’s no way I’m doing that calculation for every person in the data set.</p>
-<p>Using the main effects model from above, stored in the object <code>mvmodel</code>, we can call the <code>predict()</code> command to generate a vector of predictions for each row used in the model.</p>
+<p>We can use the <code>predict()</code> command to generate a vector of predictions for each row used in the model.</p>
 
 <div class="rmdcaution">
-Any row with missing data on any variable used in the model will NOT get a predicted value.
+Any row with missing data on any variable used in the model will be dropped, and so NOT get a predicted value. So the tactic is to use the data stored in the model object.
 </div>
-<p>The <code>mvmodel</code> object contains a lot of information. I recommend you look at <code>str(mvmodel)</code> on your own time as it’s too much to print out here. The important pieces for this section is that the data used in the model (all complete case records) are stored.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="calculating-predictions.html#cb219-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb219-2"><a href="calculating-predictions.html#cb219-2" aria-hidden="true" tabindex="-1"></a>model.pred.prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mvmodel, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
-<p>Calling <code>dim(model.pred.prob)</code> gives us 294. This matches the number of complete case records used to build the model. This is the same length as <code>mvmodel$y</code>, so we can bind them together in a data frame (useful for plotting).</p>
-<p>The <code>model.pred.prob</code> is a vector of individual predicted probabilities of the outcome (being depressed).
-To classify individual <span class="math inline">\(i\)</span> as being depressed or not, we draw a binary value (<span class="math inline">\(x_{i} = 0 or 1\)</span>), with probability <span class="math inline">\(p_{i}\)</span> by using the <code>rbinom</code> function, with a <code>size=1</code>.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="calculating-predictions.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co">#reminder: change the combo on my luggage</span></span>
-<span id="cb220-2"><a href="calculating-predictions.html#cb220-2" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pred.prob =</span> model.pred.prob, </span>
-<span id="cb220-3"><a href="calculating-predictions.html#cb220-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pred.class =</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="fu">length</span>(model.pred.prob), <span class="at">size=</span><span class="dv">1</span>, <span class="at">p=</span>model.pred.prob),</span>
-<span id="cb220-4"><a href="calculating-predictions.html#cb220-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">truth =</span> mvmodel<span class="sc">$</span>y)</span>
-<span id="cb220-5"><a href="calculating-predictions.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plot.mpp)</span>
-<span id="cb220-6"><a href="calculating-predictions.html#cb220-6" aria-hidden="true" tabindex="-1"></a><span class="do">##    pred.prob pred.class truth</span></span>
-<span id="cb220-7"><a href="calculating-predictions.html#cb220-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.21108906          0     0</span></span>
-<span id="cb220-8"><a href="calculating-predictions.html#cb220-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.08014012          0     0</span></span>
-<span id="cb220-9"><a href="calculating-predictions.html#cb220-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.15266203          0     0</span></span>
-<span id="cb220-10"><a href="calculating-predictions.html#cb220-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.24527840          1     0</span></span>
-<span id="cb220-11"><a href="calculating-predictions.html#cb220-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.15208679          0     0</span></span>
-<span id="cb220-12"><a href="calculating-predictions.html#cb220-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.17056409          0     0</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="calculating-predictions.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb4-2"><a href="calculating-predictions.html#cb4-2" aria-hidden="true" tabindex="-1"></a>model.pred.prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mvmodel, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<p>The <code>model.pred.prob</code> is a vector of individual predicted probabilities of the outcome (being depressed). To classify individual <span class="math inline">\(i\)</span> as being depressed or not, we draw a binary value (<span class="math inline">\(x_{i} = 0\)</span> or <span class="math inline">\(1\)</span>), with probability <span class="math inline">\(p_{i}\)</span> by using the <code>rbinom</code> function, with a <code>size=1</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="calculating-predictions.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co">#reminder: change the combo on my luggage</span></span>
+<span id="cb5-2"><a href="calculating-predictions.html#cb5-2" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pred.prob =</span> model.pred.prob, </span>
+<span id="cb5-3"><a href="calculating-predictions.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pred.class =</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="fu">length</span>(model.pred.prob), </span>
+<span id="cb5-4"><a href="calculating-predictions.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">size =</span> <span class="dv">1</span>, </span>
+<span id="cb5-5"><a href="calculating-predictions.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">p =</span> model.pred.prob),</span>
+<span id="cb5-6"><a href="calculating-predictions.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">truth =</span> mvmodel<span class="sc">$</span>y)</span>
+<span id="cb5-7"><a href="calculating-predictions.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plot.mpp)</span>
+<span id="cb5-8"><a href="calculating-predictions.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    pred.prob pred.class truth</span></span>
+<span id="cb5-9"><a href="calculating-predictions.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.21108906          0     0</span></span>
+<span id="cb5-10"><a href="calculating-predictions.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.08014012          0     0</span></span>
+<span id="cb5-11"><a href="calculating-predictions.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.15266203          0     0</span></span>
+<span id="cb5-12"><a href="calculating-predictions.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.24527840          1     0</span></span>
+<span id="cb5-13"><a href="calculating-predictions.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.15208679          0     0</span></span>
+<span id="cb5-14"><a href="calculating-predictions.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.17056409          0     0</span></span></code></pre></div>
 <p>Applying class labels and creating a cross table of predicted vs truth:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="calculating-predictions.html#cb221-1" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> plot.mpp <span class="sc">%&gt;%</span> </span>
-<span id="cb221-2"><a href="calculating-predictions.html#cb221-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred.class =</span> <span class="fu">factor</span>(pred.class, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)), </span>
-<span id="cb221-3"><a href="calculating-predictions.html#cb221-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">truth =</span> <span class="fu">factor</span>(truth, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))</span>
-<span id="cb221-4"><a href="calculating-predictions.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb221-5"><a href="calculating-predictions.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth)</span>
-<span id="cb221-6"><a href="calculating-predictions.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                </span></span>
-<span id="cb221-7"><a href="calculating-predictions.html#cb221-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Not Depressed Depressed</span></span>
-<span id="cb221-8"><a href="calculating-predictions.html#cb221-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
-<span id="cb221-9"><a href="calculating-predictions.html#cb221-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="calculating-predictions.html#cb6-1" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> plot.mpp <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="calculating-predictions.html#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred.class =</span> <span class="fu">factor</span>(pred.class, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)), </span>
+<span id="cb6-3"><a href="calculating-predictions.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">truth =</span> <span class="fu">factor</span>(truth, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))</span>
+<span id="cb6-4"><a href="calculating-predictions.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="calculating-predictions.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth)</span>
+<span id="cb6-6"><a href="calculating-predictions.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                </span></span>
+<span id="cb6-7"><a href="calculating-predictions.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Not Depressed Depressed</span></span>
+<span id="cb6-8"><a href="calculating-predictions.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
+<span id="cb6-9"><a href="calculating-predictions.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span></code></pre></div>
 <p>The model correctly identified 195 individuals as not depressed and 15 as depressed.
 The model got it wrong 49 + 25 times.</p>
+<p>The <strong>accuracy</strong> of the model is calculated as the fraction of times the model prediction matches the observed category:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="calculating-predictions.html#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">195</span><span class="sc">+</span><span class="dv">15</span>)<span class="sc">/</span>(<span class="dv">195</span><span class="sc">+</span><span class="dv">35</span><span class="sc">+</span><span class="dv">49</span><span class="sc">+</span><span class="dv">15</span>)</span>
+<span id="cb7-2"><a href="calculating-predictions.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.7142857</span></span></code></pre></div>
+<p>This model has a 71.4% accuracy.</p>
 <p><img src="images/q.png" /> Is this good? What if death were the event?</p>
-<div id="distribution-of-predictions" class="section level4 hasAnchor" number="12.1.0.1">
-<h4><span class="header-section-number">12.1.0.1</span> Distribution of Predictions<a href="calculating-predictions.html#distribution-of-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="distribution-of-predictions" class="section level4 hasAnchor" number="12.2.0.1">
+<h4><span class="header-section-number">12.2.0.1</span> Distribution of Predictions<a href="calculating-predictions.html#distribution-of-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let’s look at a plot:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="calculating-predictions.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.mpp, <span class="fu">aes</span>(<span class="at">x=</span>truth, <span class="at">y=</span>pred.prob, <span class="at">fill=</span>truth)) <span class="sc">+</span> </span>
-<span id="cb222-2"><a href="calculating-predictions.html#cb222-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="calculating-predictions.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.mpp, <span class="fu">aes</span>(<span class="at">x=</span>truth, <span class="at">y=</span>pred.prob, <span class="at">fill=</span>truth)) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="calculating-predictions.html#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><img src="images/q.png" /></p>
 <ul>
 <li>What do you notice in this plot?</li>
@@ -561,7 +569,7 @@ The model got it wrong 49 + 25 times.</p>
           </div>
         </div>
       </div>
-<a href="binary-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predicted-probabilities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="confusion-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

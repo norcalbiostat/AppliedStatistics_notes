@@ -37,7 +37,7 @@ age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) +
         geom_point(aes(col=gender)) + 
         geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
         geom_smooth(se=FALSE, col="red", method="lm") + 
-        scale_color_viridis_d(guide=FALSE)
+        scale_color_viridis_d(guide="none")
         
 gridExtra::grid.arrange(ht.plot, age.plot, ncol=2)
 ```
@@ -306,12 +306,12 @@ summary(me_intx_model)
 ```
 
 
-## Wald test (General F) {#general-F}
+## Wald test
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 
-1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit
-2. Testing a linear combination of predictors (such as a difference of differences). _This topic is not discussed yet_
+1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit. 
+2. Testing whether or not the regression model is helpful in predicting values of Y at all. 
 
 Consider a model with $P$ variables and you want to test if $Q$ additional variables are useful.   
 
@@ -319,7 +319,7 @@ Consider a model with $P$ variables and you want to test if $Q$ additional varia
 * $H_{A}: Q$ additional variables are useful to explain/predict $Y$
 
 The traditional test statistic that we've seen since Intro stats is
-$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$
+$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$, and generally has a $Z$ or $T$ distribution. 
 
 The Wald test generalizes this test _any_ linear combination of predictors. 
 
@@ -331,49 +331,86 @@ $$
 
 Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
 
-In the case where we're testing $\beta_{p}=\beta_{q}=...=0$, $\mathbf{R}$ is all 1's. 
+**Example**
+Consider the following model, where $X_{1}$ and $X_{2}$ are continuous predictors and $X_{3}, X_{4}, X_{5}$ are binary indicators from a 4 level categorical variable. 
 
+$$ 
+Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}X_{3} + \beta_{4}x_{4} + \beta_{5}X_{5}+\epsilon_{i}
+$$
 
-##### Example: Employment status on depression score
+If you wanted to test (1) whether or not the categorical variable as a whole improves model fit, then 
+$\mathbf{R} = 
+\begin{bmatrix}
+0 , 0 ,1,1,1
+\end{bmatrix}$
+
+If we want to test (2) that the regression plane is useful to predict $Y$, then we are testing $\beta_{1}=\beta_{2}=...\beta_{5}=0$, then
+$\mathbf{R} = 
+\begin{bmatrix}
+1 , 1 ,1,1,1
+\end{bmatrix}$.
+
+### Example: Modeling depression score
 Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.
 
 ```{r}
 employ.depression.model <- lm(cesd ~ age + chronill + employ, data=depress)
-tbl_regression(employ.depression.model)
+summary(employ.depression.model)
 ```
 
 The results of this model show that age and chronic illness are statistically associated with CESD (each p<.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression? 
 
-Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
+**(1) Testing if a categorical variable as a whole improves model fit**
 
-But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all $\beta$'s related to employment status are 0. 
+Since employment is a categorical variable, all the coefficient estimates shown are the effect of being in that income category has on depression _compared to_ being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed. 
 
+To test that employment status affects CESD we need to do a global test that all $\beta$'s related to employment status are 0. 
 
 $H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0$  
 $H_{A}$: At least one $\beta_{j}$ is not 0. 
 
-The `regTermTest` function can be found in the `survey` package. The `survey` package has functions that tend to conflict with `dplyr`, so it is recommended that you don't load the package entirely, and use `::` notation to call the function directly. 
+ANOVA to the rescue! Since ANOVA partitions the variance in our outcome $Y$ into amounts due to each variable, we get an ANOVA table that has one row per term: 
 
 ```{r}
-survey::regTermTest(employ.depression.model, "employ")
+aov(employ.depression.model) %>% summary()
 ```
 
-* Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
+* The last row for `employ` is what we are interested in here. 
+* First confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1. 
     - Employment has 7 levels, so $df=6$. 
     - Or equivalently, the degrees of freedom are the number of $beta$'s you are testing to be 0. 
     
-The p-value of this Wald test is significant, thus employment significantly predicts CESD score.
+The p-value of this Wald test is significant, thus not $beta$'s are equal to zero, which implies employment status significantly predicts CESD score.
 
-![q](images/q.png) What does the vector of coefficients $R$ look like here? 
+```{block2,  type='rmdcaution'}
+Note the p-values for the individual coefficients `age` and `chronill` are not the same as in the regression model. ANOVA models are order dependent as they describe a "reduction" in variance in the outcome due to that variable. A deeper explanation of this is not included in these notes at this time. 
+```
+
+**(2) Testing that the regression plane is useful to predict $Y$**
+
+This information is provided to us directly in the last line of the summary output from a linear model. 
+
+```{r}
+summary(employ.depression.model)
+```
 
 
-
-## Multicollinearity
+## Multicollinearity 
 
 * Occurs when some of the X variables are highly intercorrelated.
-* Affects estimates and their SE's (p. 143)
-* Look at tolerance, and its inverse, the Variance Inflation Factor (VIF)
-* Need tolerance < 0.01, or VIF > 100.
+* Computed estimates of regression coefficients are unstable and have large standard errors. 
+
+For example, the squared standard error of the $i$th slope coefficient ($[SE(\beta_{i})]^2$) can be written as: 
+
+$$
+[SE(\beta_{i})]^2 = \frac{S^{2}}{(N-1)(S_{i}^{2})}*\frac{1}{1 - (R_{i})^2}
+$$
+
+where $S^{2}$ is the residual mean square, $S_{i}$ the standard deviation of $X_{i}$, and $R_{i}$ the multiple correlation between $X_{i}$ and all other $X$'s. 
+
+When $R_{i}$ is close to 1 (very large), $1 - (R_{i})^2$ becomes close to 0, which makes $\frac{1}{1 - (R_{i})^2}$ very large. 
+
+This fraction is called the **variance inflation factor** and is available in most model diagnostics. 
 
 ```{r}
 big.pen.model <- lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm, data=pen) 
@@ -381,7 +418,7 @@ performance::check_collinearity(big.pen.model) |> plot()
 ```
 
 * Solution: use variable selection to delete some X variables.
-* Alternatively, use dimension reduction techniques such as Principal Components (Chaper @\ref(pca)).
+* Alternatively, use dimension reduction techniques such as Principal Components (Chapter \@ref(pca)).
 
 
 ## Variable Selection Process
@@ -512,7 +549,7 @@ First we need to look at two quantities:
 
 ### RSS: Residual Sum of Squares
 
-Recall the method of least squares introduced in section \@ref(mlr) minimies the residual sum of squares around the regression plane. This value is central to all following model comparison. How ``far away" are the model estimates from the observed? 
+Recall the method of least squares introduced in section \@ref(mlr) minimizes the residual sum of squares around the regression plane. This value is central to all following model comparison. How "far away" are the model estimates from the observed? 
 
 $$
 \sum(Y - \bar{Y})^{2}(1-R^{2})  
@@ -530,13 +567,27 @@ $$
 * Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
 * We can compare between models using functions based off the LL. 
 
-----
 
 There are several measures we can use to compare between competing models. 
 
-### General F Test
+### General F Test  {#general-F}
 
-Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level.
+Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. 
+
+
+```{r}
+# Full model
+full.employ.model <- lm(cesd ~ age + chronill + employ, data=depress)
+# Reduced model
+reduced.employ.model <- lm(cesd ~ age, data=depress)
+anova(reduced.employ.model, full.employ.model)
+```
+
+```{block2,  type='rmdcaution'}
+Caution: this uses `anova()` not `aov()`. 
+```
+
+Other references: https://online.stat.psu.edu/stat501/lesson/6/6.2
 
 
 ### Multiple $R^{2}$

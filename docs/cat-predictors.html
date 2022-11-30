@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.2 Categorical Predictors | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.2 Categorical Predictors | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -279,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -310,7 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
 <li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
+<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="general-F.html"><a href="general-F.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+</ul></li>
 <li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
 <li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
 <ul>
@@ -342,22 +346,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
@@ -692,12 +696,12 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
 \]</span></p>
 <p>Let’s look interpret the regression coefficients and their 95% confidence intervals from the main effects model again.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="cat-predictors.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Species, <span class="at">data=</span>iris) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="kynxpkchrt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mvpocqplki" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kynxpkchrt .gt_table {
+#mvpocqplki .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -722,7 +726,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-left-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_heading {
+#mvpocqplki .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -734,7 +738,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-right-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_title {
+#mvpocqplki .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -746,7 +750,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-bottom-width: 0;
 }
 
-#kynxpkchrt .gt_subtitle {
+#mvpocqplki .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -758,13 +762,13 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-top-width: 0;
 }
 
-#kynxpkchrt .gt_bottom_border {
+#mvpocqplki .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_col_headings {
+#mvpocqplki .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -779,7 +783,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-right-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_col_heading {
+#mvpocqplki .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -799,7 +803,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   overflow-x: hidden;
 }
 
-#kynxpkchrt .gt_column_spanner_outer {
+#mvpocqplki .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -811,15 +815,15 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 4px;
 }
 
-#kynxpkchrt .gt_column_spanner_outer:first-child {
+#mvpocqplki .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kynxpkchrt .gt_column_spanner_outer:last-child {
+#mvpocqplki .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kynxpkchrt .gt_column_spanner {
+#mvpocqplki .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -831,7 +835,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   width: 100%;
 }
 
-#kynxpkchrt .gt_group_heading {
+#mvpocqplki .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -856,7 +860,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   vertical-align: middle;
 }
 
-#kynxpkchrt .gt_empty_group_heading {
+#mvpocqplki .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -871,15 +875,15 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   vertical-align: middle;
 }
 
-#kynxpkchrt .gt_from_md > :first-child {
+#mvpocqplki .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kynxpkchrt .gt_from_md > :last-child {
+#mvpocqplki .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kynxpkchrt .gt_row {
+#mvpocqplki .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -898,7 +902,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   overflow-x: hidden;
 }
 
-#kynxpkchrt .gt_stub {
+#mvpocqplki .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -911,7 +915,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 5px;
 }
 
-#kynxpkchrt .gt_stub_row_group {
+#mvpocqplki .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -925,11 +929,11 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   vertical-align: top;
 }
 
-#kynxpkchrt .gt_row_group_first td {
+#mvpocqplki .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kynxpkchrt .gt_summary_row {
+#mvpocqplki .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -939,16 +943,16 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 5px;
 }
 
-#kynxpkchrt .gt_first_summary_row {
+#mvpocqplki .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_first_summary_row.thick {
+#mvpocqplki .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kynxpkchrt .gt_last_summary_row {
+#mvpocqplki .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -958,7 +962,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-bottom-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_grand_summary_row {
+#mvpocqplki .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -968,7 +972,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 5px;
 }
 
-#kynxpkchrt .gt_first_grand_summary_row {
+#mvpocqplki .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -978,11 +982,11 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-top-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_striped {
+#mvpocqplki .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kynxpkchrt .gt_table_body {
+#mvpocqplki .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -991,7 +995,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-bottom-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_footnotes {
+#mvpocqplki .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1005,7 +1009,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-right-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_footnote {
+#mvpocqplki .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1014,7 +1018,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 5px;
 }
 
-#kynxpkchrt .gt_sourcenotes {
+#mvpocqplki .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1028,7 +1032,7 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   border-right-color: #D3D3D3;
 }
 
-#kynxpkchrt .gt_sourcenote {
+#mvpocqplki .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1036,75 +1040,82 @@ y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 
   padding-right: 5px;
 }
 
-#kynxpkchrt .gt_left {
+#mvpocqplki .gt_left {
   text-align: left;
 }
 
-#kynxpkchrt .gt_center {
+#mvpocqplki .gt_center {
   text-align: center;
 }
 
-#kynxpkchrt .gt_right {
+#mvpocqplki .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kynxpkchrt .gt_font_normal {
+#mvpocqplki .gt_font_normal {
   font-weight: normal;
 }
 
-#kynxpkchrt .gt_font_bold {
+#mvpocqplki .gt_font_bold {
   font-weight: bold;
 }
 
-#kynxpkchrt .gt_font_italic {
+#mvpocqplki .gt_font_italic {
   font-style: italic;
 }
 
-#kynxpkchrt .gt_super {
+#mvpocqplki .gt_super {
   font-size: 65%;
 }
 
-#kynxpkchrt .gt_footnote_marks {
+#mvpocqplki .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#mvpocqplki .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kynxpkchrt .gt_asterisk {
+#mvpocqplki .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kynxpkchrt .gt_indent_1 {
-  text-indent: 5px;
+#mvpocqplki .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#kynxpkchrt .gt_indent_2 {
-  text-indent: 10px;
+#mvpocqplki .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#kynxpkchrt .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#kynxpkchrt .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#kynxpkchrt .gt_indent_5 {
-  text-indent: 25px;
+#mvpocqplki .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -1213,7 +1224,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

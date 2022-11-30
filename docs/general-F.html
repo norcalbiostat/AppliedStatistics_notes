@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.4 Wald test (General F) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.4 Wald test (General F) | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -279,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -310,7 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
 <li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
+<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="general-F.html"><a href="general-F.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+</ul></li>
 <li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
 <li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
 <ul>
@@ -342,22 +346,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
@@ -508,8 +512,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.4</span> Wald test (General F)<a href="general-F.html#general-F" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The Wald test is used for simultaneous tests of <span class="math inline">\(Q\)</span> variables in a model. This is used primarily in two situations:</p>
 <ol style="list-style-type: decimal">
-<li>Testing if a categorical variable (with more than 2 levels) as a whole improves model fit</li>
-<li>Testing a linear combination of predictors (such as a difference of differences). <em>This topic is not discussed yet</em></li>
+<li>Testing if a categorical variable (with more than 2 levels) as a whole improves model fit.</li>
+<li>Testing whether or not the regression model is helpful in predicting values of Y at all.</li>
 </ol>
 <p>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.</p>
 <ul>
@@ -518,7 +522,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(H_{A}: Q\)</span> additional variables are useful to explain/predict <span class="math inline">\(Y\)</span></li>
 </ul>
 <p>The traditional test statistic that we’ve seen since Intro stats is
-<span class="math inline">\(\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}\)</span></p>
+<span class="math inline">\(\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}\)</span>, and generally has a <span class="math inline">\(Z\)</span> or <span class="math inline">\(T\)</span> distribution.</p>
 <p>The Wald test generalizes this test <em>any</em> linear combination of predictors.</p>
 <p><span class="math display">\[
 (R\hat{\theta}_{n}-r)^{&#39;}[R({\hat{V}}_{n}/n)R^{&#39;}]^{-1}
@@ -526,496 +530,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
 \]</span></p>
 <p>Where <span class="math inline">\(\mathbf{R}\)</span> is the vector of coefficients for the <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\hat{V}_{n}\)</span> is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(Q\)</span> and <span class="math inline">\(n-P\)</span> degrees of freedom.</p>
-<p>In the case where we’re testing <span class="math inline">\(\beta_{p}=\beta_{q}=...=0\)</span>, <span class="math inline">\(\mathbf{R}\)</span> is all 1’s.</p>
-<div id="example-employment-status-on-depression-score" class="section level5 hasAnchor" number="10.4.0.0.1">
-<h5><span class="header-section-number">10.4.0.0.1</span> Example: Employment status on depression score<a href="general-F.html#example-employment-status-on-depression-score" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Example</strong>
+Consider the following model, where <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are continuous predictors and <span class="math inline">\(X_{3}, X_{4}, X_{5}\)</span> are binary indicators from a 4 level categorical variable.</p>
+<p><span class="math display">\[
+Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}X_{3} + \beta_{4}x_{4} + \beta_{5}X_{5}+\epsilon_{i}
+\]</span></p>
+<p>If you wanted to test (1) whether or not the categorical variable as a whole improves model fit, then
+<span class="math inline">\(\mathbf{R} = \begin{bmatrix} 0 , 0 ,1,1,1 \end{bmatrix}\)</span></p>
+<p>If we want to test (2) that the regression plane is useful to predict <span class="math inline">\(Y\)</span>, then we are testing <span class="math inline">\(\beta_{1}=\beta_{2}=...\beta_{5}=0\)</span>, then
+<span class="math inline">\(\mathbf{R} = \begin{bmatrix} 1 , 1 ,1,1,1 \end{bmatrix}\)</span>.</p>
+<div id="example-modeling-depression-score" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Example: Modeling depression score<a href="general-F.html#example-modeling-depression-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="general-F.html#cb13-1" aria-hidden="true" tabindex="-1"></a>employ.depression.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
-<span id="cb13-2"><a href="general-F.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(employ.depression.model)</span></code></pre></div>
-<div id="dmoyyptspc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#dmoyyptspc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#dmoyyptspc .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#dmoyyptspc .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#dmoyyptspc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#dmoyyptspc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#dmoyyptspc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#dmoyyptspc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#dmoyyptspc .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dmoyyptspc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dmoyyptspc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#dmoyyptspc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#dmoyyptspc .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#dmoyyptspc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dmoyyptspc .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#dmoyyptspc .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#dmoyyptspc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dmoyyptspc .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#dmoyyptspc .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dmoyyptspc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#dmoyyptspc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dmoyyptspc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dmoyyptspc .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dmoyyptspc .gt_left {
-  text-align: left;
-}
-
-#dmoyyptspc .gt_center {
-  text-align: center;
-}
-
-#dmoyyptspc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#dmoyyptspc .gt_font_normal {
-  font-weight: normal;
-}
-
-#dmoyyptspc .gt_font_bold {
-  font-weight: bold;
-}
-
-#dmoyyptspc .gt_font_italic {
-  font-style: italic;
-}
-
-#dmoyyptspc .gt_super {
-  font-size: 65%;
-}
-
-#dmoyyptspc .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#dmoyyptspc .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#dmoyyptspc .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#dmoyyptspc .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#dmoyyptspc .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#dmoyyptspc .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#dmoyyptspc .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">age</td>
-<td class="gt_row gt_center">-0.13</td>
-<td class="gt_row gt_center">-0.20, -0.06</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">chronill</td>
-<td class="gt_row gt_center">2.7</td>
-<td class="gt_row gt_center">0.67, 4.7</td>
-<td class="gt_row gt_center">0.009</td></tr>
-    <tr><td class="gt_row gt_left">employ</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">FT</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Houseperson</td>
-<td class="gt_row gt_center">6.8</td>
-<td class="gt_row gt_center">3.2, 10</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">In School</td>
-<td class="gt_row gt_center">2.0</td>
-<td class="gt_row gt_center">-9.8, 14</td>
-<td class="gt_row gt_center">0.7</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Other</td>
-<td class="gt_row gt_center">4.9</td>
-<td class="gt_row gt_center">-3.5, 13</td>
-<td class="gt_row gt_center">0.3</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">PT</td>
-<td class="gt_row gt_center">3.3</td>
-<td class="gt_row gt_center">0.36, 6.2</td>
-<td class="gt_row gt_center">0.028</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Retired</td>
-<td class="gt_row gt_center">3.2</td>
-<td class="gt_row gt_center">-0.48, 6.9</td>
-<td class="gt_row gt_center">0.088</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unemp</td>
-<td class="gt_row gt_center">7.6</td>
-<td class="gt_row gt_center">3.0, 12</td>
-<td class="gt_row gt_center">0.001</td></tr>
-  </tbody>
-  
-  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
-    </tr>
-  </tfoot>
-</table>
-</div>
+<span id="cb13-2"><a href="general-F.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
+<span id="cb13-3"><a href="general-F.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-4"><a href="general-F.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb13-5"><a href="general-F.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
+<span id="cb13-6"><a href="general-F.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-7"><a href="general-F.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb13-8"><a href="general-F.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb13-9"><a href="general-F.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
+<span id="cb13-10"><a href="general-F.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-11"><a href="general-F.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb13-12"><a href="general-F.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb13-13"><a href="general-F.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
+<span id="cb13-14"><a href="general-F.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
+<span id="cb13-15"><a href="general-F.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
+<span id="cb13-16"><a href="general-F.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
+<span id="cb13-17"><a href="general-F.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
+<span id="cb13-18"><a href="general-F.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
+<span id="cb13-19"><a href="general-F.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
+<span id="cb13-20"><a href="general-F.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
+<span id="cb13-21"><a href="general-F.html#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
+<span id="cb13-22"><a href="general-F.html#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb13-23"><a href="general-F.html#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb13-24"><a href="general-F.html#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-25"><a href="general-F.html#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
+<span id="cb13-26"><a href="general-F.html#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
+<span id="cb13-27"><a href="general-F.html#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
 <p>The results of this model show that age and chronic illness are statistically associated with CESD (each p&lt;.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression?</p>
-<p>Recall that employment is a categorical variable, and all the coefficient estimates shown are the effect of being in that income category has on depression <em>compared to</em> being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed.</p>
-<p>But what about employment status overall? Not all employment categories are significantly different from FT status. To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s related to employment status are 0.</p>
+<p><strong>(1) Testing if a categorical variable as a whole improves model fit</strong></p>
+<p>Since employment is a categorical variable, all the coefficient estimates shown are the effect of being in that income category has on depression <em>compared to</em> being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed.</p>
+<p>To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s related to employment status are 0.</p>
 <p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
 <span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
-<p>The <code>regTermTest</code> function can be found in the <code>survey</code> package. The <code>survey</code> package has functions that tend to conflict with <code>dplyr</code>, so it is recommended that you don’t load the package entirely, and use <code>::</code> notation to call the function directly.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="general-F.html#cb14-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(employ.depression.model, <span class="st">&quot;employ&quot;</span>)</span>
-<span id="cb14-2"><a href="general-F.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test for employ</span></span>
-<span id="cb14-3"><a href="general-F.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  in lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
-<span id="cb14-4"><a href="general-F.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## F =  4.153971  on  6  and  285  df: p= 0.0005092</span></span></code></pre></div>
+<p>ANOVA to the rescue! Since ANOVA partitions the variance in our outcome <span class="math inline">\(Y\)</span> into amounts due to each variable, we get an ANOVA table that has one row per term:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="general-F.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(employ.depression.model) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb14-2"><a href="general-F.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span id="cb14-3"><a href="general-F.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.743 0.003368 ** </span></span>
+<span id="cb14-4"><a href="general-F.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.821 0.016469 *  </span></span>
+<span id="cb14-5"><a href="general-F.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.154 0.000509 ***</span></span>
+<span id="cb14-6"><a href="general-F.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   285  20036    70.3                     </span></span>
+<span id="cb14-7"><a href="general-F.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb14-8"><a href="general-F.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <ul>
-<li>Confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
+<li>The last row for <code>employ</code> is what we are interested in here.</li>
+<li>First confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
 <ul>
 <li>Employment has 7 levels, so <span class="math inline">\(df=6\)</span>.</li>
 <li>Or equivalently, the degrees of freedom are the number of <span class="math inline">\(beta\)</span>’s you are testing to be 0.</li>
 </ul></li>
 </ul>
-<p>The p-value of this Wald test is significant, thus employment significantly predicts CESD score.</p>
-<p><img src="images/q.png" alt="q" /> What does the vector of coefficients <span class="math inline">\(R\)</span> look like here?</p>
+<p>The p-value of this Wald test is significant, thus not <span class="math inline">\(beta\)</span>’s are equal to zero, which implies employment status significantly predicts CESD score.</p>
+
+<div class="rmdcaution">
+Note the p-values for the individual coefficients <code>age</code> and <code>chronill</code> are not the same as in the regression model. ANOVA models are order dependent as they describe a “reduction” in variance in the outcome due to that variable. A deeper explanation of this is not included in these notes at this time.
+</div>
+<p><strong>(2) Testing that the regression plane is useful to predict <span class="math inline">\(Y\)</span></strong></p>
+<p>Again we can use ANOVA to test if this model is better than nothing, but this time we use it as a model comparison technique. See section <a href="model-fit-criteria.html#model-fit-criteria">10.7</a> for examples.</p>
 </div>
 </div>
             </section>
@@ -1084,7 +667,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

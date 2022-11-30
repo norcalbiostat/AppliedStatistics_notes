@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Applied Statistics</title>
+  <title>12.2 Predicted Class (outcome) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Applied Statistics" />
+  <meta property="og:title" content="12.2 Predicted Class (outcome) | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Applied Statistics" />
+  <meta name="twitter:title" content="12.2 Predicted Class (outcome) | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="predicted-probabilities.html"/>
+<link rel="next" href="confusion-matrix.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -509,19 +509,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="predicted-class-outcome" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Predicted Class (outcome)<a href="predicted-class-outcome.html#predicted-class-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So what if you want to get the model predicted probability of the event for all individuals in the data set? There’s no way I’m doing that calculation for every person in the data set.</p>
+<p>We can use the <code>predict()</code> command to generate a vector of predictions for each row used in the model.</p>
+
+<div class="rmdcaution">
+Any row with missing data on any variable used in the model will be dropped, and so NOT get a predicted value. So the tactic is to use the data stored in the model object.
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="predicted-class-outcome.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb4-2"><a href="predicted-class-outcome.html#cb4-2" aria-hidden="true" tabindex="-1"></a>model.pred.prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mvmodel, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<p>The <code>model.pred.prob</code> is a vector of individual predicted probabilities of the outcome (being depressed). To classify individual <span class="math inline">\(i\)</span> as being depressed or not, we draw a binary value (<span class="math inline">\(x_{i} = 0\)</span> or <span class="math inline">\(1\)</span>), with probability <span class="math inline">\(p_{i}\)</span> by using the <code>rbinom</code> function, with a <code>size=1</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="predicted-class-outcome.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co">#reminder: change the combo on my luggage</span></span>
+<span id="cb5-2"><a href="predicted-class-outcome.html#cb5-2" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pred.prob =</span> model.pred.prob, </span>
+<span id="cb5-3"><a href="predicted-class-outcome.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pred.class =</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="fu">length</span>(model.pred.prob), </span>
+<span id="cb5-4"><a href="predicted-class-outcome.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">size =</span> <span class="dv">1</span>, </span>
+<span id="cb5-5"><a href="predicted-class-outcome.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">p =</span> model.pred.prob),</span>
+<span id="cb5-6"><a href="predicted-class-outcome.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">truth =</span> mvmodel<span class="sc">$</span>y)</span>
+<span id="cb5-7"><a href="predicted-class-outcome.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plot.mpp)</span>
+<span id="cb5-8"><a href="predicted-class-outcome.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    pred.prob pred.class truth</span></span>
+<span id="cb5-9"><a href="predicted-class-outcome.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.21108906          0     0</span></span>
+<span id="cb5-10"><a href="predicted-class-outcome.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.08014012          0     0</span></span>
+<span id="cb5-11"><a href="predicted-class-outcome.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.15266203          0     0</span></span>
+<span id="cb5-12"><a href="predicted-class-outcome.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.24527840          1     0</span></span>
+<span id="cb5-13"><a href="predicted-class-outcome.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.15208679          0     0</span></span>
+<span id="cb5-14"><a href="predicted-class-outcome.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.17056409          0     0</span></span></code></pre></div>
+<p>Applying class labels and creating a cross table of predicted vs truth:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="predicted-class-outcome.html#cb6-1" aria-hidden="true" tabindex="-1"></a>plot.mpp <span class="ot">&lt;-</span> plot.mpp <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="predicted-class-outcome.html#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred.class =</span> <span class="fu">factor</span>(pred.class, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)), </span>
+<span id="cb6-3"><a href="predicted-class-outcome.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">truth =</span> <span class="fu">factor</span>(truth, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)))</span>
+<span id="cb6-4"><a href="predicted-class-outcome.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="predicted-class-outcome.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth)</span>
+<span id="cb6-6"><a href="predicted-class-outcome.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                </span></span>
+<span id="cb6-7"><a href="predicted-class-outcome.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Not Depressed Depressed</span></span>
+<span id="cb6-8"><a href="predicted-class-outcome.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
+<span id="cb6-9"><a href="predicted-class-outcome.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span></code></pre></div>
+<p>The model correctly identified 195 individuals as not depressed and 15 as depressed.
+The model got it wrong 49 + 25 times.</p>
+<p>The <strong>accuracy</strong> of the model is calculated as the fraction of times the model prediction matches the observed category:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="predicted-class-outcome.html#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">195</span><span class="sc">+</span><span class="dv">15</span>)<span class="sc">/</span>(<span class="dv">195</span><span class="sc">+</span><span class="dv">35</span><span class="sc">+</span><span class="dv">49</span><span class="sc">+</span><span class="dv">15</span>)</span>
+<span id="cb7-2"><a href="predicted-class-outcome.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.7142857</span></span></code></pre></div>
+<p>This model has a 71.4% accuracy.</p>
+<p><img src="images/q.png" /> Is this good? What if death were the event?</p>
+<div id="distribution-of-predicted-probabilities" class="section level4 hasAnchor" number="12.2.0.1">
+<h4><span class="header-section-number">12.2.0.1</span> Distribution of Predicted probabilities<a href="predicted-class-outcome.html#distribution-of-predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let’s look at a plot:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="predicted-class-outcome.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.mpp, <span class="fu">aes</span>(<span class="at">x=</span>truth, <span class="at">y=</span>pred.prob, <span class="at">fill=</span>truth)) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="predicted-class-outcome.html#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="images/q.png" /></p>
+<ul>
+<li>What do you notice in this plot?</li>
+<li>What can you infer?</li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="predicted-probabilities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="confusion-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

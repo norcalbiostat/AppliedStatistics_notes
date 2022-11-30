@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Applied Statistics</title>
+  <title>12.1 Predicted Probabilities | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Applied Statistics" />
+  <meta property="og:title" content="12.1 Predicted Probabilities | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Applied Statistics" />
+  <meta name="twitter:title" content="12.1 Predicted Probabilities | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="binary-classification.html"/>
+<link rel="next" href="predicted-class-outcome.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -509,19 +509,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="predicted-probabilities" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Predicted Probabilities<a href="predicted-probabilities.html#predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Sometimes Odds Ratios can be difficult to interpret or understand.</li>
+<li>Sometimes you just want to report the probability of the event occurring.</li>
+<li>Or sometimes you want to predict whether or not a new individual is going to have the event.</li>
+</ul>
+<p>For all of these, we need to calculate <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>, the probability of the event.</p>
+<p>Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
+<p><span class="math display">\[
+p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+{1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
+\]</span></p>
+<p>Consider the main effects model of depression on age, income and gender from section <a href="logreg.html#logreg-dep-ex">11.3.3</a></p>
+<table style="width:89%;">
+<colgroup>
+<col width="25%" />
+<col width="15%" />
+<col width="18%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Estimate</th>
+<th align="center">Std. Error</th>
+<th align="center">z value</th>
+<th align="center">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">-2.313</td>
+<td align="center">0.3315</td>
+<td align="center">-6.976</td>
+<td align="center">3.044e-12</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>sex</strong></td>
+<td align="center">1.039</td>
+<td align="center">0.3767</td>
+<td align="center">2.757</td>
+<td align="center">0.005831</td>
+</tr>
+</tbody>
+</table>
+<p>(Dispersion parameter for binomial family taken to be 1 )</p>
+<table style="width:68%;">
+<colgroup>
+<col width="29%" />
+<col width="38%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">Null deviance:</td>
+<td align="center">268.1 on 293 degrees of
+freedom</td>
+</tr>
+<tr class="even">
+<td align="center">Residual deviance:</td>
+<td align="center">259.4 on 292 degrees of
+freedom</td>
+</tr>
+</tbody>
+</table>
+<p>The predicted probability of depression is calculated as:
+<span class="math display">\[
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+\]</span></p>
+<p>Notice you can’t get a “generic” probability for all individuals. It entirely depends on their <em>covariate profile</em>. In other words, what value X take on for each record.</p>
+<p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="predicted-probabilities.html#cb1-1" aria-hidden="true" tabindex="-1"></a>depress <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">age=</span><span class="fu">mean</span>(age), <span class="at">income=</span><span class="fu">mean</span>(income))</span>
+<span id="cb1-2"><a href="predicted-probabilities.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##        age   income</span></span>
+<span id="cb1-3"><a href="predicted-probabilities.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 44.41497 20.57483</span></span></code></pre></div>
+<p>Plug the coefficient estimates and the values of the variables into the equation and calculate.
+<span class="math display">\[
+P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
+\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="predicted-probabilities.html#cb2-1" aria-hidden="true" tabindex="-1"></a>XB.f <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>) <span class="sc">+</span> <span class="fl">0.92945</span></span>
+<span id="cb2-2"><a href="predicted-probabilities.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.f) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.f))</span>
+<span id="cb2-3"><a href="predicted-probabilities.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1930504</span></span></code></pre></div>
+<p><span class="math display">\[
+P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+{1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
+\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="predicted-probabilities.html#cb3-1" aria-hidden="true" tabindex="-1"></a>XB.m <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>)</span>
+<span id="cb3-2"><a href="predicted-probabilities.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.m) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.m))</span>
+<span id="cb3-3"><a href="predicted-probabilities.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.08629312</span></span></code></pre></div>
+<p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="binary-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predicted-class-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

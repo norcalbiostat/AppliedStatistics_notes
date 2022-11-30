@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.3 Interactions | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.3 Interactions | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -279,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -310,7 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
 <li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
+<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="general-F.html"><a href="general-F.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+</ul></li>
 <li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
 <li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
 <ul>
@@ -342,22 +346,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
@@ -527,12 +531,12 @@ which simplifies to
 <p>Interactions are fit in <code>R</code> by simply multiplying <code>*</code> the two variables together in the model statement.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="interactions.html#cb6-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>setosa <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb6-2"><a href="interactions.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> setosa <span class="sc">+</span> Sepal.Length<span class="sc">*</span>setosa, <span class="at">data=</span>iris) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="yamiuvfgac" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="htlqvwvaoj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#yamiuvfgac .gt_table {
+#htlqvwvaoj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -557,7 +561,7 @@ which simplifies to
   border-left-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_heading {
+#htlqvwvaoj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -569,7 +573,7 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_title {
+#htlqvwvaoj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -581,7 +585,7 @@ which simplifies to
   border-bottom-width: 0;
 }
 
-#yamiuvfgac .gt_subtitle {
+#htlqvwvaoj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -593,13 +597,13 @@ which simplifies to
   border-top-width: 0;
 }
 
-#yamiuvfgac .gt_bottom_border {
+#htlqvwvaoj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_col_headings {
+#htlqvwvaoj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -614,7 +618,7 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_col_heading {
+#htlqvwvaoj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -634,7 +638,7 @@ which simplifies to
   overflow-x: hidden;
 }
 
-#yamiuvfgac .gt_column_spanner_outer {
+#htlqvwvaoj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -646,15 +650,15 @@ which simplifies to
   padding-right: 4px;
 }
 
-#yamiuvfgac .gt_column_spanner_outer:first-child {
+#htlqvwvaoj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yamiuvfgac .gt_column_spanner_outer:last-child {
+#htlqvwvaoj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yamiuvfgac .gt_column_spanner {
+#htlqvwvaoj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -666,7 +670,7 @@ which simplifies to
   width: 100%;
 }
 
-#yamiuvfgac .gt_group_heading {
+#htlqvwvaoj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,7 +695,7 @@ which simplifies to
   vertical-align: middle;
 }
 
-#yamiuvfgac .gt_empty_group_heading {
+#htlqvwvaoj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -706,15 +710,15 @@ which simplifies to
   vertical-align: middle;
 }
 
-#yamiuvfgac .gt_from_md > :first-child {
+#htlqvwvaoj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yamiuvfgac .gt_from_md > :last-child {
+#htlqvwvaoj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yamiuvfgac .gt_row {
+#htlqvwvaoj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -733,7 +737,7 @@ which simplifies to
   overflow-x: hidden;
 }
 
-#yamiuvfgac .gt_stub {
+#htlqvwvaoj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -746,7 +750,7 @@ which simplifies to
   padding-right: 5px;
 }
 
-#yamiuvfgac .gt_stub_row_group {
+#htlqvwvaoj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -760,11 +764,11 @@ which simplifies to
   vertical-align: top;
 }
 
-#yamiuvfgac .gt_row_group_first td {
+#htlqvwvaoj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yamiuvfgac .gt_summary_row {
+#htlqvwvaoj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -774,16 +778,16 @@ which simplifies to
   padding-right: 5px;
 }
 
-#yamiuvfgac .gt_first_summary_row {
+#htlqvwvaoj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_first_summary_row.thick {
+#htlqvwvaoj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yamiuvfgac .gt_last_summary_row {
+#htlqvwvaoj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -793,7 +797,7 @@ which simplifies to
   border-bottom-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_grand_summary_row {
+#htlqvwvaoj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -803,7 +807,7 @@ which simplifies to
   padding-right: 5px;
 }
 
-#yamiuvfgac .gt_first_grand_summary_row {
+#htlqvwvaoj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -813,11 +817,11 @@ which simplifies to
   border-top-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_striped {
+#htlqvwvaoj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yamiuvfgac .gt_table_body {
+#htlqvwvaoj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -826,7 +830,7 @@ which simplifies to
   border-bottom-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_footnotes {
+#htlqvwvaoj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -840,7 +844,7 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_footnote {
+#htlqvwvaoj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -849,7 +853,7 @@ which simplifies to
   padding-right: 5px;
 }
 
-#yamiuvfgac .gt_sourcenotes {
+#htlqvwvaoj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -863,7 +867,7 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#yamiuvfgac .gt_sourcenote {
+#htlqvwvaoj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -871,75 +875,82 @@ which simplifies to
   padding-right: 5px;
 }
 
-#yamiuvfgac .gt_left {
+#htlqvwvaoj .gt_left {
   text-align: left;
 }
 
-#yamiuvfgac .gt_center {
+#htlqvwvaoj .gt_center {
   text-align: center;
 }
 
-#yamiuvfgac .gt_right {
+#htlqvwvaoj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yamiuvfgac .gt_font_normal {
+#htlqvwvaoj .gt_font_normal {
   font-weight: normal;
 }
 
-#yamiuvfgac .gt_font_bold {
+#htlqvwvaoj .gt_font_bold {
   font-weight: bold;
 }
 
-#yamiuvfgac .gt_font_italic {
+#htlqvwvaoj .gt_font_italic {
   font-style: italic;
 }
 
-#yamiuvfgac .gt_super {
+#htlqvwvaoj .gt_super {
   font-size: 65%;
 }
 
-#yamiuvfgac .gt_footnote_marks {
+#htlqvwvaoj .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#htlqvwvaoj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#yamiuvfgac .gt_asterisk {
+#htlqvwvaoj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yamiuvfgac .gt_indent_1 {
-  text-indent: 5px;
+#htlqvwvaoj .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#yamiuvfgac .gt_indent_2 {
-  text-indent: 10px;
+#htlqvwvaoj .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#yamiuvfgac .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#yamiuvfgac .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#yamiuvfgac .gt_indent_5 {
-  text-indent: 25px;
+#htlqvwvaoj .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -1076,7 +1087,7 @@ So if we were to go back to the stratified model where we fit the model of petal
 <div id="example-3" class="section level3 hasAnchor" number="10.3.4">
 <h3><span class="header-section-number">10.3.4</span> Example 3:<a href="interactions.html#example-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s explore the relationship between income, employment status and depression.
-This example follows a logistic regression example from section <a href="logistic-regression.html#mlogreg">11.3.3</a>.</p>
+This example follows a logistic regression example from section <a href="logreg.html#mlogreg">11.3.4</a>.</p>
 <p>Here I create the binary indicators of <code>lowincome</code> (annual income &lt;$10k/year) and underemployed (part time or unemployed).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="interactions.html#cb10-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>lowincome <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>income <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb10-2"><a href="interactions.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>lowincome, depress<span class="sc">$</span>income, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
@@ -1221,7 +1232,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

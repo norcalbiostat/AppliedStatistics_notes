@@ -2,6 +2,8 @@
 
 > This section will be expanded to discuss classification for more than two groups. 
 
+## Predicted Probabilities
+
 * Sometimes Odds Ratios can be difficult to interpret or understand. 
 * Sometimes you just want to report the probability of the event occurring. 
 * Or sometimes you want to predict whether or not a new individual is going to have the event. 
@@ -39,7 +41,7 @@ Consider the main effects model of depression on age, income and gender from sec
                                freedom          
 -------------------- ---------------------------
 
-The predicted probability of depression is calcualted as: 
+The predicted probability of depression is calculated as: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
 {1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
@@ -84,16 +86,13 @@ The probability for a 44.4 year old female who makes $20.6k annual income has a 
 
 
 
-## Calculating predictions
+## Predicted Class (outcome)
 
 So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
 
-Using the main effects model from above, stored in the object `mvmodel`, we can call the `predict()` command to generate a vector of predictions for each row used in the model. 
+We can use the `predict()` command to generate a vector of predictions for each row used in the model. 
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Any row with missing data on any variable used in the model will NOT get a predicted value.</div>\EndKnitrBlock{rmdcaution}
-
-The `mvmodel` object contains a lot of information. I recommend you look at `str(mvmodel)` on your own time as it's too much to print out here. The important pieces for this section is that the data used in the model (all complete case records) are stored. 
-
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Any row with missing data on any variable used in the model will be dropped, and so NOT get a predicted value. So the tactic is to use the data stored in the model object.</div>\EndKnitrBlock{rmdcaution}
 
 
 ```r
@@ -101,16 +100,14 @@ mvmodel <- glm(cases ~ age + income + sex, data=depress, family="binomial")
 model.pred.prob <- predict(mvmodel, type='response')
 ```
 
-Calling `dim(model.pred.prob)` gives us 294. This matches the number of complete case records used to build the model. This is the same length as `mvmodel$y`, so we can bind them together in a data frame (useful for plotting).  
-
-The `model.pred.prob` is a vector of individual predicted probabilities of the outcome (being depressed). 
-To classify individual $i$ as being depressed or not, we draw a binary value ($x_{i} = 0 or 1$), with probability $p_{i}$ by using the `rbinom` function, with a `size=1`. 
-
+The `model.pred.prob` is a vector of individual predicted probabilities of the outcome (being depressed). To classify individual $i$ as being depressed or not, we draw a binary value ($x_{i} = 0$ or $1$), with probability $p_{i}$ by using the `rbinom` function, with a `size=1`. 
 
 ```r
 set.seed(12345) #reminder: change the combo on my luggage
 plot.mpp <- data.frame(pred.prob = model.pred.prob, 
-                       pred.class = rbinom(n=length(model.pred.prob), size=1, p=model.pred.prob),
+                       pred.class = rbinom(n = length(model.pred.prob), 
+                                           size = 1, 
+                                           p = model.pred.prob),
                        truth = mvmodel$y)
 head(plot.mpp)
 ##    pred.prob pred.class truth
@@ -140,10 +137,21 @@ table(plot.mpp$pred.class, plot.mpp$truth)
 The model correctly identified 195 individuals as not depressed and 15 as depressed.
 The model got it wrong 49 + 25 times. 
 
+The **accuracy** of the model is calculated as the fraction of times the model prediction matches the observed category: 
+
+
+```r
+(195+15)/(195+35+49+15)
+## [1] 0.7142857
+```
+
+This model has a 71.4% accuracy. 
+
+
 ![](images/q.png) Is this good? What if death were the event? 
 
  
-#### Distribution of Predictions
+#### Distribution of Predicted probabilities
 Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let's look at a plot: 
 
 
@@ -152,7 +160,7 @@ ggplot(plot.mpp, aes(x=truth, y=pred.prob, fill=truth)) +
       geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ![](images/q.png) 
 
@@ -293,7 +301,7 @@ plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 We can also use the `performance()` function to evaluate the $f1$ measure
 
@@ -307,7 +315,7 @@ plot(perf.f1)
 plot(perf.acc)
 ```
 
-<img src="classification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="classification_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 We can dig into the `perf.acc` object to get the maximum accuracy value (`y.value`), then find the row where that value occurs, and link it to the corresponding cutoff value of x.
 

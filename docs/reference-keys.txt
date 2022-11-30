@@ -281,3 +281,8 @@ log-linear
 poisson-reg
 poisson-regression
 multinomial-reg
+example-4
+example-modeling-depression-score
+predicted-probabilities
+predicted-class-outcome
+distribution-of-predicted-probabilities
