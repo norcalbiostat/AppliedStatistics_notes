@@ -307,13 +307,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
 <li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
 <li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a>
+<li class="chapter" data-level="10.4" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.4</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="general-F.html"><a href="general-F.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.4.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.4.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.4.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.4.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
 <li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
@@ -326,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
 <li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
 <li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
@@ -365,11 +366,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -515,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First we need to look at two quantities:</p>
 <div id="rss-residual-sum-of-squares" class="section level3 hasAnchor" number="10.7.1">
 <h3><span class="header-section-number">10.7.1</span> RSS: Residual Sum of Squares<a href="model-fit-criteria.html#rss-residual-sum-of-squares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Recall the method of least squares introduced in section <a href="mlr.html#mlr">9</a> minimies the residual sum of squares around the regression plane. This value is central to all following model comparison. How ``far away” are the model estimates from the observed?</p>
+<p>Recall the method of least squares introduced in section <a href="mlr.html#mlr">9</a> minimizes the residual sum of squares around the regression plane. This value is central to all following model comparison. How “far away” are the model estimates from the observed?</p>
 <p><span class="math display">\[
 \sum(Y - \bar{Y})^{2}(1-R^{2})  
 \]</span></p>
@@ -533,13 +535,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>We can compare between models using functions based off the LL.</li>
 </ul>
-<hr />
 <p>There are several measures we can use to compare between competing models.</p>
 </div>
-<div id="general-f-test" class="section level3 hasAnchor" number="10.7.3">
-<h3><span class="header-section-number">10.7.3</span> General F Test<a href="model-fit-criteria.html#general-f-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can
-Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level.</p>
+<div id="general-F" class="section level3 hasAnchor" number="10.7.3">
+<h3><span class="header-section-number">10.7.3</span> General F Test<a href="model-fit-criteria.html#general-F" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. <em>Nested</em>: The list of variables in one model is a subset of the list of variables from a bigger model.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="model-fit-criteria.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model</span></span>
+<span id="cb19-2"><a href="model-fit-criteria.html#cb19-2" aria-hidden="true" tabindex="-1"></a>full.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
+<span id="cb19-3"><a href="model-fit-criteria.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model</span></span>
+<span id="cb19-4"><a href="model-fit-criteria.html#cb19-4" aria-hidden="true" tabindex="-1"></a>reduced.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age, <span class="at">data=</span>depress)</span>
+<span id="cb19-5"><a href="model-fit-criteria.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reduced.employ.model, full.employ.model)</span>
+<span id="cb19-6"><a href="model-fit-criteria.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb19-7"><a href="model-fit-criteria.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb19-8"><a href="model-fit-criteria.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: cesd ~ age</span></span>
+<span id="cb19-9"><a href="model-fit-criteria.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: cesd ~ age + chronill + employ</span></span>
+<span id="cb19-10"><a href="model-fit-criteria.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
+<span id="cb19-11"><a href="model-fit-criteria.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    292 22197                                  </span></span>
+<span id="cb19-12"><a href="model-fit-criteria.html#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    285 20036  7    2161.4 4.3921 0.0001197 ***</span></span>
+<span id="cb19-13"><a href="model-fit-criteria.html#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb19-14"><a href="model-fit-criteria.html#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+
+<div class="rmdcaution">
+Caution: this uses <code>anova()</code> not <code>aov()</code>.
+</div>
+<p>Other references: <a href="https://online.stat.psu.edu/stat501/lesson/6/6.2" class="uri">https://online.stat.psu.edu/stat501/lesson/6/6.2</a></p>
 </div>
 <div id="multiple-r2" class="section level3 hasAnchor" number="10.7.4">
 <h3><span class="header-section-number">10.7.4</span> Multiple <span class="math inline">\(R^{2}\)</span><a href="model-fit-criteria.html#multiple-r2" class="anchor-section" aria-label="Anchor link to header"></a></h3>

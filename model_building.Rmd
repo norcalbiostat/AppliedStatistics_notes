@@ -226,7 +226,7 @@ The coefficient $b_{3}$ for the interaction term is significant, confirming that
 The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.
 ```
 
-### Categorical Interaction variables
+### Categorical Interaction variables  {#interactions-catvars}
 
 Let's up the game now and look at the full interaction model with a categorical version of species. 
 Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . Refer to \@ref(cat-predictors) for information on how to interpret categorical predictors as main effects. 
@@ -393,6 +393,33 @@ This information is provided to us directly in the last line of the summary outp
 ```{r}
 summary(employ.depression.model)
 ```
+
+### Testing for a moderation effect in a multiple regression model. 
+
+Moderation is introduced in Chapter \@ref(mod-strat), and helps to set the motivation for stratified models. Later, in Chapter \@ref(interactions-catvars), we show that an interaction term in a regression model is equivelant to stratification. 
+
+Well what if you have other predictors in the model, not just the ones that you have an interaction on? We can use the Wald test to assess if a measure is a significant moderator without stratifying. 
+
+Continuing with the depression example we saw that employment affects CESD depression score. What if we think that the effect (slope) of age on CESD may be different depending on their employment? That is, is the effect of age on depression different for those that are employed versus retired? 
+
+```{r}
+emp.dep.intx <- lm(cesd ~ age + chronill + employ + age*employ, data=depress)
+summary(emp.dep.intx)
+```
+
+Let's revisit our list of beta coefficients: 
+
+* $\beta_{1}$: Age
+* $\beta_{2}$: Chronic illness
+* $\beta_{3} \ldots \beta_{7}$: Effects of different levels of employment (Houseperson to Unemployed)
+* $\beta_{8} \ldots \beta_{12}$: Multiplicative effect that levels of employment have on the slope of age. 
+
+To see if the interaction term `age*employ` is significant, we run an F test via `aov()` and interpret the p-value for the interaction term `age:employ`. Here the pvalue is very large, so there is no reason to believe that employment moderates the relationship between age and CESD score. This is a two way relationship. There is also no reason to believe that age moderates the relationship between employment and CESD score. 
+
+```{r}
+aov(emp.dep.intx) |> summary()
+```
+
 
 
 ## Multicollinearity 

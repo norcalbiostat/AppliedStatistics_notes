@@ -286,3 +286,6 @@ example-modeling-depression-score
 predicted-probabilities
 predicted-class-outcome
 distribution-of-predicted-probabilities
+interactions-catvars
+wald-test
+testing-for-a-moderation-effect-in-a-multiple-regression-model.

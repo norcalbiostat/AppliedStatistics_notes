@@ -1674,7 +1674,7 @@ The coefficient $b_{3}$ for the interaction term is significant, confirming that
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The main effects ($b_{1}$, $b_{2}$) cannot be interpreted by themselves when there is an interaction in the model.</div>\EndKnitrBlock{rmdcaution}
 
-### Categorical Interaction variables
+### Categorical Interaction variables  {#interactions-catvars}
 
 Let's up the game now and look at the full interaction model with a categorical version of species. 
 Recall $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ . Refer to \@ref(cat-predictors) for information on how to interpret categorical predictors as main effects. 
@@ -1880,7 +1880,7 @@ summary(me_intx_model)
 ```
 
 
-## Wald test (General F) {#general-F}
+## Wald test
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 
@@ -1994,7 +1994,105 @@ The p-value of this Wald test is significant, thus not $beta$'s are equal to zer
 
 **(2) Testing that the regression plane is useful to predict $Y$**
 
-Again we can use ANOVA to test if this model is better than nothing, but this time we use it as a model comparison technique. See section \@ref(model-fit-criteria) for examples. 
+This information is provided to us directly in the last line of the summary output from a linear model. 
+
+
+```r
+summary(employ.depression.model)
+## 
+## Call:
+## lm(formula = cesd ~ age + chronill + employ, data = depress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -16.665  -5.843  -1.705   3.155  33.576 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***
+## age               -0.13300    0.03514  -3.785 0.000187 ***
+## chronill           2.68759    1.02368   2.625 0.009121 ** 
+## employHouseperson  6.75036    1.79661   3.757 0.000208 ***
+## employIn School    1.96663    5.99549   0.328 0.743138    
+## employOther        4.89731    4.27848   1.145 0.253320    
+## employPT           3.25937    1.47240   2.214 0.027645 *  
+## employRetired      3.23316    1.88602   1.714 0.087565 .  
+## employUnemp        7.63163    2.33915   3.263 0.001238 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.385 on 285 degrees of freedom
+## Multiple R-squared:  0.1217,	Adjusted R-squared:  0.09704 
+## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06
+```
+
+### Testing for a moderation effect in a multiple regression model. 
+
+Moderation is introduced in Chapter \@ref(mod-strat), and helps to set the motivation for stratified models. Later, in Chapter \@ref(interactions-catvars), we show that an interaction term in a regression model is equivelant to stratification. 
+
+Well what if you have other predictors in the model, not just the ones that you have an interaction on? We can use the Wald test to assess if a measure is a significant moderator without stratifying. 
+
+Continuing with the depression example we saw that employment affects CESD depression score. What if we think that the effect (slope) of age on CESD may be different depending on their employment? That is, is the effect of age on depression different for those that are employed versus retired? 
+
+
+```r
+emp.dep.intx <- lm(cesd ~ age + chronill + employ + age*employ, data=depress)
+summary(emp.dep.intx)
+## 
+## Call:
+## lm(formula = cesd ~ age + chronill + employ + age * employ, data = depress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -18.728  -5.499  -1.900   3.251  33.973 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)            10.514408   2.027479   5.186 4.14e-07 ***
+## age                    -0.108148   0.050325  -2.149  0.03250 *  
+## chronill                2.716041   1.035393   2.623  0.00919 ** 
+## employHouseperson      13.136141   5.279521   2.488  0.01343 *  
+## employIn School       -39.366285  42.218614  -0.932  0.35192    
+## employOther             5.099073  18.815341   0.271  0.78659    
+## employPT                2.742451   3.850676   0.712  0.47694    
+## employRetired          -2.851372  12.739350  -0.224  0.82306    
+## employUnemp            13.820668   5.677595   2.434  0.01555 *  
+## age:employHouseperson  -0.130545   0.102421  -1.275  0.20351    
+## age:employIn School     1.988808   1.989220   1.000  0.31828    
+## age:employOther        -0.009316   0.386657  -0.024  0.98080    
+## age:employPT            0.008960   0.085254   0.105  0.91638    
+## age:employRetired       0.073942   0.182591   0.405  0.68582    
+## age:employUnemp        -0.174615   0.146179  -1.195  0.23328    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.408 on 279 degrees of freedom
+## Multiple R-squared:  0.1354,	Adjusted R-squared:  0.09201 
+## F-statistic: 3.121 on 14 and 279 DF,  p-value: 0.0001511
+```
+
+Let's revisit our list of beta coefficients: 
+
+* $\beta_{1}$: Age
+* $\beta_{2}$: Chronic illness
+* $\beta_{3} \ldots \beta_{7}$: Effects of different levels of employment (Houseperson to Unemployed)
+* $\beta_{8} \ldots \beta_{12}$: Multiplicative effect that levels of employment have on the slope of age. 
+
+To see if the interaction term `age*employ` is significant, we run an F test via `aov()` and interpret the p-value for the interaction term `age:employ`. Here the pvalue is very large, so there is no reason to believe that employment moderates the relationship between age and CESD score. This is a two way relationship. There is also no reason to believe that age moderates the relationship between employment and CESD score. 
+
+
+```r
+aov(emp.dep.intx) |> summary()
+##              Df Sum Sq Mean Sq F value   Pr(>F)    
+## age           1    615   614.6   8.694 0.003462 ** 
+## chronill      1    409   409.2   5.789 0.016781 *  
+## employ        6   1752   292.0   4.131 0.000541 ***
+## age:employ    6    313    52.1   0.737 0.620089    
+## Residuals   279  19723    70.7                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 
 
 ## Multicollinearity 
@@ -2020,7 +2118,7 @@ big.pen.model <- lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_lengt
 performance::check_collinearity(big.pen.model) |> plot()
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 * Solution: use variable selection to delete some X variables.
 * Alternatively, use dimension reduction techniques such as Principal Components (Chapter \@ref(pca)).
@@ -2150,7 +2248,7 @@ First we need to look at two quantities:
 
 ### RSS: Residual Sum of Squares
 
-Recall the method of least squares introduced in section \@ref(mlr) minimies the residual sum of squares around the regression plane. This value is central to all following model comparison. How ``far away" are the model estimates from the observed? 
+Recall the method of least squares introduced in section \@ref(mlr) minimizes the residual sum of squares around the regression plane. This value is central to all following model comparison. How "far away" are the model estimates from the observed? 
 
 $$
 \sum(Y - \bar{Y})^{2}(1-R^{2})  
@@ -2168,14 +2266,35 @@ $$
 * Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
 * We can compare between models using functions based off the LL. 
 
-----
 
 There are several measures we can use to compare between competing models. 
 
-### General F Test
+### General F Test  {#general-F}
 
-We can 
-Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level.
+Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. 
+
+
+
+```r
+# Full model
+full.employ.model <- lm(cesd ~ age + chronill + employ, data=depress)
+# Reduced model
+reduced.employ.model <- lm(cesd ~ age, data=depress)
+anova(reduced.employ.model, full.employ.model)
+## Analysis of Variance Table
+## 
+## Model 1: cesd ~ age
+## Model 2: cesd ~ age + chronill + employ
+##   Res.Df   RSS Df Sum of Sq      F    Pr(>F)    
+## 1    292 22197                                  
+## 2    285 20036  7    2161.4 4.3921 0.0001197 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Caution: this uses `anova()` not `aov()`. </div>\EndKnitrBlock{rmdcaution}
+
+Other references: https://online.stat.psu.edu/stat501/lesson/6/6.2
 
 
 ### Multiple $R^{2}$
