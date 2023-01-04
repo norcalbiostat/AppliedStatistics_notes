@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -510,59 +513,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Missing data in <code>R</code> is denoted as <code>NA</code></li>
 <li>Arithmetic functions on missing data will return missing</li>
 </ul>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="identifying-missing-data.html#cb256-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> MASS<span class="sc">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></span>
-<span id="cb256-2"><a href="identifying-missing-data.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb256-3"><a href="identifying-missing-data.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  92 104  87  NA  35  64</span></span>
-<span id="cb256-4"><a href="identifying-missing-data.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb256-5"><a href="identifying-missing-data.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="identifying-missing-data.html#cb263-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> MASS<span class="sc">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></span>
+<span id="cb263-2"><a href="identifying-missing-data.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb263-3"><a href="identifying-missing-data.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  92 104  87  NA  35  64</span></span>
+<span id="cb263-4"><a href="identifying-missing-data.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb263-5"><a href="identifying-missing-data.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div>
 <p>The <code>summary()</code> function will always show missing.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="identifying-missing-data.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb257-2"><a href="identifying-missing-data.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
-<span id="cb257-3"><a href="identifying-missing-data.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="identifying-missing-data.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb264-2"><a href="identifying-missing-data.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
+<span id="cb264-3"><a href="identifying-missing-data.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></span></code></pre></div>
 <p>The <code>is.na()</code> function is helpful to identify rows with missing data</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="identifying-missing-data.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(survey<span class="sc">$</span>Pulse))</span>
-<span id="cb258-2"><a href="identifying-missing-data.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb258-3"><a href="identifying-missing-data.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb258-4"><a href="identifying-missing-data.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   192    45</span></span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="identifying-missing-data.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(survey<span class="sc">$</span>Pulse))</span>
+<span id="cb265-2"><a href="identifying-missing-data.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb265-3"><a href="identifying-missing-data.html#cb265-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb265-4"><a href="identifying-missing-data.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   192    45</span></span></code></pre></div>
 <p>The function <code>table()</code> will not show NA by default.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="identifying-missing-data.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I)</span>
-<span id="cb259-2"><a href="identifying-missing-data.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb259-3"><a href="identifying-missing-data.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric </span></span>
-<span id="cb259-4"><a href="identifying-missing-data.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141</span></span>
-<span id="cb259-5"><a href="identifying-missing-data.html#cb259-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb259-6"><a href="identifying-missing-data.html#cb259-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb259-7"><a href="identifying-missing-data.html#cb259-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric     &lt;NA&gt; </span></span>
-<span id="cb259-8"><a href="identifying-missing-data.html#cb259-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141       28</span></span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="identifying-missing-data.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I)</span>
+<span id="cb266-2"><a href="identifying-missing-data.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb266-3"><a href="identifying-missing-data.html#cb266-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric </span></span>
+<span id="cb266-4"><a href="identifying-missing-data.html#cb266-4" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141</span></span>
+<span id="cb266-5"><a href="identifying-missing-data.html#cb266-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb266-6"><a href="identifying-missing-data.html#cb266-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb266-7"><a href="identifying-missing-data.html#cb266-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric     &lt;NA&gt; </span></span>
+<span id="cb266-8"><a href="identifying-missing-data.html#cb266-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141       28</span></span></code></pre></div>
 <ul>
 <li>What percent of the data set is missing?</li>
 </ul>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="identifying-missing-data.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(survey)))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
-<span id="cb260-2"><a href="identifying-missing-data.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb260-3"><a href="identifying-missing-data.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb260-4"><a href="identifying-missing-data.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  96.2   3.8</span></span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="identifying-missing-data.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(survey)))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb267-2"><a href="identifying-missing-data.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb267-3"><a href="identifying-missing-data.html#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb267-4"><a href="identifying-missing-data.html#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  96.2   3.8</span></span></code></pre></div>
 <p>4% of the data points are missing.</p>
 <ul>
 <li>How much missing is there per variable?</li>
 </ul>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="identifying-missing-data.html#cb261-1" aria-hidden="true" tabindex="-1"></a>prop.miss <span class="ot">&lt;-</span> <span class="fu">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">NROW</span>(x),<span class="dv">4</span>))</span>
-<span id="cb261-2"><a href="identifying-missing-data.html#cb261-2" aria-hidden="true" tabindex="-1"></a>prop.miss</span>
-<span id="cb261-3"><a href="identifying-missing-data.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height    M.I </span></span>
-<span id="cb261-4"><a href="identifying-missing-data.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 0.1181 </span></span>
-<span id="cb261-5"><a href="identifying-missing-data.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    Age </span></span>
-<span id="cb261-6"><a href="identifying-missing-data.html#cb261-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0000</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="identifying-missing-data.html#cb268-1" aria-hidden="true" tabindex="-1"></a>prop.miss <span class="ot">&lt;-</span> <span class="fu">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">NROW</span>(x),<span class="dv">4</span>))</span>
+<span id="cb268-2"><a href="identifying-missing-data.html#cb268-2" aria-hidden="true" tabindex="-1"></a>prop.miss</span>
+<span id="cb268-3"><a href="identifying-missing-data.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height    M.I </span></span>
+<span id="cb268-4"><a href="identifying-missing-data.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 0.1181 </span></span>
+<span id="cb268-5"><a href="identifying-missing-data.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    Age </span></span>
+<span id="cb268-6"><a href="identifying-missing-data.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0000</span></span></code></pre></div>
 <p>The amount of missing data per variable varies from 0 to 19%.</p>
 <div id="visualize-missing-patterns" class="section level3 hasAnchor" number="17.1.1">
 <h3><span class="header-section-number">17.1.1</span> Visualize missing patterns<a href="identifying-missing-data.html#visualize-missing-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Using <code>ggplot2</code></p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="identifying-missing-data.html#cb262-1" aria-hidden="true" tabindex="-1"></a>pmpv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">variable =</span> <span class="fu">names</span>(survey), <span class="at">pct.miss =</span>prop.miss)</span>
-<span id="cb262-2"><a href="identifying-missing-data.html#cb262-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-3"><a href="identifying-missing-data.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pmpv, <span class="fu">aes</span>(<span class="at">x=</span>variable, <span class="at">y=</span>pct.miss)) <span class="sc">+</span></span>
-<span id="cb262-4"><a href="identifying-missing-data.html#cb262-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span>percent, <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb262-5"><a href="identifying-missing-data.html#cb262-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>pmpv, <span class="fu">aes</span>(<span class="at">label=</span><span class="fu">paste0</span>(<span class="fu">round</span>(pct.miss<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="at">y=</span>pct.miss<span class="fl">+.025</span>), <span class="at">size=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="identifying-missing-data.html#cb269-1" aria-hidden="true" tabindex="-1"></a>pmpv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">variable =</span> <span class="fu">names</span>(survey), <span class="at">pct.miss =</span>prop.miss)</span>
+<span id="cb269-2"><a href="identifying-missing-data.html#cb269-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-3"><a href="identifying-missing-data.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pmpv, <span class="fu">aes</span>(<span class="at">x=</span>variable, <span class="at">y=</span>pct.miss)) <span class="sc">+</span></span>
+<span id="cb269-4"><a href="identifying-missing-data.html#cb269-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span>percent, <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb269-5"><a href="identifying-missing-data.html#cb269-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>pmpv, <span class="fu">aes</span>(<span class="at">label=</span><span class="fu">paste0</span>(<span class="fu">round</span>(pct.miss<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="at">y=</span>pct.miss<span class="fl">+.025</span>), <span class="at">size=</span><span class="dv">4</span>)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Using <code>mice</code></p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="identifying-missing-data.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
-<span id="cb263-2"><a href="identifying-missing-data.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(survey)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="identifying-missing-data.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb270-2"><a href="identifying-missing-data.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(survey)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre><code>##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
 ## 168    1    1   1   1      1      1     1    1     1      1   1     1   0
@@ -576,11 +579,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107</code></pre>
 <p>This somewhat ugly output tells us that 168 records have no missing data, 38 records are missing only <code>Pulse</code> and 20 are missing both <code>Height</code> and <code>M.I</code>.</p>
 <p>Using <code>VIM</code></p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="identifying-missing-data.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
-<span id="cb265-2"><a href="identifying-missing-data.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(survey, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</span>
-<span id="cb265-3"><a href="identifying-missing-data.html#cb265-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
-<span id="cb265-4"><a href="identifying-missing-data.html#cb265-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(survey), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
-<span id="cb265-5"><a href="identifying-missing-data.html#cb265-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="identifying-missing-data.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
+<span id="cb272-2"><a href="identifying-missing-data.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(survey, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</span>
+<span id="cb272-3"><a href="identifying-missing-data.html#cb272-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
+<span id="cb272-4"><a href="identifying-missing-data.html#cb272-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(survey), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
+<span id="cb272-5"><a href="identifying-missing-data.html#cb272-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p>The plot on the left is a simplified, and ordered version of the ggplot from above, except the bars appear to be inflated because the y-axis goes up to 15% instead of 100%.</p>
 <p>The plot on the right shows the missing data patterns, and indicate that 71% of the records has complete cases, and that everyone who is missing <code>M.I.</code> is also missing Height.</p>
@@ -593,7 +596,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>The darkred text indicates how many records are missing on both.</li>
 </ul>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="identifying-missing-data.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">marginplot</span>(survey[,<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="identifying-missing-data.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">marginplot</span>(survey[,<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate.</p>
 </div>

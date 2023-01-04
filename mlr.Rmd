@@ -19,6 +19,7 @@ This section uses functions from the `dotwhisker` and `gtsummary` visualize resu
 
 ```{r, echo=FALSE}
 library(performance) 
+pen <- palmerpenguins::penguins
 ```
 
 ## Mathematical Model
@@ -66,9 +67,7 @@ $$ || \mathbf{Y} - \mathbf{X}\mathbf{\beta} ||^{2} $$
 
 Solving this least squares problem for multiple regression requires knowledge of multivariable calculus and linear algebra, and so is left to a course in mathematical statistics. 
 
-
-
-## Example {#mlr-fev}
+## Fitting the model
 
 The analysis in example \@ref(slr-fev) concluded that FEV1 in fathers significantly increases by 0.12 (95% CI:0.09, 0.15) liters per additional inch in height (p<.0001). Looking at the multiple $R^{2}$ (correlation of determination), this simple model explains 25% of the variance seen in the outcome $y$. 
 
@@ -81,22 +80,184 @@ What direction do you expect the slope coefficient for age to be? For height?
 Fitting a regression model in R with more than 1 predictor is done by adding each variable to the right hand side of the model notation connected with a `+`. 
 
 ```{r}
+lm(FFEV1 ~ FAGE + FHEIGHT, data=fev)
+```
+
+
+## Interpreting Coefficients
+
+Similar to simple linear regression, each $\beta_{j}$ coefficient is considered a slope. That is, the amount $Y$ will change for every 1 unit increase in $X_{j}$. In a multiple variable regression model, $\b_{j}$ is the estimated change in $Y$ _after controlling for other predictors in the model_. 
+
+### Continuous predictors
+
+```{r}
 mlr.dad.model <- lm(FFEV1 ~ FAGE + FHEIGHT, data=fev)
 summary(mlr.dad.model)
 confint(mlr.dad.model)
 ```
 
-**Interpretations**
-
-Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p<.0001).
-
-Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p<.0001). 
+* Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p<.0001).
+* Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p<.0001). 
 
 For the model that includes age, the coefficient for height is now `r round(mlr.dad.model$coefficients[3],2)`, which is interpreted as the rate of change of FEV1 as a function of height **after adjusting for age**. This is also called the **partial regression coefficient** of FEV1 on height after adjusting for age. 
 
-Both height and age are significantly associated with FEV in fathers (p<.0001 each).
 
-## Presenting regression results
+### Binary predictors
+
+Binary predictors (categorical variables with only 2 levels) get converted to a numeric _binary indicator_ variable which only has the values 0 and 1. Whichever level gets assigned to be 0 is called the _reference_ group or level. The regression estimate $b$ then is the effect of being in group ($x=1$) _compared to_ being in the reference ($x=0$) group.
+
+Does gender also play a roll in FEV? Let's look at how gender may impact or change the relationship between FEV and either height or age. 
+
+> Note, the `fev` data set is in _wide_ form right now, with different columns for mothers and fathers. First I need to reshape the data into _long_ format, so gender is it's own variable. 
+
+```{r}
+# a pivot_longer() probably would have worked here as well
+fev_long <- data.frame(gender = c(fev$FSEX, fev$MSEX), 
+                   fev1 = c(fev$FFEV1, fev$MFEV1), 
+                   ht = c(fev$FHEIGHT, fev$MHEIGHT), 
+                   age = c(fev$FAGE, fev$MAGE), 
+                   area = c(fev$AREA, fev$AREA))
+fev_long$gender <- factor(fev_long$gender, labels=c("M", "F"))
+fev_long$area   <- factor(fev_long$area, labels=c("Burbank", "Lancaster", "Long Beach", "Glendora"))
+```
+
+So the model being fit looks like: 
+
+$$ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}$$
+
+where 
+
+* $x_{1}$: Age
+* $x_{2}$: height
+* $x_{3}$: 0 if Male, 1 if Female
+
+```{r}
+lm(fev1 ~ age + ht + gender, data=fev_long)
+```
+
+In this model gender is a binary categorical variable, with reference group "Male". This is detected because the variable that shows up in the regression model output is `genderF`. So the estimate shown is for males, compared to females. 
+
+Note that I **DID NOT** have to convert the categorical variable `gender` to a binary numeric variable before fitting it into the model. R (and any other software program) will do this for you already. 
+
+
+The regression equation for the model with gender is 
+
+$$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
+
+
+* $b_{0}:$ For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.
+* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
+* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
+* $b_{3}:$ Females have 0.64L lower FEV compared to males. 
+
+**Note**: The interpretation of categorical variables still falls under the template language of "for every one unit increase in $X_{p}$, $Y$ changes by $b_{p}$". Here, $X_{3}=0$ for males, and 1 for females. So a 1 "unit" change is females _compared to_ males. 
+
+
+
+### Categorical Predictors {#cat-predictors}
+
+Let's continue to model the FEV for individuals living in Southern California, but now we also consider the effect of city they live in. For those unfamiliar with the region, these cities represent very different environmental profiles. 
+
+```{r}
+table(fev_long$area)
+```
+
+Let's fit a model with `area`, notice again I do not do anything to the variable `area` itself aside from add it into the model. 
+```{r}
+lm(fev1 ~ age + ht + gender + area, data=fev_long) |> summary()
+```
+
+Examine the coefficient names, `areaLancaster`, `areaLong Beach` and `areaGlendora`. Again R automatically take a categorical variable and turn it into a series of binary indicator variables where a 1 indicates if a person is from that area. Notice how someone from Burbank has 0's for all of the three indicator variables, someone from Lancaster only has a 1 in the `areaLancaster` variable and 0 otherwise. And etc for each other area.
+
+```{r, echo=FALSE}
+a <- model.matrix(fev1 ~ area, data=fev_long)
+b <- data.frame(a, area=fev_long$area)[c(1,51,75,101),-1]
+kable(b)
+```
+
+* Most commonly known as "Dummy coding". Not an informative term to use. 
+* Better used term: Indicator variable
+* Math notation: **I(gender == "Female")**. 
+* A.k.a "reference coding" or "one hot encoding"
+* For a nominal X with K categories, define K indicator variables.
+    - Choose a reference (referent) category:
+    - Leave it out
+    - Use remaining K-1 in the regression.
+    - Often, the largest category is chosen as the reference category.
+
+Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is the Burbank area. Why Burbank? Because that is what R sees as the first level. If you want something different, you need to change the factor ordering. 
+
+```{r}
+levels(fev_long$area)
+```
+
+The mathematical model is now written as follows, 
+
+$$ Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}x_{4i} + \beta_{5}x_{5i} +\beta_{6}x_{6i}\epsilon_{i}$$
+
+where 
+
+* $x_{1}$: Age
+* $x_{2}$: height
+* $x_{3}$: 0 if Male, 1 if Female
+* $x_{4}$: 1 if living in Lancaster, 0 otherwise 
+* $x_{5}$: 1 if living in Long Beach, 0 otherwise
+* $x_{6}$: 1 if living in Glendora, 0 otherwise
+
+
+For someone living in Burbank, $x_{4}=x_{5}=x_{6} =0$ so the model then is
+
+$$Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}$$
+
+For someone living in Lancaster, $x_{4}=1, x_{5}=0, x_{6} =0$ so the model then is
+
+$$ 
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{4}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+$$
+
+For someone living in Long Beach, $x_{4}=0, x_{5}=1, x_{6} =0$ so the model then is
+
+$$ 
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{5}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{5}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+$$
+
+
+and the model for someone living in Glendora $x_{4}=0, x_{5}=0, x_{6} =1$ is
+
+$$ 
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{6}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{6}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+$$
+
+
+In summary, each area gets it's own intercept, but still has a common slope for all other variables. 
+
+$$
+y_{i.Burbank} = -2.25 - 0.023(age) + 0.10(ht) -0.64(female) \\
+y_{i.Lancaster} = -2.22 - 0.023(age) + 0.10(ht) -0.64(female)\\
+y_{i.Long.Beach} = -2.19 - 0.023(age) + 0.10(ht) -0.64(female) \\
+y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female) 
+$$
+
+Let's look interpret the regression coefficients and their 95% confidence intervals from the main effects model again. 
+
+```{r}
+lm(fev1 ~ age + ht + gender + area, data=fev_long) |> tbl_regression()
+```
+
+* $b_{4}$: After controlling for age, height and gender, those that live in Lancaster have 0.03 (-0.14, 0.20) higher FEV1 compared to someone living in Burbank (p=0.7). 
+* $b_{5}$: After controlling for age, height and gender, those that live in Long Beach have 0.06 (-0.14, 0.27) higher FEV1 compared to someone living in Burbank (p=0.6). 
+* $b_{6}$: After controlling for age, height and gender, those that live in Glendora have 0.12 (-0.04, 0.28) higher FEV1 compared to someone living in Burbank (p=0.14). 
+
+> Beta coefficients for categorical variables are always interpreted as the difference between that particular level and the reference group
+
+
+
+
+
+## Presenting results
 The direct software output always tells you more information than what you are wanting to share with an audience. Here are some ways to "prettify" your regression output. 
 
 
@@ -186,6 +347,7 @@ This means that the third variable is explaining the relationship between the ex
         
 Note that this is a two way relationship. The order of $x_{1}$ and $x_{2}$ is invaraiant. If you were to add $x_{2}$ to the model before $x_{1}$ you may see the same thing occur. That is - both variables are explaining the same portion of the variance in $y$. 
 
+<!---
 ### Example: Does smoking affect pulse rate? 
 
 Prior studies have indicate that smoking is associated with high blood pressure. Is smoking also associated with your pulse rate? 
@@ -211,6 +373,8 @@ lm(H4PR ~ H4TO5 +  H4TO6 , data=addhealth) %>% summary()
 
 Thus, the number of days smoked _confounds_ the relationship between the number of cigarettes smoked per day, and the person's pulse rate. 
 
+
+--->
 
 
 ## Model Diagnostics 

@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -633,39 +636,38 @@ and the MODEL is the expected counts <span class="math inline">\(E_{ij}\)</span>
 so we can find our way around the cells of a table.
 Just like rows and columns in a matrix, rows are indexed first (as <span class="math inline">\(i\)</span> and columns indexed as <span class="math inline">\(j\)</span>).
 So the cell in the top left is <span class="math inline">\(i=1\)</span> and <span class="math inline">\(j=1\)</span>.</p>
-<table style="width:60%;">
+<table style="width:58%;">
 <colgroup>
 <col width="15%" />
 <col width="13%" />
 <col width="15%" />
-<col width="15%" />
+<col width="1%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left"><span class="math inline">\(O_{ij}\)</span></th>
 <th align="center">Alive</th>
 <th align="center">Dead</th>
-<th align="center">Total</th>
+<th colspan="2" align="center">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Mammo</td>
 <td align="center"><span class="math inline">\(n_{11}\)</span></td>
-<td align="center"><span class="math inline">\(n_{12}\)</span></td>
-<td align="center"><span class="math inline">\(n_{1.}\)</span></td>
+<td colspan="3" align="center"><span class="math inline">\(n_{12}\)</span> | <span class="math inline">\(n_{1.}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">Control</td>
 <td align="center"><span class="math inline">\(n_{21}\)</span></td>
-<td align="center"><span class="math inline">\(n_{22}\)</span></td>
-<td align="center"><span class="math inline">\(n_{2.}\)</span></td>
+<td colspan="3" align="center"><span class="math inline">\(n_{22}\)</span> | <span class="math inline">\(n_{2.}\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">Total</td>
 <td align="center"><span class="math inline">\(n_{.1}\)</span></td>
 <td align="center"><span class="math inline">\(n_{.2}\)</span></td>
-<td align="center"><span class="math inline">\(N\)</span></td>
+<td colspan="2" align="center"><span class="math inline">\(N\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -766,8 +768,8 @@ Mammogram
 <li>The categorical explanatory variable is the person’s general health (<code>genhealth</code>) and has levels “Excellent”, “Very Good”, “Good”, “Fair”, and “Poor”.</li>
 </ul>
 <p><strong>2. Visualize and summarise bivariate relationship.</strong></p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="bv-chisq.html#cb141-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_xtab</span>(<span class="at">grp=</span>addhealth<span class="sc">$</span>eversmoke_c, <span class="at">x=</span>addhealth<span class="sc">$</span>genhealth, </span>
-<span id="cb141-2"><a href="bv-chisq.html#cb141-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin=</span><span class="st">&quot;row&quot;</span>, <span class="at">legend.title=</span><span class="st">&quot;&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="bv-chisq.html#cb142-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_xtab</span>(<span class="at">grp=</span>addhealth<span class="sc">$</span>eversmoke_c, <span class="at">x=</span>addhealth<span class="sc">$</span>genhealth, </span>
+<span id="cb142-2"><a href="bv-chisq.html#cb142-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin=</span><span class="st">&quot;row&quot;</span>, <span class="at">legend.title=</span><span class="st">&quot;&quot;</span>) </span></code></pre></div>
 <p><img src="bivariate_analysis_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
 <p>The percentage of smokers seems to increase as the general health status decreases. Almost three-quarters (73%, n=40) of those reporting poor health have smoked an entire cigarette at least once in their life compared to 59% (n=573) of those reporting excellent health.</p>
 <p><strong>3. Write the relationship you want to examine in the form of a research question.</strong></p>
@@ -791,13 +793,13 @@ Mammogram
 <li><p>I will conduct a <span class="math inline">\(\chi\)</span>-squared test of association. There is at least 10 observations in each combination of smoking status and general health.</p></li>
 <li><p>Conduct the test.</p></li>
 </ol>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="bv-chisq.html#cb142-1" aria-hidden="true" tabindex="-1"></a>health.smoke.model <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(addhealth<span class="sc">$</span>genhealth, addhealth<span class="sc">$</span>eversmoke_c)</span>
-<span id="cb142-2"><a href="bv-chisq.html#cb142-2" aria-hidden="true" tabindex="-1"></a>health.smoke.model</span>
-<span id="cb142-3"><a href="bv-chisq.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb142-4"><a href="bv-chisq.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb142-5"><a href="bv-chisq.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb142-6"><a href="bv-chisq.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  addhealth$genhealth and addhealth$eversmoke_c</span></span>
-<span id="cb142-7"><a href="bv-chisq.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 30.795, df = 4, p-value = 3.371e-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="bv-chisq.html#cb143-1" aria-hidden="true" tabindex="-1"></a>health.smoke.model <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(addhealth<span class="sc">$</span>genhealth, addhealth<span class="sc">$</span>eversmoke_c)</span>
+<span id="cb143-2"><a href="bv-chisq.html#cb143-2" aria-hidden="true" tabindex="-1"></a>health.smoke.model</span>
+<span id="cb143-3"><a href="bv-chisq.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb143-4"><a href="bv-chisq.html#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb143-5"><a href="bv-chisq.html#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb143-6"><a href="bv-chisq.html#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  addhealth$genhealth and addhealth$eversmoke_c</span></span>
+<span id="cb143-7"><a href="bv-chisq.html#cb143-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 30.795, df = 4, p-value = 3.371e-06</span></span></code></pre></div>
 <p>We have strong evidence against the null; the <span class="math inline">\(p\)</span>-value is less than .0001.</p>
 <p><strong>5. Write a conclusion in context of the problem.</strong>
 We can conclude that there is an association between ever smoking a cigarette in their life and perceived general health (<span class="math inline">\(\chi^2\)</span> = 30.8, df=4, <span class="math inline">\(p&lt;.0001\)</span>).</p>
@@ -806,18 +808,18 @@ We can conclude that there is an association between ever smoking a cigarette in
 <h3><span class="header-section-number">5.5.4</span> Multiple Comparisons<a href="bv-chisq.html#multiple-comparisons-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Just like with ANOVA, if we find that the chi-squared test indicates that at least one proportion is different from the others, it’s our job to figure out which ones might be different! We will analyze the residuals to accomplish this. Not by hand! Never again! You’re not learning how to code for nothing.</p>
 <p>The residuals are automatically stored in the model output. You can either print them out and look at the values directly:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="bv-chisq.html#cb143-1" aria-hidden="true" tabindex="-1"></a>health.smoke.model<span class="sc">$</span>residuals</span>
-<span id="cb143-2"><a href="bv-chisq.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                    addhealth$eversmoke_c</span></span>
-<span id="cb143-3"><a href="bv-chisq.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$genhealth Non Smoker     Smoker</span></span>
-<span id="cb143-4"><a href="bv-chisq.html#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="do">##           Excellent  3.4461139 -2.5168277</span></span>
-<span id="cb143-5"><a href="bv-chisq.html#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="do">##           Very good  0.4810893 -0.3513578</span></span>
-<span id="cb143-6"><a href="bv-chisq.html#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           Good      -2.4431255  1.7843072</span></span>
-<span id="cb143-7"><a href="bv-chisq.html#cb143-7" aria-hidden="true" tabindex="-1"></a><span class="do">##           Fair      -1.0556365  0.7709714</span></span>
-<span id="cb143-8"><a href="bv-chisq.html#cb143-8" aria-hidden="true" tabindex="-1"></a><span class="do">##           Poor      -0.9446378  0.6899048</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="bv-chisq.html#cb144-1" aria-hidden="true" tabindex="-1"></a>health.smoke.model<span class="sc">$</span>residuals</span>
+<span id="cb144-2"><a href="bv-chisq.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                    addhealth$eversmoke_c</span></span>
+<span id="cb144-3"><a href="bv-chisq.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$genhealth Non Smoker     Smoker</span></span>
+<span id="cb144-4"><a href="bv-chisq.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="do">##           Excellent  3.4461139 -2.5168277</span></span>
+<span id="cb144-5"><a href="bv-chisq.html#cb144-5" aria-hidden="true" tabindex="-1"></a><span class="do">##           Very good  0.4810893 -0.3513578</span></span>
+<span id="cb144-6"><a href="bv-chisq.html#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           Good      -2.4431255  1.7843072</span></span>
+<span id="cb144-7"><a href="bv-chisq.html#cb144-7" aria-hidden="true" tabindex="-1"></a><span class="do">##           Fair      -1.0556365  0.7709714</span></span>
+<span id="cb144-8"><a href="bv-chisq.html#cb144-8" aria-hidden="true" tabindex="-1"></a><span class="do">##           Poor      -0.9446378  0.6899048</span></span></code></pre></div>
 <p>Or you can extract them and save them as a data frame. Then use ggplot with <code>geom_raster</code> to fill in your squares.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="bv-chisq.html#cb144-1" aria-hidden="true" tabindex="-1"></a>plot.residuals <span class="ot">&lt;-</span> health.smoke.model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
-<span id="cb144-2"><a href="bv-chisq.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.residuals, <span class="fu">aes</span>(<span class="at">x=</span>addhealth.genhealth, <span class="at">y=</span>addhealth.eversmoke_c)) <span class="sc">+</span></span>
-<span id="cb144-3"><a href="bv-chisq.html#cb144-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">fill=</span>Freq)) <span class="sc">+</span>  <span class="fu">scale_fill_viridis_c</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="bv-chisq.html#cb145-1" aria-hidden="true" tabindex="-1"></a>plot.residuals <span class="ot">&lt;-</span> health.smoke.model<span class="sc">$</span>residuals <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
+<span id="cb145-2"><a href="bv-chisq.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.residuals, <span class="fu">aes</span>(<span class="at">x=</span>addhealth.genhealth, <span class="at">y=</span>addhealth.eversmoke_c)) <span class="sc">+</span></span>
+<span id="cb145-3"><a href="bv-chisq.html#cb145-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">fill=</span>Freq)) <span class="sc">+</span>  <span class="fu">scale_fill_viridis_c</span>()</span></code></pre></div>
 <p><img src="bivariate_analysis_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The proportion of those who have never smoked and report being in Excellent health is higher than expected if these two measures were independent (high positive residual means observed is greater than expected). A lower percent of people reporting Good health never smoked, which is lower than expected if smoking and health status were independent. So these two categories are likely to be the groups that have a different proportion of lifetime smoker <span class="math inline">\(p_{i}\)</span> compared to the other groups.</p>
 </div>

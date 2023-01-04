@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9.4 Interpreting Coefficients | Applied Statistics</title>
+  <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9.4 Interpreting Coefficients | Applied Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9.4 Interpreting Coefficients | Applied Statistics" />
+  
+  <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
+  
+
+<meta name="author" content="Robin Donatello, Edward Roualdes" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fitting-the-model.html"/>
+<link rel="next" href="presenting-results.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Statistics course notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I Preparing Data for Analysis</b></span></li>
+<li class="chapter" data-level="1" data-path="data_prep.html"><a href="data_prep.html"><i class="fa fa-check"></i><b>1</b> Workflow and Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
+<li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-variable-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming variable names for sanity sake</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="data-management.html"><a href="data-management.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.3.2</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.3.3" data-path="data-management.html"><a href="data-management.html#outliers"><i class="fa fa-check"></i><b>1.3.3</b> Outliers</a></li>
+<li class="chapter" data-level="1.3.4" data-path="data-management.html"><a href="data-management.html#creating-secondary-variables"><i class="fa fa-check"></i><b>1.3.4</b> Creating secondary variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
+<li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html"><i class="fa fa-check"></i><b>2.1</b> The syntax of <code>ggplot</code></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html#required-arguments"><i class="fa fa-check"></i><b>2.1.1</b> Required arguments</a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-syntax-of-ggplot.html"><a href="the-syntax-of-ggplot.html#optional-but-helpful-arguments"><i class="fa fa-check"></i><b>2.1.2</b> Optional but helpful arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>2.2</b> The Data</a></li>
+<li class="chapter" data-level="2.3" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html"><i class="fa fa-check"></i><b>2.3</b> Univariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html#categorical-variables"><i class="fa fa-check"></i><b>2.3.1</b> Categorical variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="univariate-visualizations.html"><a href="univariate-visualizations.html#continuous-measures"><i class="fa fa-check"></i><b>2.3.2</b> Continuous Measures</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html"><i class="fa fa-check"></i><b>2.4</b> Bivariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#categorical-v.-categorical"><i class="fa fa-check"></i><b>2.4.1</b> Categorical v. Categorical</a></li>
+<li class="chapter" data-level="2.4.2" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#grouped-bar-charts-with-percentages"><i class="fa fa-check"></i><b>2.4.2</b> Grouped bar charts with percentages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#continuous-v.-continuous"><i class="fa fa-check"></i><b>2.4.3</b> Continuous v. Continuous</a></li>
+<li class="chapter" data-level="2.4.4" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#continuous-v.-categorical"><i class="fa fa-check"></i><b>2.4.4</b> Continuous v. Categorical</a></li>
+<li class="chapter" data-level="2.4.5" data-path="bivariate-visualizations.html"><a href="bivariate-visualizations.html#joy-plots-ridgelines"><i class="fa fa-check"></i><b>2.4.5</b> Joy plots / Ridgelines</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="faceting-paneling.html"><a href="faceting-paneling.html"><i class="fa fa-check"></i><b>2.5</b> Faceting / paneling</a></li>
+<li class="chapter" data-level="2.6" data-path="multiple-plots-per-window.html"><a href="multiple-plots-per-window.html"><i class="fa fa-check"></i><b>2.6</b> Multiple plots per window</a></li>
+<li class="chapter" data-level="2.7" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html"><i class="fa fa-check"></i><b>2.7</b> Multivariate (3+ variables)</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#three-continuous"><i class="fa fa-check"></i><b>2.7.1</b> Three continuous</a></li>
+<li class="chapter" data-level="2.7.2" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#scatterplot-matrix"><i class="fa fa-check"></i><b>2.7.2</b> Scatterplot matrix</a></li>
+<li class="chapter" data-level="2.7.3" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#two-categorical-and-one-continuous"><i class="fa fa-check"></i><b>2.7.3</b> Two categorical and one continuous</a></li>
+<li class="chapter" data-level="2.7.4" data-path="multivariate-3-variables.html"><a href="multivariate-3-variables.html#two-continuous-and-one-categorical"><i class="fa fa-check"></i><b>2.7.4</b> Two continuous and one categorical</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="paneling-on-two-variables.html"><a href="paneling-on-two-variables.html"><i class="fa fa-check"></i><b>2.8</b> Paneling on two variables</a></li>
+<li class="chapter" data-level="2.9" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>2.9</b> Troubleshooting</a></li>
+<li class="chapter" data-level="2.10" data-path="but-what-about.html"><a href="but-what-about.html"><i class="fa fa-check"></i><b>2.10</b> But what about…</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="but-what-about.html"><a href="but-what-about.html#other-plots-not-mentioned"><i class="fa fa-check"></i><b>2.10.1</b> Other plots not mentioned</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>2.11</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="select_analysis.html"><a href="select_analysis.html"><i class="fa fa-check"></i><b>3</b> Selecting Appropriate Analyses</a></li>
+<li class="part"><span><b>II Statistical Inference</b></span></li>
+<li class="chapter" data-level="4" data-path="bv-intro.html"><a href="bv-intro.html"><i class="fa fa-check"></i><b>4</b> Foundations for Inference</a></li>
+<li class="chapter" data-level="5" data-path="bivariate-analysis.html"><a href="bivariate-analysis.html"><i class="fa fa-check"></i><b>5</b> Bivariate Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="assumption-of-independent-observations.html"><a href="assumption-of-independent-observations.html"><i class="fa fa-check"></i><b>5.1</b> Assumption of Independent Observations</a></li>
+<li class="chapter" data-level="5.2" data-path="choosing-appropriate-bivariate-analysis.html"><a href="choosing-appropriate-bivariate-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Choosing appropriate bivariate analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="bv-ttest.html"><a href="bv-ttest.html"><i class="fa fa-check"></i><b>5.3</b> (Q~B) Two means: T-Test</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="bv-ttest.html"><a href="bv-ttest.html#assumptions"><i class="fa fa-check"></i><b>5.3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="bv-ttest.html"><a href="bv-ttest.html#sampling-distribution-for-the-difference"><i class="fa fa-check"></i><b>5.3.2</b> Sampling Distribution for the difference</a></li>
+<li class="chapter" data-level="5.3.3" data-path="bv-ttest.html"><a href="bv-ttest.html#example-smoking-and-bmi"><i class="fa fa-check"></i><b>5.3.3</b> Example: Smoking and BMI</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="bv-chisq.html"><a href="bv-chisq.html#conditions-for-the-sampling-distribution-to-be-normal."><i class="fa fa-check"></i><b>5.5.1</b> Conditions for the sampling distribution to be normal.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="bv-chisq.html"><a href="bv-chisq.html#example-are-mammograms-effective"><i class="fa fa-check"></i><b>5.5.2</b> Example: Are Mammograms effective?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="bv-chisq.html"><a href="bv-chisq.html#example-smoking-and-general-health"><i class="fa fa-check"></i><b>5.5.3</b> Example: Smoking and General Health</a></li>
+<li class="chapter" data-level="5.5.4" data-path="bv-chisq.html"><a href="bv-chisq.html#multiple-comparisons-1"><i class="fa fa-check"></i><b>5.5.4</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="bv-corr.html"><a href="bv-corr.html"><i class="fa fa-check"></i><b>5.6</b> (Q~Q) Correlation</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="bv-corr.html"><a href="bv-corr.html#strength-of-the-correlation"><i class="fa fa-check"></i><b>5.6.1</b> Strength of the correlation</a></li>
+<li class="chapter" data-level="5.6.2" data-path="bv-corr.html"><a href="bv-corr.html#example-federal-spending-per-capita-and-poverty-rate"><i class="fa fa-check"></i><b>5.6.2</b> Example: Federal spending per capita and poverty rate</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Regression Modeling</b></span></li>
+<li class="chapter" data-level="6" data-path="reg-intro.html"><a href="reg-intro.html"><i class="fa fa-check"></i><b>6</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="opening-remarks.html"><a href="opening-remarks.html"><i class="fa fa-check"></i><b>6.1</b> Opening Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="slr.html"><a href="slr.html"><i class="fa fa-check"></i><b>7</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>7.1</b> Example</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="example.html"><a href="example.html#caution-on-out-of-range-predictions"><i class="fa fa-check"></i><b>7.1.1</b> Caution on out of range predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="mathematical-model.html"><a href="mathematical-model.html"><i class="fa fa-check"></i><b>7.2</b> Mathematical Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="mathematical-model.html"><a href="mathematical-model.html#unifying-model-framework"><i class="fa fa-check"></i><b>7.2.1</b> Unifying model framework</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="parameter-estimates.html"><a href="parameter-estimates.html"><i class="fa fa-check"></i><b>7.3</b> Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="parameter-estimates.html"><a href="parameter-estimates.html#sum-of-squares"><i class="fa fa-check"></i><b>7.3.1</b> Sum of Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="assumptions-2.html"><a href="assumptions-2.html"><i class="fa fa-check"></i><b>7.4</b> Assumptions</a></li>
+<li class="chapter" data-level="7.5" data-path="slr-fev.html"><a href="slr-fev.html"><i class="fa fa-check"></i><b>7.5</b> Example</a></li>
+<li class="chapter" data-level="7.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>7.6</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="7.7" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7.7</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty-based-on-the-model"><i class="fa fa-check"></i><b>7.7.1</b> Predict the <em>average</em> value of Y (<span class="math inline">\(\hat{y}\)</span>) based on the model</a></li>
+<li class="chapter" data-level="7.7.2" data-path="prediction.html"><a href="prediction.html#confidence-intervals-for-the-predicted-mean"><i class="fa fa-check"></i><b>7.7.2</b> Confidence intervals for the predicted mean</a></li>
+<li class="chapter" data-level="7.7.3" data-path="prediction.html"><a href="prediction.html#predict-the-average-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.7.3</b> Predict the <em>average</em> value of Y <span class="math inline">\((\hat{y_{i}})\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+<li class="chapter" data-level="7.7.4" data-path="prediction.html"><a href="prediction.html#predict-a-new-value-of-y-haty_i-for-a-certain-value-of-x"><i class="fa fa-check"></i><b>7.7.4</b> Predict a <em>new</em> value of Y <span class="math inline">\(\hat{y_{i}}\)</span> for a certain value of <span class="math inline">\(x^{*}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="anova-for-regression.html"><a href="anova-for-regression.html"><i class="fa fa-check"></i><b>7.8</b> ANOVA for regression</a></li>
+<li class="chapter" data-level="7.9" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html"><i class="fa fa-check"></i><b>7.9</b> Correlation Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mod-strat.html"><a href="mod-strat.html"><i class="fa fa-check"></i><b>8</b> Moderation and Stratification</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>8.1</b> Moderation</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="moderation.html"><a href="moderation.html#example-1-simpsons-paradox"><i class="fa fa-check"></i><b>8.1.1</b> Example 1: Simpson’s Paradox</a></li>
+<li class="chapter" data-level="8.1.2" data-path="moderation.html"><a href="moderation.html#example-2-sepal-vs-petal-length-in-iris-flowers"><i class="fa fa-check"></i><b>8.1.2</b> Example 2: Sepal vs Petal Length in Iris flowers</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>8.2</b> Stratification</a></li>
+<li class="chapter" data-level="8.3" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html"><i class="fa fa-check"></i><b>8.3</b> Identifying a moderator</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
+<li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>9</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
+<li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
+<li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.7" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.8</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>11.1</b> Fitting GLMs</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="fitting-glms.html"><a href="fitting-glms.html#r"><i class="fa fa-check"></i><b>11.1.1</b> R</a></li>
+<li class="chapter" data-level="11.1.2" data-path="fitting-glms.html"><a href="fitting-glms.html#spss"><i class="fa fa-check"></i><b>11.1.2</b> SPSS</a></li>
+<li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+</ul></li>
+<li class="part"><span><b>IV Multivariate Analysis</b></span></li>
+<li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
+<li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="introduction.html"><a href="introduction.html#latent-constructs"><i class="fa fa-check"></i><b>14.1.1</b> Latent Constructs</a></li>
+<li class="chapter" data-level="14.1.2" data-path="introduction.html"><a href="introduction.html#comparison-with-pca"><i class="fa fa-check"></i><b>14.1.2</b> Comparison with PCA</a></li>
+<li class="chapter" data-level="14.1.3" data-path="introduction.html"><a href="introduction.html#efa-vs-cfa"><i class="fa fa-check"></i><b>14.1.3</b> EFA vs CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="factor-model.html"><a href="factor-model.html"><i class="fa fa-check"></i><b>14.2</b> Factor Model</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="factor-model.html"><a href="factor-model.html#components-of-variance"><i class="fa fa-check"></i><b>14.2.1</b> Components of Variance</a></li>
+<li class="chapter" data-level="14.2.2" data-path="factor-model.html"><a href="factor-model.html#two-big-steps"><i class="fa fa-check"></i><b>14.2.2</b> Two big steps</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="fa-example.html"><a href="fa-example.html"><i class="fa fa-check"></i><b>14.3</b> Example data setup</a></li>
+<li class="chapter" data-level="14.4" data-path="fa-extract.html"><a href="fa-extract.html"><i class="fa fa-check"></i><b>14.4</b> Factor Extraction Methods</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="fa-extract.html"><a href="fa-extract.html#principal-components-pc-factor-model"><i class="fa fa-check"></i><b>14.4.1</b> Principal components (PC Factor model)</a></li>
+<li class="chapter" data-level="14.4.2" data-path="fa-extract.html"><a href="fa-extract.html#iterated-components"><i class="fa fa-check"></i><b>14.4.2</b> Iterated components</a></li>
+<li class="chapter" data-level="14.4.3" data-path="fa-extract.html"><a href="fa-extract.html#maximum-likelihood"><i class="fa fa-check"></i><b>14.4.3</b> Maximum Likelihood</a></li>
+<li class="chapter" data-level="14.4.4" data-path="fa-extract.html"><a href="fa-extract.html#uniqueness"><i class="fa fa-check"></i><b>14.4.4</b> Uniqueness</a></li>
+<li class="chapter" data-level="14.4.5" data-path="fa-extract.html"><a href="fa-extract.html#resulting-factors"><i class="fa fa-check"></i><b>14.4.5</b> Resulting factors</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="rotating-factors.html"><a href="rotating-factors.html"><i class="fa fa-check"></i><b>14.5</b> Rotating Factors</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="rotating-factors.html"><a href="rotating-factors.html#varimax-rotation"><i class="fa fa-check"></i><b>14.5.1</b> Varimax Rotation</a></li>
+<li class="chapter" data-level="14.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>14.5.2</b> Oblique rotation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>14.6</b> Factor Scores</a></li>
+<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>V Multi-level Modeling</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>15</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="example-school-data.html"><a href="example-school-data.html"><i class="fa fa-check"></i><b>15.1</b> Example School Data</a></li>
+<li class="chapter" data-level="15.2" data-path="multi-level-models.html"><a href="multi-level-models.html"><i class="fa fa-check"></i><b>15.2</b> Multi-level models</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="RI.html"><a href="RI.html"><i class="fa fa-check"></i><b>16</b> Random Intercept Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="pooling.html"><a href="pooling.html"><i class="fa fa-check"></i><b>16.1</b> Pooling</a></li>
+<li class="chapter" data-level="16.2" data-path="mathri.html"><a href="mathri.html"><i class="fa fa-check"></i><b>16.2</b> Mathematical Models</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="mathri.html"><a href="mathri.html#complete-pooling"><i class="fa fa-check"></i><b>16.2.1</b> Complete Pooling</a></li>
+<li class="chapter" data-level="16.2.2" data-path="mathri.html"><a href="mathri.html#no-pooling"><i class="fa fa-check"></i><b>16.2.2</b> No Pooling</a></li>
+<li class="chapter" data-level="16.2.3" data-path="mathri.html"><a href="mathri.html#partial-pooling-ri"><i class="fa fa-check"></i><b>16.2.3</b> Partial Pooling (RI)</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="components-of-variance-1.html"><a href="components-of-variance-1.html"><i class="fa fa-check"></i><b>16.3</b> Components of Variance</a></li>
+<li class="chapter" data-level="16.4" data-path="fitri.html"><a href="fitri.html"><i class="fa fa-check"></i><b>16.4</b> Fitting models in R</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="fitri.html"><a href="fitri.html#comparison-of-estimates"><i class="fa fa-check"></i><b>16.4.1</b> Comparison of estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="estimation-methods.html"><a href="estimation-methods.html"><i class="fa fa-check"></i><b>16.5</b> Estimation Methods</a></li>
+<li class="chapter" data-level="16.6" data-path="including-covariates.html"><a href="including-covariates.html"><i class="fa fa-check"></i><b>16.6</b> Including Covariates</a></li>
+<li class="chapter" data-level="16.7" data-path="more-random-effects.html"><a href="more-random-effects.html"><i class="fa fa-check"></i><b>16.7</b> More Random Effects</a></li>
+<li class="chapter" data-level="16.8" data-path="centering-terms.html"><a href="centering-terms.html"><i class="fa fa-check"></i><b>16.8</b> Centering terms</a>
+<ul>
+<li class="chapter" data-level="16.8.1" data-path="centering-terms.html"><a href="centering-terms.html#a-generic-dplyr-approach-to-centering."><i class="fa fa-check"></i><b>16.8.1</b> A generic <code>dplyr</code> approach to centering.</a></li>
+</ul></li>
+<li class="chapter" data-level="16.9" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html"><i class="fa fa-check"></i><b>16.9</b> Specifying Correlation Structures</a>
+<ul>
+<li class="chapter" data-level="16.9.1" data-path="specifying-correlation-structures.html"><a href="specifying-correlation-structures.html#changing-covariance-structures-in-r"><i class="fa fa-check"></i><b>16.9.1</b> Changing covariance structures in R</a></li>
+</ul></li>
+<li class="chapter" data-level="16.10" data-path="additional-references.html"><a href="additional-references.html"><i class="fa fa-check"></i><b>16.10</b> Additional References</a>
+<ul>
+<li class="chapter" data-level="16.10.1" data-path="additional-references.html"><a href="additional-references.html#lecture-notes-from-other-classes-found-on-the-interwebs"><i class="fa fa-check"></i><b>16.10.1</b> Lecture notes from other classes found on the interwebs</a></li>
+<li class="chapter" data-level="16.10.2" data-path="additional-references.html"><a href="additional-references.html#package-vignettes"><i class="fa fa-check"></i><b>16.10.2</b> Package Vignettes</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI Other Topics</b></span></li>
+<li class="chapter" data-level="17" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>17</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>17.1</b> Identifying missing data</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>17.1.1</b> Visualize missing patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>17.2</b> Effects of Nonresponse</a></li>
+<li class="chapter" data-level="17.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>17.3</b> Missing Data Mechanisms</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html#demonstration-via-simulation"><i class="fa fa-check"></i><b>17.3.1</b> Demonstration via Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="general-strategies.html"><a href="general-strategies.html"><i class="fa fa-check"></i><b>17.4</b> General strategies</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="general-strategies.html"><a href="general-strategies.html#complete-cases-analysis"><i class="fa fa-check"></i><b>17.4.1</b> Complete cases analysis</a></li>
+<li class="chapter" data-level="17.4.2" data-path="general-strategies.html"><a href="general-strategies.html#available-case-analysis"><i class="fa fa-check"></i><b>17.4.2</b> Available-case analysis</a></li>
+<li class="chapter" data-level="17.4.3" data-path="general-strategies.html"><a href="general-strategies.html#imputation"><i class="fa fa-check"></i><b>17.4.3</b> Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="imputation-methods.html"><a href="imputation-methods.html"><i class="fa fa-check"></i><b>17.5</b> Imputation Methods</a></li>
+<li class="chapter" data-level="17.6" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html"><i class="fa fa-check"></i><b>17.6</b> Multiple Imputation (MI)</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#goals"><i class="fa fa-check"></i><b>17.6.1</b> Goals</a></li>
+<li class="chapter" data-level="17.6.2" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#technique"><i class="fa fa-check"></i><b>17.6.2</b> Technique</a></li>
+<li class="chapter" data-level="17.6.3" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#mi-as-a-paradigm"><i class="fa fa-check"></i><b>17.6.3</b> MI as a paradigm</a></li>
+<li class="chapter" data-level="17.6.4" data-path="multiple-imputation-mi.html"><a href="multiple-imputation-mi.html#inference-on-mi"><i class="fa fa-check"></i><b>17.6.4</b> Inference on MI</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html"><i class="fa fa-check"></i><b>17.7</b> Multiple Imputation using Chained Equations (MICE)</a>
+<ul>
+<li class="chapter" data-level="17.7.1" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#overview"><i class="fa fa-check"></i><b>17.7.1</b> Overview</a></li>
+<li class="chapter" data-level="17.7.2" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#process-algorithm"><i class="fa fa-check"></i><b>17.7.2</b> Process / Algorithm</a></li>
+<li class="chapter" data-level="17.7.3" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#convergence"><i class="fa fa-check"></i><b>17.7.3</b> Convergence</a></li>
+<li class="chapter" data-level="17.7.4" data-path="multiple-imputation-using-chained-equations-mice.html"><a href="multiple-imputation-using-chained-equations-mice.html#imputation-methods-1"><i class="fa fa-check"></i><b>17.7.4</b> Imputation Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="17.8" data-path="diagnostics.html"><a href="diagnostics.html"><i class="fa fa-check"></i><b>17.8</b> Diagnostics</a></li>
+<li class="chapter" data-level="17.9" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html"><i class="fa fa-check"></i><b>17.9</b> Example: Prescribed amount of missing.</a>
+<ul>
+<li class="chapter" data-level="17.9.1" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#multiply-impute-the-missing-data-using-mice"><i class="fa fa-check"></i><b>17.9.1</b> Multiply impute the missing data using <code>mice()</code></a></li>
+<li class="chapter" data-level="17.9.2" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#check-the-imputation-method-used-on-each-variable."><i class="fa fa-check"></i><b>17.9.2</b> Check the imputation method used on each variable.</a></li>
+<li class="chapter" data-level="17.9.3" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#check-convergence"><i class="fa fa-check"></i><b>17.9.3</b> Check Convergence</a></li>
+<li class="chapter" data-level="17.9.4" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#look-at-the-values-generated-for-imputation"><i class="fa fa-check"></i><b>17.9.4</b> Look at the values generated for imputation</a></li>
+<li class="chapter" data-level="17.9.5" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations"><i class="fa fa-check"></i><b>17.9.5</b> Create a complete data set by filling in the missing data using the imputations</a></li>
+<li class="chapter" data-level="17.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>17.9.6</b> Visualize Imputations</a></li>
+<li class="chapter" data-level="17.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>17.9.7</b> Calculating bias</a></li>
+</ul></li>
+<li class="chapter" data-level="17.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>17.10</b> Final thoughts</a></li>
+<li class="chapter" data-level="17.11" data-path="additional-references-1.html"><a href="additional-references-1.html"><i class="fa fa-check"></i><b>17.11</b> Additional References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interpreting-coefficients" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Interpreting Coefficients<a href="interpreting-coefficients.html#interpreting-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Similar to simple linear regression, each <span class="math inline">\(\beta_{j}\)</span> coefficient is considered a slope. That is, the amount <span class="math inline">\(Y\)</span> will change for every 1 unit increase in <span class="math inline">\(X_{j}\)</span>. In a multiple variable regression model, <span class="math inline">\(\b_{j}\)</span> is the estimated change in <span class="math inline">\(Y\)</span> <em>after controlling for other predictors in the model</em>.</p>
+<div id="continuous-predictors" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Continuous predictors<a href="interpreting-coefficients.html#continuous-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="interpreting-coefficients.html#cb2-1" aria-hidden="true" tabindex="-1"></a>mlr.dad.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FAGE <span class="sc">+</span> FHEIGHT, <span class="at">data=</span>fev)</span>
+<span id="cb2-2"><a href="interpreting-coefficients.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr.dad.model)</span>
+<span id="cb2-3"><a href="interpreting-coefficients.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-4"><a href="interpreting-coefficients.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb2-5"><a href="interpreting-coefficients.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></span>
+<span id="cb2-6"><a href="interpreting-coefficients.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-7"><a href="interpreting-coefficients.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb2-8"><a href="interpreting-coefficients.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb2-9"><a href="interpreting-coefficients.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></span>
+<span id="cb2-10"><a href="interpreting-coefficients.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-11"><a href="interpreting-coefficients.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb2-12"><a href="interpreting-coefficients.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb2-13"><a href="interpreting-coefficients.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></span>
+<span id="cb2-14"><a href="interpreting-coefficients.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></span>
+<span id="cb2-15"><a href="interpreting-coefficients.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></span>
+<span id="cb2-16"><a href="interpreting-coefficients.html#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb2-17"><a href="interpreting-coefficients.html#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb2-18"><a href="interpreting-coefficients.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-19"><a href="interpreting-coefficients.html#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.5348 on 147 degrees of freedom</span></span>
+<span id="cb2-20"><a href="interpreting-coefficients.html#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></span>
+<span id="cb2-21"><a href="interpreting-coefficients.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></span>
+<span id="cb2-22"><a href="interpreting-coefficients.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mlr.dad.model)</span>
+<span id="cb2-23"><a href="interpreting-coefficients.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2.5 %      97.5 %</span></span>
+<span id="cb2-24"><a href="interpreting-coefficients.html#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -5.00919751 -0.51229620</span></span>
+<span id="cb2-25"><a href="interpreting-coefficients.html#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.03922545 -0.01405323</span></span>
+<span id="cb2-26"><a href="interpreting-coefficients.html#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.08319434  0.14559974</span></span></code></pre></div>
+<ul>
+<li>Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p&lt;.0001).</li>
+<li>Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p&lt;.0001).</li>
+</ul>
+<p>For the model that includes age, the coefficient for height is now 0.11, which is interpreted as the rate of change of FEV1 as a function of height <strong>after adjusting for age</strong>. This is also called the <strong>partial regression coefficient</strong> of FEV1 on height after adjusting for age.</p>
+</div>
+<div id="binary-predictors" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Binary predictors<a href="interpreting-coefficients.html#binary-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Binary predictors (categorical variables with only 2 levels) get converted to a numeric <em>binary indicator</em> variable which only has the values 0 and 1. Whichever level gets assigned to be 0 is called the <em>reference</em> group or level. The regression estimate <span class="math inline">\(b\)</span> then is the effect of being in group (<span class="math inline">\(x=1\)</span>) <em>compared to</em> being in the reference (<span class="math inline">\(x=0\)</span>) group.</p>
+<p>Does gender also play a roll in FEV? Let’s look at how gender may impact or change the relationship between FEV and either height or age.</p>
+<blockquote>
+<p>Note, the <code>fev</code> data set is in <em>wide</em> form right now, with different columns for mothers and fathers. First I need to reshape the data into <em>long</em> format, so gender is it’s own variable.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="interpreting-coefficients.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a pivot_longer() probably would have worked here as well</span></span>
+<span id="cb3-2"><a href="interpreting-coefficients.html#cb3-2" aria-hidden="true" tabindex="-1"></a>fev_long <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
+<span id="cb3-3"><a href="interpreting-coefficients.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fev1 =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
+<span id="cb3-4"><a href="interpreting-coefficients.html#cb3-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
+<span id="cb3-5"><a href="interpreting-coefficients.html#cb3-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE), </span>
+<span id="cb3-6"><a href="interpreting-coefficients.html#cb3-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">area =</span> <span class="fu">c</span>(fev<span class="sc">$</span>AREA, fev<span class="sc">$</span>AREA))</span>
+<span id="cb3-7"><a href="interpreting-coefficients.html#cb3-7" aria-hidden="true" tabindex="-1"></a>fev_long<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
+<span id="cb3-8"><a href="interpreting-coefficients.html#cb3-8" aria-hidden="true" tabindex="-1"></a>fev_long<span class="sc">$</span>area   <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>area, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Burbank&quot;</span>, <span class="st">&quot;Lancaster&quot;</span>, <span class="st">&quot;Long Beach&quot;</span>, <span class="st">&quot;Glendora&quot;</span>))</span></code></pre></div>
+<p>So the model being fit looks like:</p>
+<p><span class="math display">\[ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(x_{1}\)</span>: Age</li>
+<li><span class="math inline">\(x_{2}\)</span>: height</li>
+<li><span class="math inline">\(x_{3}\)</span>: 0 if Male, 1 if Female</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="interpreting-coefficients.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender, <span class="at">data=</span>fev_long)</span>
+<span id="cb4-2"><a href="interpreting-coefficients.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-3"><a href="interpreting-coefficients.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb4-4"><a href="interpreting-coefficients.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender, data = fev_long)</span></span>
+<span id="cb4-5"><a href="interpreting-coefficients.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-6"><a href="interpreting-coefficients.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb4-7"><a href="interpreting-coefficients.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)          age           ht      genderF  </span></span>
+<span id="cb4-8"><a href="interpreting-coefficients.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    -2.24051     -0.02354      0.10509     -0.63775</span></span></code></pre></div>
+<p>In this model gender is a binary categorical variable, with reference group “Male”. This is detected because the variable that shows up in the regression model output is <code>genderF</code>. So the estimate shown is for males, compared to females.</p>
+<p>Note that I <strong>DID NOT</strong> have to convert the categorical variable <code>gender</code> to a binary numeric variable before fitting it into the model. R (and any other software program) will do this for you already.</p>
+<p>The regression equation for the model with gender is</p>
+<p><span class="math display">\[ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF \]</span></p>
+<ul>
+<li><span class="math inline">\(b_{0}:\)</span> For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.</li>
+<li><span class="math inline">\(b_{1}:\)</span> For every additional year older an individual is, their FEV1 decreases by 0.02L.</li>
+<li><span class="math inline">\(b_{2}:\)</span> For every additional cm taller an individual is, their FEV1 increases by 0.16L.</li>
+<li><span class="math inline">\(b_{3}:\)</span> Females have 0.64L lower FEV compared to males.</li>
+</ul>
+<p><strong>Note</strong>: The interpretation of categorical variables still falls under the template language of “for every one unit increase in <span class="math inline">\(X_{p}\)</span>, <span class="math inline">\(Y\)</span> changes by <span class="math inline">\(b_{p}\)</span>”. Here, <span class="math inline">\(X_{3}=0\)</span> for males, and 1 for females. So a 1 “unit” change is females <em>compared to</em> males.</p>
+</div>
+<div id="cat-predictors" class="section level3 hasAnchor" number="9.4.3">
+<h3><span class="header-section-number">9.4.3</span> Categorical Predictors<a href="interpreting-coefficients.html#cat-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s continue to model the FEV for individuals living in Southern California, but now we also consider the effect of city they live in. For those unfamiliar with the region, these cities represent very different environmental profiles.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="interpreting-coefficients.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fev_long<span class="sc">$</span>area)</span>
+<span id="cb5-2"><a href="interpreting-coefficients.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-3"><a href="interpreting-coefficients.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Burbank  Lancaster Long Beach   Glendora </span></span>
+<span id="cb5-4"><a href="interpreting-coefficients.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         48         98         38        116</span></span></code></pre></div>
+<p>Let’s fit a model with <code>area</code>, notice again I do not do anything to the variable <code>area</code> itself aside from add it into the model.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="interpreting-coefficients.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb6-2"><a href="interpreting-coefficients.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-3"><a href="interpreting-coefficients.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb6-4"><a href="interpreting-coefficients.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender + area, data = fev_long)</span></span>
+<span id="cb6-5"><a href="interpreting-coefficients.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-6"><a href="interpreting-coefficients.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb6-7"><a href="interpreting-coefficients.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb6-8"><a href="interpreting-coefficients.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.32809 -0.29573  0.00578  0.31588  1.37041 </span></span>
+<span id="cb6-9"><a href="interpreting-coefficients.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-10"><a href="interpreting-coefficients.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb6-11"><a href="interpreting-coefficients.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb6-12"><a href="interpreting-coefficients.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    -2.250564   0.752414  -2.991  0.00302 ** </span></span>
+<span id="cb6-13"><a href="interpreting-coefficients.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## age            -0.022801   0.004151  -5.493 8.59e-08 ***</span></span>
+<span id="cb6-14"><a href="interpreting-coefficients.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ht              0.103866   0.010555   9.841  &lt; 2e-16 ***</span></span>
+<span id="cb6-15"><a href="interpreting-coefficients.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## genderF        -0.642168   0.078400  -8.191 8.10e-15 ***</span></span>
+<span id="cb6-16"><a href="interpreting-coefficients.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLancaster   0.031549   0.084980   0.371  0.71072    </span></span>
+<span id="cb6-17"><a href="interpreting-coefficients.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLong Beach  0.061963   0.104057   0.595  0.55199    </span></span>
+<span id="cb6-18"><a href="interpreting-coefficients.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">## areaGlendora    0.121589   0.082097   1.481  0.13967    </span></span>
+<span id="cb6-19"><a href="interpreting-coefficients.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb6-20"><a href="interpreting-coefficients.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-21"><a href="interpreting-coefficients.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-22"><a href="interpreting-coefficients.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.4777 on 293 degrees of freedom</span></span>
+<span id="cb6-23"><a href="interpreting-coefficients.html#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6529, Adjusted R-squared:  0.6458 </span></span>
+<span id="cb6-24"><a href="interpreting-coefficients.html#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 91.86 on 6 and 293 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<p>Examine the coefficient names, <code>areaLancaster</code>, <code>areaLong Beach</code> and <code>areaGlendora</code>. Again R automatically take a categorical variable and turn it into a series of binary indicator variables where a 1 indicates if a person is from that area. Notice how someone from Burbank has 0’s for all of the three indicator variables, someone from Lancaster only has a 1 in the <code>areaLancaster</code> variable and 0 otherwise. And etc for each other area.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+areaLancaster
+</th>
+<th style="text-align:right;">
+areaLong.Beach
+</th>
+<th style="text-align:right;">
+areaGlendora
+</th>
+<th style="text-align:left;">
+area
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Burbank
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Lancaster
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+75
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Long Beach
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Glendora
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Most commonly known as “Dummy coding”. Not an informative term to use.</li>
+<li>Better used term: Indicator variable</li>
+<li>Math notation: <strong>I(gender == “Female”)</strong>.</li>
+<li>A.k.a “reference coding” or “one hot encoding”</li>
+<li>For a nominal X with K categories, define K indicator variables.
+<ul>
+<li>Choose a reference (referent) category:</li>
+<li>Leave it out</li>
+<li>Use remaining K-1 in the regression.</li>
+<li>Often, the largest category is chosen as the reference category.</li>
+</ul></li>
+</ul>
+<p>Interpreting the regression coefficients are going to be <strong>compared to the reference group</strong>. In this case, it is the Burbank area. Why Burbank? Because that is what R sees as the first level. If you want something different, you need to change the factor ordering.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="interpreting-coefficients.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(fev_long<span class="sc">$</span>area)</span>
+<span id="cb7-2"><a href="interpreting-coefficients.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Burbank&quot;    &quot;Lancaster&quot;  &quot;Long Beach&quot; &quot;Glendora&quot;</span></span></code></pre></div>
+<p>The mathematical model is now written as follows,</p>
+<p><span class="math display">\[ Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}x_{4i} + \beta_{5}x_{5i} +\beta_{6}x_{6i}\epsilon_{i}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(x_{1}\)</span>: Age</li>
+<li><span class="math inline">\(x_{2}\)</span>: height</li>
+<li><span class="math inline">\(x_{3}\)</span>: 0 if Male, 1 if Female</li>
+<li><span class="math inline">\(x_{4}\)</span>: 1 if living in Lancaster, 0 otherwise</li>
+<li><span class="math inline">\(x_{5}\)</span>: 1 if living in Long Beach, 0 otherwise</li>
+<li><span class="math inline">\(x_{6}\)</span>: 1 if living in Glendora, 0 otherwise</li>
+</ul>
+<p>For someone living in Burbank, <span class="math inline">\(x_{4}=x_{5}=x_{6} =0\)</span> so the model then is</p>
+<p><span class="math display">\[Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}\]</span></p>
+<p>For someone living in Lancaster, <span class="math inline">\(x_{4}=1, x_{5}=0, x_{6} =0\)</span> so the model then is</p>
+<p><span class="math display">\[
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{4}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+\]</span></p>
+<p>For someone living in Long Beach, <span class="math inline">\(x_{4}=0, x_{5}=1, x_{6} =0\)</span> so the model then is</p>
+<p><span class="math display">\[
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{5}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{5}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+\]</span></p>
+<p>and the model for someone living in Glendora <span class="math inline">\(x_{4}=0, x_{5}=0, x_{6} =1\)</span> is</p>
+<p><span class="math display">\[
+Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{6}(1) \\
+Y_{i} \sim (\beta_{0} + \beta_{6}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
+\]</span></p>
+<p>In summary, each area gets it’s own intercept, but still has a common slope for all other variables.</p>
+<p><span class="math display">\[
+y_{i.Burbank} = -2.25 - 0.023(age) + 0.10(ht) -0.64(female) \\
+y_{i.Lancaster} = -2.22 - 0.023(age) + 0.10(ht) -0.64(female)\\
+y_{i.Long.Beach} = -2.19 - 0.023(age) + 0.10(ht) -0.64(female) \\
+y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
+\]</span></p>
+<p>Let’s look interpret the regression coefficients and their 95% confidence intervals from the main effects model again.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="interpreting-coefficients.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
+<div id="iydbaessff" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#iydbaessff .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iydbaessff .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iydbaessff .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iydbaessff .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iydbaessff .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iydbaessff .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iydbaessff .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iydbaessff .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iydbaessff .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iydbaessff .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iydbaessff .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iydbaessff .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iydbaessff .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iydbaessff .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iydbaessff .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iydbaessff .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iydbaessff .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iydbaessff .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iydbaessff .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iydbaessff .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iydbaessff .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iydbaessff .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iydbaessff .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iydbaessff .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iydbaessff .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iydbaessff .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iydbaessff .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iydbaessff .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iydbaessff .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iydbaessff .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iydbaessff .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iydbaessff .gt_left {
+  text-align: left;
+}
+
+#iydbaessff .gt_center {
+  text-align: center;
+}
+
+#iydbaessff .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iydbaessff .gt_font_normal {
+  font-weight: normal;
+}
+
+#iydbaessff .gt_font_bold {
+  font-weight: bold;
+}
+
+#iydbaessff .gt_font_italic {
+  font-style: italic;
+}
+
+#iydbaessff .gt_super {
+  font-size: 65%;
+}
+
+#iydbaessff .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#iydbaessff .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#iydbaessff .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iydbaessff .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#iydbaessff .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#iydbaessff .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">age</td>
+<td class="gt_row gt_center">-0.02</td>
+<td class="gt_row gt_center">-0.03, -0.01</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">ht</td>
+<td class="gt_row gt_center">0.10</td>
+<td class="gt_row gt_center">0.08, 0.12</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">gender</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
+<td class="gt_row gt_center">-0.64</td>
+<td class="gt_row gt_center">-0.80, -0.49</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">area</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Burbank</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Lancaster</td>
+<td class="gt_row gt_center">0.03</td>
+<td class="gt_row gt_center">-0.14, 0.20</td>
+<td class="gt_row gt_center">0.7</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Long Beach</td>
+<td class="gt_row gt_center">0.06</td>
+<td class="gt_row gt_center">-0.14, 0.27</td>
+<td class="gt_row gt_center">0.6</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Glendora</td>
+<td class="gt_row gt_center">0.12</td>
+<td class="gt_row gt_center">-0.04, 0.28</td>
+<td class="gt_row gt_center">0.14</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<ul>
+<li><span class="math inline">\(b_{4}\)</span>: After controlling for age, height and gender, those that live in Lancaster have 0.03 (-0.14, 0.20) higher FEV1 compared to someone living in Burbank (p=0.7).</li>
+<li><span class="math inline">\(b_{5}\)</span>: After controlling for age, height and gender, those that live in Long Beach have 0.06 (-0.14, 0.27) higher FEV1 compared to someone living in Burbank (p=0.6).</li>
+<li><span class="math inline">\(b_{6}\)</span>: After controlling for age, height and gender, those that live in Glendora have 0.12 (-0.04, 0.28) higher FEV1 compared to someone living in Burbank (p=0.14).</li>
+</ul>
+<blockquote>
+<p>Beta coefficients for categorical variables are always interpreted as the difference between that particular level and the reference group</p>
+</blockquote>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fitting-the-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="presenting-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

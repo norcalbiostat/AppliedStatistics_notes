@@ -9,1170 +9,6 @@ This chapter introduces how to use and interpret different types of covariates, 
 
 
 
-## Binary predictors
-
-Does gender also play a roll in FEV? Let's look at the separate effects of height and age on FEV1, and visualize how gender plays a roll. 
-
-
-
-```r
-ht.plot <- ggplot(fev_long, aes(x=ht, y=fev1)) + 
-        geom_point(aes(col=gender)) + 
-        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
-        geom_smooth(se=FALSE, col="red", method="lm") + 
-        scale_color_viridis_d() + 
-        theme(legend.position = c(0.15,0.85))
-
-age.plot <- ggplot(fev_long, aes(x=age, y=fev1)) + 
-        geom_point(aes(col=gender)) + 
-        geom_smooth(se=FALSE, aes(col=gender), method="lm") + 
-        geom_smooth(se=FALSE, col="red", method="lm") + 
-        scale_color_viridis_d(guide="none")
-        
-gridExtra::grid.arrange(ht.plot, age.plot, ncol=2)
-```
-
-<img src="model_building_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-
-* The points are colored by gender
-* Each gender has it's own best fit line in the same color as the points
-* The red line is the best fit line overall - ignoring gender
-
-![q](images/q.png) Is gender a moderator for either height or age? 
-
-Let's compare the models with, and without gender 
-
-```r
-gmod1 <- lm(fev1 ~ age + ht, data=fev_long)
-gmod2 <- lm(fev1 ~ age + ht + gender, data=fev_long)
-
-tbl_merge(
-  tbls = list(tbl_regression(gmod1), 
-              tbl_regression(gmod2)), 
-  tab_spanner = c("**Model 1**", "**Model 2**")
-)
-```
-
-```{=html}
-<div id="nzlsebiube" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#nzlsebiube .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#nzlsebiube .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#nzlsebiube .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#nzlsebiube .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#nzlsebiube .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#nzlsebiube .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#nzlsebiube .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#nzlsebiube .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#nzlsebiube .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#nzlsebiube .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#nzlsebiube .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#nzlsebiube .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#nzlsebiube .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nzlsebiube .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#nzlsebiube .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#nzlsebiube .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nzlsebiube .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#nzlsebiube .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nzlsebiube .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#nzlsebiube .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nzlsebiube .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#nzlsebiube .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nzlsebiube .gt_left {
-  text-align: left;
-}
-
-#nzlsebiube .gt_center {
-  text-align: center;
-}
-
-#nzlsebiube .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#nzlsebiube .gt_font_normal {
-  font-weight: normal;
-}
-
-#nzlsebiube .gt_font_bold {
-  font-weight: bold;
-}
-
-#nzlsebiube .gt_font_italic {
-  font-style: italic;
-}
-
-#nzlsebiube .gt_super {
-  font-size: 65%;
-}
-
-#nzlsebiube .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#nzlsebiube .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#nzlsebiube .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#nzlsebiube .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-#nzlsebiube .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-#nzlsebiube .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
-        <span class="gt_column_spanner"><strong>Model 1</strong></span>
-      </th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
-        <span class="gt_column_spanner"><strong>Model 2</strong></span>
-      </th>
-    </tr>
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">age</td>
-<td class="gt_row gt_center">-0.02</td>
-<td class="gt_row gt_center">-0.03, -0.01</td>
-<td class="gt_row gt_center"><0.001</td>
-<td class="gt_row gt_center">-0.02</td>
-<td class="gt_row gt_center">-0.03, -0.02</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">ht</td>
-<td class="gt_row gt_center">0.16</td>
-<td class="gt_row gt_center">0.15, 0.18</td>
-<td class="gt_row gt_center"><0.001</td>
-<td class="gt_row gt_center">0.11</td>
-<td class="gt_row gt_center">0.08, 0.13</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">gender</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">-0.64</td>
-<td class="gt_row gt_center">-0.79, -0.48</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-  </tbody>
-  
-  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="7"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-```
-
-* Gender is a binary categorical variable, with reference group "Male".
-    - This is detected because the variable that shows up in the regression model output is `genderF`. So the estimate shown is for males, compared to females. 
-    - More details on how categorical variables are included in multivariable models is covered in section \@ref(cat-predictors). 
-
-
-
-**Interpretation of Coefficients**
-
-The regression equation for the model without gender is 
-
-$$ y = -6.74 - 0.02 age + 0.16 height $$
-
-* $b_{0}:$ For someone who is 0 years old and 0 cm tall, their FEV is -6.74L.
-* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
-* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
-
-
-The regression equation for the model with gender is 
-
-$$ y = -2.24 - 0.02 age + 0.11 height - 0.64genderF $$
-
-
-* $b_{0}:$ For a male who is 0 years old and 0 cm tall, their FEV is -2.24L.
-* $b_{1}:$ For every additional year older an individual is, their FEV1 decreases by 0.02L. 
-* $b_{2}:$ For every additional cm taller an individual is, their FEV1 increases by 0.16L. 
-* $b_{3}:$ Females have 0.64L lower FEV compared to males. 
-
-**Note**: The interpretation of categorical variables still falls under the template language of "for every one unit increase in $X_{p}$, $Y$ changes by $b_{p}$". Here, $X_{3}=0$ for males, and 1 for females. So a 1 "unit" change is females _compared to_ males. 
-
-![q](images/q.png) Which model fits better? What measure are you using to quanitify "fit"? 
-
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">What part of the model (intercept, or one of the slope parameters) did adding gender have the most effect on? </div>\EndKnitrBlock{rmdnote}
-
-
-
-## Categorical Predictors {#cat-predictors}
-
-Let's continue to model the length of the iris petal based on the length of the sepal, controlling for species. But here we'll keep species as a categorical variable. What happens if we just put the variable in the model? 
-
-
-```r
-summary(lm(Petal.Length ~ Sepal.Length + Species, data=iris))
-## 
-## Call:
-## lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.76390 -0.17875  0.00716  0.17461  0.79954 
-## 
-## Coefficients:
-##                   Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
-## Sepal.Length       0.63211    0.04527  13.962  < 2e-16 ***
-## Speciesversicolor  2.21014    0.07047  31.362  < 2e-16 ***
-## Speciesvirginica   3.09000    0.09123  33.870  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.2826 on 146 degrees of freedom
-## Multiple R-squared:  0.9749,	Adjusted R-squared:  0.9744 
-## F-statistic:  1890 on 3 and 146 DF,  p-value: < 2.2e-16
-```
-
-Examine the coefficient names, `Speciesversicolor` and `Speciesvirginica`. R (and most software packages) automatically take a categorical variable and turn it into a series of binary indicator variables. Let's look at what the software program does in the background. Below is a sample of the iris data. The first column shows the row number, specifically I am only showing 2 sample rows from each species. The second column is the value of the sepal length, the third is the binary indicator for if the iris is from species _versicolor_, next the binary indicator for if the iris is from species _virginica_, and lastly the species as a 3 level categorical variable (which is what we're used to seeing at this point.)
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Sepal.Length </th>
-   <th style="text-align:right;"> Speciesversicolor </th>
-   <th style="text-align:right;"> Speciesvirginica </th>
-   <th style="text-align:left;"> Species </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 5.1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> setosa </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> 4.9 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> setosa </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 51 </td>
-   <td style="text-align:right;"> 7.0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> versicolor </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 52 </td>
-   <td style="text-align:right;"> 6.4 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> versicolor </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 101 </td>
-   <td style="text-align:right;"> 6.3 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> virginica </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 102 </td>
-   <td style="text-align:right;"> 5.8 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> virginica </td>
-  </tr>
-</tbody>
-</table>
-
-### Factor variable coding
-
-* Most commonly known as "Dummy coding". Not an informative term to use. 
-* Better used term: Indicator variable
-* Math notation: **I(gender == "Female")**. 
-* A.k.a reference coding
-* For a nominal X with K categories, define K indicator variables.
-    - Choose a reference (referent) category:
-    - Leave it out
-    - Use remaining K-1 in the regression.
-    - Often, the largest category is chosen as the reference category.
-
-For the iris example, 2 indicator variables are created for _versicolor_ and _virginica_. Interpreting the regression coefficients are going to be **compared to the reference group**. In this case, it is species _setosa_. 
-
-The mathematical model is now written as follows, where $x_{1}$ is Sepal Length, $x_{2}$ is the indicator for _versicolor_, and $x_{3}$ the indicator for _virginica_ 
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i}+ \epsilon_{i}$$
-
-When the species is _setosa_, $x_{2} =0$ and $x_{3}=0$, so the model then is
-
-$$ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}$$
-
-When the species is _versicolor_, $x_{2} =1$ and $x_{3}=0$, so the model then is
-
-$$ 
-Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2} + \epsilon_{i} \\
-Y_{i} \sim (\beta_{0} + \beta_{2}) + \beta_{1}x_{i} +  \epsilon_{i}
-$$
-
-and similarly for species _virginica_. 
-
-When the species is _virginica_., $x_{2} =0$ and $x_{3}=1$, so the model then is
-
-$$ 
-Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{3} + \epsilon_{i} \\
-Y_{i} \sim (\beta_{0} + \beta_{3}) + \beta_{1}x_{i} +  \epsilon_{i}
-$$
-
-In summary, each species gets it's own intercept, but still has a common slope for Sepal length. 
-
-$$
-y_{i.setosa} = -1.70 + 0.632(Sepal.Length_{i}) \\
-y_{i.versicolor} = (-1.70 + 2.21) + 0.632(Sepal.Length_{i}) \longrightarrow 0.51 + 0.632(Sepal.Length_{i})\\
-y_{i.virginica} = (-1.70 + 3.09) + 0.632(Sepal.Length_{i}) \longrightarrow 1.39 + 0.632(Sepal.Length_{i}) \\
-$$
-
- 
-Let's look interpret the regression coefficients and their 95% confidence intervals from the main effects model again. 
-
-
-```r
-lm(Petal.Length ~ Sepal.Length + Species, data=iris) |> tbl_regression()
-```
-
-```{=html}
-<div id="mvpocqplki" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#mvpocqplki .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#mvpocqplki .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#mvpocqplki .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#mvpocqplki .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#mvpocqplki .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#mvpocqplki .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#mvpocqplki .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#mvpocqplki .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#mvpocqplki .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#mvpocqplki .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#mvpocqplki .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#mvpocqplki .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#mvpocqplki .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mvpocqplki .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#mvpocqplki .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#mvpocqplki .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mvpocqplki .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#mvpocqplki .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mvpocqplki .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#mvpocqplki .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mvpocqplki .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#mvpocqplki .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mvpocqplki .gt_left {
-  text-align: left;
-}
-
-#mvpocqplki .gt_center {
-  text-align: center;
-}
-
-#mvpocqplki .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#mvpocqplki .gt_font_normal {
-  font-weight: normal;
-}
-
-#mvpocqplki .gt_font_bold {
-  font-weight: bold;
-}
-
-#mvpocqplki .gt_font_italic {
-  font-style: italic;
-}
-
-#mvpocqplki .gt_super {
-  font-size: 65%;
-}
-
-#mvpocqplki .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#mvpocqplki .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#mvpocqplki .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#mvpocqplki .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-#mvpocqplki .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-#mvpocqplki .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Sepal.Length</td>
-<td class="gt_row gt_center">0.63</td>
-<td class="gt_row gt_center">0.54, 0.72</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">Species</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">setosa</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">versicolor</td>
-<td class="gt_row gt_center">2.2</td>
-<td class="gt_row gt_center">2.1, 2.3</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">virginica</td>
-<td class="gt_row gt_center">3.1</td>
-<td class="gt_row gt_center">2.9, 3.3</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-  </tbody>
-  
-  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-```
-
-* $b_{1}$: After controlling for species, Petal length significantly increases with the length of the sepal (0.63, 95% CI 0.54-0.72, p<.0001). 
-* $b_{2}$: _Versicolor_ has on average 2.2cm longer petal lengths compared to _setosa_ (95% CI 2.1-2.3, p<.0001). 
-* $b_{3}$: _Virginica_ has on average 3.1cm longer petal lengths compared to _setosa_ (95% CI 2.9-3.3, p<.0001). 
-
-> Beta coefficients for categorical variables are always interpreted as the difference between that particular level and the reference group
-
-
-
 ## Interactions {#interactions}
 
 In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. Reviewing the scatterplot below, do you think this is a reasonable model to fit the observed relationship?
@@ -1183,8 +19,7 @@ ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, color = Species)) +
   geom_point() + geom_smooth(method="lm", se=FALSE)
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-
+<img src="model_building_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 If we care about how species _changes_ the relationship between petal and sepal length, we can fit a model with an **interaction** between sepal length ($x_{1}$) and species. For this first example let $x_{2}$ be an indicator for when `species == setosa`. Note that both _main effects_ of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting. 
@@ -1216,12 +51,12 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
 ```
 
 ```{=html}
-<div id="htlqvwvaoj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lsebiubemv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#htlqvwvaoj .gt_table {
+#lsebiubemv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1246,7 +81,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-left-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_heading {
+#lsebiubemv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1258,7 +93,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-right-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_title {
+#lsebiubemv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1270,7 +105,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-bottom-width: 0;
 }
 
-#htlqvwvaoj .gt_subtitle {
+#lsebiubemv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1282,13 +117,13 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-top-width: 0;
 }
 
-#htlqvwvaoj .gt_bottom_border {
+#lsebiubemv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_col_headings {
+#lsebiubemv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1303,7 +138,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-right-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_col_heading {
+#lsebiubemv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1323,7 +158,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   overflow-x: hidden;
 }
 
-#htlqvwvaoj .gt_column_spanner_outer {
+#lsebiubemv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1335,15 +170,15 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 4px;
 }
 
-#htlqvwvaoj .gt_column_spanner_outer:first-child {
+#lsebiubemv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#htlqvwvaoj .gt_column_spanner_outer:last-child {
+#lsebiubemv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#htlqvwvaoj .gt_column_spanner {
+#lsebiubemv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1355,7 +190,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   width: 100%;
 }
 
-#htlqvwvaoj .gt_group_heading {
+#lsebiubemv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1380,7 +215,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   vertical-align: middle;
 }
 
-#htlqvwvaoj .gt_empty_group_heading {
+#lsebiubemv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1395,15 +230,15 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   vertical-align: middle;
 }
 
-#htlqvwvaoj .gt_from_md > :first-child {
+#lsebiubemv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#htlqvwvaoj .gt_from_md > :last-child {
+#lsebiubemv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#htlqvwvaoj .gt_row {
+#lsebiubemv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +257,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   overflow-x: hidden;
 }
 
-#htlqvwvaoj .gt_stub {
+#lsebiubemv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1435,7 +270,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 5px;
 }
 
-#htlqvwvaoj .gt_stub_row_group {
+#lsebiubemv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,11 +284,11 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   vertical-align: top;
 }
 
-#htlqvwvaoj .gt_row_group_first td {
+#lsebiubemv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#htlqvwvaoj .gt_summary_row {
+#lsebiubemv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1463,16 +298,16 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 5px;
 }
 
-#htlqvwvaoj .gt_first_summary_row {
+#lsebiubemv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_first_summary_row.thick {
+#lsebiubemv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#htlqvwvaoj .gt_last_summary_row {
+#lsebiubemv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1482,7 +317,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-bottom-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_grand_summary_row {
+#lsebiubemv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1492,7 +327,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 5px;
 }
 
-#htlqvwvaoj .gt_first_grand_summary_row {
+#lsebiubemv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1502,11 +337,11 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-top-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_striped {
+#lsebiubemv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#htlqvwvaoj .gt_table_body {
+#lsebiubemv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1515,7 +350,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-bottom-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_footnotes {
+#lsebiubemv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1529,7 +364,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-right-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_footnote {
+#lsebiubemv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1538,7 +373,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 5px;
 }
 
-#htlqvwvaoj .gt_sourcenotes {
+#lsebiubemv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1552,7 +387,7 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   border-right-color: #D3D3D3;
 }
 
-#htlqvwvaoj .gt_sourcenote {
+#lsebiubemv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1560,36 +395,36 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   padding-right: 5px;
 }
 
-#htlqvwvaoj .gt_left {
+#lsebiubemv .gt_left {
   text-align: left;
 }
 
-#htlqvwvaoj .gt_center {
+#lsebiubemv .gt_center {
   text-align: center;
 }
 
-#htlqvwvaoj .gt_right {
+#lsebiubemv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#htlqvwvaoj .gt_font_normal {
+#lsebiubemv .gt_font_normal {
   font-weight: normal;
 }
 
-#htlqvwvaoj .gt_font_bold {
+#lsebiubemv .gt_font_bold {
   font-weight: bold;
 }
 
-#htlqvwvaoj .gt_font_italic {
+#lsebiubemv .gt_font_italic {
   font-style: italic;
 }
 
-#htlqvwvaoj .gt_super {
+#lsebiubemv .gt_super {
   font-size: 65%;
 }
 
-#htlqvwvaoj .gt_two_val_uncert {
+#lsebiubemv .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -1598,31 +433,31 @@ lm(Petal.Length ~ Sepal.Length + setosa + Sepal.Length*setosa, data=iris) |> tbl
   margin-left: 0.1em;
 }
 
-#htlqvwvaoj .gt_footnote_marks {
+#lsebiubemv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#htlqvwvaoj .gt_asterisk {
+#lsebiubemv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#htlqvwvaoj .gt_slash_mark {
+#lsebiubemv .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#htlqvwvaoj .gt_fraction_numerator {
+#lsebiubemv .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#htlqvwvaoj .gt_fraction_denominator {
+#lsebiubemv .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2118,7 +953,7 @@ big.pen.model <- lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_lengt
 performance::check_collinearity(big.pen.model) |> plot()
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 * Solution: use variable selection to delete some X variables.
 * Alternatively, use dimension reduction techniques such as Principal Components (Chapter \@ref(pca)).

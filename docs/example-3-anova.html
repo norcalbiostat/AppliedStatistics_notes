@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -507,50 +510,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-3-anova" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Example 3: ANOVA<a href="example-3-anova.html#example-3-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Is the relationship between flipper length and species the same for each sex of penguin?</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="example-3-anova.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
-<span id="cb166-2"><a href="example-3-anova.html#cb166-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb166-3"><a href="example-3-anova.html#cb166-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb166-4"><a href="example-3-anova.html#cb166-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb166-5"><a href="example-3-anova.html#cb166-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
-<span id="cb166-6"><a href="example-3-anova.html#cb166-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb166-7"><a href="example-3-anova.html#cb166-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb166-8"><a href="example-3-anova.html#cb166-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="example-3-anova.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
+<span id="cb167-2"><a href="example-3-anova.html#cb167-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb167-3"><a href="example-3-anova.html#cb167-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb167-4"><a href="example-3-anova.html#cb167-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb167-5"><a href="example-3-anova.html#cb167-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
+<span id="cb167-6"><a href="example-3-anova.html#cb167-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb167-7"><a href="example-3-anova.html#cb167-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb167-8"><a href="example-3-anova.html#cb167-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="moderation_stratification_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="example-3-anova.html#cb167-1" aria-hidden="true" tabindex="-1"></a>pen <span class="sc">%&gt;%</span> <span class="fu">select</span>(flipper_length_mm, species, sex) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb167-2"><a href="example-3-anova.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
-<span id="cb167-3"><a href="example-3-anova.html#cb167-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb167-4"><a href="example-3-anova.html#cb167-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb167-5"><a href="example-3-anova.html#cb167-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb167-6"><a href="example-3-anova.html#cb167-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
-<span id="cb167-7"><a href="example-3-anova.html#cb167-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb167-8"><a href="example-3-anova.html#cb167-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb167-9"><a href="example-3-anova.html#cb167-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb167-10"><a href="example-3-anova.html#cb167-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="example-3-anova.html#cb168-1" aria-hidden="true" tabindex="-1"></a>pen <span class="sc">%&gt;%</span> <span class="fu">select</span>(flipper_length_mm, species, sex) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb168-2"><a href="example-3-anova.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
+<span id="cb168-3"><a href="example-3-anova.html#cb168-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb168-4"><a href="example-3-anova.html#cb168-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb168-5"><a href="example-3-anova.html#cb168-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb168-6"><a href="example-3-anova.html#cb168-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
+<span id="cb168-7"><a href="example-3-anova.html#cb168-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb168-8"><a href="example-3-anova.html#cb168-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb168-9"><a href="example-3-anova.html#cb168-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb168-10"><a href="example-3-anova.html#cb168-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
 <p><img src="moderation_stratification_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>The pattern of distributions of flipper length by species seems the same for both sexes of penguin. Sex is likely not a moderator. Let’s check the ANOVA anyhow</p>
 <p><strong>Overall</strong></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="example-3-anova.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(pen<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> pen<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb168-2"><a href="example-3-anova.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    </span></span>
-<span id="cb168-3"><a href="example-3-anova.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="do">## pen$species   2  52473   26237   594.8 &lt;2e-16 ***</span></span>
-<span id="cb168-4"><a href="example-3-anova.html#cb168-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   339  14953      44                   </span></span>
-<span id="cb168-5"><a href="example-3-anova.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb168-6"><a href="example-3-anova.html#cb168-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb168-7"><a href="example-3-anova.html#cb168-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 observations deleted due to missingness</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="example-3-anova.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(pen<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> pen<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb169-2"><a href="example-3-anova.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    </span></span>
+<span id="cb169-3"><a href="example-3-anova.html#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="do">## pen$species   2  52473   26237   594.8 &lt;2e-16 ***</span></span>
+<span id="cb169-4"><a href="example-3-anova.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   339  14953      44                   </span></span>
+<span id="cb169-5"><a href="example-3-anova.html#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb169-6"><a href="example-3-anova.html#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb169-7"><a href="example-3-anova.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 observations deleted due to missingness</span></span></code></pre></div>
 <p><strong>By Sex</strong></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="example-3-anova.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(pen, pen<span class="sc">$</span>sex, <span class="cf">function</span>(x) {</span>
-<span id="cb169-2"><a href="example-3-anova.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aov</span>(x<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> x<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb169-3"><a href="example-3-anova.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb169-4"><a href="example-3-anova.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
-<span id="cb169-5"><a href="example-3-anova.html#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="do">## x$species     2 21415.6   10708  411.79 &lt; 2.2e-16 ***</span></span>
-<span id="cb169-6"><a href="example-3-anova.html#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   162  4212.6      26                      </span></span>
-<span id="cb169-7"><a href="example-3-anova.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb169-8"><a href="example-3-anova.html#cb169-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb169-9"><a href="example-3-anova.html#cb169-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
-<span id="cb169-10"><a href="example-3-anova.html#cb169-10" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
-<span id="cb169-11"><a href="example-3-anova.html#cb169-11" aria-hidden="true" tabindex="-1"></a><span class="do">## x$species     2 29098.4 14549.2  384.37 &lt; 2.2e-16 ***</span></span>
-<span id="cb169-12"><a href="example-3-anova.html#cb169-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   165  6245.6    37.9                      </span></span>
-<span id="cb169-13"><a href="example-3-anova.html#cb169-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb169-14"><a href="example-3-anova.html#cb169-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="example-3-anova.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(pen, pen<span class="sc">$</span>sex, <span class="cf">function</span>(x) {</span>
+<span id="cb170-2"><a href="example-3-anova.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aov</span>(x<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> x<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb170-3"><a href="example-3-anova.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb170-4"><a href="example-3-anova.html#cb170-4" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb170-5"><a href="example-3-anova.html#cb170-5" aria-hidden="true" tabindex="-1"></a><span class="do">## x$species     2 21415.6   10708  411.79 &lt; 2.2e-16 ***</span></span>
+<span id="cb170-6"><a href="example-3-anova.html#cb170-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   162  4212.6      26                      </span></span>
+<span id="cb170-7"><a href="example-3-anova.html#cb170-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb170-8"><a href="example-3-anova.html#cb170-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb170-9"><a href="example-3-anova.html#cb170-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb170-10"><a href="example-3-anova.html#cb170-10" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb170-11"><a href="example-3-anova.html#cb170-11" aria-hidden="true" tabindex="-1"></a><span class="do">## x$species     2 29098.4 14549.2  384.37 &lt; 2.2e-16 ***</span></span>
+<span id="cb170-12"><a href="example-3-anova.html#cb170-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   165  6245.6    37.9                      </span></span>
+<span id="cb170-13"><a href="example-3-anova.html#cb170-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb170-14"><a href="example-3-anova.html#cb170-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <p>Sex is <strong>not</strong> a modifier, the relationship between species and flipper length is the same within male and female penguins.</p>
 </div>
             </section>

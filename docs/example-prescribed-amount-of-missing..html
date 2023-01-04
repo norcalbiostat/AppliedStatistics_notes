@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -508,19 +511,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">17.9</span> Example: Prescribed amount of missing.<a href="example-prescribed-amount-of-missing..html#example-prescribed-amount-of-missing." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will demonstrate using Fisher’s Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to estimate the bias incurred by using these imputation methods.</p>
 <p>For the <code>iris</code> data we set a seed and use the <code>prodNA()</code> function from the <code>missForest</code> package to create 10% missing values in this data set.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="example-prescribed-amount-of-missing..html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(missForest)</span>
-<span id="cb279-2"><a href="example-prescribed-amount-of-missing..html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># Note to self: Change the combo on my luggage</span></span>
-<span id="cb279-3"><a href="example-prescribed-amount-of-missing..html#cb279-3" aria-hidden="true" tabindex="-1"></a>iris.mis <span class="ot">&lt;-</span> <span class="fu">prodNA</span>(iris, <span class="at">noNA=</span><span class="fl">0.1</span>)</span>
-<span id="cb279-4"><a href="example-prescribed-amount-of-missing..html#cb279-4" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(iris.mis)))</span>
-<span id="cb279-5"><a href="example-prescribed-amount-of-missing..html#cb279-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb279-6"><a href="example-prescribed-amount-of-missing..html#cb279-6" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb279-7"><a href="example-prescribed-amount-of-missing..html#cb279-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.9   0.1</span></span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="example-prescribed-amount-of-missing..html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(missForest)</span>
+<span id="cb286-2"><a href="example-prescribed-amount-of-missing..html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># Note to self: Change the combo on my luggage</span></span>
+<span id="cb286-3"><a href="example-prescribed-amount-of-missing..html#cb286-3" aria-hidden="true" tabindex="-1"></a>iris.mis <span class="ot">&lt;-</span> <span class="fu">prodNA</span>(iris, <span class="at">noNA=</span><span class="fl">0.1</span>)</span>
+<span id="cb286-4"><a href="example-prescribed-amount-of-missing..html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(iris.mis)))</span>
+<span id="cb286-5"><a href="example-prescribed-amount-of-missing..html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-6"><a href="example-prescribed-amount-of-missing..html#cb286-6" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb286-7"><a href="example-prescribed-amount-of-missing..html#cb286-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.9   0.1</span></span></code></pre></div>
 <p>Visualize missing data pattern.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="example-prescribed-amount-of-missing..html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
-<span id="cb280-2"><a href="example-prescribed-amount-of-missing..html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(iris.mis, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;darkolivegreen3&#39;</span>,<span class="st">&#39;salmon&#39;</span>),</span>
-<span id="cb280-3"><a href="example-prescribed-amount-of-missing..html#cb280-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
-<span id="cb280-4"><a href="example-prescribed-amount-of-missing..html#cb280-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(iris.mis), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
-<span id="cb280-5"><a href="example-prescribed-amount-of-missing..html#cb280-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="example-prescribed-amount-of-missing..html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
+<span id="cb287-2"><a href="example-prescribed-amount-of-missing..html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(iris.mis, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;darkolivegreen3&#39;</span>,<span class="st">&#39;salmon&#39;</span>),</span>
+<span id="cb287-3"><a href="example-prescribed-amount-of-missing..html#cb287-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
+<span id="cb287-4"><a href="example-prescribed-amount-of-missing..html#cb287-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(iris.mis), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
+<span id="cb287-5"><a href="example-prescribed-amount-of-missing..html#cb287-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <pre><code>## 
 ##  Variables sorted by number of missings: 
@@ -533,20 +536,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here’s another example of where only 10% of the data overall is missing, but it results in only 58% complete cases.</p>
 <div id="multiply-impute-the-missing-data-using-mice" class="section level3 hasAnchor" number="17.9.1">
 <h3><span class="header-section-number">17.9.1</span> Multiply impute the missing data using <code>mice()</code><a href="example-prescribed-amount-of-missing..html#multiply-impute-the-missing-data-using-mice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="example-prescribed-amount-of-missing..html#cb282-1" aria-hidden="true" tabindex="-1"></a>imp_iris <span class="ot">&lt;-</span> <span class="fu">mice</span>(iris.mis, <span class="at">m=</span><span class="dv">10</span>, <span class="at">maxit=</span><span class="dv">25</span>, <span class="at">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="at">seed=</span><span class="dv">500</span>, <span class="at">printFlag=</span><span class="cn">FALSE</span>)</span>
-<span id="cb282-2"><a href="example-prescribed-amount-of-missing..html#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(imp_iris)</span>
-<span id="cb282-3"><a href="example-prescribed-amount-of-missing..html#cb282-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Class: mids</span></span>
-<span id="cb282-4"><a href="example-prescribed-amount-of-missing..html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of multiple imputations:  10 </span></span>
-<span id="cb282-5"><a href="example-prescribed-amount-of-missing..html#cb282-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Imputation methods:</span></span>
-<span id="cb282-6"><a href="example-prescribed-amount-of-missing..html#cb282-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span></span>
-<span id="cb282-7"><a href="example-prescribed-amount-of-missing..html#cb282-7" aria-hidden="true" tabindex="-1"></a><span class="do">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; </span></span>
-<span id="cb282-8"><a href="example-prescribed-amount-of-missing..html#cb282-8" aria-hidden="true" tabindex="-1"></a><span class="do">## PredictorMatrix:</span></span>
-<span id="cb282-9"><a href="example-prescribed-amount-of-missing..html#cb282-9" aria-hidden="true" tabindex="-1"></a><span class="do">##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span id="cb282-10"><a href="example-prescribed-amount-of-missing..html#cb282-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length            0           1            1           1       1</span></span>
-<span id="cb282-11"><a href="example-prescribed-amount-of-missing..html#cb282-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Width             1           0            1           1       1</span></span>
-<span id="cb282-12"><a href="example-prescribed-amount-of-missing..html#cb282-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Length            1           1            0           1       1</span></span>
-<span id="cb282-13"><a href="example-prescribed-amount-of-missing..html#cb282-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Width             1           1            1           0       1</span></span>
-<span id="cb282-14"><a href="example-prescribed-amount-of-missing..html#cb282-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Species                 1           1            1           1       0</span></span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="example-prescribed-amount-of-missing..html#cb289-1" aria-hidden="true" tabindex="-1"></a>imp_iris <span class="ot">&lt;-</span> <span class="fu">mice</span>(iris.mis, <span class="at">m=</span><span class="dv">10</span>, <span class="at">maxit=</span><span class="dv">25</span>, <span class="at">meth=</span><span class="st">&quot;pmm&quot;</span>, <span class="at">seed=</span><span class="dv">500</span>, <span class="at">printFlag=</span><span class="cn">FALSE</span>)</span>
+<span id="cb289-2"><a href="example-prescribed-amount-of-missing..html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(imp_iris)</span>
+<span id="cb289-3"><a href="example-prescribed-amount-of-missing..html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Class: mids</span></span>
+<span id="cb289-4"><a href="example-prescribed-amount-of-missing..html#cb289-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of multiple imputations:  10 </span></span>
+<span id="cb289-5"><a href="example-prescribed-amount-of-missing..html#cb289-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Imputation methods:</span></span>
+<span id="cb289-6"><a href="example-prescribed-amount-of-missing..html#cb289-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span></span>
+<span id="cb289-7"><a href="example-prescribed-amount-of-missing..html#cb289-7" aria-hidden="true" tabindex="-1"></a><span class="do">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot; </span></span>
+<span id="cb289-8"><a href="example-prescribed-amount-of-missing..html#cb289-8" aria-hidden="true" tabindex="-1"></a><span class="do">## PredictorMatrix:</span></span>
+<span id="cb289-9"><a href="example-prescribed-amount-of-missing..html#cb289-9" aria-hidden="true" tabindex="-1"></a><span class="do">##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span id="cb289-10"><a href="example-prescribed-amount-of-missing..html#cb289-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length            0           1            1           1       1</span></span>
+<span id="cb289-11"><a href="example-prescribed-amount-of-missing..html#cb289-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Width             1           0            1           1       1</span></span>
+<span id="cb289-12"><a href="example-prescribed-amount-of-missing..html#cb289-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Length            1           1            0           1       1</span></span>
+<span id="cb289-13"><a href="example-prescribed-amount-of-missing..html#cb289-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Width             1           1            1           0       1</span></span>
+<span id="cb289-14"><a href="example-prescribed-amount-of-missing..html#cb289-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Species                 1           1            1           1       0</span></span></code></pre></div>
 
 <div class="rmdnote">
 <p>The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a <strong>very</strong> good idea to understand these controls.</p>
@@ -555,84 +558,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="check-the-imputation-method-used-on-each-variable." class="section level3 hasAnchor" number="17.9.2">
 <h3><span class="header-section-number">17.9.2</span> Check the imputation method used on each variable.<a href="example-prescribed-amount-of-missing..html#check-the-imputation-method-used-on-each-variable." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="example-prescribed-amount-of-missing..html#cb283-1" aria-hidden="true" tabindex="-1"></a>imp_iris<span class="sc">$</span>meth</span>
-<span id="cb283-2"><a href="example-prescribed-amount-of-missing..html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span></span>
-<span id="cb283-3"><a href="example-prescribed-amount-of-missing..html#cb283-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="example-prescribed-amount-of-missing..html#cb290-1" aria-hidden="true" tabindex="-1"></a>imp_iris<span class="sc">$</span>meth</span>
+<span id="cb290-2"><a href="example-prescribed-amount-of-missing..html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species </span></span>
+<span id="cb290-3"><a href="example-prescribed-amount-of-missing..html#cb290-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;        &quot;pmm&quot;</span></span></code></pre></div>
 <p>Predictive mean matching was used for all variables, even <code>Species</code>. This is reasonable because PMM is a hot deck method of imputation.</p>
 </div>
 <div id="check-convergence" class="section level3 hasAnchor" number="17.9.3">
 <h3><span class="header-section-number">17.9.3</span> Check Convergence<a href="example-prescribed-amount-of-missing..html#check-convergence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="example-prescribed-amount-of-missing..html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(imp_iris, <span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="example-prescribed-amount-of-missing..html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(imp_iris, <span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>))</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>The variance across chains is no larger than the variance within chains.</p>
 </div>
 <div id="look-at-the-values-generated-for-imputation" class="section level3 hasAnchor" number="17.9.4">
 <h3><span class="header-section-number">17.9.4</span> Look at the values generated for imputation<a href="example-prescribed-amount-of-missing..html#look-at-the-values-generated-for-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="example-prescribed-amount-of-missing..html#cb285-1" aria-hidden="true" tabindex="-1"></a>imp_iris<span class="sc">$</span>imp<span class="sc">$</span>Sepal.Length</span>
-<span id="cb285-2"><a href="example-prescribed-amount-of-missing..html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       1   2   3   4   5   6   7   8   9  10</span></span>
-<span id="cb285-3"><a href="example-prescribed-amount-of-missing..html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  5.4 5.2 5.3 5.0 5.4 4.9 5.1 4.9 5.4 5.4</span></span>
-<span id="cb285-4"><a href="example-prescribed-amount-of-missing..html#cb285-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  4.7 4.4 5.0 4.4 4.6 4.4 4.9 4.9 5.0 4.9</span></span>
-<span id="cb285-5"><a href="example-prescribed-amount-of-missing..html#cb285-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  4.4 4.4 4.7 4.5 4.4 4.9 4.4 4.4 4.4 4.4</span></span>
-<span id="cb285-6"><a href="example-prescribed-amount-of-missing..html#cb285-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 36  4.4 4.4 4.7 4.9 4.7 4.4 4.4 4.4 4.9 4.7</span></span>
-<span id="cb285-7"><a href="example-prescribed-amount-of-missing..html#cb285-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 38  5.1 5.2 5.4 5.0 5.1 4.6 4.6 5.0 4.7 5.0</span></span>
-<span id="cb285-8"><a href="example-prescribed-amount-of-missing..html#cb285-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 40  5.2 5.0 5.4 5.4 4.6 5.0 4.8 5.0 4.6 5.1</span></span>
-<span id="cb285-9"><a href="example-prescribed-amount-of-missing..html#cb285-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 46  4.9 4.4 4.4 4.9 4.7 4.4 4.7 4.7 5.0 5.5</span></span>
-<span id="cb285-10"><a href="example-prescribed-amount-of-missing..html#cb285-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 51  6.9 6.4 6.8 6.8 6.7 6.3 6.5 6.4 6.8 6.9</span></span>
-<span id="cb285-11"><a href="example-prescribed-amount-of-missing..html#cb285-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 56  6.0 5.8 5.4 5.8 6.1 5.4 5.4 5.9 6.0 6.0</span></span>
-<span id="cb285-12"><a href="example-prescribed-amount-of-missing..html#cb285-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 62  6.3 5.8 6.3 5.8 5.7 5.7 6.8 5.8 5.8 6.2</span></span>
-<span id="cb285-13"><a href="example-prescribed-amount-of-missing..html#cb285-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 74  6.7 5.4 6.4 6.1 6.9 6.8 6.5 6.1 6.4 6.7</span></span>
-<span id="cb285-14"><a href="example-prescribed-amount-of-missing..html#cb285-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 75  6.2 6.2 5.6 5.8 6.2 6.0 6.7 6.7 5.8 5.7</span></span>
-<span id="cb285-15"><a href="example-prescribed-amount-of-missing..html#cb285-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 86  6.4 6.0 6.5 6.9 6.1 6.3 6.9 6.8 6.3 6.5</span></span>
-<span id="cb285-16"><a href="example-prescribed-amount-of-missing..html#cb285-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 90  5.2 5.6 5.5 5.2 5.2 6.0 6.2 5.2 4.9 5.8</span></span>
-<span id="cb285-17"><a href="example-prescribed-amount-of-missing..html#cb285-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 91  5.6 6.2 6.2 5.6 6.1 5.8 6.0 6.2 5.8 6.2</span></span>
-<span id="cb285-18"><a href="example-prescribed-amount-of-missing..html#cb285-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 106 7.7 7.9 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.7</span></span>
-<span id="cb285-19"><a href="example-prescribed-amount-of-missing..html#cb285-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 124 6.7 6.2 5.7 5.7 6.2 5.7 5.6 5.7 5.6 5.7</span></span>
-<span id="cb285-20"><a href="example-prescribed-amount-of-missing..html#cb285-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 142 6.2 6.1 6.0 6.1 6.9 6.6 6.1 6.5 6.6 5.8</span></span>
-<span id="cb285-21"><a href="example-prescribed-amount-of-missing..html#cb285-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 145 6.3 6.4 6.4 6.7 6.3 6.3 6.4 6.3 6.7 6.5</span></span>
-<span id="cb285-22"><a href="example-prescribed-amount-of-missing..html#cb285-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 148 6.4 6.5 5.6 6.4 6.7 6.0 6.4 6.5 6.4 5.6</span></span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="example-prescribed-amount-of-missing..html#cb292-1" aria-hidden="true" tabindex="-1"></a>imp_iris<span class="sc">$</span>imp<span class="sc">$</span>Sepal.Length</span>
+<span id="cb292-2"><a href="example-prescribed-amount-of-missing..html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       1   2   3   4   5   6   7   8   9  10</span></span>
+<span id="cb292-3"><a href="example-prescribed-amount-of-missing..html#cb292-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  5.4 5.2 5.3 5.0 5.4 4.9 5.1 4.9 5.4 5.4</span></span>
+<span id="cb292-4"><a href="example-prescribed-amount-of-missing..html#cb292-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  4.7 4.4 5.0 4.4 4.6 4.4 4.9 4.9 5.0 4.9</span></span>
+<span id="cb292-5"><a href="example-prescribed-amount-of-missing..html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  4.4 4.4 4.7 4.5 4.4 4.9 4.4 4.4 4.4 4.4</span></span>
+<span id="cb292-6"><a href="example-prescribed-amount-of-missing..html#cb292-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 36  4.4 4.4 4.7 4.9 4.7 4.4 4.4 4.4 4.9 4.7</span></span>
+<span id="cb292-7"><a href="example-prescribed-amount-of-missing..html#cb292-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 38  5.1 5.2 5.4 5.0 5.1 4.6 4.6 5.0 4.7 5.0</span></span>
+<span id="cb292-8"><a href="example-prescribed-amount-of-missing..html#cb292-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 40  5.2 5.0 5.4 5.4 4.6 5.0 4.8 5.0 4.6 5.1</span></span>
+<span id="cb292-9"><a href="example-prescribed-amount-of-missing..html#cb292-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 46  4.9 4.4 4.4 4.9 4.7 4.4 4.7 4.7 5.0 5.5</span></span>
+<span id="cb292-10"><a href="example-prescribed-amount-of-missing..html#cb292-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 51  6.9 6.4 6.8 6.8 6.7 6.3 6.5 6.4 6.8 6.9</span></span>
+<span id="cb292-11"><a href="example-prescribed-amount-of-missing..html#cb292-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 56  6.0 5.8 5.4 5.8 6.1 5.4 5.4 5.9 6.0 6.0</span></span>
+<span id="cb292-12"><a href="example-prescribed-amount-of-missing..html#cb292-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 62  6.3 5.8 6.3 5.8 5.7 5.7 6.8 5.8 5.8 6.2</span></span>
+<span id="cb292-13"><a href="example-prescribed-amount-of-missing..html#cb292-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 74  6.7 5.4 6.4 6.1 6.9 6.8 6.5 6.1 6.4 6.7</span></span>
+<span id="cb292-14"><a href="example-prescribed-amount-of-missing..html#cb292-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 75  6.2 6.2 5.6 5.8 6.2 6.0 6.7 6.7 5.8 5.7</span></span>
+<span id="cb292-15"><a href="example-prescribed-amount-of-missing..html#cb292-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 86  6.4 6.0 6.5 6.9 6.1 6.3 6.9 6.8 6.3 6.5</span></span>
+<span id="cb292-16"><a href="example-prescribed-amount-of-missing..html#cb292-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 90  5.2 5.6 5.5 5.2 5.2 6.0 6.2 5.2 4.9 5.8</span></span>
+<span id="cb292-17"><a href="example-prescribed-amount-of-missing..html#cb292-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 91  5.6 6.2 6.2 5.6 6.1 5.8 6.0 6.2 5.8 6.2</span></span>
+<span id="cb292-18"><a href="example-prescribed-amount-of-missing..html#cb292-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 106 7.7 7.9 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.7</span></span>
+<span id="cb292-19"><a href="example-prescribed-amount-of-missing..html#cb292-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 124 6.7 6.2 5.7 5.7 6.2 5.7 5.6 5.7 5.6 5.7</span></span>
+<span id="cb292-20"><a href="example-prescribed-amount-of-missing..html#cb292-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 142 6.2 6.1 6.0 6.1 6.9 6.6 6.1 6.5 6.6 5.8</span></span>
+<span id="cb292-21"><a href="example-prescribed-amount-of-missing..html#cb292-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 145 6.3 6.4 6.4 6.7 6.3 6.3 6.4 6.3 6.7 6.5</span></span>
+<span id="cb292-22"><a href="example-prescribed-amount-of-missing..html#cb292-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 148 6.4 6.5 5.6 6.4 6.7 6.0 6.4 6.5 6.4 5.6</span></span></code></pre></div>
 <p>This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for <code>Sepal.Length</code> was needed. Notice only imputations are shown, no observed data is showing here.</p>
 </div>
 <div id="create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations" class="section level3 hasAnchor" number="17.9.5">
 <h3><span class="header-section-number">17.9.5</span> Create a complete data set by filling in the missing data using the imputations<a href="example-prescribed-amount-of-missing..html#create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="example-prescribed-amount-of-missing..html#cb286-1" aria-hidden="true" tabindex="-1"></a>iris_1 <span class="ot">&lt;-</span> <span class="fu">complete</span>(imp_iris, <span class="at">action=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="example-prescribed-amount-of-missing..html#cb293-1" aria-hidden="true" tabindex="-1"></a>iris_1 <span class="ot">&lt;-</span> <span class="fu">complete</span>(imp_iris, <span class="at">action=</span><span class="dv">1</span>)</span></code></pre></div>
 <p>Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on.</p>
 <div id="alternative---stack-the-imputed-data-sets-in-long-format." class="section level4 hasAnchor" number="17.9.5.1">
 <h4><span class="header-section-number">17.9.5.1</span> Alternative - Stack the imputed data sets in <em>long</em> format.<a href="example-prescribed-amount-of-missing..html#alternative---stack-the-imputed-data-sets-in-long-format." class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="example-prescribed-amount-of-missing..html#cb287-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="ot">&lt;-</span> <span class="fu">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="example-prescribed-amount-of-missing..html#cb294-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="ot">&lt;-</span> <span class="fu">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>)</span></code></pre></div>
 <p>By looking at the <code>names</code> of this new object we can confirm that there are indeed 10 complete data sets with <span class="math inline">\(n=150\)</span> in each.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="example-prescribed-amount-of-missing..html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(iris_long)</span>
-<span id="cb288-2"><a href="example-prescribed-amount-of-missing..html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot;</span></span>
-<span id="cb288-3"><a href="example-prescribed-amount-of-missing..html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] &quot;Petal.Width&quot;  &quot;Species&quot;</span></span>
-<span id="cb288-4"><a href="example-prescribed-amount-of-missing..html#cb288-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris_long<span class="sc">$</span>.imp)</span>
-<span id="cb288-5"><a href="example-prescribed-amount-of-missing..html#cb288-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb288-6"><a href="example-prescribed-amount-of-missing..html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   1   2   3   4   5   6   7   8   9  10 </span></span>
-<span id="cb288-7"><a href="example-prescribed-amount-of-missing..html#cb288-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 150 150 150 150 150 150 150 150 150 150</span></span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="example-prescribed-amount-of-missing..html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(iris_long)</span>
+<span id="cb295-2"><a href="example-prescribed-amount-of-missing..html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;.imp&quot;         &quot;.id&quot;          &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot;</span></span>
+<span id="cb295-3"><a href="example-prescribed-amount-of-missing..html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] &quot;Petal.Width&quot;  &quot;Species&quot;</span></span>
+<span id="cb295-4"><a href="example-prescribed-amount-of-missing..html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris_long<span class="sc">$</span>.imp)</span>
+<span id="cb295-5"><a href="example-prescribed-amount-of-missing..html#cb295-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb295-6"><a href="example-prescribed-amount-of-missing..html#cb295-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   1   2   3   4   5   6   7   8   9  10 </span></span>
+<span id="cb295-7"><a href="example-prescribed-amount-of-missing..html#cb295-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 150 150 150 150 150 150 150 150 150 150</span></span></code></pre></div>
 </div>
 </div>
 <div id="visualize-imputations" class="section level3 hasAnchor" number="17.9.6">
 <h3><span class="header-section-number">17.9.6</span> Visualize Imputations<a href="example-prescribed-amount-of-missing..html#visualize-imputations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s compare the imputed values to the observed values to see if they are indeed “plausible” We want to see that the distribution of of the magenta points (imputed) matches the distribution of the blue ones (observed).</p>
 <p><strong>Univariately</strong></p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="example-prescribed-amount-of-missing..html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">densityplot</span>(imp_iris)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="example-prescribed-amount-of-missing..html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">densityplot</span>(imp_iris)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-37-1.png" width="768" /></p>
 <p><strong>Multivariately</strong></p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="example-prescribed-amount-of-missing..html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(imp_iris, Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Petal.Width <span class="sc">|</span> Species, <span class="at">cex=</span>.<span class="dv">8</span>, <span class="at">pch=</span><span class="dv">16</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="example-prescribed-amount-of-missing..html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(imp_iris, Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Petal.Width <span class="sc">|</span> Species, <span class="at">cex=</span>.<span class="dv">8</span>, <span class="at">pch=</span><span class="dv">16</span>)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" /></p>
 <p><strong>Analyze and pool</strong>
 All of this imputation was done so we could actually perform an analysis!</p>
 <p>Let’s run a simple linear regression on <code>Sepal.Length</code> as a function of <code>Sepal.Width</code>,
 <code>Petal.Length</code> and <code>Species</code>.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="example-prescribed-amount-of-missing..html#cb291-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">with</span>(imp_iris, <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Species))</span>
-<span id="cb291-2"><a href="example-prescribed-amount-of-missing..html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">pool</span>(model))</span>
-<span id="cb291-3"><a href="example-prescribed-amount-of-missing..html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                term   estimate  std.error statistic        df      p.value</span></span>
-<span id="cb291-4"><a href="example-prescribed-amount-of-missing..html#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.942002e-12</span></span>
-<span id="cb291-5"><a href="example-prescribed-amount-of-missing..html#cb291-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       Sepal.Width  0.4324051 0.09212873  4.693488  88.97127 9.678996e-06</span></span>
-<span id="cb291-6"><a href="example-prescribed-amount-of-missing..html#cb291-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 0.000000e+00</span></span>
-<span id="cb291-7"><a href="example-prescribed-amount-of-missing..html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Speciesversicolor -1.0848839 0.24416495 -4.443242  96.69963 2.360206e-05</span></span>
-<span id="cb291-8"><a href="example-prescribed-amount-of-missing..html#cb291-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  Speciesvirginica -1.6001933 0.31893115 -5.017363 103.29187 2.189018e-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="example-prescribed-amount-of-missing..html#cb298-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">with</span>(imp_iris, <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Species))</span>
+<span id="cb298-2"><a href="example-prescribed-amount-of-missing..html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">pool</span>(model))</span>
+<span id="cb298-3"><a href="example-prescribed-amount-of-missing..html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                term   estimate  std.error statistic        df      p.value</span></span>
+<span id="cb298-4"><a href="example-prescribed-amount-of-missing..html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.942002e-12</span></span>
+<span id="cb298-5"><a href="example-prescribed-amount-of-missing..html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       Sepal.Width  0.4324051 0.09212873  4.693488  88.97127 9.678996e-06</span></span>
+<span id="cb298-6"><a href="example-prescribed-amount-of-missing..html#cb298-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 0.000000e+00</span></span>
+<span id="cb298-7"><a href="example-prescribed-amount-of-missing..html#cb298-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Speciesversicolor -1.0848839 0.24416495 -4.443242  96.69963 2.360206e-05</span></span>
+<span id="cb298-8"><a href="example-prescribed-amount-of-missing..html#cb298-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  Speciesvirginica -1.6001933 0.31893115 -5.017363 103.29187 2.189018e-06</span></span></code></pre></div>
 <p>Pooled parameter estimates <span class="math inline">\(\bar{Q}\)</span> and their standard errors <span class="math inline">\(\sqrt{T}\)</span> are provided, along with a significance test (against <span class="math inline">\(\beta_p=0\)</span>). Note that a 95% interval must be calculated manually.</p>
 <p>Digging deeper into the object created by <code>pool(model)</code>, specifically the <code>pooled</code> list, we can pull out additional information including the number of missing values, the <em>fraction of missing information</em> (<code>fmi</code>) as defined by Rubin (1987), and <code>lambda</code>, the proportion of total variance that is attributable to the missing data (<span class="math inline">\(\lambda = (B + B/m)/T)\)</span>.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="example-prescribed-amount-of-missing..html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">pool</span>(model)<span class="sc">$</span>pooled[,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">8</span><span class="sc">:</span><span class="dv">9</span>)], <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="example-prescribed-amount-of-missing..html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">pool</span>(model)<span class="sc">$</span>pooled[,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">8</span><span class="sc">:</span><span class="dv">9</span>)], <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -763,29 +766,29 @@ Speciesvirginica
 <div id="calculating-bias" class="section level3 hasAnchor" number="17.9.7">
 <h3><span class="header-section-number">17.9.7</span> Calculating bias<a href="example-prescribed-amount-of-missing..html#calculating-bias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The iris data set had no missing data to begin with. So we can calculate the “true” parameter estimates…</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="example-prescribed-amount-of-missing..html#cb293-1" aria-hidden="true" tabindex="-1"></a>true.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Species, <span class="at">data=</span>iris)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="example-prescribed-amount-of-missing..html#cb300-1" aria-hidden="true" tabindex="-1"></a>true.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Species, <span class="at">data=</span>iris)</span></code></pre></div>
 <p>and find the difference in coefficients.</p>
 <p>The variance of the multiply imputed estimates is larger because of the between-imputation variance.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="example-prescribed-amount-of-missing..html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forestplot)</span>
-<span id="cb294-2"><a href="example-prescribed-amount-of-missing..html#cb294-2" aria-hidden="true" tabindex="-1"></a>te.mean <span class="ot">&lt;-</span> <span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
-<span id="cb294-3"><a href="example-prescribed-amount-of-missing..html#cb294-3" aria-hidden="true" tabindex="-1"></a>mi.mean <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">1</span>]</span>
-<span id="cb294-4"><a href="example-prescribed-amount-of-missing..html#cb294-4" aria-hidden="true" tabindex="-1"></a>te.ll   <span class="ot">&lt;-</span> te.mean <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
-<span id="cb294-5"><a href="example-prescribed-amount-of-missing..html#cb294-5" aria-hidden="true" tabindex="-1"></a>mi.ll   <span class="ot">&lt;-</span> mi.mean <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">2</span>]</span>
-<span id="cb294-6"><a href="example-prescribed-amount-of-missing..html#cb294-6" aria-hidden="true" tabindex="-1"></a>te.ul   <span class="ot">&lt;-</span> te.mean <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
-<span id="cb294-7"><a href="example-prescribed-amount-of-missing..html#cb294-7" aria-hidden="true" tabindex="-1"></a>mi.ul   <span class="ot">&lt;-</span> mi.mean <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">2</span>]</span>
-<span id="cb294-8"><a href="example-prescribed-amount-of-missing..html#cb294-8" aria-hidden="true" tabindex="-1"></a>names   <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">coef</span>(true.model))</span>
-<span id="cb294-9"><a href="example-prescribed-amount-of-missing..html#cb294-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb294-10"><a href="example-prescribed-amount-of-missing..html#cb294-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb294-11"><a href="example-prescribed-amount-of-missing..html#cb294-11" aria-hidden="true" tabindex="-1"></a><span class="fu">forestplot</span>(names, </span>
-<span id="cb294-12"><a href="example-prescribed-amount-of-missing..html#cb294-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;True Model&quot;</span>, <span class="st">&quot;MICE&quot;</span>),</span>
-<span id="cb294-13"><a href="example-prescribed-amount-of-missing..html#cb294-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">fn.ci_norm =</span> <span class="fu">c</span>(fpDrawNormalCI, fpDrawCircleCI), </span>
-<span id="cb294-14"><a href="example-prescribed-amount-of-missing..html#cb294-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">mean =</span> <span class="fu">cbind</span>(te.mean, mi.mean), </span>
-<span id="cb294-15"><a href="example-prescribed-amount-of-missing..html#cb294-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">lower =</span> <span class="fu">cbind</span>(te.ll, mi.ll),</span>
-<span id="cb294-16"><a href="example-prescribed-amount-of-missing..html#cb294-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">upper =</span> <span class="fu">cbind</span>(te.ul, mi.ul), </span>
-<span id="cb294-17"><a href="example-prescribed-amount-of-missing..html#cb294-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">col=</span><span class="fu">fpColors</span>(<span class="at">box=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkred&quot;</span>)), </span>
-<span id="cb294-18"><a href="example-prescribed-amount-of-missing..html#cb294-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab=</span><span class="st">&quot;Regression coefficients&quot;</span>,</span>
-<span id="cb294-19"><a href="example-prescribed-amount-of-missing..html#cb294-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">boxsize =</span> .<span class="dv">1</span></span>
-<span id="cb294-20"><a href="example-prescribed-amount-of-missing..html#cb294-20" aria-hidden="true" tabindex="-1"></a>           )</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="example-prescribed-amount-of-missing..html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forestplot)</span>
+<span id="cb301-2"><a href="example-prescribed-amount-of-missing..html#cb301-2" aria-hidden="true" tabindex="-1"></a>te.mean <span class="ot">&lt;-</span> <span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
+<span id="cb301-3"><a href="example-prescribed-amount-of-missing..html#cb301-3" aria-hidden="true" tabindex="-1"></a>mi.mean <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">1</span>]</span>
+<span id="cb301-4"><a href="example-prescribed-amount-of-missing..html#cb301-4" aria-hidden="true" tabindex="-1"></a>te.ll   <span class="ot">&lt;-</span> te.mean <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
+<span id="cb301-5"><a href="example-prescribed-amount-of-missing..html#cb301-5" aria-hidden="true" tabindex="-1"></a>mi.ll   <span class="ot">&lt;-</span> mi.mean <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">2</span>]</span>
+<span id="cb301-6"><a href="example-prescribed-amount-of-missing..html#cb301-6" aria-hidden="true" tabindex="-1"></a>te.ul   <span class="ot">&lt;-</span> te.mean <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(true.model)<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
+<span id="cb301-7"><a href="example-prescribed-amount-of-missing..html#cb301-7" aria-hidden="true" tabindex="-1"></a>mi.ul   <span class="ot">&lt;-</span> mi.mean <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">summary</span>(<span class="fu">pool</span>(model))[,<span class="dv">2</span>]</span>
+<span id="cb301-8"><a href="example-prescribed-amount-of-missing..html#cb301-8" aria-hidden="true" tabindex="-1"></a>names   <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">coef</span>(true.model))</span>
+<span id="cb301-9"><a href="example-prescribed-amount-of-missing..html#cb301-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-10"><a href="example-prescribed-amount-of-missing..html#cb301-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-11"><a href="example-prescribed-amount-of-missing..html#cb301-11" aria-hidden="true" tabindex="-1"></a><span class="fu">forestplot</span>(names, </span>
+<span id="cb301-12"><a href="example-prescribed-amount-of-missing..html#cb301-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;True Model&quot;</span>, <span class="st">&quot;MICE&quot;</span>),</span>
+<span id="cb301-13"><a href="example-prescribed-amount-of-missing..html#cb301-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">fn.ci_norm =</span> <span class="fu">c</span>(fpDrawNormalCI, fpDrawCircleCI), </span>
+<span id="cb301-14"><a href="example-prescribed-amount-of-missing..html#cb301-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">mean =</span> <span class="fu">cbind</span>(te.mean, mi.mean), </span>
+<span id="cb301-15"><a href="example-prescribed-amount-of-missing..html#cb301-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">lower =</span> <span class="fu">cbind</span>(te.ll, mi.ll),</span>
+<span id="cb301-16"><a href="example-prescribed-amount-of-missing..html#cb301-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">upper =</span> <span class="fu">cbind</span>(te.ul, mi.ul), </span>
+<span id="cb301-17"><a href="example-prescribed-amount-of-missing..html#cb301-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">col=</span><span class="fu">fpColors</span>(<span class="at">box=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkred&quot;</span>)), </span>
+<span id="cb301-18"><a href="example-prescribed-amount-of-missing..html#cb301-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab=</span><span class="st">&quot;Regression coefficients&quot;</span>,</span>
+<span id="cb301-19"><a href="example-prescribed-amount-of-missing..html#cb301-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">boxsize =</span> .<span class="dv">1</span></span>
+<span id="cb301-20"><a href="example-prescribed-amount-of-missing..html#cb301-20" aria-hidden="true" tabindex="-1"></a>           )</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-42-1.png" width="960" /></p>
 </div>
 </div>

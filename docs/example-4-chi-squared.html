@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -513,48 +516,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Categorical Potential Moderator = Gender (variable <code>female5_c</code></li>
 </ul>
 <p><strong>Visualize the relationship between smoking and general health across the entire sample.</strong></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="example-4-chi-squared.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_xtab</span>(addhealth<span class="sc">$</span>genhealth, addhealth<span class="sc">$</span>eversmoke_c, </span>
-<span id="cb170-2"><a href="example-4-chi-squared.html#cb170-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb170-3"><a href="example-4-chi-squared.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Overall&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="example-4-chi-squared.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_xtab</span>(addhealth<span class="sc">$</span>genhealth, addhealth<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb171-2"><a href="example-4-chi-squared.html#cb171-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb171-3"><a href="example-4-chi-squared.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Overall&quot;</span>)</span></code></pre></div>
 <p><img src="moderation_stratification_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="example-4-chi-squared.html#cb171-1" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb171-2"><a href="example-4-chi-squared.html#cb171-2" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span>
-<span id="cb171-3"><a href="example-4-chi-squared.html#cb171-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-4"><a href="example-4-chi-squared.html#cb171-4" aria-hidden="true" tabindex="-1"></a>fem.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(fem<span class="sc">$</span>genhealth, fem<span class="sc">$</span>eversmoke_c, </span>
-<span id="cb171-5"><a href="example-4-chi-squared.html#cb171-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb171-6"><a href="example-4-chi-squared.html#cb171-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Females only&quot;</span>)</span>
-<span id="cb171-7"><a href="example-4-chi-squared.html#cb171-7" aria-hidden="true" tabindex="-1"></a>mal.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(mal<span class="sc">$</span>genhealth, mal<span class="sc">$</span>eversmoke_c, </span>
-<span id="cb171-8"><a href="example-4-chi-squared.html#cb171-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb171-9"><a href="example-4-chi-squared.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Males only&quot;</span>)</span>
-<span id="cb171-10"><a href="example-4-chi-squared.html#cb171-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-11"><a href="example-4-chi-squared.html#cb171-11" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(fem.plot, mal.plot)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="example-4-chi-squared.html#cb172-1" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb172-2"><a href="example-4-chi-squared.html#cb172-2" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb172-3"><a href="example-4-chi-squared.html#cb172-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-4"><a href="example-4-chi-squared.html#cb172-4" aria-hidden="true" tabindex="-1"></a>fem.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(fem<span class="sc">$</span>genhealth, fem<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb172-5"><a href="example-4-chi-squared.html#cb172-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb172-6"><a href="example-4-chi-squared.html#cb172-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Females only&quot;</span>)</span>
+<span id="cb172-7"><a href="example-4-chi-squared.html#cb172-7" aria-hidden="true" tabindex="-1"></a>mal.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(mal<span class="sc">$</span>genhealth, mal<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb172-8"><a href="example-4-chi-squared.html#cb172-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb172-9"><a href="example-4-chi-squared.html#cb172-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Males only&quot;</span>)</span>
+<span id="cb172-10"><a href="example-4-chi-squared.html#cb172-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-11"><a href="example-4-chi-squared.html#cb172-11" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(fem.plot, mal.plot)</span></code></pre></div>
 <p><img src="moderation_stratification_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>A general pattern is seen where the proportion of smokers increases as the level of general health decreases. This pattern is similar within males and females, but it is noteworthy that a higher proportion of non smokers are female.</p>
 <p><img src="images/q.png" alt="q" /> Does being female change the relationship between smoking and general health? Is the distribution of smoking status (proportion of those who have ever smoked) equal across all levels of general health, for both males and females?</p>
 <p><strong>Fit both the original, and stratified models.</strong></p>
 <p><strong>original</strong></p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="example-4-chi-squared.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(addhealth<span class="sc">$</span>eversmoke_c, addhealth<span class="sc">$</span>genhealth)</span>
-<span id="cb172-2"><a href="example-4-chi-squared.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb172-3"><a href="example-4-chi-squared.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb172-4"><a href="example-4-chi-squared.html#cb172-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb172-5"><a href="example-4-chi-squared.html#cb172-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  addhealth$eversmoke_c and addhealth$genhealth</span></span>
-<span id="cb172-6"><a href="example-4-chi-squared.html#cb172-6" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 30.795, df = 4, p-value = 3.371e-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="example-4-chi-squared.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(addhealth<span class="sc">$</span>eversmoke_c, addhealth<span class="sc">$</span>genhealth)</span>
+<span id="cb173-2"><a href="example-4-chi-squared.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb173-3"><a href="example-4-chi-squared.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb173-4"><a href="example-4-chi-squared.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb173-5"><a href="example-4-chi-squared.html#cb173-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  addhealth$eversmoke_c and addhealth$genhealth</span></span>
+<span id="cb173-6"><a href="example-4-chi-squared.html#cb173-6" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 30.795, df = 4, p-value = 3.371e-06</span></span></code></pre></div>
 <p><strong>stratified</strong></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="example-4-chi-squared.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(addhealth, addhealth<span class="sc">$</span>female_c, <span class="cf">function</span>(x) <span class="fu">chisq.test</span>(x<span class="sc">$</span>eversmoke_c, x<span class="sc">$</span>genhealth))</span>
-<span id="cb173-2"><a href="example-4-chi-squared.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$female_c: Male</span></span>
-<span id="cb173-3"><a href="example-4-chi-squared.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb173-4"><a href="example-4-chi-squared.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb173-5"><a href="example-4-chi-squared.html#cb173-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb173-6"><a href="example-4-chi-squared.html#cb173-6" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
-<span id="cb173-7"><a href="example-4-chi-squared.html#cb173-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 19.455, df = 4, p-value = 0.0006395</span></span>
-<span id="cb173-8"><a href="example-4-chi-squared.html#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb173-9"><a href="example-4-chi-squared.html#cb173-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
-<span id="cb173-10"><a href="example-4-chi-squared.html#cb173-10" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$female_c: Female</span></span>
-<span id="cb173-11"><a href="example-4-chi-squared.html#cb173-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb173-12"><a href="example-4-chi-squared.html#cb173-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb173-13"><a href="example-4-chi-squared.html#cb173-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb173-14"><a href="example-4-chi-squared.html#cb173-14" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
-<span id="cb173-15"><a href="example-4-chi-squared.html#cb173-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 19.998, df = 4, p-value = 0.0004998</span></span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="example-4-chi-squared.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(addhealth, addhealth<span class="sc">$</span>female_c, <span class="cf">function</span>(x) <span class="fu">chisq.test</span>(x<span class="sc">$</span>eversmoke_c, x<span class="sc">$</span>genhealth))</span>
+<span id="cb174-2"><a href="example-4-chi-squared.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$female_c: Male</span></span>
+<span id="cb174-3"><a href="example-4-chi-squared.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb174-4"><a href="example-4-chi-squared.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb174-5"><a href="example-4-chi-squared.html#cb174-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb174-6"><a href="example-4-chi-squared.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
+<span id="cb174-7"><a href="example-4-chi-squared.html#cb174-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 19.455, df = 4, p-value = 0.0006395</span></span>
+<span id="cb174-8"><a href="example-4-chi-squared.html#cb174-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb174-9"><a href="example-4-chi-squared.html#cb174-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb174-10"><a href="example-4-chi-squared.html#cb174-10" aria-hidden="true" tabindex="-1"></a><span class="do">## addhealth$female_c: Female</span></span>
+<span id="cb174-11"><a href="example-4-chi-squared.html#cb174-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb174-12"><a href="example-4-chi-squared.html#cb174-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb174-13"><a href="example-4-chi-squared.html#cb174-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb174-14"><a href="example-4-chi-squared.html#cb174-14" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
+<span id="cb174-15"><a href="example-4-chi-squared.html#cb174-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 19.998, df = 4, p-value = 0.0004998</span></span></code></pre></div>
 <p><strong>Determine if the Third Variable is a moderator or not.</strong></p>
 <p>The relationship between smoking status and general health is significant in both the main effects and the stratified model. The distribution of smoking status across general health categories does not differ between females and males. Gender is <strong>not</strong> a moderator for this analysis.</p>
 

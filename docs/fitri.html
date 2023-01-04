@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -287,51 +287,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.5</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
+<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
+<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
+<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -342,30 +344,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.2</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#mlogreg"><i class="fa fa-check"></i><b>11.3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.4</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.5</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#reporting"><i class="fa fa-check"></i><b>11.3.6</b> Reporting</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
+<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -508,21 +511,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">16.4</span> Fitting models in R<a href="fitri.html#fitri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Complete Pooling</strong></p>
 <p>The complete pooling model is fit with the function <code>lm</code>, and is only modeled by <code>1</code> and no covariates. This is the simple mean model, and is equivelant to estimating the mean.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="fitri.html#cb245-1" aria-hidden="true" tabindex="-1"></a>fit_completepool <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>radon)</span>
-<span id="cb245-2"><a href="fitri.html#cb245-2" aria-hidden="true" tabindex="-1"></a>fit_completepool</span>
-<span id="cb245-3"><a href="fitri.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb245-4"><a href="fitri.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb245-5"><a href="fitri.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = log_radon ~ 1, data = radon)</span></span>
-<span id="cb245-6"><a href="fitri.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb245-7"><a href="fitri.html#cb245-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb245-8"><a href="fitri.html#cb245-8" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  </span></span>
-<span id="cb245-9"><a href="fitri.html#cb245-9" aria-hidden="true" tabindex="-1"></a><span class="do">##       1.265</span></span>
-<span id="cb245-10"><a href="fitri.html#cb245-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(radon<span class="sc">$</span>log_radon)</span>
-<span id="cb245-11"><a href="fitri.html#cb245-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.264779</span></span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="fitri.html#cb252-1" aria-hidden="true" tabindex="-1"></a>fit_completepool <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>radon)</span>
+<span id="cb252-2"><a href="fitri.html#cb252-2" aria-hidden="true" tabindex="-1"></a>fit_completepool</span>
+<span id="cb252-3"><a href="fitri.html#cb252-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb252-4"><a href="fitri.html#cb252-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb252-5"><a href="fitri.html#cb252-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = log_radon ~ 1, data = radon)</span></span>
+<span id="cb252-6"><a href="fitri.html#cb252-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb252-7"><a href="fitri.html#cb252-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb252-8"><a href="fitri.html#cb252-8" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  </span></span>
+<span id="cb252-9"><a href="fitri.html#cb252-9" aria-hidden="true" tabindex="-1"></a><span class="do">##       1.265</span></span>
+<span id="cb252-10"><a href="fitri.html#cb252-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(radon<span class="sc">$</span>log_radon)</span>
+<span id="cb252-11"><a href="fitri.html#cb252-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.264779</span></span></code></pre></div>
 <p><strong>No Pooling</strong></p>
 <p>The no pooling model is also fit with the function <code>lm</code>, but gives each county a unique intercept in the model.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="fitri.html#cb246-1" aria-hidden="true" tabindex="-1"></a>fit_nopool <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> county, <span class="at">data=</span>radon)</span>
-<span id="cb246-2"><a href="fitri.html#cb246-2" aria-hidden="true" tabindex="-1"></a>fit_nopool.withint <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> county, <span class="at">data=</span>radon)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="fitri.html#cb253-1" aria-hidden="true" tabindex="-1"></a>fit_nopool <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> county, <span class="at">data=</span>radon)</span>
+<span id="cb253-2"><a href="fitri.html#cb253-2" aria-hidden="true" tabindex="-1"></a>fit_nopool.withint <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_radon <span class="sc">~</span> county, <span class="at">data=</span>radon)</span></code></pre></div>
 <table style="text-align:center">
 <tr>
 <td colspan="3" style="border-bottom: 1px solid black">
@@ -636,42 +639,42 @@ countyBECKER
 <li>The partial pooling model is fit with the function <code>lmer()</code>, which is part of the <strong><a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf"><code>lme4</code></a></strong> package.</li>
 <li>The extra notation around the input variable <code>(1|county)</code> dictates that each county should get its own unique intercept <span class="math inline">\(\alpha_{j[n]}\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="fitri.html#cb247-1" aria-hidden="true" tabindex="-1"></a>fit_partpool <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_radon <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span>county), <span class="at">data=</span>radon)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="fitri.html#cb254-1" aria-hidden="true" tabindex="-1"></a>fit_partpool <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_radon <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span>county), <span class="at">data=</span>radon)</span></code></pre></div>
 <p>The fixed effects portion of the model output of <code>lmer</code> is similar to output from <code>lm</code>, except no p-values are displayed. The fact that no p-values are displayed is a much discussed topic. The author of the library <code>lme4</code>, Douglas Bates, believes that there is no “obviously correct” solution to calculating p-values for models with randomly varying intercepts (or slopes); see <strong><a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here</a></strong> for a general discussion.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="fitri.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_partpool)</span>
-<span id="cb248-2"><a href="fitri.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Linear mixed model fit by REML [&#39;lmerMod&#39;]</span></span>
-<span id="cb248-3"><a href="fitri.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: log_radon ~ (1 | county)</span></span>
-<span id="cb248-4"><a href="fitri.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: radon</span></span>
-<span id="cb248-5"><a href="fitri.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb248-6"><a href="fitri.html#cb248-6" aria-hidden="true" tabindex="-1"></a><span class="do">## REML criterion at convergence: 2184.9</span></span>
-<span id="cb248-7"><a href="fitri.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb248-8"><a href="fitri.html#cb248-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaled residuals: </span></span>
-<span id="cb248-9"><a href="fitri.html#cb248-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb248-10"><a href="fitri.html#cb248-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -4.6880 -0.5884  0.0323  0.6444  3.4186 </span></span>
-<span id="cb248-11"><a href="fitri.html#cb248-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb248-12"><a href="fitri.html#cb248-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
-<span id="cb248-13"><a href="fitri.html#cb248-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  Groups   Name        Variance Std.Dev.</span></span>
-<span id="cb248-14"><a href="fitri.html#cb248-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  county   (Intercept) 0.08861  0.2977  </span></span>
-<span id="cb248-15"><a href="fitri.html#cb248-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  Residual             0.58686  0.7661  </span></span>
-<span id="cb248-16"><a href="fitri.html#cb248-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of obs: 919, groups:  county, 85</span></span>
-<span id="cb248-17"><a href="fitri.html#cb248-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb248-18"><a href="fitri.html#cb248-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:</span></span>
-<span id="cb248-19"><a href="fitri.html#cb248-19" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value</span></span>
-<span id="cb248-20"><a href="fitri.html#cb248-20" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    1.350      0.047   28.72</span></span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="fitri.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_partpool)</span>
+<span id="cb255-2"><a href="fitri.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Linear mixed model fit by REML [&#39;lmerMod&#39;]</span></span>
+<span id="cb255-3"><a href="fitri.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: log_radon ~ (1 | county)</span></span>
+<span id="cb255-4"><a href="fitri.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: radon</span></span>
+<span id="cb255-5"><a href="fitri.html#cb255-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb255-6"><a href="fitri.html#cb255-6" aria-hidden="true" tabindex="-1"></a><span class="do">## REML criterion at convergence: 2184.9</span></span>
+<span id="cb255-7"><a href="fitri.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb255-8"><a href="fitri.html#cb255-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaled residuals: </span></span>
+<span id="cb255-9"><a href="fitri.html#cb255-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb255-10"><a href="fitri.html#cb255-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -4.6880 -0.5884  0.0323  0.6444  3.4186 </span></span>
+<span id="cb255-11"><a href="fitri.html#cb255-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb255-12"><a href="fitri.html#cb255-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb255-13"><a href="fitri.html#cb255-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  Groups   Name        Variance Std.Dev.</span></span>
+<span id="cb255-14"><a href="fitri.html#cb255-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  county   (Intercept) 0.08861  0.2977  </span></span>
+<span id="cb255-15"><a href="fitri.html#cb255-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  Residual             0.58686  0.7661  </span></span>
+<span id="cb255-16"><a href="fitri.html#cb255-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of obs: 919, groups:  county, 85</span></span>
+<span id="cb255-17"><a href="fitri.html#cb255-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb255-18"><a href="fitri.html#cb255-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:</span></span>
+<span id="cb255-19"><a href="fitri.html#cb255-19" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value</span></span>
+<span id="cb255-20"><a href="fitri.html#cb255-20" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    1.350      0.047   28.72</span></span></code></pre></div>
 <ul>
 <li>The random effects portion of the <code>lmer</code> output provides a point estimate of the variance of component <span class="math inline">\(\sigma^2_{\alpha} = 0.09\)</span> and the model’s residual variance, <span class="math inline">\(\sigma_\epsilon = 0.57\)</span>.</li>
 <li>The fixed effect here is interpreted in the same way that we would in a normal fixed effects mean model, as the global predicted value of the outcome of <code>log_radon</code>.</li>
 <li>The random intercepts aren’t automatically shown in this output. We can visualize these using a forestplot. We use the <code>plot_model()</code> function from the <code>sjPlot</code> package, on the <code>fit_partpool</code> model, we want to see the random effects (<code>type="re"</code>), and we want to sort on the name of the random variable, here it’s <code>"(Intercept)"</code>.</li>
 </ul>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="fitri.html#cb249-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_partpool, <span class="at">type=</span><span class="st">&quot;re&quot;</span>, <span class="at">sort.est =</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="at">y.offset =</span> .<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="fitri.html#cb256-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_partpool, <span class="at">type=</span><span class="st">&quot;re&quot;</span>, <span class="at">sort.est =</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="at">y.offset =</span> .<span class="dv">4</span>)</span></code></pre></div>
 <p><img src="random_intercept_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Notice that these effects are centered around 0. Refering back (<span class="citation">(<a href="#ref-mathri" role="doc-biblioref"><strong>mathri?</strong></a>)</span>), the intercept <span class="math inline">\(\beta_{0j}\)</span> was modeled equal to some average intercept across all groups <span class="math inline">\(\gamma_{00}\)</span>, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="fitri.html#cb250-1" aria-hidden="true" tabindex="-1"></a>showri <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Random_Effect   =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool)), </span>
-<span id="cb250-2"><a href="fitri.html#cb250-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Fixed_Intercept =</span> <span class="fu">fixef</span>(fit_partpool), </span>
-<span id="cb250-3"><a href="fitri.html#cb250-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">RandomIntercept =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool))<span class="sc">+</span><span class="fu">fixef</span>(fit_partpool))</span>
-<span id="cb250-4"><a href="fitri.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb250-5"><a href="fitri.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(showri) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">coef</span>(fit_partpool)<span class="sc">$</span>county)</span>
-<span id="cb250-6"><a href="fitri.html#cb250-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(showri))</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="fitri.html#cb257-1" aria-hidden="true" tabindex="-1"></a>showri <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Random_Effect   =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool)), </span>
+<span id="cb257-2"><a href="fitri.html#cb257-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Fixed_Intercept =</span> <span class="fu">fixef</span>(fit_partpool), </span>
+<span id="cb257-3"><a href="fitri.html#cb257-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">RandomIntercept =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool))<span class="sc">+</span><span class="fu">fixef</span>(fit_partpool))</span>
+<span id="cb257-4"><a href="fitri.html#cb257-4" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb257-5"><a href="fitri.html#cb257-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(showri) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">coef</span>(fit_partpool)<span class="sc">$</span>county)</span>
+<span id="cb257-6"><a href="fitri.html#cb257-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(showri))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -781,11 +784,11 @@ BIGSTONE
 <li>By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties.</li>
 <li>Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section (<span class="citation">(<a href="#ref-pool" role="doc-biblioref"><strong>pool?</strong></a>)</span>).</li>
 </ul>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="fitri.html#cb251-1" aria-hidden="true" tabindex="-1"></a>cmpr.est <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Mean_Model       =</span> <span class="fu">coef</span>(fit_completepool), </span>
-<span id="cb251-2"><a href="fitri.html#cb251-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Random_Intercept =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool))<span class="sc">+</span><span class="fu">fixef</span>(fit_partpool), </span>
-<span id="cb251-3"><a href="fitri.html#cb251-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Fixed_Effects    =</span> <span class="fu">coef</span>(fit_nopool))</span>
-<span id="cb251-4"><a href="fitri.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmpr.est) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">coef</span>(fit_partpool)<span class="sc">$</span>county)</span>
-<span id="cb251-5"><a href="fitri.html#cb251-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(cmpr.est))</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="fitri.html#cb258-1" aria-hidden="true" tabindex="-1"></a>cmpr.est <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Mean_Model       =</span> <span class="fu">coef</span>(fit_completepool), </span>
+<span id="cb258-2"><a href="fitri.html#cb258-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Random_Intercept =</span> <span class="fu">unlist</span>(<span class="fu">ranef</span>(fit_partpool))<span class="sc">+</span><span class="fu">fixef</span>(fit_partpool), </span>
+<span id="cb258-3"><a href="fitri.html#cb258-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Fixed_Effects    =</span> <span class="fu">coef</span>(fit_nopool))</span>
+<span id="cb258-4"><a href="fitri.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmpr.est) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">coef</span>(fit_partpool)<span class="sc">$</span>county)</span>
+<span id="cb258-5"><a href="fitri.html#cb258-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(cmpr.est))</span></code></pre></div>
 <table>
 <thead>
 <tr>
