@@ -5,7 +5,7 @@ Model building methods are used mainly in exploratory situations where many inde
 This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit. 
 
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gtsummary`, and `survey`...packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gtsummary`, `performance`, and `survey` packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
 
 
 
@@ -1201,6 +1201,89 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * Thus, BIC penalizes larger models more heavily.
 * They often agree.
     - When they disagree, AIC chooses a larger model than BIC.
+
+## Model Diagnostics {#model-diagnostics}
+
+Recall from Section \ref(@mlr-math-model) the assumptions for linear regression model are; 
+
+* **Linearity** The relationship between $x_j$ and $y$ is linear, for all $j$. 
+* **Normality, Homogeneity of variance** The residuals are identically distributed $\epsilon_{i} \sim N(0, \sigma^{2})$ 
+* **Uncorrelated/Independent** Distinct error terms are uncorrelated: $\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.$  
+
+There are a few ways to visually assess these assumptions. We'll look at this using a penguin model of body mass as an example. 
+
+
+```r
+pen.bmg.model <- lm(body_mass_g ~ bill_length_mm + flipper_length_mm, data=pen)
+```
+
+### Linearity
+Create a scatterplot with lowess AND linear regression line. See how close the lowess trend line is to the best fit line. Do this for all variables. 
+
+
+```r
+bill.plot  <- ggplot(pen, aes(y=body_mass_g, x=bill_length_mm)) + 
+  geom_point() +   theme_bw() + 
+  geom_smooth(col = "red") + 
+  geom_smooth(method = "lm" , col = "blue")
+
+flipper.plot  <- ggplot(pen, aes(y=body_mass_g, x=flipper_length_mm)) + 
+  geom_point() +   theme_bw() + 
+  geom_smooth(col = "red") + 
+  geom_smooth(method = "lm" , col = "blue")
+
+gridExtra::grid.arrange(bill.plot, flipper.plot, ncol=2)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+
+Both variables appear to have a mostly linear relationship with body mass. For penguins with bill length over 50mm the slope may decrease, but the data is sparse in the tails. 
+
+### Normality of residuals. 
+There are two common ways to assess normality. 
+
+1. A histogram or density plot with a normal distribution curve overlaid. 
+2. A qqplot. This is also known as a 'normal probability plot'. It is used to compare the theoretical quantiles of the data _if it were to come from a normal distribution_ to the observed quantiles. PMA6 Figure 5.4 has more examples and an explanation. 
+
+
+```r
+gridExtra::grid.arrange(
+  plot(check_normality(pen.bmg.model)), 
+  plot(check_normality(pen.bmg.model), type = "qq"),
+  ncol=2
+)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+In both cases you want to assess how close the dots/distribution is to the reference curve/line. 
+
+### Homogeneity of variance
+The variability of the residuals should be constant, and independent of the value of the fitted value $\hat{y}$. 
+
+
+```r
+plot(check_heteroskedasticity(pen.bmg.model))
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+This assumption is often the hardest to be fully upheld. Here we see a slightly downward trend. However, this is not a massive violation of assumptions. 
+
+### Posterior Predictions
+
+Not really an assumption, but we can also assess the fit of a model by how well it does to predict the outcome. Using a Bayesian sampling method, the distribution of the predictions from the model should resemble the observed distribution. 
+
+
+```r
+plot(check_posterior_predictions(pen.bmg.model))
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+
+This looks like a good fit. 
+
+
 
 ## General Advice
 

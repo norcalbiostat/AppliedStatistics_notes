@@ -22,7 +22,7 @@ library(performance)
 pen <- palmerpenguins::penguins
 ```
 
-## Mathematical Model
+## Mathematical Model {#mlr-math-model}
 
 The mathematical model for multiple linear regression equates the value of the continuous outcome $y_{i}$ to a **linear combination** of multiple predictors $x_{1} \ldots x_{p}$ each with their own slope coefficient $\beta_{1} \ldots \beta_{p}$. 
 
@@ -385,7 +385,7 @@ The same set of regression diagnostics can be examined to identify any potential
 check_model(mlr.dad.model)
 ```
 
-
+More about these model diagnostics can be found in Section \ref(@model-diagnostics)
  
 ## What to watch out for
 * Representative sample 

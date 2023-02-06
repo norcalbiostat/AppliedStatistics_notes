@@ -124,7 +124,7 @@ example-2-cont.-correlation-regression
 example-3-anova
 example-4-chi-squared
 mlr
-mathematical-model-1
+mlr-math-model
 parameter-estimation
 fitting-the-model
 interpreting-coefficients
@@ -159,6 +159,10 @@ mallows-c_p
 akaike-information-criterion-aic
 bayesian-information-criterion-bic
 aic-vs-bic
+linearity
+normality-of-residuals.
+homogeneity-of-variance
+posterior-predictions
 general-advice
 what-to-watch-out-for-1
 glm
@@ -274,5 +278,3 @@ visualize-imputations
 calculating-bias
 final-thoughts
 additional-references-1
-terminology
-autoregressive

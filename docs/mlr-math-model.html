@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Applied Statistics</title>
+  <title>9.1 Mathematical Model | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Applied Statistics" />
+  <meta property="og:title" content="9.1 Mathematical Model | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Applied Statistics" />
+  <meta name="twitter:title" content="9.1 Mathematical Model | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="mlr.html"/>
+<link rel="next" href="parameter-estimation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -515,19 +515,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="mlr-math-model" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Mathematical Model<a href="mlr-math-model.html#mlr-math-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The mathematical model for multiple linear regression equates the value of the continuous outcome <span class="math inline">\(y_{i}\)</span> to a <strong>linear combination</strong> of multiple predictors <span class="math inline">\(x_{1} \ldots x_{p}\)</span> each with their own slope coefficient <span class="math inline">\(\beta_{1} \ldots \beta_{p}\)</span>.</p>
+<p><span class="math display">\[ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \ldots + \beta_{p}x_{pi} + \epsilon_{i}\]</span></p>
+<p>where <span class="math inline">\(i\)</span> indexes the observations <span class="math inline">\(i = 1 \ldots n\)</span>, and <span class="math inline">\(j\)</span> indexes the number of parameters <span class="math inline">\(j=1 \ldots p\)</span>. This linear combination is often written using <em>summation notation</em>: <span class="math inline">\(\sum_{i=1}^{p}X_{ij}\beta_{j}\)</span>.</p>
+<p>The assumptions on the residuals <span class="math inline">\(\epsilon_{i}\)</span> still hold:</p>
+<ul>
+<li>They have mean zero<br />
+</li>
+<li>They are homoscedastic, that is all have the same finite variance: <span class="math inline">\(Var(\epsilon_{i})=\sigma^{2}&lt;\infty\)</span><br />
+</li>
+<li>Distinct error terms are uncorrelated: (Independent) <span class="math inline">\(\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.\)</span></li>
+</ul>
+<p>In matrix notation the linear combination of <span class="math inline">\(X\)</span>’s and <span class="math inline">\(\beta\)</span>’s is written as <span class="math inline">\(\mathbf{x}_{i}^{&#39;}\mathbf{\beta}\)</span>, (the inner product between the vectors <span class="math inline">\(\mathbf{x}_{i}\)</span> and <span class="math inline">\(\mathbf{\beta}\)</span>). Then the model is written as:</p>
+<p><span class="math display">\[ \textbf{y} = \textbf{X} \mathbf{\beta} + \mathbf{\epsilon} ,\]</span></p>
+<p>and we say the regression model relates <span class="math inline">\(y\)</span> to a function of <span class="math inline">\(\textbf{X}\)</span> and <span class="math inline">\(\mathbf{\beta}\)</span>, where <span class="math inline">\(\textbf{X}\)</span> is a <span class="math inline">\(nxp\)</span> matrix of <span class="math inline">\(p\)</span> covariates on <span class="math inline">\(n\)</span> observations and <span class="math inline">\(\mathbf{\beta}\)</span> is a length <span class="math inline">\(p\)</span> vector of regression coefficients.</p>
+<p><em>Note: Knowledge of Matricies or Linear Algebra is not required to conduct or understand multiple regression, but it is foundational and essential for Statistics and Data Science majors to understand the theory behind linear models.</em></p>
+<p><em>Learners in other domains should attempt to understand matricies at a high level, as some of the places models can fail is due to problems doing math on matricies.</em></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="mlr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameter-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

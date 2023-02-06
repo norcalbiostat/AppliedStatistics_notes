@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="variable-selection-process.html"/>
-<link rel="next" href="general-advice.html"/>
+<link rel="next" href="model-diagnostics.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,13 +214,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -285,19 +286,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>9</b> Multiple Linear Regression</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
+<li class="chapter" data-level="9.1" data-path="mlr-math-model.html"><a href="mlr-math-model.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
 <li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
 <li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
 <li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
+<li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
-<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
-<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
-<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.8</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
@@ -332,8 +336,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
 <li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
-<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html#model-diagnostics"><i class="fa fa-check"></i><b>10.6</b> Model Diagnostics</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="model-diagnostics.html"><a href="model-diagnostics.html#linearity"><i class="fa fa-check"></i><b>10.6.1</b> Linearity</a></li>
+<li class="chapter" data-level="10.6.2" data-path="model-diagnostics.html"><a href="model-diagnostics.html#normality-of-residuals."><i class="fa fa-check"></i><b>10.6.2</b> Normality of residuals.</a></li>
+<li class="chapter" data-level="10.6.3" data-path="model-diagnostics.html"><a href="model-diagnostics.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>10.6.3</b> Homogeneity of variance</a></li>
+<li class="chapter" data-level="10.6.4" data-path="model-diagnostics.html"><a href="model-diagnostics.html#posterior-predictions"><i class="fa fa-check"></i><b>10.6.4</b> Posterior Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.7</b> General Advice</a></li>
+<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -537,20 +548,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="general-F" class="section level3 hasAnchor" number="10.5.3">
 <h3><span class="header-section-number">10.5.3</span> General F Test<a href="model-fit-criteria.html#general-F" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. <em>Nested</em>: The list of variables in one model is a subset of the list of variables from a bigger model.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="model-fit-criteria.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model</span></span>
-<span id="cb202-2"><a href="model-fit-criteria.html#cb202-2" aria-hidden="true" tabindex="-1"></a>full.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
-<span id="cb202-3"><a href="model-fit-criteria.html#cb202-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model</span></span>
-<span id="cb202-4"><a href="model-fit-criteria.html#cb202-4" aria-hidden="true" tabindex="-1"></a>reduced.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age, <span class="at">data=</span>depress)</span>
-<span id="cb202-5"><a href="model-fit-criteria.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reduced.employ.model, full.employ.model)</span>
-<span id="cb202-6"><a href="model-fit-criteria.html#cb202-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
-<span id="cb202-7"><a href="model-fit-criteria.html#cb202-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb202-8"><a href="model-fit-criteria.html#cb202-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: cesd ~ age</span></span>
-<span id="cb202-9"><a href="model-fit-criteria.html#cb202-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: cesd ~ age + chronill + employ</span></span>
-<span id="cb202-10"><a href="model-fit-criteria.html#cb202-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
-<span id="cb202-11"><a href="model-fit-criteria.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    292 22197                                  </span></span>
-<span id="cb202-12"><a href="model-fit-criteria.html#cb202-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    285 20036  7    2161.4 4.3921 0.0001197 ***</span></span>
-<span id="cb202-13"><a href="model-fit-criteria.html#cb202-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb202-14"><a href="model-fit-criteria.html#cb202-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="model-fit-criteria.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model</span></span>
+<span id="cb15-2"><a href="model-fit-criteria.html#cb15-2" aria-hidden="true" tabindex="-1"></a>full.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
+<span id="cb15-3"><a href="model-fit-criteria.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model</span></span>
+<span id="cb15-4"><a href="model-fit-criteria.html#cb15-4" aria-hidden="true" tabindex="-1"></a>reduced.employ.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age, <span class="at">data=</span>depress)</span>
+<span id="cb15-5"><a href="model-fit-criteria.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reduced.employ.model, full.employ.model)</span>
+<span id="cb15-6"><a href="model-fit-criteria.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb15-7"><a href="model-fit-criteria.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-8"><a href="model-fit-criteria.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: cesd ~ age</span></span>
+<span id="cb15-9"><a href="model-fit-criteria.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: cesd ~ age + chronill + employ</span></span>
+<span id="cb15-10"><a href="model-fit-criteria.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
+<span id="cb15-11"><a href="model-fit-criteria.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    292 22197                                  </span></span>
+<span id="cb15-12"><a href="model-fit-criteria.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    285 20036  7    2161.4 4.3921 0.0001197 ***</span></span>
+<span id="cb15-13"><a href="model-fit-criteria.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb15-14"><a href="model-fit-criteria.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 
 <div class="rmdcaution">
 Caution: this uses <code>anova()</code> not <code>aov()</code>.
@@ -639,7 +650,7 @@ Caution: this uses <code>anova()</code> not <code>aov()</code>.
         </div>
       </div>
 <a href="variable-selection-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general-advice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-diagnostics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
