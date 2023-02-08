@@ -5,7 +5,7 @@ Model building methods are used mainly in exploratory situations where many inde
 This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit. 
 
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gtsummary`, `performance`, and `survey` packages to help tidy and visualize results from regression models. </div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `gtsummary` and `survey` packages to help tidy and visualize results from regression models. It also uses functions from the `performance` and `glmnet` packages to perform model selection and assessment. </div>\EndKnitrBlock{rmdnote}
 
 
 
@@ -1039,22 +1039,16 @@ etc.
 * Compare and choose among the "best subsets" of various sizes.
 
 
-### Implementation in R
-
-Refer to the following refereces
-
-* Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
-* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the stepwise procedures, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
-* Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
+### Implementation of stepwise selection in R
+* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
+* **Best Subsets** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
 
 
-
-
-### Lasso
+### LASSO Regression (PMA6 9.7)
 
 **L**east **A**bsolute **S**hrinkage and **S**election **O**perator.
 
-Goal is to minimize
+The goal of LASSO is to minimize
 
 $$
 RSS + \lambda \sum_{j}\mid \beta_{j} \ \mid
@@ -1062,14 +1056,582 @@ $$
 
 where $\lambda$ is a model complexity penalty parameter. 
 
-* Used during cross-validation and AIC/BIC
-* "Shrinks" the coefficients, setting some to exactly 0. 
+* "Shrinks" the coefficients, setting some to exactly 0.
+    - Thus essentially choosing a simpler model 
+* Balances model accuracy with interpretation.
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">Appropriate inference after model selection is currently under research. No unifying theory exists yet. </div>\EndKnitrBlock{rmdnote}
 
+The lasso fits many regression models and selects those variables that show the strongest association with the response variable using the data at hand. This is also described as a method of _selective inference_  (Taylor and Tibshirani, 2015) and is an example of exploratory research, where the data may influence what type and how many analyses are performed.
+
+
+#### Example
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions `glmnet` package, and the `Chemical` data set from PMA6. Also it uses the `model.matrix` function from the `stats` package (automatically loaded). This function takes a set of input predictors and turns them into the variables that are used directly in the model. For example, categorical variables will be converted into multiple binary indicators. This typically happens in the background. </div>\EndKnitrBlock{rmdnote}
+
+The `glmnet` function works best when the outcome `y` and predictors `x` are not contained within a data frame. The `alpha` argument is the tuning parameter, where a value of 1 specifies the lasso. 
+
+
+```r
+library(glmnet)
+chem <- read.table("data/Chemical.txt", header = TRUE)
+y <- chem$PE
+x <- model.matrix(PE~., chem)[,-1] # the -1 drops the intercept
+chem.lasso <- glmnet(x, y, alpha = 1)
+```
+
+We can visualize the effect of the coefficient shrinkage using the following plot.
+
+
+```r
+plot(chem.lasso, xvar = "lambda")
+mtext(side=3, "Number of Variables", line=2)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+* Each line represents the value of a coefficient as $ln(\lambda)$ changes. 
+* The red line on the bottom and the purple on the top must be important, since they are the last two to be shrunk to 0 and they are relatively stable. 
+
+Examining the coefficients of the `chem.lasso` model object gives us a very large matrix (7x61), listing the coefficients for each value of $\lambda$ that was tried. A sample of columns are shown below: 
+
+```r
+coef(chem.lasso)[,1:8]
+## 7 x 8 sparse Matrix of class "dgCMatrix"
+##                   s0         s1         s2        s3       s4         s5
+## (Intercept) 9.366667  9.5835968  9.7812554  9.961355 10.12545 10.0399324
+## ROR5        .         .          .          .         .        .        
+## DE          .        -0.5206322 -0.9950129 -1.427251 -1.82109 -2.0903355
+## SALESGR5    .         .          .          .         .        .        
+## EPS5        .         .          .          .         .        .        
+## NPM1        .         .          .          .         .        0.0157436
+## PAYOUTR1    .         .          .          .         .        0.2427377
+##                      s6          s7
+## (Intercept)  9.59940208  9.19800729
+## ROR5         .           .         
+## DE          -2.21050375 -2.31999666
+## SALESGR5     .           .         
+## EPS5         .           .         
+## NPM1         0.04642112  0.07437333
+## PAYOUTR1     0.98609790  1.66341998
+coef(chem.lasso)[,56:60]
+## 7 x 5 sparse Matrix of class "dgCMatrix"
+##                     s55         s56         s57         s58         s59
+## (Intercept)  1.36957827  1.35834023  1.34802448  1.34099610  1.33052382
+## ROR5         0.03767492  0.03797214  0.03825501  0.03840313  0.03870172
+## DE          -2.58475249 -2.58199893 -2.57937377 -2.57863116 -2.57530747
+## SALESGR5     0.19961031  0.19990639  0.20017553  0.20039468  0.20064382
+## EPS5        -0.03468051 -0.03483069 -0.03497088 -0.03507850 -0.03520342
+## NPM1         0.34740236  0.34760738  0.34778861  0.34795977  0.34812027
+## PAYOUTR1     9.78594052  9.79286717  9.79910767  9.80408094  9.81009965
+```
+
+Comparing the plot to the coefficient model output above, we see that the variables that show up being shrunk last are `DE` and `PAYOUTR1`. 
+
+**Using Cross validation to find minimum lambda**
+
+Cross-validation is a resampling method that uses different portions of the data to test and train a model on different iterations [Wikipedia](https://en.wikipedia.org/wiki/Cross-validation_(statistics)). 
+
+By applying a cross-validation technique, we can identify the specific value for $\lambda$ that 
+results in the lowest cross-validated Mean Squared Error (MSE) ($\lambda_{min}$). To ensure
+reproducibility of these results we set a seed for the random number generator prior to analysis.
+
+
+```r
+set.seed(123) # Setting a seed to ensure I get the same results each time I knit
+cv.lasso <- cv.glmnet(x, y, alpha = 1) # note change in function
+
+# Fit the final model using the min lambda
+model <- glmnet(x, y, alpha = 1, lambda = cv.lasso$lambda.min)
+```
+
+The resulting table of shrunk regression coefficients then is; 
+
+```r
+coef(model)
+## 7 x 1 sparse Matrix of class "dgCMatrix"
+##                       s0
+## (Intercept)  2.645693621
+## ROR5         0.004833458
+## DE          -2.882636490
+## SALESGR5     0.165581782
+## EPS5        -0.017771193
+## NPM1         0.323497141
+## PAYOUTR1     8.986481946
+```
+
+In this case we would keep variables: DE, SALESGR5, NPM1 and PAYOUTR1. Estimates for ROR5 and EPS56 are very small, and so can be reasonably excluded. 
+
+* The lasso procedure normalizes the data prior to fitting a model, so the coefficient values that are returned _cannot_ be interpreted directly in context of the problem. 
+    - This does allow us the ability to make "judgement" calls on what is a 'small' estimate since it's no longer dependent on the units of the data. 
+* Appropriate inference after model selection is currently under research. No unifying theory exists yet. 
 * For now, use lasso to choose variables, then fit a model with only those selected variables in the final model. 
 * Variables chosen in this manner are important, yet biased estimates. 
 
+
+```r
+lm(PE ~ DE + SALESGR5 + NPM1 + PAYOUTR1, data = chem) |> tbl_regression()
+```
+
+```{=html}
+<div id="iijwugufyb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#iijwugufyb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iijwugufyb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iijwugufyb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iijwugufyb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iijwugufyb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iijwugufyb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iijwugufyb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iijwugufyb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iijwugufyb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iijwugufyb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iijwugufyb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iijwugufyb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iijwugufyb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iijwugufyb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iijwugufyb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iijwugufyb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iijwugufyb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iijwugufyb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iijwugufyb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iijwugufyb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iijwugufyb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iijwugufyb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iijwugufyb .gt_left {
+  text-align: left;
+}
+
+#iijwugufyb .gt_center {
+  text-align: center;
+}
+
+#iijwugufyb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iijwugufyb .gt_font_normal {
+  font-weight: normal;
+}
+
+#iijwugufyb .gt_font_bold {
+  font-weight: bold;
+}
+
+#iijwugufyb .gt_font_italic {
+  font-style: italic;
+}
+
+#iijwugufyb .gt_super {
+  font-size: 65%;
+}
+
+#iijwugufyb .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#iijwugufyb .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#iijwugufyb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iijwugufyb .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#iijwugufyb .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#iijwugufyb .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">DE</td>
+<td class="gt_row gt_center">-3.2</td>
+<td class="gt_row gt_center">-6.9, 0.58</td>
+<td class="gt_row gt_center">0.094</td></tr>
+    <tr><td class="gt_row gt_left">SALESGR5</td>
+<td class="gt_row gt_center">0.19</td>
+<td class="gt_row gt_center">-0.02, 0.41</td>
+<td class="gt_row gt_center">0.077</td></tr>
+    <tr><td class="gt_row gt_left">NPM1</td>
+<td class="gt_row gt_center">0.35</td>
+<td class="gt_row gt_center">0.12, 0.59</td>
+<td class="gt_row gt_center">0.005</td></tr>
+    <tr><td class="gt_row gt_left">PAYOUTR1</td>
+<td class="gt_row gt_center">11</td>
+<td class="gt_row gt_center">4.7, 17</td>
+<td class="gt_row gt_center">0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+#### Ridge Regression (PMA6 10.6)
+
+Often compared to LASSO, Ridge regression also minimizes the RSS, but the penalty function is different: 
+$$
+RSS + \lambda \sum_{j} \beta_{j}^2
+$$
+
+Ridge regression only shrinks the magnitude of the coefficients, not set them exactly to zero. 
+
+\BeginKnitrBlock{rmdwarning}<div class="rmdwarning">This means Ridge regression is **not** a method of variable selection.  </div>\EndKnitrBlock{rmdwarning}
 
 
 ## Comparing between models {#model-fit-criteria}
@@ -1090,23 +1652,9 @@ $$
 $$
 
 
-### Likelihood function
-
-What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
-$$
-\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
-$$
-
-* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).  
-* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
-* We can compare between models using functions based off the LL. 
-
-
-There are several measures we can use to compare between competing models. 
-
 ### General F Test  {#general-F}
 
-Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. 
+Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. Similar to all other ANOVA models, you are essentially comparing the difference in RSS between nested models. 
 
 
 
@@ -1131,16 +1679,30 @@ anova(reduced.employ.model, full.employ.model)
 
 Other references: https://online.stat.psu.edu/stat501/lesson/6/6.2
 
+### Likelihood function
+
+What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
+$$
+\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
+$$
+
+* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).  
+* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
+* We can compare between models using functions based off the LL. 
+
+
+There are several measures we can use to compare between competing models. 
+
 
 ### Multiple $R^{2}$
 If the model explains a large amount of variation in the outcome that's good right? So we could consider using $R^{2}$ as a selection criteria and trying to find the model that maximizes this value. 
-
 
 * Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
     - Ex. 1: N = 100, P = 1, E($R^{2}$) = 0.01
     - Ex. 2: N = 21, P = 10, E($R^{2}$) = 0.5
 * Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
 
+Reference PMA6 Figure 9.1
 
 ### Adjusted $R^{2}$
 To alleviate bias use Mean squares instead of SS. 
@@ -1202,9 +1764,9 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * They often agree.
     - When they disagree, AIC chooses a larger model than BIC.
 
-## Model Diagnostics {#model-diagnostics}
+## Model Diagnostics
 
-Recall from Section \ref(@mlr-math-model) the assumptions for linear regression model are; 
+Recall from Section \@ref(mathematical-model) the assumptions for linear regression model are; 
 
 * **Linearity** The relationship between $x_j$ and $y$ is linear, for all $j$. 
 * **Normality, Homogeneity of variance** The residuals are identically distributed $\epsilon_{i} \sim N(0, \sigma^{2})$ 
@@ -1235,7 +1797,7 @@ flipper.plot  <- ggplot(pen, aes(y=body_mass_g, x=flipper_length_mm)) +
 gridExtra::grid.arrange(bill.plot, flipper.plot, ncol=2)
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 Both variables appear to have a mostly linear relationship with body mass. For penguins with bill length over 50mm the slope may decrease, but the data is sparse in the tails. 
 
@@ -1254,7 +1816,7 @@ gridExtra::grid.arrange(
 )
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 In both cases you want to assess how close the dots/distribution is to the reference curve/line. 
 
@@ -1266,7 +1828,7 @@ The variability of the residuals should be constant, and independent of the valu
 plot(check_heteroskedasticity(pen.bmg.model))
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 This assumption is often the hardest to be fully upheld. Here we see a slightly downward trend. However, this is not a massive violation of assumptions. 
 
@@ -1279,13 +1841,22 @@ Not really an assumption, but we can also assess the fit of a model by how well 
 plot(check_posterior_predictions(pen.bmg.model))
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 This looks like a good fit. 
 
+### All at once
 
 
-## General Advice
+```r
+check_model(pen.bmg.model)
+```
+
+<img src="model_building_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+
+Refer to PMA6 8.8 to learn about _leverage_. 
+
+## General Advice (PMA6 9.9)
 
 * Model selection is not a hard science. 
 * Some criteria have "rules of thumb" that can guide your exploration (such as difference in AIC < 2)
@@ -1299,7 +1870,7 @@ This looks like a good fit.
     - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
 
 
-## What to watch out for
+## What to watch out for (PMA6 9.10)
 * Multicollinearity
 * Missing Data
 * Use previous research as a guide

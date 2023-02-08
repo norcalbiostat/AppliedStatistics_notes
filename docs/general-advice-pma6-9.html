@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.4 Log-linear models | Applied Statistics</title>
+  <title>10.7 General Advice (PMA6 9.9) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.4 Log-linear models | Applied Statistics" />
+  <meta property="og:title" content="10.7 General Advice (PMA6 9.9) | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.4 Log-linear models | Applied Statistics" />
+  <meta name="twitter:title" content="10.7 General Advice (PMA6 9.9) | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="logreg.html"/>
-<link rel="next" href="count-outcome-data.html"/>
+<link rel="prev" href="model-diagnostics-1.html"/>
+<link rel="next" href="what-to-watch-out-for-pma6-9.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -213,14 +214,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -279,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -287,51 +287,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
-<li class="chapter" data-level="9.3" data-path="mlr-fev.html"><a href="mlr-fev.html"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
-<li class="chapter" data-level="9.4" data-path="presenting-regression-results.html"><a href="presenting-regression-results.html"><i class="fa fa-check"></i><b>9.4</b> Presenting regression results</a></li>
-<li class="chapter" data-level="9.5" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.5</b> Confounding</a>
+<li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
+<li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
 <ul>
-<li class="chapter" data-level="9.5.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.5.1</b> Example: Does smoking affect pulse rate?</a></li>
+<li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
+<li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
+<li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.6</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="binary-predictors.html"><a href="binary-predictors.html"><i class="fa fa-check"></i><b>10.1</b> Binary predictors</a></li>
-<li class="chapter" data-level="10.2" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>10.2</b> Categorical Predictors</a>
+<li class="chapter" data-level="10.1" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.1</b> Interactions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="cat-predictors.html"><a href="cat-predictors.html#factor-variable-coding"><i class="fa fa-check"></i><b>10.2.1</b> Factor variable coding</a></li>
+<li class="chapter" data-level="10.1.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.1.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
+<li class="chapter" data-level="10.1.2" data-path="interactions.html"><a href="interactions.html#interactions-catvars"><i class="fa fa-check"></i><b>10.1.2</b> Categorical Interaction variables</a></li>
+<li class="chapter" data-level="10.1.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.1.3</b> Example 2</a></li>
+<li class="chapter" data-level="10.1.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.1.4</b> Example 3:</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="interactions.html"><a href="interactions.html"><i class="fa fa-check"></i><b>10.3</b> Interactions</a>
+<li class="chapter" data-level="10.2" data-path="wald-test.html"><a href="wald-test.html"><i class="fa fa-check"></i><b>10.2</b> Wald test</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="interactions.html"><a href="interactions.html#fitting-interaction-models-interpreting-coefficients"><i class="fa fa-check"></i><b>10.3.1</b> Fitting interaction models &amp; interpreting coefficients</a></li>
-<li class="chapter" data-level="10.3.2" data-path="interactions.html"><a href="interactions.html#categorical-interaction-variables"><i class="fa fa-check"></i><b>10.3.2</b> Categorical Interaction variables</a></li>
-<li class="chapter" data-level="10.3.3" data-path="interactions.html"><a href="interactions.html#example-2"><i class="fa fa-check"></i><b>10.3.3</b> Example 2</a></li>
-<li class="chapter" data-level="10.3.4" data-path="interactions.html"><a href="interactions.html#example-3"><i class="fa fa-check"></i><b>10.3.4</b> Example 3:</a></li>
+<li class="chapter" data-level="10.2.1" data-path="wald-test.html"><a href="wald-test.html#example-modeling-depression-score"><i class="fa fa-check"></i><b>10.2.1</b> Example: Modeling depression score</a></li>
+<li class="chapter" data-level="10.2.2" data-path="wald-test.html"><a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model."><i class="fa fa-check"></i><b>10.2.2</b> Testing for a moderation effect in a multiple regression model.</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="general-F.html"><a href="general-F.html"><i class="fa fa-check"></i><b>10.4</b> Wald test (General F)</a></li>
-<li class="chapter" data-level="10.5" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.5</b> Multicollinearity</a></li>
-<li class="chapter" data-level="10.6" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.6</b> Variable Selection Process</a>
+<li class="chapter" data-level="10.3" data-path="multicollinearity.html"><a href="multicollinearity.html"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity</a></li>
+<li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.6.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.6.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.6.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.6.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.6.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.7</b> Comparing between models</a>
+<li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.7.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.7.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.7.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.7.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-f-test"><i class="fa fa-check"></i><b>10.7.3</b> General F Test</a></li>
-<li class="chapter" data-level="10.7.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.7.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.7.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="10.7.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.7.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
-<li class="chapter" data-level="10.7.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.7.7</b> Akaike Information Criterion (AIC)</a></li>
-<li class="chapter" data-level="10.7.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.7.8</b> Bayesian Information Criterion (BIC)</a></li>
-<li class="chapter" data-level="10.7.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.7.9</b> AIC vs BIC</a></li>
+<li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.2</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.3</b> Likelihood function</a></li>
+<li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
+<li class="chapter" data-level="10.5.7" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#akaike-information-criterion-aic"><i class="fa fa-check"></i><b>10.5.7</b> Akaike Information Criterion (AIC)</a></li>
+<li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
+<li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.8</b> General Advice</a></li>
-<li class="chapter" data-level="10.9" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>10.6</b> Model Diagnostics</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#linearity"><i class="fa fa-check"></i><b>10.6.1</b> Linearity</a></li>
+<li class="chapter" data-level="10.6.2" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#normality-of-residuals."><i class="fa fa-check"></i><b>10.6.2</b> Normality of residuals.</a></li>
+<li class="chapter" data-level="10.6.3" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>10.6.3</b> Homogeneity of variance</a></li>
+<li class="chapter" data-level="10.6.4" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#posterior-predictions"><i class="fa fa-check"></i><b>10.6.4</b> Posterior Predictions</a></li>
+<li class="chapter" data-level="10.6.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#all-at-once"><i class="fa fa-check"></i><b>10.6.5</b> All at once</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="general-advice-pma6-9.html"><a href="general-advice-pma6-9.html"><i class="fa fa-check"></i><b>10.7</b> General Advice (PMA6 9.9)</a></li>
+<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-pma6-9.html"><a href="what-to-watch-out-for-pma6-9.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for (PMA6 9.10)</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -352,20 +361,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
 <li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear-models.html"><a href="log-linear-models.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
+<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear-models.html"><a href="log-linear-models.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="count-outcome-data.html"><a href="count-outcome-data.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
-<li class="chapter" data-level="11.6" data-path="categorical-outcome-data.html"><a href="categorical-outcome-data.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
+<li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
+<li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="calculating-predictions.html"><a href="calculating-predictions.html"><i class="fa fa-check"></i><b>12.1</b> Calculating predictions</a></li>
-<li class="chapter" data-level="12.2" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.2</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.3" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.3</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.4" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.5" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.5</b> Model Performance</a></li>
+<li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -397,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>14.5.2</b> Oblique rotation</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>14.6</b> Factor Scores</a></li>
-<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
 </ul></li>
 <li class="part"><span><b>V Multi-level Modeling</b></span></li>
@@ -504,134 +514,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="log-linear-models" class="section level2 hasAnchor" number="11.4">
-<h2><span class="header-section-number">11.4</span> Log-linear models<a href="log-linear-models.html#log-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A <em>log-linear</em> model is when the log of the response variable is modeled using a linear combination of predictors.</p>
-<p><span class="math display">\[ln(Y) \sim XB +\epsilon\]</span></p>
-<p>Recall that in statistics, when we refer to the <em>log</em>, we mean the natural log <em>ln</em>.</p>
-<p>This type of model is often use for Poisson models also (Section <a href="count-outcome-data.html#poisson-models">11.5.0.1</a>).</p>
-<p>Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed.</p>
-<p><strong>Interpreting results</strong></p>
-<p>This is hands down the best reference that describes how to interpret the results when your response, predictor, or both variables are log transformed.</p>
-<p><a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</a></p>
-<div id="example-1" class="section level3 hasAnchor" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> Example<a href="log-linear-models.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings <code>H4EC2</code> by following the steps below <em>in order</em>.</p>
-<ol style="list-style-type: decimal">
-<li>Remove values above 999995 (structural missing).</li>
-<li>Create a new variable called <code>income</code>, that sets all values of personal income to be NA if below the federal poverty line.
+<div id="general-advice-pma6-9.9" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> General Advice (PMA6 9.9)<a href="general-advice-pma6-9.html#general-advice-pma6-9.9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>First set <code>income= H4EC2</code></li>
-<li>Then set income to missing, if <code>H4EC2 &lt; 10210</code> (the federal poverty limit from 2008)</li>
+<li>Model selection is not a hard science.</li>
+<li>Some criteria have “rules of thumb” that can guide your exploration (such as difference in AIC &lt; 2)</li>
+<li><em><strong>Use common sense</strong></em>: A sub-optimal subset may make more sense than optimal one</li>
+<li>p-values: When you compare two criteria, often the difference has a known distribution.
+<ul>
+<li>Wald F Test, the difference in RSS between the two models has a F distribution.</li>
 </ul></li>
-<li>Then create a new variable: <code>logincome</code> that is the natural log (<em>ln</em>) of income. e.g. <code>addhealth$logincome = log(addhealth$income)</code></li>
-</ol>
-<p>Why are we transforming income? To achieve normality.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="log-linear-models.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb13-2"><a href="log-linear-models.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb13-3"><a href="log-linear-models.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb13-4"><a href="log-linear-models.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb13-5"><a href="log-linear-models.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="GLM_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p><strong>Identify variables</strong></p>
+<li>All criterion should be used as guides.</li>
+<li>Perform multiple methods of variable selection, find the commonalities.</li>
+<li>Let science and the purpose of your model be your ultimate guide
 <ul>
-<li>Quantitative outcome that has been log transformed: Income (variable <code>logincome</code>)</li>
-<li>Binary predictor: Ever smoked a cigarette (variable <code>eversmoke_c</code>)</li>
-<li>Binary confounder: Gender (variable <code>female_c</code>)</li>
+<li>If the purpose of the model is for explanation/interpretation, error on the side of parsimony (smaller model) than being overly complex.</li>
+<li>If the purpose is prediction, then as long as you’re not overfitting the model (as checked using cross-validation techniques), use as much information as possible.</li>
+</ul></li>
 </ul>
-<p>The mathematical multivariable model looks like:</p>
-<p><span class="math display">\[ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}\]</span></p>
-<p>Similar to logistic regression, we need to <em>exponentiate</em> the regression coefficient before we can interpret the number as a <strong>percentage</strong> change in <span class="math inline">\(Y\)</span> for a unit increase in <span class="math inline">\(x_{j}\)</span>.</p>
-<ul>
-<li><strong><span class="math inline">\(b_{j}&lt;1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(1 - e^{b_{j}}\)</span> percent <em>lower</em> than when <span class="math inline">\(x=1\)</span></li>
-<li><strong><span class="math inline">\(b_{j} \geq 1\)</span></strong> : The expected value of <span class="math inline">\(Y\)</span> for when <span class="math inline">\(x=0\)</span> is <span class="math inline">\(e^{b_{j}}\)</span> percent <em>higher</em> than when <span class="math inline">\(x=1\)</span></li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="log-linear-models.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
-<span id="cb14-2"><a href="log-linear-models.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
-<table style="width:93%;">
-<colgroup>
-<col width="29%" />
-<col width="15%" />
-<col width="18%" />
-<col width="13%" />
-<col width="16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"> </th>
-<th align="center">Estimate</th>
-<th align="center">Std. Error</th>
-<th align="center">t value</th>
-<th align="center">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>(Intercept)</strong></td>
-<td align="center">10.65</td>
-<td align="center">0.026</td>
-<td align="center">409.8</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>wakeup</strong></td>
-<td align="center">-0.01491</td>
-<td align="center">0.003218</td>
-<td align="center">-4.633</td>
-<td align="center">3.73e-06</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>female_cFemale</strong></td>
-<td align="center">-0.1927</td>
-<td align="center">0.017</td>
-<td align="center">-11.34</td>
-<td align="center">2.564e-29</td>
-</tr>
-</tbody>
-</table>
-<table style="width:89%;">
-<caption>Fitting linear model: logincome ~ wakeup + female_c</caption>
-<colgroup>
-<col width="20%" />
-<col width="30%" />
-<col width="13%" />
-<col width="23%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Observations</th>
-<th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">\(R^2\)</span></th>
-<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">3813</td>
-<td align="center">0.5233</td>
-<td align="center">0.03611</td>
-<td align="center">0.0356</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="log-linear-models.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
-<span id="cb15-2"><a href="log-linear-models.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
-<span id="cb15-3"><a href="log-linear-models.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
-<span id="cb15-4"><a href="log-linear-models.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
-<ul>
-<li>For every hour later one wakes up in the morning, one can expect to earn <code>1-exp(-0.015)</code> = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender.</li>
-<li>Females have on average <code>1-exp(-0.19)</code> = 17% percent lower income than males, after controlling for the wake up time.</li>
-</ul>
-<p>Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p&lt;.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p&lt;.0001) percent lower income than males.</p>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="logreg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="count-outcome-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-diagnostics-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="what-to-watch-out-for-pma6-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -691,7 +599,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

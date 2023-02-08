@@ -17,7 +17,7 @@ Now it's no longer a 2D regression _line_, but a $p$ dimensional regression plan
 
 
 
-## Mathematical Model {#mlr-math-model}
+## Mathematical Model
 
 The mathematical model for multiple linear regression equates the value of the continuous outcome $y_{i}$ to a **linear combination** of multiple predictors $x_{1} \ldots x_{p}$ each with their own slope coefficient $\beta_{1} \ldots \beta_{p}$. 
 
@@ -1476,20 +1476,6 @@ Thus, the number of days smoked _confounds_ the relationship between the number 
 
 --->
 
-
-## Model Diagnostics 
-
-The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model. 
-
-
-```r
-check_model(mlr.dad.model)
-```
-
-<img src="mlr_files/figure-html/unnamed-chunk-21-1.png" width="672" />
-
-More about these model diagnostics can be found in Section \ref(@model-diagnostics)
- 
 ## What to watch out for
 * Representative sample 
 * Range of prediction should match observed range of X in sample

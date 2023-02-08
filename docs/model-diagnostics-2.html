@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.5 Categorical Predictors | Applied Statistics</title>
+  <title>10.6 Model Diagnostics | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.5 Categorical Predictors | Applied Statistics" />
+  <meta property="og:title" content="10.6 Model Diagnostics | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.5 Categorical Predictors | Applied Statistics" />
+  <meta name="twitter:title" content="10.6 Model Diagnostics | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="interpreting-coefficients.html"/>
-<link rel="next" href="presenting-results.html"/>
+<link rel="prev" href="model-fit-criteria.html"/>
+<link rel="next" href="general-advice-pma6-9.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -292,12 +292,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.4.1" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#continuous-predictors"><i class="fa fa-check"></i><b>9.4.1</b> Continuous predictors</a></li>
 <li class="chapter" data-level="9.4.2" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#binary-predictors"><i class="fa fa-check"></i><b>9.4.2</b> Binary predictors</a></li>
+<li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="cat-predictors.html"><a href="cat-predictors.html"><i class="fa fa-check"></i><b>9.5</b> Categorical Predictors</a></li>
-<li class="chapter" data-level="9.6" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.6</b> Presenting results</a></li>
-<li class="chapter" data-level="9.7" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.7</b> Confounding</a></li>
-<li class="chapter" data-level="9.8" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.8</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.9" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.9</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.7" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.7</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="9.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.8</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
@@ -317,14 +317,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
 <li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.2</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.3</b> Likelihood function</a></li>
 <li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
@@ -332,8 +332,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
 <li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.6</b> General Advice</a></li>
-<li class="chapter" data-level="10.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.6" data-path="model-diagnostics-2.html"><a href="model-diagnostics-2.html"><i class="fa fa-check"></i><b>10.6</b> Model Diagnostics</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="model-diagnostics-2.html"><a href="model-diagnostics-2.html#linearity"><i class="fa fa-check"></i><b>10.6.1</b> Linearity</a></li>
+<li class="chapter" data-level="10.6.2" data-path="model-diagnostics-2.html"><a href="model-diagnostics-2.html#normality-of-residuals."><i class="fa fa-check"></i><b>10.6.2</b> Normality of residuals.</a></li>
+<li class="chapter" data-level="10.6.3" data-path="model-diagnostics-2.html"><a href="model-diagnostics-2.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>10.6.3</b> Homogeneity of variance</a></li>
+<li class="chapter" data-level="10.6.4" data-path="model-diagnostics-2.html"><a href="model-diagnostics-2.html#posterior-predictions"><i class="fa fa-check"></i><b>10.6.4</b> Posterior Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="general-advice-pma6-9.html"><a href="general-advice-pma6-9.html"><i class="fa fa-check"></i><b>10.7</b> General Advice (PMA6 9.9)</a></li>
+<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-pma6-9.html"><a href="what-to-watch-out-for-pma6-9.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for (PMA6 9.10)</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -356,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
 <li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
@@ -400,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>14.5.2</b> Oblique rotation</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>14.6</b> Factor Scores</a></li>
-<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
 </ul></li>
 <li class="part"><span><b>V Multi-level Modeling</b></span></li>
@@ -507,670 +514,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cat-predictors" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Categorical Predictors<a href="cat-predictors.html#cat-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s continue to model the FEV for individuals living in Southern California, but now we also consider the effect of city they live in. For those unfamiliar with the region, these cities represent very different environmental profiles.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="cat-predictors.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fev_long<span class="sc">$</span>area)</span>
-<span id="cb179-2"><a href="cat-predictors.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb179-3"><a href="cat-predictors.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Burbank  Lancaster Long Beach   Glendora </span></span>
-<span id="cb179-4"><a href="cat-predictors.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         48         98         38        116</span></span></code></pre></div>
-<p>Let’s fit a model with <code>area</code>, notice again I do not do anything to the variable <code>area</code> itself aside from add it into the model.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="cat-predictors.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb180-2"><a href="cat-predictors.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-3"><a href="cat-predictors.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb180-4"><a href="cat-predictors.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender + area, data = fev_long)</span></span>
-<span id="cb180-5"><a href="cat-predictors.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-6"><a href="cat-predictors.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb180-7"><a href="cat-predictors.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb180-8"><a href="cat-predictors.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.32809 -0.29573  0.00578  0.31588  1.37041 </span></span>
-<span id="cb180-9"><a href="cat-predictors.html#cb180-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-10"><a href="cat-predictors.html#cb180-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb180-11"><a href="cat-predictors.html#cb180-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb180-12"><a href="cat-predictors.html#cb180-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    -2.250564   0.752414  -2.991  0.00302 ** </span></span>
-<span id="cb180-13"><a href="cat-predictors.html#cb180-13" aria-hidden="true" tabindex="-1"></a><span class="do">## age            -0.022801   0.004151  -5.493 8.59e-08 ***</span></span>
-<span id="cb180-14"><a href="cat-predictors.html#cb180-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ht              0.103866   0.010555   9.841  &lt; 2e-16 ***</span></span>
-<span id="cb180-15"><a href="cat-predictors.html#cb180-15" aria-hidden="true" tabindex="-1"></a><span class="do">## genderF        -0.642168   0.078400  -8.191 8.10e-15 ***</span></span>
-<span id="cb180-16"><a href="cat-predictors.html#cb180-16" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLancaster   0.031549   0.084980   0.371  0.71072    </span></span>
-<span id="cb180-17"><a href="cat-predictors.html#cb180-17" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLong Beach  0.061963   0.104057   0.595  0.55199    </span></span>
-<span id="cb180-18"><a href="cat-predictors.html#cb180-18" aria-hidden="true" tabindex="-1"></a><span class="do">## areaGlendora    0.121589   0.082097   1.481  0.13967    </span></span>
-<span id="cb180-19"><a href="cat-predictors.html#cb180-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb180-20"><a href="cat-predictors.html#cb180-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb180-21"><a href="cat-predictors.html#cb180-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-22"><a href="cat-predictors.html#cb180-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.4777 on 293 degrees of freedom</span></span>
-<span id="cb180-23"><a href="cat-predictors.html#cb180-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6529, Adjusted R-squared:  0.6458 </span></span>
-<span id="cb180-24"><a href="cat-predictors.html#cb180-24" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 91.86 on 6 and 293 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
-<p>Examine the coefficient names, <code>areaLancaster</code>, <code>areaLong Beach</code> and <code>areaGlendora</code>. Again R automatically take a categorical variable and turn it into a series of binary indicator variables where a 1 indicates if a person is from that area. Notice how someone from Burbank has 0’s for all of the three indicator variables, someone from Lancaster only has a 1 in the <code>areaLancaster</code> variable and 0 otherwise. And etc for each other area.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-areaLancaster
-</th>
-<th style="text-align:right;">
-areaLong.Beach
-</th>
-<th style="text-align:right;">
-areaGlendora
-</th>
-<th style="text-align:left;">
-area
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Burbank
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-51
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Lancaster
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-75
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Long Beach
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-101
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-Glendora
-</td>
-</tr>
-</tbody>
-</table>
+<div id="model-diagnostics-2" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Model Diagnostics<a href="model-diagnostics-2.html#model-diagnostics-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall from Section <a href="mathematical-model.html#mathematical-model">7.2</a> the assumptions for linear regression model are;</p>
 <ul>
-<li>Most commonly known as “Dummy coding”. Not an informative term to use.</li>
-<li>Better used term: Indicator variable</li>
-<li>Math notation: <strong>I(gender == “Female”)</strong>.</li>
-<li>A.k.a “reference coding” or “one hot encoding”</li>
-<li>For a nominal X with K categories, define K indicator variables.
-<ul>
-<li>Choose a reference (referent) category:</li>
-<li>Leave it out</li>
-<li>Use remaining K-1 in the regression.</li>
-<li>Often, the largest category is chosen as the reference category.</li>
-</ul></li>
+<li><strong>Linearity</strong> The relationship between <span class="math inline">\(x_j\)</span> and <span class="math inline">\(y\)</span> is linear, for all <span class="math inline">\(j\)</span>.</li>
+<li><strong>Normality, Homogeneity of variance</strong> The residuals are identically distributed <span class="math inline">\(\epsilon_{i} \sim N(0, \sigma^{2})\)</span></li>
+<li><strong>Uncorrelated/Independent</strong> Distinct error terms are uncorrelated: <span class="math inline">\(\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.\)</span></li>
 </ul>
-<p>Interpreting the regression coefficients are going to be <strong>compared to the reference group</strong>. In this case, it is the Burbank area. Why Burbank? Because that is what R sees as the first level. If you want something different, you need to change the factor ordering.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="cat-predictors.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(fev_long<span class="sc">$</span>area)</span>
-<span id="cb181-2"><a href="cat-predictors.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Burbank&quot;    &quot;Lancaster&quot;  &quot;Long Beach&quot; &quot;Glendora&quot;</span></span></code></pre></div>
-<p>The mathematical model is now written as follows,</p>
-<p><span class="math display">\[ Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}x_{4i} + \beta_{5}x_{5i} +\beta_{6}x_{6i}\epsilon_{i}\]</span></p>
-<p>where</p>
-<ul>
-<li><span class="math inline">\(x_{1}\)</span>: Age</li>
-<li><span class="math inline">\(x_{2}\)</span>: height</li>
-<li><span class="math inline">\(x_{3}\)</span>: 0 if Male, 1 if Female</li>
-<li><span class="math inline">\(x_{4}\)</span>: 1 if living in Lancaster, 0 otherwise</li>
-<li><span class="math inline">\(x_{5}\)</span>: 1 if living in Long Beach, 0 otherwise</li>
-<li><span class="math inline">\(x_{6}\)</span>: 1 if living in Glendora, 0 otherwise</li>
-</ul>
-<p>For someone living in Burbank, <span class="math inline">\(x_{4}=x_{5}=x_{6} =0\)</span> so the model then is</p>
-<p><span class="math display">\[Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}\]</span></p>
-<p>For someone living in Lancaster, <span class="math inline">\(x_{4}=1, x_{5}=0, x_{6} =0\)</span> so the model then is</p>
-<p><span class="math display">\[
-Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}(1) \\
-Y_{i} \sim (\beta_{0} + \beta_{4}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
-\]</span></p>
-<p>For someone living in Long Beach, <span class="math inline">\(x_{4}=0, x_{5}=1, x_{6} =0\)</span> so the model then is</p>
-<p><span class="math display">\[
-Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{5}(1) \\
-Y_{i} \sim (\beta_{0} + \beta_{5}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
-\]</span></p>
-<p>and the model for someone living in Glendora <span class="math inline">\(x_{4}=0, x_{5}=0, x_{6} =1\)</span> is</p>
-<p><span class="math display">\[
-Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{6}(1) \\
-Y_{i} \sim (\beta_{0} + \beta_{6}) + \beta_{1}x_{i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} \epsilon_{i}
-\]</span></p>
-<p>In summary, each area gets it’s own intercept, but still has a common slope for all other variables.</p>
-<p><span class="math display">\[
-y_{i.Burbank} = -2.25 - 0.023(age) + 0.10(ht) -0.64(female) \\
-y_{i.Lancaster} = -2.22 - 0.023(age) + 0.10(ht) -0.64(female)\\
-y_{i.Long.Beach} = -2.19 - 0.023(age) + 0.10(ht) -0.64(female) \\
-y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
-\]</span></p>
-<p>Let’s look interpret the regression coefficients and their 95% confidence intervals from the main effects model again.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="cat-predictors.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="iydbaessff" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#iydbaessff .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#iydbaessff .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iydbaessff .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#iydbaessff .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#iydbaessff .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iydbaessff .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iydbaessff .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#iydbaessff .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#iydbaessff .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#iydbaessff .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#iydbaessff .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#iydbaessff .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#iydbaessff .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#iydbaessff .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#iydbaessff .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#iydbaessff .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#iydbaessff .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#iydbaessff .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#iydbaessff .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#iydbaessff .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#iydbaessff .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iydbaessff .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#iydbaessff .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#iydbaessff .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iydbaessff .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iydbaessff .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iydbaessff .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_left {
-  text-align: left;
-}
-
-#iydbaessff .gt_center {
-  text-align: center;
-}
-
-#iydbaessff .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#iydbaessff .gt_font_normal {
-  font-weight: normal;
-}
-
-#iydbaessff .gt_font_bold {
-  font-weight: bold;
-}
-
-#iydbaessff .gt_font_italic {
-  font-style: italic;
-}
-
-#iydbaessff .gt_super {
-  font-size: 65%;
-}
-
-#iydbaessff .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#iydbaessff .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#iydbaessff .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#iydbaessff .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-#iydbaessff .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-#iydbaessff .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">age</td>
-<td class="gt_row gt_center">-0.02</td>
-<td class="gt_row gt_center">-0.03, -0.01</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">ht</td>
-<td class="gt_row gt_center">0.10</td>
-<td class="gt_row gt_center">0.08, 0.12</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">gender</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
-<td class="gt_row gt_center">-0.64</td>
-<td class="gt_row gt_center">-0.80, -0.49</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">area</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Burbank</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Lancaster</td>
-<td class="gt_row gt_center">0.03</td>
-<td class="gt_row gt_center">-0.14, 0.20</td>
-<td class="gt_row gt_center">0.7</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Long Beach</td>
-<td class="gt_row gt_center">0.06</td>
-<td class="gt_row gt_center">-0.14, 0.27</td>
-<td class="gt_row gt_center">0.6</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Glendora</td>
-<td class="gt_row gt_center">0.12</td>
-<td class="gt_row gt_center">-0.04, 0.28</td>
-<td class="gt_row gt_center">0.14</td></tr>
-  </tbody>
-  
-  <tfoot class="gt_footnotes">
-    <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
-    </tr>
-  </tfoot>
-</table>
+<p>There are a few ways to visually assess these assumptions. We’ll look at this using a penguin model of body mass as an example.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="model-diagnostics-2.html#cb209-1" aria-hidden="true" tabindex="-1"></a>pen.bmg.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> bill_length_mm <span class="sc">+</span> flipper_length_mm, <span class="at">data=</span>pen)</span></code></pre></div>
+<div id="linearity" class="section level3 hasAnchor" number="10.6.1">
+<h3><span class="header-section-number">10.6.1</span> Linearity<a href="model-diagnostics-2.html#linearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a scatterplot with lowess AND linear regression line. See how close the lowess trend line is to the best fit line. Do this for all variables.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="model-diagnostics-2.html#cb210-1" aria-hidden="true" tabindex="-1"></a>bill.plot  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">y=</span>body_mass_g, <span class="at">x=</span>bill_length_mm)) <span class="sc">+</span> </span>
+<span id="cb210-2"><a href="model-diagnostics-2.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb210-3"><a href="model-diagnostics-2.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb210-4"><a href="model-diagnostics-2.html#cb210-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span> , <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb210-5"><a href="model-diagnostics-2.html#cb210-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-6"><a href="model-diagnostics-2.html#cb210-6" aria-hidden="true" tabindex="-1"></a>flipper.plot  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">y=</span>body_mass_g, <span class="at">x=</span>flipper_length_mm)) <span class="sc">+</span> </span>
+<span id="cb210-7"><a href="model-diagnostics-2.html#cb210-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb210-8"><a href="model-diagnostics-2.html#cb210-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb210-9"><a href="model-diagnostics-2.html#cb210-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span> , <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb210-10"><a href="model-diagnostics-2.html#cb210-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-11"><a href="model-diagnostics-2.html#cb210-11" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(bill.plot, flipper.plot, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Both variables appear to have a mostly linear relationship with body mass. For penguins with bill length over 50mm the slope may decrease, but the data is sparse in the tails.</p>
 </div>
-<ul>
-<li><span class="math inline">\(b_{4}\)</span>: After controlling for age, height and gender, those that live in Lancaster have 0.03 (-0.14, 0.20) higher FEV1 compared to someone living in Burbank (p=0.7).</li>
-<li><span class="math inline">\(b_{5}\)</span>: After controlling for age, height and gender, those that live in Long Beach have 0.06 (-0.14, 0.27) higher FEV1 compared to someone living in Burbank (p=0.6).</li>
-<li><span class="math inline">\(b_{6}\)</span>: After controlling for age, height and gender, those that live in Glendora have 0.12 (-0.04, 0.28) higher FEV1 compared to someone living in Burbank (p=0.14).</li>
-</ul>
-<blockquote>
-<p>Beta coefficients for categorical variables are always interpreted as the difference between that particular level and the reference group</p>
-</blockquote>
+<div id="normality-of-residuals." class="section level3 hasAnchor" number="10.6.2">
+<h3><span class="header-section-number">10.6.2</span> Normality of residuals.<a href="model-diagnostics-2.html#normality-of-residuals." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are two common ways to assess normality.</p>
+<ol style="list-style-type: decimal">
+<li>A histogram or density plot with a normal distribution curve overlaid.</li>
+<li>A qqplot. This is also known as a ‘normal probability plot’. It is used to compare the theoretical quantiles of the data <em>if it were to come from a normal distribution</em> to the observed quantiles. PMA6 Figure 5.4 has more examples and an explanation.</li>
+</ol>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="model-diagnostics-2.html#cb211-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb211-2"><a href="model-diagnostics-2.html#cb211-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">check_normality</span>(pen.bmg.model)), </span>
+<span id="cb211-3"><a href="model-diagnostics-2.html#cb211-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">check_normality</span>(pen.bmg.model), <span class="at">type =</span> <span class="st">&quot;qq&quot;</span>),</span>
+<span id="cb211-4"><a href="model-diagnostics-2.html#cb211-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb211-5"><a href="model-diagnostics-2.html#cb211-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>In both cases you want to assess how close the dots/distribution is to the reference curve/line.</p>
+</div>
+<div id="homogeneity-of-variance" class="section level3 hasAnchor" number="10.6.3">
+<h3><span class="header-section-number">10.6.3</span> Homogeneity of variance<a href="model-diagnostics-2.html#homogeneity-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The variability of the residuals should be constant, and independent of the value of the fitted value <span class="math inline">\(\hat{y}\)</span>.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="model-diagnostics-2.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_heteroskedasticity</span>(pen.bmg.model))</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>This assumption is often the hardest to be fully upheld. Here we see a slightly downward trend. However, this is not a massive violation of assumptions.</p>
+</div>
+<div id="posterior-predictions" class="section level3 hasAnchor" number="10.6.4">
+<h3><span class="header-section-number">10.6.4</span> Posterior Predictions<a href="model-diagnostics-2.html#posterior-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Not really an assumption, but we can also assess the fit of a model by how well it does to predict the outcome. Using a Bayesian sampling method, the distribution of the predictions from the model should resemble the observed distribution.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="model-diagnostics-2.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_posterior_predictions</span>(pen.bmg.model))</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>This looks like a good fit.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="interpreting-coefficients.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="presenting-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-fit-criteria.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general-advice-pma6-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

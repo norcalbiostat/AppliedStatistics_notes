@@ -6,7 +6,7 @@ This chapter introduces how to use and interpret different types of covariates, 
 
 
 ```{block2,  type='rmdnote'}
-This section uses functions from the `gtsummary`, `performance`, and `survey` packages to help tidy and visualize results from regression models. 
+This section uses functions from the `gtsummary` and `survey` packages to help tidy and visualize results from regression models. It also uses functions from the `performance` and `glmnet` packages to perform model selection and assessment. 
 ```
 
 ```{r, echo=FALSE}
@@ -369,22 +369,16 @@ etc.
 * Compare and choose among the "best subsets" of various sizes.
 
 
-### Implementation in R
-
-Refer to the following refereces
-
-* Notes maintained by [Xiaorhui Zhu](https://xiaoruizhu.github.io/) for a data mining class at Linder College of Business: https://xiaoruizhu.github.io/Data-Mining-R/lecture/3_LinearReg.html
-* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the stepwise procedures, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
-* Author and year unknown, but shows best subsets. At least 2 years old, content has not been tested recently. https://rstudio-pubs-static.s3.amazonaws.com/2897_9220b21cfc0c43a396ff9abf122bb351.html
+### Implementation of stepwise selection in R
+* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
+* **Best Subsets** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
 
 
-
-
-### Lasso
+### LASSO Regression (PMA6 9.7)
 
 **L**east **A**bsolute **S**hrinkage and **S**election **O**perator.
 
-Goal is to minimize
+The goal of LASSO is to minimize
 
 $$
 RSS + \lambda \sum_{j}\mid \beta_{j} \ \mid
@@ -392,16 +386,92 @@ $$
 
 where $\lambda$ is a model complexity penalty parameter. 
 
-* Used during cross-validation and AIC/BIC
-* "Shrinks" the coefficients, setting some to exactly 0. 
+* "Shrinks" the coefficients, setting some to exactly 0.
+    - Thus essentially choosing a simpler model 
+* Balances model accuracy with interpretation.
 
+
+The lasso fits many regression models and selects those variables that show the strongest association with the response variable using the data at hand. This is also described as a method of _selective inference_  (Taylor and Tibshirani, 2015) and is an example of exploratory research, where the data may influence what type and how many analyses are performed.
+
+
+#### Example
 ```{block2,  type='rmdnote'}
-Appropriate inference after model selection is currently under research. No unifying theory exists yet. 
+This section uses functions `glmnet` package, and the `Chemical` data set from PMA6. Also it uses the `model.matrix` function from the `stats` package (automatically loaded). This function takes a set of input predictors and turns them into the variables that are used directly in the model. For example, categorical variables will be converted into multiple binary indicators. This typically happens in the background. 
 ```
 
+The `glmnet` function works best when the outcome `y` and predictors `x` are not contained within a data frame. The `alpha` argument is the tuning parameter, where a value of 1 specifies the lasso. 
+
+```{r}
+library(glmnet)
+chem <- read.table("data/Chemical.txt", header = TRUE)
+y <- chem$PE
+x <- model.matrix(PE~., chem)[,-1] # the -1 drops the intercept
+chem.lasso <- glmnet(x, y, alpha = 1)
+```
+
+We can visualize the effect of the coefficient shrinkage using the following plot.
+
+```{r}
+plot(chem.lasso, xvar = "lambda")
+mtext(side=3, "Number of Variables", line=2)
+```
+
+* Each line represents the value of a coefficient as $ln(\lambda)$ changes. 
+* The red line on the bottom and the purple on the top must be important, since they are the last two to be shrunk to 0 and they are relatively stable. 
+
+Examining the coefficients of the `chem.lasso` model object gives us a very large matrix (7x61), listing the coefficients for each value of $\lambda$ that was tried. A sample of columns are shown below: 
+```{r}
+coef(chem.lasso)[,1:8]
+coef(chem.lasso)[,56:60]
+```
+
+Comparing the plot to the coefficient model output above, we see that the variables that show up being shrunk last are `DE` and `PAYOUTR1`. 
+
+**Using Cross validation to find minimum lambda**
+
+Cross-validation is a resampling method that uses different portions of the data to test and train a model on different iterations [Wikipedia](https://en.wikipedia.org/wiki/Cross-validation_(statistics)). 
+
+By applying a cross-validation technique, we can identify the specific value for $\lambda$ that 
+results in the lowest cross-validated Mean Squared Error (MSE) ($\lambda_{min}$). To ensure
+reproducibility of these results we set a seed for the random number generator prior to analysis.
+
+```{r}
+set.seed(123) # Setting a seed to ensure I get the same results each time I knit
+cv.lasso <- cv.glmnet(x, y, alpha = 1) # note change in function
+
+# Fit the final model using the min lambda
+model <- glmnet(x, y, alpha = 1, lambda = cv.lasso$lambda.min)
+```
+
+The resulting table of shrunk regression coefficients then is; 
+```{r}
+coef(model)
+```
+
+In this case we would keep variables: DE, SALESGR5, NPM1 and PAYOUTR1. Estimates for ROR5 and EPS56 are very small, and so can be reasonably excluded. 
+
+* The lasso procedure normalizes the data prior to fitting a model, so the coefficient values that are returned _cannot_ be interpreted directly in context of the problem. 
+    - This does allow us the ability to make "judgement" calls on what is a 'small' estimate since it's no longer dependent on the units of the data. 
+* Appropriate inference after model selection is currently under research. No unifying theory exists yet. 
 * For now, use lasso to choose variables, then fit a model with only those selected variables in the final model. 
 * Variables chosen in this manner are important, yet biased estimates. 
 
+```{r}
+lm(PE ~ DE + SALESGR5 + NPM1 + PAYOUTR1, data = chem) |> tbl_regression()
+```
+
+#### Ridge Regression (PMA6 10.6)
+
+Often compared to LASSO, Ridge regression also minimizes the RSS, but the penalty function is different: 
+$$
+RSS + \lambda \sum_{j} \beta_{j}^2
+$$
+
+Ridge regression only shrinks the magnitude of the coefficients, not set them exactly to zero. 
+
+```{block2,  type='rmdwarning'}
+This means Ridge regression is **not** a method of variable selection.  
+```
 
 
 ## Comparing between models {#model-fit-criteria}
@@ -422,23 +492,9 @@ $$
 $$
 
 
-### Likelihood function
-
-What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
-$$
-\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
-$$
-
-* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).  
-* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
-* We can compare between models using functions based off the LL. 
-
-
-There are several measures we can use to compare between competing models. 
-
 ### General F Test  {#general-F}
 
-Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. 
+Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. Similar to all other ANOVA models, you are essentially comparing the difference in RSS between nested models. 
 
 
 ```{r}
@@ -455,16 +511,30 @@ Caution: this uses `anova()` not `aov()`.
 
 Other references: https://online.stat.psu.edu/stat501/lesson/6/6.2
 
+### Likelihood function
+
+What is the likelihood that we observed the data $x$, given parameter values $\theta$. 
+$$
+\mathcal{L}(\theta \mid x)=p_{\theta }(x)=P_{\theta }(X=x)
+$$
+
+* For strictly convenient mathematical matters, we tend to work with the **log-likelihood** (LL).  
+* Great because $log$ is a monotonic increasing function, maximizing the LL = maximizing the likelihood function.  
+* We can compare between models using functions based off the LL. 
+
+
+There are several measures we can use to compare between competing models. 
+
 
 ### Multiple $R^{2}$
 If the model explains a large amount of variation in the outcome that's good right? So we could consider using $R^{2}$ as a selection criteria and trying to find the model that maximizes this value. 
-
 
 * Problem: The multiple $R^{2}$ _always_ increases as predictors are added to the model. 
     - Ex. 1: N = 100, P = 1, E($R^{2}$) = 0.01
     - Ex. 2: N = 21, P = 10, E($R^{2}$) = 0.5
 * Problem: $R^{2} = 1-\frac{Model SS}{Total SS}$ is biased: If population $R^{2}$ is really zero, then E($R^{2}$) = P/(N-1). 
 
+Reference PMA6 Figure 9.1
 
 ### Adjusted $R^{2}$
 To alleviate bias use Mean squares instead of SS. 
@@ -526,9 +596,9 @@ $$ BIC = -2LL + ln(N)*(P+1)$$
 * They often agree.
     - When they disagree, AIC chooses a larger model than BIC.
 
-## Model Diagnostics {#model-diagnostics}
+## Model Diagnostics
 
-Recall from Section \ref(@mlr-math-model) the assumptions for linear regression model are; 
+Recall from Section \@ref(mathematical-model) the assumptions for linear regression model are; 
 
 * **Linearity** The relationship between $x_j$ and $y$ is linear, for all $j$. 
 * **Normality, Homogeneity of variance** The residuals are identically distributed $\epsilon_{i} \sim N(0, \sigma^{2})$ 
@@ -595,9 +665,15 @@ plot(check_posterior_predictions(pen.bmg.model))
 
 This looks like a good fit. 
 
+### All at once
 
+```{r, fig.height = 8}
+check_model(pen.bmg.model)
+```
 
-## General Advice
+Refer to PMA6 8.8 to learn about _leverage_. 
+
+## General Advice (PMA6 9.9)
 
 * Model selection is not a hard science. 
 * Some criteria have "rules of thumb" that can guide your exploration (such as difference in AIC < 2)
@@ -611,7 +687,7 @@ This looks like a good fit.
     - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
 
 
-## What to watch out for
+## What to watch out for (PMA6 9.10)
 * Multicollinearity
 * Missing Data
 * Use previous research as a guide

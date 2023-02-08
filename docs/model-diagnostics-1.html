@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.7 Model Diagnostics | Applied Statistics</title>
+  <title>10.6 Model Diagnostics | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.7 Model Diagnostics | Applied Statistics" />
+  <meta property="og:title" content="10.6 Model Diagnostics | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.7 Model Diagnostics | Applied Statistics" />
+  <meta name="twitter:title" content="10.6 Model Diagnostics | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="confounding.html"/>
-<link rel="next" href="what-to-watch-out-for.html"/>
+<link rel="prev" href="model-fit-criteria.html"/>
+<link rel="next" href="general-advice-pma6-9.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,14 +214,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -286,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="mlr.html"><a href="mlr.html"><i class="fa fa-check"></i><b>9</b> Multiple Linear Regression</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="mlr-math-model.html"><a href="mlr-math-model.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
+<li class="chapter" data-level="9.1" data-path="mathematical-model-1.html"><a href="mathematical-model-1.html"><i class="fa fa-check"></i><b>9.1</b> Mathematical Model</a></li>
 <li class="chapter" data-level="9.2" data-path="parameter-estimation.html"><a href="parameter-estimation.html"><i class="fa fa-check"></i><b>9.2</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="9.3" data-path="fitting-the-model.html"><a href="fitting-the-model.html"><i class="fa fa-check"></i><b>9.3</b> Fitting the model</a></li>
 <li class="chapter" data-level="9.4" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html"><i class="fa fa-check"></i><b>9.4</b> Interpreting Coefficients</a>
@@ -297,8 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
 <li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
-<li class="chapter" data-level="9.7" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>9.7</b> Model Diagnostics</a></li>
-<li class="chapter" data-level="9.8" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
 <ul>
@@ -318,14 +316,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso"><i class="fa fa-check"></i><b>10.4.3</b> Lasso</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
+<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
 <li class="chapter" data-level="10.5.1" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#rss-residual-sum-of-squares"><i class="fa fa-check"></i><b>10.5.1</b> RSS: Residual Sum of Squares</a></li>
-<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.2</b> Likelihood function</a></li>
-<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.3</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.2" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#general-F"><i class="fa fa-check"></i><b>10.5.2</b> General F Test</a></li>
+<li class="chapter" data-level="10.5.3" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#likelihood-function"><i class="fa fa-check"></i><b>10.5.3</b> Likelihood function</a></li>
 <li class="chapter" data-level="10.5.4" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#multiple-r2"><i class="fa fa-check"></i><b>10.5.4</b> Multiple <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.5.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#adjusted-r2"><i class="fa fa-check"></i><b>10.5.5</b> Adjusted <span class="math inline">\(R^{2}\)</span></a></li>
 <li class="chapter" data-level="10.5.6" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#mallows-c_p"><i class="fa fa-check"></i><b>10.5.6</b> Mallows <span class="math inline">\(C_{p}\)</span></a></li>
@@ -333,15 +331,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.8" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#bayesian-information-criterion-bic"><i class="fa fa-check"></i><b>10.5.8</b> Bayesian Information Criterion (BIC)</a></li>
 <li class="chapter" data-level="10.5.9" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html#aic-vs-bic"><i class="fa fa-check"></i><b>10.5.9</b> AIC vs BIC</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="model-diagnostics.html"><a href="model-diagnostics.html#model-diagnostics"><i class="fa fa-check"></i><b>10.6</b> Model Diagnostics</a>
+<li class="chapter" data-level="10.6" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html"><i class="fa fa-check"></i><b>10.6</b> Model Diagnostics</a>
 <ul>
-<li class="chapter" data-level="10.6.1" data-path="model-diagnostics.html"><a href="model-diagnostics.html#linearity"><i class="fa fa-check"></i><b>10.6.1</b> Linearity</a></li>
-<li class="chapter" data-level="10.6.2" data-path="model-diagnostics.html"><a href="model-diagnostics.html#normality-of-residuals."><i class="fa fa-check"></i><b>10.6.2</b> Normality of residuals.</a></li>
-<li class="chapter" data-level="10.6.3" data-path="model-diagnostics.html"><a href="model-diagnostics.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>10.6.3</b> Homogeneity of variance</a></li>
-<li class="chapter" data-level="10.6.4" data-path="model-diagnostics.html"><a href="model-diagnostics.html#posterior-predictions"><i class="fa fa-check"></i><b>10.6.4</b> Posterior Predictions</a></li>
+<li class="chapter" data-level="10.6.1" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#linearity"><i class="fa fa-check"></i><b>10.6.1</b> Linearity</a></li>
+<li class="chapter" data-level="10.6.2" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#normality-of-residuals."><i class="fa fa-check"></i><b>10.6.2</b> Normality of residuals.</a></li>
+<li class="chapter" data-level="10.6.3" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>10.6.3</b> Homogeneity of variance</a></li>
+<li class="chapter" data-level="10.6.4" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#posterior-predictions"><i class="fa fa-check"></i><b>10.6.4</b> Posterior Predictions</a></li>
+<li class="chapter" data-level="10.6.5" data-path="model-diagnostics-1.html"><a href="model-diagnostics-1.html#all-at-once"><i class="fa fa-check"></i><b>10.6.5</b> All at once</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="general-advice.html"><a href="general-advice.html"><i class="fa fa-check"></i><b>10.7</b> General Advice</a></li>
-<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for</a></li>
+<li class="chapter" data-level="10.7" data-path="general-advice-pma6-9.html"><a href="general-advice-pma6-9.html"><i class="fa fa-check"></i><b>10.7</b> General Advice (PMA6 9.9)</a></li>
+<li class="chapter" data-level="10.8" data-path="what-to-watch-out-for-pma6-9.html"><a href="what-to-watch-out-for-pma6-9.html"><i class="fa fa-check"></i><b>10.8</b> What to watch out for (PMA6 9.10)</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
@@ -364,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-1"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
 <li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
@@ -408,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5.2" data-path="rotating-factors.html"><a href="rotating-factors.html#oblique-rotation"><i class="fa fa-check"></i><b>14.5.2</b> Oblique rotation</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="factor-scores.html"><a href="factor-scores.html"><i class="fa fa-check"></i><b>14.6</b> Factor Scores</a></li>
-<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-2.html"><a href="what-to-watch-out-for-2.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
+<li class="chapter" data-level="14.7" data-path="what-to-watch-out-for-1.html"><a href="what-to-watch-out-for-1.html"><i class="fa fa-check"></i><b>14.7</b> What to watch out for</a></li>
 <li class="chapter" data-level="14.8" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>14.8</b> Additional Resources</a></li>
 </ul></li>
 <li class="part"><span><b>V Multi-level Modeling</b></span></li>
@@ -515,20 +514,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-diagnostics-1" class="section level2 hasAnchor" number="9.7">
-<h2><span class="header-section-number">9.7</span> Model Diagnostics<a href="model-diagnostics-1.html#model-diagnostics-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The same set of regression diagnostics can be examined to identify any potential influential points, outliers or other problems with the linear model.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="model-diagnostics-1.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(mlr.dad.model)</span></code></pre></div>
-<p><img src="mlr_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>More about these model diagnostics can be found in Section (<span class="citation">(<a href="#ref-model-diagnostics" role="doc-biblioref"><strong>model-diagnostics?</strong></a>)</span>)</p>
+<div id="model-diagnostics-1" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Model Diagnostics<a href="model-diagnostics-1.html#model-diagnostics-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall from Section <a href="mathematical-model.html#mathematical-model">7.2</a> the assumptions for linear regression model are;</p>
+<ul>
+<li><strong>Linearity</strong> The relationship between <span class="math inline">\(x_j\)</span> and <span class="math inline">\(y\)</span> is linear, for all <span class="math inline">\(j\)</span>.</li>
+<li><strong>Normality, Homogeneity of variance</strong> The residuals are identically distributed <span class="math inline">\(\epsilon_{i} \sim N(0, \sigma^{2})\)</span></li>
+<li><strong>Uncorrelated/Independent</strong> Distinct error terms are uncorrelated: <span class="math inline">\(\text{Cov}(\epsilon_{i},\epsilon_{j})=0,\forall i\neq j.\)</span></li>
+</ul>
+<p>There are a few ways to visually assess these assumptions. We’ll look at this using a penguin model of body mass as an example.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="model-diagnostics-1.html#cb208-1" aria-hidden="true" tabindex="-1"></a>pen.bmg.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> bill_length_mm <span class="sc">+</span> flipper_length_mm, <span class="at">data=</span>pen)</span></code></pre></div>
+<div id="linearity" class="section level3 hasAnchor" number="10.6.1">
+<h3><span class="header-section-number">10.6.1</span> Linearity<a href="model-diagnostics-1.html#linearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a scatterplot with lowess AND linear regression line. See how close the lowess trend line is to the best fit line. Do this for all variables.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="model-diagnostics-1.html#cb209-1" aria-hidden="true" tabindex="-1"></a>bill.plot  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">y=</span>body_mass_g, <span class="at">x=</span>bill_length_mm)) <span class="sc">+</span> </span>
+<span id="cb209-2"><a href="model-diagnostics-1.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb209-3"><a href="model-diagnostics-1.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb209-4"><a href="model-diagnostics-1.html#cb209-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span> , <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb209-5"><a href="model-diagnostics-1.html#cb209-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-6"><a href="model-diagnostics-1.html#cb209-6" aria-hidden="true" tabindex="-1"></a>flipper.plot  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">y=</span>body_mass_g, <span class="at">x=</span>flipper_length_mm)) <span class="sc">+</span> </span>
+<span id="cb209-7"><a href="model-diagnostics-1.html#cb209-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb209-8"><a href="model-diagnostics-1.html#cb209-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb209-9"><a href="model-diagnostics-1.html#cb209-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span> , <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb209-10"><a href="model-diagnostics-1.html#cb209-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-11"><a href="model-diagnostics-1.html#cb209-11" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(bill.plot, flipper.plot, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Both variables appear to have a mostly linear relationship with body mass. For penguins with bill length over 50mm the slope may decrease, but the data is sparse in the tails.</p>
+</div>
+<div id="normality-of-residuals." class="section level3 hasAnchor" number="10.6.2">
+<h3><span class="header-section-number">10.6.2</span> Normality of residuals.<a href="model-diagnostics-1.html#normality-of-residuals." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are two common ways to assess normality.</p>
+<ol style="list-style-type: decimal">
+<li>A histogram or density plot with a normal distribution curve overlaid.</li>
+<li>A qqplot. This is also known as a ‘normal probability plot’. It is used to compare the theoretical quantiles of the data <em>if it were to come from a normal distribution</em> to the observed quantiles. PMA6 Figure 5.4 has more examples and an explanation.</li>
+</ol>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="model-diagnostics-1.html#cb210-1" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb210-2"><a href="model-diagnostics-1.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">check_normality</span>(pen.bmg.model)), </span>
+<span id="cb210-3"><a href="model-diagnostics-1.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">check_normality</span>(pen.bmg.model), <span class="at">type =</span> <span class="st">&quot;qq&quot;</span>),</span>
+<span id="cb210-4"><a href="model-diagnostics-1.html#cb210-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb210-5"><a href="model-diagnostics-1.html#cb210-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>In both cases you want to assess how close the dots/distribution is to the reference curve/line.</p>
+</div>
+<div id="homogeneity-of-variance" class="section level3 hasAnchor" number="10.6.3">
+<h3><span class="header-section-number">10.6.3</span> Homogeneity of variance<a href="model-diagnostics-1.html#homogeneity-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The variability of the residuals should be constant, and independent of the value of the fitted value <span class="math inline">\(\hat{y}\)</span>.</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="model-diagnostics-1.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_heteroskedasticity</span>(pen.bmg.model))</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>This assumption is often the hardest to be fully upheld. Here we see a slightly downward trend. However, this is not a massive violation of assumptions.</p>
+</div>
+<div id="posterior-predictions" class="section level3 hasAnchor" number="10.6.4">
+<h3><span class="header-section-number">10.6.4</span> Posterior Predictions<a href="model-diagnostics-1.html#posterior-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Not really an assumption, but we can also assess the fit of a model by how well it does to predict the outcome. Using a Bayesian sampling method, the distribution of the predictions from the model should resemble the observed distribution.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="model-diagnostics-1.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_posterior_predictions</span>(pen.bmg.model))</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>This looks like a good fit.</p>
+</div>
+<div id="all-at-once" class="section level3 hasAnchor" number="10.6.5">
+<h3><span class="header-section-number">10.6.5</span> All at once<a href="model-diagnostics-1.html#all-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="model-diagnostics-1.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(pen.bmg.model)</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>Refer to PMA6 8.8 to learn about <em>leverage</em>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="confounding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-to-watch-out-for.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-fit-criteria.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general-advice-pma6-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

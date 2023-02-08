@@ -239,7 +239,7 @@ sjPlot::plot_model(fit_partpool, type="re", sort.est = "(Intercept)", y.offset =
 
 <img src="random_intercept_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
-Notice that these effects are centered around 0. Refering back \ref(@mathri), the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
+Notice that these effects are centered around 0. Refering back \@ref(mathri), the intercept $\beta_{0j}$ was modeled equal to some average intercept across all groups $\gamma_{00}$, plus some difference. What is plotted above is listed in a table below, showing that if you add that random effect to the fixed effect of the intercept, you get the value of the random intercept for each county. 
 
 
 ```r
@@ -305,7 +305,7 @@ kable(head(showri))
 ### Comparison of estimates
 
 * By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties. 
-* Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section \ref(@pool). 
+* Thus we come back to that idea of shrinkage. Below is a numeric table version of the plot in Section \@ref(pool). 
 
 
 ```r
