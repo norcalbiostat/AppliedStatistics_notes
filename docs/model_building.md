@@ -988,21 +988,28 @@ How variables are chosen for inclusion into a model is heavily driven by the pur
 
 ### Automated selection procedures
 
+> This example uses the penguins data to model the body mass
 
-_Forward selection_: Variables are added one at a time until optimal model reached. 
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">The model fitting must apply the models to the same dataset. This may be a problem if there are missing values. We suggest you remove the missing values first. (From the R help file)</div>\EndKnitrBlock{rmdcaution}
+
+
+```r
+pen.nomiss <- pen %>% na.omit()
+```
+
+#### Forward selection: Variables are added one at a time until optimal model reached. 
 
 1. Choose the variable with the highest absolute correlation $\mid r \mid$ with the outcome.
 2. Choose the next variable that maximizes the model adjusted $R^{2}$. 
 3. Repeat until adding additional variables does not improve the model fit significantly. 
 
-_Backward elimination_: Variables are removed one at a time until optimal model reached
+#### Backward elimination: Variables are removed one at a time until optimal model reached
 
 1. Put all variables into the model. 
 2. Remove the least useful variable in the model. This can be done by choosing the variable with the largest $p$-value. 
 3. Repeat until removing additional variables reduces the model fit significantly. 
 
-
-_Stepwise selection_: Combination of forward and backward. 
+#### Stepwise selection: Combination of forward and backward. 
 
 0. Start with no variables (just $\bar{Y}$)
 1. Add the variable that results in the greatest improvement in model fit. 
@@ -1014,13 +1021,303 @@ _Stepwise selection_: Combination of forward and backward.
 
 Most programs have the option to **force** variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect. 
 
+**Doing stepwise selection in R**
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Automated versions of variable selection processes should not be used blindly. </div>\EndKnitrBlock{rmdcaution}
+First you need to specify your null model - just the outcome, no covariates, and the full model - the outcome against ALL of your covariates. 
 
 
-> "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
-> "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
-> _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
+```r
+null.model <- lm(body_mass_g ~ 1, data=pen.nomiss)
+full.model <- lm(body_mass_g ~ ., data=pen.nomiss)
+```
+
+**Forward selection**
+
+
+```r
+step(null.model, 
+     scope=list(lower=null.model, upper=full.model),
+     direction='forward', trace=1) |> summary()
+## Start:  AIC=4457.28
+## body_mass_g ~ 1
+## 
+##                     Df Sum of Sq       RSS    AIC
+## + flipper_length_mm  1 164047703  51211963 3981.1
+## + species            2 145190219  70069447 4087.5
+## + island             2  83740680 131518986 4297.2
+## + bill_length_mm     1  74792533 140467133 4317.1
+## + bill_depth_mm      1  47959592 167300074 4375.3
+## + sex                1  38878897 176380769 4392.9
+## <none>                           215259666 4457.3
+## + year               1    102884 215156782 4459.1
+## 
+## Step:  AIC=3981.13
+## body_mass_g ~ flipper_length_mm
+## 
+##                  Df Sum of Sq      RSS    AIC
+## + sex             1   9416589 41795374 3915.5
+## + species         2   5368818 45843144 3948.3
+## + island          2   3437527 47774435 3962.0
+## + year            1   2666295 48545668 3965.3
+## + bill_depth_mm   1    338887 50873075 3980.9
+## <none>                        51211963 3981.1
+## + bill_length_mm  1    140000 51071963 3982.2
+## 
+## Step:  AIC=3915.47
+## body_mass_g ~ flipper_length_mm + sex
+## 
+##                  Df Sum of Sq      RSS    AIC
+## + species         2  13141806 28653568 3793.8
+## + island          2   6037165 35758209 3867.5
+## + bill_depth_mm   1   3667377 38127997 3886.9
+## + year            1   2276715 39518658 3898.8
+## <none>                        41795374 3915.5
+## + bill_length_mm  1    144990 41650383 3916.3
+## 
+## Step:  AIC=3793.76
+## body_mass_g ~ flipper_length_mm + sex + species
+## 
+##                  Df Sum of Sq      RSS    AIC
+## + bill_depth_mm   1   1196096 27457472 3781.6
+## + bill_length_mm  1    780776 27872792 3786.6
+## + year            1    474080 28179488 3790.2
+## <none>                        28653568 3793.8
+## + island          2     61695 28591873 3797.0
+## 
+## Step:  AIC=3781.56
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm
+## 
+##                  Df Sum of Sq      RSS    AIC
+## + bill_length_mm  1    541825 26915647 3776.9
+## + year            1    272828 27184644 3780.2
+## <none>                        27457472 3781.6
+## + island          2     59488 27397984 3784.8
+## 
+## Step:  AIC=3776.93
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + 
+##     bill_length_mm
+## 
+##          Df Sum of Sq      RSS    AIC
+## + year    1    319160 26596486 3775.0
+## <none>                26915647 3776.9
+## + island  2     56214 26859432 3780.2
+## 
+## Step:  AIC=3774.95
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + 
+##     bill_length_mm + year
+## 
+##          Df Sum of Sq      RSS  AIC
+## <none>                26596486 3775
+## + island  2     79468 26517018 3778
+## 
+## Call:
+## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + 
+##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -809.15 -179.43   -3.42  183.60  866.03 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       80838.770  41677.817   1.940 0.053292 .  
+## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***
+## sexmale             382.168     47.797   7.996 2.28e-14 ***
+## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***
+## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***
+## bill_depth_mm        60.749     19.926   3.049 0.002487 ** 
+## bill_length_mm       18.997      7.086   2.681 0.007718 ** 
+## year                -41.139     20.832  -1.975 0.049131 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 286.1 on 325 degrees of freedom
+## Multiple R-squared:  0.8764,	Adjusted R-squared:  0.8738 
+## F-statistic: 329.3 on 7 and 325 DF,  p-value: < 2.2e-16
+```
+
+**Backward selection**
+
+```r
+step(full.model, direction='backward', trace=1) |> summary()
+## Start:  AIC=3777.96
+## body_mass_g ~ species + island + bill_length_mm + bill_depth_mm + 
+##     flipper_length_mm + sex + year
+## 
+##                     Df Sum of Sq      RSS    AIC
+## - island             2     79468 26596486 3775.0
+## <none>                           26517018 3778.0
+## - year               1    342414 26859432 3780.2
+## - bill_length_mm     1    583730 27100748 3783.2
+## - bill_depth_mm      1    758473 27275491 3785.3
+## - flipper_length_mm  1   2872068 29389086 3810.2
+## - sex                1   5101785 31618803 3834.6
+## - species            2   6470784 32987802 3846.7
+## 
+## Step:  AIC=3774.95
+## body_mass_g ~ species + bill_length_mm + bill_depth_mm + flipper_length_mm + 
+##     sex + year
+## 
+##                     Df Sum of Sq      RSS    AIC
+## <none>                           26596486 3775.0
+## - year               1    319160 26915647 3776.9
+## - bill_length_mm     1    588158 27184644 3780.2
+## - bill_depth_mm      1    760657 27357143 3782.3
+## - flipper_length_mm  1   2800047 29396533 3806.3
+## - sex                1   5231718 31828204 3832.8
+## - species            2   9693667 36290153 3874.4
+## 
+## Call:
+## lm(formula = body_mass_g ~ species + bill_length_mm + bill_depth_mm + 
+##     flipper_length_mm + sex + year, data = pen.nomiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -809.15 -179.43   -3.42  183.60  866.03 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       80838.770  41677.817   1.940 0.053292 .  
+## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***
+## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***
+## bill_length_mm       18.997      7.086   2.681 0.007718 ** 
+## bill_depth_mm        60.749     19.926   3.049 0.002487 ** 
+## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***
+## sexmale             382.168     47.797   7.996 2.28e-14 ***
+## year                -41.139     20.832  -1.975 0.049131 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 286.1 on 325 degrees of freedom
+## Multiple R-squared:  0.8764,	Adjusted R-squared:  0.8738 
+## F-statistic: 329.3 on 7 and 325 DF,  p-value: < 2.2e-16
+```
+
+**Stepwise** 
+
+```r
+step(null.model, 
+     scope=list(lower=null.model, upper=full.model),
+     direction='both', trace=1) |> summary()
+## Start:  AIC=4457.28
+## body_mass_g ~ 1
+## 
+##                     Df Sum of Sq       RSS    AIC
+## + flipper_length_mm  1 164047703  51211963 3981.1
+## + species            2 145190219  70069447 4087.5
+## + island             2  83740680 131518986 4297.2
+## + bill_length_mm     1  74792533 140467133 4317.1
+## + bill_depth_mm      1  47959592 167300074 4375.3
+## + sex                1  38878897 176380769 4392.9
+## <none>                           215259666 4457.3
+## + year               1    102884 215156782 4459.1
+## 
+## Step:  AIC=3981.13
+## body_mass_g ~ flipper_length_mm
+## 
+##                     Df Sum of Sq       RSS    AIC
+## + sex                1   9416589  41795374 3915.5
+## + species            2   5368818  45843144 3948.3
+## + island             2   3437527  47774435 3962.0
+## + year               1   2666295  48545668 3965.3
+## + bill_depth_mm      1    338887  50873075 3980.9
+## <none>                            51211963 3981.1
+## + bill_length_mm     1    140000  51071963 3982.2
+## - flipper_length_mm  1 164047703 215259666 4457.3
+## 
+## Step:  AIC=3915.47
+## body_mass_g ~ flipper_length_mm + sex
+## 
+##                     Df Sum of Sq       RSS    AIC
+## + species            2  13141806  28653568 3793.8
+## + island             2   6037165  35758209 3867.5
+## + bill_depth_mm      1   3667377  38127997 3886.9
+## + year               1   2276715  39518658 3898.8
+## <none>                            41795374 3915.5
+## + bill_length_mm     1    144990  41650383 3916.3
+## - sex                1   9416589  51211963 3981.1
+## - flipper_length_mm  1 134585395 176380769 4392.9
+## 
+## Step:  AIC=3793.76
+## body_mass_g ~ flipper_length_mm + sex + species
+## 
+##                     Df Sum of Sq      RSS    AIC
+## + bill_depth_mm      1   1196096 27457472 3781.6
+## + bill_length_mm     1    780776 27872792 3786.6
+## + year               1    474080 28179488 3790.2
+## <none>                           28653568 3793.8
+## + island             2     61695 28591873 3797.0
+## - flipper_length_mm  1   4325617 32979185 3838.6
+## - species            2  13141806 41795374 3915.5
+## - sex                1  17189576 45843144 3948.3
+## 
+## Step:  AIC=3781.56
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm
+## 
+##                     Df Sum of Sq      RSS    AIC
+## + bill_length_mm     1    541825 26915647 3776.9
+## + year               1    272828 27184644 3780.2
+## <none>                           27457472 3781.6
+## + island             2     59488 27397984 3784.8
+## - bill_depth_mm      1   1196096 28653568 3793.8
+## - flipper_length_mm  1   3145834 30603306 3815.7
+## - sex                1   7932472 35389944 3864.1
+## - species            2  10670525 38127997 3886.9
+## 
+## Step:  AIC=3776.93
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + 
+##     bill_length_mm
+## 
+##                     Df Sum of Sq      RSS    AIC
+## + year               1    319160 26596486 3775.0
+## <none>                           26915647 3776.9
+## + island             2     56214 26859432 3780.2
+## - bill_length_mm     1    541825 27457472 3781.6
+## - bill_depth_mm      1    957145 27872792 3786.6
+## - flipper_length_mm  1   2481143 29396790 3804.3
+## - sex                1   5482024 32397671 3836.7
+## - species            2  11183644 38099291 3888.6
+## 
+## Step:  AIC=3774.95
+## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + 
+##     bill_length_mm + year
+## 
+##                     Df Sum of Sq      RSS    AIC
+## <none>                           26596486 3775.0
+## - year               1    319160 26915647 3776.9
+## + island             2     79468 26517018 3778.0
+## - bill_length_mm     1    588158 27184644 3780.2
+## - bill_depth_mm      1    760657 27357143 3782.3
+## - flipper_length_mm  1   2800047 29396533 3806.3
+## - sex                1   5231718 31828204 3832.8
+## - species            2   9693667 36290153 3874.4
+## 
+## Call:
+## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + 
+##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -809.15 -179.43   -3.42  183.60  866.03 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       80838.770  41677.817   1.940 0.053292 .  
+## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***
+## sexmale             382.168     47.797   7.996 2.28e-14 ***
+## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***
+## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***
+## bill_depth_mm        60.749     19.926   3.049 0.002487 ** 
+## bill_length_mm       18.997      7.086   2.681 0.007718 ** 
+## year                -41.139     20.832  -1.975 0.049131 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 286.1 on 325 degrees of freedom
+## Multiple R-squared:  0.8764,	Adjusted R-squared:  0.8738 
+## F-statistic: 329.3 on 7 and 325 DF,  p-value: < 2.2e-16
+```
+
 
 Warnings: 
 
@@ -1028,8 +1325,9 @@ Warnings:
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
+**Other references** Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
 
-_Best Subsets_
+#### Best Subsets
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -1039,10 +1337,23 @@ etc.
 * Compare and choose among the "best subsets" of various sizes.
 
 
-### Implementation of stepwise selection in R
-* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
-* **Best Subsets** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
+```r
+oc.ht <- regsubsets(body_mass_g ~ ., data=pen.nomiss)
+par(mfrow=c(1,3)) # set plotting window to be 1 row and 3 columns
+plot(oc.ht, scale='adjr2');plot(oc.ht, scale='bic');plot(oc.ht, scale='Cp')
+```
 
+<img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="960" />
+
+* The black squares are when the variable is in the model, the white is when it's not
+* The vertical axis are chosen fit metrics such as adjusted R2, BIC and Mallows Cp. The higher the better
+
+In this example variables that show up as improving model fit include `species`, `sex`, `flipper_length_mm`, `bill_length`, and possibly `year`. For sure island is out.  
+
+
+**Other references** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
+
+**Notable problems:** categorical variables are not treated as a group. that is, they are not "all in" or "all out". If at least one level is frequently chosen as improving model fit, add the entire categorical variable to the model.  
 
 ### LASSO Regression (PMA6 9.7)
 
@@ -1086,7 +1397,7 @@ plot(chem.lasso, xvar = "lambda")
 mtext(side=3, "Number of Variables", line=2)
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 * Each line represents the value of a coefficient as $ln(\lambda)$ changes. 
 * The red line on the bottom and the purple on the top must be important, since they are the last two to be shrunk to 0 and they are relatively stable. 
@@ -1797,7 +2108,7 @@ flipper.plot  <- ggplot(pen, aes(y=body_mass_g, x=flipper_length_mm)) +
 gridExtra::grid.arrange(bill.plot, flipper.plot, ncol=2)
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 Both variables appear to have a mostly linear relationship with body mass. For penguins with bill length over 50mm the slope may decrease, but the data is sparse in the tails. 
 
@@ -1816,7 +2127,7 @@ gridExtra::grid.arrange(
 )
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 In both cases you want to assess how close the dots/distribution is to the reference curve/line. 
 
@@ -1828,7 +2139,7 @@ The variability of the residuals should be constant, and independent of the valu
 plot(check_heteroskedasticity(pen.bmg.model))
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 This assumption is often the hardest to be fully upheld. Here we see a slightly downward trend. However, this is not a massive violation of assumptions. 
 
@@ -1841,7 +2152,7 @@ Not really an assumption, but we can also assess the fit of a model by how well 
 plot(check_posterior_predictions(pen.bmg.model))
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 This looks like a good fit. 
 
@@ -1852,7 +2163,7 @@ This looks like a good fit.
 check_model(pen.bmg.model)
 ```
 
-<img src="model_building_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="model_building_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 Refer to PMA6 8.8 to learn about _leverage_. 
 
@@ -1868,6 +2179,9 @@ Refer to PMA6 8.8 to learn about _leverage_.
 * Let science and the purpose of your model be your ultimate guide
     - If the purpose of the model is for explanation/interpretation, error on the side of parsimony (smaller model) than being overly complex. 
     - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
+
+* Automated versions of variable selection processes should not be used blindly. 
+* "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."..."Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster." _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
 
 
 ## What to watch out for (PMA6 9.10)

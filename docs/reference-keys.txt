@@ -281,3 +281,10 @@ visualize-imputations
 calculating-bias
 final-thoughts
 additional-references-1
+terminology
+example-does-smoking-affect-pulse-rate
+forward-selection-variables-are-added-one-at-a-time-until-optimal-model-reached.
+backward-elimination-variables-are-removed-one-at-a-time-until-optimal-model-reached
+stepwise-selection-combination-of-forward-and-backward.
+best-subsets
+autoregressive

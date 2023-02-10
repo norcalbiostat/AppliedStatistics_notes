@@ -10,7 +10,7 @@ This section uses functions from the `gtsummary` and `survey` packages to help t
 ```
 
 ```{r, echo=FALSE}
-library(gtsummary); library(performance)
+library(gtsummary); library(performance); library(leaps)
 pen <- palmerpenguins::penguins
 ```
 
@@ -316,21 +316,29 @@ How variables are chosen for inclusion into a model is heavily driven by the pur
 
 ### Automated selection procedures
 
+> This example uses the penguins data to model the body mass
 
-_Forward selection_: Variables are added one at a time until optimal model reached. 
+```{block2,  type='rmdcaution'}
+The model fitting must apply the models to the same dataset. This may be a problem if there are missing values. We suggest you remove the missing values first. (From the R help file)
+```
+
+```{r}
+pen.nomiss <- pen %>% na.omit()
+```
+
+#### Forward selection: Variables are added one at a time until optimal model reached. 
 
 1. Choose the variable with the highest absolute correlation $\mid r \mid$ with the outcome.
 2. Choose the next variable that maximizes the model adjusted $R^{2}$. 
 3. Repeat until adding additional variables does not improve the model fit significantly. 
 
-_Backward elimination_: Variables are removed one at a time until optimal model reached
+#### Backward elimination: Variables are removed one at a time until optimal model reached
 
 1. Put all variables into the model. 
 2. Remove the least useful variable in the model. This can be done by choosing the variable with the largest $p$-value. 
 3. Repeat until removing additional variables reduces the model fit significantly. 
 
-
-_Stepwise selection_: Combination of forward and backward. 
+#### Stepwise selection: Combination of forward and backward. 
 
 0. Start with no variables (just $\bar{Y}$)
 1. Add the variable that results in the greatest improvement in model fit. 
@@ -342,15 +350,35 @@ _Stepwise selection_: Combination of forward and backward.
 
 Most programs have the option to **force** variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect. 
 
+**Doing stepwise selection in R**
 
-```{block2,  type='rmdcaution'}
-Automated versions of variable selection processes should not be used blindly. 
+First you need to specify your null model - just the outcome, no covariates, and the full model - the outcome against ALL of your covariates. 
+
+```{r}
+null.model <- lm(body_mass_g ~ 1, data=pen.nomiss)
+full.model <- lm(body_mass_g ~ ., data=pen.nomiss)
 ```
 
+**Forward selection**
 
-> "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."
-> "Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster."
-> _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
+```{r}
+step(null.model, 
+     scope=list(lower=null.model, upper=full.model),
+     direction='forward', trace=1) |> summary()
+```
+
+**Backward selection**
+```{r}
+step(full.model, direction='backward', trace=1) |> summary()
+```
+
+**Stepwise** 
+```{r}
+step(null.model, 
+     scope=list(lower=null.model, upper=full.model),
+     direction='both', trace=1) |> summary()
+```
+
 
 Warnings: 
 
@@ -358,8 +386,9 @@ Warnings:
 * Can reject perfectly plausible models from later consideration
 * Hides relationships between variables (X3 is added and now X1 is no longer significant. X1 vs X3 should be looked at)
 
+**Other references** Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
 
-_Best Subsets_
+#### Best Subsets
 
 * Select one X with highest simple $r$ with Y
 * Select two X’s with highest multiple $r$ with Y
@@ -368,11 +397,21 @@ etc.
 * Compute adjusted R2, AIC or BIC each time.
 * Compare and choose among the "best subsets" of various sizes.
 
+```{r, fig.width=10, fig.height=6}
+oc.ht <- regsubsets(body_mass_g ~ ., data=pen.nomiss)
+par(mfrow=c(1,3)) # set plotting window to be 1 row and 3 columns
+plot(oc.ht, scale='adjr2');plot(oc.ht, scale='bic');plot(oc.ht, scale='Cp')
+```
 
-### Implementation of stepwise selection in R
-* Jupyter notebook (R kernel) Stats 191 at Stanford. This one uses cross-validation on the **stepwise procedures**, and demonstrates the dangers of trusting models that come out of blind use of variable selection methods. https://web.stanford.edu/class/stats191/notebooks/Selection.html
-* **Best Subsets** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
+* The black squares are when the variable is in the model, the white is when it's not
+* The vertical axis are chosen fit metrics such as adjusted R2, BIC and Mallows Cp. The higher the better
 
+In this example variables that show up as improving model fit include `species`, `sex`, `flipper_length_mm`, `bill_length`, and possibly `year`. For sure island is out.  
+
+
+**Other references** from STDHA: http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/155-best-subsets-regression-essentials-in-r/
+
+**Notable problems:** categorical variables are not treated as a group. that is, they are not "all in" or "all out". If at least one level is frequently chosen as improving model fit, add the entire categorical variable to the model.  
 
 ### LASSO Regression (PMA6 9.7)
 
@@ -685,6 +724,9 @@ Refer to PMA6 8.8 to learn about _leverage_.
 * Let science and the purpose of your model be your ultimate guide
     - If the purpose of the model is for explanation/interpretation, error on the side of parsimony (smaller model) than being overly complex. 
     - If the purpose is prediction, then as long as you're not overfitting the model (as checked using cross-validation techniques), use as much information as possible. 
+
+* Automated versions of variable selection processes should not be used blindly. 
+* "... perhaps the most serious source of error lies in letting statistical procedures make decisions for you."..."Don't be too quick to turn on the computer. Bypassing the brain to compute by reflex is a sure recipe for disaster." _Good and Hardin, Common Errors in Statistics (and How to Avoid Them), p. 3, p. 152_
 
 
 ## What to watch out for (PMA6 9.10)
