@@ -1,6 +1,16 @@
 # Classification of Binary outcomes {#binary-classification}
 
-> This section will be expanded to discuss classification for more than two groups. 
+```{block2,  type='rmdnote'}
+This section uses functions from the following packages:  
+
+* [ROCR](https://rocr.bioinf.mpi-sb.mpg.de/) to create ROC curves
+* [caret](https://topepo.github.io/caret/index.html) package to create a confusion matrix
+* [ggpubr](https://rpkgs.datanovia.com/ggpubr/) for some nicer plots
+```
+
+```{r, echo=FALSE}
+library(ROCR); library(caret)
+``` 
 
 ## Predicted Probabilities
 
@@ -9,8 +19,6 @@
 * Or sometimes you want to predict whether or not a new individual is going to have the event. 
 
 For all of these, we need to calculate $p_{i} = P(y_{i}=1)$, the probability of the event. 
-
-
 Back solving the logistic model for $p_{i} = e^{\beta X} / (1+e^{\beta X})$ gives us the probability of an event. 
 
 $$
@@ -18,21 +26,21 @@ p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_
 {1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
 $$
 
-Consider the main effects model of depression on age, income and gender from section \@ref(logreg-dep-ex)
+Consider the main effects model of depression on age, income and sex from section \@ref(logreg-dep-ex)
 
 ```{r, echo=FALSE}
-dep_sex_model <- glm(cases ~ sex, data=depress, family="binomial")
+depress$sex <- factor(depress$sex, labels = c("Male", "Female"))
+dep_sex_model <- glm(cases ~ age + income + sex, data=depress, family="binomial")
 summary(dep_sex_model) %>% pander()
 ```
 
 The predicted probability of depression is calculated as: 
 $$
-P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
-{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
 $$
 
-Notice you can't get a "generic" probability for all individuals. It entirely depends on their _covariate profile_. In other words, what value X take on for each record. 
-
+Notice this formulation requires you to specify a _covariate profile_. In other words, what value X take on for each record. Often when you are only concerned with comparing the effect of a single measures, you set all other measures equal to their means. 
 
 Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
 
@@ -62,30 +70,56 @@ exp(XB.m) / (1+exp(XB.m))
 The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
 
 
+## Distribution of Predicted probabilities
 
-## Predicted Class (outcome)
+We know that not everyone in the data set is 44.4 years old and makes $20.6k annually (thankfully). So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
 
-So what if you want to get the model predicted probability of the event for all individuals in the data set? There's no way I'm doing that calculation for every person in the data set. 
+We can use the `predict()` command to generate a vector of predictions $\hat{p}_{i}$ for each row used in the model. 
 
-We can use the `predict()` command to generate a vector of predictions for each row used in the model. 
+```{r}
+phat.depr <- predict(dep_sex_model, type='response') # create prediction vector
+summary(phat.depr)
+hist(phat.depr) # base R histogram
+abline(v = mean(phat.depr), col = "blue", lwd = 2) # add mean
+```
+
+The average predicted probability of showing symptoms of depression is 0.45. 
+
+### Plotting predictions against covariates
+
+Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let's look at a plot: 
 
 ```{block2,  type='rmdcaution'}
 Any row with missing data on any variable used in the model will be dropped, and so NOT get a predicted value. So the tactic is to use the data stored in the model object.
 ```
 
 ```{r}
-mvmodel <- glm(cases ~ age + income + sex, data=depress, family="binomial")
-model.pred.prob <- predict(mvmodel, type='response')
+model.pred.data <- cbind(dep_sex_model$data, phat.depr)
+tail(names(model.pred.data))
 ```
 
-The `model.pred.prob` is a vector of individual predicted probabilities of the outcome (being depressed). To classify individual $i$ as being depressed or not, we draw a binary value ($x_{i} = 0$ or $1$), with probability $p_{i}$ by using the `rbinom` function, with a `size=1`. 
+Now that the predictions have been added back onto the data used in the model using `cbind`, we have covariates to use to plot the predictions against. 
+
+```{r}
+ggpubr::ggdensity(model.pred.data, x="phat.depr", add="mean", rug = TRUE, 
+          color = "sex", fill = "sex", palette = c("#00AFBB", "#E7B800"))
+```
+
+![](images/q.png) 
+
+* What do you notice in this plot?
+* What can you infer? 
+
+## Predicted Class (outcome)
+
+To classify individual $i$ as being depressed or not, we draw a binary value ($x_{i} = 0$ or $1$), with probability $p_{i}$ by using the `rbinom` function, with a `size=1`. 
 ```{r}
 set.seed(12345) #reminder: change the combo on my luggage
-plot.mpp <- data.frame(pred.prob = model.pred.prob, 
-                       pred.class = rbinom(n = length(model.pred.prob), 
+plot.mpp <- data.frame(pred.prob = phat.depr, 
+                       pred.class = rbinom(n = length(phat.depr), 
                                            size = 1, 
-                                           p = model.pred.prob),
-                       truth = mvmodel$y)
+                                           p = phat.depr),
+                       truth = dep_sex_model$y)
 head(plot.mpp)
 ```
 
@@ -100,7 +134,7 @@ table(plot.mpp$pred.class, plot.mpp$truth)
 ```
 
 The model correctly identified 195 individuals as not depressed and 15 as depressed.
-The model got it wrong 49 + 25 times. 
+The model got it wrong 49 + 35 times. 
 
 The **accuracy** of the model is calculated as the fraction of times the model prediction matches the observed category: 
 
@@ -110,22 +144,9 @@ The **accuracy** of the model is calculated as the fraction of times the model p
 
 This model has a 71.4% accuracy. 
 
-
 ![](images/q.png) Is this good? What if death were the event? 
 
  
-#### Distribution of Predicted probabilities
-Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let's look at a plot: 
-
-```{r}
-ggplot(plot.mpp, aes(x=truth, y=pred.prob, fill=truth)) + 
-      geom_jitter(width=.2) + geom_violin(alpha=.4) + theme_bw()
-```
-
-![](images/q.png) 
-
-* What do you notice in this plot?
-* What can you infer? 
 
 ## Confusion Matrix
 
@@ -142,9 +163,6 @@ Often we adjust the cutoff value to improve accuracy. This is where we have to p
 
 
 There are many different types of criteria that can be used to find the optimal cutoff value. But first we need to understand the expanded borders of a [[Confusion Matrix]](https://en.wikipedia.org/wiki/Confusion_matrix). 
-
-![Confusion matrix. Credit: Wikipedia](images/confusion-matrix.png)
-
 Using the `confusionMatrix` function inside the `caret` package performs all these calculations for us.
 
 ```{block2,  type='rmdcaution'}
@@ -153,7 +171,7 @@ This is also another place where the factor ordering of binary variables can cau
 ```
 
 ```{r}
-caret::confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
+confusionMatrix(plot.mpp$pred.class, plot.mpp$truth, positive="Depressed")
 ```
 
 * 195 people were correctly predicted to not be depressed (True Negative)
@@ -168,8 +186,12 @@ Also other names for the same term, and formulas.
 * True negative ($n_{22}$)
 * False positive, Type I error ($n_{12}$)
 * False negative, Type II error ($n_{21}$)
-* True positive rate (TPR), Recall, Sensitivity, probability of detection, power. 
+* True positive rate (TPR), Recall, Sensitivity, probability of detection, power. P(predicted positive | total positive)
 $\frac{\# True Positive}{\#Condition Positive}$
+
+* True negative rate (TNR), Specificity, selectivity. P(predicted negative | total negative)
+$\frac{\# True Negative}{\# Condition Negative}$
+
 
 * False positive rate (FPR), fall-out, probability of false alarm. 
 $\frac{\# False Positive}{\# Condition Negative}$
@@ -177,16 +199,15 @@ $\frac{\# False Positive}{\# Condition Negative}$
 * False negative rate (FNR), miss rate. 
 $\frac{\# False Negative}{\# Condition Positive}$
 
-* True negative rate (TNR), Specificity, selectivity. 
-$\frac{\# True Negative}{\# Condition Negative}$
-
 * Prevalence. 
 $\frac{\# Condition Positive}{\# Total Population}$
 
 * Accuracy. 
 $\frac{\# True Positive + \# True Negative}{\# Total Population}$
 
-* Positive Predictive Value (PPV), Precision. 
+* Balanced Accuracy: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - Adjusts for class size imbalances
+
+* Positive Predictive Value (PPV), Precision. P(true positive | predicted positive)
 $\frac{\# True Positive}{\# Predicted Condition Positive}$
 
 * False discovery rate (FDR). 
@@ -198,18 +219,7 @@ $\frac{\# False Negative}{\# Predicted Condition Negative}$
 * Negative predictive value (NPV). 
 $\frac{\# True Negative}{\# Predicted Condition Negative}$
 
-* F1 score. $\frac{2 * (Precision * Recall)}{Precision + Recall}$
-
-<!---
-Other terminology: 
-
-* **Sensitivity/Recall/True positive rate**: P(predicted positive | total positive) = `40/(10+40) = .8`
-* **Specificity/true negative rate**: P(predicted negative | total negative) = `123/(123+121) = .504`
-* **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
-* **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
-* **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
-* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
----->
+* F1 score. The harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $\frac{2 * (Precision * Recall)}{Precision + Recall}$
 
 
 ## ROC Curves
@@ -222,8 +232,7 @@ Other terminology:
         - The `colorize` option colors the curve according to the probability cutoff point. 
 
 ```{r}
-library(ROCR)
-pr <- prediction(model.pred.prob, mvmodel$y)
+pr <- prediction(phat.depr, dep_sex_model$y)
 perf <- performance(pr, measure="tpr", x.measure="fpr")
 plot(perf, colorize=TRUE, lwd=3, print.cutoffs.at=c(seq(0,1,by=0.1)))
 abline(a=0, b=1, lty=2)
@@ -248,9 +257,7 @@ We can dig into the `perf.acc` object to get the maximum accuracy value (`y.valu
 (cutoff.value <- perf.acc@x.values[[1]][row.with.max])
 ```
 
-A cutoff of 0.42 provides the maximum accuracy measure. 
-
-You can do the same process with other measures of optimization such as the $f1$ score.
+Sometimes (like here) there is not one single maximum value for accuracy. In this case I would look at which of these two cutoff points maximize other metrics such as the $f1$ score. 
 
 ROC curves: 
 
@@ -274,8 +281,6 @@ auc@y.values
 
 
 ```{r}
-library(caret)
-
 plot.mpp$pred.class2 <- ifelse(plot.mpp$pred.prob <0.15, 0,1) 
 plot.mpp$pred.class2 <- factor(plot.mpp$pred.class2, labels=c("Not Depressed", "Depressed")) %>%   
                         forcats::fct_rev()

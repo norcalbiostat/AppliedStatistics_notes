@@ -288,3 +288,4 @@ backward-elimination-variables-are-removed-one-at-a-time-until-optimal-model-rea
 stepwise-selection-combination-of-forward-and-backward.
 best-subsets
 autoregressive
+plotting-predictions-against-covariates

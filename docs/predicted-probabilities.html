@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="binary-classification.html"/>
-<link rel="next" href="predicted-class-outcome.html"/>
+<link rel="next" href="distribution-of-predicted-probabilities.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,13 +214,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -295,7 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -316,8 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +374,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -521,20 +528,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Sometimes you just want to report the probability of the event occurring.</li>
 <li>Or sometimes you want to predict whether or not a new individual is going to have the event.</li>
 </ul>
-<p>For all of these, we need to calculate <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>, the probability of the event.</p>
-<p>Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
+<p>For all of these, we need to calculate <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>, the probability of the event.
+Back solving the logistic model for <span class="math inline">\(p_{i} = e^{\beta X} / (1+e^{\beta X})\)</span> gives us the probability of an event.</p>
 <p><span class="math display">\[
 p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
 {1 + e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_{p}x_{pi}}}
 \]</span></p>
-<p>Consider the main effects model of depression on age, income and gender from section <a href="logreg.html#logreg-dep-ex">11.3.3</a></p>
-<table style="width:89%;">
+<p>Consider the main effects model of depression on age, income and sex from section <a href="logreg.html#logreg-dep-ex">11.3.3</a></p>
+<table style="width:88%;">
 <colgroup>
 <col width="25%" />
 <col width="15%" />
 <col width="18%" />
 <col width="13%" />
-<col width="16%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -548,17 +555,31 @@ p_{i} = \frac{e^{\beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} + \ldots + \beta_
 <tbody>
 <tr class="odd">
 <td align="center"><strong>(Intercept)</strong></td>
-<td align="center">-2.313</td>
-<td align="center">0.3315</td>
-<td align="center">-6.976</td>
-<td align="center">3.044e-12</td>
+<td align="center">-0.6765</td>
+<td align="center">0.5788</td>
+<td align="center">-1.169</td>
+<td align="center">0.2425</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>sex</strong></td>
-<td align="center">1.039</td>
-<td align="center">0.3767</td>
-<td align="center">2.757</td>
-<td align="center">0.005831</td>
+<td align="center"><strong>age</strong></td>
+<td align="center">-0.02096</td>
+<td align="center">0.00904</td>
+<td align="center">-2.318</td>
+<td align="center">0.02043</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>income</strong></td>
+<td align="center">-0.03656</td>
+<td align="center">0.01409</td>
+<td align="center">-2.595</td>
+<td align="center">0.009457</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>sexFemale</strong></td>
+<td align="center">0.9294</td>
+<td align="center">0.3858</td>
+<td align="center">2.409</td>
+<td align="center">0.016</td>
 </tr>
 </tbody>
 </table>
@@ -576,36 +597,36 @@ freedom</td>
 </tr>
 <tr class="even">
 <td align="center">Residual deviance:</td>
-<td align="center">259.4 on 292 degrees of
+<td align="center">247.5 on 290 degrees of
 freedom</td>
 </tr>
 </tbody>
 </table>
 <p>The predicted probability of depression is calculated as:
 <span class="math display">\[
-P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
-{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*gender}}
+P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
+{1 + e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
 \]</span></p>
-<p>Notice you can’t get a “generic” probability for all individuals. It entirely depends on their <em>covariate profile</em>. In other words, what value X take on for each record.</p>
+<p>Notice this formulation requires you to specify a <em>covariate profile</em>. In other words, what value X take on for each record. Often when you are only concerned with comparing the effect of a single measures, you set all other measures equal to their means.</p>
 <p>Let’s compare the probability of being depressed for males and females separately, while holding age and income constant at their average value.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="predicted-probabilities.html#cb233-1" aria-hidden="true" tabindex="-1"></a>depress <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">age=</span><span class="fu">mean</span>(age), <span class="at">income=</span><span class="fu">mean</span>(income))</span>
-<span id="cb233-2"><a href="predicted-probabilities.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="do">##        age   income</span></span>
-<span id="cb233-3"><a href="predicted-probabilities.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 44.41497 20.57483</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="predicted-probabilities.html#cb1-1" aria-hidden="true" tabindex="-1"></a>depress <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">age=</span><span class="fu">mean</span>(age), <span class="at">income=</span><span class="fu">mean</span>(income))</span>
+<span id="cb1-2"><a href="predicted-probabilities.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##        age   income</span></span>
+<span id="cb1-3"><a href="predicted-probabilities.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 44.41497 20.57483</span></span></code></pre></div>
 <p>Plug the coefficient estimates and the values of the variables into the equation and calculate.
 <span class="math display">\[
 P(depressed|Female) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
 {1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(1)}}
 \]</span></p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="predicted-probabilities.html#cb234-1" aria-hidden="true" tabindex="-1"></a>XB.f <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>) <span class="sc">+</span> <span class="fl">0.92945</span></span>
-<span id="cb234-2"><a href="predicted-probabilities.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.f) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.f))</span>
-<span id="cb234-3"><a href="predicted-probabilities.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1930504</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="predicted-probabilities.html#cb2-1" aria-hidden="true" tabindex="-1"></a>XB.f <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>) <span class="sc">+</span> <span class="fl">0.92945</span></span>
+<span id="cb2-2"><a href="predicted-probabilities.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.f) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.f))</span>
+<span id="cb2-3"><a href="predicted-probabilities.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1930504</span></span></code></pre></div>
 <p><span class="math display">\[
 P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
 {1 + e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}}
 \]</span></p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="predicted-probabilities.html#cb235-1" aria-hidden="true" tabindex="-1"></a>XB.m <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>)</span>
-<span id="cb235-2"><a href="predicted-probabilities.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.m) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.m))</span>
-<span id="cb235-3"><a href="predicted-probabilities.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.08629312</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="predicted-probabilities.html#cb3-1" aria-hidden="true" tabindex="-1"></a>XB.m <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.676</span> <span class="sc">-</span> <span class="fl">0.02096</span><span class="sc">*</span>(<span class="fl">44.4</span>) <span class="sc">-</span> .<span class="dv">03656</span><span class="sc">*</span>(<span class="fl">20.6</span>)</span>
+<span id="cb3-2"><a href="predicted-probabilities.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(XB.m) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(XB.m))</span>
+<span id="cb3-3"><a href="predicted-probabilities.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.08629312</span></span></code></pre></div>
 <p>The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86.</p>
 </div>
             </section>
@@ -614,7 +635,7 @@ P(depressed|Male) = \frac{e^{-0.676 - 0.02096(44.4) - .03656(20.6) + 0.92945(0)}
         </div>
       </div>
 <a href="binary-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="predicted-class-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="distribution-of-predicted-probabilities.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

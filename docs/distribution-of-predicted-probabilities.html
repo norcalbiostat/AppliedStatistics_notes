@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.6 ROC Curves | Applied Statistics</title>
+  <title>12.2 Distribution of Predicted probabilities | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.6 ROC Curves | Applied Statistics" />
+  <meta property="og:title" content="12.2 Distribution of Predicted probabilities | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.6 ROC Curves | Applied Statistics" />
+  <meta name="twitter:title" content="12.2 Distribution of Predicted probabilities | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vocabulary-terms.html"/>
-<link rel="next" href="model-performance.html"/>
+<link rel="prev" href="predicted-probabilities.html"/>
+<link rel="next" href="predicted-class-outcome.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -521,59 +521,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="roc-curves" class="section level2 hasAnchor" number="12.6">
-<h2><span class="header-section-number">12.6</span> ROC Curves<a href="roc-curves.html#roc-curves" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="distribution-of-predicted-probabilities" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Distribution of Predicted probabilities<a href="distribution-of-predicted-probabilities.html#distribution-of-predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We know that not everyone in the data set is 44.4 years old and makes $20.6k annually (thankfully). So what if you want to get the model predicted probability of the event for all individuals in the data set? There’s no way I’m doing that calculation for every person in the data set.</p>
+<p>We can use the <code>predict()</code> command to generate a vector of predictions <span class="math inline">\(\hat{p}_{i}\)</span> for each row used in the model.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="distribution-of-predicted-probabilities.html#cb4-1" aria-hidden="true" tabindex="-1"></a>phat.depr <span class="ot">&lt;-</span> <span class="fu">predict</span>(dep_sex_model, <span class="at">type=</span><span class="st">&#39;response&#39;</span>) <span class="co"># create prediction vector</span></span>
+<span id="cb4-2"><a href="distribution-of-predicted-probabilities.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(phat.depr)</span>
+<span id="cb4-3"><a href="distribution-of-predicted-probabilities.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb4-4"><a href="distribution-of-predicted-probabilities.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.01271 0.08352 0.16303 0.17007 0.23145 0.45082</span></span>
+<span id="cb4-5"><a href="distribution-of-predicted-probabilities.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(phat.depr) <span class="co"># base R histogram</span></span>
+<span id="cb4-6"><a href="distribution-of-predicted-probabilities.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(phat.depr), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="co"># add mean</span></span></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The average predicted probability of showing symptoms of depression is 0.45.</p>
+<div id="plotting-predictions-against-covariates" class="section level3 hasAnchor" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Plotting predictions against covariates<a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another important feature to look at is to see how well the model discriminates between the two groups in terms of predicted probabilities. Let’s look at a plot:</p>
+
+<div class="rmdcaution">
+Any row with missing data on any variable used in the model will be dropped, and so NOT get a predicted value. So the tactic is to use the data stored in the model object.
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="distribution-of-predicted-probabilities.html#cb5-1" aria-hidden="true" tabindex="-1"></a>model.pred.data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dep_sex_model<span class="sc">$</span>data, phat.depr)</span>
+<span id="cb5-2"><a href="distribution-of-predicted-probabilities.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">names</span>(model.pred.data))</span>
+<span id="cb5-3"><a href="distribution-of-predicted-probabilities.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;regdoc&quot;    &quot;treat&quot;     &quot;beddays&quot;   &quot;acuteill&quot;  &quot;chronill&quot;  &quot;phat.depr&quot;</span></span></code></pre></div>
+<p>Now that the predictions have been added back onto the data used in the model using <code>cbind</code>, we have covariates to use to plot the predictions against.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="distribution-of-predicted-probabilities.html#cb6-1" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">ggdensity</span>(model.pred.data, <span class="at">x=</span><span class="st">&quot;phat.depr&quot;</span>, <span class="at">add=</span><span class="st">&quot;mean&quot;</span>, <span class="at">rug =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb6-2"><a href="distribution-of-predicted-probabilities.html#cb6-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>))</span></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="images/q.png" /></p>
 <ul>
-<li>ROC curves show the balance between sensitivity and specificity.</li>
-<li>We’ll use the <a href="https://rocr.bioinf.mpi-sb.mpg.de/">[ROCR]</a> package. It only takes 3 commands:
-<ul>
-<li>calculate <code>prediction()</code> using the model</li>
-<li>calculate the model <code>performance()</code> on both true positive rate and true negative rate for a whole range of cutoff values.</li>
-<li><code>plot</code> the curve.
-<ul>
-<li>The <code>colorize</code> option colors the curve according to the probability cutoff point.</li>
-</ul></li>
-</ul></li>
+<li>What do you notice in this plot?</li>
+<li>What can you infer?</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="roc-curves.html#cb12-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">prediction</span>(phat.depr, dep_sex_model<span class="sc">$</span>y)</span>
-<span id="cb12-2"><a href="roc-curves.html#cb12-2" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="at">x.measure=</span><span class="st">&quot;fpr&quot;</span>)</span>
-<span id="cb12-3"><a href="roc-curves.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf, <span class="at">colorize=</span><span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">print.cutoffs.at=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">by=</span><span class="fl">0.1</span>)))</span>
-<span id="cb12-4"><a href="roc-curves.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p>We can also use the <code>performance()</code> function to evaluate the <span class="math inline">\(f1\)</span> measure</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="roc-curves.html#cb13-1" aria-hidden="true" tabindex="-1"></a>perf.f1 <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;f&quot;</span>)</span>
-<span id="cb13-2"><a href="roc-curves.html#cb13-2" aria-hidden="true" tabindex="-1"></a>perf.acc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;acc&quot;</span>)</span>
-<span id="cb13-3"><a href="roc-curves.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="roc-curves.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb13-5"><a href="roc-curves.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf.f1)</span>
-<span id="cb13-6"><a href="roc-curves.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf.acc)</span></code></pre></div>
-<p><img src="classification_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>We can dig into the <code>perf.acc</code> object to get the maximum accuracy value (<code>y.value</code>), then find the row where that value occurs, and link it to the corresponding cutoff value of x.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="roc-curves.html#cb14-1" aria-hidden="true" tabindex="-1"></a>(max.f1 <span class="ot">&lt;-</span> <span class="fu">max</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]], <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb14-2"><a href="roc-curves.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8333333</span></span>
-<span id="cb14-3"><a href="roc-curves.html#cb14-3" aria-hidden="true" tabindex="-1"></a>(row.with.max <span class="ot">&lt;-</span> <span class="fu">which</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]]<span class="sc">==</span>max.f1))</span>
-<span id="cb14-4"><a href="roc-curves.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2 8</span></span>
-<span id="cb14-5"><a href="roc-curves.html#cb14-5" aria-hidden="true" tabindex="-1"></a>(cutoff.value <span class="ot">&lt;-</span> perf.acc<span class="sc">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</span>
-<span id="cb14-6"><a href="roc-curves.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">##       124       256 </span></span>
-<span id="cb14-7"><a href="roc-curves.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.4508171 0.3946273</span></span></code></pre></div>
-<p>Sometimes (like here) there is not one single maximum value for accuracy. In this case I would look at which of these two cutoff points maximize other metrics such as the <span class="math inline">\(f1\)</span> score.</p>
-<p>ROC curves:</p>
-<ul>
-<li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
-<li>The Area under the Curve (auc) also gives you a measure of overall model accuracy.</li>
-</ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="roc-curves.html#cb15-1" aria-hidden="true" tabindex="-1"></a>auc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&#39;auc&#39;</span>)</span>
-<span id="cb15-2"><a href="roc-curves.html#cb15-2" aria-hidden="true" tabindex="-1"></a>auc<span class="sc">@</span>y.values</span>
-<span id="cb15-3"><a href="roc-curves.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
-<span id="cb15-4"><a href="roc-curves.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.695041</span></span></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="vocabulary-terms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-performance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="predicted-probabilities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predicted-class-outcome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
