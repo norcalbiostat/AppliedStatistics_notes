@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -556,11 +559,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Then create a new variable: <code>logincome</code> that is the natural log (<em>ln</em>) of income. e.g. <code>addhealth$logincome = log(addhealth$income)</code></li>
 </ol>
 <p>Why are we transforming income? To achieve normality.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="log-linear.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb226-2"><a href="log-linear.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb226-3"><a href="log-linear.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb226-4"><a href="log-linear.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb226-5"><a href="log-linear.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="log-linear.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb232-2"><a href="log-linear.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>income, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>income, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb232-3"><a href="log-linear.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(addhealth<span class="sc">$</span>logincome, <span class="at">probability =</span> <span class="cn">TRUE</span>); <span class="fu">lines</span>(<span class="fu">density</span>(addhealth<span class="sc">$</span>logincome, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb232-4"><a href="log-linear.html#cb232-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>income); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb232-5"><a href="log-linear.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(addhealth<span class="sc">$</span>logincome); <span class="fu">qqline</span>(addhealth<span class="sc">$</span>logincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><strong>Identify variables</strong></p>
 <ul>
@@ -571,8 +574,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The mathematical multivariable model looks like:</p>
 <p><span class="math display">\[ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}\]</span></p>
 <p><strong>Fit a linear regression model</strong></p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="log-linear.html#cb227-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
-<span id="cb227-2"><a href="log-linear.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="log-linear.html#cb233-1" aria-hidden="true" tabindex="-1"></a>ln.mod<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(logincome<span class="sc">~</span>wakeup <span class="sc">+</span> female_c, <span class="at">data=</span>addhealth)</span>
+<span id="cb233-2"><a href="log-linear.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ln.mod<span class="fl">.2</span>) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code></pre></div>
 <table style="width:93%;">
 <colgroup>
 <col width="29%" />
@@ -639,10 +642,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="log-linear.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
-<span id="cb228-2"><a href="log-linear.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
-<span id="cb228-3"><a href="log-linear.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
-<span id="cb228-4"><a href="log-linear.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="log-linear.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="fu">confint</span>(ln.mod<span class="fl">.2</span>)[<span class="sc">-</span><span class="dv">1</span>,])</span>
+<span id="cb234-2"><a href="log-linear.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                     2.5 %      97.5 %</span></span>
+<span id="cb234-3"><a href="log-linear.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="do">## wakeup         0.02099299 0.008561652</span></span>
+<span id="cb234-4"><a href="log-linear.html#cb234-4" aria-hidden="true" tabindex="-1"></a><span class="do">## female_cFemale 0.20231394 0.147326777</span></span></code></pre></div>
 <p><strong>Interpret the results</strong></p>
 <ul>
 <li>For every hour later one wakes up in the morning, one can expect to earn <code>1-exp(-0.015)</code> = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender.</li>

@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -519,15 +522,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="color:blue"><strong>Example Data</strong></span></p>
 <p>Radon is a radioactive gas that naturally occurs in soils around the U.S. As radon decays it releases other radioactive elements, which stick to, among other things, dust particles commonly found in homes. The EPA believes <a href="https://www.epa.gov/radon">radon exposure</a> is one of the leading causes of cancer in the United States.</p>
 <p>This example uses a dataset named <code>radon</code> from the <code>rstanarm</code> package. The dataset contains <span class="math inline">\(N=919\)</span> observations, each measurement taken within a home that is located within one of the <span class="math inline">\(J=85\)</span> sampled counties in Minnesota. The first six rows of the dataframe show us that the county Aitkin has variable levels of <span class="math inline">\(log(radon)\)</span>. Our goal is to build a model to predict <span class="math inline">\(log(radon)\)</span>.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="RI.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(radon, <span class="at">package=</span><span class="st">&quot;rstanarm&quot;</span>)</span>
-<span id="cb262-2"><a href="RI.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(radon)</span>
-<span id="cb262-3"><a href="RI.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   floor county  log_radon log_uranium</span></span>
-<span id="cb262-4"><a href="RI.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 AITKIN 0.83290912  -0.6890476</span></span>
-<span id="cb262-5"><a href="RI.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     0 AITKIN 0.83290912  -0.6890476</span></span>
-<span id="cb262-6"><a href="RI.html#cb262-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     0 AITKIN 1.09861229  -0.6890476</span></span>
-<span id="cb262-7"><a href="RI.html#cb262-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     0 AITKIN 0.09531018  -0.6890476</span></span>
-<span id="cb262-8"><a href="RI.html#cb262-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     0  ANOKA 1.16315081  -0.8473129</span></span>
-<span id="cb262-9"><a href="RI.html#cb262-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6     0  ANOKA 0.95551145  -0.8473129</span></span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="RI.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(radon, <span class="at">package=</span><span class="st">&quot;rstanarm&quot;</span>)</span>
+<span id="cb269-2"><a href="RI.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(radon)</span>
+<span id="cb269-3"><a href="RI.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   floor county  log_radon log_uranium</span></span>
+<span id="cb269-4"><a href="RI.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 AITKIN 0.83290912  -0.6890476</span></span>
+<span id="cb269-5"><a href="RI.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     0 AITKIN 0.83290912  -0.6890476</span></span>
+<span id="cb269-6"><a href="RI.html#cb269-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     0 AITKIN 1.09861229  -0.6890476</span></span>
+<span id="cb269-7"><a href="RI.html#cb269-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     0 AITKIN 0.09531018  -0.6890476</span></span>
+<span id="cb269-8"><a href="RI.html#cb269-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     0  ANOKA 1.16315081  -0.8473129</span></span>
+<span id="cb269-9"><a href="RI.html#cb269-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6     0  ANOKA 0.95551145  -0.8473129</span></span></code></pre></div>
 </div>
             </section>
 

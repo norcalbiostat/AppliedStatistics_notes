@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -536,18 +539,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   0.279 &amp; 0.322 &amp; 0.521 &amp; 0.942 &amp; 1
   \end{array}\right)
 \]</span>.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="fa-example.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
-<span id="cb248-2"><a href="fa-example.html#cb248-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="sc">-</span><span class="fl">0.039</span>, <span class="sc">-</span><span class="fl">0.013</span>)</span>
-<span id="cb248-3"><a href="fa-example.html#cb248-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </span>
-<span id="cb248-4"><a href="fa-example.html#cb248-4" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </span>
-<span id="cb248-5"><a href="fa-example.html#cb248-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </span>
-<span id="cb248-6"><a href="fa-example.html#cb248-6" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </span>
-<span id="cb248-7"><a href="fa-example.html#cb248-7" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </span>
-<span id="cb248-8"><a href="fa-example.html#cb248-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">5</span>)</span>
-<span id="cb248-9"><a href="fa-example.html#cb248-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">mu=</span>m, <span class="at">Sigma=</span>s))</span>
-<span id="cb248-10"><a href="fa-example.html#cb248-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="fa-example.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb255-2"><a href="fa-example.html#cb255-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.163</span>, <span class="fl">0.142</span>, <span class="fl">0.098</span>, <span class="sc">-</span><span class="fl">0.039</span>, <span class="sc">-</span><span class="fl">0.013</span>)</span>
+<span id="cb255-3"><a href="fa-example.html#cb255-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.000</span>, <span class="fl">0.757</span>, <span class="fl">0.047</span>, <span class="fl">0.155</span>, <span class="fl">0.279</span>, </span>
+<span id="cb255-4"><a href="fa-example.html#cb255-4" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.757</span>, <span class="fl">1.000</span>, <span class="fl">0.054</span>, <span class="fl">0.176</span>, <span class="fl">0.322</span>, </span>
+<span id="cb255-5"><a href="fa-example.html#cb255-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.047</span>, <span class="fl">0.054</span>, <span class="fl">1.000</span>, <span class="fl">0.531</span>, <span class="fl">0.521</span>, </span>
+<span id="cb255-6"><a href="fa-example.html#cb255-6" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.155</span>, <span class="fl">0.176</span>, <span class="fl">0.531</span>, <span class="fl">1.000</span>, <span class="fl">0.942</span>, </span>
+<span id="cb255-7"><a href="fa-example.html#cb255-7" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.279</span>, <span class="fl">0.322</span>, <span class="fl">0.521</span>, <span class="fl">0.942</span>, <span class="fl">1.000</span>), </span>
+<span id="cb255-8"><a href="fa-example.html#cb255-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">5</span>)</span>
+<span id="cb255-9"><a href="fa-example.html#cb255-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">mu=</span>m, <span class="at">Sigma=</span>s))</span>
+<span id="cb255-10"><a href="fa-example.html#cb255-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <p>Standardize the <span class="math inline">\(X\)</span>’s.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="fa-example.html#cb249-1" aria-hidden="true" tabindex="-1"></a>stan.dta <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(data))</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="fa-example.html#cb256-1" aria-hidden="true" tabindex="-1"></a>stan.dta <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(data))</span></code></pre></div>
 <p>The hypothetical data model is that these 5 variables are generated from 2 underlying factors.</p>
 <p><span class="math display">\[
 \begin{equation}
@@ -566,8 +569,8 @@ X_{5} &amp;=  (0)*F_{1} +    (2)*F_{2} + e_{5} \\
 <li>The first two <span class="math inline">\(X\)</span>’s are inter-correlated, and the last 3 <span class="math inline">\(X\)</span>’s are inter-correlated</li>
 <li>The first 2 <span class="math inline">\(X\)</span>’s are NOT correlated with the last 3 <span class="math inline">\(X\)</span>’s</li>
 </ul>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="fa-example.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(corrplot)</span></span>
-<span id="cb250-2"><a href="fa-example.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(stan.dta), <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="fa-example.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(corrplot)</span></span>
+<span id="cb257-2"><a href="fa-example.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(stan.dta), <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
             </section>

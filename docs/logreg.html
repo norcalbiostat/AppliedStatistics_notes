@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -545,70 +548,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Binary predictor variable: Gender (<code>sex</code>) as an indicator of being female</li>
 </ul>
 <p>The outcome <span class="math inline">\(y\)</span> is a 0/1 Bernoulli random variable. The sum of a vector of Bernoulli’s (<span class="math inline">\(\sum_{i=1}^{n}y_{i}\)</span>) has a Binomial distribution. When we specify that <code>family = "binomial"</code> the <code>glm()</code> function auto-assigns “logit” link function.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="logreg.html#cb216-1" aria-hidden="true" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb216-2"><a href="logreg.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
-<span id="cb216-3"><a href="logreg.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-4"><a href="logreg.html#cb216-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb216-5"><a href="logreg.html#cb216-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
-<span id="cb216-6"><a href="logreg.html#cb216-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-7"><a href="logreg.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb216-8"><a href="logreg.html#cb216-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb216-9"><a href="logreg.html#cb216-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.7023  -0.7023  -0.4345  -0.4345   2.1941  </span></span>
-<span id="cb216-10"><a href="logreg.html#cb216-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-11"><a href="logreg.html#cb216-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb216-12"><a href="logreg.html#cb216-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb216-13"><a href="logreg.html#cb216-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
-<span id="cb216-14"><a href="logreg.html#cb216-14" aria-hidden="true" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
-<span id="cb216-15"><a href="logreg.html#cb216-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb216-16"><a href="logreg.html#cb216-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb216-17"><a href="logreg.html#cb216-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-18"><a href="logreg.html#cb216-18" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb216-19"><a href="logreg.html#cb216-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-20"><a href="logreg.html#cb216-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb216-21"><a href="logreg.html#cb216-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
-<span id="cb216-22"><a href="logreg.html#cb216-22" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
-<span id="cb216-23"><a href="logreg.html#cb216-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb216-24"><a href="logreg.html#cb216-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logreg.html#cb222-1" aria-hidden="true" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb222-2"><a href="logreg.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
+<span id="cb222-3"><a href="logreg.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-4"><a href="logreg.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb222-5"><a href="logreg.html#cb222-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
+<span id="cb222-6"><a href="logreg.html#cb222-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-7"><a href="logreg.html#cb222-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
+<span id="cb222-8"><a href="logreg.html#cb222-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb222-9"><a href="logreg.html#cb222-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.7023  -0.7023  -0.4345  -0.4345   2.1941  </span></span>
+<span id="cb222-10"><a href="logreg.html#cb222-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-11"><a href="logreg.html#cb222-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb222-12"><a href="logreg.html#cb222-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb222-13"><a href="logreg.html#cb222-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
+<span id="cb222-14"><a href="logreg.html#cb222-14" aria-hidden="true" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
+<span id="cb222-15"><a href="logreg.html#cb222-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb222-16"><a href="logreg.html#cb222-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb222-17"><a href="logreg.html#cb222-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-18"><a href="logreg.html#cb222-18" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb222-19"><a href="logreg.html#cb222-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-20"><a href="logreg.html#cb222-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb222-21"><a href="logreg.html#cb222-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
+<span id="cb222-22"><a href="logreg.html#cb222-22" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
+<span id="cb222-23"><a href="logreg.html#cb222-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-24"><a href="logreg.html#cb222-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <p>We exponentiate the coefficients to back transform the <span class="math inline">\(\beta\)</span> estimates into Odds Ratios</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="logreg.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
-<span id="cb217-2"><a href="logreg.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
-<span id="cb217-3"><a href="logreg.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
-<span id="cb217-4"><a href="logreg.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
-<span id="cb217-5"><a href="logreg.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
-<span id="cb217-6"><a href="logreg.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
-<span id="cb217-7"><a href="logreg.html#cb217-7" aria-hidden="true" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logreg.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
+<span id="cb223-2"><a href="logreg.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
+<span id="cb223-3"><a href="logreg.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
+<span id="cb223-4"><a href="logreg.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
+<span id="cb223-5"><a href="logreg.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
+<span id="cb223-6"><a href="logreg.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
+<span id="cb223-7"><a href="logreg.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
 <p>Females have 2.8 (1.4, 6.2) times the odds of showing signs of depression compared to males.</p>
 </div>
 <div id="mlogreg" class="section level3 hasAnchor" number="11.3.4">
 <h3><span class="header-section-number">11.3.4</span> Multiple Logistic Regression<a href="logreg.html#mlogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s continue with the depression model, but now also include age and income as potential predictors of symptoms of depression.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="logreg.html#cb218-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb218-2"><a href="logreg.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
-<span id="cb218-3"><a href="logreg.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-4"><a href="logreg.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb218-5"><a href="logreg.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
-<span id="cb218-6"><a href="logreg.html#cb218-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
-<span id="cb218-7"><a href="logreg.html#cb218-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-8"><a href="logreg.html#cb218-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb218-9"><a href="logreg.html#cb218-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb218-10"><a href="logreg.html#cb218-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.0249  -0.6524  -0.5050  -0.3179   2.5305  </span></span>
-<span id="cb218-11"><a href="logreg.html#cb218-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-12"><a href="logreg.html#cb218-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb218-13"><a href="logreg.html#cb218-13" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
-<span id="cb218-14"><a href="logreg.html#cb218-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
-<span id="cb218-15"><a href="logreg.html#cb218-15" aria-hidden="true" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
-<span id="cb218-16"><a href="logreg.html#cb218-16" aria-hidden="true" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
-<span id="cb218-17"><a href="logreg.html#cb218-17" aria-hidden="true" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
-<span id="cb218-18"><a href="logreg.html#cb218-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb218-19"><a href="logreg.html#cb218-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb218-20"><a href="logreg.html#cb218-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-21"><a href="logreg.html#cb218-21" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb218-22"><a href="logreg.html#cb218-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-23"><a href="logreg.html#cb218-23" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb218-24"><a href="logreg.html#cb218-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
-<span id="cb218-25"><a href="logreg.html#cb218-25" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
-<span id="cb218-26"><a href="logreg.html#cb218-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb218-27"><a href="logreg.html#cb218-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="logreg.html#cb224-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb224-2"><a href="logreg.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
+<span id="cb224-3"><a href="logreg.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-4"><a href="logreg.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb224-5"><a href="logreg.html#cb224-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
+<span id="cb224-6"><a href="logreg.html#cb224-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
+<span id="cb224-7"><a href="logreg.html#cb224-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-8"><a href="logreg.html#cb224-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
+<span id="cb224-9"><a href="logreg.html#cb224-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb224-10"><a href="logreg.html#cb224-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.0249  -0.6524  -0.5050  -0.3179   2.5305  </span></span>
+<span id="cb224-11"><a href="logreg.html#cb224-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-12"><a href="logreg.html#cb224-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb224-13"><a href="logreg.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb224-14"><a href="logreg.html#cb224-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
+<span id="cb224-15"><a href="logreg.html#cb224-15" aria-hidden="true" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
+<span id="cb224-16"><a href="logreg.html#cb224-16" aria-hidden="true" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
+<span id="cb224-17"><a href="logreg.html#cb224-17" aria-hidden="true" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
+<span id="cb224-18"><a href="logreg.html#cb224-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb224-19"><a href="logreg.html#cb224-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb224-20"><a href="logreg.html#cb224-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-21"><a href="logreg.html#cb224-21" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb224-22"><a href="logreg.html#cb224-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-23"><a href="logreg.html#cb224-23" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb224-24"><a href="logreg.html#cb224-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
+<span id="cb224-25"><a href="logreg.html#cb224-25" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
+<span id="cb224-26"><a href="logreg.html#cb224-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-27"><a href="logreg.html#cb224-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <ul>
 <li>The sign of the <span class="math inline">\(\beta\)</span> coefficients can be interpreted in the same manner as with linear regression as having a positive or negative relationship.<br />
 </li>
@@ -631,11 +634,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ = \frac{e^{0.92945(1)}}
           {e^{0.92945(0)}}\]</span></p>
 <p><span class="math display">\[ = e^{0.92945} \]</span></p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="logreg.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
-<span id="cb219-2"><a href="logreg.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
-<span id="cb219-3"><a href="logreg.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
-<span id="cb219-4"><a href="logreg.html#cb219-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      sex </span></span>
-<span id="cb219-5"><a href="logreg.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logreg.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
+<span id="cb225-2"><a href="logreg.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
+<span id="cb225-3"><a href="logreg.html#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
+<span id="cb225-4"><a href="logreg.html#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      sex </span></span>
+<span id="cb225-5"><a href="logreg.html#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
 </div>
 <div id="effect-of-a-k-unit-change" class="section level3 hasAnchor" number="11.3.5">
 <h3><span class="header-section-number">11.3.5</span> Effect of a k unit change<a href="logreg.html#effect-of-a-k-unit-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -643,7 +646,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Sometimes a 1 unit change in a continuous variable is not meaningful.</li>
 <li><span class="math inline">\(exp(kb)\)</span> is the incremental odds ratio corresponding to an increase of <span class="math inline">\(k\)</span> units in the variable X, assuming that the values of all other X variables remain unchanged.</li>
 </ul>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="logreg.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="logreg.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="swvnyhdtxt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1095,13 +1098,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In generalized linear models, the assumptions on <span class="math inline">\(\beta\)</span> having a normal distribution</p>
 <p>Refer back to equation <a href="logreg.html#or-ci">11.3.2</a>, the linearity of the relationship is on the <span class="math inline">\(\beta\)</span> level, not the odds ratio. Do all transformations on the <span class="math inline">\(\beta\)</span>’s, then the last step is the non-linear transformation of exponentiation.</p>
 <p>So the mathmatical order of operations is important! First use <code>coef</code> to extract the coefficients out of the model object (here named <code>mvmodel</code>), then pull the 2nd item out <code>coef(mvmodel)[2]</code>, then multiply it by 10, then lastly exponentiate this value.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="logreg.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
-<span id="cb221-2"><a href="logreg.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       age </span></span>
-<span id="cb221-3"><a href="logreg.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logreg.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
+<span id="cb227-2"><a href="logreg.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       age </span></span>
+<span id="cb227-3"><a href="logreg.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
 <p>Do the same to calculate the confidence interval for a 10 year time span.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logreg.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
-<span id="cb222-2"><a href="logreg.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
-<span id="cb222-3"><a href="logreg.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logreg.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
+<span id="cb228-2"><a href="logreg.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
+<span id="cb228-3"><a href="logreg.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
 <p>Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them.</p>
 </div>
 <div id="example-predictors-of-smoking-status" class="section level3 hasAnchor" number="11.3.6">
@@ -1111,8 +1114,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)}
 + \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
 \]</span></p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logreg.html#cb223-1" aria-hidden="true" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
-<span id="cb223-2"><a href="logreg.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="logreg.html#cb229-1" aria-hidden="true" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
+<span id="cb229-2"><a href="logreg.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="vlzpibhdwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1582,11 +1585,11 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
 </table>
 </div>
 <p>It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let’s test that hypothesis formally using a Wald Test.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="logreg.html#cb224-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
-<span id="cb224-2"><a href="logreg.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
-<span id="cb224-3"><a href="logreg.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
-<span id="cb224-4"><a href="logreg.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
-<span id="cb224-5"><a href="logreg.html#cb224-5" aria-hidden="true" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logreg.html#cb230-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
+<span id="cb230-2"><a href="logreg.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
+<span id="cb230-3"><a href="logreg.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
+<span id="cb230-4"><a href="logreg.html#cb230-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
+<span id="cb230-5"><a href="logreg.html#cb230-5" aria-hidden="true" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
 <p>The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.</p>
 <ul>
 <li>This means blood pressure classification should not be included in a model to explain smoking status.</li>

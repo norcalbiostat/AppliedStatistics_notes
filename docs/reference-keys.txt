@@ -146,7 +146,10 @@ testing-for-a-moderation-effect-in-a-multiple-regression-model.
 multicollinearity
 variable-selection-process
 automated-selection-procedures
-implementation-of-stepwise-selection-in-r
+forward-selection-variables-are-added-one-at-a-time-until-optimal-model-reached.
+backward-elimination-variables-are-removed-one-at-a-time-until-optimal-model-reached
+stepwise-selection-combination-of-forward-and-backward.
+best-subsets
 lasso-regression-pma6-9.7
 example-1
 ridge-regression-pma6-10.6
@@ -193,8 +196,9 @@ example-modeling-counts-from-the-add-health-wave-iv-dataset.
 multinomial-reg
 binary-classification
 predicted-probabilities
-predicted-class-outcome
 distribution-of-predicted-probabilities
+plotting-predictions-against-covariates
+predicted-class-outcome
 confusion-matrix
 vocabulary-terms
 roc-curves
@@ -281,11 +285,3 @@ visualize-imputations
 calculating-bias
 final-thoughts
 additional-references-1
-terminology
-example-does-smoking-affect-pulse-rate
-forward-selection-variables-are-added-one-at-a-time-until-optimal-model-reached.
-backward-elimination-variables-are-removed-one-at-a-time-until-optimal-model-reached
-stepwise-selection-combination-of-forward-and-backward.
-best-subsets
-autoregressive
-plotting-predictions-against-covariates

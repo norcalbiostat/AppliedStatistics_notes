@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -556,44 +559,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Draw a random sample of size 100 from a standard Normal distribution (Z) and calculate the mean.</li>
 </ol>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="missing-data-mechanisms.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>) <span class="co"># setting a seed ensures the same numbers will be drawn each time</span></span>
-<span id="cb285-2"><a href="missing-data-mechanisms.html#cb285-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb285-3"><a href="missing-data-mechanisms.html#cb285-3" aria-hidden="true" tabindex="-1"></a>mean.z <span class="ot">&lt;-</span> <span class="fu">mean</span>(z)</span>
-<span id="cb285-4"><a href="missing-data-mechanisms.html#cb285-4" aria-hidden="true" tabindex="-1"></a>mean.z</span>
-<span id="cb285-5"><a href="missing-data-mechanisms.html#cb285-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1205748</span></span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="missing-data-mechanisms.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>) <span class="co"># setting a seed ensures the same numbers will be drawn each time</span></span>
+<span id="cb292-2"><a href="missing-data-mechanisms.html#cb292-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb292-3"><a href="missing-data-mechanisms.html#cb292-3" aria-hidden="true" tabindex="-1"></a>mean.z <span class="ot">&lt;-</span> <span class="fu">mean</span>(z)</span>
+<span id="cb292-4"><a href="missing-data-mechanisms.html#cb292-4" aria-hidden="true" tabindex="-1"></a>mean.z</span>
+<span id="cb292-5"><a href="missing-data-mechanisms.html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1205748</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Delete data at a rate of <span class="math inline">\(p\)</span> and calculate the complete case (available) mean.
 <ul>
 <li>Sample 100 random Bernoulli (0/1) variables with probability <span class="math inline">\(p\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="missing-data-mechanisms.html#cb286-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="at">p=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="missing-data-mechanisms.html#cb293-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="at">p=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <ul>
 <li>Find out which elements are are 1’s</li>
 </ul>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="missing-data-mechanisms.html#cb287-1" aria-hidden="true" tabindex="-1"></a>delete.these <span class="ot">&lt;-</span> <span class="fu">which</span>(x<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="missing-data-mechanisms.html#cb294-1" aria-hidden="true" tabindex="-1"></a>delete.these <span class="ot">&lt;-</span> <span class="fu">which</span>(x<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
 <ul>
 <li>Set those elements in <code>z</code> to <code>NA</code>.</li>
 </ul>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="missing-data-mechanisms.html#cb288-1" aria-hidden="true" tabindex="-1"></a>z[delete.these] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="missing-data-mechanisms.html#cb295-1" aria-hidden="true" tabindex="-1"></a>z[delete.these] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <ul>
 <li>Calculate the complete case mean</li>
 </ul>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="missing-data-mechanisms.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb289-2"><a href="missing-data-mechanisms.html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1377305</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="missing-data-mechanisms.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb296-2"><a href="missing-data-mechanisms.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1377305</span></span></code></pre></div></li>
 <li>Calculate the bias as the sample mean minus the true mean (<span class="math inline">\(E(\hat\theta) - \theta\)</span>).</li>
 </ol>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="missing-data-mechanisms.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">-</span> mean.z</span>
-<span id="cb290-2"><a href="missing-data-mechanisms.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.01715565</span></span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="missing-data-mechanisms.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">-</span> mean.z</span>
+<span id="cb297-2"><a href="missing-data-mechanisms.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.01715565</span></span></code></pre></div>
 <p>How does the bias change as a function of the proportion of missing? Let <span class="math inline">\(p\)</span> range from 0% to 99% and plot the bias as a function of <span class="math inline">\(p\)</span>.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="missing-data-mechanisms.html#cb291-1" aria-hidden="true" tabindex="-1"></a>calc.bias <span class="ot">&lt;-</span> <span class="cf">function</span>(p){ <span class="co"># create a function to handle the repeated calculations</span></span>
-<span id="cb291-2"><a href="missing-data-mechanisms.html#cb291-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">ifelse</span>(<span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="sc">==</span><span class="dv">1</span>, <span class="cn">NA</span>, z), <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">-</span> mean.z</span>
-<span id="cb291-3"><a href="missing-data-mechanisms.html#cb291-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb291-4"><a href="missing-data-mechanisms.html#cb291-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-5"><a href="missing-data-mechanisms.html#cb291-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">99</span>,<span class="at">by=</span>.<span class="dv">01</span>)</span>
-<span id="cb291-6"><a href="missing-data-mechanisms.html#cb291-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-7"><a href="missing-data-mechanisms.html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Bias&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Proportion of missing&quot;</span>)</span>
-<span id="cb291-8"><a href="missing-data-mechanisms.html#cb291-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(p, <span class="fu">sapply</span>(p, calc.bias), <span class="at">pch=</span><span class="dv">16</span>)</span>
-<span id="cb291-9"><a href="missing-data-mechanisms.html#cb291-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="missing-data-mechanisms.html#cb298-1" aria-hidden="true" tabindex="-1"></a>calc.bias <span class="ot">&lt;-</span> <span class="cf">function</span>(p){ <span class="co"># create a function to handle the repeated calculations</span></span>
+<span id="cb298-2"><a href="missing-data-mechanisms.html#cb298-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">ifelse</span>(<span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, p)<span class="sc">==</span><span class="dv">1</span>, <span class="cn">NA</span>, z), <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">-</span> mean.z</span>
+<span id="cb298-3"><a href="missing-data-mechanisms.html#cb298-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb298-4"><a href="missing-data-mechanisms.html#cb298-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-5"><a href="missing-data-mechanisms.html#cb298-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">99</span>,<span class="at">by=</span>.<span class="dv">01</span>)</span>
+<span id="cb298-6"><a href="missing-data-mechanisms.html#cb298-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-7"><a href="missing-data-mechanisms.html#cb298-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Bias&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Proportion of missing&quot;</span>)</span>
+<span id="cb298-8"><a href="missing-data-mechanisms.html#cb298-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(p, <span class="fu">sapply</span>(p, calc.bias), <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb298-9"><a href="missing-data-mechanisms.html#cb298-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><img src="images/q.png" /> What is the behavior of the bias as <span class="math inline">\(p\)</span> increases? Look specifically at the position/location of the bias, and the variance/variability of the bias.</p>
 </div>
@@ -603,52 +606,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Randomly draw 100 random data points from a Standard Normal distribution to serve as our population, and 100 uniform random values between 0 and 1 to serve as probabilities of the data being missing (<span class="math inline">\(p=P(miss)\)</span>)</li>
 </ol>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="missing-data-mechanisms.html#cb292-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb292-2"><a href="missing-data-mechanisms.html#cb292-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="missing-data-mechanisms.html#cb299-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb299-2"><a href="missing-data-mechanisms.html#cb299-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Sort both in ascending order, shove into a data frame and confirm that <span class="math inline">\(p(miss)\)</span> increases along with <span class="math inline">\(z\)</span>.</li>
 </ol>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="missing-data-mechanisms.html#cb293-1" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Z=</span><span class="fu">sort</span>(Z), <span class="at">p=</span><span class="fu">sort</span>(p))</span>
-<span id="cb293-2"><a href="missing-data-mechanisms.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta)</span>
-<span id="cb293-3"><a href="missing-data-mechanisms.html#cb293-3" aria-hidden="true" tabindex="-1"></a><span class="do">##           Z           p</span></span>
-<span id="cb293-4"><a href="missing-data-mechanisms.html#cb293-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -2.898122 0.003673455</span></span>
-<span id="cb293-5"><a href="missing-data-mechanisms.html#cb293-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -2.185058 0.013886146</span></span>
-<span id="cb293-6"><a href="missing-data-mechanisms.html#cb293-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -2.076032 0.035447986</span></span>
-<span id="cb293-7"><a href="missing-data-mechanisms.html#cb293-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 -1.938288 0.039780643</span></span>
-<span id="cb293-8"><a href="missing-data-mechanisms.html#cb293-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 -1.930809 0.051362816</span></span>
-<span id="cb293-9"><a href="missing-data-mechanisms.html#cb293-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 -1.905331 0.054639596</span></span>
-<span id="cb293-10"><a href="missing-data-mechanisms.html#cb293-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dta, <span class="fu">aes</span>(<span class="at">x=</span>p, <span class="at">y=</span>Z)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="missing-data-mechanisms.html#cb300-1" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Z=</span><span class="fu">sort</span>(Z), <span class="at">p=</span><span class="fu">sort</span>(p))</span>
+<span id="cb300-2"><a href="missing-data-mechanisms.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta)</span>
+<span id="cb300-3"><a href="missing-data-mechanisms.html#cb300-3" aria-hidden="true" tabindex="-1"></a><span class="do">##           Z           p</span></span>
+<span id="cb300-4"><a href="missing-data-mechanisms.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -2.898122 0.003673455</span></span>
+<span id="cb300-5"><a href="missing-data-mechanisms.html#cb300-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -2.185058 0.013886146</span></span>
+<span id="cb300-6"><a href="missing-data-mechanisms.html#cb300-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -2.076032 0.035447986</span></span>
+<span id="cb300-7"><a href="missing-data-mechanisms.html#cb300-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 -1.938288 0.039780643</span></span>
+<span id="cb300-8"><a href="missing-data-mechanisms.html#cb300-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 -1.930809 0.051362816</span></span>
+<span id="cb300-9"><a href="missing-data-mechanisms.html#cb300-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 -1.905331 0.054639596</span></span>
+<span id="cb300-10"><a href="missing-data-mechanisms.html#cb300-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dta, <span class="fu">aes</span>(<span class="at">x=</span>p, <span class="at">y=</span>Z)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;P(missing)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Z~Normal(0,1)&quot;</span>)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-19-1.png" width="384" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Set <span class="math inline">\(Z\)</span> missing with probability equal to the <span class="math inline">\(p\)</span> for that row. Create a new vector <code>dta$z.miss</code> that is either 0, or the value of <code>dta$Z</code> with probability <code>1-dta$p</code>. Then change all the 0’s to <code>NA</code>.</li>
 </ol>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="missing-data-mechanisms.html#cb294-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Z.miss <span class="ot">&lt;-</span> dta<span class="sc">$</span>Z <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">rbinom</span>(<span class="fu">NROW</span>(dta), <span class="dv">1</span>, dta<span class="sc">$</span>p))</span>
-<span id="cb294-2"><a href="missing-data-mechanisms.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta) <span class="co"># see structure of data to understand what is going on</span></span>
-<span id="cb294-3"><a href="missing-data-mechanisms.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="do">##           Z           p    Z.miss</span></span>
-<span id="cb294-4"><a href="missing-data-mechanisms.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -2.898122 0.003673455 -2.898122</span></span>
-<span id="cb294-5"><a href="missing-data-mechanisms.html#cb294-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -2.185058 0.013886146 -2.185058</span></span>
-<span id="cb294-6"><a href="missing-data-mechanisms.html#cb294-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -2.076032 0.035447986 -2.076032</span></span>
-<span id="cb294-7"><a href="missing-data-mechanisms.html#cb294-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 -1.938288 0.039780643 -1.938288</span></span>
-<span id="cb294-8"><a href="missing-data-mechanisms.html#cb294-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 -1.930809 0.051362816 -1.930809</span></span>
-<span id="cb294-9"><a href="missing-data-mechanisms.html#cb294-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 -1.905331 0.054639596 -1.905331</span></span>
-<span id="cb294-10"><a href="missing-data-mechanisms.html#cb294-10" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Z.miss[dta<span class="sc">$</span>Z.miss<span class="sc">==</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="missing-data-mechanisms.html#cb301-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Z.miss <span class="ot">&lt;-</span> dta<span class="sc">$</span>Z <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">rbinom</span>(<span class="fu">NROW</span>(dta), <span class="dv">1</span>, dta<span class="sc">$</span>p))</span>
+<span id="cb301-2"><a href="missing-data-mechanisms.html#cb301-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dta) <span class="co"># see structure of data to understand what is going on</span></span>
+<span id="cb301-3"><a href="missing-data-mechanisms.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="do">##           Z           p    Z.miss</span></span>
+<span id="cb301-4"><a href="missing-data-mechanisms.html#cb301-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -2.898122 0.003673455 -2.898122</span></span>
+<span id="cb301-5"><a href="missing-data-mechanisms.html#cb301-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -2.185058 0.013886146 -2.185058</span></span>
+<span id="cb301-6"><a href="missing-data-mechanisms.html#cb301-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -2.076032 0.035447986 -2.076032</span></span>
+<span id="cb301-7"><a href="missing-data-mechanisms.html#cb301-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 -1.938288 0.039780643 -1.938288</span></span>
+<span id="cb301-8"><a href="missing-data-mechanisms.html#cb301-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 -1.930809 0.051362816 -1.930809</span></span>
+<span id="cb301-9"><a href="missing-data-mechanisms.html#cb301-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 -1.905331 0.054639596 -1.905331</span></span>
+<span id="cb301-10"><a href="missing-data-mechanisms.html#cb301-10" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Z.miss[dta<span class="sc">$</span>Z.miss<span class="sc">==</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Calculate the complete case mean and the bias</li>
 </ol>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="missing-data-mechanisms.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dta<span class="sc">$</span>Z.miss, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb295-2"><a href="missing-data-mechanisms.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.7777319</span></span>
-<span id="cb295-3"><a href="missing-data-mechanisms.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dta<span class="sc">$</span>Z) <span class="sc">-</span> <span class="fu">mean</span>(dta<span class="sc">$</span>Z.miss, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb295-4"><a href="missing-data-mechanisms.html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6830372</span></span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="missing-data-mechanisms.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dta<span class="sc">$</span>Z.miss, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb302-2"><a href="missing-data-mechanisms.html#cb302-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.7777319</span></span>
+<span id="cb302-3"><a href="missing-data-mechanisms.html#cb302-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dta<span class="sc">$</span>Z) <span class="sc">-</span> <span class="fu">mean</span>(dta<span class="sc">$</span>Z.miss, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb302-4"><a href="missing-data-mechanisms.html#cb302-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6830372</span></span></code></pre></div>
 <p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean? Is the bias positive or negative?</p>
 </div>
 <div id="nmar-pure-censoring" class="section level4 hasAnchor" number="17.3.1.3">
 <h4><span class="header-section-number">17.3.1.3</span> NMAR: Pure Censoring<a href="missing-data-mechanisms.html#nmar-pure-censoring" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Consider a hypothetical blood test to measure a hormone that is normally distributed in the blood with mean 10<span class="math inline">\(\mu g\)</span> and variance 1. However the test to detect the compound only can detect levels above 10.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="missing-data-mechanisms.html#cb296-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
-<span id="cb296-2"><a href="missing-data-mechanisms.html#cb296-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> z</span>
-<span id="cb296-3"><a href="missing-data-mechanisms.html#cb296-3" aria-hidden="true" tabindex="-1"></a>y[y<span class="sc">&lt;</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb296-4"><a href="missing-data-mechanisms.html#cb296-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z) <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb296-5"><a href="missing-data-mechanisms.html#cb296-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.6850601</span></span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="missing-data-mechanisms.html#cb303-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb303-2"><a href="missing-data-mechanisms.html#cb303-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> z</span>
+<span id="cb303-3"><a href="missing-data-mechanisms.html#cb303-3" aria-hidden="true" tabindex="-1"></a>y[y<span class="sc">&lt;</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb303-4"><a href="missing-data-mechanisms.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z) <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb303-5"><a href="missing-data-mechanisms.html#cb303-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.6850601</span></span></code></pre></div>
 <p><a href="images/q.png"></a> Did the complete case estimate over- or under-estimate the true mean?</p>
 
 <div class="rmdnote">

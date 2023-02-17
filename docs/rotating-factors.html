@@ -316,8 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="variable-selection-process.html"><a href="variable-selection-process.html"><i class="fa fa-check"></i><b>10.4</b> Variable Selection Process</a>
 <ul>
 <li class="chapter" data-level="10.4.1" data-path="variable-selection-process.html"><a href="variable-selection-process.html#automated-selection-procedures"><i class="fa fa-check"></i><b>10.4.1</b> Automated selection procedures</a></li>
-<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#implementation-of-stepwise-selection-in-r"><i class="fa fa-check"></i><b>10.4.2</b> Implementation of stepwise selection in R</a></li>
-<li class="chapter" data-level="10.4.3" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.3</b> LASSO Regression (PMA6 9.7)</a></li>
+<li class="chapter" data-level="10.4.2" data-path="variable-selection-process.html"><a href="variable-selection-process.html#lasso-regression-pma6-9.7"><i class="fa fa-check"></i><b>10.4.2</b> LASSO Regression (PMA6 9.7)</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="model-fit-criteria.html"><a href="model-fit-criteria.html"><i class="fa fa-check"></i><b>10.5</b> Comparing between models</a>
 <ul>
@@ -371,11 +370,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>12</b> Classification of Binary outcomes</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="predicted-probabilities.html"><a href="predicted-probabilities.html"><i class="fa fa-check"></i><b>12.1</b> Predicted Probabilities</a></li>
-<li class="chapter" data-level="12.2" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.2</b> Predicted Class (outcome)</a></li>
-<li class="chapter" data-level="12.3" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.3</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="12.4" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.4</b> Vocabulary terms</a></li>
-<li class="chapter" data-level="12.5" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.5</b> ROC Curves</a></li>
-<li class="chapter" data-level="12.6" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.6</b> Model Performance</a></li>
+<li class="chapter" data-level="12.2" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html"><i class="fa fa-check"></i><b>12.2</b> Distribution of Predicted probabilities</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="distribution-of-predicted-probabilities.html"><a href="distribution-of-predicted-probabilities.html#plotting-predictions-against-covariates"><i class="fa fa-check"></i><b>12.2.1</b> Plotting predictions against covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="predicted-class-outcome.html"><a href="predicted-class-outcome.html"><i class="fa fa-check"></i><b>12.3</b> Predicted Class (outcome)</a></li>
+<li class="chapter" data-level="12.4" data-path="confusion-matrix.html"><a href="confusion-matrix.html"><i class="fa fa-check"></i><b>12.4</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="12.5" data-path="vocabulary-terms.html"><a href="vocabulary-terms.html"><i class="fa fa-check"></i><b>12.5</b> Vocabulary terms</a></li>
+<li class="chapter" data-level="12.6" data-path="roc-curves.html"><a href="roc-curves.html"><i class="fa fa-check"></i><b>12.6</b> ROC Curves</a></li>
+<li class="chapter" data-level="12.7" data-path="model-performance.html"><a href="model-performance.html"><i class="fa fa-check"></i><b>12.7</b> Model Performance</a></li>
 </ul></li>
 <li class="part"><span><b>IV Multivariate Analysis</b></span></li>
 <li class="chapter" data-level="13" data-path="mv-intro.html"><a href="mv-intro.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
@@ -530,59 +533,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Interpretations slightly less clear</li>
 </ul>
 <p>Varimax rotation with principal components extraction.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="rotating-factors.html#cb255-1" aria-hidden="true" tabindex="-1"></a>pc.extract.varimax <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;varimax&quot;</span>)</span>
-<span id="cb255-2"><a href="rotating-factors.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pc.extract.varimax)</span>
-<span id="cb255-3"><a href="rotating-factors.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Principal Components Analysis</span></span>
-<span id="cb255-4"><a href="rotating-factors.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;varimax&quot;)</span></span>
-<span id="cb255-5"><a href="rotating-factors.html#cb255-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized loadings (pattern matrix) based upon correlation matrix</span></span>
-<span id="cb255-6"><a href="rotating-factors.html#cb255-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     RC1  RC2   h2    u2 com</span></span>
-<span id="cb255-7"><a href="rotating-factors.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 0.07 0.94 0.90 0.104 1.0</span></span>
-<span id="cb255-8"><a href="rotating-factors.html#cb255-8" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 0.13 0.94 0.89 0.106 1.0</span></span>
-<span id="cb255-9"><a href="rotating-factors.html#cb255-9" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 0.80 0.02 0.64 0.360 1.0</span></span>
-<span id="cb255-10"><a href="rotating-factors.html#cb255-10" aria-hidden="true" tabindex="-1"></a><span class="do">## X4 0.94 0.11 0.90 0.099 1.0</span></span>
-<span id="cb255-11"><a href="rotating-factors.html#cb255-11" aria-hidden="true" tabindex="-1"></a><span class="do">## X5 0.93 0.23 0.91 0.087 1.1</span></span>
-<span id="cb255-12"><a href="rotating-factors.html#cb255-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb255-13"><a href="rotating-factors.html#cb255-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                        RC1  RC2</span></span>
-<span id="cb255-14"><a href="rotating-factors.html#cb255-14" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings           2.41 1.83</span></span>
-<span id="cb255-15"><a href="rotating-factors.html#cb255-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var        0.48 0.37</span></span>
-<span id="cb255-16"><a href="rotating-factors.html#cb255-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var        0.48 0.85</span></span>
-<span id="cb255-17"><a href="rotating-factors.html#cb255-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.57 0.43</span></span>
-<span id="cb255-18"><a href="rotating-factors.html#cb255-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.57 1.00</span></span>
-<span id="cb255-19"><a href="rotating-factors.html#cb255-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb255-20"><a href="rotating-factors.html#cb255-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean item complexity =  1</span></span>
-<span id="cb255-21"><a href="rotating-factors.html#cb255-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 components are sufficient.</span></span>
-<span id="cb255-22"><a href="rotating-factors.html#cb255-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb255-23"><a href="rotating-factors.html#cb255-23" aria-hidden="true" tabindex="-1"></a><span class="do">## The root mean square of the residuals (RMSR) is  0.08 </span></span>
-<span id="cb255-24"><a href="rotating-factors.html#cb255-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></span>
-<span id="cb255-25"><a href="rotating-factors.html#cb255-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb255-26"><a href="rotating-factors.html#cb255-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit based upon off diagonal values = 0.97</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="rotating-factors.html#cb262-1" aria-hidden="true" tabindex="-1"></a>pc.extract.varimax <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;varimax&quot;</span>)</span>
+<span id="cb262-2"><a href="rotating-factors.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pc.extract.varimax)</span>
+<span id="cb262-3"><a href="rotating-factors.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Principal Components Analysis</span></span>
+<span id="cb262-4"><a href="rotating-factors.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;varimax&quot;)</span></span>
+<span id="cb262-5"><a href="rotating-factors.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized loadings (pattern matrix) based upon correlation matrix</span></span>
+<span id="cb262-6"><a href="rotating-factors.html#cb262-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     RC1  RC2   h2    u2 com</span></span>
+<span id="cb262-7"><a href="rotating-factors.html#cb262-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 0.07 0.94 0.90 0.104 1.0</span></span>
+<span id="cb262-8"><a href="rotating-factors.html#cb262-8" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 0.13 0.94 0.89 0.106 1.0</span></span>
+<span id="cb262-9"><a href="rotating-factors.html#cb262-9" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 0.80 0.02 0.64 0.360 1.0</span></span>
+<span id="cb262-10"><a href="rotating-factors.html#cb262-10" aria-hidden="true" tabindex="-1"></a><span class="do">## X4 0.94 0.11 0.90 0.099 1.0</span></span>
+<span id="cb262-11"><a href="rotating-factors.html#cb262-11" aria-hidden="true" tabindex="-1"></a><span class="do">## X5 0.93 0.23 0.91 0.087 1.1</span></span>
+<span id="cb262-12"><a href="rotating-factors.html#cb262-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb262-13"><a href="rotating-factors.html#cb262-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                        RC1  RC2</span></span>
+<span id="cb262-14"><a href="rotating-factors.html#cb262-14" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings           2.41 1.83</span></span>
+<span id="cb262-15"><a href="rotating-factors.html#cb262-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var        0.48 0.37</span></span>
+<span id="cb262-16"><a href="rotating-factors.html#cb262-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var        0.48 0.85</span></span>
+<span id="cb262-17"><a href="rotating-factors.html#cb262-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.57 0.43</span></span>
+<span id="cb262-18"><a href="rotating-factors.html#cb262-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.57 1.00</span></span>
+<span id="cb262-19"><a href="rotating-factors.html#cb262-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb262-20"><a href="rotating-factors.html#cb262-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean item complexity =  1</span></span>
+<span id="cb262-21"><a href="rotating-factors.html#cb262-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 components are sufficient.</span></span>
+<span id="cb262-22"><a href="rotating-factors.html#cb262-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb262-23"><a href="rotating-factors.html#cb262-23" aria-hidden="true" tabindex="-1"></a><span class="do">## The root mean square of the residuals (RMSR) is  0.08 </span></span>
+<span id="cb262-24"><a href="rotating-factors.html#cb262-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></span>
+<span id="cb262-25"><a href="rotating-factors.html#cb262-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb262-26"><a href="rotating-factors.html#cb262-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit based upon off diagonal values = 0.97</span></span></code></pre></div>
 <p>Varimax rotation with maximum likelihood extraction. Here i’m using the cutoff argument to only show the values of loadings over 0.3.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="rotating-factors.html#cb256-1" aria-hidden="true" tabindex="-1"></a>ml.extract.varimax <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;varimax&quot;</span>)</span>
-<span id="cb256-2"><a href="rotating-factors.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ml.extract.varimax, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">cutoff=</span>.<span class="dv">3</span>)</span>
-<span id="cb256-3"><a href="rotating-factors.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb256-4"><a href="rotating-factors.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb256-5"><a href="rotating-factors.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="do">## factanal(x = stan.dta, factors = 2, rotation = &quot;varimax&quot;)</span></span>
-<span id="cb256-6"><a href="rotating-factors.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb256-7"><a href="rotating-factors.html#cb256-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Uniquenesses:</span></span>
-<span id="cb256-8"><a href="rotating-factors.html#cb256-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   X1   X2   X3   X4   X5 </span></span>
-<span id="cb256-9"><a href="rotating-factors.html#cb256-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.37 0.00 0.63 0.06 0.04 </span></span>
-<span id="cb256-10"><a href="rotating-factors.html#cb256-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb256-11"><a href="rotating-factors.html#cb256-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
-<span id="cb256-12"><a href="rotating-factors.html#cb256-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    Factor1 Factor2</span></span>
-<span id="cb256-13"><a href="rotating-factors.html#cb256-13" aria-hidden="true" tabindex="-1"></a><span class="do">## X1         0.79   </span></span>
-<span id="cb256-14"><a href="rotating-factors.html#cb256-14" aria-hidden="true" tabindex="-1"></a><span class="do">## X2         0.99   </span></span>
-<span id="cb256-15"><a href="rotating-factors.html#cb256-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 0.61           </span></span>
-<span id="cb256-16"><a href="rotating-factors.html#cb256-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X4 0.97           </span></span>
-<span id="cb256-17"><a href="rotating-factors.html#cb256-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X5 0.96           </span></span>
-<span id="cb256-18"><a href="rotating-factors.html#cb256-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb256-19"><a href="rotating-factors.html#cb256-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                Factor1 Factor2</span></span>
-<span id="cb256-20"><a href="rotating-factors.html#cb256-20" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       2.26    1.64</span></span>
-<span id="cb256-21"><a href="rotating-factors.html#cb256-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.45    0.33</span></span>
-<span id="cb256-22"><a href="rotating-factors.html#cb256-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.45    0.78</span></span>
-<span id="cb256-23"><a href="rotating-factors.html#cb256-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb256-24"><a href="rotating-factors.html#cb256-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 factors are sufficient.</span></span>
-<span id="cb256-25"><a href="rotating-factors.html#cb256-25" aria-hidden="true" tabindex="-1"></a><span class="do">## The chi square statistic is 0.2 on 1 degree of freedom.</span></span>
-<span id="cb256-26"><a href="rotating-factors.html#cb256-26" aria-hidden="true" tabindex="-1"></a><span class="do">## The p-value is 0.652</span></span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="rotating-factors.html#cb263-1" aria-hidden="true" tabindex="-1"></a>ml.extract.varimax <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;varimax&quot;</span>)</span>
+<span id="cb263-2"><a href="rotating-factors.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ml.extract.varimax, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">cutoff=</span>.<span class="dv">3</span>)</span>
+<span id="cb263-3"><a href="rotating-factors.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb263-4"><a href="rotating-factors.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb263-5"><a href="rotating-factors.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="do">## factanal(x = stan.dta, factors = 2, rotation = &quot;varimax&quot;)</span></span>
+<span id="cb263-6"><a href="rotating-factors.html#cb263-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb263-7"><a href="rotating-factors.html#cb263-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Uniquenesses:</span></span>
+<span id="cb263-8"><a href="rotating-factors.html#cb263-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   X1   X2   X3   X4   X5 </span></span>
+<span id="cb263-9"><a href="rotating-factors.html#cb263-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.37 0.00 0.63 0.06 0.04 </span></span>
+<span id="cb263-10"><a href="rotating-factors.html#cb263-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb263-11"><a href="rotating-factors.html#cb263-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb263-12"><a href="rotating-factors.html#cb263-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    Factor1 Factor2</span></span>
+<span id="cb263-13"><a href="rotating-factors.html#cb263-13" aria-hidden="true" tabindex="-1"></a><span class="do">## X1         0.79   </span></span>
+<span id="cb263-14"><a href="rotating-factors.html#cb263-14" aria-hidden="true" tabindex="-1"></a><span class="do">## X2         0.99   </span></span>
+<span id="cb263-15"><a href="rotating-factors.html#cb263-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 0.61           </span></span>
+<span id="cb263-16"><a href="rotating-factors.html#cb263-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X4 0.97           </span></span>
+<span id="cb263-17"><a href="rotating-factors.html#cb263-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X5 0.96           </span></span>
+<span id="cb263-18"><a href="rotating-factors.html#cb263-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb263-19"><a href="rotating-factors.html#cb263-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                Factor1 Factor2</span></span>
+<span id="cb263-20"><a href="rotating-factors.html#cb263-20" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       2.26    1.64</span></span>
+<span id="cb263-21"><a href="rotating-factors.html#cb263-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.45    0.33</span></span>
+<span id="cb263-22"><a href="rotating-factors.html#cb263-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.45    0.78</span></span>
+<span id="cb263-23"><a href="rotating-factors.html#cb263-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb263-24"><a href="rotating-factors.html#cb263-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 factors are sufficient.</span></span>
+<span id="cb263-25"><a href="rotating-factors.html#cb263-25" aria-hidden="true" tabindex="-1"></a><span class="do">## The chi square statistic is 0.2 on 1 degree of freedom.</span></span>
+<span id="cb263-26"><a href="rotating-factors.html#cb263-26" aria-hidden="true" tabindex="-1"></a><span class="do">## The p-value is 0.652</span></span></code></pre></div>
 <p>Communalities are unchanged after varimax (part of variance due to common factors). This will always be the case for orthogonal (perpendicular) rotations.</p>
 </div>
 <div id="oblique-rotation" class="section level3 hasAnchor" number="14.5.2">
@@ -599,25 +602,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>promax</em> is computationally faster than <em>direct oblimin</em>, so good for very large datasets</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="rotating-factors.html#cb257-1" aria-hidden="true" tabindex="-1"></a>pc.extract.quartimin <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;quartimin&quot;</span>)</span>
-<span id="cb257-2"><a href="rotating-factors.html#cb257-2" aria-hidden="true" tabindex="-1"></a>ml.extract.promax<span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;promax&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="rotating-factors.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb258-2"><a href="rotating-factors.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.norotate, <span class="at">title=</span><span class="st">&quot;PC + norotate&quot;</span>)</span>
-<span id="cb258-3"><a href="rotating-factors.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.varimax, <span class="at">title=</span><span class="st">&quot;PC + Varimax&quot;</span>)</span>
-<span id="cb258-4"><a href="rotating-factors.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.quartimin, <span class="at">title=</span><span class="st">&quot;PC + quartimin&quot;</span>)</span>
-<span id="cb258-5"><a href="rotating-factors.html#cb258-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-6"><a href="rotating-factors.html#cb258-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-7"><a href="rotating-factors.html#cb258-7" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb258-8"><a href="rotating-factors.html#cb258-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML + norotate&quot;</span>)</span>
-<span id="cb258-9"><a href="rotating-factors.html#cb258-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load))</span>
-<span id="cb258-10"><a href="rotating-factors.html#cb258-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-11"><a href="rotating-factors.html#cb258-11" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.varimax<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb258-12"><a href="rotating-factors.html#cb258-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML + Varimax&quot;</span>) </span>
-<span id="cb258-13"><a href="rotating-factors.html#cb258-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load)) </span>
-<span id="cb258-14"><a href="rotating-factors.html#cb258-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-15"><a href="rotating-factors.html#cb258-15" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.promax<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb258-16"><a href="rotating-factors.html#cb258-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span> <span class="st">&quot;ML + Promax&quot;</span>) </span>
-<span id="cb258-17"><a href="rotating-factors.html#cb258-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load)) </span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="rotating-factors.html#cb264-1" aria-hidden="true" tabindex="-1"></a>pc.extract.quartimin <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;quartimin&quot;</span>)</span>
+<span id="cb264-2"><a href="rotating-factors.html#cb264-2" aria-hidden="true" tabindex="-1"></a>ml.extract.promax<span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;promax&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="rotating-factors.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb265-2"><a href="rotating-factors.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.norotate, <span class="at">title=</span><span class="st">&quot;PC + norotate&quot;</span>)</span>
+<span id="cb265-3"><a href="rotating-factors.html#cb265-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.varimax, <span class="at">title=</span><span class="st">&quot;PC + Varimax&quot;</span>)</span>
+<span id="cb265-4"><a href="rotating-factors.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.extract.quartimin, <span class="at">title=</span><span class="st">&quot;PC + quartimin&quot;</span>)</span>
+<span id="cb265-5"><a href="rotating-factors.html#cb265-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-6"><a href="rotating-factors.html#cb265-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-7"><a href="rotating-factors.html#cb265-7" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb265-8"><a href="rotating-factors.html#cb265-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML + norotate&quot;</span>)</span>
+<span id="cb265-9"><a href="rotating-factors.html#cb265-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load))</span>
+<span id="cb265-10"><a href="rotating-factors.html#cb265-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-11"><a href="rotating-factors.html#cb265-11" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.varimax<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb265-12"><a href="rotating-factors.html#cb265-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML + Varimax&quot;</span>) </span>
+<span id="cb265-13"><a href="rotating-factors.html#cb265-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load)) </span>
+<span id="cb265-14"><a href="rotating-factors.html#cb265-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-15"><a href="rotating-factors.html#cb265-15" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> ml.extract.promax<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb265-16"><a href="rotating-factors.html#cb265-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span> <span class="st">&quot;ML + Promax&quot;</span>) </span>
+<span id="cb265-17"><a href="rotating-factors.html#cb265-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(load, <span class="at">labels=</span><span class="fu">rownames</span>(load)) </span></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Varimax vs oblique here doesn’t make much of a difference, and typically this is the case. You almost always use some sort of rotation. Recall, this is a hypothetical example and we set up the variables in a distinct two-factor model. So this example will look nice.</p>
 </div>
