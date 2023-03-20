@@ -831,11 +831,11 @@ The variance of the multiply imputed estimates is larger because of the between-
 ```r
 library(forestplot)
 te.mean <- summary(true.model)$coefficients[,1]
-mi.mean <- summary(pool(model))[,1]
+mi.mean <- summary(pool(model))[,2]
 te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
-mi.ll   <- mi.mean - 1.96*summary(pool(model))[,2]
+mi.ll   <- mi.mean - 1.96*summary(pool(model))[,3]
 te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
-mi.ul   <- mi.mean + 1.96*summary(pool(model))[,2]
+mi.ul   <- mi.mean + 1.96*summary(pool(model))[,3]
 names   <- names(coef(true.model))
 
 

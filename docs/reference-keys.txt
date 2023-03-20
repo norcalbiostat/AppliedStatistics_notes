@@ -285,3 +285,6 @@ visualize-imputations
 calculating-bias
 final-thoughts
 additional-references-1
+terminology
+example-does-smoking-affect-pulse-rate
+autoregressive
