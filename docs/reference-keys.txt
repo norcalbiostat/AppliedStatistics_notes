@@ -204,6 +204,18 @@ vocabulary-terms
 roc-curves
 model-performance
 mv-intro
+pca
+when-is-principal-components-analysis-pca-used
+basic-idea
+more-generally
+generating-pcs-using-r
+data-reduction
+standardizing
+example-5
+use-in-multiple-regression
+example-modeling-acute-illness
+things-to-watch-out-for
+additional-references
 fa
 introduction
 latent-constructs
@@ -246,7 +258,7 @@ centering-terms
 a-generic-dplyr-approach-to-centering.
 specifying-correlation-structures
 changing-covariance-structures-in-r
-additional-references
+additional-references-1
 lecture-notes-from-other-classes-found-on-the-interwebs
 package-vignettes
 mda
@@ -284,7 +296,4 @@ alternative---stack-the-imputed-data-sets-in-long-format.
 visualize-imputations
 calculating-bias
 final-thoughts
-additional-references-1
-terminology
-example-does-smoking-affect-pulse-rate
-autoregressive
+additional-references-2

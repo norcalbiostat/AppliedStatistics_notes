@@ -135,7 +135,7 @@ $$
 $$
 
 
-* Hotelling (1933) showed that the $a_{ij}$'s are solutions to $(\mathbf{\Sigma} -\lambda\mathbf{I})\mathbf{a}=\mathbf{0}$. 
+* Hotelling (1933) showed that the columns of the matrix $a_{ij}$ are solutions to $(\mathbf{\Sigma} -\lambda\mathbf{I})\mathbf{a}=\mathbf{0}$. 
     - $\mathbf{\Sigma}$ is the variance-covariance matrix of the $\mathbf{X}$ variables.  
 * This means $\lambda$ is an eigenvalue and $\mathbf{a}$ an eigenvector of the covariance matrix $\mathbf{\Sigma}$.
     - (Optional) Learn more about eigenvalues [[in this video]](https://www.youtube.com/watch?v=PFDu9oVAE-g&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=14). 
