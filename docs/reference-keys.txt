@@ -79,6 +79,7 @@ sampling-distribution-for-the-difference
 example-smoking-and-bmi
 bv-anova
 example-visual-comparison
+terminology
 formulation-of-the-one-way-anova-model
 analysis-of-variance-table
 the-f-distribution
@@ -133,6 +134,7 @@ binary-predictors
 cat-predictors
 presenting-results
 confounding
+example-does-smoking-affect-pulse-rate
 what-to-watch-out-for
 model-building
 interactions
@@ -258,6 +260,7 @@ centering-terms
 a-generic-dplyr-approach-to-centering.
 specifying-correlation-structures
 changing-covariance-structures-in-r
+autoregressive
 additional-references-1
 lecture-notes-from-other-classes-found-on-the-interwebs
 package-vignettes
@@ -295,5 +298,6 @@ create-a-complete-data-set-by-filling-in-the-missing-data-using-the-imputations
 alternative---stack-the-imputed-data-sets-in-long-format.
 visualize-imputations
 calculating-bias
+post-mice-data-management
 final-thoughts
 additional-references-2

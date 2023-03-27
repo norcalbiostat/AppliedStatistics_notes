@@ -554,7 +554,7 @@ imp_iris$imp$Sepal.Length
 This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
 
 ### Create a complete data set by filling in the missing data using the imputations
-```{r}
+```{r, eval=FALSE}
 iris_1 <- complete(imp_iris, action=1)
 ```
 Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on. 
@@ -588,17 +588,23 @@ xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Speci
 **Analyze and pool**
 All of this imputation was done so we could actually perform an analysis! 
 
-Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.Width`, 
-`Petal.Length` and `Species`.
+Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.Width`, `Petal.Length` and `Species`.
 
 ```{r}
 model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
 ```
 
-Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note that a 95% interval must be calculated manually. 
+Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note with this output that a 95% interval must be calculated manually. 
 
-Digging deeper into the object created by `pool(model)`, specifically the `pooled` list, we can pull out additional information including the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
+We can leverage the `gtsummary` package to tidy and print the results of a `mids` object, but the mice object has to be passed to `tbl_regression` BEFORE you pool. [ref SO post](https://stackoverflow.com/questions/65314702/using-tbl-regression-with-imputed-data-pooled-regression-models). This function needs to access features of the original model first, then will do the appropriate pooling and tidying. 
+
+```{r}
+gtsummary::tbl_regression(model)
+```
+
+
+Additionally digging deeper into the object created by `pool(model)`, specifically the `pooled` list, we can pull out additional information including the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
 
 ```{r}
 kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
@@ -638,6 +644,41 @@ forestplot(names,
 
 ```
 
+## Post MICE data management
+
+Sometimes you'll have a need to do additional data management after imputation has been completed. Creating binary indicators of an event, re-creating scale variables etc. The general approach is to transform the imputed data into long format using `complete` **with the argument `include=TRUE`** , do the necessary data management, and then convert it back to a `mids` object type. 
+
+Continuing with the iris example, let's create a new variable that is the ratio of Sepal to Petal length. 
+
+Recapping prior steps of imputing, and then creating the completed long data set. 
+
+```{r, eval=2}
+imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+iris_long <- complete(imp_iris, 'long', include=TRUE)
+```
+
+We create the new ratio variable on the long data: 
+```{r}
+iris_long$ratio <- iris_long$Sepal.Length / iris_long$Petal.Length
+```
+
+Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `iris_long` data. 
+```{r}
+ggpubr::ggboxplot(iris_long, y="ratio", x="Species", facet.by = ".imp")
+```
+
+Then convert the data back to `mids` object, specifying the variable name that identifies the imputation number. 
+
+```{r}
+imp_iris1 <- as.mids(iris_long, .imp = ".imp")
+```
+
+Now we can conduct analyses such as an ANOVA (in linear model form) to see if this ratio differs significantly across the species. 
+
+```{r}
+nova.ratio <- with(imp_iris1, lm(ratio ~ Species))
+pool(nova.ratio) |> summary()
+```
 
 
 ## Final thoughts

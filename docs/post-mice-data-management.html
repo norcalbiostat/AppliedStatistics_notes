@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>18.11 Final thoughts | Applied Statistics</title>
+  <title>18.10 Post MICE data management | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="18.11 Final thoughts | Applied Statistics" />
+  <meta property="og:title" content="18.10 Post MICE data management | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="18.11 Final thoughts | Applied Statistics" />
+  <meta name="twitter:title" content="18.10 Post MICE data management | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="post-mice-data-management.html"/>
-<link rel="next" href="additional-references-2.html"/>
+<link rel="prev" href="example-prescribed-amount-of-missing..html"/>
+<link rel="next" href="final-thoughts.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -538,46 +538,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="final-thoughts" class="section level2 hasAnchor" number="18.11">
-<h2><span class="header-section-number">18.11</span> Final thoughts<a href="final-thoughts.html#final-thoughts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>“In our experience with real and artificial data…, the practical conclusion appears to be that multiple imputation, when carefully done, can be safely used with real problems even when the ultimate user may be applying models or analyses not contemplated by the imputer.” - Little &amp; Rubin (Book, p. 218)</p>
-</blockquote>
-<ul>
-<li>Don’t ignore missing data.</li>
-<li>Impute sensibly and multiple times.</li>
-<li>It’s typically desirable to include many predictors in an imputation model, both to
-<ul>
-<li>improve precision of imputed values</li>
-<li>make MAR assumption more plausible</li>
-</ul></li>
-<li>But the number of covariance parameters goes up as the square of the number of variables in the model,
-<ul>
-<li>implying practical limits on the number of variables for which parameters can be estimated well</li>
-</ul></li>
-<li>MI applies to subjects who have a general missingness pattern, i.e., they have measurements on some variables, but not on others.</li>
-<li>But, subjects can be lost to follow up due to death or other reasons (i.e., attrition).</li>
-<li>Here we have only baseline data, but not the outcome or other follow up data.</li>
-<li>If attrition subjects are eliminated from the sample, they can produce non-response or attrition bias.</li>
-<li>Use attrition weights.
-<ul>
-<li>Given a baseline profile, predict the probability that subject will
-stay and use the inverse probability as weight.</li>
-<li>e.g., if for a given profile all subjects stay, then the predicted probability
-is 1 and the attrition weight is 1. Such a subject “counts once”.</li>
-<li>For another profile, the probability may be 0.5, attrition weight is
-1/.5 = 2 and that person “counts twice”.</li>
-</ul></li>
-<li>For differential drop-out, or self-selected treatment, you can consider using Propensity Scores.</li>
-</ul>
+<div id="post-mice-data-management" class="section level2 hasAnchor" number="18.10">
+<h2><span class="header-section-number">18.10</span> Post MICE data management<a href="post-mice-data-management.html#post-mice-data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sometimes you’ll have a need to do additional data management after imputation has been completed. Creating binary indicators of an event, re-creating scale variables etc. The general approach is to transform the imputed data into long format using <code>complete</code> <strong>with the argument <code>include=TRUE</code></strong> , do the necessary data management, and then convert it back to a <code>mids</code> object type.</p>
+<p>Continuing with the iris example, let’s create a new variable that is the ratio of Sepal to Petal length.</p>
+<p>Recapping prior steps of imputing, and then creating the completed long data set.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="post-mice-data-management.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## imp_iris &lt;- mice(iris.mis, m=10, maxit=25, meth=&quot;pmm&quot;, seed=500, printFlag=FALSE)</span></span>
+<span id="cb41-2"><a href="post-mice-data-management.html#cb41-2" aria-hidden="true" tabindex="-1"></a>iris_long <span class="ot">&lt;-</span> <span class="fu">complete</span>(imp_iris, <span class="st">&#39;long&#39;</span>, <span class="at">include=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>We create the new ratio variable on the long data:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="post-mice-data-management.html#cb42-1" aria-hidden="true" tabindex="-1"></a>iris_long<span class="sc">$</span>ratio <span class="ot">&lt;-</span> iris_long<span class="sc">$</span>Sepal.Length <span class="sc">/</span> iris_long<span class="sc">$</span>Petal.Length</span></code></pre></div>
+<p>Let’s visualize this to see how different the distributions are across imputation. Notice imputation “0” still has missing data - this is a result of using <code>include = TRUE</code> and keeping the original data as part of the <code>iris_long</code> data.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="post-mice-data-management.html#cb43-1" aria-hidden="true" tabindex="-1"></a>ggpubr<span class="sc">::</span><span class="fu">ggboxplot</span>(iris_long, <span class="at">y=</span><span class="st">&quot;ratio&quot;</span>, <span class="at">x=</span><span class="st">&quot;Species&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;.imp&quot;</span>)</span></code></pre></div>
+<p><img src="missing_data_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Then convert the data back to <code>mids</code> object, specifying the variable name that identifies the imputation number.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="post-mice-data-management.html#cb44-1" aria-hidden="true" tabindex="-1"></a>imp_iris1 <span class="ot">&lt;-</span> <span class="fu">as.mids</span>(iris_long, <span class="at">.imp =</span> <span class="st">&quot;.imp&quot;</span>)</span></code></pre></div>
+<p>Now we can conduct analyses such as an ANOVA (in linear model form) to see if this ratio differs significantly across the species.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="post-mice-data-management.html#cb45-1" aria-hidden="true" tabindex="-1"></a>nova.ratio <span class="ot">&lt;-</span> <span class="fu">with</span>(imp_iris1, <span class="fu">lm</span>(ratio <span class="sc">~</span> Species))</span>
+<span id="cb45-2"><a href="post-mice-data-management.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pool</span>(nova.ratio) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb45-3"><a href="post-mice-data-management.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                term  estimate  std.error statistic       df       p.value</span></span>
+<span id="cb45-4"><a href="post-mice-data-management.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       (Intercept)  3.439557 0.03597499  95.60967 105.1753 4.559615e-104</span></span>
+<span id="cb45-5"><a href="post-mice-data-management.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Speciesversicolor -2.048535 0.04990110 -41.05191 117.2154  2.090733e-71</span></span>
+<span id="cb45-6"><a href="post-mice-data-management.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  Speciesvirginica -2.258591 0.05000935 -45.16337 119.3221  7.055165e-77</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="post-mice-data-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-references-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="example-prescribed-amount-of-missing..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-thoughts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
