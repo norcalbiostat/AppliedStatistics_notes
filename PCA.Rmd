@@ -14,6 +14,9 @@ From [Grammerist](http://grammarist.com/spelling/principle-principal/):
 
 This third definition (3) is the context in which we will be using this term. 
 
+```{block2,  type='rmdnote'}
+This section uses functions from the following additional packages: `factoextra`. 
+```
 
 ## When is Principal Components Analysis (PCA) used? 
 
@@ -150,29 +153,52 @@ Which gives us
 * Can be thought of as variance decomposition into orthogonal (independet) vectors (variables). 
 * With $Var(C_{1}) \geq Var(C_{2}) \geq \ldots \geq Var(C_{P})$. 
 
-## Generating PC's using R
-
+## R commands
 
 ```{block2, type='rmdnote'}
 Corresponding reading: PMA6 Ch 14.3-14.4
 ```
 
-Calculating the principal components in R can be done using the function `prcomp()` and `princomp()`. This section of notes uses `princomp()`, not for any specific reason.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) has a good overview of the difference between `prcomp()` and `princomp()`. It appears that `prcomp()` may have some more post-analysis fancy visualizations available. 
 
-* Requirements of `data`: This must be a numeric matrix. Since I made up this example by generating data in section \@ref(basic-idea), I know they are numeric. 
+Calculating the principal components in R can be done using the function `prcomp()`, `princomp()` and functions from the `factoextra` package. This section of notes uses `princomp()` to generate the PCAs and helper functions from `factoextra` package.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) is a great reference for these functions.
+
+### Generating PC's
+
+The matrix that is used in `princomp` must be fully numeric.
 ```{r}
 pr <- princomp(data)
-summary(pr)
 ```
 
-* The summary output above shows the first PC (`Comp.1`) explains the highest proportion of variance. 
-* The values for the matrix $\mathbf{A}$ is contained in `pr$loadings`. 
+### Viewing the amount of variance contained by each PC
+
+Use `summary` or `get_eigenvalue` to see the variance breakdown. 
+
+```{r}
+summary(pr)
+factoextra::get_eigenvalue(pr)
+```
+
+The first PC (`Comp.1`) will always explain the highest proportion of variance (by mathematical design).
+
+### Vizualize Loadings
+
+#### As a matrix of values
+
+* The values for the matrix $\mathbf{A}$ is contained in `pr$loadings`. Alternatively the `loadings` function will extract this matrix. 
 ```{r}
 pr$loadings
+loadings(pr)
 ```
 
-To visualize these new axes, we plot the centered data. 
-```{r, fig.align='center'}
+$$
+C_{1} = 0.854x_1 + 0.519X_2 \\
+C_{2} =  0.519x_1 - 0.854X_2
+$$
+
+#### As a vector plot
+
+To visualize how these two new PC's create new axes these new axes, we plot the centered data. 
+```{r, fig.align='center', fig.height=4, fig.width=4}
 a <- pr$loadings
 x1 <- with(data, X1 - mean(X1))
 x2 <- with(data, X2 - mean(X2))
@@ -183,11 +209,52 @@ abline(0, a[2,1]/a[1,1]); text(30, 10, expression(C[1]))
 abline(0, a[2,2]/a[1,2]); text(-10, 20, expression(C[2]))
 ```
 
-
-Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at. 
+Another useful plot is called a **biplot**. Here the PC's are on the dominant axes, and the red vectors show you the magnitude and direction of the original variables on this new axis. 
 
 ```{r}
 biplot(pr)
+library(factoextra)
+fviz_pca_biplot(pr)
+```
+
+* X1 is positively correlated with both PC1 and PC2
+* X2 is positively correlated with PC1 but negatively correlated with PC2. 
+
+This information was also seen in the loading values. 
+
+#### As a heatmap
+
+* Often in high dimensional studies, the loadings are visualized using a heatmap. 
+* Here we use the `heatmap.2()` in the `gplots` package. I encourage you to play with the options such as `dendogram` and `trace` to see what they remove/add, and review the `?heatmap.2` help file.
+    
+```{r}
+library(gplots)
+heatmap.2(pr$loadings, dendrogram="none", trace="none", density.info="none")
+```
+
+#### As a strength of reprensetation 
+
+Contribution of rows/columns to the PC's. For a given dimension, any row/column with a contribution above the reference line could be considered as important in contributing to the dimension.
+
+```{r}
+fviz_contrib(pr, choice = "var", axes = 1)
+```
+
+X1 contributes more than half of the amount of information to PC1 compared to X2
+
+
+
+#### As a correlation circle
+
+With only 2 PC's this isn't that informative. The later example and the vignette are likely more helpful. 
+
+See [STDHA correlation circle](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials#graph-of-variables) for detailed information. 
+
+```{r}
+fviz_pca_var(pr, col.var = "contrib", axes=c(1,2),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
 ```
 
 
@@ -201,14 +268,20 @@ Corresponding reading: PMA6 Ch 14.5
 * Keep enough to explain a large percentage of original total variance.
 * Ideally you want a small number of PC's that explain a large percentage of the total variance. 
 
-**Choosing $m$**
+### Choosing $m$
 
 * Rely on existing theory 
 * Explain a given % of variance (cumulative percentage plot)
 * All eigenvalues > 1 (Scree plot)
 * Elbow rule (Scree Plot)
 
-These are best understood using an example, but there is one more thing to consider first and that is how the data is prepared before calculating the principal components. 
+A _Scree plot_ is created by plotting the eigenvalue against the PC number. 
+
+```{r}
+fviz_eig(pr, addlabels = TRUE)
+```
+
+These are best understood using an example containing more than two PC's, but there is one more thing to consider first and that is how the data is prepared before calculating the principal components. 
 
 
 ## Standardizing
@@ -250,6 +323,7 @@ To calculate the principal components using the correlation matrix using `princo
 ```{r}
 pr_corr <- princomp(data, cor=TRUE)
 summary(pr_corr)
+pr_corr$loadings
 ```
 
 * If we use the covariance matrix and change the scale of a variable (i.e. in to cm) that will change the results of the PC's
@@ -257,6 +331,19 @@ summary(pr_corr)
     - It compensates for the units of measurements for the different variables. 
     - Interpretations are made in terms of the standardized variables. 
 
+$$
+C_{1} = 0.707x_1 + 0.707X_2 \\
+C_{2} = 0.707x_1 - 0.707X_2
+$$
+
+I want to compare them side by side in a nice table. 
+
+```{r}
+data.frame(PC1.cov = loadings(pr)[,1],
+           PC2.cov = loadings(pr)[,2],
+           PC1.cor = loadings(pr_corr)[,1],
+           PC2.cor = loadings(pr_corr)[,2]) |> kable(digits=2)
+```
 
 ## Example
 
@@ -287,22 +374,29 @@ summary(pc_dep)
 
 **2. Pick a subset of PC's to work with**
 
-In the cumulative percentage plot below, I drew a horizontal line at 80%. So the first 9 PC's explain around 75% of the total variance, and the first 10 can explain around 80%. 
+In the cumulative percentage plot below, I drew a reference line at 80%. So the first 10 PC's can explain around 80% of the variance in the data. 
 
 ```{r, fig.height=4, fig.width=4, fig.align='center'}
-library(ggplot2)
-var_pc <- (pc_dep$sdev)^2
 
-qplot(x=1:20, y=cumsum(var_pc)/sum(var_pc)*100, geom="point") + 
-  xlab("PC number") + ylab("Cumulative %") + ylim(c(0,100)) +
-  geom_hline(aes(yintercept=80))
+(create.cumvar.plot <- get_eigenvalue(pc_dep) %>%
+  mutate(PC = paste0("PC", 1:20), # create a new variable containing the PC name
+         PC = forcats::fct_reorder(PC, cumulative.variance.percent))  # reorder this by the value of the cumulative variance
+ ) 
+
+ggplot(create.cumvar.plot, 
+       aes(y = PC, 
+           x = cumulative.variance.percent)) + 
+  geom_point(size=4) + 
+  geom_vline(xintercept = 80)
 ```
 
-**3. Create a _Scree plot_ by plotting the eigenvalue against the PC number.**
+**3. Create a _Scree plot_ by plotting the eigenvalue or the proportion of variance from that eigenvalue against the PC number.**
 
-```{r, fig.height=4, fig.width=4, fig.align='center'}
-qplot(x=1:20, y=var_pc, geom=c("point", "line")) + 
-  xlab("PC number") + ylab("Eigenvalue") + ylim(c(0,8))
+```{r}
+gridExtra::grid.arrange(
+  fviz_eig(pc_dep, choice = "eigenvalue", addlabels = TRUE),
+  fviz_screeplot(pc_dep, addlabels = TRUE)
+)
 ```
 
 * **Option 1**: Take all eigenvalues > 1 ($m=5$)  
@@ -321,10 +415,10 @@ Here
 
 So the PC's are calculated as
 
-\[
+$$
 C_{1} = 0.277x_{1} + 0.313x_{2} + \ldots \\
 C_{2} = -0.1449x_{1} + 0.0271x_{2} + \ldots
-\]
+$$
 
 etc...
 
@@ -339,7 +433,6 @@ The full question text for the depression data used here can be found on Table 1
     - half the options I use below come from [this SO post](https://stackoverflow.com/questions/11713563/heatmap-color-key-with-five-different-colors). I had no idea what they did, so I took what the solution showed, and played with it (added/changed some to see what they did), and reviewed `?heatmap.2` to see what options were available. 
     
 ```{r}
-library(gplots)
 heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="none",
           dendrogram="none", trace="none", col=rev(heat.colors(256)))
 ```
@@ -353,6 +446,28 @@ heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="n
 * $C_{3}$: friendliness of others. Large negative loading on c19, c9
 
 etc. 
+
+**Contributions***
+```{r}
+fviz_contrib(pc_dep, choice = "var", axes = 1, top=10)
+fviz_contrib(pc_dep, choice = "var", axes = 2, top=10)
+```
+
+
+```{r}
+fviz_pca_var(pc_dep, col.var = "contrib", axes=c(1,2),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
+
+fviz_pca_var(pc_dep, col.var = "contrib", axes=c(3,4),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
+```
+
+
+
 
 ## Use in Multiple Regression
 * Choose a handful of few principal components to use as predictors in a regression model 

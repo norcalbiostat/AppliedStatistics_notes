@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.2 Basic Idea - change of coordinates | Applied Statistics</title>
+  <title>14.4 R commands | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.2 Basic Idea - change of coordinates | Applied Statistics" />
+  <meta property="og:title" content="14.4 R commands | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.2 Basic Idea - change of coordinates | Applied Statistics" />
+  <meta name="twitter:title" content="14.4 R commands | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="when-is-principal-components-analysis-pca-used.html"/>
-<link rel="next" href="more-generally.html"/>
+<link rel="prev" href="more-generally.html"/>
+<link rel="next" href="data-reduction.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -546,53 +546,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="basic-idea" class="section level2 hasAnchor" number="14.2">
-<h2><span class="header-section-number">14.2</span> Basic Idea - change of coordinates<a href="basic-idea.html#basic-idea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Consider a hypothetical data set that consists of 100 random pairs of observations <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> that are correlated. Let <span class="math inline">\(X_{1} \sim \mathcal{N}(100, 100)\)</span>, <span class="math inline">\(X_{2} \sim \mathcal{N}(50, 50)\)</span>, with <span class="math inline">\(\rho_{12} = \frac{1}{\sqrt{2}}\)</span>.</p>
-<p>In matrix notation this is written as: <span class="math inline">\(\mathbf{X} \sim \mathcal{N}\left(\mathbf{\mu}, \mathbf{\Sigma}\right)\)</span> where
-<span class="math display">\[\mathbf{\mu} =
-  \left(\begin{array}
-  {r}
-  \mu_{1} \\
-  \mu_{2}
-  \end{array}\right),
-  \mathbf{\Sigma} =
-  \left(\begin{array}
-  {cc}
-  \sigma_{1}^{2} &amp; \rho_{12}\sigma_{x}\sigma_{y} \\
-  \rho_{12}\sigma_{x}\sigma_{y} &amp; \sigma_{2}^{2}
-  \end{array}\right)
-\]</span>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basic-idea.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
-<span id="cb1-2"><a href="basic-idea.html#cb1-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">50</span>)</span>
-<span id="cb1-3"><a href="basic-idea.html#cb1-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="fu">sqrt</span>(.<span class="dv">5</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">50</span>), <span class="fu">sqrt</span>(.<span class="dv">5</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">50</span>), <span class="dv">50</span>), <span class="at">nrow=</span><span class="dv">2</span>)</span>
-<span id="cb1-4"><a href="basic-idea.html#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">mu=</span>m, <span class="at">Sigma=</span>s))</span>
-<span id="cb1-5"><a href="basic-idea.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>)</span>
-<span id="cb1-6"><a href="basic-idea.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="basic-idea.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2 <span class="sc">~</span> X1, <span class="at">data=</span>data, <span class="at">pch=</span><span class="dv">16</span>)</span></code></pre></div>
-<p><img src="PCA_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Goal: Create two new variables <span class="math inline">\(C_{1}\)</span> and <span class="math inline">\(C_{2}\)</span> as linear combinations of <span class="math inline">\(\mathbf{x_{1}}\)</span> and <span class="math inline">\(\mathbf{x_{2}}\)</span></p>
-<p><span class="math display">\[ \mathbf{C_{1}} = a_{11}\mathbf{x_{1}} + a_{12}\mathbf{x_{2}} \]</span>
-<span class="math display">\[ \mathbf{C_{2}} = a_{21}\mathbf{x_{1}} + a_{22}\mathbf{x_{2}} \]</span></p>
-<p>or more simply <span class="math inline">\(\mathbf{C = aX}\)</span>, where</p>
+<div id="r-commands" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> R commands<a href="r-commands.html#r-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+<div class="rmdnote">
+Corresponding reading: PMA6 Ch 14.3-14.4
+</div>
+<p>Calculating the principal components in R can be done using the function <code>prcomp()</code>, <code>princomp()</code> and functions from the <code>factoextra</code> package. This section of notes uses <code>princomp()</code> to generate the PCAs and helper functions from <code>factoextra</code> package. <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/">STHDA</a> is a great reference for these functions.</p>
+<div id="generating-pcs" class="section level3 hasAnchor" number="14.4.1">
+<h3><span class="header-section-number">14.4.1</span> Generating PC’s<a href="r-commands.html#generating-pcs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The matrix that is used in <code>princomp</code> must be fully numeric.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-commands.html#cb2-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">princomp</span>(data)</span></code></pre></div>
+</div>
+<div id="viewing-the-amount-of-variance-contained-by-each-pc" class="section level3 hasAnchor" number="14.4.2">
+<h3><span class="header-section-number">14.4.2</span> Viewing the amount of variance contained by each PC<a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use <code>summary</code> or <code>get_eigenvalue</code> to see the variance breakdown.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-commands.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr)</span>
+<span id="cb3-2"><a href="r-commands.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb3-3"><a href="r-commands.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                            Comp.1    Comp.2</span></span>
+<span id="cb3-4"><a href="r-commands.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     11.4019265 4.2236767</span></span>
+<span id="cb3-5"><a href="r-commands.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance  0.8793355 0.1206645</span></span>
+<span id="cb3-6"><a href="r-commands.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion   0.8793355 1.0000000</span></span>
+<span id="cb3-7"><a href="r-commands.html#cb3-7" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">get_eigenvalue</span>(pr)</span>
+<span id="cb3-8"><a href="r-commands.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       eigenvalue variance.percent cumulative.variance.percent</span></span>
+<span id="cb3-9"><a href="r-commands.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.1  130.00393         87.93355                    87.93355</span></span>
+<span id="cb3-10"><a href="r-commands.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.2   17.83944         12.06645                   100.00000</span></span></code></pre></div>
+<p>The first PC (<code>Comp.1</code>) will always explain the highest proportion of variance (by mathematical design).</p>
+</div>
+<div id="vizualize-loadings" class="section level3 hasAnchor" number="14.4.3">
+<h3><span class="header-section-number">14.4.3</span> Vizualize Loadings<a href="r-commands.html#vizualize-loadings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="as-a-matrix-of-values" class="section level4 hasAnchor" number="14.4.3.1">
+<h4><span class="header-section-number">14.4.3.1</span> As a matrix of values<a href="r-commands.html#as-a-matrix-of-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li>The <span class="math inline">\(\mathbf{x}\)</span>’s have been centered by subtracting their mean (<span class="math inline">\(\mathbf{x_{1}} = x_{1}-\bar{x_{1}}\)</span>)</li>
-<li><span class="math inline">\(Var(C_{1})\)</span> is as large as possible</li>
+<li>The values for the matrix <span class="math inline">\(\mathbf{A}\)</span> is contained in <code>pr$loadings</code>. Alternatively the <code>loadings</code> function will extract this matrix.</li>
 </ul>
-<p>Graphically we’re creating two new axes, where now <span class="math inline">\(C_{1}\)</span> and <span class="math inline">\(C_{2}\)</span> are uncorrelated.</p>
-<blockquote>
-<p>PCA is mathematically defined as an orthogonal linear transformation that transforms the data to a new coordinate system such that the greatest variance by some projection of the data comes to lie on the first coordinate (called the first principal component), the second greatest variance on the second coordinate, and so on. <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia</a></p>
-</blockquote>
-<p><img src="images/pca_coord_rotate.png" /></p>
-<p>In Linear Algebra terms, this is a <a href="https://en.wikipedia.org/wiki/Change_of_basis">change of basis</a>. We are changing from a coordinate system of <span class="math inline">\((x_{1},x_{2})\)</span> to <span class="math inline">\((c_{1}, c_{2})\)</span>. If you want to see more about this concept, here is a good <a href="https://www.youtube.com/watch?v=P2LTAUO1TdA&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=13">[YouTube Video]</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-commands.html#cb4-1" aria-hidden="true" tabindex="-1"></a>pr<span class="sc">$</span>loadings</span>
+<span id="cb4-2"><a href="r-commands.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-3"><a href="r-commands.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb4-4"><a href="r-commands.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
+<span id="cb4-5"><a href="r-commands.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
+<span id="cb4-6"><a href="r-commands.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
+<span id="cb4-7"><a href="r-commands.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-8"><a href="r-commands.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
+<span id="cb4-9"><a href="r-commands.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
+<span id="cb4-10"><a href="r-commands.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
+<span id="cb4-11"><a href="r-commands.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span>
+<span id="cb4-12"><a href="r-commands.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">loadings</span>(pr)</span>
+<span id="cb4-13"><a href="r-commands.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-14"><a href="r-commands.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb4-15"><a href="r-commands.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
+<span id="cb4-16"><a href="r-commands.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
+<span id="cb4-17"><a href="r-commands.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
+<span id="cb4-18"><a href="r-commands.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-19"><a href="r-commands.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
+<span id="cb4-20"><a href="r-commands.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
+<span id="cb4-21"><a href="r-commands.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
+<span id="cb4-22"><a href="r-commands.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span></code></pre></div>
+<p><span class="math display">\[
+C_{1} = 0.854x_1 + 0.519X_2 \\
+C_{2} =  0.519x_1 - 0.854X_2
+\]</span></p>
+</div>
+<div id="as-a-vector-plot" class="section level4 hasAnchor" number="14.4.3.2">
+<h4><span class="header-section-number">14.4.3.2</span> As a vector plot<a href="r-commands.html#as-a-vector-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To visualize how these two new PC’s create new axes these new axes, we plot the centered data.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-commands.html#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> pr<span class="sc">$</span>loadings</span>
+<span id="cb5-2"><a href="r-commands.html#cb5-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X1 <span class="sc">-</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb5-3"><a href="r-commands.html#cb5-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X2 <span class="sc">-</span> <span class="fu">mean</span>(X2))</span>
+<span id="cb5-4"><a href="r-commands.html#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="r-commands.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="at">type=</span><span class="st">&quot;n&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;x2&quot;</span>)</span>
+<span id="cb5-6"><a href="r-commands.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x=</span>x1, <span class="at">y=</span>x2, <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb5-7"><a href="r-commands.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="fu">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="fu">expression</span>(C[<span class="dv">1</span>]))</span>
+<span id="cb5-8"><a href="r-commands.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="fu">text</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="fu">expression</span>(C[<span class="dv">2</span>]))</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Another useful plot is called a <strong>biplot</strong>. Here the PC’s are on the dominant axes, and the red vectors show you the magnitude and direction of the original variables on this new axis.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-commands.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pr)</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-commands.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb7-2"><a href="r-commands.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pr)</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<ul>
+<li>X1 is positively correlated with both PC1 and PC2</li>
+<li>X2 is positively correlated with PC1 but negatively correlated with PC2.</li>
+</ul>
+<p>This information was also seen in the loading values.</p>
+</div>
+<div id="as-a-heatmap" class="section level4 hasAnchor" number="14.4.3.3">
+<h4><span class="header-section-number">14.4.3.3</span> As a heatmap<a href="r-commands.html#as-a-heatmap" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Often in high dimensional studies, the loadings are visualized using a heatmap.</li>
+<li>Here we use the <code>heatmap.2()</code> in the <code>gplots</code> package. I encourage you to play with the options such as <code>dendogram</code> and <code>trace</code> to see what they remove/add, and review the <code>?heatmap.2</code> help file.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-commands.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb8-2"><a href="r-commands.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap.2</span>(pr<span class="sc">$</span>loadings, <span class="at">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="at">trace=</span><span class="st">&quot;none&quot;</span>, <span class="at">density.info=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="as-a-strength-of-reprensetation" class="section level4 hasAnchor" number="14.4.3.4">
+<h4><span class="header-section-number">14.4.3.4</span> As a strength of reprensetation<a href="r-commands.html#as-a-strength-of-reprensetation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Contribution of rows/columns to the PC’s. For a given dimension, any row/column with a contribution above the reference line could be considered as important in contributing to the dimension.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-commands.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(pr, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">axes =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>X1 contributes more than half of the amount of information to PC1 compared to X2</p>
+</div>
+<div id="as-a-correlation-circle" class="section level4 hasAnchor" number="14.4.3.5">
+<h4><span class="header-section-number">14.4.3.5</span> As a correlation circle<a href="r-commands.html#as-a-correlation-circle" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>With only 2 PC’s this isn’t that informative. The later example and the vignette are likely more helpful.</p>
+<p>See <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials#graph-of-variables">STDHA correlation circle</a> for detailed information.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-commands.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pr, <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>, <span class="at">axes=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb10-2"><a href="r-commands.html#cb10-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), </span>
+<span id="cb10-3"><a href="r-commands.html#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
+<span id="cb10-4"><a href="r-commands.html#cb10-4" aria-hidden="true" tabindex="-1"></a>             )</span></code></pre></div>
+<p><img src="PCA_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="when-is-principal-components-analysis-pca-used.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="more-generally.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="more-generally.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-reduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

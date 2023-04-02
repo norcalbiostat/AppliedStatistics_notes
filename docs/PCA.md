@@ -14,6 +14,7 @@ From [Grammerist](http://grammarist.com/spelling/principle-principal/):
 
 This third definition (3) is the context in which we will be using this term. 
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the following additional packages: `factoextra`. </div>\EndKnitrBlock{rmdnote}
 
 ## When is Principal Components Analysis (PCA) used? 
 
@@ -73,7 +74,7 @@ colnames(data) <- c("X1", "X2")
 plot(X2 ~ X1, data=data, pch=16)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
 Goal: Create two new variables $C_{1}$ and $C_{2}$ as linear combinations of $\mathbf{x_{1}}$ and $\mathbf{x_{2}}$ 
@@ -153,27 +154,46 @@ Which gives us
 * Can be thought of as variance decomposition into orthogonal (independet) vectors (variables). 
 * With $Var(C_{1}) \geq Var(C_{2}) \geq \ldots \geq Var(C_{P})$. 
 
-## Generating PC's using R
-
+## R commands
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">Corresponding reading: PMA6 Ch 14.3-14.4</div>\EndKnitrBlock{rmdnote}
 
-Calculating the principal components in R can be done using the function `prcomp()` and `princomp()`. This section of notes uses `princomp()`, not for any specific reason.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) has a good overview of the difference between `prcomp()` and `princomp()`. It appears that `prcomp()` may have some more post-analysis fancy visualizations available. 
 
-* Requirements of `data`: This must be a numeric matrix. Since I made up this example by generating data in section \@ref(basic-idea), I know they are numeric. 
+Calculating the principal components in R can be done using the function `prcomp()`, `princomp()` and functions from the `factoextra` package. This section of notes uses `princomp()` to generate the PCAs and helper functions from `factoextra` package.  [STHDA](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/) is a great reference for these functions.
+
+### Generating PC's
+
+The matrix that is used in `princomp` must be fully numeric.
 
 ```r
 pr <- princomp(data)
+```
+
+### Viewing the amount of variance contained by each PC
+
+Use `summary` or `get_eigenvalue` to see the variance breakdown. 
+
+
+```r
 summary(pr)
 ## Importance of components:
 ##                            Comp.1    Comp.2
 ## Standard deviation     11.4019265 4.2236767
 ## Proportion of Variance  0.8793355 0.1206645
 ## Cumulative Proportion   0.8793355 1.0000000
+factoextra::get_eigenvalue(pr)
+##       eigenvalue variance.percent cumulative.variance.percent
+## Dim.1  130.00393         87.93355                    87.93355
+## Dim.2   17.83944         12.06645                   100.00000
 ```
 
-* The summary output above shows the first PC (`Comp.1`) explains the highest proportion of variance. 
-* The values for the matrix $\mathbf{A}$ is contained in `pr$loadings`. 
+The first PC (`Comp.1`) will always explain the highest proportion of variance (by mathematical design).
+
+### Vizualize Loadings
+
+#### As a matrix of values
+
+* The values for the matrix $\mathbf{A}$ is contained in `pr$loadings`. Alternatively the `loadings` function will extract this matrix. 
 
 ```r
 pr$loadings
@@ -187,9 +207,27 @@ pr$loadings
 ## SS loadings       1.0    1.0
 ## Proportion Var    0.5    0.5
 ## Cumulative Var    0.5    1.0
+loadings(pr)
+## 
+## Loadings:
+##    Comp.1 Comp.2
+## X1  0.854  0.519
+## X2  0.519 -0.854
+## 
+##                Comp.1 Comp.2
+## SS loadings       1.0    1.0
+## Proportion Var    0.5    0.5
+## Cumulative Var    0.5    1.0
 ```
 
-To visualize these new axes, we plot the centered data. 
+$$
+C_{1} = 0.854x_1 + 0.519X_2 \\
+C_{2} =  0.519x_1 - 0.854X_2
+$$
+
+#### As a vector plot
+
+To visualize how these two new PC's create new axes these new axes, we plot the centered data. 
 
 ```r
 a <- pr$loadings
@@ -202,17 +240,72 @@ abline(0, a[2,1]/a[1,1]); text(30, 10, expression(C[1]))
 abline(0, a[2,2]/a[1,2]); text(-10, 20, expression(C[2]))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;" />
 
-
-Plot the original data on the new axes we see that PC1 and PC2 are uncorrelated. The red vectors show you where the original coordinates were at. 
+Another useful plot is called a **biplot**. Here the PC's are on the dominant axes, and the red vectors show you the magnitude and direction of the original variables on this new axis. 
 
 
 ```r
 biplot(pr)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+```r
+library(factoextra)
+fviz_pca_biplot(pr)
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-8-2.png" width="672" />
+
+* X1 is positively correlated with both PC1 and PC2
+* X2 is positively correlated with PC1 but negatively correlated with PC2. 
+
+This information was also seen in the loading values. 
+
+#### As a heatmap
+
+* Often in high dimensional studies, the loadings are visualized using a heatmap. 
+* Here we use the `heatmap.2()` in the `gplots` package. I encourage you to play with the options such as `dendogram` and `trace` to see what they remove/add, and review the `?heatmap.2` help file.
+    
+
+```r
+library(gplots)
+heatmap.2(pr$loadings, dendrogram="none", trace="none", density.info="none")
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
+#### As a strength of reprensetation 
+
+Contribution of rows/columns to the PC's. For a given dimension, any row/column with a contribution above the reference line could be considered as important in contributing to the dimension.
+
+
+```r
+fviz_contrib(pr, choice = "var", axes = 1)
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+X1 contributes more than half of the amount of information to PC1 compared to X2
+
+
+
+#### As a correlation circle
+
+With only 2 PC's this isn't that informative. The later example and the vignette are likely more helpful. 
+
+See [STDHA correlation circle](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials#graph-of-variables) for detailed information. 
+
+
+```r
+fviz_pca_var(pr, col.var = "contrib", axes=c(1,2),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 
 ## Data Reduction
@@ -223,14 +316,23 @@ biplot(pr)
 * Keep enough to explain a large percentage of original total variance.
 * Ideally you want a small number of PC's that explain a large percentage of the total variance. 
 
-**Choosing $m$**
+### Choosing $m$
 
 * Rely on existing theory 
 * Explain a given % of variance (cumulative percentage plot)
 * All eigenvalues > 1 (Scree plot)
 * Elbow rule (Scree Plot)
 
-These are best understood using an example, but there is one more thing to consider first and that is how the data is prepared before calculating the principal components. 
+A _Scree plot_ is created by plotting the eigenvalue against the PC number. 
+
+
+```r
+fviz_eig(pr, addlabels = TRUE)
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+These are best understood using an example containing more than two PC's, but there is one more thing to consider first and that is how the data is prepared before calculating the principal components. 
 
 
 ## Standardizing
@@ -283,6 +385,17 @@ summary(pr_corr)
 ## Standard deviation     1.3110229 0.5303008
 ## Proportion of Variance 0.8593906 0.1406094
 ## Cumulative Proportion  0.8593906 1.0000000
+pr_corr$loadings
+## 
+## Loadings:
+##    Comp.1 Comp.2
+## X1  0.707  0.707
+## X2  0.707 -0.707
+## 
+##                Comp.1 Comp.2
+## SS loadings       1.0    1.0
+## Proportion Var    0.5    0.5
+## Cumulative Var    0.5    1.0
 ```
 
 * If we use the covariance matrix and change the scale of a variable (i.e. in to cm) that will change the results of the PC's
@@ -290,6 +403,48 @@ summary(pr_corr)
     - It compensates for the units of measurements for the different variables. 
     - Interpretations are made in terms of the standardized variables. 
 
+$$
+C_{1} = 0.707x_1 + 0.707X_2 \\
+C_{2} = 0.707x_1 - 0.707X_2
+$$
+
+I want to compare them side by side in a nice table. 
+
+
+```r
+data.frame(PC1.cov = loadings(pr)[,1],
+           PC2.cov = loadings(pr)[,2],
+           PC1.cor = loadings(pr_corr)[,1],
+           PC2.cor = loadings(pr_corr)[,2]) |> kable(digits=2)
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> PC1.cov </th>
+   <th style="text-align:right;"> PC2.cov </th>
+   <th style="text-align:right;"> PC1.cor </th>
+   <th style="text-align:right;"> PC2.cor </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> X1 </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.52 </td>
+   <td style="text-align:right;"> 0.71 </td>
+   <td style="text-align:right;"> 0.71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> X2 </td>
+   <td style="text-align:right;"> 0.52 </td>
+   <td style="text-align:right;"> -0.85 </td>
+   <td style="text-align:right;"> 0.71 </td>
+   <td style="text-align:right;"> -0.71 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Example
 
@@ -342,29 +497,57 @@ summary(pc_dep)
 
 **2. Pick a subset of PC's to work with**
 
-In the cumulative percentage plot below, I drew a horizontal line at 80%. So the first 9 PC's explain around 75% of the total variance, and the first 10 can explain around 80%. 
+In the cumulative percentage plot below, I drew a reference line at 80%. So the first 10 PC's can explain around 80% of the variance in the data. 
 
 
 ```r
-library(ggplot2)
-var_pc <- (pc_dep$sdev)^2
 
-qplot(x=1:20, y=cumsum(var_pc)/sum(var_pc)*100, geom="point") + 
-  xlab("PC number") + ylab("Cumulative %") + ylim(c(0,100)) +
-  geom_hline(aes(yintercept=80))
+(create.cumvar.plot <- get_eigenvalue(pc_dep) %>%
+  mutate(PC = paste0("PC", 1:20), # create a new variable containing the PC name
+         PC = forcats::fct_reorder(PC, cumulative.variance.percent))  # reorder this by the value of the cumulative variance
+ ) 
+##        eigenvalue variance.percent cumulative.variance.percent   PC
+## Dim.1   7.0554177       35.2770884                    35.27709  PC1
+## Dim.2   1.4855693        7.4278463                    42.70493  PC2
+## Dim.3   1.2315098        6.1575488                    48.86248  PC3
+## Dim.4   1.0656850        5.3284251                    54.19091  PC4
+## Dim.5   1.0126326        5.0631630                    59.25407  PC5
+## Dim.6   0.9674607        4.8373036                    64.09138  PC6
+## Dim.7   0.9468164        4.7340818                    68.82546  PC7
+## Dim.8   0.7692375        3.8461877                    72.67164  PC8
+## Dim.9   0.6946370        3.4731850                    76.14483  PC9
+## Dim.10  0.6601269        3.3006343                    79.44546 PC10
+## Dim.11  0.6076355        3.0381773                    82.48364 PC11
+## Dim.12  0.5493373        2.7466867                    85.23033 PC12
+## Dim.13  0.5366336        2.6831679                    87.91350 PC13
+## Dim.14  0.5087176        2.5435878                    90.45708 PC14
+## Dim.15  0.4509026        2.2545129                    92.71160 PC15
+## Dim.16  0.3751809        1.8759047                    94.58750 PC16
+## Dim.17  0.3211844        1.6059218                    96.19342 PC17
+## Dim.18  0.2945628        1.4728139                    97.66624 PC18
+## Dim.19  0.2683745        1.3418724                    99.00811 PC19
+## Dim.20  0.1983782        0.9918908                   100.00000 PC20
+
+ggplot(create.cumvar.plot, 
+       aes(y = PC, 
+           x = cumulative.variance.percent)) + 
+  geom_point(size=4) + 
+  geom_vline(xintercept = 80)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-20-1.png" width="384" style="display: block; margin: auto;" />
 
-**3. Create a _Scree plot_ by plotting the eigenvalue against the PC number.**
+**3. Create a _Scree plot_ by plotting the eigenvalue or the proportion of variance from that eigenvalue against the PC number.**
 
 
 ```r
-qplot(x=1:20, y=var_pc, geom=c("point", "line")) + 
-  xlab("PC number") + ylab("Eigenvalue") + ylim(c(0,8))
+gridExtra::grid.arrange(
+  fviz_eig(pc_dep, choice = "eigenvalue", addlabels = TRUE),
+  fviz_screeplot(pc_dep, addlabels = TRUE)
+)
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 * **Option 1**: Take all eigenvalues > 1 ($m=5$)  
 * **Option 2**: Use a cutoff point where the lines joining consecutive points are steep to the left of the cutoff point and flat right of the cutoff point. Point where the two slopes meet is the elbow. ($m=2$). 
@@ -387,10 +570,10 @@ Here
 
 So the PC's are calculated as
 
-\[
+$$
 C_{1} = 0.277x_{1} + 0.313x_{2} + \ldots \\
 C_{2} = -0.1449x_{1} + 0.0271x_{2} + \ldots
-\]
+$$
 
 etc...
 
@@ -404,12 +587,11 @@ etc...
     
 
 ```r
-library(gplots)
 heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="none",
           dendrogram="none", trace="none", col=rev(heat.colors(256)))
 ```
 
-<img src="PCA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="PCA_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 * Loadings over 0.5 (red) help us interpret what these components could "mean"
     - Must know exact wording of component questions
@@ -420,6 +602,44 @@ heatmap.2(pc_dep$loadings[,1:5], scale="none", Rowv=NA, Colv=NA, density.info="n
 * $C_{3}$: friendliness of others. Large negative loading on c19, c9
 
 etc. 
+
+**Contributions***
+
+```r
+fviz_contrib(pc_dep, choice = "var", axes = 1, top=10)
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+```r
+fviz_contrib(pc_dep, choice = "var", axes = 2, top=10)
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-25-2.png" width="672" />
+
+
+
+```r
+fviz_pca_var(pc_dep, col.var = "contrib", axes=c(1,2),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+```r
+
+fviz_pca_var(pc_dep, col.var = "contrib", axes=c(3,4),
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+             )
+```
+
+<img src="PCA_files/figure-html/unnamed-chunk-26-2.png" width="672" />
+
+
+
 
 ## Use in Multiple Regression
 * Choose a handful of few principal components to use as predictors in a regression model 

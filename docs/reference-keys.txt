@@ -301,3 +301,13 @@ calculating-bias
 post-mice-data-management
 final-thoughts
 additional-references-2
+r-commands
+generating-pcs
+viewing-the-amount-of-variance-contained-by-each-pc
+vizualize-loadings
+as-a-matrix-of-values
+as-a-vector-plot
+as-a-heatmap
+as-a-strength-of-reprensetation
+as-a-correlation-circle
+choosing-m
