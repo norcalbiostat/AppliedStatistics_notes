@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.4 Saving your changes | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.4 Saving your changes | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -159,7 +158,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -214,13 +217,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -279,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -295,7 +299,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -387,8 +394,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +525,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -543,10 +559,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Keep the data, codebook and data management file in the same folder.</li>
 </ul>
 <p>The <code>Sys.Date()</code> function takes the current date from your computer. The value is then formatted nicely for human consumption and added (pasted) to the file name before written to the working directory as a new text file.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="saving-your-changes.html#cb38-1" aria-hidden="true" tabindex="-1"></a>depress_clean <span class="ot">&lt;-</span> depress <span class="sc">%&gt;%</span> <span class="fu">select</span>(var1, var2, var3)</span>
-<span id="cb38-2"><a href="saving-your-changes.html#cb38-2" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%m%d%y&quot;</span>)</span>
-<span id="cb38-3"><a href="saving-your-changes.html#cb38-3" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;depress_&quot;</span>, date, <span class="st">&quot;.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb38-4"><a href="saving-your-changes.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(depress_clean, filename, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="saving-your-changes.html#cb37-1" aria-hidden="true" tabindex="-1"></a>depress_clean <span class="ot">&lt;-</span> depress <span class="sc">%&gt;%</span> <span class="fu">select</span>(var1, var2, var3)</span>
+<span id="cb37-2"><a href="saving-your-changes.html#cb37-2" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%m%d%y&quot;</span>)</span>
+<span id="cb37-3"><a href="saving-your-changes.html#cb37-3" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;depress_&quot;</span>, date, <span class="st">&quot;.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb37-4"><a href="saving-your-changes.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(depress_clean, filename, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>SPSS users commonly save cleaned data as a <code>.sav</code> format.</p>
 <pre><code>SAVE outfile=&#39;FilePath\depress_sysdate.sav&#39;
 /KEEP = Variable_Name1 Variable_Name2.
@@ -623,7 +639,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

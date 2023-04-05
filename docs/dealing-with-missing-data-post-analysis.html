@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.6 Dealing with missing data post-analysis | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.6 Dealing with missing data post-analysis | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -159,7 +158,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -214,13 +217,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -279,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -295,7 +299,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -387,8 +394,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +525,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -535,20 +551,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="dealing-with-missing-data-post-analysis" class="section level2 hasAnchor" number="1.6">
 <h2><span class="header-section-number">1.6</span> Dealing with missing data post-analysis<a href="dealing-with-missing-data-post-analysis.html#dealing-with-missing-data-post-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Case when: you want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis.</li>
-</ul>
-<p>If your original data had missing values, here is one way to get the factor scores for available data back onto the data set. Alternatively you can look into methods to conduct factor analysis with missing data (FactomineR)</p>
+<p><strong>Situation</strong>: You want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis.</p>
+<div id="regression" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Regression<a href="dealing-with-missing-data-post-analysis.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R objects created by methods such as <code>lm</code> and <code>glm</code> will store the data used in the model in the model object itself in <code>model$data</code>. See Chapter <a href="binary-classification.html#binary-classification">12</a> for an example.</p>
+</div>
+<div id="factor-analysis-and-principle-components" class="section level3 hasAnchor" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Factor Analysis and Principle Components<a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If your original data had missing values, here is one way to get the PC’s / factor scores for available data back onto the data set.</p>
+<p><strong>Method 1) Create an ID column and merge new variables onto original data. (add columns)</strong></p>
 <ol style="list-style-type: decimal">
-<li>If no ID column exists, create one: <code>id = 1:NROW(data)</code></li>
-<li>Use <code>select()</code> to extract ID and all variables used in the factor analysis</li>
-<li>Do <code>na.omit()</code></li>
-<li>Conduct factor analysis on this subsetted data set</li>
-<li>Use <code>bind_cols()</code> to add columns containing factor scores to this subsetted data set as described above</li>
-<li>Use <code>select()</code> to only keep the ID and the factor score variables</li>
-<li>Then <code>left_join()</code> the factor scores back to the original data, using the ID variable as the joining key.</li>
+<li>If no ID column exists, create one on the original dataset <code>id = 1:NROW(data)</code></li>
+<li>Use <code>select()</code> to extract the ID and all variables used in the factor analysis, then do a <code>na.omit()</code> to drop rows with any missing data. Save this as a new complete case data set.</li>
+<li>Conduct PCA / Factor analysis on this new complete case data set (MINUS THE ID). Extract the PCs or factor scores.</li>
+<li>Use <code>bind_cols()</code> to add the ID variable to the data containing factor scores.</li>
+<li>Then <code>left_join(original_data, factor_score_data)</code> the factor scores back to the original data, using the ID variable as the joining key.</li>
 </ol>
+<p><strong>Method 2) Split the data, analyze one part then concatenate back together. (add rows)</strong></p>
+<ol style="list-style-type: decimal">
+<li>Use the <code>complete.cases()</code> function to create a boolean vector for if each row is complete</li>
+<li>Split the data into complete and incomplete.</li>
+<li>Do the analysis on the complete rows, extracting the PC’s/Factors</li>
+<li>Add the PC/Factor data onto the complete rows using <code>bind_cols</code></li>
+<li>Then <code>bind_rows</code> the two parts back together.</li>
+</ol>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="dealing-with-missing-data-post-analysis.html#cb41-1" aria-hidden="true" tabindex="-1"></a>cc.idx <span class="ot">&lt;-</span> hiv <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;pb&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">complete.cases</span>() <span class="co"># 1</span></span>
+<span id="cb41-2"><a href="dealing-with-missing-data-post-analysis.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="dealing-with-missing-data-post-analysis.html#cb41-3" aria-hidden="true" tabindex="-1"></a>complete.rows <span class="ot">&lt;-</span> hiv[cc.idx,] <span class="co">#2</span></span>
+<span id="cb41-4"><a href="dealing-with-missing-data-post-analysis.html#cb41-4" aria-hidden="true" tabindex="-1"></a>incomplete.rows <span class="ot">&lt;-</span> hiv[<span class="sc">!</span>cc.idx,]</span>
+<span id="cb41-5"><a href="dealing-with-missing-data-post-analysis.html#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="dealing-with-missing-data-post-analysis.html#cb41-6" aria-hidden="true" tabindex="-1"></a>pc.scores <span class="ot">&lt;-</span> <span class="fu">princomp</span>(pb)<span class="sc">$</span>scores <span class="co">#3 </span></span>
+<span id="cb41-7"><a href="dealing-with-missing-data-post-analysis.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="dealing-with-missing-data-post-analysis.html#cb41-8" aria-hidden="true" tabindex="-1"></a>complete.add.pc <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(complete.rows, pc.scores) <span class="co">#4</span></span>
+<span id="cb41-9"><a href="dealing-with-missing-data-post-analysis.html#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="dealing-with-missing-data-post-analysis.html#cb41-10" aria-hidden="true" tabindex="-1"></a>hiv.with.pcs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(complete.add.pc, incomplete.rows) <span class="co">#5</span></span></code></pre></div>
 
+</div>
 </div>
 <!-- </div> -->
             </section>
@@ -617,7 +655,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -469,18 +469,12 @@ Let's look at assessing normal distributions using the **cleaned** depression da
 
 
 ```r
-rm(depress) # remove the current version that was used in the previous part of this markdown file
-depress <- read.table("https://norcalbiostat.netlify.com/data/depress_081217.txt", sep="\t", header=TRUE)  
-```
-
-
-```r
 hist(depress$income, prob=TRUE, xlab="Annual income (in thousands)", 
      main="Histogram and Density curve of Income", ylab="")
 lines(density(depress$income), col="blue")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="data_prep_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ```r
 summary(depress$income)
@@ -513,7 +507,7 @@ Another common method of assessing normality is to create a normal probability (
 qqnorm(depress$income);qqline(depress$income, col="red")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="data_prep_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or `U` shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created. 
 
@@ -539,7 +533,7 @@ qqnorm(loginc, main = "Natural Log"); qqline(loginc, col="blue")
 qqnorm(xincome, main="-1/cuberoot(income)"); qqline(xincome, col="blue")
 ```
 
-<img src="data_prep_files/figure-html/unnamed-chunk-18-1.png" width="960" />
+<img src="data_prep_files/figure-html/unnamed-chunk-17-1.png" width="960" />
 
 
 ## Saving your changes
@@ -628,16 +622,46 @@ head(fev2)
 
 Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several `R` packages that can help with this including `reshape2` and `tidyr`. 
 
+
 ## Dealing with missing data post-analysis 
 
-* Case when: you want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis. 
+**Situation**: You want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis. 
 
-If your original data had missing values, here is one way to get the factor scores for available data back onto the data set. Alternatively you can look into methods to conduct factor analysis with missing data (FactomineR)
+### Regression
 
-1. If no ID column exists, create one: `id = 1:NROW(data)`
-2. Use `select()` to extract ID and all variables used in the factor analysis
-3. Do `na.omit()`
-4. Conduct factor analysis on this subsetted data set
-5. Use `bind_cols()` to add columns containing factor scores to this subsetted data set as described above
-6. Use `select()` to only keep the ID and the factor score variables
-5. Then `left_join()` the factor scores back to the original data, using the ID variable as the joining key.
+R objects created by methods such as `lm` and `glm` will store the data used in the model in the model object itself in `model$data`. See Chapter \@ref(binary-classification) for an example.  
+
+
+### Factor Analysis and Principle Components
+
+If your original data had missing values, here is one way to get the PC's / factor scores for available data back onto the data set. 
+
+**Method 1) Create an ID column and merge new variables onto original data. (add columns)**
+
+1. If no ID column exists, create one on the original dataset `id = 1:NROW(data)`
+2. Use `select()` to extract the ID and all variables used in the factor analysis, then do a `na.omit()` to drop rows with any missing data. Save this as a new complete case data set. 
+4. Conduct PCA / Factor analysis on this new complete case data set (MINUS THE ID). Extract the PCs or factor scores. 
+5. Use `bind_cols()` to add the ID variable to the data containing factor scores. 
+6. Then `left_join(original_data, factor_score_data)` the factor scores back to the original data, using the ID variable as the joining key.
+
+**Method 2) Split the data, analyze one part then concatenate back together. (add rows)**
+
+1. Use the `complete.cases()` function to create a boolean vector for if each row is complete
+2. Split the data into complete and incomplete.
+3. Do the analysis on the complete rows, extracting the PC's/Factors
+4. Add the PC/Factor data onto the complete rows using `bind_cols` 
+5. Then `bind_rows` the two parts back together. 
+
+
+```r
+cc.idx <- hiv %>% select(starts_with("pb")) %>% complete.cases() # 1
+
+complete.rows <- hiv[cc.idx,] #2
+incomplete.rows <- hiv[!cc.idx,]
+
+pc.scores <- princomp(pb)$scores #3 
+
+complete.add.pc <- bind_cols(complete.rows, pc.scores) #4
+
+hiv.with.pcs <- bind_rows(complete.add.pc, incomplete.rows) #5
+```

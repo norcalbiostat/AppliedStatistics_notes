@@ -311,3 +311,5 @@ as-a-heatmap
 as-a-strength-of-reprensetation
 as-a-correlation-circle
 choosing-m
+regression
+factor-analysis-and-principle-components
