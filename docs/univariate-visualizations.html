@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 Univariate Visualizations | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 Univariate Visualizations | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -541,10 +593,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tables" class="section level4 hasAnchor" number="2.3.1.1">
 <h4><span class="header-section-number">2.3.1.1</span> Tables<a href="univariate-visualizations.html#tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Tables are the most common way to get summary statistics of a categorical variable. The <code>table()</code> function produces a frequency table, where each entry represents the number of records in the data set holding the corresponding labeled value.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="univariate-visualizations.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
-<span id="cb44-2"><a href="univariate-visualizations.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb44-3"><a href="univariate-visualizations.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="do">##      Fair      Good Very Good   Premium     Ideal </span></span>
-<span id="cb44-4"><a href="univariate-visualizations.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        34        99       220       257       390</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="univariate-visualizations.html#cb44-1" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
+<span id="cb44-2"><a href="univariate-visualizations.html#cb44-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb44-3"><a href="univariate-visualizations.html#cb44-3" tabindex="-1"></a><span class="do">##      Fair      Good Very Good   Premium     Ideal </span></span>
+<span id="cb44-4"><a href="univariate-visualizations.html#cb44-4" tabindex="-1"></a><span class="do">##        34        99       220       257       390</span></span></code></pre></div>
 <p>There are 27 Fair quality diamonds, 83 good quality and 387 Ideal quality diamonds in this sample.</p>
 </div>
 <div id="barcharts-barplots" class="section level4 hasAnchor" number="2.3.1.2">
@@ -552,55 +604,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A Barchart or barplot takes these frequencies, and draws bars along the X-axis where the height of the bars is determined by the frequencies seen in the table.</p>
 <p><strong>base</strong>
 To create a barplot/barchart in base graphics requires the data to be in summarized in a table form first. Then the result of the table is plotted. The first argument is the table to be plotted, the <code>main</code> argument controls the title.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="univariate-visualizations.html#cb45-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
-<span id="cb45-2"><a href="univariate-visualizations.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(dc, <span class="at">main=</span><span class="st">&quot;Barchart using base graphics&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="univariate-visualizations.html#cb45-1" tabindex="-1"></a>dc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
+<span id="cb45-2"><a href="univariate-visualizations.html#cb45-2" tabindex="-1"></a><span class="fu">barplot</span>(dc, <span class="at">main=</span><span class="st">&quot;Barchart using base graphics&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 The geometry needed to draw a barchart in ggplot is <code>geom_bar()</code>.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="univariate-visualizations.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="univariate-visualizations.html#cb46-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>pretty</strong>
 The biggest addition to a barchart is the numbers on top of the bars. This isn’t mandatory, but it does make it nice.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="univariate-visualizations.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb47-2"><a href="univariate-visualizations.html#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..count..)) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Frequnency of diamonds by cut type&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb47-3"><a href="univariate-visualizations.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y=</span>..count.. <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label=</span>..count..), <span class="at">stat=</span><span class="st">&#39;count&#39;</span>, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="univariate-visualizations.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="univariate-visualizations.html#cb47-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..count..)) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Frequnency of diamonds by cut type&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb47-3"><a href="univariate-visualizations.html#cb47-3" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y=</span>..count.. <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label=</span>..count..), <span class="at">stat=</span><span class="st">&#39;count&#39;</span>, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="plotting-proportions" class="section level4 hasAnchor" number="2.3.1.3">
 <h4><span class="header-section-number">2.3.1.3</span> Plotting Proportions<a href="univariate-visualizations.html#plotting-proportions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Often you don’t want to compare counts but percents. To accomplish this, we have to aggregate the data to calculate the proportions first, then plot the aggregated data using <code>geom_col</code> to create the columns.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="univariate-visualizations.html#cb48-1" aria-hidden="true" tabindex="-1"></a>cut.props <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut)))</span>
-<span id="cb48-2"><a href="univariate-visualizations.html#cb48-2" aria-hidden="true" tabindex="-1"></a>cut.props <span class="co"># what does this data look like? </span></span>
-<span id="cb48-3"><a href="univariate-visualizations.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        Var1  Freq</span></span>
-<span id="cb48-4"><a href="univariate-visualizations.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      Fair 0.034</span></span>
-<span id="cb48-5"><a href="univariate-visualizations.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2      Good 0.099</span></span>
-<span id="cb48-6"><a href="univariate-visualizations.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Very Good 0.220</span></span>
-<span id="cb48-7"><a href="univariate-visualizations.html#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   Premium 0.257</span></span>
-<span id="cb48-8"><a href="univariate-visualizations.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     Ideal 0.390</span></span>
-<span id="cb48-9"><a href="univariate-visualizations.html#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-10"><a href="univariate-visualizations.html#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cut.props, <span class="fu">aes</span>(<span class="at">x=</span>Var1, <span class="at">y=</span>Freq)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
-<span id="cb48-11"><a href="univariate-visualizations.html#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Proportion&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Cut type&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb48-12"><a href="univariate-visualizations.html#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Proportion of diamonds by cut type&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="univariate-visualizations.html#cb48-1" tabindex="-1"></a>cut.props <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut)))</span>
+<span id="cb48-2"><a href="univariate-visualizations.html#cb48-2" tabindex="-1"></a>cut.props <span class="co"># what does this data look like? </span></span>
+<span id="cb48-3"><a href="univariate-visualizations.html#cb48-3" tabindex="-1"></a><span class="do">##        Var1  Freq</span></span>
+<span id="cb48-4"><a href="univariate-visualizations.html#cb48-4" tabindex="-1"></a><span class="do">## 1      Fair 0.034</span></span>
+<span id="cb48-5"><a href="univariate-visualizations.html#cb48-5" tabindex="-1"></a><span class="do">## 2      Good 0.099</span></span>
+<span id="cb48-6"><a href="univariate-visualizations.html#cb48-6" tabindex="-1"></a><span class="do">## 3 Very Good 0.220</span></span>
+<span id="cb48-7"><a href="univariate-visualizations.html#cb48-7" tabindex="-1"></a><span class="do">## 4   Premium 0.257</span></span>
+<span id="cb48-8"><a href="univariate-visualizations.html#cb48-8" tabindex="-1"></a><span class="do">## 5     Ideal 0.390</span></span>
+<span id="cb48-9"><a href="univariate-visualizations.html#cb48-9" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="univariate-visualizations.html#cb48-10" tabindex="-1"></a><span class="fu">ggplot</span>(cut.props, <span class="fu">aes</span>(<span class="at">x=</span>Var1, <span class="at">y=</span>Freq)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb48-11"><a href="univariate-visualizations.html#cb48-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Proportion&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Cut type&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb48-12"><a href="univariate-visualizations.html#cb48-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Proportion of diamonds by cut type&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="cleveland-dot-plots" class="section level4 hasAnchor" number="2.3.1.4">
 <h4><span class="header-section-number">2.3.1.4</span> Cleveland Dot Plots<a href="univariate-visualizations.html#cleveland-dot-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another way to visualize categorical data that takes up less ink than bars is a Cleveland dot plot. Here again we are plotting summary data instead of the raw data. This uses the <code>geom_segment</code> that draws the lines from x=0 to the value of the proportion (named <code>Freq</code> because of the way <code>data.frame</code> works).</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="univariate-visualizations.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cut.props, <span class="fu">aes</span>(<span class="at">x=</span>Freq, <span class="at">y=</span>Var1)) <span class="sc">+</span>  </span>
-<span id="cb49-2"><a href="univariate-visualizations.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Proportion of diamonds&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb49-3"><a href="univariate-visualizations.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Cut Type&quot;</span>) <span class="sc">+</span></span>
-<span id="cb49-4"><a href="univariate-visualizations.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">xend=</span>Freq, <span class="at">y=</span>Var1, <span class="at">yend=</span>Var1), <span class="at">color=</span><span class="st">&#39;grey50&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="univariate-visualizations.html#cb49-1" tabindex="-1"></a><span class="fu">ggplot</span>(cut.props, <span class="fu">aes</span>(<span class="at">x=</span>Freq, <span class="at">y=</span>Var1)) <span class="sc">+</span>  </span>
+<span id="cb49-2"><a href="univariate-visualizations.html#cb49-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Proportion of diamonds&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb49-3"><a href="univariate-visualizations.html#cb49-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Cut Type&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="univariate-visualizations.html#cb49-4" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">xend=</span>Freq, <span class="at">y=</span>Var1, <span class="at">yend=</span>Var1), <span class="at">color=</span><span class="st">&#39;grey50&#39;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="pie-chart" class="section level4 hasAnchor" number="2.3.1.5">
 <h4><span class="header-section-number">2.3.1.5</span> Pie Chart<a href="univariate-visualizations.html#pie-chart" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Just like <code>barplot()</code>, <code>pie()</code> takes a table object as it’s argument.</p>
 <p><strong>base</strong></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="univariate-visualizations.html#cb50-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
-<span id="cb50-2"><a href="univariate-visualizations.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(dc)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="univariate-visualizations.html#cb50-1" tabindex="-1"></a>dc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut)</span>
+<span id="cb50-2"><a href="univariate-visualizations.html#cb50-2" tabindex="-1"></a><span class="fu">pie</span>(dc)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Pie charts are my <em>least</em> favorite plotting type. Human eyeballs can’t distinguish between angles as well as we can with heights. A mandatory piece needed to make the wedges readable is to add the percentages of each wedge.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="univariate-visualizations.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(dc, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="fu">names</span>(dc), <span class="st">&#39; (&#39;</span>, <span class="fu">prop.table</span>(dc)<span class="sc">*</span><span class="dv">100</span>, <span class="st">&quot;%)&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="univariate-visualizations.html#cb51-1" tabindex="-1"></a><span class="fu">pie</span>(dc, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="fu">names</span>(dc), <span class="st">&#39; (&#39;</span>, <span class="fu">prop.table</span>(dc)<span class="sc">*</span><span class="dv">100</span>, <span class="st">&quot;%)&quot;</span>))</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><strong>ggplot</strong></p>
 <p>And here I thought pie charts couldn’t get worse… i’m not a fan at all of the ggplot version. So i’m not even going to show it. Here’s a link to another great tutorial that does show you how to make one.</p>
@@ -612,11 +664,11 @@ The biggest addition to a barchart is the numbers on top of the bars. This isn�
 <h4><span class="header-section-number">2.3.1.6</span> Waffle Chart<a href="univariate-visualizations.html#waffle-chart" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>This type of chart is not natively found in the <code>ggplot2</code> package, but it’s own <code>waffle</code> package. These are great for infographics.</p>
 <p>Reference: <a href="https://www.r-bloggers.com/making-waffle-charts-in-r-with-the-new-waffle-package/" class="uri">https://www.r-bloggers.com/making-waffle-charts-in-r-with-the-new-waffle-package/</a></p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="univariate-visualizations.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(waffle)</span>
-<span id="cb52-2"><a href="univariate-visualizations.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="univariate-visualizations.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(dc<span class="sc">/</span><span class="dv">10</span>, <span class="at">rows=</span><span class="dv">5</span>, <span class="at">size=</span><span class="fl">0.5</span>, </span>
-<span id="cb52-4"><a href="univariate-visualizations.html#cb52-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Cut quality of diamond&quot;</span>, </span>
-<span id="cb52-5"><a href="univariate-visualizations.html#cb52-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;1 square == 10 diamonds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="univariate-visualizations.html#cb52-1" tabindex="-1"></a><span class="fu">library</span>(waffle)</span>
+<span id="cb52-2"><a href="univariate-visualizations.html#cb52-2" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="univariate-visualizations.html#cb52-3" tabindex="-1"></a><span class="fu">waffle</span>(dc<span class="sc">/</span><span class="dv">10</span>, <span class="at">rows=</span><span class="dv">5</span>, <span class="at">size=</span><span class="fl">0.5</span>, </span>
+<span id="cb52-4"><a href="univariate-visualizations.html#cb52-4" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Cut quality of diamond&quot;</span>, </span>
+<span id="cb52-5"><a href="univariate-visualizations.html#cb52-5" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;1 square == 10 diamonds&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
@@ -625,7 +677,7 @@ The biggest addition to a barchart is the numbers on top of the bars. This isn�
 <p>Here we can look at the price, carat, and depth of the diamonds.</p>
 <div id="dotplot" class="section level4 hasAnchor" number="2.3.2.1">
 <h4><span class="header-section-number">2.3.2.1</span> Dotplot<a href="univariate-visualizations.html#dotplot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="univariate-visualizations.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="univariate-visualizations.html#cb53-1" tabindex="-1"></a><span class="fu">plot</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>The base function <code>plot()</code> creates a <strong>dotplot</strong> for a continuous variable. The value of the variable is plotted on the y axis, and the index, or row number, is plotted on the x axis. This gives you a nice, quick way to see the values of the data.</p>
 <p>Often you are not interested in the individual values of each data point, but the <em>distribution</em> of the data. In other words, where is the majority of the data? Does it look symmetric around some central point? Around what values do the bulk of the data lie?</p>
@@ -633,26 +685,26 @@ The biggest addition to a barchart is the numbers on top of the bars. This isn�
 <div id="histograms" class="section level4 hasAnchor" number="2.3.2.2">
 <h4><span class="header-section-number">2.3.2.2</span> Histograms<a href="univariate-visualizations.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Rather than showing the value of each observation, we prefer to think of the value as belonging to a . <strong>The height of the bars in a histogram display the frequency of values that fall into those of those bins.</strong> For example if we cut the poverty rates into 7 bins of equal width, the frequency table would look like this:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="univariate-visualizations.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">cut</span>(dsmall<span class="sc">$</span>depth, <span class="dv">7</span>))</span>
-<span id="cb54-2"><a href="univariate-visualizations.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-3"><a href="univariate-visualizations.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (55.3,57.6] (57.6,59.8] (59.8,62.1] (62.1,64.4] (64.4,66.7] (66.7,68.9] </span></span>
-<span id="cb54-4"><a href="univariate-visualizations.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="do">##           6          79         536         351          23           3 </span></span>
-<span id="cb54-5"><a href="univariate-visualizations.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="do">## (68.9,71.2] </span></span>
-<span id="cb54-6"><a href="univariate-visualizations.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           2</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="univariate-visualizations.html#cb54-1" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">cut</span>(dsmall<span class="sc">$</span>depth, <span class="dv">7</span>))</span>
+<span id="cb54-2"><a href="univariate-visualizations.html#cb54-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-3"><a href="univariate-visualizations.html#cb54-3" tabindex="-1"></a><span class="do">## (55.3,57.6] (57.6,59.8] (59.8,62.1] (62.1,64.4] (64.4,66.7] (66.7,68.9] </span></span>
+<span id="cb54-4"><a href="univariate-visualizations.html#cb54-4" tabindex="-1"></a><span class="do">##           6          79         536         351          23           3 </span></span>
+<span id="cb54-5"><a href="univariate-visualizations.html#cb54-5" tabindex="-1"></a><span class="do">## (68.9,71.2] </span></span>
+<span id="cb54-6"><a href="univariate-visualizations.html#cb54-6" tabindex="-1"></a><span class="do">##           2</span></span></code></pre></div>
 <p>In a histogram, the binned counts are plotted as bars into a histogram. Note that the x-axis is continuous, so the bars touch. This is unlike the barchart that has a categorical x-axis, and vertical bars that are separated.</p>
 <p><strong>base</strong>
 You can make a histogram in base graphics super easy.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="univariate-visualizations.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="univariate-visualizations.html#cb55-1" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>And it doesn’t take too much to clean it up. Here you can specify the number of bins by specifying how many <code>breaks</code> should be made in the data (the number of breaks controls the number of bins, and bin width) and use <code>col</code> for the fill color.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="univariate-visualizations.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth, <span class="at">xlab=</span><span class="st">&quot;depth&quot;</span>, <span class="at">main=</span><span class="st">&quot;Histogram of diamond depth&quot;</span>, <span class="at">col=</span><span class="st">&quot;cyan&quot;</span>, <span class="at">breaks=</span><span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="univariate-visualizations.html#cb56-1" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth, <span class="at">xlab=</span><span class="st">&quot;depth&quot;</span>, <span class="at">main=</span><span class="st">&quot;Histogram of diamond depth&quot;</span>, <span class="at">col=</span><span class="st">&quot;cyan&quot;</span>, <span class="at">breaks=</span><span class="dv">20</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p><strong>ggplot</strong></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="univariate-visualizations.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">2.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="univariate-visualizations.html#cb57-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">2.2</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>The binwidth here is set by looking at the cut points above that were used to create 7 bins. Notice that darkgrey is the default fill color, but makes it hard to differentiate between the bars. So we’ll make the outline black using <code>colour</code>, and <code>fill</code> the bars with white.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="univariate-visualizations.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb58-2"><a href="univariate-visualizations.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of diamond depth&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="univariate-visualizations.html#cb58-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb58-2"><a href="univariate-visualizations.html#cb58-2" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of diamond depth&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Note I did <strong>not</strong> specify the <code>binwidth</code> argument here. The size of the bins can hide features from your graph, the default value for ggplot2 is range/30 and usually is a good choice.</p>
 </div>
@@ -660,11 +712,11 @@ You can make a histogram in base graphics super easy.</p>
 <h4><span class="header-section-number">2.3.2.3</span> Density plots<a href="univariate-visualizations.html#density-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To get a better idea of the true shape of the distribution we can “smooth” out the bins and create what’s called a <code>density</code> plot or curve. Notice that the shape of this distribution curve is much more… “wigglier” than the histogram may have implied.</p>
 <p><strong>base</strong></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="univariate-visualizations.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(dsmall<span class="sc">$</span>depth))</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="univariate-visualizations.html#cb59-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(dsmall<span class="sc">$</span>depth))</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Awesome title huh? (NOT)</p>
 <p><strong>ggplot2</strong></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="univariate-visualizations.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="univariate-visualizations.html#cb60-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="histograms-density" class="section level4 hasAnchor" number="2.3.2.4">
@@ -672,67 +724,67 @@ You can make a histogram in base graphics super easy.</p>
 <p>Often is is more helpful to have the density (or kernel density) plot <em>on top of</em> a histogram plot.</p>
 <p><strong>Base</strong>
 Since the height of the bars in a histogram default to showing the frequency of records in the data set within that bin, we need to 1) scale the height so that it’s a <em>relative frequency</em>, and then use the <code>lines()</code> function to add a <code>density()</code> line on top.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="univariate-visualizations.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
-<span id="cb61-2"><a href="univariate-visualizations.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(dsmall<span class="sc">$</span>depth), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="univariate-visualizations.html#cb61-1" tabindex="-1"></a><span class="fu">hist</span>(dsmall<span class="sc">$</span>depth, <span class="at">prob=</span><span class="cn">TRUE</span>)</span>
+<span id="cb61-2"><a href="univariate-visualizations.html#cb61-2" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(dsmall<span class="sc">$</span>depth), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 The syntax starts the same, we’ll add a new geom, <code>geom_density</code> and color the line blue. Then we add the histogram geom using <code>geom_histogram</code> but must specify that the y axis should be on the density, not frequency, scale. Note that this has to go inside the aesthetic statement <code>aes()</code>. I’m also going to get rid of the fill by using <code>NA</code> so it doesn’t plot over the density line.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="univariate-visualizations.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb62-2"><a href="univariate-visualizations.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="univariate-visualizations.html#cb62-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>depth)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb62-2"><a href="univariate-visualizations.html#cb62-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="cn">NA</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 <div id="boxplots" class="section level4 hasAnchor" number="2.3.2.5">
 <h4><span class="header-section-number">2.3.2.5</span> Boxplots<a href="univariate-visualizations.html#boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another very common way to visualize the distribution of a continuous variable is using a boxplot. Boxplots are useful for quickly identifying where the bulk of your data lie. R specifically draws a “modified” boxplot where values that are considered outliers are plotted as dots.</p>
 <p><strong>base</strong></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="univariate-visualizations.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="univariate-visualizations.html#cb63-1" tabindex="-1"></a><span class="fu">boxplot</span>(dsmall<span class="sc">$</span>depth)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Notice that the only axis labeled is the y=axis. Like a dotplot the x axis, or “width”, of the boxplot is meaningless here. We can make the axis more readable by flipping the plot on it’s side.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="univariate-visualizations.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(dsmall<span class="sc">$</span>depth, <span class="at">horizontal =</span> <span class="cn">TRUE</span>, <span class="at">main=</span><span class="st">&quot;Distribution of diamond prices&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Dollars&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="univariate-visualizations.html#cb64-1" tabindex="-1"></a><span class="fu">boxplot</span>(dsmall<span class="sc">$</span>depth, <span class="at">horizontal =</span> <span class="cn">TRUE</span>, <span class="at">main=</span><span class="st">&quot;Distribution of diamond prices&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Dollars&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Horizontal is a bit easier to read in my opinion.</p>
 <p><strong>ggplot</strong>
 What about ggplot? ggplot doesn’t really like to do univariate boxplots. We can get around that by specifying that we want the box placed at a specific x value.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="univariate-visualizations.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="univariate-visualizations.html#cb65-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>To flip it horizontal you may think to simply swap x and y? Good thinking. Of course it wouldn’t be that easy. So let’s just flip the whole darned plot on it’s coordinate axis.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="univariate-visualizations.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="univariate-visualizations.html#cb66-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="violin-plots" class="section level4 hasAnchor" number="2.3.2.6">
 <h4><span class="header-section-number">2.3.2.6</span> Violin plots<a href="univariate-visualizations.html#violin-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="univariate-visualizations.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_violin</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="univariate-visualizations.html#cb67-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_violin</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
 <div id="boxplot-violin-plots" class="section level4 hasAnchor" number="2.3.2.7">
 <h4><span class="header-section-number">2.3.2.7</span> Boxplot + Violin plots<a href="univariate-visualizations.html#boxplot-violin-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Overlaying a boxplot and a violin plot serves a similar purpose to Histograms + Density plots.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="univariate-visualizations.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="univariate-visualizations.html#cb68-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Better appearance - different levels of transparency of the box and violin.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="univariate-visualizations.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb69-2"><a href="univariate-visualizations.html#cb69-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_violin</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb69-3"><a href="univariate-visualizations.html#cb69-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb69-4"><a href="univariate-visualizations.html#cb69-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb69-5"><a href="univariate-visualizations.html#cb69-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb69-6"><a href="univariate-visualizations.html#cb69-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="univariate-visualizations.html#cb69-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span>depth)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb69-2"><a href="univariate-visualizations.html#cb69-2" tabindex="-1"></a>              <span class="fu">geom_violin</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb69-3"><a href="univariate-visualizations.html#cb69-3" tabindex="-1"></a>              <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb69-4"><a href="univariate-visualizations.html#cb69-4" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb69-5"><a href="univariate-visualizations.html#cb69-5" tabindex="-1"></a>              <span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb69-6"><a href="univariate-visualizations.html#cb69-6" tabindex="-1"></a>              <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>())</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="normal-qq-plots" class="section level4 hasAnchor" number="2.3.2.8">
 <h4><span class="header-section-number">2.3.2.8</span> Normal QQ plots<a href="univariate-visualizations.html#normal-qq-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The last useful plot that we will do on a single continuous variable is to assess the <em>normality</em> of the distribution. Basically how close the data follows a normal distribution.</p>
 <p><strong>base</strong></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="univariate-visualizations.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(dsmall<span class="sc">$</span>price)</span>
-<span id="cb70-2"><a href="univariate-visualizations.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(dsmall<span class="sc">$</span>price, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="univariate-visualizations.html#cb70-1" tabindex="-1"></a><span class="fu">qqnorm</span>(dsmall<span class="sc">$</span>price)</span>
+<span id="cb70-2"><a href="univariate-visualizations.html#cb70-2" tabindex="-1"></a><span class="fu">qqline</span>(dsmall<span class="sc">$</span>price, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>The line I make red because it is a reference line. The closer the points are to following this line, the more “normal” the shape of the distribution is. Price has some pretty strong deviation away from that line. Below I have plotted what a normal distribution looks like as an example of a “perfect” fit.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="univariate-visualizations.html#cb71-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
-<span id="cb71-2"><a href="univariate-visualizations.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(z)</span>
-<span id="cb71-3"><a href="univariate-visualizations.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(z, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="univariate-visualizations.html#cb71-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb71-2"><a href="univariate-visualizations.html#cb71-2" tabindex="-1"></a><span class="fu">qqnorm</span>(z)</span>
+<span id="cb71-3"><a href="univariate-visualizations.html#cb71-3" tabindex="-1"></a><span class="fu">qqline</span>(z, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 qq (or qnorm) plots specifically plot the data against a theoretical distribution. That means in the <code>aes()</code> aesthetic argument we don’t specify either x or y, but instead the <code>sample=</code> is the variable we want to plot.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="univariate-visualizations.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">sample=</span>price)) <span class="sc">+</span> <span class="fu">stat_qq</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="univariate-visualizations.html#cb72-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">sample=</span>price)) <span class="sc">+</span> <span class="fu">stat_qq</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>Additional references on making qqplots in ggplot: <a href="http://www.sthda.com/english/wiki/ggplot2-qq-plot-quantile-quantile-graph-quick-start-guide-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-qq-plot-quantile-quantile-graph-quick-start-guide-r-software-and-data-visualization</a></p>
 </div>
@@ -804,7 +856,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

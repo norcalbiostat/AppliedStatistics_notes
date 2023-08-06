@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", "kableExtra",
                       "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot", "gridExtra", "knitr", 
-                      "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", "ggjoy",
+                      "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", "ggjoy", "ggdist", "glmmTMB",
                       "stargazer", "missForest", "forestplot", "emo", "tidyr", "factoextra", 
                       "performance", "broom", "dotwhisker", "survey", "marginaleffects", "gtsummary", 
                       "sjPlot", "mice", "palmerpenguins")
@@ -22,7 +22,7 @@ list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pan
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages>0)){install.packages(new.packages)}
 
-library(ggplot2)
+ library(ggplot2)
 library(gridExtra)
 library(dplyr)
 library(pander)

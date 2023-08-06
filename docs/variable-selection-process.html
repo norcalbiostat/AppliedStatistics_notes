@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.4 Variable Selection Process | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.4 Variable Selection Process | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -566,7 +618,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcaution">
 The model fitting must apply the models to the same dataset. This may be a problem if there are missing values. We suggest you remove the missing values first. (From the R help file)
 </div>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="variable-selection-process.html#cb201-1" aria-hidden="true" tabindex="-1"></a>pen.nomiss <span class="ot">&lt;-</span> pen <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="variable-selection-process.html#cb201-1" tabindex="-1"></a>pen.nomiss <span class="ot">&lt;-</span> pen <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code></pre></div>
 <div id="forward-selection-variables-are-added-one-at-a-time-until-optimal-model-reached." class="section level4 hasAnchor" number="10.4.1.1">
 <h4><span class="header-section-number">10.4.1.1</span> Forward selection: Variables are added one at a time until optimal model reached.<a href="variable-selection-process.html#forward-selection-variables-are-added-one-at-a-time-until-optimal-model-reached." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
@@ -597,282 +649,282 @@ The model fitting must apply the models to the same dataset. This may be a probl
 <p>Most programs have the option to <strong>force</strong> variables to be included in the model. This is important in cases where there is a primary factor of interest such as a treatment effect.</p>
 <p><strong>Doing stepwise selection in R</strong></p>
 <p>First you need to specify your null model - just the outcome, no covariates, and the full model - the outcome against ALL of your covariates.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="variable-selection-process.html#cb202-1" aria-hidden="true" tabindex="-1"></a>null.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>pen.nomiss)</span>
-<span id="cb202-2"><a href="variable-selection-process.html#cb202-2" aria-hidden="true" tabindex="-1"></a>full.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data=</span>pen.nomiss)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="variable-selection-process.html#cb202-1" tabindex="-1"></a>null.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>pen.nomiss)</span>
+<span id="cb202-2"><a href="variable-selection-process.html#cb202-2" tabindex="-1"></a>full.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data=</span>pen.nomiss)</span></code></pre></div>
 <p><strong>Forward selection</strong></p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="variable-selection-process.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(null.model, </span>
-<span id="cb203-2"><a href="variable-selection-process.html#cb203-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span>null.model, <span class="at">upper=</span>full.model),</span>
-<span id="cb203-3"><a href="variable-selection-process.html#cb203-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">direction=</span><span class="st">&#39;forward&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb203-4"><a href="variable-selection-process.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Start:  AIC=4457.28</span></span>
-<span id="cb203-5"><a href="variable-selection-process.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ 1</span></span>
-<span id="cb203-6"><a href="variable-selection-process.html#cb203-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-7"><a href="variable-selection-process.html#cb203-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
-<span id="cb203-8"><a href="variable-selection-process.html#cb203-8" aria-hidden="true" tabindex="-1"></a><span class="do">## + flipper_length_mm  1 164047703  51211963 3981.1</span></span>
-<span id="cb203-9"><a href="variable-selection-process.html#cb203-9" aria-hidden="true" tabindex="-1"></a><span class="do">## + species            2 145190219  70069447 4087.5</span></span>
-<span id="cb203-10"><a href="variable-selection-process.html#cb203-10" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2  83740680 131518986 4297.2</span></span>
-<span id="cb203-11"><a href="variable-selection-process.html#cb203-11" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1  74792533 140467133 4317.1</span></span>
-<span id="cb203-12"><a href="variable-selection-process.html#cb203-12" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm      1  47959592 167300074 4375.3</span></span>
-<span id="cb203-13"><a href="variable-selection-process.html#cb203-13" aria-hidden="true" tabindex="-1"></a><span class="do">## + sex                1  38878897 176380769 4392.9</span></span>
-<span id="cb203-14"><a href="variable-selection-process.html#cb203-14" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           215259666 4457.3</span></span>
-<span id="cb203-15"><a href="variable-selection-process.html#cb203-15" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1    102884 215156782 4459.1</span></span>
-<span id="cb203-16"><a href="variable-selection-process.html#cb203-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-17"><a href="variable-selection-process.html#cb203-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3981.13</span></span>
-<span id="cb203-18"><a href="variable-selection-process.html#cb203-18" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm</span></span>
-<span id="cb203-19"><a href="variable-selection-process.html#cb203-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-20"><a href="variable-selection-process.html#cb203-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb203-21"><a href="variable-selection-process.html#cb203-21" aria-hidden="true" tabindex="-1"></a><span class="do">## + sex             1   9416589 41795374 3915.5</span></span>
-<span id="cb203-22"><a href="variable-selection-process.html#cb203-22" aria-hidden="true" tabindex="-1"></a><span class="do">## + species         2   5368818 45843144 3948.3</span></span>
-<span id="cb203-23"><a href="variable-selection-process.html#cb203-23" aria-hidden="true" tabindex="-1"></a><span class="do">## + island          2   3437527 47774435 3962.0</span></span>
-<span id="cb203-24"><a href="variable-selection-process.html#cb203-24" aria-hidden="true" tabindex="-1"></a><span class="do">## + year            1   2666295 48545668 3965.3</span></span>
-<span id="cb203-25"><a href="variable-selection-process.html#cb203-25" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm   1    338887 50873075 3980.9</span></span>
-<span id="cb203-26"><a href="variable-selection-process.html#cb203-26" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                        51211963 3981.1</span></span>
-<span id="cb203-27"><a href="variable-selection-process.html#cb203-27" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm  1    140000 51071963 3982.2</span></span>
-<span id="cb203-28"><a href="variable-selection-process.html#cb203-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-29"><a href="variable-selection-process.html#cb203-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3915.47</span></span>
-<span id="cb203-30"><a href="variable-selection-process.html#cb203-30" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex</span></span>
-<span id="cb203-31"><a href="variable-selection-process.html#cb203-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-32"><a href="variable-selection-process.html#cb203-32" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb203-33"><a href="variable-selection-process.html#cb203-33" aria-hidden="true" tabindex="-1"></a><span class="do">## + species         2  13141806 28653568 3793.8</span></span>
-<span id="cb203-34"><a href="variable-selection-process.html#cb203-34" aria-hidden="true" tabindex="-1"></a><span class="do">## + island          2   6037165 35758209 3867.5</span></span>
-<span id="cb203-35"><a href="variable-selection-process.html#cb203-35" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm   1   3667377 38127997 3886.9</span></span>
-<span id="cb203-36"><a href="variable-selection-process.html#cb203-36" aria-hidden="true" tabindex="-1"></a><span class="do">## + year            1   2276715 39518658 3898.8</span></span>
-<span id="cb203-37"><a href="variable-selection-process.html#cb203-37" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                        41795374 3915.5</span></span>
-<span id="cb203-38"><a href="variable-selection-process.html#cb203-38" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm  1    144990 41650383 3916.3</span></span>
-<span id="cb203-39"><a href="variable-selection-process.html#cb203-39" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-40"><a href="variable-selection-process.html#cb203-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3793.76</span></span>
-<span id="cb203-41"><a href="variable-selection-process.html#cb203-41" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species</span></span>
-<span id="cb203-42"><a href="variable-selection-process.html#cb203-42" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-43"><a href="variable-selection-process.html#cb203-43" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb203-44"><a href="variable-selection-process.html#cb203-44" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm   1   1196096 27457472 3781.6</span></span>
-<span id="cb203-45"><a href="variable-selection-process.html#cb203-45" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm  1    780776 27872792 3786.6</span></span>
-<span id="cb203-46"><a href="variable-selection-process.html#cb203-46" aria-hidden="true" tabindex="-1"></a><span class="do">## + year            1    474080 28179488 3790.2</span></span>
-<span id="cb203-47"><a href="variable-selection-process.html#cb203-47" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                        28653568 3793.8</span></span>
-<span id="cb203-48"><a href="variable-selection-process.html#cb203-48" aria-hidden="true" tabindex="-1"></a><span class="do">## + island          2     61695 28591873 3797.0</span></span>
-<span id="cb203-49"><a href="variable-selection-process.html#cb203-49" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-50"><a href="variable-selection-process.html#cb203-50" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3781.56</span></span>
-<span id="cb203-51"><a href="variable-selection-process.html#cb203-51" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm</span></span>
-<span id="cb203-52"><a href="variable-selection-process.html#cb203-52" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-53"><a href="variable-selection-process.html#cb203-53" aria-hidden="true" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb203-54"><a href="variable-selection-process.html#cb203-54" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm  1    541825 26915647 3776.9</span></span>
-<span id="cb203-55"><a href="variable-selection-process.html#cb203-55" aria-hidden="true" tabindex="-1"></a><span class="do">## + year            1    272828 27184644 3780.2</span></span>
-<span id="cb203-56"><a href="variable-selection-process.html#cb203-56" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                        27457472 3781.6</span></span>
-<span id="cb203-57"><a href="variable-selection-process.html#cb203-57" aria-hidden="true" tabindex="-1"></a><span class="do">## + island          2     59488 27397984 3784.8</span></span>
-<span id="cb203-58"><a href="variable-selection-process.html#cb203-58" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-59"><a href="variable-selection-process.html#cb203-59" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3776.93</span></span>
-<span id="cb203-60"><a href="variable-selection-process.html#cb203-60" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
-<span id="cb203-61"><a href="variable-selection-process.html#cb203-61" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_length_mm</span></span>
-<span id="cb203-62"><a href="variable-selection-process.html#cb203-62" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-63"><a href="variable-selection-process.html#cb203-63" aria-hidden="true" tabindex="-1"></a><span class="do">##          Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb203-64"><a href="variable-selection-process.html#cb203-64" aria-hidden="true" tabindex="-1"></a><span class="do">## + year    1    319160 26596486 3775.0</span></span>
-<span id="cb203-65"><a href="variable-selection-process.html#cb203-65" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                26915647 3776.9</span></span>
-<span id="cb203-66"><a href="variable-selection-process.html#cb203-66" aria-hidden="true" tabindex="-1"></a><span class="do">## + island  2     56214 26859432 3780.2</span></span>
-<span id="cb203-67"><a href="variable-selection-process.html#cb203-67" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-68"><a href="variable-selection-process.html#cb203-68" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
-<span id="cb203-69"><a href="variable-selection-process.html#cb203-69" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
-<span id="cb203-70"><a href="variable-selection-process.html#cb203-70" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_length_mm + year</span></span>
-<span id="cb203-71"><a href="variable-selection-process.html#cb203-71" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-72"><a href="variable-selection-process.html#cb203-72" aria-hidden="true" tabindex="-1"></a><span class="do">##          Df Sum of Sq      RSS  AIC</span></span>
-<span id="cb203-73"><a href="variable-selection-process.html#cb203-73" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                26596486 3775</span></span>
-<span id="cb203-74"><a href="variable-selection-process.html#cb203-74" aria-hidden="true" tabindex="-1"></a><span class="do">## + island  2     79468 26517018 3778</span></span>
-<span id="cb203-75"><a href="variable-selection-process.html#cb203-75" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-76"><a href="variable-selection-process.html#cb203-76" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb203-77"><a href="variable-selection-process.html#cb203-77" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + </span></span>
-<span id="cb203-78"><a href="variable-selection-process.html#cb203-78" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)</span></span>
-<span id="cb203-79"><a href="variable-selection-process.html#cb203-79" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-80"><a href="variable-selection-process.html#cb203-80" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb203-81"><a href="variable-selection-process.html#cb203-81" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb203-82"><a href="variable-selection-process.html#cb203-82" aria-hidden="true" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
-<span id="cb203-83"><a href="variable-selection-process.html#cb203-83" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-84"><a href="variable-selection-process.html#cb203-84" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb203-85"><a href="variable-selection-process.html#cb203-85" aria-hidden="true" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb203-86"><a href="variable-selection-process.html#cb203-86" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
-<span id="cb203-87"><a href="variable-selection-process.html#cb203-87" aria-hidden="true" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
-<span id="cb203-88"><a href="variable-selection-process.html#cb203-88" aria-hidden="true" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
-<span id="cb203-89"><a href="variable-selection-process.html#cb203-89" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
-<span id="cb203-90"><a href="variable-selection-process.html#cb203-90" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
-<span id="cb203-91"><a href="variable-selection-process.html#cb203-91" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
-<span id="cb203-92"><a href="variable-selection-process.html#cb203-92" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
-<span id="cb203-93"><a href="variable-selection-process.html#cb203-93" aria-hidden="true" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
-<span id="cb203-94"><a href="variable-selection-process.html#cb203-94" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb203-95"><a href="variable-selection-process.html#cb203-95" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb203-96"><a href="variable-selection-process.html#cb203-96" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb203-97"><a href="variable-selection-process.html#cb203-97" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
-<span id="cb203-98"><a href="variable-selection-process.html#cb203-98" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
-<span id="cb203-99"><a href="variable-selection-process.html#cb203-99" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="variable-selection-process.html#cb203-1" tabindex="-1"></a><span class="fu">step</span>(null.model, </span>
+<span id="cb203-2"><a href="variable-selection-process.html#cb203-2" tabindex="-1"></a>     <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span>null.model, <span class="at">upper=</span>full.model),</span>
+<span id="cb203-3"><a href="variable-selection-process.html#cb203-3" tabindex="-1"></a>     <span class="at">direction=</span><span class="st">&#39;forward&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb203-4"><a href="variable-selection-process.html#cb203-4" tabindex="-1"></a><span class="do">## Start:  AIC=4457.28</span></span>
+<span id="cb203-5"><a href="variable-selection-process.html#cb203-5" tabindex="-1"></a><span class="do">## body_mass_g ~ 1</span></span>
+<span id="cb203-6"><a href="variable-selection-process.html#cb203-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-7"><a href="variable-selection-process.html#cb203-7" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
+<span id="cb203-8"><a href="variable-selection-process.html#cb203-8" tabindex="-1"></a><span class="do">## + flipper_length_mm  1 164047703  51211963 3981.1</span></span>
+<span id="cb203-9"><a href="variable-selection-process.html#cb203-9" tabindex="-1"></a><span class="do">## + species            2 145190219  70069447 4087.5</span></span>
+<span id="cb203-10"><a href="variable-selection-process.html#cb203-10" tabindex="-1"></a><span class="do">## + island             2  83740680 131518986 4297.2</span></span>
+<span id="cb203-11"><a href="variable-selection-process.html#cb203-11" tabindex="-1"></a><span class="do">## + bill_length_mm     1  74792533 140467133 4317.1</span></span>
+<span id="cb203-12"><a href="variable-selection-process.html#cb203-12" tabindex="-1"></a><span class="do">## + bill_depth_mm      1  47959592 167300074 4375.3</span></span>
+<span id="cb203-13"><a href="variable-selection-process.html#cb203-13" tabindex="-1"></a><span class="do">## + sex                1  38878897 176380769 4392.9</span></span>
+<span id="cb203-14"><a href="variable-selection-process.html#cb203-14" tabindex="-1"></a><span class="do">## &lt;none&gt;                           215259666 4457.3</span></span>
+<span id="cb203-15"><a href="variable-selection-process.html#cb203-15" tabindex="-1"></a><span class="do">## + year               1    102884 215156782 4459.1</span></span>
+<span id="cb203-16"><a href="variable-selection-process.html#cb203-16" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-17"><a href="variable-selection-process.html#cb203-17" tabindex="-1"></a><span class="do">## Step:  AIC=3981.13</span></span>
+<span id="cb203-18"><a href="variable-selection-process.html#cb203-18" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm</span></span>
+<span id="cb203-19"><a href="variable-selection-process.html#cb203-19" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-20"><a href="variable-selection-process.html#cb203-20" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb203-21"><a href="variable-selection-process.html#cb203-21" tabindex="-1"></a><span class="do">## + sex             1   9416589 41795374 3915.5</span></span>
+<span id="cb203-22"><a href="variable-selection-process.html#cb203-22" tabindex="-1"></a><span class="do">## + species         2   5368818 45843144 3948.3</span></span>
+<span id="cb203-23"><a href="variable-selection-process.html#cb203-23" tabindex="-1"></a><span class="do">## + island          2   3437527 47774435 3962.0</span></span>
+<span id="cb203-24"><a href="variable-selection-process.html#cb203-24" tabindex="-1"></a><span class="do">## + year            1   2666295 48545668 3965.3</span></span>
+<span id="cb203-25"><a href="variable-selection-process.html#cb203-25" tabindex="-1"></a><span class="do">## + bill_depth_mm   1    338887 50873075 3980.9</span></span>
+<span id="cb203-26"><a href="variable-selection-process.html#cb203-26" tabindex="-1"></a><span class="do">## &lt;none&gt;                        51211963 3981.1</span></span>
+<span id="cb203-27"><a href="variable-selection-process.html#cb203-27" tabindex="-1"></a><span class="do">## + bill_length_mm  1    140000 51071963 3982.2</span></span>
+<span id="cb203-28"><a href="variable-selection-process.html#cb203-28" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-29"><a href="variable-selection-process.html#cb203-29" tabindex="-1"></a><span class="do">## Step:  AIC=3915.47</span></span>
+<span id="cb203-30"><a href="variable-selection-process.html#cb203-30" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex</span></span>
+<span id="cb203-31"><a href="variable-selection-process.html#cb203-31" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-32"><a href="variable-selection-process.html#cb203-32" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb203-33"><a href="variable-selection-process.html#cb203-33" tabindex="-1"></a><span class="do">## + species         2  13141806 28653568 3793.8</span></span>
+<span id="cb203-34"><a href="variable-selection-process.html#cb203-34" tabindex="-1"></a><span class="do">## + island          2   6037165 35758209 3867.5</span></span>
+<span id="cb203-35"><a href="variable-selection-process.html#cb203-35" tabindex="-1"></a><span class="do">## + bill_depth_mm   1   3667377 38127997 3886.9</span></span>
+<span id="cb203-36"><a href="variable-selection-process.html#cb203-36" tabindex="-1"></a><span class="do">## + year            1   2276715 39518658 3898.8</span></span>
+<span id="cb203-37"><a href="variable-selection-process.html#cb203-37" tabindex="-1"></a><span class="do">## &lt;none&gt;                        41795374 3915.5</span></span>
+<span id="cb203-38"><a href="variable-selection-process.html#cb203-38" tabindex="-1"></a><span class="do">## + bill_length_mm  1    144990 41650383 3916.3</span></span>
+<span id="cb203-39"><a href="variable-selection-process.html#cb203-39" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-40"><a href="variable-selection-process.html#cb203-40" tabindex="-1"></a><span class="do">## Step:  AIC=3793.76</span></span>
+<span id="cb203-41"><a href="variable-selection-process.html#cb203-41" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species</span></span>
+<span id="cb203-42"><a href="variable-selection-process.html#cb203-42" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-43"><a href="variable-selection-process.html#cb203-43" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb203-44"><a href="variable-selection-process.html#cb203-44" tabindex="-1"></a><span class="do">## + bill_depth_mm   1   1196096 27457472 3781.6</span></span>
+<span id="cb203-45"><a href="variable-selection-process.html#cb203-45" tabindex="-1"></a><span class="do">## + bill_length_mm  1    780776 27872792 3786.6</span></span>
+<span id="cb203-46"><a href="variable-selection-process.html#cb203-46" tabindex="-1"></a><span class="do">## + year            1    474080 28179488 3790.2</span></span>
+<span id="cb203-47"><a href="variable-selection-process.html#cb203-47" tabindex="-1"></a><span class="do">## &lt;none&gt;                        28653568 3793.8</span></span>
+<span id="cb203-48"><a href="variable-selection-process.html#cb203-48" tabindex="-1"></a><span class="do">## + island          2     61695 28591873 3797.0</span></span>
+<span id="cb203-49"><a href="variable-selection-process.html#cb203-49" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-50"><a href="variable-selection-process.html#cb203-50" tabindex="-1"></a><span class="do">## Step:  AIC=3781.56</span></span>
+<span id="cb203-51"><a href="variable-selection-process.html#cb203-51" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm</span></span>
+<span id="cb203-52"><a href="variable-selection-process.html#cb203-52" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-53"><a href="variable-selection-process.html#cb203-53" tabindex="-1"></a><span class="do">##                  Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb203-54"><a href="variable-selection-process.html#cb203-54" tabindex="-1"></a><span class="do">## + bill_length_mm  1    541825 26915647 3776.9</span></span>
+<span id="cb203-55"><a href="variable-selection-process.html#cb203-55" tabindex="-1"></a><span class="do">## + year            1    272828 27184644 3780.2</span></span>
+<span id="cb203-56"><a href="variable-selection-process.html#cb203-56" tabindex="-1"></a><span class="do">## &lt;none&gt;                        27457472 3781.6</span></span>
+<span id="cb203-57"><a href="variable-selection-process.html#cb203-57" tabindex="-1"></a><span class="do">## + island          2     59488 27397984 3784.8</span></span>
+<span id="cb203-58"><a href="variable-selection-process.html#cb203-58" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-59"><a href="variable-selection-process.html#cb203-59" tabindex="-1"></a><span class="do">## Step:  AIC=3776.93</span></span>
+<span id="cb203-60"><a href="variable-selection-process.html#cb203-60" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
+<span id="cb203-61"><a href="variable-selection-process.html#cb203-61" tabindex="-1"></a><span class="do">##     bill_length_mm</span></span>
+<span id="cb203-62"><a href="variable-selection-process.html#cb203-62" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-63"><a href="variable-selection-process.html#cb203-63" tabindex="-1"></a><span class="do">##          Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb203-64"><a href="variable-selection-process.html#cb203-64" tabindex="-1"></a><span class="do">## + year    1    319160 26596486 3775.0</span></span>
+<span id="cb203-65"><a href="variable-selection-process.html#cb203-65" tabindex="-1"></a><span class="do">## &lt;none&gt;                26915647 3776.9</span></span>
+<span id="cb203-66"><a href="variable-selection-process.html#cb203-66" tabindex="-1"></a><span class="do">## + island  2     56214 26859432 3780.2</span></span>
+<span id="cb203-67"><a href="variable-selection-process.html#cb203-67" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-68"><a href="variable-selection-process.html#cb203-68" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
+<span id="cb203-69"><a href="variable-selection-process.html#cb203-69" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
+<span id="cb203-70"><a href="variable-selection-process.html#cb203-70" tabindex="-1"></a><span class="do">##     bill_length_mm + year</span></span>
+<span id="cb203-71"><a href="variable-selection-process.html#cb203-71" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-72"><a href="variable-selection-process.html#cb203-72" tabindex="-1"></a><span class="do">##          Df Sum of Sq      RSS  AIC</span></span>
+<span id="cb203-73"><a href="variable-selection-process.html#cb203-73" tabindex="-1"></a><span class="do">## &lt;none&gt;                26596486 3775</span></span>
+<span id="cb203-74"><a href="variable-selection-process.html#cb203-74" tabindex="-1"></a><span class="do">## + island  2     79468 26517018 3778</span></span>
+<span id="cb203-75"><a href="variable-selection-process.html#cb203-75" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-76"><a href="variable-selection-process.html#cb203-76" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb203-77"><a href="variable-selection-process.html#cb203-77" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + </span></span>
+<span id="cb203-78"><a href="variable-selection-process.html#cb203-78" tabindex="-1"></a><span class="do">##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)</span></span>
+<span id="cb203-79"><a href="variable-selection-process.html#cb203-79" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-80"><a href="variable-selection-process.html#cb203-80" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb203-81"><a href="variable-selection-process.html#cb203-81" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb203-82"><a href="variable-selection-process.html#cb203-82" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
+<span id="cb203-83"><a href="variable-selection-process.html#cb203-83" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-84"><a href="variable-selection-process.html#cb203-84" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb203-85"><a href="variable-selection-process.html#cb203-85" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb203-86"><a href="variable-selection-process.html#cb203-86" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
+<span id="cb203-87"><a href="variable-selection-process.html#cb203-87" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
+<span id="cb203-88"><a href="variable-selection-process.html#cb203-88" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
+<span id="cb203-89"><a href="variable-selection-process.html#cb203-89" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
+<span id="cb203-90"><a href="variable-selection-process.html#cb203-90" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
+<span id="cb203-91"><a href="variable-selection-process.html#cb203-91" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
+<span id="cb203-92"><a href="variable-selection-process.html#cb203-92" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
+<span id="cb203-93"><a href="variable-selection-process.html#cb203-93" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
+<span id="cb203-94"><a href="variable-selection-process.html#cb203-94" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb203-95"><a href="variable-selection-process.html#cb203-95" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb203-96"><a href="variable-selection-process.html#cb203-96" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb203-97"><a href="variable-selection-process.html#cb203-97" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
+<span id="cb203-98"><a href="variable-selection-process.html#cb203-98" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
+<span id="cb203-99"><a href="variable-selection-process.html#cb203-99" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p><strong>Backward selection</strong></p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="variable-selection-process.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(full.model, <span class="at">direction=</span><span class="st">&#39;backward&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb204-2"><a href="variable-selection-process.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Start:  AIC=3777.96</span></span>
-<span id="cb204-3"><a href="variable-selection-process.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ species + island + bill_length_mm + bill_depth_mm + </span></span>
-<span id="cb204-4"><a href="variable-selection-process.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     flipper_length_mm + sex + year</span></span>
-<span id="cb204-5"><a href="variable-selection-process.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-6"><a href="variable-selection-process.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb204-7"><a href="variable-selection-process.html#cb204-7" aria-hidden="true" tabindex="-1"></a><span class="do">## - island             2     79468 26596486 3775.0</span></span>
-<span id="cb204-8"><a href="variable-selection-process.html#cb204-8" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26517018 3778.0</span></span>
-<span id="cb204-9"><a href="variable-selection-process.html#cb204-9" aria-hidden="true" tabindex="-1"></a><span class="do">## - year               1    342414 26859432 3780.2</span></span>
-<span id="cb204-10"><a href="variable-selection-process.html#cb204-10" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_length_mm     1    583730 27100748 3783.2</span></span>
-<span id="cb204-11"><a href="variable-selection-process.html#cb204-11" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    758473 27275491 3785.3</span></span>
-<span id="cb204-12"><a href="variable-selection-process.html#cb204-12" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2872068 29389086 3810.2</span></span>
-<span id="cb204-13"><a href="variable-selection-process.html#cb204-13" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   5101785 31618803 3834.6</span></span>
-<span id="cb204-14"><a href="variable-selection-process.html#cb204-14" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2   6470784 32987802 3846.7</span></span>
-<span id="cb204-15"><a href="variable-selection-process.html#cb204-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-16"><a href="variable-selection-process.html#cb204-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
-<span id="cb204-17"><a href="variable-selection-process.html#cb204-17" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ species + bill_length_mm + bill_depth_mm + flipper_length_mm + </span></span>
-<span id="cb204-18"><a href="variable-selection-process.html#cb204-18" aria-hidden="true" tabindex="-1"></a><span class="do">##     sex + year</span></span>
-<span id="cb204-19"><a href="variable-selection-process.html#cb204-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-20"><a href="variable-selection-process.html#cb204-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb204-21"><a href="variable-selection-process.html#cb204-21" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26596486 3775.0</span></span>
-<span id="cb204-22"><a href="variable-selection-process.html#cb204-22" aria-hidden="true" tabindex="-1"></a><span class="do">## - year               1    319160 26915647 3776.9</span></span>
-<span id="cb204-23"><a href="variable-selection-process.html#cb204-23" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_length_mm     1    588158 27184644 3780.2</span></span>
-<span id="cb204-24"><a href="variable-selection-process.html#cb204-24" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    760657 27357143 3782.3</span></span>
-<span id="cb204-25"><a href="variable-selection-process.html#cb204-25" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2800047 29396533 3806.3</span></span>
-<span id="cb204-26"><a href="variable-selection-process.html#cb204-26" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   5231718 31828204 3832.8</span></span>
-<span id="cb204-27"><a href="variable-selection-process.html#cb204-27" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2   9693667 36290153 3874.4</span></span>
-<span id="cb204-28"><a href="variable-selection-process.html#cb204-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-29"><a href="variable-selection-process.html#cb204-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb204-30"><a href="variable-selection-process.html#cb204-30" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ species + bill_length_mm + bill_depth_mm + </span></span>
-<span id="cb204-31"><a href="variable-selection-process.html#cb204-31" aria-hidden="true" tabindex="-1"></a><span class="do">##     flipper_length_mm + sex + year, data = pen.nomiss)</span></span>
-<span id="cb204-32"><a href="variable-selection-process.html#cb204-32" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-33"><a href="variable-selection-process.html#cb204-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb204-34"><a href="variable-selection-process.html#cb204-34" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb204-35"><a href="variable-selection-process.html#cb204-35" aria-hidden="true" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
-<span id="cb204-36"><a href="variable-selection-process.html#cb204-36" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-37"><a href="variable-selection-process.html#cb204-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb204-38"><a href="variable-selection-process.html#cb204-38" aria-hidden="true" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb204-39"><a href="variable-selection-process.html#cb204-39" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
-<span id="cb204-40"><a href="variable-selection-process.html#cb204-40" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
-<span id="cb204-41"><a href="variable-selection-process.html#cb204-41" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
-<span id="cb204-42"><a href="variable-selection-process.html#cb204-42" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
-<span id="cb204-43"><a href="variable-selection-process.html#cb204-43" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
-<span id="cb204-44"><a href="variable-selection-process.html#cb204-44" aria-hidden="true" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
-<span id="cb204-45"><a href="variable-selection-process.html#cb204-45" aria-hidden="true" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
-<span id="cb204-46"><a href="variable-selection-process.html#cb204-46" aria-hidden="true" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
-<span id="cb204-47"><a href="variable-selection-process.html#cb204-47" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb204-48"><a href="variable-selection-process.html#cb204-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb204-49"><a href="variable-selection-process.html#cb204-49" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb204-50"><a href="variable-selection-process.html#cb204-50" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
-<span id="cb204-51"><a href="variable-selection-process.html#cb204-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
-<span id="cb204-52"><a href="variable-selection-process.html#cb204-52" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="variable-selection-process.html#cb204-1" tabindex="-1"></a><span class="fu">step</span>(full.model, <span class="at">direction=</span><span class="st">&#39;backward&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb204-2"><a href="variable-selection-process.html#cb204-2" tabindex="-1"></a><span class="do">## Start:  AIC=3777.96</span></span>
+<span id="cb204-3"><a href="variable-selection-process.html#cb204-3" tabindex="-1"></a><span class="do">## body_mass_g ~ species + island + bill_length_mm + bill_depth_mm + </span></span>
+<span id="cb204-4"><a href="variable-selection-process.html#cb204-4" tabindex="-1"></a><span class="do">##     flipper_length_mm + sex + year</span></span>
+<span id="cb204-5"><a href="variable-selection-process.html#cb204-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-6"><a href="variable-selection-process.html#cb204-6" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb204-7"><a href="variable-selection-process.html#cb204-7" tabindex="-1"></a><span class="do">## - island             2     79468 26596486 3775.0</span></span>
+<span id="cb204-8"><a href="variable-selection-process.html#cb204-8" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26517018 3778.0</span></span>
+<span id="cb204-9"><a href="variable-selection-process.html#cb204-9" tabindex="-1"></a><span class="do">## - year               1    342414 26859432 3780.2</span></span>
+<span id="cb204-10"><a href="variable-selection-process.html#cb204-10" tabindex="-1"></a><span class="do">## - bill_length_mm     1    583730 27100748 3783.2</span></span>
+<span id="cb204-11"><a href="variable-selection-process.html#cb204-11" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    758473 27275491 3785.3</span></span>
+<span id="cb204-12"><a href="variable-selection-process.html#cb204-12" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2872068 29389086 3810.2</span></span>
+<span id="cb204-13"><a href="variable-selection-process.html#cb204-13" tabindex="-1"></a><span class="do">## - sex                1   5101785 31618803 3834.6</span></span>
+<span id="cb204-14"><a href="variable-selection-process.html#cb204-14" tabindex="-1"></a><span class="do">## - species            2   6470784 32987802 3846.7</span></span>
+<span id="cb204-15"><a href="variable-selection-process.html#cb204-15" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-16"><a href="variable-selection-process.html#cb204-16" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
+<span id="cb204-17"><a href="variable-selection-process.html#cb204-17" tabindex="-1"></a><span class="do">## body_mass_g ~ species + bill_length_mm + bill_depth_mm + flipper_length_mm + </span></span>
+<span id="cb204-18"><a href="variable-selection-process.html#cb204-18" tabindex="-1"></a><span class="do">##     sex + year</span></span>
+<span id="cb204-19"><a href="variable-selection-process.html#cb204-19" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-20"><a href="variable-selection-process.html#cb204-20" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb204-21"><a href="variable-selection-process.html#cb204-21" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26596486 3775.0</span></span>
+<span id="cb204-22"><a href="variable-selection-process.html#cb204-22" tabindex="-1"></a><span class="do">## - year               1    319160 26915647 3776.9</span></span>
+<span id="cb204-23"><a href="variable-selection-process.html#cb204-23" tabindex="-1"></a><span class="do">## - bill_length_mm     1    588158 27184644 3780.2</span></span>
+<span id="cb204-24"><a href="variable-selection-process.html#cb204-24" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    760657 27357143 3782.3</span></span>
+<span id="cb204-25"><a href="variable-selection-process.html#cb204-25" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2800047 29396533 3806.3</span></span>
+<span id="cb204-26"><a href="variable-selection-process.html#cb204-26" tabindex="-1"></a><span class="do">## - sex                1   5231718 31828204 3832.8</span></span>
+<span id="cb204-27"><a href="variable-selection-process.html#cb204-27" tabindex="-1"></a><span class="do">## - species            2   9693667 36290153 3874.4</span></span>
+<span id="cb204-28"><a href="variable-selection-process.html#cb204-28" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-29"><a href="variable-selection-process.html#cb204-29" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb204-30"><a href="variable-selection-process.html#cb204-30" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ species + bill_length_mm + bill_depth_mm + </span></span>
+<span id="cb204-31"><a href="variable-selection-process.html#cb204-31" tabindex="-1"></a><span class="do">##     flipper_length_mm + sex + year, data = pen.nomiss)</span></span>
+<span id="cb204-32"><a href="variable-selection-process.html#cb204-32" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-33"><a href="variable-selection-process.html#cb204-33" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb204-34"><a href="variable-selection-process.html#cb204-34" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb204-35"><a href="variable-selection-process.html#cb204-35" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
+<span id="cb204-36"><a href="variable-selection-process.html#cb204-36" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-37"><a href="variable-selection-process.html#cb204-37" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb204-38"><a href="variable-selection-process.html#cb204-38" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb204-39"><a href="variable-selection-process.html#cb204-39" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
+<span id="cb204-40"><a href="variable-selection-process.html#cb204-40" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
+<span id="cb204-41"><a href="variable-selection-process.html#cb204-41" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
+<span id="cb204-42"><a href="variable-selection-process.html#cb204-42" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
+<span id="cb204-43"><a href="variable-selection-process.html#cb204-43" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
+<span id="cb204-44"><a href="variable-selection-process.html#cb204-44" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
+<span id="cb204-45"><a href="variable-selection-process.html#cb204-45" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
+<span id="cb204-46"><a href="variable-selection-process.html#cb204-46" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
+<span id="cb204-47"><a href="variable-selection-process.html#cb204-47" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb204-48"><a href="variable-selection-process.html#cb204-48" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb204-49"><a href="variable-selection-process.html#cb204-49" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb204-50"><a href="variable-selection-process.html#cb204-50" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
+<span id="cb204-51"><a href="variable-selection-process.html#cb204-51" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
+<span id="cb204-52"><a href="variable-selection-process.html#cb204-52" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p><strong>Stepwise</strong></p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="variable-selection-process.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(null.model, </span>
-<span id="cb205-2"><a href="variable-selection-process.html#cb205-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span>null.model, <span class="at">upper=</span>full.model),</span>
-<span id="cb205-3"><a href="variable-selection-process.html#cb205-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">direction=</span><span class="st">&#39;both&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb205-4"><a href="variable-selection-process.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Start:  AIC=4457.28</span></span>
-<span id="cb205-5"><a href="variable-selection-process.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ 1</span></span>
-<span id="cb205-6"><a href="variable-selection-process.html#cb205-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-7"><a href="variable-selection-process.html#cb205-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
-<span id="cb205-8"><a href="variable-selection-process.html#cb205-8" aria-hidden="true" tabindex="-1"></a><span class="do">## + flipper_length_mm  1 164047703  51211963 3981.1</span></span>
-<span id="cb205-9"><a href="variable-selection-process.html#cb205-9" aria-hidden="true" tabindex="-1"></a><span class="do">## + species            2 145190219  70069447 4087.5</span></span>
-<span id="cb205-10"><a href="variable-selection-process.html#cb205-10" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2  83740680 131518986 4297.2</span></span>
-<span id="cb205-11"><a href="variable-selection-process.html#cb205-11" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1  74792533 140467133 4317.1</span></span>
-<span id="cb205-12"><a href="variable-selection-process.html#cb205-12" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm      1  47959592 167300074 4375.3</span></span>
-<span id="cb205-13"><a href="variable-selection-process.html#cb205-13" aria-hidden="true" tabindex="-1"></a><span class="do">## + sex                1  38878897 176380769 4392.9</span></span>
-<span id="cb205-14"><a href="variable-selection-process.html#cb205-14" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           215259666 4457.3</span></span>
-<span id="cb205-15"><a href="variable-selection-process.html#cb205-15" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1    102884 215156782 4459.1</span></span>
-<span id="cb205-16"><a href="variable-selection-process.html#cb205-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-17"><a href="variable-selection-process.html#cb205-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3981.13</span></span>
-<span id="cb205-18"><a href="variable-selection-process.html#cb205-18" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm</span></span>
-<span id="cb205-19"><a href="variable-selection-process.html#cb205-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-20"><a href="variable-selection-process.html#cb205-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
-<span id="cb205-21"><a href="variable-selection-process.html#cb205-21" aria-hidden="true" tabindex="-1"></a><span class="do">## + sex                1   9416589  41795374 3915.5</span></span>
-<span id="cb205-22"><a href="variable-selection-process.html#cb205-22" aria-hidden="true" tabindex="-1"></a><span class="do">## + species            2   5368818  45843144 3948.3</span></span>
-<span id="cb205-23"><a href="variable-selection-process.html#cb205-23" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2   3437527  47774435 3962.0</span></span>
-<span id="cb205-24"><a href="variable-selection-process.html#cb205-24" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1   2666295  48545668 3965.3</span></span>
-<span id="cb205-25"><a href="variable-selection-process.html#cb205-25" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm      1    338887  50873075 3980.9</span></span>
-<span id="cb205-26"><a href="variable-selection-process.html#cb205-26" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                            51211963 3981.1</span></span>
-<span id="cb205-27"><a href="variable-selection-process.html#cb205-27" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1    140000  51071963 3982.2</span></span>
-<span id="cb205-28"><a href="variable-selection-process.html#cb205-28" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1 164047703 215259666 4457.3</span></span>
-<span id="cb205-29"><a href="variable-selection-process.html#cb205-29" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-30"><a href="variable-selection-process.html#cb205-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3915.47</span></span>
-<span id="cb205-31"><a href="variable-selection-process.html#cb205-31" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex</span></span>
-<span id="cb205-32"><a href="variable-selection-process.html#cb205-32" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-33"><a href="variable-selection-process.html#cb205-33" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
-<span id="cb205-34"><a href="variable-selection-process.html#cb205-34" aria-hidden="true" tabindex="-1"></a><span class="do">## + species            2  13141806  28653568 3793.8</span></span>
-<span id="cb205-35"><a href="variable-selection-process.html#cb205-35" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2   6037165  35758209 3867.5</span></span>
-<span id="cb205-36"><a href="variable-selection-process.html#cb205-36" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm      1   3667377  38127997 3886.9</span></span>
-<span id="cb205-37"><a href="variable-selection-process.html#cb205-37" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1   2276715  39518658 3898.8</span></span>
-<span id="cb205-38"><a href="variable-selection-process.html#cb205-38" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                            41795374 3915.5</span></span>
-<span id="cb205-39"><a href="variable-selection-process.html#cb205-39" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1    144990  41650383 3916.3</span></span>
-<span id="cb205-40"><a href="variable-selection-process.html#cb205-40" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   9416589  51211963 3981.1</span></span>
-<span id="cb205-41"><a href="variable-selection-process.html#cb205-41" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1 134585395 176380769 4392.9</span></span>
-<span id="cb205-42"><a href="variable-selection-process.html#cb205-42" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-43"><a href="variable-selection-process.html#cb205-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3793.76</span></span>
-<span id="cb205-44"><a href="variable-selection-process.html#cb205-44" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species</span></span>
-<span id="cb205-45"><a href="variable-selection-process.html#cb205-45" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-46"><a href="variable-selection-process.html#cb205-46" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb205-47"><a href="variable-selection-process.html#cb205-47" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_depth_mm      1   1196096 27457472 3781.6</span></span>
-<span id="cb205-48"><a href="variable-selection-process.html#cb205-48" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1    780776 27872792 3786.6</span></span>
-<span id="cb205-49"><a href="variable-selection-process.html#cb205-49" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1    474080 28179488 3790.2</span></span>
-<span id="cb205-50"><a href="variable-selection-process.html#cb205-50" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           28653568 3793.8</span></span>
-<span id="cb205-51"><a href="variable-selection-process.html#cb205-51" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2     61695 28591873 3797.0</span></span>
-<span id="cb205-52"><a href="variable-selection-process.html#cb205-52" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   4325617 32979185 3838.6</span></span>
-<span id="cb205-53"><a href="variable-selection-process.html#cb205-53" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2  13141806 41795374 3915.5</span></span>
-<span id="cb205-54"><a href="variable-selection-process.html#cb205-54" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1  17189576 45843144 3948.3</span></span>
-<span id="cb205-55"><a href="variable-selection-process.html#cb205-55" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-56"><a href="variable-selection-process.html#cb205-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3781.56</span></span>
-<span id="cb205-57"><a href="variable-selection-process.html#cb205-57" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm</span></span>
-<span id="cb205-58"><a href="variable-selection-process.html#cb205-58" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-59"><a href="variable-selection-process.html#cb205-59" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb205-60"><a href="variable-selection-process.html#cb205-60" aria-hidden="true" tabindex="-1"></a><span class="do">## + bill_length_mm     1    541825 26915647 3776.9</span></span>
-<span id="cb205-61"><a href="variable-selection-process.html#cb205-61" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1    272828 27184644 3780.2</span></span>
-<span id="cb205-62"><a href="variable-selection-process.html#cb205-62" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           27457472 3781.6</span></span>
-<span id="cb205-63"><a href="variable-selection-process.html#cb205-63" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2     59488 27397984 3784.8</span></span>
-<span id="cb205-64"><a href="variable-selection-process.html#cb205-64" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_depth_mm      1   1196096 28653568 3793.8</span></span>
-<span id="cb205-65"><a href="variable-selection-process.html#cb205-65" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   3145834 30603306 3815.7</span></span>
-<span id="cb205-66"><a href="variable-selection-process.html#cb205-66" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   7932472 35389944 3864.1</span></span>
-<span id="cb205-67"><a href="variable-selection-process.html#cb205-67" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2  10670525 38127997 3886.9</span></span>
-<span id="cb205-68"><a href="variable-selection-process.html#cb205-68" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-69"><a href="variable-selection-process.html#cb205-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3776.93</span></span>
-<span id="cb205-70"><a href="variable-selection-process.html#cb205-70" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
-<span id="cb205-71"><a href="variable-selection-process.html#cb205-71" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_length_mm</span></span>
-<span id="cb205-72"><a href="variable-selection-process.html#cb205-72" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-73"><a href="variable-selection-process.html#cb205-73" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb205-74"><a href="variable-selection-process.html#cb205-74" aria-hidden="true" tabindex="-1"></a><span class="do">## + year               1    319160 26596486 3775.0</span></span>
-<span id="cb205-75"><a href="variable-selection-process.html#cb205-75" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26915647 3776.9</span></span>
-<span id="cb205-76"><a href="variable-selection-process.html#cb205-76" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2     56214 26859432 3780.2</span></span>
-<span id="cb205-77"><a href="variable-selection-process.html#cb205-77" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_length_mm     1    541825 27457472 3781.6</span></span>
-<span id="cb205-78"><a href="variable-selection-process.html#cb205-78" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    957145 27872792 3786.6</span></span>
-<span id="cb205-79"><a href="variable-selection-process.html#cb205-79" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2481143 29396790 3804.3</span></span>
-<span id="cb205-80"><a href="variable-selection-process.html#cb205-80" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   5482024 32397671 3836.7</span></span>
-<span id="cb205-81"><a href="variable-selection-process.html#cb205-81" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2  11183644 38099291 3888.6</span></span>
-<span id="cb205-82"><a href="variable-selection-process.html#cb205-82" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-83"><a href="variable-selection-process.html#cb205-83" aria-hidden="true" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
-<span id="cb205-84"><a href="variable-selection-process.html#cb205-84" aria-hidden="true" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
-<span id="cb205-85"><a href="variable-selection-process.html#cb205-85" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_length_mm + year</span></span>
-<span id="cb205-86"><a href="variable-selection-process.html#cb205-86" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-87"><a href="variable-selection-process.html#cb205-87" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
-<span id="cb205-88"><a href="variable-selection-process.html#cb205-88" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26596486 3775.0</span></span>
-<span id="cb205-89"><a href="variable-selection-process.html#cb205-89" aria-hidden="true" tabindex="-1"></a><span class="do">## - year               1    319160 26915647 3776.9</span></span>
-<span id="cb205-90"><a href="variable-selection-process.html#cb205-90" aria-hidden="true" tabindex="-1"></a><span class="do">## + island             2     79468 26517018 3778.0</span></span>
-<span id="cb205-91"><a href="variable-selection-process.html#cb205-91" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_length_mm     1    588158 27184644 3780.2</span></span>
-<span id="cb205-92"><a href="variable-selection-process.html#cb205-92" aria-hidden="true" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    760657 27357143 3782.3</span></span>
-<span id="cb205-93"><a href="variable-selection-process.html#cb205-93" aria-hidden="true" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2800047 29396533 3806.3</span></span>
-<span id="cb205-94"><a href="variable-selection-process.html#cb205-94" aria-hidden="true" tabindex="-1"></a><span class="do">## - sex                1   5231718 31828204 3832.8</span></span>
-<span id="cb205-95"><a href="variable-selection-process.html#cb205-95" aria-hidden="true" tabindex="-1"></a><span class="do">## - species            2   9693667 36290153 3874.4</span></span>
-<span id="cb205-96"><a href="variable-selection-process.html#cb205-96" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-97"><a href="variable-selection-process.html#cb205-97" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb205-98"><a href="variable-selection-process.html#cb205-98" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + </span></span>
-<span id="cb205-99"><a href="variable-selection-process.html#cb205-99" aria-hidden="true" tabindex="-1"></a><span class="do">##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)</span></span>
-<span id="cb205-100"><a href="variable-selection-process.html#cb205-100" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-101"><a href="variable-selection-process.html#cb205-101" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb205-102"><a href="variable-selection-process.html#cb205-102" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb205-103"><a href="variable-selection-process.html#cb205-103" aria-hidden="true" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
-<span id="cb205-104"><a href="variable-selection-process.html#cb205-104" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-105"><a href="variable-selection-process.html#cb205-105" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb205-106"><a href="variable-selection-process.html#cb205-106" aria-hidden="true" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb205-107"><a href="variable-selection-process.html#cb205-107" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
-<span id="cb205-108"><a href="variable-selection-process.html#cb205-108" aria-hidden="true" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
-<span id="cb205-109"><a href="variable-selection-process.html#cb205-109" aria-hidden="true" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
-<span id="cb205-110"><a href="variable-selection-process.html#cb205-110" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
-<span id="cb205-111"><a href="variable-selection-process.html#cb205-111" aria-hidden="true" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
-<span id="cb205-112"><a href="variable-selection-process.html#cb205-112" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
-<span id="cb205-113"><a href="variable-selection-process.html#cb205-113" aria-hidden="true" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
-<span id="cb205-114"><a href="variable-selection-process.html#cb205-114" aria-hidden="true" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
-<span id="cb205-115"><a href="variable-selection-process.html#cb205-115" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb205-116"><a href="variable-selection-process.html#cb205-116" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb205-117"><a href="variable-selection-process.html#cb205-117" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb205-118"><a href="variable-selection-process.html#cb205-118" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
-<span id="cb205-119"><a href="variable-selection-process.html#cb205-119" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
-<span id="cb205-120"><a href="variable-selection-process.html#cb205-120" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="variable-selection-process.html#cb205-1" tabindex="-1"></a><span class="fu">step</span>(null.model, </span>
+<span id="cb205-2"><a href="variable-selection-process.html#cb205-2" tabindex="-1"></a>     <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span>null.model, <span class="at">upper=</span>full.model),</span>
+<span id="cb205-3"><a href="variable-selection-process.html#cb205-3" tabindex="-1"></a>     <span class="at">direction=</span><span class="st">&#39;both&#39;</span>, <span class="at">trace=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb205-4"><a href="variable-selection-process.html#cb205-4" tabindex="-1"></a><span class="do">## Start:  AIC=4457.28</span></span>
+<span id="cb205-5"><a href="variable-selection-process.html#cb205-5" tabindex="-1"></a><span class="do">## body_mass_g ~ 1</span></span>
+<span id="cb205-6"><a href="variable-selection-process.html#cb205-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-7"><a href="variable-selection-process.html#cb205-7" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
+<span id="cb205-8"><a href="variable-selection-process.html#cb205-8" tabindex="-1"></a><span class="do">## + flipper_length_mm  1 164047703  51211963 3981.1</span></span>
+<span id="cb205-9"><a href="variable-selection-process.html#cb205-9" tabindex="-1"></a><span class="do">## + species            2 145190219  70069447 4087.5</span></span>
+<span id="cb205-10"><a href="variable-selection-process.html#cb205-10" tabindex="-1"></a><span class="do">## + island             2  83740680 131518986 4297.2</span></span>
+<span id="cb205-11"><a href="variable-selection-process.html#cb205-11" tabindex="-1"></a><span class="do">## + bill_length_mm     1  74792533 140467133 4317.1</span></span>
+<span id="cb205-12"><a href="variable-selection-process.html#cb205-12" tabindex="-1"></a><span class="do">## + bill_depth_mm      1  47959592 167300074 4375.3</span></span>
+<span id="cb205-13"><a href="variable-selection-process.html#cb205-13" tabindex="-1"></a><span class="do">## + sex                1  38878897 176380769 4392.9</span></span>
+<span id="cb205-14"><a href="variable-selection-process.html#cb205-14" tabindex="-1"></a><span class="do">## &lt;none&gt;                           215259666 4457.3</span></span>
+<span id="cb205-15"><a href="variable-selection-process.html#cb205-15" tabindex="-1"></a><span class="do">## + year               1    102884 215156782 4459.1</span></span>
+<span id="cb205-16"><a href="variable-selection-process.html#cb205-16" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-17"><a href="variable-selection-process.html#cb205-17" tabindex="-1"></a><span class="do">## Step:  AIC=3981.13</span></span>
+<span id="cb205-18"><a href="variable-selection-process.html#cb205-18" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm</span></span>
+<span id="cb205-19"><a href="variable-selection-process.html#cb205-19" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-20"><a href="variable-selection-process.html#cb205-20" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
+<span id="cb205-21"><a href="variable-selection-process.html#cb205-21" tabindex="-1"></a><span class="do">## + sex                1   9416589  41795374 3915.5</span></span>
+<span id="cb205-22"><a href="variable-selection-process.html#cb205-22" tabindex="-1"></a><span class="do">## + species            2   5368818  45843144 3948.3</span></span>
+<span id="cb205-23"><a href="variable-selection-process.html#cb205-23" tabindex="-1"></a><span class="do">## + island             2   3437527  47774435 3962.0</span></span>
+<span id="cb205-24"><a href="variable-selection-process.html#cb205-24" tabindex="-1"></a><span class="do">## + year               1   2666295  48545668 3965.3</span></span>
+<span id="cb205-25"><a href="variable-selection-process.html#cb205-25" tabindex="-1"></a><span class="do">## + bill_depth_mm      1    338887  50873075 3980.9</span></span>
+<span id="cb205-26"><a href="variable-selection-process.html#cb205-26" tabindex="-1"></a><span class="do">## &lt;none&gt;                            51211963 3981.1</span></span>
+<span id="cb205-27"><a href="variable-selection-process.html#cb205-27" tabindex="-1"></a><span class="do">## + bill_length_mm     1    140000  51071963 3982.2</span></span>
+<span id="cb205-28"><a href="variable-selection-process.html#cb205-28" tabindex="-1"></a><span class="do">## - flipper_length_mm  1 164047703 215259666 4457.3</span></span>
+<span id="cb205-29"><a href="variable-selection-process.html#cb205-29" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-30"><a href="variable-selection-process.html#cb205-30" tabindex="-1"></a><span class="do">## Step:  AIC=3915.47</span></span>
+<span id="cb205-31"><a href="variable-selection-process.html#cb205-31" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex</span></span>
+<span id="cb205-32"><a href="variable-selection-process.html#cb205-32" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-33"><a href="variable-selection-process.html#cb205-33" tabindex="-1"></a><span class="do">##                     Df Sum of Sq       RSS    AIC</span></span>
+<span id="cb205-34"><a href="variable-selection-process.html#cb205-34" tabindex="-1"></a><span class="do">## + species            2  13141806  28653568 3793.8</span></span>
+<span id="cb205-35"><a href="variable-selection-process.html#cb205-35" tabindex="-1"></a><span class="do">## + island             2   6037165  35758209 3867.5</span></span>
+<span id="cb205-36"><a href="variable-selection-process.html#cb205-36" tabindex="-1"></a><span class="do">## + bill_depth_mm      1   3667377  38127997 3886.9</span></span>
+<span id="cb205-37"><a href="variable-selection-process.html#cb205-37" tabindex="-1"></a><span class="do">## + year               1   2276715  39518658 3898.8</span></span>
+<span id="cb205-38"><a href="variable-selection-process.html#cb205-38" tabindex="-1"></a><span class="do">## &lt;none&gt;                            41795374 3915.5</span></span>
+<span id="cb205-39"><a href="variable-selection-process.html#cb205-39" tabindex="-1"></a><span class="do">## + bill_length_mm     1    144990  41650383 3916.3</span></span>
+<span id="cb205-40"><a href="variable-selection-process.html#cb205-40" tabindex="-1"></a><span class="do">## - sex                1   9416589  51211963 3981.1</span></span>
+<span id="cb205-41"><a href="variable-selection-process.html#cb205-41" tabindex="-1"></a><span class="do">## - flipper_length_mm  1 134585395 176380769 4392.9</span></span>
+<span id="cb205-42"><a href="variable-selection-process.html#cb205-42" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-43"><a href="variable-selection-process.html#cb205-43" tabindex="-1"></a><span class="do">## Step:  AIC=3793.76</span></span>
+<span id="cb205-44"><a href="variable-selection-process.html#cb205-44" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species</span></span>
+<span id="cb205-45"><a href="variable-selection-process.html#cb205-45" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-46"><a href="variable-selection-process.html#cb205-46" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb205-47"><a href="variable-selection-process.html#cb205-47" tabindex="-1"></a><span class="do">## + bill_depth_mm      1   1196096 27457472 3781.6</span></span>
+<span id="cb205-48"><a href="variable-selection-process.html#cb205-48" tabindex="-1"></a><span class="do">## + bill_length_mm     1    780776 27872792 3786.6</span></span>
+<span id="cb205-49"><a href="variable-selection-process.html#cb205-49" tabindex="-1"></a><span class="do">## + year               1    474080 28179488 3790.2</span></span>
+<span id="cb205-50"><a href="variable-selection-process.html#cb205-50" tabindex="-1"></a><span class="do">## &lt;none&gt;                           28653568 3793.8</span></span>
+<span id="cb205-51"><a href="variable-selection-process.html#cb205-51" tabindex="-1"></a><span class="do">## + island             2     61695 28591873 3797.0</span></span>
+<span id="cb205-52"><a href="variable-selection-process.html#cb205-52" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   4325617 32979185 3838.6</span></span>
+<span id="cb205-53"><a href="variable-selection-process.html#cb205-53" tabindex="-1"></a><span class="do">## - species            2  13141806 41795374 3915.5</span></span>
+<span id="cb205-54"><a href="variable-selection-process.html#cb205-54" tabindex="-1"></a><span class="do">## - sex                1  17189576 45843144 3948.3</span></span>
+<span id="cb205-55"><a href="variable-selection-process.html#cb205-55" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-56"><a href="variable-selection-process.html#cb205-56" tabindex="-1"></a><span class="do">## Step:  AIC=3781.56</span></span>
+<span id="cb205-57"><a href="variable-selection-process.html#cb205-57" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm</span></span>
+<span id="cb205-58"><a href="variable-selection-process.html#cb205-58" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-59"><a href="variable-selection-process.html#cb205-59" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb205-60"><a href="variable-selection-process.html#cb205-60" tabindex="-1"></a><span class="do">## + bill_length_mm     1    541825 26915647 3776.9</span></span>
+<span id="cb205-61"><a href="variable-selection-process.html#cb205-61" tabindex="-1"></a><span class="do">## + year               1    272828 27184644 3780.2</span></span>
+<span id="cb205-62"><a href="variable-selection-process.html#cb205-62" tabindex="-1"></a><span class="do">## &lt;none&gt;                           27457472 3781.6</span></span>
+<span id="cb205-63"><a href="variable-selection-process.html#cb205-63" tabindex="-1"></a><span class="do">## + island             2     59488 27397984 3784.8</span></span>
+<span id="cb205-64"><a href="variable-selection-process.html#cb205-64" tabindex="-1"></a><span class="do">## - bill_depth_mm      1   1196096 28653568 3793.8</span></span>
+<span id="cb205-65"><a href="variable-selection-process.html#cb205-65" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   3145834 30603306 3815.7</span></span>
+<span id="cb205-66"><a href="variable-selection-process.html#cb205-66" tabindex="-1"></a><span class="do">## - sex                1   7932472 35389944 3864.1</span></span>
+<span id="cb205-67"><a href="variable-selection-process.html#cb205-67" tabindex="-1"></a><span class="do">## - species            2  10670525 38127997 3886.9</span></span>
+<span id="cb205-68"><a href="variable-selection-process.html#cb205-68" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-69"><a href="variable-selection-process.html#cb205-69" tabindex="-1"></a><span class="do">## Step:  AIC=3776.93</span></span>
+<span id="cb205-70"><a href="variable-selection-process.html#cb205-70" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
+<span id="cb205-71"><a href="variable-selection-process.html#cb205-71" tabindex="-1"></a><span class="do">##     bill_length_mm</span></span>
+<span id="cb205-72"><a href="variable-selection-process.html#cb205-72" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-73"><a href="variable-selection-process.html#cb205-73" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb205-74"><a href="variable-selection-process.html#cb205-74" tabindex="-1"></a><span class="do">## + year               1    319160 26596486 3775.0</span></span>
+<span id="cb205-75"><a href="variable-selection-process.html#cb205-75" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26915647 3776.9</span></span>
+<span id="cb205-76"><a href="variable-selection-process.html#cb205-76" tabindex="-1"></a><span class="do">## + island             2     56214 26859432 3780.2</span></span>
+<span id="cb205-77"><a href="variable-selection-process.html#cb205-77" tabindex="-1"></a><span class="do">## - bill_length_mm     1    541825 27457472 3781.6</span></span>
+<span id="cb205-78"><a href="variable-selection-process.html#cb205-78" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    957145 27872792 3786.6</span></span>
+<span id="cb205-79"><a href="variable-selection-process.html#cb205-79" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2481143 29396790 3804.3</span></span>
+<span id="cb205-80"><a href="variable-selection-process.html#cb205-80" tabindex="-1"></a><span class="do">## - sex                1   5482024 32397671 3836.7</span></span>
+<span id="cb205-81"><a href="variable-selection-process.html#cb205-81" tabindex="-1"></a><span class="do">## - species            2  11183644 38099291 3888.6</span></span>
+<span id="cb205-82"><a href="variable-selection-process.html#cb205-82" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-83"><a href="variable-selection-process.html#cb205-83" tabindex="-1"></a><span class="do">## Step:  AIC=3774.95</span></span>
+<span id="cb205-84"><a href="variable-selection-process.html#cb205-84" tabindex="-1"></a><span class="do">## body_mass_g ~ flipper_length_mm + sex + species + bill_depth_mm + </span></span>
+<span id="cb205-85"><a href="variable-selection-process.html#cb205-85" tabindex="-1"></a><span class="do">##     bill_length_mm + year</span></span>
+<span id="cb205-86"><a href="variable-selection-process.html#cb205-86" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-87"><a href="variable-selection-process.html#cb205-87" tabindex="-1"></a><span class="do">##                     Df Sum of Sq      RSS    AIC</span></span>
+<span id="cb205-88"><a href="variable-selection-process.html#cb205-88" tabindex="-1"></a><span class="do">## &lt;none&gt;                           26596486 3775.0</span></span>
+<span id="cb205-89"><a href="variable-selection-process.html#cb205-89" tabindex="-1"></a><span class="do">## - year               1    319160 26915647 3776.9</span></span>
+<span id="cb205-90"><a href="variable-selection-process.html#cb205-90" tabindex="-1"></a><span class="do">## + island             2     79468 26517018 3778.0</span></span>
+<span id="cb205-91"><a href="variable-selection-process.html#cb205-91" tabindex="-1"></a><span class="do">## - bill_length_mm     1    588158 27184644 3780.2</span></span>
+<span id="cb205-92"><a href="variable-selection-process.html#cb205-92" tabindex="-1"></a><span class="do">## - bill_depth_mm      1    760657 27357143 3782.3</span></span>
+<span id="cb205-93"><a href="variable-selection-process.html#cb205-93" tabindex="-1"></a><span class="do">## - flipper_length_mm  1   2800047 29396533 3806.3</span></span>
+<span id="cb205-94"><a href="variable-selection-process.html#cb205-94" tabindex="-1"></a><span class="do">## - sex                1   5231718 31828204 3832.8</span></span>
+<span id="cb205-95"><a href="variable-selection-process.html#cb205-95" tabindex="-1"></a><span class="do">## - species            2   9693667 36290153 3874.4</span></span>
+<span id="cb205-96"><a href="variable-selection-process.html#cb205-96" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-97"><a href="variable-selection-process.html#cb205-97" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb205-98"><a href="variable-selection-process.html#cb205-98" tabindex="-1"></a><span class="do">## lm(formula = body_mass_g ~ flipper_length_mm + sex + species + </span></span>
+<span id="cb205-99"><a href="variable-selection-process.html#cb205-99" tabindex="-1"></a><span class="do">##     bill_depth_mm + bill_length_mm + year, data = pen.nomiss)</span></span>
+<span id="cb205-100"><a href="variable-selection-process.html#cb205-100" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-101"><a href="variable-selection-process.html#cb205-101" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb205-102"><a href="variable-selection-process.html#cb205-102" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb205-103"><a href="variable-selection-process.html#cb205-103" tabindex="-1"></a><span class="do">## -809.15 -179.43   -3.42  183.60  866.03 </span></span>
+<span id="cb205-104"><a href="variable-selection-process.html#cb205-104" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-105"><a href="variable-selection-process.html#cb205-105" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb205-106"><a href="variable-selection-process.html#cb205-106" tabindex="-1"></a><span class="do">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb205-107"><a href="variable-selection-process.html#cb205-107" tabindex="-1"></a><span class="do">## (Intercept)       80838.770  41677.817   1.940 0.053292 .  </span></span>
+<span id="cb205-108"><a href="variable-selection-process.html#cb205-108" tabindex="-1"></a><span class="do">## flipper_length_mm    18.064      3.088   5.849 1.20e-08 ***</span></span>
+<span id="cb205-109"><a href="variable-selection-process.html#cb205-109" tabindex="-1"></a><span class="do">## sexmale             382.168     47.797   7.996 2.28e-14 ***</span></span>
+<span id="cb205-110"><a href="variable-selection-process.html#cb205-110" tabindex="-1"></a><span class="do">## speciesChinstrap   -274.496     81.558  -3.366 0.000855 ***</span></span>
+<span id="cb205-111"><a href="variable-selection-process.html#cb205-111" tabindex="-1"></a><span class="do">## speciesGentoo       929.275    136.036   6.831 4.16e-11 ***</span></span>
+<span id="cb205-112"><a href="variable-selection-process.html#cb205-112" tabindex="-1"></a><span class="do">## bill_depth_mm        60.749     19.926   3.049 0.002487 ** </span></span>
+<span id="cb205-113"><a href="variable-selection-process.html#cb205-113" tabindex="-1"></a><span class="do">## bill_length_mm       18.997      7.086   2.681 0.007718 ** </span></span>
+<span id="cb205-114"><a href="variable-selection-process.html#cb205-114" tabindex="-1"></a><span class="do">## year                -41.139     20.832  -1.975 0.049131 *  </span></span>
+<span id="cb205-115"><a href="variable-selection-process.html#cb205-115" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb205-116"><a href="variable-selection-process.html#cb205-116" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb205-117"><a href="variable-selection-process.html#cb205-117" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb205-118"><a href="variable-selection-process.html#cb205-118" tabindex="-1"></a><span class="do">## Residual standard error: 286.1 on 325 degrees of freedom</span></span>
+<span id="cb205-119"><a href="variable-selection-process.html#cb205-119" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8764, Adjusted R-squared:  0.8738 </span></span>
+<span id="cb205-120"><a href="variable-selection-process.html#cb205-120" tabindex="-1"></a><span class="do">## F-statistic: 329.3 on 7 and 325 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>Warnings:</p>
 <ul>
 <li>Stopping criteria and algorithm can be different for different software programs.</li>
@@ -891,9 +943,9 @@ etc.</li>
 <li>Compute adjusted R2, AIC or BIC each time.</li>
 <li>Compare and choose among the “best subsets” of various sizes.</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="variable-selection-process.html#cb206-1" aria-hidden="true" tabindex="-1"></a>oc.ht <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data=</span>pen.nomiss)</span>
-<span id="cb206-2"><a href="variable-selection-process.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># set plotting window to be 1 row and 3 columns</span></span>
-<span id="cb206-3"><a href="variable-selection-process.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;adjr2&#39;</span>);<span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;bic&#39;</span>);<span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;Cp&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="variable-selection-process.html#cb206-1" tabindex="-1"></a>oc.ht <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(body_mass_g <span class="sc">~</span> ., <span class="at">data=</span>pen.nomiss)</span>
+<span id="cb206-2"><a href="variable-selection-process.html#cb206-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># set plotting window to be 1 row and 3 columns</span></span>
+<span id="cb206-3"><a href="variable-selection-process.html#cb206-3" tabindex="-1"></a><span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;adjr2&#39;</span>);<span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;bic&#39;</span>);<span class="fu">plot</span>(oc.ht, <span class="at">scale=</span><span class="st">&#39;Cp&#39;</span>)</span></code></pre></div>
 <p><img src="model_building_files/figure-html/unnamed-chunk-25-1.png" width="960" /></p>
 <ul>
 <li>The black squares are when the variable is in the model, the white is when it’s not</li>
@@ -927,70 +979,70 @@ RSS + \lambda \sum_{j}\mid \beta_{j} \ \mid
 This section uses functions <code>glmnet</code> package, and the <code>Chemical</code> data set from PMA6. Also it uses the <code>model.matrix</code> function from the <code>stats</code> package (automatically loaded). This function takes a set of input predictors and turns them into the variables that are used directly in the model. For example, categorical variables will be converted into multiple binary indicators. This typically happens in the background.
 </div>
 <p>The <code>glmnet</code> function works best when the outcome <code>y</code> and predictors <code>x</code> are not contained within a data frame. The <code>alpha</code> argument is the tuning parameter, where a value of 1 specifies the lasso.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="variable-selection-process.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb207-2"><a href="variable-selection-process.html#cb207-2" aria-hidden="true" tabindex="-1"></a>chem <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/Chemical.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb207-3"><a href="variable-selection-process.html#cb207-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> chem<span class="sc">$</span>PE</span>
-<span id="cb207-4"><a href="variable-selection-process.html#cb207-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(PE<span class="sc">~</span>., chem)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># the -1 drops the intercept</span></span>
-<span id="cb207-5"><a href="variable-selection-process.html#cb207-5" aria-hidden="true" tabindex="-1"></a>chem.lasso <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="variable-selection-process.html#cb207-1" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb207-2"><a href="variable-selection-process.html#cb207-2" tabindex="-1"></a>chem <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/Chemical.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb207-3"><a href="variable-selection-process.html#cb207-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> chem<span class="sc">$</span>PE</span>
+<span id="cb207-4"><a href="variable-selection-process.html#cb207-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(PE<span class="sc">~</span>., chem)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># the -1 drops the intercept</span></span>
+<span id="cb207-5"><a href="variable-selection-process.html#cb207-5" tabindex="-1"></a>chem.lasso <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>We can visualize the effect of the coefficient shrinkage using the following plot.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="variable-selection-process.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(chem.lasso, <span class="at">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span>
-<span id="cb208-2"><a href="variable-selection-process.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">side=</span><span class="dv">3</span>, <span class="st">&quot;Number of Variables&quot;</span>, <span class="at">line=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="variable-selection-process.html#cb208-1" tabindex="-1"></a><span class="fu">plot</span>(chem.lasso, <span class="at">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span>
+<span id="cb208-2"><a href="variable-selection-process.html#cb208-2" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">side=</span><span class="dv">3</span>, <span class="st">&quot;Number of Variables&quot;</span>, <span class="at">line=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="model_building_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <ul>
 <li>Each line represents the value of a coefficient as <span class="math inline">\(ln(\lambda)\)</span> changes.</li>
 <li>The red line on the bottom and the purple on the top must be important, since they are the last two to be shrunk to 0 and they are relatively stable.</li>
 </ul>
 <p>Examining the coefficients of the <code>chem.lasso</code> model object gives us a very large matrix (7x61), listing the coefficients for each value of <span class="math inline">\(\lambda\)</span> that was tried. A sample of columns are shown below:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="variable-selection-process.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(chem.lasso)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
-<span id="cb209-2"><a href="variable-selection-process.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 x 8 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
-<span id="cb209-3"><a href="variable-selection-process.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                   s0         s1         s2        s3       s4         s5</span></span>
-<span id="cb209-4"><a href="variable-selection-process.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 9.366667  9.5835968  9.7812554  9.961355 10.12545 10.0399324</span></span>
-<span id="cb209-5"><a href="variable-selection-process.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ROR5        .         .          .          .         .        .        </span></span>
-<span id="cb209-6"><a href="variable-selection-process.html#cb209-6" aria-hidden="true" tabindex="-1"></a><span class="do">## DE          .        -0.5206322 -0.9950129 -1.427251 -1.82109 -2.0903355</span></span>
-<span id="cb209-7"><a href="variable-selection-process.html#cb209-7" aria-hidden="true" tabindex="-1"></a><span class="do">## SALESGR5    .         .          .          .         .        .        </span></span>
-<span id="cb209-8"><a href="variable-selection-process.html#cb209-8" aria-hidden="true" tabindex="-1"></a><span class="do">## EPS5        .         .          .          .         .        .        </span></span>
-<span id="cb209-9"><a href="variable-selection-process.html#cb209-9" aria-hidden="true" tabindex="-1"></a><span class="do">## NPM1        .         .          .          .         .        0.0157436</span></span>
-<span id="cb209-10"><a href="variable-selection-process.html#cb209-10" aria-hidden="true" tabindex="-1"></a><span class="do">## PAYOUTR1    .         .          .          .         .        0.2427377</span></span>
-<span id="cb209-11"><a href="variable-selection-process.html#cb209-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                      s6          s7</span></span>
-<span id="cb209-12"><a href="variable-selection-process.html#cb209-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  9.59940208  9.19800729</span></span>
-<span id="cb209-13"><a href="variable-selection-process.html#cb209-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ROR5         .           .         </span></span>
-<span id="cb209-14"><a href="variable-selection-process.html#cb209-14" aria-hidden="true" tabindex="-1"></a><span class="do">## DE          -2.21050375 -2.31999666</span></span>
-<span id="cb209-15"><a href="variable-selection-process.html#cb209-15" aria-hidden="true" tabindex="-1"></a><span class="do">## SALESGR5     .           .         </span></span>
-<span id="cb209-16"><a href="variable-selection-process.html#cb209-16" aria-hidden="true" tabindex="-1"></a><span class="do">## EPS5         .           .         </span></span>
-<span id="cb209-17"><a href="variable-selection-process.html#cb209-17" aria-hidden="true" tabindex="-1"></a><span class="do">## NPM1         0.04642112  0.07437333</span></span>
-<span id="cb209-18"><a href="variable-selection-process.html#cb209-18" aria-hidden="true" tabindex="-1"></a><span class="do">## PAYOUTR1     0.98609790  1.66341998</span></span>
-<span id="cb209-19"><a href="variable-selection-process.html#cb209-19" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(chem.lasso)[,<span class="dv">56</span><span class="sc">:</span><span class="dv">60</span>]</span>
-<span id="cb209-20"><a href="variable-selection-process.html#cb209-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 x 5 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
-<span id="cb209-21"><a href="variable-selection-process.html#cb209-21" aria-hidden="true" tabindex="-1"></a><span class="do">##                     s55         s56         s57         s58         s59</span></span>
-<span id="cb209-22"><a href="variable-selection-process.html#cb209-22" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  1.36957827  1.35834023  1.34802448  1.34099610  1.33052382</span></span>
-<span id="cb209-23"><a href="variable-selection-process.html#cb209-23" aria-hidden="true" tabindex="-1"></a><span class="do">## ROR5         0.03767492  0.03797214  0.03825501  0.03840313  0.03870172</span></span>
-<span id="cb209-24"><a href="variable-selection-process.html#cb209-24" aria-hidden="true" tabindex="-1"></a><span class="do">## DE          -2.58475249 -2.58199893 -2.57937377 -2.57863116 -2.57530747</span></span>
-<span id="cb209-25"><a href="variable-selection-process.html#cb209-25" aria-hidden="true" tabindex="-1"></a><span class="do">## SALESGR5     0.19961031  0.19990639  0.20017553  0.20039468  0.20064382</span></span>
-<span id="cb209-26"><a href="variable-selection-process.html#cb209-26" aria-hidden="true" tabindex="-1"></a><span class="do">## EPS5        -0.03468051 -0.03483069 -0.03497088 -0.03507850 -0.03520342</span></span>
-<span id="cb209-27"><a href="variable-selection-process.html#cb209-27" aria-hidden="true" tabindex="-1"></a><span class="do">## NPM1         0.34740236  0.34760738  0.34778861  0.34795977  0.34812027</span></span>
-<span id="cb209-28"><a href="variable-selection-process.html#cb209-28" aria-hidden="true" tabindex="-1"></a><span class="do">## PAYOUTR1     9.78594052  9.79286717  9.79910767  9.80408094  9.81009965</span></span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="variable-selection-process.html#cb209-1" tabindex="-1"></a><span class="fu">coef</span>(chem.lasso)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb209-2"><a href="variable-selection-process.html#cb209-2" tabindex="-1"></a><span class="do">## 7 x 8 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb209-3"><a href="variable-selection-process.html#cb209-3" tabindex="-1"></a><span class="do">##                   s0         s1         s2        s3       s4         s5</span></span>
+<span id="cb209-4"><a href="variable-selection-process.html#cb209-4" tabindex="-1"></a><span class="do">## (Intercept) 9.366667  9.5835968  9.7812554  9.961355 10.12545 10.0399324</span></span>
+<span id="cb209-5"><a href="variable-selection-process.html#cb209-5" tabindex="-1"></a><span class="do">## ROR5        .         .          .          .         .        .        </span></span>
+<span id="cb209-6"><a href="variable-selection-process.html#cb209-6" tabindex="-1"></a><span class="do">## DE          .        -0.5206322 -0.9950129 -1.427251 -1.82109 -2.0903355</span></span>
+<span id="cb209-7"><a href="variable-selection-process.html#cb209-7" tabindex="-1"></a><span class="do">## SALESGR5    .         .          .          .         .        .        </span></span>
+<span id="cb209-8"><a href="variable-selection-process.html#cb209-8" tabindex="-1"></a><span class="do">## EPS5        .         .          .          .         .        .        </span></span>
+<span id="cb209-9"><a href="variable-selection-process.html#cb209-9" tabindex="-1"></a><span class="do">## NPM1        .         .          .          .         .        0.0157436</span></span>
+<span id="cb209-10"><a href="variable-selection-process.html#cb209-10" tabindex="-1"></a><span class="do">## PAYOUTR1    .         .          .          .         .        0.2427377</span></span>
+<span id="cb209-11"><a href="variable-selection-process.html#cb209-11" tabindex="-1"></a><span class="do">##                      s6          s7</span></span>
+<span id="cb209-12"><a href="variable-selection-process.html#cb209-12" tabindex="-1"></a><span class="do">## (Intercept)  9.59940208  9.19800729</span></span>
+<span id="cb209-13"><a href="variable-selection-process.html#cb209-13" tabindex="-1"></a><span class="do">## ROR5         .           .         </span></span>
+<span id="cb209-14"><a href="variable-selection-process.html#cb209-14" tabindex="-1"></a><span class="do">## DE          -2.21050375 -2.31999666</span></span>
+<span id="cb209-15"><a href="variable-selection-process.html#cb209-15" tabindex="-1"></a><span class="do">## SALESGR5     .           .         </span></span>
+<span id="cb209-16"><a href="variable-selection-process.html#cb209-16" tabindex="-1"></a><span class="do">## EPS5         .           .         </span></span>
+<span id="cb209-17"><a href="variable-selection-process.html#cb209-17" tabindex="-1"></a><span class="do">## NPM1         0.04642112  0.07437333</span></span>
+<span id="cb209-18"><a href="variable-selection-process.html#cb209-18" tabindex="-1"></a><span class="do">## PAYOUTR1     0.98609790  1.66341998</span></span>
+<span id="cb209-19"><a href="variable-selection-process.html#cb209-19" tabindex="-1"></a><span class="fu">coef</span>(chem.lasso)[,<span class="dv">56</span><span class="sc">:</span><span class="dv">60</span>]</span>
+<span id="cb209-20"><a href="variable-selection-process.html#cb209-20" tabindex="-1"></a><span class="do">## 7 x 5 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb209-21"><a href="variable-selection-process.html#cb209-21" tabindex="-1"></a><span class="do">##                     s55         s56         s57         s58         s59</span></span>
+<span id="cb209-22"><a href="variable-selection-process.html#cb209-22" tabindex="-1"></a><span class="do">## (Intercept)  1.36957827  1.35834023  1.34802448  1.34099610  1.33052382</span></span>
+<span id="cb209-23"><a href="variable-selection-process.html#cb209-23" tabindex="-1"></a><span class="do">## ROR5         0.03767492  0.03797214  0.03825501  0.03840313  0.03870172</span></span>
+<span id="cb209-24"><a href="variable-selection-process.html#cb209-24" tabindex="-1"></a><span class="do">## DE          -2.58475249 -2.58199893 -2.57937377 -2.57863116 -2.57530747</span></span>
+<span id="cb209-25"><a href="variable-selection-process.html#cb209-25" tabindex="-1"></a><span class="do">## SALESGR5     0.19961031  0.19990639  0.20017553  0.20039468  0.20064382</span></span>
+<span id="cb209-26"><a href="variable-selection-process.html#cb209-26" tabindex="-1"></a><span class="do">## EPS5        -0.03468051 -0.03483069 -0.03497088 -0.03507850 -0.03520342</span></span>
+<span id="cb209-27"><a href="variable-selection-process.html#cb209-27" tabindex="-1"></a><span class="do">## NPM1         0.34740236  0.34760738  0.34778861  0.34795977  0.34812027</span></span>
+<span id="cb209-28"><a href="variable-selection-process.html#cb209-28" tabindex="-1"></a><span class="do">## PAYOUTR1     9.78594052  9.79286717  9.79910767  9.80408094  9.81009965</span></span></code></pre></div>
 <p>Comparing the plot to the coefficient model output above, we see that the variables that show up being shrunk last are <code>DE</code> and <code>PAYOUTR1</code>.</p>
 <p><strong>Using Cross validation to find minimum lambda</strong></p>
 <p>Cross-validation is a resampling method that uses different portions of the data to test and train a model on different iterations <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">Wikipedia</a>.</p>
 <p>By applying a cross-validation technique, we can identify the specific value for <span class="math inline">\(\lambda\)</span> that
 results in the lowest cross-validated Mean Squared Error (MSE) (<span class="math inline">\(\lambda_{min}\)</span>). To ensure
 reproducibility of these results we set a seed for the random number generator prior to analysis.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="variable-selection-process.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Setting a seed to ensure I get the same results each time I knit</span></span>
-<span id="cb210-2"><a href="variable-selection-process.html#cb210-2" aria-hidden="true" tabindex="-1"></a>cv.lasso <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="co"># note change in function</span></span>
-<span id="cb210-3"><a href="variable-selection-process.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb210-4"><a href="variable-selection-process.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the final model using the min lambda</span></span>
-<span id="cb210-5"><a href="variable-selection-process.html#cb210-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.lasso<span class="sc">$</span>lambda.min)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="variable-selection-process.html#cb210-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Setting a seed to ensure I get the same results each time I knit</span></span>
+<span id="cb210-2"><a href="variable-selection-process.html#cb210-2" tabindex="-1"></a>cv.lasso <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="co"># note change in function</span></span>
+<span id="cb210-3"><a href="variable-selection-process.html#cb210-3" tabindex="-1"></a></span>
+<span id="cb210-4"><a href="variable-selection-process.html#cb210-4" tabindex="-1"></a><span class="co"># Fit the final model using the min lambda</span></span>
+<span id="cb210-5"><a href="variable-selection-process.html#cb210-5" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.lasso<span class="sc">$</span>lambda.min)</span></code></pre></div>
 <p>The resulting table of shrunk regression coefficients then is;</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="variable-selection-process.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model)</span>
-<span id="cb211-2"><a href="variable-selection-process.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 x 1 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
-<span id="cb211-3"><a href="variable-selection-process.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                       s0</span></span>
-<span id="cb211-4"><a href="variable-selection-process.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  2.645693621</span></span>
-<span id="cb211-5"><a href="variable-selection-process.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ROR5         0.004833458</span></span>
-<span id="cb211-6"><a href="variable-selection-process.html#cb211-6" aria-hidden="true" tabindex="-1"></a><span class="do">## DE          -2.882636490</span></span>
-<span id="cb211-7"><a href="variable-selection-process.html#cb211-7" aria-hidden="true" tabindex="-1"></a><span class="do">## SALESGR5     0.165581782</span></span>
-<span id="cb211-8"><a href="variable-selection-process.html#cb211-8" aria-hidden="true" tabindex="-1"></a><span class="do">## EPS5        -0.017771193</span></span>
-<span id="cb211-9"><a href="variable-selection-process.html#cb211-9" aria-hidden="true" tabindex="-1"></a><span class="do">## NPM1         0.323497141</span></span>
-<span id="cb211-10"><a href="variable-selection-process.html#cb211-10" aria-hidden="true" tabindex="-1"></a><span class="do">## PAYOUTR1     8.986481946</span></span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="variable-selection-process.html#cb211-1" tabindex="-1"></a><span class="fu">coef</span>(model)</span>
+<span id="cb211-2"><a href="variable-selection-process.html#cb211-2" tabindex="-1"></a><span class="do">## 7 x 1 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb211-3"><a href="variable-selection-process.html#cb211-3" tabindex="-1"></a><span class="do">##                       s0</span></span>
+<span id="cb211-4"><a href="variable-selection-process.html#cb211-4" tabindex="-1"></a><span class="do">## (Intercept)  2.645693621</span></span>
+<span id="cb211-5"><a href="variable-selection-process.html#cb211-5" tabindex="-1"></a><span class="do">## ROR5         0.004833458</span></span>
+<span id="cb211-6"><a href="variable-selection-process.html#cb211-6" tabindex="-1"></a><span class="do">## DE          -2.882636490</span></span>
+<span id="cb211-7"><a href="variable-selection-process.html#cb211-7" tabindex="-1"></a><span class="do">## SALESGR5     0.165581782</span></span>
+<span id="cb211-8"><a href="variable-selection-process.html#cb211-8" tabindex="-1"></a><span class="do">## EPS5        -0.017771193</span></span>
+<span id="cb211-9"><a href="variable-selection-process.html#cb211-9" tabindex="-1"></a><span class="do">## NPM1         0.323497141</span></span>
+<span id="cb211-10"><a href="variable-selection-process.html#cb211-10" tabindex="-1"></a><span class="do">## PAYOUTR1     8.986481946</span></span></code></pre></div>
 <p>In this case we would keep variables: DE, SALESGR5, NPM1 and PAYOUTR1. Estimates for ROR5 and EPS56 are very small, and so can be reasonably excluded.</p>
 <ul>
 <li>The lasso procedure normalizes the data prior to fitting a model, so the coefficient values that are returned <em>cannot</em> be interpreted directly in context of the problem.
@@ -1001,15 +1053,27 @@ reproducibility of these results we set a seed for the random number generator p
 <li>For now, use lasso to choose variables, then fit a model with only those selected variables in the final model.</li>
 <li>Variables chosen in this manner are important, yet biased estimates.</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="variable-selection-process.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(PE <span class="sc">~</span> DE <span class="sc">+</span> SALESGR5 <span class="sc">+</span> NPM1 <span class="sc">+</span> PAYOUTR1, <span class="at">data =</span> chem) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="iijwugufyb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="variable-selection-process.html#cb212-1" tabindex="-1"></a><span class="fu">lm</span>(PE <span class="sc">~</span> DE <span class="sc">+</span> SALESGR5 <span class="sc">+</span> NPM1 <span class="sc">+</span> PAYOUTR1, <span class="at">data =</span> chem) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
+<div id="iijwugufyb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iijwugufyb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iijwugufyb thead, #iijwugufyb tbody, #iijwugufyb tfoot, #iijwugufyb tr, #iijwugufyb td, #iijwugufyb th {
+  border-style: none;
+}
+
+#iijwugufyb p {
+  margin: 0;
+  padding: 0;
 }
 
 #iijwugufyb .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1032,16 +1096,9 @@ reproducibility of these results we set a seed for the random number generator p
   border-left-color: #D3D3D3;
 }
 
-#iijwugufyb .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#iijwugufyb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 #iijwugufyb .gt_title {
@@ -1060,12 +1117,24 @@ reproducibility of these results we set a seed for the random number generator p
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
+}
+
+#iijwugufyb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
 }
 
 #iijwugufyb .gt_bottom_border {
@@ -1141,6 +1210,10 @@ reproducibility of these results we set a seed for the random number generator p
   width: 100%;
 }
 
+#iijwugufyb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
 #iijwugufyb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -1164,6 +1237,7 @@ reproducibility of these results we set a seed for the random number generator p
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
 #iijwugufyb .gt_empty_group_heading {
@@ -1239,6 +1313,10 @@ reproducibility of these results we set a seed for the random number generator p
   border-top-width: 2px;
 }
 
+#iijwugufyb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
 #iijwugufyb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
@@ -1288,6 +1366,16 @@ reproducibility of these results we set a seed for the random number generator p
   border-top-color: #D3D3D3;
 }
 
+#iijwugufyb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
 #iijwugufyb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
@@ -1318,8 +1406,8 @@ reproducibility of these results we set a seed for the random number generator p
 #iijwugufyb .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -1375,20 +1463,10 @@ reproducibility of these results we set a seed for the random number generator p
   font-size: 65%;
 }
 
-#iijwugufyb .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
 #iijwugufyb .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
 #iijwugufyb .gt_asterisk {
@@ -1396,56 +1474,58 @@ reproducibility of these results we set a seed for the random number generator p
   vertical-align: 0;
 }
 
-#iijwugufyb .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#iijwugufyb .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#iijwugufyb .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#iijwugufyb .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#iijwugufyb .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#iijwugufyb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iijwugufyb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iijwugufyb .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">DE</td>
-<td class="gt_row gt_center">-3.2</td>
-<td class="gt_row gt_center">-6.9, 0.58</td>
-<td class="gt_row gt_center">0.094</td></tr>
-    <tr><td class="gt_row gt_left">SALESGR5</td>
-<td class="gt_row gt_center">0.19</td>
-<td class="gt_row gt_center">-0.02, 0.41</td>
-<td class="gt_row gt_center">0.077</td></tr>
-    <tr><td class="gt_row gt_left">NPM1</td>
-<td class="gt_row gt_center">0.35</td>
-<td class="gt_row gt_center">0.12, 0.59</td>
-<td class="gt_row gt_center">0.005</td></tr>
-    <tr><td class="gt_row gt_left">PAYOUTR1</td>
-<td class="gt_row gt_center">11</td>
-<td class="gt_row gt_center">4.7, 17</td>
-<td class="gt_row gt_center">0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">DE</td>
+<td headers="estimate" class="gt_row gt_center">-3.2</td>
+<td headers="ci" class="gt_row gt_center">-6.9, 0.58</td>
+<td headers="p.value" class="gt_row gt_center">0.094</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">SALESGR5</td>
+<td headers="estimate" class="gt_row gt_center">0.19</td>
+<td headers="ci" class="gt_row gt_center">-0.02, 0.41</td>
+<td headers="p.value" class="gt_row gt_center">0.077</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">NPM1</td>
+<td headers="estimate" class="gt_row gt_center">0.35</td>
+<td headers="ci" class="gt_row gt_center">0.12, 0.59</td>
+<td headers="p.value" class="gt_row gt_center">0.005</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PAYOUTR1</td>
+<td headers="estimate" class="gt_row gt_center">11</td>
+<td headers="ci" class="gt_row gt_center">4.7, 17</td>
+<td headers="p.value" class="gt_row gt_center">0.001</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
@@ -1531,7 +1611,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

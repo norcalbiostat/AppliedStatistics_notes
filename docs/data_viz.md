@@ -583,7 +583,6 @@ calc.props
 ##  9 E     Premium    2337 0.239
 ## 10 E     Ideal      3903 0.398
 ## # … with 25 more rows
-## # ℹ Use `print(n = ...)` to see more rows
 ```
 
 Since we're plotting summary data, the height of the bars is specified using `y=pct`. 

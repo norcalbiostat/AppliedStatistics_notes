@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.6 Standardizing | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.6 Standardizing | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -214,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -296,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -526,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -561,14 +600,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Using correlation matrix vs covariance matrix will generate different PC’s
 </div>
 <p>This makes sense given the difference in matricies:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="standardizing.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(data) <span class="co">#Covariance Matrix</span></span>
-<span id="cb12-2"><a href="standardizing.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">##           X1       X2</span></span>
-<span id="cb12-3"><a href="standardizing.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 100.74146 50.29187</span></span>
-<span id="cb12-4"><a href="standardizing.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  50.29187 48.59528</span></span>
-<span id="cb12-5"><a href="standardizing.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data) <span class="co">#Correlation Matrix</span></span>
-<span id="cb12-6"><a href="standardizing.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           X1        X2</span></span>
-<span id="cb12-7"><a href="standardizing.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 1.0000000 0.7187811</span></span>
-<span id="cb12-8"><a href="standardizing.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 0.7187811 1.0000000</span></span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="standardizing.html#cb266-1" tabindex="-1"></a><span class="fu">cov</span>(data) <span class="co">#Covariance Matrix</span></span>
+<span id="cb266-2"><a href="standardizing.html#cb266-2" tabindex="-1"></a><span class="do">##           X1       X2</span></span>
+<span id="cb266-3"><a href="standardizing.html#cb266-3" tabindex="-1"></a><span class="do">## X1 100.74146 50.29187</span></span>
+<span id="cb266-4"><a href="standardizing.html#cb266-4" tabindex="-1"></a><span class="do">## X2  50.29187 48.59528</span></span>
+<span id="cb266-5"><a href="standardizing.html#cb266-5" tabindex="-1"></a><span class="fu">cor</span>(data) <span class="co">#Correlation Matrix</span></span>
+<span id="cb266-6"><a href="standardizing.html#cb266-6" tabindex="-1"></a><span class="do">##           X1        X2</span></span>
+<span id="cb266-7"><a href="standardizing.html#cb266-7" tabindex="-1"></a><span class="do">## X1 1.0000000 0.7187811</span></span>
+<span id="cb266-8"><a href="standardizing.html#cb266-8" tabindex="-1"></a><span class="do">## X2 0.7187811 1.0000000</span></span></code></pre></div>
 <p>Standardizing your data prior to analysis (using <span class="math inline">\(\mathbf{R}\)</span> instead of <span class="math inline">\(\mathbf{\Sigma}\)</span>) aids the interpretation of the PC’s in a few ways</p>
 <ol style="list-style-type: decimal">
 <li>The total variance is the number of variables <span class="math inline">\(P\)</span></li>
@@ -577,24 +616,24 @@ Using correlation matrix vs covariance matrix will generate different PC’s
 </ol>
 <p>This last point means that for any given <span class="math inline">\(C_{i}\)</span> we can quantify the relative degree of dependence of the PC on each of the standardized variables. This is a.k.a. the <strong>factor loading</strong> (we will return to this key term later).</p>
 <p>To calculate the principal components using the correlation matrix using <code>princomp</code>, set the <code>cor</code> argument to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="standardizing.html#cb13-1" aria-hidden="true" tabindex="-1"></a>pr_corr <span class="ot">&lt;-</span> <span class="fu">princomp</span>(data, <span class="at">cor=</span><span class="cn">TRUE</span>)</span>
-<span id="cb13-2"><a href="standardizing.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr_corr)</span>
-<span id="cb13-3"><a href="standardizing.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb13-4"><a href="standardizing.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">##                           Comp.1    Comp.2</span></span>
-<span id="cb13-5"><a href="standardizing.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.3110229 0.5303008</span></span>
-<span id="cb13-6"><a href="standardizing.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.8593906 0.1406094</span></span>
-<span id="cb13-7"><a href="standardizing.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.8593906 1.0000000</span></span>
-<span id="cb13-8"><a href="standardizing.html#cb13-8" aria-hidden="true" tabindex="-1"></a>pr_corr<span class="sc">$</span>loadings</span>
-<span id="cb13-9"><a href="standardizing.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-10"><a href="standardizing.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
-<span id="cb13-11"><a href="standardizing.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
-<span id="cb13-12"><a href="standardizing.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">## X1  0.707  0.707</span></span>
-<span id="cb13-13"><a href="standardizing.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  0.707 -0.707</span></span>
-<span id="cb13-14"><a href="standardizing.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-15"><a href="standardizing.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
-<span id="cb13-16"><a href="standardizing.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
-<span id="cb13-17"><a href="standardizing.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
-<span id="cb13-18"><a href="standardizing.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="standardizing.html#cb267-1" tabindex="-1"></a>pr_corr <span class="ot">&lt;-</span> <span class="fu">princomp</span>(data, <span class="at">cor=</span><span class="cn">TRUE</span>)</span>
+<span id="cb267-2"><a href="standardizing.html#cb267-2" tabindex="-1"></a><span class="fu">summary</span>(pr_corr)</span>
+<span id="cb267-3"><a href="standardizing.html#cb267-3" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb267-4"><a href="standardizing.html#cb267-4" tabindex="-1"></a><span class="do">##                           Comp.1    Comp.2</span></span>
+<span id="cb267-5"><a href="standardizing.html#cb267-5" tabindex="-1"></a><span class="do">## Standard deviation     1.3110229 0.5303008</span></span>
+<span id="cb267-6"><a href="standardizing.html#cb267-6" tabindex="-1"></a><span class="do">## Proportion of Variance 0.8593906 0.1406094</span></span>
+<span id="cb267-7"><a href="standardizing.html#cb267-7" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.8593906 1.0000000</span></span>
+<span id="cb267-8"><a href="standardizing.html#cb267-8" tabindex="-1"></a>pr_corr<span class="sc">$</span>loadings</span>
+<span id="cb267-9"><a href="standardizing.html#cb267-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb267-10"><a href="standardizing.html#cb267-10" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb267-11"><a href="standardizing.html#cb267-11" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
+<span id="cb267-12"><a href="standardizing.html#cb267-12" tabindex="-1"></a><span class="do">## X1  0.707  0.707</span></span>
+<span id="cb267-13"><a href="standardizing.html#cb267-13" tabindex="-1"></a><span class="do">## X2  0.707 -0.707</span></span>
+<span id="cb267-14"><a href="standardizing.html#cb267-14" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb267-15"><a href="standardizing.html#cb267-15" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
+<span id="cb267-16"><a href="standardizing.html#cb267-16" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
+<span id="cb267-17"><a href="standardizing.html#cb267-17" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
+<span id="cb267-18"><a href="standardizing.html#cb267-18" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span></code></pre></div>
 <ul>
 <li>If we use the covariance matrix and change the scale of a variable (i.e. in to cm) that will change the results of the PC’s</li>
 <li>Many researchers prefer to use the correlation matrix
@@ -608,10 +647,10 @@ C_{1} = 0.707x_1 + 0.707X_2 \\
 C_{2} = 0.707x_1 - 0.707X_2
 \]</span></p>
 <p>I want to compare them side by side in a nice table.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="standardizing.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">PC1.cov =</span> <span class="fu">loadings</span>(pr)[,<span class="dv">1</span>],</span>
-<span id="cb14-2"><a href="standardizing.html#cb14-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">PC2.cov =</span> <span class="fu">loadings</span>(pr)[,<span class="dv">2</span>],</span>
-<span id="cb14-3"><a href="standardizing.html#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">PC1.cor =</span> <span class="fu">loadings</span>(pr_corr)[,<span class="dv">1</span>],</span>
-<span id="cb14-4"><a href="standardizing.html#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">PC2.cor =</span> <span class="fu">loadings</span>(pr_corr)[,<span class="dv">2</span>]) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="standardizing.html#cb268-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">PC1.cov =</span> <span class="fu">loadings</span>(pr)[,<span class="dv">1</span>],</span>
+<span id="cb268-2"><a href="standardizing.html#cb268-2" tabindex="-1"></a>           <span class="at">PC2.cov =</span> <span class="fu">loadings</span>(pr)[,<span class="dv">2</span>],</span>
+<span id="cb268-3"><a href="standardizing.html#cb268-3" tabindex="-1"></a>           <span class="at">PC1.cor =</span> <span class="fu">loadings</span>(pr_corr)[,<span class="dv">1</span>],</span>
+<span id="cb268-4"><a href="standardizing.html#cb268-4" tabindex="-1"></a>           <span class="at">PC2.cor =</span> <span class="fu">loadings</span>(pr_corr)[,<span class="dv">2</span>]) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">2</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -735,7 +774,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

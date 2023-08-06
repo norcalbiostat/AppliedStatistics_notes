@@ -6,7 +6,7 @@ Once the data are available from a study there are still a number of steps that 
 
 One of the most misunderstood parts of the analysis process is the data preparation stage. To say that 70% of any analysis is spent on the data management stage is not an understatement. 
 
-This chapter provides information on topics related to data processing and corresponds to :book: PMA6 Chapter 3. 
+This chapter provides information on topics related to data processing and corresponds to PMA6 Chapter 3. 
 
 
 ## Generating a reproducible workflows

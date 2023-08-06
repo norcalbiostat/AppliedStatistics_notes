@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.2 Wald test | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.2 Wald test | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -567,33 +619,33 @@ Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}X_{3} + \beta_{4}x_{4
 <div id="example-modeling-depression-score" class="section level3 hasAnchor" number="10.2.1">
 <h3><span class="header-section-number">10.2.1</span> Example: Modeling depression score<a href="wald-test.html#example-modeling-depression-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="wald-test.html#cb195-1" aria-hidden="true" tabindex="-1"></a>employ.depression.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
-<span id="cb195-2"><a href="wald-test.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
-<span id="cb195-3"><a href="wald-test.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb195-4"><a href="wald-test.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb195-5"><a href="wald-test.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
-<span id="cb195-6"><a href="wald-test.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb195-7"><a href="wald-test.html#cb195-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb195-8"><a href="wald-test.html#cb195-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb195-9"><a href="wald-test.html#cb195-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
-<span id="cb195-10"><a href="wald-test.html#cb195-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb195-11"><a href="wald-test.html#cb195-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb195-12"><a href="wald-test.html#cb195-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb195-13"><a href="wald-test.html#cb195-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
-<span id="cb195-14"><a href="wald-test.html#cb195-14" aria-hidden="true" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
-<span id="cb195-15"><a href="wald-test.html#cb195-15" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
-<span id="cb195-16"><a href="wald-test.html#cb195-16" aria-hidden="true" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
-<span id="cb195-17"><a href="wald-test.html#cb195-17" aria-hidden="true" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
-<span id="cb195-18"><a href="wald-test.html#cb195-18" aria-hidden="true" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
-<span id="cb195-19"><a href="wald-test.html#cb195-19" aria-hidden="true" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
-<span id="cb195-20"><a href="wald-test.html#cb195-20" aria-hidden="true" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
-<span id="cb195-21"><a href="wald-test.html#cb195-21" aria-hidden="true" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
-<span id="cb195-22"><a href="wald-test.html#cb195-22" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb195-23"><a href="wald-test.html#cb195-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb195-24"><a href="wald-test.html#cb195-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb195-25"><a href="wald-test.html#cb195-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
-<span id="cb195-26"><a href="wald-test.html#cb195-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
-<span id="cb195-27"><a href="wald-test.html#cb195-27" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="wald-test.html#cb195-1" tabindex="-1"></a>employ.depression.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
+<span id="cb195-2"><a href="wald-test.html#cb195-2" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
+<span id="cb195-3"><a href="wald-test.html#cb195-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb195-4"><a href="wald-test.html#cb195-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb195-5"><a href="wald-test.html#cb195-5" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
+<span id="cb195-6"><a href="wald-test.html#cb195-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb195-7"><a href="wald-test.html#cb195-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb195-8"><a href="wald-test.html#cb195-8" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb195-9"><a href="wald-test.html#cb195-9" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
+<span id="cb195-10"><a href="wald-test.html#cb195-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb195-11"><a href="wald-test.html#cb195-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb195-12"><a href="wald-test.html#cb195-12" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb195-13"><a href="wald-test.html#cb195-13" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
+<span id="cb195-14"><a href="wald-test.html#cb195-14" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
+<span id="cb195-15"><a href="wald-test.html#cb195-15" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
+<span id="cb195-16"><a href="wald-test.html#cb195-16" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
+<span id="cb195-17"><a href="wald-test.html#cb195-17" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
+<span id="cb195-18"><a href="wald-test.html#cb195-18" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
+<span id="cb195-19"><a href="wald-test.html#cb195-19" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
+<span id="cb195-20"><a href="wald-test.html#cb195-20" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
+<span id="cb195-21"><a href="wald-test.html#cb195-21" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
+<span id="cb195-22"><a href="wald-test.html#cb195-22" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb195-23"><a href="wald-test.html#cb195-23" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb195-24"><a href="wald-test.html#cb195-24" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb195-25"><a href="wald-test.html#cb195-25" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
+<span id="cb195-26"><a href="wald-test.html#cb195-26" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
+<span id="cb195-27"><a href="wald-test.html#cb195-27" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
 <p>The results of this model show that age and chronic illness are statistically associated with CESD (each p&lt;.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression?</p>
 <p><strong>(1) Testing if a categorical variable as a whole improves model fit</strong></p>
 <p>Since employment is a categorical variable, all the coefficient estimates shown are the effect of being in that income category has on depression <em>compared to</em> being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed.</p>
@@ -601,14 +653,14 @@ Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}X_{3} + \beta_{4}x_{4
 <p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
 <span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
 <p>ANOVA to the rescue! Since ANOVA partitions the variance in our outcome <span class="math inline">\(Y\)</span> into amounts due to each variable, we get an ANOVA table that has one row per term:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="wald-test.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(employ.depression.model) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
-<span id="cb196-2"><a href="wald-test.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
-<span id="cb196-3"><a href="wald-test.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.743 0.003368 ** </span></span>
-<span id="cb196-4"><a href="wald-test.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.821 0.016469 *  </span></span>
-<span id="cb196-5"><a href="wald-test.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.154 0.000509 ***</span></span>
-<span id="cb196-6"><a href="wald-test.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   285  20036    70.3                     </span></span>
-<span id="cb196-7"><a href="wald-test.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb196-8"><a href="wald-test.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="wald-test.html#cb196-1" tabindex="-1"></a><span class="fu">aov</span>(employ.depression.model) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb196-2"><a href="wald-test.html#cb196-2" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span id="cb196-3"><a href="wald-test.html#cb196-3" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.743 0.003368 ** </span></span>
+<span id="cb196-4"><a href="wald-test.html#cb196-4" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.821 0.016469 *  </span></span>
+<span id="cb196-5"><a href="wald-test.html#cb196-5" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.154 0.000509 ***</span></span>
+<span id="cb196-6"><a href="wald-test.html#cb196-6" tabindex="-1"></a><span class="do">## Residuals   285  20036    70.3                     </span></span>
+<span id="cb196-7"><a href="wald-test.html#cb196-7" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb196-8"><a href="wald-test.html#cb196-8" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <ul>
 <li>The last row for <code>employ</code> is what we are interested in here.</li>
 <li>First confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
@@ -624,71 +676,71 @@ Note the p-values for the individual coefficients <code>age</code> and <code>chr
 </div>
 <p><strong>(2) Testing that the regression plane is useful to predict <span class="math inline">\(Y\)</span></strong></p>
 <p>This information is provided to us directly in the last line of the summary output from a linear model.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="wald-test.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
-<span id="cb197-2"><a href="wald-test.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb197-3"><a href="wald-test.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb197-4"><a href="wald-test.html#cb197-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
-<span id="cb197-5"><a href="wald-test.html#cb197-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb197-6"><a href="wald-test.html#cb197-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb197-7"><a href="wald-test.html#cb197-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb197-8"><a href="wald-test.html#cb197-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
-<span id="cb197-9"><a href="wald-test.html#cb197-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb197-10"><a href="wald-test.html#cb197-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb197-11"><a href="wald-test.html#cb197-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb197-12"><a href="wald-test.html#cb197-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
-<span id="cb197-13"><a href="wald-test.html#cb197-13" aria-hidden="true" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
-<span id="cb197-14"><a href="wald-test.html#cb197-14" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
-<span id="cb197-15"><a href="wald-test.html#cb197-15" aria-hidden="true" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
-<span id="cb197-16"><a href="wald-test.html#cb197-16" aria-hidden="true" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
-<span id="cb197-17"><a href="wald-test.html#cb197-17" aria-hidden="true" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
-<span id="cb197-18"><a href="wald-test.html#cb197-18" aria-hidden="true" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
-<span id="cb197-19"><a href="wald-test.html#cb197-19" aria-hidden="true" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
-<span id="cb197-20"><a href="wald-test.html#cb197-20" aria-hidden="true" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
-<span id="cb197-21"><a href="wald-test.html#cb197-21" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb197-22"><a href="wald-test.html#cb197-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb197-23"><a href="wald-test.html#cb197-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb197-24"><a href="wald-test.html#cb197-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
-<span id="cb197-25"><a href="wald-test.html#cb197-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
-<span id="cb197-26"><a href="wald-test.html#cb197-26" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="wald-test.html#cb197-1" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
+<span id="cb197-2"><a href="wald-test.html#cb197-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb197-3"><a href="wald-test.html#cb197-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb197-4"><a href="wald-test.html#cb197-4" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
+<span id="cb197-5"><a href="wald-test.html#cb197-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb197-6"><a href="wald-test.html#cb197-6" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb197-7"><a href="wald-test.html#cb197-7" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb197-8"><a href="wald-test.html#cb197-8" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
+<span id="cb197-9"><a href="wald-test.html#cb197-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb197-10"><a href="wald-test.html#cb197-10" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb197-11"><a href="wald-test.html#cb197-11" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb197-12"><a href="wald-test.html#cb197-12" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
+<span id="cb197-13"><a href="wald-test.html#cb197-13" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
+<span id="cb197-14"><a href="wald-test.html#cb197-14" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
+<span id="cb197-15"><a href="wald-test.html#cb197-15" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
+<span id="cb197-16"><a href="wald-test.html#cb197-16" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
+<span id="cb197-17"><a href="wald-test.html#cb197-17" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
+<span id="cb197-18"><a href="wald-test.html#cb197-18" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
+<span id="cb197-19"><a href="wald-test.html#cb197-19" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
+<span id="cb197-20"><a href="wald-test.html#cb197-20" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
+<span id="cb197-21"><a href="wald-test.html#cb197-21" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb197-22"><a href="wald-test.html#cb197-22" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb197-23"><a href="wald-test.html#cb197-23" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb197-24"><a href="wald-test.html#cb197-24" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
+<span id="cb197-25"><a href="wald-test.html#cb197-25" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
+<span id="cb197-26"><a href="wald-test.html#cb197-26" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
 </div>
 <div id="testing-for-a-moderation-effect-in-a-multiple-regression-model." class="section level3 hasAnchor" number="10.2.2">
 <h3><span class="header-section-number">10.2.2</span> Testing for a moderation effect in a multiple regression model.<a href="wald-test.html#testing-for-a-moderation-effect-in-a-multiple-regression-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Moderation is introduced in Chapter <a href="mod-strat.html#mod-strat">8</a>, and helps to set the motivation for stratified models. Later, in Chapter <a href="interactions.html#interactions-catvars">10.1.2</a>, we show that an interaction term in a regression model is equivelant to stratification.</p>
 <p>Well what if you have other predictors in the model, not just the ones that you have an interaction on? We can use the Wald test to assess if a measure is a significant moderator without stratifying.</p>
 <p>Continuing with the depression example we saw that employment affects CESD depression score. What if we think that the effect (slope) of age on CESD may be different depending on their employment? That is, is the effect of age on depression different for those that are employed versus retired?</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="wald-test.html#cb198-1" aria-hidden="true" tabindex="-1"></a>emp.dep.intx <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ <span class="sc">+</span> age<span class="sc">*</span>employ, <span class="at">data=</span>depress)</span>
-<span id="cb198-2"><a href="wald-test.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emp.dep.intx)</span>
-<span id="cb198-3"><a href="wald-test.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb198-4"><a href="wald-test.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb198-5"><a href="wald-test.html#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ + age * employ, data = depress)</span></span>
-<span id="cb198-6"><a href="wald-test.html#cb198-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb198-7"><a href="wald-test.html#cb198-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb198-8"><a href="wald-test.html#cb198-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb198-9"><a href="wald-test.html#cb198-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -18.728  -5.499  -1.900   3.251  33.973 </span></span>
-<span id="cb198-10"><a href="wald-test.html#cb198-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb198-11"><a href="wald-test.html#cb198-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb198-12"><a href="wald-test.html#cb198-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb198-13"><a href="wald-test.html#cb198-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)            10.514408   2.027479   5.186 4.14e-07 ***</span></span>
-<span id="cb198-14"><a href="wald-test.html#cb198-14" aria-hidden="true" tabindex="-1"></a><span class="do">## age                    -0.108148   0.050325  -2.149  0.03250 *  </span></span>
-<span id="cb198-15"><a href="wald-test.html#cb198-15" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill                2.716041   1.035393   2.623  0.00919 ** </span></span>
-<span id="cb198-16"><a href="wald-test.html#cb198-16" aria-hidden="true" tabindex="-1"></a><span class="do">## employHouseperson      13.136141   5.279521   2.488  0.01343 *  </span></span>
-<span id="cb198-17"><a href="wald-test.html#cb198-17" aria-hidden="true" tabindex="-1"></a><span class="do">## employIn School       -39.366285  42.218614  -0.932  0.35192    </span></span>
-<span id="cb198-18"><a href="wald-test.html#cb198-18" aria-hidden="true" tabindex="-1"></a><span class="do">## employOther             5.099073  18.815341   0.271  0.78659    </span></span>
-<span id="cb198-19"><a href="wald-test.html#cb198-19" aria-hidden="true" tabindex="-1"></a><span class="do">## employPT                2.742451   3.850676   0.712  0.47694    </span></span>
-<span id="cb198-20"><a href="wald-test.html#cb198-20" aria-hidden="true" tabindex="-1"></a><span class="do">## employRetired          -2.851372  12.739350  -0.224  0.82306    </span></span>
-<span id="cb198-21"><a href="wald-test.html#cb198-21" aria-hidden="true" tabindex="-1"></a><span class="do">## employUnemp            13.820668   5.677595   2.434  0.01555 *  </span></span>
-<span id="cb198-22"><a href="wald-test.html#cb198-22" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employHouseperson  -0.130545   0.102421  -1.275  0.20351    </span></span>
-<span id="cb198-23"><a href="wald-test.html#cb198-23" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employIn School     1.988808   1.989220   1.000  0.31828    </span></span>
-<span id="cb198-24"><a href="wald-test.html#cb198-24" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employOther        -0.009316   0.386657  -0.024  0.98080    </span></span>
-<span id="cb198-25"><a href="wald-test.html#cb198-25" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employPT            0.008960   0.085254   0.105  0.91638    </span></span>
-<span id="cb198-26"><a href="wald-test.html#cb198-26" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employRetired       0.073942   0.182591   0.405  0.68582    </span></span>
-<span id="cb198-27"><a href="wald-test.html#cb198-27" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employUnemp        -0.174615   0.146179  -1.195  0.23328    </span></span>
-<span id="cb198-28"><a href="wald-test.html#cb198-28" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb198-29"><a href="wald-test.html#cb198-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb198-30"><a href="wald-test.html#cb198-30" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb198-31"><a href="wald-test.html#cb198-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 8.408 on 279 degrees of freedom</span></span>
-<span id="cb198-32"><a href="wald-test.html#cb198-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1354, Adjusted R-squared:  0.09201 </span></span>
-<span id="cb198-33"><a href="wald-test.html#cb198-33" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 3.121 on 14 and 279 DF,  p-value: 0.0001511</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="wald-test.html#cb198-1" tabindex="-1"></a>emp.dep.intx <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ <span class="sc">+</span> age<span class="sc">*</span>employ, <span class="at">data=</span>depress)</span>
+<span id="cb198-2"><a href="wald-test.html#cb198-2" tabindex="-1"></a><span class="fu">summary</span>(emp.dep.intx)</span>
+<span id="cb198-3"><a href="wald-test.html#cb198-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb198-4"><a href="wald-test.html#cb198-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb198-5"><a href="wald-test.html#cb198-5" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ + age * employ, data = depress)</span></span>
+<span id="cb198-6"><a href="wald-test.html#cb198-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb198-7"><a href="wald-test.html#cb198-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb198-8"><a href="wald-test.html#cb198-8" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb198-9"><a href="wald-test.html#cb198-9" tabindex="-1"></a><span class="do">## -18.728  -5.499  -1.900   3.251  33.973 </span></span>
+<span id="cb198-10"><a href="wald-test.html#cb198-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb198-11"><a href="wald-test.html#cb198-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb198-12"><a href="wald-test.html#cb198-12" tabindex="-1"></a><span class="do">##                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb198-13"><a href="wald-test.html#cb198-13" tabindex="-1"></a><span class="do">## (Intercept)            10.514408   2.027479   5.186 4.14e-07 ***</span></span>
+<span id="cb198-14"><a href="wald-test.html#cb198-14" tabindex="-1"></a><span class="do">## age                    -0.108148   0.050325  -2.149  0.03250 *  </span></span>
+<span id="cb198-15"><a href="wald-test.html#cb198-15" tabindex="-1"></a><span class="do">## chronill                2.716041   1.035393   2.623  0.00919 ** </span></span>
+<span id="cb198-16"><a href="wald-test.html#cb198-16" tabindex="-1"></a><span class="do">## employHouseperson      13.136141   5.279521   2.488  0.01343 *  </span></span>
+<span id="cb198-17"><a href="wald-test.html#cb198-17" tabindex="-1"></a><span class="do">## employIn School       -39.366285  42.218614  -0.932  0.35192    </span></span>
+<span id="cb198-18"><a href="wald-test.html#cb198-18" tabindex="-1"></a><span class="do">## employOther             5.099073  18.815341   0.271  0.78659    </span></span>
+<span id="cb198-19"><a href="wald-test.html#cb198-19" tabindex="-1"></a><span class="do">## employPT                2.742451   3.850676   0.712  0.47694    </span></span>
+<span id="cb198-20"><a href="wald-test.html#cb198-20" tabindex="-1"></a><span class="do">## employRetired          -2.851372  12.739350  -0.224  0.82306    </span></span>
+<span id="cb198-21"><a href="wald-test.html#cb198-21" tabindex="-1"></a><span class="do">## employUnemp            13.820668   5.677595   2.434  0.01555 *  </span></span>
+<span id="cb198-22"><a href="wald-test.html#cb198-22" tabindex="-1"></a><span class="do">## age:employHouseperson  -0.130545   0.102421  -1.275  0.20351    </span></span>
+<span id="cb198-23"><a href="wald-test.html#cb198-23" tabindex="-1"></a><span class="do">## age:employIn School     1.988808   1.989220   1.000  0.31828    </span></span>
+<span id="cb198-24"><a href="wald-test.html#cb198-24" tabindex="-1"></a><span class="do">## age:employOther        -0.009316   0.386657  -0.024  0.98080    </span></span>
+<span id="cb198-25"><a href="wald-test.html#cb198-25" tabindex="-1"></a><span class="do">## age:employPT            0.008960   0.085254   0.105  0.91638    </span></span>
+<span id="cb198-26"><a href="wald-test.html#cb198-26" tabindex="-1"></a><span class="do">## age:employRetired       0.073942   0.182591   0.405  0.68582    </span></span>
+<span id="cb198-27"><a href="wald-test.html#cb198-27" tabindex="-1"></a><span class="do">## age:employUnemp        -0.174615   0.146179  -1.195  0.23328    </span></span>
+<span id="cb198-28"><a href="wald-test.html#cb198-28" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb198-29"><a href="wald-test.html#cb198-29" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb198-30"><a href="wald-test.html#cb198-30" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb198-31"><a href="wald-test.html#cb198-31" tabindex="-1"></a><span class="do">## Residual standard error: 8.408 on 279 degrees of freedom</span></span>
+<span id="cb198-32"><a href="wald-test.html#cb198-32" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1354, Adjusted R-squared:  0.09201 </span></span>
+<span id="cb198-33"><a href="wald-test.html#cb198-33" tabindex="-1"></a><span class="do">## F-statistic: 3.121 on 14 and 279 DF,  p-value: 0.0001511</span></span></code></pre></div>
 <p>Let’s revisit our list of beta coefficients:</p>
 <ul>
 <li><span class="math inline">\(\beta_{1}\)</span>: Age</li>
@@ -697,15 +749,15 @@ Note the p-values for the individual coefficients <code>age</code> and <code>chr
 <li><span class="math inline">\(\beta_{8} \ldots \beta_{12}\)</span>: Multiplicative effect that levels of employment have on the slope of age.</li>
 </ul>
 <p>To see if the interaction term <code>age*employ</code> is significant, we run an F test via <code>aov()</code> and interpret the p-value for the interaction term <code>age:employ</code>. Here the pvalue is very large, so there is no reason to believe that employment moderates the relationship between age and CESD score. This is a two way relationship. There is also no reason to believe that age moderates the relationship between employment and CESD score.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="wald-test.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(emp.dep.intx) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb199-2"><a href="wald-test.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
-<span id="cb199-3"><a href="wald-test.html#cb199-3" aria-hidden="true" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.694 0.003462 ** </span></span>
-<span id="cb199-4"><a href="wald-test.html#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.789 0.016781 *  </span></span>
-<span id="cb199-5"><a href="wald-test.html#cb199-5" aria-hidden="true" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.131 0.000541 ***</span></span>
-<span id="cb199-6"><a href="wald-test.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="do">## age:employ    6    313    52.1   0.737 0.620089    </span></span>
-<span id="cb199-7"><a href="wald-test.html#cb199-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   279  19723    70.7                     </span></span>
-<span id="cb199-8"><a href="wald-test.html#cb199-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb199-9"><a href="wald-test.html#cb199-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="wald-test.html#cb199-1" tabindex="-1"></a><span class="fu">aov</span>(emp.dep.intx) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb199-2"><a href="wald-test.html#cb199-2" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span id="cb199-3"><a href="wald-test.html#cb199-3" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.694 0.003462 ** </span></span>
+<span id="cb199-4"><a href="wald-test.html#cb199-4" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.789 0.016781 *  </span></span>
+<span id="cb199-5"><a href="wald-test.html#cb199-5" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.131 0.000541 ***</span></span>
+<span id="cb199-6"><a href="wald-test.html#cb199-6" tabindex="-1"></a><span class="do">## age:employ    6    313    52.1   0.737 0.620089    </span></span>
+<span id="cb199-7"><a href="wald-test.html#cb199-7" tabindex="-1"></a><span class="do">## Residuals   279  19723    70.7                     </span></span>
+<span id="cb199-8"><a href="wald-test.html#cb199-8" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb199-9"><a href="wald-test.html#cb199-9" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 </div>
 </div>
             </section>
@@ -774,7 +826,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 Data Management | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -119,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -217,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -283,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -299,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -529,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -578,131 +614,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Missing Data in SPSS: <a href="https://stats.idre.ucla.edu/spss/modules/missing-data/" class="uri">https://stats.idre.ucla.edu/spss/modules/missing-data/</a></p>
 <p>Why would data be missing? Other than the obvious data entry errors, tech glitches or just non-cooperative plants or people, sometimes values are out of range and you would rather delete them than change their value (data edit).</p>
 <p>Lets look at the religion variable in the depression data set.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-management.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb4-2"><a href="data-management.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-3"><a href="data-management.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    2    3    4    6 &lt;NA&gt; </span></span>
-<span id="cb4-4"><a href="data-management.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  155   51   30   56    2    0</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-management.html#cb4-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb4-2"><a href="data-management.html#cb4-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-3"><a href="data-management.html#cb4-3" tabindex="-1"></a><span class="do">##    1    2    3    4    6 &lt;NA&gt; </span></span>
+<span id="cb4-4"><a href="data-management.html#cb4-4" tabindex="-1"></a><span class="do">##  155   51   30   56    2    0</span></span></code></pre></div>
 <p>Looking at the codebook, there is no category <code>6</code> for religion. Let’s change all values to <code>NA</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-management.html#cb5-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>relig[depress<span class="sc">$</span>relig<span class="sc">==</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-management.html#cb5-1" tabindex="-1"></a>depress<span class="sc">$</span>relig[depress<span class="sc">$</span>relig<span class="sc">==</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <p>This code says take all rows where <code>relig</code> is equal to 6, and change them to <code>NA</code>.</p>
 <p>Confirm recode.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-management.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb6-2"><a href="data-management.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-3"><a href="data-management.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    2    3    4 &lt;NA&gt; </span></span>
-<span id="cb6-4"><a href="data-management.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  155   51   30   56    2</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-management.html#cb6-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb6-2"><a href="data-management.html#cb6-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-3"><a href="data-management.html#cb6-3" tabindex="-1"></a><span class="do">##    1    2    3    4 &lt;NA&gt; </span></span>
+<span id="cb6-4"><a href="data-management.html#cb6-4" tabindex="-1"></a><span class="do">##  155   51   30   56    2</span></span></code></pre></div>
 <p>Notice the use of the <code>useNA="always"</code> argument. If we just looked at the base table without this argument, we would have never known there was missing data!</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-management.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig)</span>
-<span id="cb7-2"><a href="data-management.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb7-3"><a href="data-management.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   1   2   3   4 </span></span>
-<span id="cb7-4"><a href="data-management.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 155  51  30  56</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-management.html#cb7-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig)</span>
+<span id="cb7-2"><a href="data-management.html#cb7-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-3"><a href="data-management.html#cb7-3" tabindex="-1"></a><span class="do">##   1   2   3   4 </span></span>
+<span id="cb7-4"><a href="data-management.html#cb7-4" tabindex="-1"></a><span class="do">## 155  51  30  56</span></span></code></pre></div>
 <p>What about continuous variables? Well there happens to be no other missing data in this data set, so let’s make up a set of 7 data points stored in a variable named <code>y</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-management.html#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">6</span>)</span>
-<span id="cb8-2"><a href="data-management.html#cb8-2" aria-hidden="true" tabindex="-1"></a>y</span>
-<span id="cb8-3"><a href="data-management.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  1  2  3 NA  4 NA  6</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-management.html#cb8-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">6</span>)</span>
+<span id="cb8-2"><a href="data-management.html#cb8-2" tabindex="-1"></a>y</span>
+<span id="cb8-3"><a href="data-management.html#cb8-3" tabindex="-1"></a><span class="do">## [1]  1  2  3 NA  4 NA  6</span></span></code></pre></div>
 <p>The #1 way to identify missing data in a continuous variable is by looking at the <code>summary()</code> values.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-management.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span>
-<span id="cb9-2"><a href="data-management.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span>
-<span id="cb9-3"><a href="data-management.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y)</span>
-<span id="cb9-4"><a href="data-management.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
-<span id="cb9-5"><a href="data-management.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     1.0     2.0     3.0     3.2     4.0     6.0       2</span></span>
-<span id="cb9-6"><a href="data-management.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb9-7"><a href="data-management.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-management.html#cb9-1" tabindex="-1"></a><span class="fu">mean</span>(y)</span>
+<span id="cb9-2"><a href="data-management.html#cb9-2" tabindex="-1"></a><span class="do">## [1] NA</span></span>
+<span id="cb9-3"><a href="data-management.html#cb9-3" tabindex="-1"></a><span class="fu">summary</span>(y)</span>
+<span id="cb9-4"><a href="data-management.html#cb9-4" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
+<span id="cb9-5"><a href="data-management.html#cb9-5" tabindex="-1"></a><span class="do">##     1.0     2.0     3.0     3.2     4.0     6.0       2</span></span>
+<span id="cb9-6"><a href="data-management.html#cb9-6" tabindex="-1"></a><span class="fu">mean</span>(y, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-7"><a href="data-management.html#cb9-7" tabindex="-1"></a><span class="do">## [1] 3.2</span></span></code></pre></div>
 <p>In R, any arithmetic function (like addition, multiplication) on missing data results in a missing value. The <code>na.rm=TRUE</code> toggle tells R to calculate the <em>complete case</em> mean. This is a biased measure of the mean, but missing data is a topic worthy of it’s own course.</p>
 </div>
 <div id="identifying-variable-types" class="section level3 hasAnchor" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Identifying Variable Types<a href="data-management.html#identifying-variable-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>str</code> function is short for <em>structure</em>. This shows you the variable names, what data types R thinks each variable are, and some of the raw data. You can also use the <code>view()</code> function to open the data as a similar spreadsheet format, or <code>head()</code> to see the top 6 rows of the data. The latter is sometimes less than helpful for a very large data set.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-management.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(depress)</span>
-<span id="cb10-2"><a href="data-management.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    294 obs. of  37 variables:</span></span>
-<span id="cb10-3"><a href="data-management.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ id      : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span id="cb10-4"><a href="data-management.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ sex     : int  2 1 2 2 2 1 2 1 2 1 ...</span></span>
-<span id="cb10-5"><a href="data-management.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ age     : int  68 58 45 50 33 24 58 22 47 30 ...</span></span>
-<span id="cb10-6"><a href="data-management.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ marital : int  5 3 2 3 4 2 2 1 2 2 ...</span></span>
-<span id="cb10-7"><a href="data-management.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ educat  : int  2 4 3 3 3 3 2 3 3 2 ...</span></span>
-<span id="cb10-8"><a href="data-management.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ employ  : int  4 1 1 3 1 1 5 1 4 1 ...</span></span>
-<span id="cb10-9"><a href="data-management.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ income  : int  4 15 28 9 35 11 11 9 23 35 ...</span></span>
-<span id="cb10-10"><a href="data-management.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ relig   : int  1 1 1 1 1 1 1 1 2 4 ...</span></span>
-<span id="cb10-11"><a href="data-management.html#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c1      : int  0 0 0 0 0 0 2 0 0 0 ...</span></span>
-<span id="cb10-12"><a href="data-management.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c2      : int  0 0 0 0 0 0 1 1 1 0 ...</span></span>
-<span id="cb10-13"><a href="data-management.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c3      : int  0 1 0 0 0 0 1 2 1 0 ...</span></span>
-<span id="cb10-14"><a href="data-management.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c4      : int  0 0 0 0 0 0 2 0 0 0 ...</span></span>
-<span id="cb10-15"><a href="data-management.html#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c5      : int  0 0 1 1 0 0 1 2 0 0 ...</span></span>
-<span id="cb10-16"><a href="data-management.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c6      : int  0 0 0 1 0 0 0 1 3 0 ...</span></span>
-<span id="cb10-17"><a href="data-management.html#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c7      : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb10-18"><a href="data-management.html#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c8      : int  0 0 0 3 3 0 2 0 0 0 ...</span></span>
-<span id="cb10-19"><a href="data-management.html#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c9      : int  0 0 0 0 3 1 2 0 0 0 ...</span></span>
-<span id="cb10-20"><a href="data-management.html#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c10     : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb10-21"><a href="data-management.html#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c11     : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb10-22"><a href="data-management.html#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c12     : int  0 1 0 0 0 1 0 0 3 0 ...</span></span>
-<span id="cb10-23"><a href="data-management.html#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c13     : int  0 0 0 0 0 2 0 0 0 0 ...</span></span>
-<span id="cb10-24"><a href="data-management.html#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c14     : int  0 0 1 0 0 0 0 0 3 0 ...</span></span>
-<span id="cb10-25"><a href="data-management.html#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c15     : int  0 1 1 0 0 0 3 0 2 0 ...</span></span>
-<span id="cb10-26"><a href="data-management.html#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c16     : int  0 0 1 0 0 2 0 1 3 0 ...</span></span>
-<span id="cb10-27"><a href="data-management.html#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c17     : int  0 1 0 0 0 1 0 1 0 0 ...</span></span>
-<span id="cb10-28"><a href="data-management.html#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c18     : int  0 0 0 0 0 0 0 1 0 0 ...</span></span>
-<span id="cb10-29"><a href="data-management.html#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c19     : int  0 0 0 0 0 0 0 1 0 0 ...</span></span>
-<span id="cb10-30"><a href="data-management.html#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ c20     : int  0 0 0 0 0 0 1 0 0 0 ...</span></span>
-<span id="cb10-31"><a href="data-management.html#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ cesd    : int  0 4 4 5 6 7 15 10 16 0 ...</span></span>
-<span id="cb10-32"><a href="data-management.html#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ cases   : int  0 0 0 0 0 0 0 0 1 0 ...</span></span>
-<span id="cb10-33"><a href="data-management.html#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ drink   : int  2 1 1 2 1 1 2 2 1 1 ...</span></span>
-<span id="cb10-34"><a href="data-management.html#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ health  : int  2 1 2 1 1 1 3 1 4 1 ...</span></span>
-<span id="cb10-35"><a href="data-management.html#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ regdoc  : int  1 1 1 1 1 1 1 2 1 1 ...</span></span>
-<span id="cb10-36"><a href="data-management.html#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ treat   : int  1 1 1 2 1 1 1 2 1 2 ...</span></span>
-<span id="cb10-37"><a href="data-management.html#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ beddays : int  0 0 0 0 1 0 0 0 1 0 ...</span></span>
-<span id="cb10-38"><a href="data-management.html#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ acuteill: int  0 0 0 0 1 1 1 1 0 0 ...</span></span>
-<span id="cb10-39"><a href="data-management.html#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ chronill: int  1 1 0 1 0 1 1 0 1 0 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-management.html#cb10-1" tabindex="-1"></a><span class="fu">str</span>(depress)</span>
+<span id="cb10-2"><a href="data-management.html#cb10-2" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    294 obs. of  37 variables:</span></span>
+<span id="cb10-3"><a href="data-management.html#cb10-3" tabindex="-1"></a><span class="do">##  $ id      : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb10-4"><a href="data-management.html#cb10-4" tabindex="-1"></a><span class="do">##  $ sex     : int  2 1 2 2 2 1 2 1 2 1 ...</span></span>
+<span id="cb10-5"><a href="data-management.html#cb10-5" tabindex="-1"></a><span class="do">##  $ age     : int  68 58 45 50 33 24 58 22 47 30 ...</span></span>
+<span id="cb10-6"><a href="data-management.html#cb10-6" tabindex="-1"></a><span class="do">##  $ marital : int  5 3 2 3 4 2 2 1 2 2 ...</span></span>
+<span id="cb10-7"><a href="data-management.html#cb10-7" tabindex="-1"></a><span class="do">##  $ educat  : int  2 4 3 3 3 3 2 3 3 2 ...</span></span>
+<span id="cb10-8"><a href="data-management.html#cb10-8" tabindex="-1"></a><span class="do">##  $ employ  : int  4 1 1 3 1 1 5 1 4 1 ...</span></span>
+<span id="cb10-9"><a href="data-management.html#cb10-9" tabindex="-1"></a><span class="do">##  $ income  : int  4 15 28 9 35 11 11 9 23 35 ...</span></span>
+<span id="cb10-10"><a href="data-management.html#cb10-10" tabindex="-1"></a><span class="do">##  $ relig   : int  1 1 1 1 1 1 1 1 2 4 ...</span></span>
+<span id="cb10-11"><a href="data-management.html#cb10-11" tabindex="-1"></a><span class="do">##  $ c1      : int  0 0 0 0 0 0 2 0 0 0 ...</span></span>
+<span id="cb10-12"><a href="data-management.html#cb10-12" tabindex="-1"></a><span class="do">##  $ c2      : int  0 0 0 0 0 0 1 1 1 0 ...</span></span>
+<span id="cb10-13"><a href="data-management.html#cb10-13" tabindex="-1"></a><span class="do">##  $ c3      : int  0 1 0 0 0 0 1 2 1 0 ...</span></span>
+<span id="cb10-14"><a href="data-management.html#cb10-14" tabindex="-1"></a><span class="do">##  $ c4      : int  0 0 0 0 0 0 2 0 0 0 ...</span></span>
+<span id="cb10-15"><a href="data-management.html#cb10-15" tabindex="-1"></a><span class="do">##  $ c5      : int  0 0 1 1 0 0 1 2 0 0 ...</span></span>
+<span id="cb10-16"><a href="data-management.html#cb10-16" tabindex="-1"></a><span class="do">##  $ c6      : int  0 0 0 1 0 0 0 1 3 0 ...</span></span>
+<span id="cb10-17"><a href="data-management.html#cb10-17" tabindex="-1"></a><span class="do">##  $ c7      : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb10-18"><a href="data-management.html#cb10-18" tabindex="-1"></a><span class="do">##  $ c8      : int  0 0 0 3 3 0 2 0 0 0 ...</span></span>
+<span id="cb10-19"><a href="data-management.html#cb10-19" tabindex="-1"></a><span class="do">##  $ c9      : int  0 0 0 0 3 1 2 0 0 0 ...</span></span>
+<span id="cb10-20"><a href="data-management.html#cb10-20" tabindex="-1"></a><span class="do">##  $ c10     : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb10-21"><a href="data-management.html#cb10-21" tabindex="-1"></a><span class="do">##  $ c11     : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb10-22"><a href="data-management.html#cb10-22" tabindex="-1"></a><span class="do">##  $ c12     : int  0 1 0 0 0 1 0 0 3 0 ...</span></span>
+<span id="cb10-23"><a href="data-management.html#cb10-23" tabindex="-1"></a><span class="do">##  $ c13     : int  0 0 0 0 0 2 0 0 0 0 ...</span></span>
+<span id="cb10-24"><a href="data-management.html#cb10-24" tabindex="-1"></a><span class="do">##  $ c14     : int  0 0 1 0 0 0 0 0 3 0 ...</span></span>
+<span id="cb10-25"><a href="data-management.html#cb10-25" tabindex="-1"></a><span class="do">##  $ c15     : int  0 1 1 0 0 0 3 0 2 0 ...</span></span>
+<span id="cb10-26"><a href="data-management.html#cb10-26" tabindex="-1"></a><span class="do">##  $ c16     : int  0 0 1 0 0 2 0 1 3 0 ...</span></span>
+<span id="cb10-27"><a href="data-management.html#cb10-27" tabindex="-1"></a><span class="do">##  $ c17     : int  0 1 0 0 0 1 0 1 0 0 ...</span></span>
+<span id="cb10-28"><a href="data-management.html#cb10-28" tabindex="-1"></a><span class="do">##  $ c18     : int  0 0 0 0 0 0 0 1 0 0 ...</span></span>
+<span id="cb10-29"><a href="data-management.html#cb10-29" tabindex="-1"></a><span class="do">##  $ c19     : int  0 0 0 0 0 0 0 1 0 0 ...</span></span>
+<span id="cb10-30"><a href="data-management.html#cb10-30" tabindex="-1"></a><span class="do">##  $ c20     : int  0 0 0 0 0 0 1 0 0 0 ...</span></span>
+<span id="cb10-31"><a href="data-management.html#cb10-31" tabindex="-1"></a><span class="do">##  $ cesd    : int  0 4 4 5 6 7 15 10 16 0 ...</span></span>
+<span id="cb10-32"><a href="data-management.html#cb10-32" tabindex="-1"></a><span class="do">##  $ cases   : int  0 0 0 0 0 0 0 0 1 0 ...</span></span>
+<span id="cb10-33"><a href="data-management.html#cb10-33" tabindex="-1"></a><span class="do">##  $ drink   : int  2 1 1 2 1 1 2 2 1 1 ...</span></span>
+<span id="cb10-34"><a href="data-management.html#cb10-34" tabindex="-1"></a><span class="do">##  $ health  : int  2 1 2 1 1 1 3 1 4 1 ...</span></span>
+<span id="cb10-35"><a href="data-management.html#cb10-35" tabindex="-1"></a><span class="do">##  $ regdoc  : int  1 1 1 1 1 1 1 2 1 1 ...</span></span>
+<span id="cb10-36"><a href="data-management.html#cb10-36" tabindex="-1"></a><span class="do">##  $ treat   : int  1 1 1 2 1 1 1 2 1 2 ...</span></span>
+<span id="cb10-37"><a href="data-management.html#cb10-37" tabindex="-1"></a><span class="do">##  $ beddays : int  0 0 0 0 1 0 0 0 1 0 ...</span></span>
+<span id="cb10-38"><a href="data-management.html#cb10-38" tabindex="-1"></a><span class="do">##  $ acuteill: int  0 0 0 0 1 1 1 1 0 0 ...</span></span>
+<span id="cb10-39"><a href="data-management.html#cb10-39" tabindex="-1"></a><span class="do">##  $ chronill: int  1 1 0 1 0 1 1 0 1 0 ...</span></span></code></pre></div>
 <p>Right away this tells me that <strong>R</strong> thinks all variables are numeric integers, not categorical variables. This will have to be changed. We’ll get to that in a moment.</p>
 <p>In SPSS you’ll the following set of icons to tell you what data types the program thinks each column is:</p>
-<p><img src="images/spss_icons.PNG" /></p>
+<p><img src="images/spss_icons.png" /></p>
 <p>Consider the variable that measures marital status.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-management.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital)</span>
-<span id="cb11-2"><a href="data-management.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-3"><a href="data-management.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   1   2   3   4   5 </span></span>
-<span id="cb11-4"><a href="data-management.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  73 127  43  13  38</span></span>
-<span id="cb11-5"><a href="data-management.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(depress<span class="sc">$</span>marital)</span>
-<span id="cb11-6"><a href="data-management.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  int [1:294] 5 3 2 3 4 2 2 1 2 2 ...</span></span>
-<span id="cb11-7"><a href="data-management.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(depress<span class="sc">$</span>marital)</span>
-<span id="cb11-8"><a href="data-management.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-management.html#cb11-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb11-2"><a href="data-management.html#cb11-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-3"><a href="data-management.html#cb11-3" tabindex="-1"></a><span class="do">##   1   2   3   4   5 </span></span>
+<span id="cb11-4"><a href="data-management.html#cb11-4" tabindex="-1"></a><span class="do">##  73 127  43  13  38</span></span>
+<span id="cb11-5"><a href="data-management.html#cb11-5" tabindex="-1"></a><span class="fu">str</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb11-6"><a href="data-management.html#cb11-6" tabindex="-1"></a><span class="do">##  int [1:294] 5 3 2 3 4 2 2 1 2 2 ...</span></span>
+<span id="cb11-7"><a href="data-management.html#cb11-7" tabindex="-1"></a><span class="fu">class</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb11-8"><a href="data-management.html#cb11-8" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span></code></pre></div>
 <p><img src="images/q.png" alt="q" /> What data type does R see this variable as?</p>
 <p>When variables have numerical levels it is necessary to ensure that the program knows it is a factor variable.</p>
 <p>The following code uses the <code>factor()</code> function to take the marital status variable and convert it into a factor variable with specified labels that match the codebook.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-management.html#cb12-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>marital <span class="ot">&lt;-</span> <span class="fu">factor</span>(depress<span class="sc">$</span>marital, </span>
-<span id="cb12-2"><a href="data-management.html#cb12-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Never Married&quot;</span>, <span class="st">&quot;Married&quot;</span>, <span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-management.html#cb12-1" tabindex="-1"></a>depress<span class="sc">$</span>marital <span class="ot">&lt;-</span> <span class="fu">factor</span>(depress<span class="sc">$</span>marital, </span>
+<span id="cb12-2"><a href="data-management.html#cb12-2" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Never Married&quot;</span>, <span class="st">&quot;Married&quot;</span>, <span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>))</span></code></pre></div>
 <p>It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable <code>marital</code> was replaced.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-management.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital)</span>
-<span id="cb13-2"><a href="data-management.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-3"><a href="data-management.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Never Married       Married      Divorced     Separated       Widowed </span></span>
-<span id="cb13-4"><a href="data-management.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">##            73           127            43            13            38</span></span>
-<span id="cb13-5"><a href="data-management.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(depress<span class="sc">$</span>marital)</span>
-<span id="cb13-6"><a href="data-management.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;factor&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-management.html#cb13-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb13-2"><a href="data-management.html#cb13-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-3"><a href="data-management.html#cb13-3" tabindex="-1"></a><span class="do">## Never Married       Married      Divorced     Separated       Widowed </span></span>
+<span id="cb13-4"><a href="data-management.html#cb13-4" tabindex="-1"></a><span class="do">##            73           127            43            13            38</span></span>
+<span id="cb13-5"><a href="data-management.html#cb13-5" tabindex="-1"></a><span class="fu">class</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb13-6"><a href="data-management.html#cb13-6" tabindex="-1"></a><span class="do">## [1] &quot;factor&quot;</span></span></code></pre></div>
 </div>
 <div id="outliers" class="section level3 hasAnchor" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Outliers<a href="data-management.html#outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s look at the age variable in the depression data set.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-management.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb14-2"><a href="data-management.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(depress<span class="sc">$</span>age)</span>
-<span id="cb14-3"><a href="data-management.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(depress<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-management.html#cb14-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb14-2"><a href="data-management.html#cb14-2" tabindex="-1"></a><span class="fu">boxplot</span>(depress<span class="sc">$</span>age)</span>
+<span id="cb14-3"><a href="data-management.html#cb14-3" tabindex="-1"></a><span class="fu">hist</span>(depress<span class="sc">$</span>age)</span></code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
 <p>Just looking at the data graphically raises no red flags. The boxplot shows no outlying values and the histogram does not look wildly skewed. This is where knowledge about the data set is essential. The codebook does not provide a valid range for the data, but the description of the data starting on page 3 in the textbook clarifies that this data set is on adults. In the research world, this specifies 18 years or older.</p>
 <p>Now look back at the graphics. See anything odd? It appears as if the data go pretty far below 20, possibly below 18. Let’s check the numerical summary to get more details.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-management.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>age)</span>
-<span id="cb15-2"><a href="data-management.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span id="cb15-3"><a href="data-management.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    9.00   28.00   42.50   44.38   59.00   89.00</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-management.html#cb15-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>age)</span>
+<span id="cb15-2"><a href="data-management.html#cb15-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb15-3"><a href="data-management.html#cb15-3" tabindex="-1"></a><span class="do">##    9.00   28.00   42.50   44.38   59.00   89.00</span></span></code></pre></div>
 <p>The minimum value is a 9, which is outside the range of valid values for this variable. This is where you, as a statistician, data analyst or researcher goes back to the PI and asks for advice. Should this data be set to missing, or edited in a way that changes this data point into a valid piece of data.</p>
 <p>Another visual way to look for outliers in a continuous measurement is to create a boxplot.
 Here we look at boxplots of income across marital status category.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-management.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(depress, <span class="fu">aes</span>(<span class="at">y=</span>income, <span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-management.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(depress, <span class="fu">aes</span>(<span class="at">y=</span>income, <span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>While there are a few potential outliers (denoted by the dots), there are none so far away from the rest of the group (or at values such as 99 or -99 that may indicate missing codes) that we need to be concerned about.</p>
 <p>As an example of a common data entry error, and for demonstration purposes, I went in and changed a 19 to a 9. So the correct thing to do here is to change that 9, back to a 19. This is a very good use of the <code>ifelse()</code> function.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-management.html#cb17-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>, <span class="dv">19</span>, depress<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-management.html#cb17-1" tabindex="-1"></a>depress<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>, <span class="dv">19</span>, depress<span class="sc">$</span>age)</span></code></pre></div>
 <p>The logical statement is <code>depress$age9</code>. Wherever this is true, replace the value of <code>depress$age</code> with 19, wherever this is false then keep the value of <code>depress$age</code> unchanged (by “replacing” the new value with the same old value).</p>
 <p>Alternatively, you can change that one value using bracket notation. Here you are specifying that you only want the rows where <code>age==9</code>, and directly assign a value of 19 to those rows.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-management.html#cb18-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>age[depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="dv">19</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-management.html#cb18-1" tabindex="-1"></a>depress<span class="sc">$</span>age[depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="dv">19</span></span></code></pre></div>
 <p>Confirm the recode.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-management.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>age)</span>
-<span id="cb19-2"><a href="data-management.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span id="cb19-3"><a href="data-management.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   18.00   28.00   42.50   44.41   59.00   89.00</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-management.html#cb19-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>age)</span>
+<span id="cb19-2"><a href="data-management.html#cb19-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb19-3"><a href="data-management.html#cb19-3" tabindex="-1"></a><span class="do">##   18.00   28.00   42.50   44.41   59.00   89.00</span></span></code></pre></div>
 <p>Looks like it worked.</p>
 </div>
 <div id="creating-secondary-variables" class="section level3 hasAnchor" number="1.3.4">
@@ -712,103 +748,103 @@ Here we look at boxplots of income across marital status category.</p>
 <p>For unbiased and accurate results of a statistical analysis, sufficient data has to be present. Often times once you start slicing and dicing the data to only look at certain groups, or if you are interested in the behavior of certain variables across levels of another variable, sometimes you start to run into small sample size problems.</p>
 <p>For example, consider marital status again. There are only 13 people who report being separated. This could potentially be too small of a group size for valid statistical analysis.</p>
 <p>One way to deal with insufficient data within a certain category is to collapse categories. The following code uses the <code>recode()</code> function from the <code>car</code> package to create a new variable that I am calling <code>marital2</code> that combines the <code>Divorced</code> and <code>Separated</code> levels.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-management.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb20-2"><a href="data-management.html#cb20-2" aria-hidden="true" tabindex="-1"></a>marital2 <span class="ot">&lt;-</span> <span class="fu">recode</span>(depress<span class="sc">$</span>marital, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-management.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb20-2"><a href="data-management.html#cb20-2" tabindex="-1"></a>marital2 <span class="ot">&lt;-</span> <span class="fu">recode</span>(depress<span class="sc">$</span>marital, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</span></code></pre></div>
 <p>Always confirm your recodes.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-management.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital, marital2, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb21-2"><a href="data-management.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                marital2</span></span>
-<span id="cb21-3"><a href="data-management.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Married Never Married Sep/Div Widowed &lt;NA&gt;</span></span>
-<span id="cb21-4"><a href="data-management.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Never Married       0            73       0       0    0</span></span>
-<span id="cb21-5"><a href="data-management.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Married           127             0       0       0    0</span></span>
-<span id="cb21-6"><a href="data-management.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Divorced            0             0      43       0    0</span></span>
-<span id="cb21-7"><a href="data-management.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Separated           0             0      13       0    0</span></span>
-<span id="cb21-8"><a href="data-management.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Widowed             0             0       0      38    0</span></span>
-<span id="cb21-9"><a href="data-management.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;NA&gt;                0             0       0       0    0</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-management.html#cb21-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital, marital2, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb21-2"><a href="data-management.html#cb21-2" tabindex="-1"></a><span class="do">##                marital2</span></span>
+<span id="cb21-3"><a href="data-management.html#cb21-3" tabindex="-1"></a><span class="do">##                 Married Never Married Sep/Div Widowed &lt;NA&gt;</span></span>
+<span id="cb21-4"><a href="data-management.html#cb21-4" tabindex="-1"></a><span class="do">##   Never Married       0            73       0       0    0</span></span>
+<span id="cb21-5"><a href="data-management.html#cb21-5" tabindex="-1"></a><span class="do">##   Married           127             0       0       0    0</span></span>
+<span id="cb21-6"><a href="data-management.html#cb21-6" tabindex="-1"></a><span class="do">##   Divorced            0             0      43       0    0</span></span>
+<span id="cb21-7"><a href="data-management.html#cb21-7" tabindex="-1"></a><span class="do">##   Separated           0             0      13       0    0</span></span>
+<span id="cb21-8"><a href="data-management.html#cb21-8" tabindex="-1"></a><span class="do">##   Widowed             0             0       0      38    0</span></span>
+<span id="cb21-9"><a href="data-management.html#cb21-9" tabindex="-1"></a><span class="do">##   &lt;NA&gt;                0             0       0       0    0</span></span></code></pre></div>
 <p>This confirms that records where <code>marital</code> (rows) is <code>Divorced</code> or <code>Separated</code> have the value of <code>Sep/Div</code> for <code>marital2</code> (columns). And that no missing data crept up in the process. Now I can drop the temporary <code>marital2</code> variable and actually fix <code>marital</code>. (keeping it clean)</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-management.html#cb22-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>marital <span class="ot">&lt;-</span> <span class="fu">recode</span>(depress<span class="sc">$</span>marital, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</span>
-<span id="cb22-2"><a href="data-management.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(marital2)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-management.html#cb22-1" tabindex="-1"></a>depress<span class="sc">$</span>marital <span class="ot">&lt;-</span> <span class="fu">recode</span>(depress<span class="sc">$</span>marital, <span class="st">&quot;&#39;Divorced&#39; = &#39;Sep/Div&#39;; &#39;Separated&#39; = &#39;Sep/Div&#39;&quot;</span>)</span>
+<span id="cb22-2"><a href="data-management.html#cb22-2" tabindex="-1"></a><span class="fu">rm</span>(marital2)</span></code></pre></div>
 </div>
 <div id="binning-a-continuous-variable-into-categorical-ranges." class="section level4 hasAnchor" number="1.3.4.2">
 <h4><span class="header-section-number">1.3.4.2</span> Binning a continuous variable into categorical ranges.<a href="data-management.html#binning-a-continuous-variable-into-categorical-ranges." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s create a new variable that categorizes income into the following ranges: &lt;30, [30, 40), [40,50), [50, 60), 60+.<br />
 The easiest way is to use the <code>cut2</code> function in the package <code>Hmisc</code>. Note you don’t have to load the package fully to use a function from within that package. Useful for times when you only need to use a function once or twice.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-management.html#cb23-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>inc_cut <span class="ot">&lt;-</span> Hmisc<span class="sc">::</span><span class="fu">cut2</span>(depress<span class="sc">$</span>income, <span class="at">cuts=</span><span class="fu">c</span>(<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>))</span>
-<span id="cb23-2"><a href="data-management.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>inc_cut)</span>
-<span id="cb23-3"><a href="data-management.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb23-4"><a href="data-management.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [ 2,30) [30,40) [40,50) [50,60) [60,65] </span></span>
-<span id="cb23-5"><a href="data-management.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     231      28      16       9      10</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-management.html#cb23-1" tabindex="-1"></a>depress<span class="sc">$</span>inc_cut <span class="ot">&lt;-</span> Hmisc<span class="sc">::</span><span class="fu">cut2</span>(depress<span class="sc">$</span>income, <span class="at">cuts=</span><span class="fu">c</span>(<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>))</span>
+<span id="cb23-2"><a href="data-management.html#cb23-2" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>inc_cut)</span>
+<span id="cb23-3"><a href="data-management.html#cb23-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-4"><a href="data-management.html#cb23-4" tabindex="-1"></a><span class="do">## [ 2,30) [30,40) [40,50) [50,60) [60,65] </span></span>
+<span id="cb23-5"><a href="data-management.html#cb23-5" tabindex="-1"></a><span class="do">##     231      28      16       9      10</span></span></code></pre></div>
 </div>
 <div id="dichotomizing-a-measure-into-2-categories" class="section level4 hasAnchor" number="1.3.4.3">
 <h4><span class="header-section-number">1.3.4.3</span> Dichotomizing a measure into 2 categories<a href="data-management.html#dichotomizing-a-measure-into-2-categories" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Dichotomous variables tend to be binary indicator variables where a code of <code>1</code> is the level you’re interested in.</p>
 <p>For example, gender is coded as 2=Female and 1=Male. This is in the right direction but it needs to be 0/1.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-management.html#cb24-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>sex <span class="ot">&lt;-</span> depress<span class="sc">$</span>sex <span class="sc">-</span><span class="dv">1</span> </span>
-<span id="cb24-2"><a href="data-management.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>sex)</span>
-<span id="cb24-3"><a href="data-management.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb24-4"><a href="data-management.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   0   1 </span></span>
-<span id="cb24-5"><a href="data-management.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 111 183</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-management.html#cb24-1" tabindex="-1"></a>depress<span class="sc">$</span>sex <span class="ot">&lt;-</span> depress<span class="sc">$</span>sex <span class="sc">-</span><span class="dv">1</span> </span>
+<span id="cb24-2"><a href="data-management.html#cb24-2" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>sex)</span>
+<span id="cb24-3"><a href="data-management.html#cb24-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-4"><a href="data-management.html#cb24-4" tabindex="-1"></a><span class="do">##   0   1 </span></span>
+<span id="cb24-5"><a href="data-management.html#cb24-5" tabindex="-1"></a><span class="do">## 111 183</span></span></code></pre></div>
 <p>0/1 binary coding is mandatory for many analyses. One simple reason is that now you can calculate the mean and interpret it as a proportion.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-management.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(depress<span class="sc">$</span>sex)</span>
-<span id="cb25-2"><a href="data-management.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.622449</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-management.html#cb25-1" tabindex="-1"></a><span class="fu">mean</span>(depress<span class="sc">$</span>sex)</span>
+<span id="cb25-2"><a href="data-management.html#cb25-2" tabindex="-1"></a><span class="do">## [1] 0.622449</span></span></code></pre></div>
 <p>62% of individuals in this data set are female.</p>
 <p>Sometimes the data is recorded as 1/2 (Yes/No), so just subtracting from 1 doesn’t create a positive indicator of the variable. For example, <code>drink=1</code> if they are a regular drinker, and <code>drink=2</code> if they are not. We want not drinking to be coded as <code>0</code>, not <code>2</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-management.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>drink)</span>
-<span id="cb26-2"><a href="data-management.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb26-3"><a href="data-management.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   1   2 </span></span>
-<span id="cb26-4"><a href="data-management.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 234  60</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-management.html#cb26-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>drink)</span>
+<span id="cb26-2"><a href="data-management.html#cb26-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb26-3"><a href="data-management.html#cb26-3" tabindex="-1"></a><span class="do">##   1   2 </span></span>
+<span id="cb26-4"><a href="data-management.html#cb26-4" tabindex="-1"></a><span class="do">## 234  60</span></span></code></pre></div>
 <p>The <code>ifelse()</code> function says that if <code>depress$DRINK</code> has a value equal to 2 <code>==2</code>, then change the value to 0. Otherwise leave it alone.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-management.html#cb27-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>drink <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>drink<span class="sc">==</span><span class="dv">2</span>, <span class="dv">0</span>, depress<span class="sc">$</span>drink)</span>
-<span id="cb27-2"><a href="data-management.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>drink)</span>
-<span id="cb27-3"><a href="data-management.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb27-4"><a href="data-management.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   0   1 </span></span>
-<span id="cb27-5"><a href="data-management.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  60 234</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-management.html#cb27-1" tabindex="-1"></a>depress<span class="sc">$</span>drink <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>drink<span class="sc">==</span><span class="dv">2</span>, <span class="dv">0</span>, depress<span class="sc">$</span>drink)</span>
+<span id="cb27-2"><a href="data-management.html#cb27-2" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>drink)</span>
+<span id="cb27-3"><a href="data-management.html#cb27-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb27-4"><a href="data-management.html#cb27-4" tabindex="-1"></a><span class="do">##   0   1 </span></span>
+<span id="cb27-5"><a href="data-management.html#cb27-5" tabindex="-1"></a><span class="do">##  60 234</span></span></code></pre></div>
 </div>
 <div id="sum-or-average-values-across-multiple-variables" class="section level4 hasAnchor" number="1.3.4.4">
 <h4><span class="header-section-number">1.3.4.4</span> Sum or Average values across multiple variables<a href="data-management.html#sum-or-average-values-across-multiple-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Center for Epidemiological Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. <code>CESD</code> is calculated as the sum of all 20 component variables, and is already on this data set. Let’s create a new variable named <code>sleep</code> as subscale for sleep quality by adding up question numbers 5, 11, and 19.</p>
 <p>Reference: <a href="http://cesd-r.com/cesdr/" class="uri">http://cesd-r.com/cesdr/</a></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-management.html#cb28-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>sleep <span class="ot">&lt;-</span> depress<span class="sc">$</span>c5 <span class="sc">+</span> depress<span class="sc">$</span>c11 <span class="sc">+</span> depress<span class="sc">$</span>c19</span>
-<span id="cb28-2"><a href="data-management.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # depress &lt;- depress %&gt;% mutate(sleep = c5+c11+c19) # Not run. dplyr example</span></span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-management.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>sleep)</span>
-<span id="cb29-2"><a href="data-management.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span id="cb29-3"><a href="data-management.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.000   0.000   1.000   1.167   2.000   7.000</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-management.html#cb28-1" tabindex="-1"></a>depress<span class="sc">$</span>sleep <span class="ot">&lt;-</span> depress<span class="sc">$</span>c5 <span class="sc">+</span> depress<span class="sc">$</span>c11 <span class="sc">+</span> depress<span class="sc">$</span>c19</span>
+<span id="cb28-2"><a href="data-management.html#cb28-2" tabindex="-1"></a><span class="do">## # depress &lt;- depress %&gt;% mutate(sleep = c5+c11+c19) # Not run. dplyr example</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-management.html#cb29-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>sleep)</span>
+<span id="cb29-2"><a href="data-management.html#cb29-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb29-3"><a href="data-management.html#cb29-3" tabindex="-1"></a><span class="do">##   0.000   0.000   1.000   1.167   2.000   7.000</span></span></code></pre></div>
 </div>
 <div id="transformations-for-normality" class="section level4 hasAnchor" number="1.3.4.5">
 <h4><span class="header-section-number">1.3.4.5</span> Transformations for Normality<a href="data-management.html#transformations-for-normality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s look at assessing normal distributions using the <strong>cleaned</strong> depression data set.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-management.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(depress<span class="sc">$</span>income, <span class="at">prob=</span><span class="cn">TRUE</span>, <span class="at">xlab=</span><span class="st">&quot;Annual income (in thousands)&quot;</span>, </span>
-<span id="cb30-2"><a href="data-management.html#cb30-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Histogram and Density curve of Income&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb30-3"><a href="data-management.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(depress<span class="sc">$</span>income), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-management.html#cb30-1" tabindex="-1"></a><span class="fu">hist</span>(depress<span class="sc">$</span>income, <span class="at">prob=</span><span class="cn">TRUE</span>, <span class="at">xlab=</span><span class="st">&quot;Annual income (in thousands)&quot;</span>, </span>
+<span id="cb30-2"><a href="data-management.html#cb30-2" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Histogram and Density curve of Income&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb30-3"><a href="data-management.html#cb30-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(depress<span class="sc">$</span>income), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-management.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>income)</span>
-<span id="cb31-2"><a href="data-management.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span id="cb31-3"><a href="data-management.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    2.00    9.00   15.00   20.57   28.00   65.00</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-management.html#cb31-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb31-2"><a href="data-management.html#cb31-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb31-3"><a href="data-management.html#cb31-3" tabindex="-1"></a><span class="do">##    2.00    9.00   15.00   20.57   28.00   65.00</span></span></code></pre></div>
 <p>The distribution of annual income is slightly skewed right with a mean of $20.5k per year and a median of $15k per year income. The range of values goes from $2k to $65k. Reported income above $40k appear to have been rounded to the nearest $10k, because there are noticeable peaks at $40k, $50k, and $60k.</p>
 <p>In general, transformations are more effective when the the standard deviation is large relative to the mean. One rule of thumb is if the sd/mean ratio is less than 1/4, a transformation may not be necessary.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-management.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> <span class="fu">mean</span>(depress<span class="sc">$</span>income)</span>
-<span id="cb32-2"><a href="data-management.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.743147</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-management.html#cb32-1" tabindex="-1"></a><span class="fu">sd</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> <span class="fu">mean</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb32-2"><a href="data-management.html#cb32-2" tabindex="-1"></a><span class="do">## [1] 0.743147</span></span></code></pre></div>
 <p>Alternatively Hoaglin, Mosteller and Tukey (1985) showed that if the largest observation divided by the smallest observation is over 2, then the data may not be sufficiently variable for the transformation to be decisive.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-management.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> (<span class="fu">min</span>(depress<span class="sc">$</span>income)<span class="sc">+</span>.<span class="dv">1</span>)</span>
-<span id="cb33-2"><a href="data-management.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 30.95238</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-management.html#cb33-1" tabindex="-1"></a><span class="fu">max</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> (<span class="fu">min</span>(depress<span class="sc">$</span>income)<span class="sc">+</span>.<span class="dv">1</span>)</span>
+<span id="cb33-2"><a href="data-management.html#cb33-2" tabindex="-1"></a><span class="do">## [1] 30.95238</span></span></code></pre></div>
 <p>Note these rules are not meaningful for data without a natural zero.</p>
 <p>Another common method of assessing normality is to create a normal probability (or normal quantile) plot.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-management.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income);<span class="fu">qqline</span>(depress<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-management.html#cb34-1" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income);<span class="fu">qqline</span>(depress<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or <code>U</code> shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created.</p>
 <ul>
 <li>Create three new variables: <code>log10inc</code> as the log base 10 of Income, <code>loginc</code> as the natural log of Income, and <code>xincome</code> which is equal to the negative of one divided by the cubic root of income.</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-management.html#cb35-1" aria-hidden="true" tabindex="-1"></a>log10inc <span class="ot">&lt;-</span> <span class="fu">log10</span>(depress<span class="sc">$</span>income)</span>
-<span id="cb35-2"><a href="data-management.html#cb35-2" aria-hidden="true" tabindex="-1"></a>loginc   <span class="ot">&lt;-</span> <span class="fu">log</span>(depress<span class="sc">$</span>income)</span>
-<span id="cb35-3"><a href="data-management.html#cb35-3" aria-hidden="true" tabindex="-1"></a>xincome  <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>(depress<span class="sc">$</span>income)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-management.html#cb35-1" tabindex="-1"></a>log10inc <span class="ot">&lt;-</span> <span class="fu">log10</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb35-2"><a href="data-management.html#cb35-2" tabindex="-1"></a>loginc   <span class="ot">&lt;-</span> <span class="fu">log</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb35-3"><a href="data-management.html#cb35-3" tabindex="-1"></a>xincome  <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>(depress<span class="sc">$</span>income)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code></pre></div>
 <ul>
 <li>Create a single plot that display normal probability plots for the original, and each of the three transformations of income. Use the base graphics grid organizer <code>par(mfrow=c(r,c))</code> where <code>r</code> is the number of rows and <code>c</code> is the number of columns. Which transformation does a better job of normalizing the distribution of Income?</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-management.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># Try (4,1) and (1,4) to see how this works. </span></span>
-<span id="cb36-2"><a href="data-management.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income, <span class="at">main=</span><span class="st">&quot;Income&quot;</span>); <span class="fu">qqline</span>(depress<span class="sc">$</span>income,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb36-3"><a href="data-management.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(log10inc, <span class="at">main=</span><span class="st">&quot;Log 10&quot;</span>); <span class="fu">qqline</span>(log10inc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb36-4"><a href="data-management.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(loginc, <span class="at">main =</span> <span class="st">&quot;Natural Log&quot;</span>); <span class="fu">qqline</span>(loginc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb36-5"><a href="data-management.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(xincome, <span class="at">main=</span><span class="st">&quot;-1/cuberoot(income)&quot;</span>); <span class="fu">qqline</span>(xincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-management.html#cb36-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># Try (4,1) and (1,4) to see how this works. </span></span>
+<span id="cb36-2"><a href="data-management.html#cb36-2" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income, <span class="at">main=</span><span class="st">&quot;Income&quot;</span>); <span class="fu">qqline</span>(depress<span class="sc">$</span>income,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb36-3"><a href="data-management.html#cb36-3" tabindex="-1"></a><span class="fu">qqnorm</span>(log10inc, <span class="at">main=</span><span class="st">&quot;Log 10&quot;</span>); <span class="fu">qqline</span>(log10inc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb36-4"><a href="data-management.html#cb36-4" tabindex="-1"></a><span class="fu">qqnorm</span>(loginc, <span class="at">main =</span> <span class="st">&quot;Natural Log&quot;</span>); <span class="fu">qqline</span>(loginc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb36-5"><a href="data-management.html#cb36-5" tabindex="-1"></a><span class="fu">qqnorm</span>(xincome, <span class="at">main=</span><span class="st">&quot;-1/cuberoot(income)&quot;</span>); <span class="fu">qqline</span>(xincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="data_prep_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 </div>
 </div>

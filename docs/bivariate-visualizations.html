@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.4 Bivariate Visualizations | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.4 Bivariate Visualizations | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -541,14 +593,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">2.4.1.1</span> Two-way Frequency tables<a href="bivariate-visualizations.html#two-way-frequency-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Cross-tabs, cross-tabulations and two-way tables (all the same thing, different names) can be created by using the <code>table()</code> function.</p>
 <p>The frequency table is constructed using the <code>table()</code> function.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="bivariate-visualizations.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
-<span id="cb73-2"><a href="bivariate-visualizations.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            </span></span>
-<span id="cb73-3"><a href="bivariate-visualizations.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="do">##              D  E  F  G  H  I  J</span></span>
-<span id="cb73-4"><a href="bivariate-visualizations.html#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fair       5  6  7  4  5  4  3</span></span>
-<span id="cb73-5"><a href="bivariate-visualizations.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Good      18 23 11 16 17  7  7</span></span>
-<span id="cb73-6"><a href="bivariate-visualizations.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Very Good 26 37 46 40 33 25 13</span></span>
-<span id="cb73-7"><a href="bivariate-visualizations.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Premium   34 53 43 49 41 24 13</span></span>
-<span id="cb73-8"><a href="bivariate-visualizations.html#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Ideal     54 63 79 92 53 34 15</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="bivariate-visualizations.html#cb73-1" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
+<span id="cb73-2"><a href="bivariate-visualizations.html#cb73-2" tabindex="-1"></a><span class="do">##            </span></span>
+<span id="cb73-3"><a href="bivariate-visualizations.html#cb73-3" tabindex="-1"></a><span class="do">##              D  E  F  G  H  I  J</span></span>
+<span id="cb73-4"><a href="bivariate-visualizations.html#cb73-4" tabindex="-1"></a><span class="do">##   Fair       5  6  7  4  5  4  3</span></span>
+<span id="cb73-5"><a href="bivariate-visualizations.html#cb73-5" tabindex="-1"></a><span class="do">##   Good      18 23 11 16 17  7  7</span></span>
+<span id="cb73-6"><a href="bivariate-visualizations.html#cb73-6" tabindex="-1"></a><span class="do">##   Very Good 26 37 46 40 33 25 13</span></span>
+<span id="cb73-7"><a href="bivariate-visualizations.html#cb73-7" tabindex="-1"></a><span class="do">##   Premium   34 53 43 49 41 24 13</span></span>
+<span id="cb73-8"><a href="bivariate-visualizations.html#cb73-8" tabindex="-1"></a><span class="do">##   Ideal     54 63 79 92 53 34 15</span></span></code></pre></div>
 <p>There are 4 Fair diamonds with color D, and 21 Ideal quality diamonds with color J.</p>
 </div>
 <div id="two-way-proprtion-tables" class="section level4 hasAnchor" number="2.4.1.2">
@@ -563,36 +615,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here are demonstrations of how the interpretation of the percents change depending on what the denominator is.</p>
 <p><strong>Cell proportions</strong></p>
 <p>Wrapping <code>prop.table()</code> around a table gives you the <strong>cell</strong> proportions.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="bivariate-visualizations.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color))</span>
-<span id="cb74-2"><a href="bivariate-visualizations.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            </span></span>
-<span id="cb74-3"><a href="bivariate-visualizations.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
-<span id="cb74-4"><a href="bivariate-visualizations.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fair      0.005 0.006 0.007 0.004 0.005 0.004 0.003</span></span>
-<span id="cb74-5"><a href="bivariate-visualizations.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Good      0.018 0.023 0.011 0.016 0.017 0.007 0.007</span></span>
-<span id="cb74-6"><a href="bivariate-visualizations.html#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Very Good 0.026 0.037 0.046 0.040 0.033 0.025 0.013</span></span>
-<span id="cb74-7"><a href="bivariate-visualizations.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Premium   0.034 0.053 0.043 0.049 0.041 0.024 0.013</span></span>
-<span id="cb74-8"><a href="bivariate-visualizations.html#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Ideal     0.054 0.063 0.079 0.092 0.053 0.034 0.015</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="bivariate-visualizations.html#cb74-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color))</span>
+<span id="cb74-2"><a href="bivariate-visualizations.html#cb74-2" tabindex="-1"></a><span class="do">##            </span></span>
+<span id="cb74-3"><a href="bivariate-visualizations.html#cb74-3" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
+<span id="cb74-4"><a href="bivariate-visualizations.html#cb74-4" tabindex="-1"></a><span class="do">##   Fair      0.005 0.006 0.007 0.004 0.005 0.004 0.003</span></span>
+<span id="cb74-5"><a href="bivariate-visualizations.html#cb74-5" tabindex="-1"></a><span class="do">##   Good      0.018 0.023 0.011 0.016 0.017 0.007 0.007</span></span>
+<span id="cb74-6"><a href="bivariate-visualizations.html#cb74-6" tabindex="-1"></a><span class="do">##   Very Good 0.026 0.037 0.046 0.040 0.033 0.025 0.013</span></span>
+<span id="cb74-7"><a href="bivariate-visualizations.html#cb74-7" tabindex="-1"></a><span class="do">##   Premium   0.034 0.053 0.043 0.049 0.041 0.024 0.013</span></span>
+<span id="cb74-8"><a href="bivariate-visualizations.html#cb74-8" tabindex="-1"></a><span class="do">##   Ideal     0.054 0.063 0.079 0.092 0.053 0.034 0.015</span></span></code></pre></div>
 <p>0.4% of all diamonds are D color and Fair cut, 2.1% are J color and Ideal cut.</p>
 <p><strong>Row proportions</strong></p>
 <p>To get the <strong>row</strong> proportions, you specify <code>margin=1</code>. The percentages now add up to 1 across the rows.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="bivariate-visualizations.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color), <span class="at">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)</span>
-<span id="cb75-2"><a href="bivariate-visualizations.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            </span></span>
-<span id="cb75-3"><a href="bivariate-visualizations.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
-<span id="cb75-4"><a href="bivariate-visualizations.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fair      0.147 0.176 0.206 0.118 0.147 0.118 0.088</span></span>
-<span id="cb75-5"><a href="bivariate-visualizations.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Good      0.182 0.232 0.111 0.162 0.172 0.071 0.071</span></span>
-<span id="cb75-6"><a href="bivariate-visualizations.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Very Good 0.118 0.168 0.209 0.182 0.150 0.114 0.059</span></span>
-<span id="cb75-7"><a href="bivariate-visualizations.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Premium   0.132 0.206 0.167 0.191 0.160 0.093 0.051</span></span>
-<span id="cb75-8"><a href="bivariate-visualizations.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Ideal     0.138 0.162 0.203 0.236 0.136 0.087 0.038</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="bivariate-visualizations.html#cb75-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color), <span class="at">margin=</span><span class="dv">1</span>),<span class="dv">3</span>)</span>
+<span id="cb75-2"><a href="bivariate-visualizations.html#cb75-2" tabindex="-1"></a><span class="do">##            </span></span>
+<span id="cb75-3"><a href="bivariate-visualizations.html#cb75-3" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
+<span id="cb75-4"><a href="bivariate-visualizations.html#cb75-4" tabindex="-1"></a><span class="do">##   Fair      0.147 0.176 0.206 0.118 0.147 0.118 0.088</span></span>
+<span id="cb75-5"><a href="bivariate-visualizations.html#cb75-5" tabindex="-1"></a><span class="do">##   Good      0.182 0.232 0.111 0.162 0.172 0.071 0.071</span></span>
+<span id="cb75-6"><a href="bivariate-visualizations.html#cb75-6" tabindex="-1"></a><span class="do">##   Very Good 0.118 0.168 0.209 0.182 0.150 0.114 0.059</span></span>
+<span id="cb75-7"><a href="bivariate-visualizations.html#cb75-7" tabindex="-1"></a><span class="do">##   Premium   0.132 0.206 0.167 0.191 0.160 0.093 0.051</span></span>
+<span id="cb75-8"><a href="bivariate-visualizations.html#cb75-8" tabindex="-1"></a><span class="do">##   Ideal     0.138 0.162 0.203 0.236 0.136 0.087 0.038</span></span></code></pre></div>
 <p>14.8% of all Fair quality diamonds are color D. 5.4% of all Ideal quality diamonds have color J.</p>
 <p><strong>Column proportions</strong></p>
 <p>To get the <strong>column</strong> proportions, you specify <code>margin=2</code>. The percentages now add up to 1 down the columns.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="bivariate-visualizations.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color), <span class="at">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)</span>
-<span id="cb76-2"><a href="bivariate-visualizations.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            </span></span>
-<span id="cb76-3"><a href="bivariate-visualizations.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
-<span id="cb76-4"><a href="bivariate-visualizations.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fair      0.036 0.033 0.038 0.020 0.034 0.043 0.059</span></span>
-<span id="cb76-5"><a href="bivariate-visualizations.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Good      0.131 0.126 0.059 0.080 0.114 0.074 0.137</span></span>
-<span id="cb76-6"><a href="bivariate-visualizations.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Very Good 0.190 0.203 0.247 0.199 0.221 0.266 0.255</span></span>
-<span id="cb76-7"><a href="bivariate-visualizations.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Premium   0.248 0.291 0.231 0.244 0.275 0.255 0.255</span></span>
-<span id="cb76-8"><a href="bivariate-visualizations.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Ideal     0.394 0.346 0.425 0.458 0.356 0.362 0.294</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="bivariate-visualizations.html#cb76-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color), <span class="at">margin=</span><span class="dv">2</span>),<span class="dv">3</span>)</span>
+<span id="cb76-2"><a href="bivariate-visualizations.html#cb76-2" tabindex="-1"></a><span class="do">##            </span></span>
+<span id="cb76-3"><a href="bivariate-visualizations.html#cb76-3" tabindex="-1"></a><span class="do">##                 D     E     F     G     H     I     J</span></span>
+<span id="cb76-4"><a href="bivariate-visualizations.html#cb76-4" tabindex="-1"></a><span class="do">##   Fair      0.036 0.033 0.038 0.020 0.034 0.043 0.059</span></span>
+<span id="cb76-5"><a href="bivariate-visualizations.html#cb76-5" tabindex="-1"></a><span class="do">##   Good      0.131 0.126 0.059 0.080 0.114 0.074 0.137</span></span>
+<span id="cb76-6"><a href="bivariate-visualizations.html#cb76-6" tabindex="-1"></a><span class="do">##   Very Good 0.190 0.203 0.247 0.199 0.221 0.266 0.255</span></span>
+<span id="cb76-7"><a href="bivariate-visualizations.html#cb76-7" tabindex="-1"></a><span class="do">##   Premium   0.248 0.291 0.231 0.244 0.275 0.255 0.255</span></span>
+<span id="cb76-8"><a href="bivariate-visualizations.html#cb76-8" tabindex="-1"></a><span class="do">##   Ideal     0.394 0.346 0.425 0.458 0.356 0.362 0.294</span></span></code></pre></div>
 <p>2.7% of all D color diamonds are of Fair quality. 44.7% of all J color diamonds are of Ideal quality.</p>
 </div>
 <div id="grouped-bar-charts" class="section level4 hasAnchor" number="2.4.1.3">
@@ -600,22 +652,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To compare proportions of one categorical variable within the same level of another, is to use grouped barcharts.</p>
 <p><strong>base</strong>
 As before, the object to be plotted needs to be the result of a table.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="bivariate-visualizations.html#cb77-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
-<span id="cb77-2"><a href="bivariate-visualizations.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(cc)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="bivariate-visualizations.html#cb77-1" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
+<span id="cb77-2"><a href="bivariate-visualizations.html#cb77-2" tabindex="-1"></a><span class="fu">barplot</span>(cc)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Stacked bars can be difficult to interpret, and very difficult to compare values between groups. A side by side barchart is preferable.
 The <code>beside=TRUE</code> is what controls the placement of the bars.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="bivariate-visualizations.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(cc, <span class="at">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="at">beside=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="bivariate-visualizations.html#cb78-1" tabindex="-1"></a><span class="fu">barplot</span>(cc, <span class="at">main=</span><span class="st">&quot;quick side by side barchart using base graphics&quot;</span>, <span class="at">beside=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 Again plot the cut on the x axis, but then <code>fill</code> using the second categorical variable. This has the effect of visualizing the <strong>row</strong> percents from the table above. The percent of color, within each type of cut.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="bivariate-visualizations.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="bivariate-visualizations.html#cb79-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Again the default is a stacked barchart. So we just specify <code>position=dodge</code> to put the bars side by side.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="bivariate-visualizations.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="bivariate-visualizations.html#cb80-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>cut, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>And look, an automatic legend. What if I wanted to better compare cut within color group? This is the <strong>column</strong> percentages. Just switch which variable is the x axis and which one is used to fill the colors!</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="bivariate-visualizations.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="bivariate-visualizations.html#cb81-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>For more than 2 colors I do not recommend choosing the colors yourself. I know little about color theory so I use the built-in color palettes. Here is a <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">great cheatsheet</a> about using color palettes.</p>
 <p>And this easy change is why we love <code>ggplot2</code>.</p>
@@ -624,61 +676,60 @@ Again plot the cut on the x axis, but then <code>fill</code> using the second ca
 <div id="grouped-bar-charts-with-percentages" class="section level3 hasAnchor" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Grouped bar charts with percentages<a href="bivariate-visualizations.html#grouped-bar-charts-with-percentages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Not as easy as one would hope, but the solution is to calculate the desired percentages first and then plot the summary data using either <code>geom_bar(stat='identity')</code> or <code>geom_col()</code>.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="bivariate-visualizations.html#cb82-1" aria-hidden="true" tabindex="-1"></a>calc.props <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(color, cut) <span class="sc">%&gt;%</span></span>
-<span id="cb82-2"><a href="bivariate-visualizations.html#cb82-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">count=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb82-3"><a href="bivariate-visualizations.html#cb82-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">pct=</span><span class="fu">round</span>(count<span class="sc">/</span><span class="fu">sum</span>(count),<span class="dv">3</span>))</span>
-<span id="cb82-4"><a href="bivariate-visualizations.html#cb82-4" aria-hidden="true" tabindex="-1"></a>calc.props</span>
-<span id="cb82-5"><a href="bivariate-visualizations.html#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 35 × 4</span></span>
-<span id="cb82-6"><a href="bivariate-visualizations.html#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # Groups:   color [7]</span></span>
-<span id="cb82-7"><a href="bivariate-visualizations.html#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="do">##    color cut       count   pct</span></span>
-<span id="cb82-8"><a href="bivariate-visualizations.html#cb82-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span></span>
-<span id="cb82-9"><a href="bivariate-visualizations.html#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 D     Fair        163 0.024</span></span>
-<span id="cb82-10"><a href="bivariate-visualizations.html#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 D     Good        662 0.098</span></span>
-<span id="cb82-11"><a href="bivariate-visualizations.html#cb82-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 D     Very Good  1513 0.223</span></span>
-<span id="cb82-12"><a href="bivariate-visualizations.html#cb82-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 D     Premium    1603 0.237</span></span>
-<span id="cb82-13"><a href="bivariate-visualizations.html#cb82-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 D     Ideal      2834 0.418</span></span>
-<span id="cb82-14"><a href="bivariate-visualizations.html#cb82-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 E     Fair        224 0.023</span></span>
-<span id="cb82-15"><a href="bivariate-visualizations.html#cb82-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 E     Good        933 0.095</span></span>
-<span id="cb82-16"><a href="bivariate-visualizations.html#cb82-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 E     Very Good  2400 0.245</span></span>
-<span id="cb82-17"><a href="bivariate-visualizations.html#cb82-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 E     Premium    2337 0.239</span></span>
-<span id="cb82-18"><a href="bivariate-visualizations.html#cb82-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 E     Ideal      3903 0.398</span></span>
-<span id="cb82-19"><a href="bivariate-visualizations.html#cb82-19" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 25 more rows</span></span>
-<span id="cb82-20"><a href="bivariate-visualizations.html#cb82-20" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="bivariate-visualizations.html#cb82-1" tabindex="-1"></a>calc.props <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(color, cut) <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="bivariate-visualizations.html#cb82-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">count=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb82-3"><a href="bivariate-visualizations.html#cb82-3" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">pct=</span><span class="fu">round</span>(count<span class="sc">/</span><span class="fu">sum</span>(count),<span class="dv">3</span>))</span>
+<span id="cb82-4"><a href="bivariate-visualizations.html#cb82-4" tabindex="-1"></a>calc.props</span>
+<span id="cb82-5"><a href="bivariate-visualizations.html#cb82-5" tabindex="-1"></a><span class="do">## # A tibble: 35 × 4</span></span>
+<span id="cb82-6"><a href="bivariate-visualizations.html#cb82-6" tabindex="-1"></a><span class="do">## # Groups:   color [7]</span></span>
+<span id="cb82-7"><a href="bivariate-visualizations.html#cb82-7" tabindex="-1"></a><span class="do">##    color cut       count   pct</span></span>
+<span id="cb82-8"><a href="bivariate-visualizations.html#cb82-8" tabindex="-1"></a><span class="do">##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb82-9"><a href="bivariate-visualizations.html#cb82-9" tabindex="-1"></a><span class="do">##  1 D     Fair        163 0.024</span></span>
+<span id="cb82-10"><a href="bivariate-visualizations.html#cb82-10" tabindex="-1"></a><span class="do">##  2 D     Good        662 0.098</span></span>
+<span id="cb82-11"><a href="bivariate-visualizations.html#cb82-11" tabindex="-1"></a><span class="do">##  3 D     Very Good  1513 0.223</span></span>
+<span id="cb82-12"><a href="bivariate-visualizations.html#cb82-12" tabindex="-1"></a><span class="do">##  4 D     Premium    1603 0.237</span></span>
+<span id="cb82-13"><a href="bivariate-visualizations.html#cb82-13" tabindex="-1"></a><span class="do">##  5 D     Ideal      2834 0.418</span></span>
+<span id="cb82-14"><a href="bivariate-visualizations.html#cb82-14" tabindex="-1"></a><span class="do">##  6 E     Fair        224 0.023</span></span>
+<span id="cb82-15"><a href="bivariate-visualizations.html#cb82-15" tabindex="-1"></a><span class="do">##  7 E     Good        933 0.095</span></span>
+<span id="cb82-16"><a href="bivariate-visualizations.html#cb82-16" tabindex="-1"></a><span class="do">##  8 E     Very Good  2400 0.245</span></span>
+<span id="cb82-17"><a href="bivariate-visualizations.html#cb82-17" tabindex="-1"></a><span class="do">##  9 E     Premium    2337 0.239</span></span>
+<span id="cb82-18"><a href="bivariate-visualizations.html#cb82-18" tabindex="-1"></a><span class="do">## 10 E     Ideal      3903 0.398</span></span>
+<span id="cb82-19"><a href="bivariate-visualizations.html#cb82-19" tabindex="-1"></a><span class="do">## # … with 25 more rows</span></span></code></pre></div>
 <p>Since we’re plotting summary data, the height of the bars is specified using <code>y=pct</code>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="bivariate-visualizations.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(calc.props, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut, <span class="at">y=</span>pct)) <span class="sc">+</span></span>
-<span id="cb83-2"><a href="bivariate-visualizations.html#cb83-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="bivariate-visualizations.html#cb83-1" tabindex="-1"></a><span class="fu">ggplot</span>(calc.props, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut, <span class="at">y=</span>pct)) <span class="sc">+</span></span>
+<span id="cb83-2"><a href="bivariate-visualizations.html#cb83-2" tabindex="-1"></a>                  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() </span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Now set some options to the y axis using <code>scale_y_continuous()</code> to make the graph more accurate and readable. The <code>labels=percent</code> comes from the <code>scales</code> package.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="bivariate-visualizations.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb84-2"><a href="bivariate-visualizations.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(calc.props, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut, <span class="at">y=</span>pct)) <span class="sc">+</span></span>
-<span id="cb84-3"><a href="bivariate-visualizations.html#cb84-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb84-4"><a href="bivariate-visualizations.html#cb84-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels=</span>percent)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="bivariate-visualizations.html#cb84-1" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb84-2"><a href="bivariate-visualizations.html#cb84-2" tabindex="-1"></a><span class="fu">ggplot</span>(calc.props, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">fill=</span>cut, <span class="at">y=</span>pct)) <span class="sc">+</span></span>
+<span id="cb84-3"><a href="bivariate-visualizations.html#cb84-3" tabindex="-1"></a>                  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb84-4"><a href="bivariate-visualizations.html#cb84-4" tabindex="-1"></a>                  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels=</span>percent)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <div id="sjplot" class="section level4 hasAnchor" number="2.4.2.1">
 <h4><span class="header-section-number">2.4.2.1</span> <code>sjPlot</code><a href="bivariate-visualizations.html#sjplot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>sjPlot does a very nice job of being able to cleanly show not only n’s but percents.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="bivariate-visualizations.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb85-2"><a href="bivariate-visualizations.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_xtab</span>(dsmall<span class="sc">$</span>color, dsmall<span class="sc">$</span>cut, <span class="at">margin=</span><span class="st">&quot;row&quot;</span>, <span class="at">coord.flip =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="bivariate-visualizations.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb85-2"><a href="bivariate-visualizations.html#cb85-2" tabindex="-1"></a><span class="fu">plot_xtab</span>(dsmall<span class="sc">$</span>color, dsmall<span class="sc">$</span>cut, <span class="at">margin=</span><span class="st">&quot;row&quot;</span>, <span class="at">coord.flip =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 <div id="mosaic-plots" class="section level4 hasAnchor" number="2.4.2.2">
 <h4><span class="header-section-number">2.4.2.2</span> Mosaic plots<a href="bivariate-visualizations.html#mosaic-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>But what if you want to know how two categorical variables are related and you don’t want to look at two different barplots? Mosaic plots are a way to visualize the proportions in a table. So here’s the two-way table we’ll be plotting.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="bivariate-visualizations.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
-<span id="cb86-2"><a href="bivariate-visualizations.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            </span></span>
-<span id="cb86-3"><a href="bivariate-visualizations.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="do">##              D  E  F  G  H  I  J</span></span>
-<span id="cb86-4"><a href="bivariate-visualizations.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fair       5  6  7  4  5  4  3</span></span>
-<span id="cb86-5"><a href="bivariate-visualizations.html#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Good      18 23 11 16 17  7  7</span></span>
-<span id="cb86-6"><a href="bivariate-visualizations.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Very Good 26 37 46 40 33 25 13</span></span>
-<span id="cb86-7"><a href="bivariate-visualizations.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Premium   34 53 43 49 41 24 13</span></span>
-<span id="cb86-8"><a href="bivariate-visualizations.html#cb86-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Ideal     54 63 79 92 53 34 15</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="bivariate-visualizations.html#cb86-1" tabindex="-1"></a><span class="fu">table</span>(dsmall<span class="sc">$</span>cut, dsmall<span class="sc">$</span>color)</span>
+<span id="cb86-2"><a href="bivariate-visualizations.html#cb86-2" tabindex="-1"></a><span class="do">##            </span></span>
+<span id="cb86-3"><a href="bivariate-visualizations.html#cb86-3" tabindex="-1"></a><span class="do">##              D  E  F  G  H  I  J</span></span>
+<span id="cb86-4"><a href="bivariate-visualizations.html#cb86-4" tabindex="-1"></a><span class="do">##   Fair       5  6  7  4  5  4  3</span></span>
+<span id="cb86-5"><a href="bivariate-visualizations.html#cb86-5" tabindex="-1"></a><span class="do">##   Good      18 23 11 16 17  7  7</span></span>
+<span id="cb86-6"><a href="bivariate-visualizations.html#cb86-6" tabindex="-1"></a><span class="do">##   Very Good 26 37 46 40 33 25 13</span></span>
+<span id="cb86-7"><a href="bivariate-visualizations.html#cb86-7" tabindex="-1"></a><span class="do">##   Premium   34 53 43 49 41 24 13</span></span>
+<span id="cb86-8"><a href="bivariate-visualizations.html#cb86-8" tabindex="-1"></a><span class="do">##   Ideal     54 63 79 92 53 34 15</span></span></code></pre></div>
 <p>The syntax for a mosaic plot uses <em>model notation</em>, which is basically y ~ x where the ~ is read as “twiddle” or “tilde”. It’s to the left of your <strong>1</strong> key.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="bivariate-visualizations.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="bivariate-visualizations.html#cb87-1" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Helpful, ish. Here are two very useful options. In reverse obviousness, <code>color</code> applies shades of gray to one of the factor levels, and <code>shade</code> applies a color gradient scale to the cells in order of what is less than expected (red) to what is more than expected (blue) if these two factors were completely independent.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="bivariate-visualizations.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># display the plots in 1 row and 2 columns</span></span>
-<span id="cb88-2"><a href="bivariate-visualizations.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall, <span class="at">color=</span><span class="cn">TRUE</span>)</span>
-<span id="cb88-3"><a href="bivariate-visualizations.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall, <span class="at">shade=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="bivariate-visualizations.html#cb88-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># display the plots in 1 row and 2 columns</span></span>
+<span id="cb88-2"><a href="bivariate-visualizations.html#cb88-2" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall, <span class="at">color=</span><span class="cn">TRUE</span>)</span>
+<span id="cb88-3"><a href="bivariate-visualizations.html#cb88-3" tabindex="-1"></a><span class="fu">mosaicplot</span>(cut<span class="sc">~</span>color, <span class="at">data=</span>dsmall, <span class="at">shade=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-47-1.png" width="960" /></p>
 <p>For example, there are fewer ‘Very Good’ cut diamonds that are color ‘G’, and fewer ‘Premium’ cut diamonds that are color ‘H’. As you can see, knowing what your data means when trying to interpret what the plots are telling you is essential.</p>
 <p>That’s about all the ways you can plot categorical variables.
@@ -695,12 +746,12 @@ If you are wondering why there was no 3D barcharts demonstrated see<br />
 <p>The most common method of visualizing the relationship between two continuous variables is by using a scatterplot.</p>
 <p><strong>base</strong>
 Back to the <code>plot()</code> command. Here we use model notation again, so it’s <span class="math inline">\(y~x\)</span>.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="bivariate-visualizations.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="bivariate-visualizations.html#cb89-1" tabindex="-1"></a><span class="fu">plot</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Looks like for the most part as the carat value increases so does price. That makes sense.</p>
 <p><strong>ggplot</strong>
 With ggplot we specify both the x and y variables, and add a point.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="bivariate-visualizations.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="bivariate-visualizations.html#cb90-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p><strong>Other Resources</strong></p>
 <ul>
@@ -714,38 +765,38 @@ With ggplot we specify both the x and y variables, and add a point.</p>
 <p>Two most common trend lines added to a scatterplots are the “best fit” straight line and the “lowess” smoother line.</p>
 <p><strong>base</strong>
 The best fit line (in blue) gets added by using the <code>abline()</code> function wrapped around the linear model function <code>lm()</code>. Note it uses the same model notation syntax and the <code>data=</code> statement as the <code>plot()</code> function does. The lowess line is added using the <code>lines()</code> function, but the <code>lowess()</code> function itself doesn’t allow for the <code>data=</code> statement so we have to use <code>$</code> sign notation.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="bivariate-visualizations.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall)</span>
-<span id="cb91-2"><a href="bivariate-visualizations.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb91-3"><a href="bivariate-visualizations.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(dsmall<span class="sc">$</span>price<span class="sc">~</span>dsmall<span class="sc">$</span>carat), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="bivariate-visualizations.html#cb91-1" tabindex="-1"></a><span class="fu">plot</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall)</span>
+<span id="cb91-2"><a href="bivariate-visualizations.html#cb91-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(price<span class="sc">~</span>carat, <span class="at">data=</span>dsmall), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb91-3"><a href="bivariate-visualizations.html#cb91-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(dsmall<span class="sc">$</span>price<span class="sc">~</span>dsmall<span class="sc">$</span>carat), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 With ggplot, we just add a <code>geom_smooth()</code> layer.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="bivariate-visualizations.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="bivariate-visualizations.html#cb92-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>() </span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Here the point-wise confidence interval for this lowess line is shown in grey. If you want to turn the confidence interval off, use <code>se=FALSE</code>. Also notice that the smoothing geom uses a different function or window than the <code>lowess</code> function used in base graphics.</p>
 <p>Here it is again using the <code>ggplot</code> plotting function and adding another <code>geom_smooth()</code> layer for the <code>lm</code> (linear model) line in blue, and the lowess line (by not specifying a method) in red.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="bivariate-visualizations.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb93-2"><a href="bivariate-visualizations.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb93-3"><a href="bivariate-visualizations.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="bivariate-visualizations.html#cb93-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb93-2"><a href="bivariate-visualizations.html#cb93-2" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb93-3"><a href="bivariate-visualizations.html#cb93-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="line-plots" class="section level4 hasAnchor" number="2.4.3.3">
 <h4><span class="header-section-number">2.4.3.3</span> Line plots<a href="bivariate-visualizations.html#line-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Line plots connect each dot with a straight line. This is most often done when measuring trends of the response as the value of x increases (such as a time series)</p>
 <p>We saw earlier that <code>carat</code> and <code>price</code> seemed possibly linear. Let see how the average price changes with carat.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="bivariate-visualizations.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb94-2"><a href="bivariate-visualizations.html#cb94-2" aria-hidden="true" tabindex="-1"></a>price.per.carat <span class="ot">&lt;-</span> dsmall <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(carat) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(price))</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="bivariate-visualizations.html#cb94-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb94-2"><a href="bivariate-visualizations.html#cb94-2" tabindex="-1"></a>price.per.carat <span class="ot">&lt;-</span> dsmall <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(carat) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(price))</span></code></pre></div>
 <p><strong>base</strong>
 For base graphics, type=‘b’ means both points and lines, ‘l’ gives you just lines and ‘p’ gives you only points. You can find more plotting character options under <code>?pch</code>.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="bivariate-visualizations.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mean<span class="sc">~</span>carat, <span class="at">data=</span>price.per.carat, <span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="bivariate-visualizations.html#cb95-1" tabindex="-1"></a><span class="fu">plot</span>(mean<span class="sc">~</span>carat, <span class="at">data=</span>price.per.carat, <span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 With ggplot we specify that we want a line geometry only.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="bivariate-visualizations.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(price.per.carat, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>mean)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="bivariate-visualizations.html#cb96-1" tabindex="-1"></a><span class="fu">ggplot</span>(price.per.carat, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>mean)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>How does this relationship change with cut of the diamond? First lets
 get the average price per combination of carat and cut.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="bivariate-visualizations.html#cb97-1" aria-hidden="true" tabindex="-1"></a>ppc2 <span class="ot">&lt;-</span> dsmall <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cut, carat) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(price))</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="bivariate-visualizations.html#cb97-1" tabindex="-1"></a>ppc2 <span class="ot">&lt;-</span> dsmall <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cut, carat) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(price))</span></code></pre></div>
 <p><strong>base</strong>
 This plot can be created in base graphics, but it takes an advanced
 knowledge of the graphics system to do so. So I do not show it here.</p>
@@ -753,7 +804,7 @@ knowledge of the graphics system to do so. So I do not show it here.</p>
 This is where ggplot starts to excel in it’s ease of creating more
 complex plots. All we have to do is specify that we want the lines
 colored by the cut variable.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="bivariate-visualizations.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ppc2, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>mean, <span class="at">col=</span>cut)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="bivariate-visualizations.html#cb98-1" tabindex="-1"></a><span class="fu">ggplot</span>(ppc2, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>mean, <span class="at">col=</span>cut)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>And we get one line per cut.</p>
 </div>
@@ -766,14 +817,14 @@ level of the categorical variable.</p>
 <h4><span class="header-section-number">2.4.4.1</span> Dotplot/strip chart<a href="bivariate-visualizations.html#dotplotstrip-chart" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Dotplots can be very useful when plotting dots against several categories. They can also be called stripcharts.</p>
 <p><strong>base</strong></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="bivariate-visualizations.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(carat <span class="sc">~</span> cut, <span class="at">data=</span>dsmall)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="bivariate-visualizations.html#cb99-1" tabindex="-1"></a><span class="fu">stripchart</span>(carat <span class="sc">~</span> cut, <span class="at">data=</span>dsmall)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>Doesn’t look to pretty, but kinda gets the point across. Few fair quality diamonds in the data set, pretty spread out across the carat range except one high end outlier.</p>
 <p><strong>ggplot</strong>
 We can reproduce the same thing by plotting one continuous variable against one categorical variable, and adding a layer of points. I’d argue that horizontal looks better due to the axis-labels.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="bivariate-visualizations.html#cb100-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">y=</span>carat, <span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb100-2"><a href="bivariate-visualizations.html#cb100-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">y=</span>cut, <span class="at">x=</span>carat)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb100-3"><a href="bivariate-visualizations.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(a, b, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="bivariate-visualizations.html#cb100-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">y=</span>carat, <span class="at">x=</span>cut)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb100-2"><a href="bivariate-visualizations.html#cb100-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">y=</span>cut, <span class="at">x=</span>carat)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb100-3"><a href="bivariate-visualizations.html#cb100-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(a, b, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 </div>
 <div id="grouped-boxplots" class="section level4 hasAnchor" number="2.4.4.2">
@@ -781,17 +832,17 @@ We can reproduce the same thing by plotting one continuous variable against one 
 <p><strong>base</strong>
 Base graphics plots grouped boxplots with also just the addition of a twiddle (tilde) <code>~</code>.
 Another example of where model notation works.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="bivariate-visualizations.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(carat<span class="sc">~</span>color, <span class="at">data=</span>dsmall)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="bivariate-visualizations.html#cb101-1" tabindex="-1"></a><span class="fu">boxplot</span>(carat<span class="sc">~</span>color, <span class="at">data=</span>dsmall)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p><strong>ggplot</strong>
 A simple addition, just define your x and y accordingly.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="bivariate-visualizations.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">y=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="bivariate-visualizations.html#cb102-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">y=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p><strong>Adding violins</strong>
 Violin plots can be overlaid here as well.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="bivariate-visualizations.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">y=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span></span>
-<span id="cb103-2"><a href="bivariate-visualizations.html#cb103-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb103-3"><a href="bivariate-visualizations.html#cb103-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">width=</span>.<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="bivariate-visualizations.html#cb103-1" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">y=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span></span>
+<span id="cb103-2"><a href="bivariate-visualizations.html#cb103-2" tabindex="-1"></a>        <span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb103-3"><a href="bivariate-visualizations.html#cb103-3" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">width=</span>.<span class="dv">2</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 </div>
 <div id="grouped-histograms" class="section level4 hasAnchor" number="2.4.4.3">
@@ -800,22 +851,22 @@ Violin plots can be overlaid here as well.</p>
 There is no easy way to create grouped histograms in base graphics we will skip it.</p>
 <p><strong>ggplot</strong>
 By default ggplot wants to overlay all plots on the same grid. This doesn’t look to good with histograms. Instead you can overlay density plots</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="bivariate-visualizations.html#cb104-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-2"><a href="bivariate-visualizations.html#cb104-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>() </span>
-<span id="cb104-3"><a href="bivariate-visualizations.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(a,b, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="bivariate-visualizations.html#cb104-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb104-2"><a href="bivariate-visualizations.html#cb104-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>() </span>
+<span id="cb104-3"><a href="bivariate-visualizations.html#cb104-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(a,b, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-63-1.png" width="960" /></p>
 <p>The solid fills are still difficult to read, so we can either turn down the alpha (turn up the transparency) or only color the lines and not the fill.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="bivariate-visualizations.html#cb105-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span>.<span class="dv">2</span>)</span>
-<span id="cb105-2"><a href="bivariate-visualizations.html#cb105-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">col=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>() </span>
-<span id="cb105-3"><a href="bivariate-visualizations.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(c,d, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="bivariate-visualizations.html#cb105-1" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">fill=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span>.<span class="dv">2</span>)</span>
+<span id="cb105-2"><a href="bivariate-visualizations.html#cb105-2" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">col=</span>color)) <span class="sc">+</span> <span class="fu">geom_density</span>() </span>
+<span id="cb105-3"><a href="bivariate-visualizations.html#cb105-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(c,d, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-64-1.png" width="960" /></p>
 </div>
 </div>
 <div id="joy-plots-ridgelines" class="section level3 hasAnchor" number="2.4.5">
 <h3><span class="header-section-number">2.4.5</span> Joy plots / Ridgelines<a href="bivariate-visualizations.html#joy-plots-ridgelines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Somewhat new (2017), joylines have not been added to the base distribution of <code>ggplot2</code> yet. For now it’s available in the <code>ggjoy</code> package. Really good way to visualize density plots without the overlapping issue.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="bivariate-visualizations.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggjoy)</span>
-<span id="cb106-2"><a href="bivariate-visualizations.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>color)) <span class="sc">+</span> <span class="fu">geom_joy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="bivariate-visualizations.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(ggjoy)</span>
+<span id="cb106-2"><a href="bivariate-visualizations.html#cb106-2" tabindex="-1"></a><span class="fu">ggplot</span>(dsmall, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>color)) <span class="sc">+</span> <span class="fu">geom_joy</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-65-1.png" width="960" /></p>
 </div>
 </div>
@@ -885,7 +936,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

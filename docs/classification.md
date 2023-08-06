@@ -49,6 +49,8 @@ Consider the main effects model of depression on age, income and sex from sectio
                                freedom          
 -------------------- ---------------------------
 
+
+
 The predicted probability of depression is calculated as: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}

@@ -18,7 +18,7 @@ This section uses functions from the `dotwhisker` and `gtsummary` visualize resu
 ```
 
 ```{r, echo=FALSE}
-library(performance) 
+library(performance); library(gtsummary)
 pen <- palmerpenguins::penguins
 ```
 

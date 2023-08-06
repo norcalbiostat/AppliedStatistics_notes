@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.4 Confusion Matrix | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.4 Confusion Matrix | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -536,11 +588,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="confusion-matrix" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Confusion Matrix<a href="confusion-matrix.html#confusion-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A confusion Matrix is the 2x2 table that compares the predicted classes to the true classes.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="confusion-matrix.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth)</span>
-<span id="cb248-2"><a href="confusion-matrix.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                </span></span>
-<span id="cb248-3"><a href="confusion-matrix.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Not Depressed Depressed</span></span>
-<span id="cb248-4"><a href="confusion-matrix.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
-<span id="cb248-5"><a href="confusion-matrix.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="confusion-matrix.html#cb248-1" tabindex="-1"></a><span class="fu">table</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth)</span>
+<span id="cb248-2"><a href="confusion-matrix.html#cb248-2" tabindex="-1"></a><span class="do">##                </span></span>
+<span id="cb248-3"><a href="confusion-matrix.html#cb248-3" tabindex="-1"></a><span class="do">##                 Not Depressed Depressed</span></span>
+<span id="cb248-4"><a href="confusion-matrix.html#cb248-4" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
+<span id="cb248-5"><a href="confusion-matrix.html#cb248-5" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span></code></pre></div>
 <p>This table was generated by drawing a random Bernoulli variable with probability <span class="math inline">\(p_{i}\)</span>. This assumes that probabilities can range from [0,1], but if you look at the plots above, the predicted probabilities max out around 0.5.</p>
 <p>Often we adjust the cutoff value to improve accuracy. This is where we have to put our gut feeling of what probability constitutes “high risk”. For some models, this could be as low as 30%. It’s whatever the probability is that optimally separates the classes. This is an important tuning parameter because since the models we build are only based on data we measured, often there are other unmeasured confounding factors that affect the predicted probability. So our predictions don’t span the full range from [0,1].</p>
 <p><img src="images/q.png" /> Using the above plots, where should we put the cutoff value? At what probability should we classify a record as “depressed”?</p>
@@ -551,34 +603,34 @@ Using the <code>confusionMatrix</code> function inside the <code>caret</code> pa
 You must specify what the ‘event’ is.
 This is also another place where the factor ordering of binary variables can cause headache. Another reason to control your factors!
 </div>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="confusion-matrix.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth, <span class="at">positive=</span><span class="st">&quot;Depressed&quot;</span>)</span>
-<span id="cb249-2"><a href="confusion-matrix.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Confusion Matrix and Statistics</span></span>
-<span id="cb249-3"><a href="confusion-matrix.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb249-4"><a href="confusion-matrix.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="do">##                Reference</span></span>
-<span id="cb249-5"><a href="confusion-matrix.html#cb249-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Prediction      Not Depressed Depressed</span></span>
-<span id="cb249-6"><a href="confusion-matrix.html#cb249-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
-<span id="cb249-7"><a href="confusion-matrix.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span>
-<span id="cb249-8"><a href="confusion-matrix.html#cb249-8" aria-hidden="true" tabindex="-1"></a><span class="do">##                                          </span></span>
-<span id="cb249-9"><a href="confusion-matrix.html#cb249-9" aria-hidden="true" tabindex="-1"></a><span class="do">##                Accuracy : 0.7143         </span></span>
-<span id="cb249-10"><a href="confusion-matrix.html#cb249-10" aria-hidden="true" tabindex="-1"></a><span class="do">##                  95% CI : (0.659, 0.7652)</span></span>
-<span id="cb249-11"><a href="confusion-matrix.html#cb249-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     No Information Rate : 0.8299         </span></span>
-<span id="cb249-12"><a href="confusion-matrix.html#cb249-12" aria-hidden="true" tabindex="-1"></a><span class="do">##     P-Value [Acc &gt; NIR] : 1.0000         </span></span>
-<span id="cb249-13"><a href="confusion-matrix.html#cb249-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                                          </span></span>
-<span id="cb249-14"><a href="confusion-matrix.html#cb249-14" aria-hidden="true" tabindex="-1"></a><span class="do">##                   Kappa : 0.0892         </span></span>
-<span id="cb249-15"><a href="confusion-matrix.html#cb249-15" aria-hidden="true" tabindex="-1"></a><span class="do">##                                          </span></span>
-<span id="cb249-16"><a href="confusion-matrix.html#cb249-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mcnemar&#39;s Test P-Value : 0.1561         </span></span>
-<span id="cb249-17"><a href="confusion-matrix.html#cb249-17" aria-hidden="true" tabindex="-1"></a><span class="do">##                                          </span></span>
-<span id="cb249-18"><a href="confusion-matrix.html#cb249-18" aria-hidden="true" tabindex="-1"></a><span class="do">##             Sensitivity : 0.30000        </span></span>
-<span id="cb249-19"><a href="confusion-matrix.html#cb249-19" aria-hidden="true" tabindex="-1"></a><span class="do">##             Specificity : 0.79918        </span></span>
-<span id="cb249-20"><a href="confusion-matrix.html#cb249-20" aria-hidden="true" tabindex="-1"></a><span class="do">##          Pos Pred Value : 0.23438        </span></span>
-<span id="cb249-21"><a href="confusion-matrix.html#cb249-21" aria-hidden="true" tabindex="-1"></a><span class="do">##          Neg Pred Value : 0.84783        </span></span>
-<span id="cb249-22"><a href="confusion-matrix.html#cb249-22" aria-hidden="true" tabindex="-1"></a><span class="do">##              Prevalence : 0.17007        </span></span>
-<span id="cb249-23"><a href="confusion-matrix.html#cb249-23" aria-hidden="true" tabindex="-1"></a><span class="do">##          Detection Rate : 0.05102        </span></span>
-<span id="cb249-24"><a href="confusion-matrix.html#cb249-24" aria-hidden="true" tabindex="-1"></a><span class="do">##    Detection Prevalence : 0.21769        </span></span>
-<span id="cb249-25"><a href="confusion-matrix.html#cb249-25" aria-hidden="true" tabindex="-1"></a><span class="do">##       Balanced Accuracy : 0.54959        </span></span>
-<span id="cb249-26"><a href="confusion-matrix.html#cb249-26" aria-hidden="true" tabindex="-1"></a><span class="do">##                                          </span></span>
-<span id="cb249-27"><a href="confusion-matrix.html#cb249-27" aria-hidden="true" tabindex="-1"></a><span class="do">##        &#39;Positive&#39; Class : Depressed      </span></span>
-<span id="cb249-28"><a href="confusion-matrix.html#cb249-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="confusion-matrix.html#cb249-1" tabindex="-1"></a><span class="fu">confusionMatrix</span>(plot.mpp<span class="sc">$</span>pred.class, plot.mpp<span class="sc">$</span>truth, <span class="at">positive=</span><span class="st">&quot;Depressed&quot;</span>)</span>
+<span id="cb249-2"><a href="confusion-matrix.html#cb249-2" tabindex="-1"></a><span class="do">## Confusion Matrix and Statistics</span></span>
+<span id="cb249-3"><a href="confusion-matrix.html#cb249-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb249-4"><a href="confusion-matrix.html#cb249-4" tabindex="-1"></a><span class="do">##                Reference</span></span>
+<span id="cb249-5"><a href="confusion-matrix.html#cb249-5" tabindex="-1"></a><span class="do">## Prediction      Not Depressed Depressed</span></span>
+<span id="cb249-6"><a href="confusion-matrix.html#cb249-6" tabindex="-1"></a><span class="do">##   Not Depressed           195        35</span></span>
+<span id="cb249-7"><a href="confusion-matrix.html#cb249-7" tabindex="-1"></a><span class="do">##   Depressed                49        15</span></span>
+<span id="cb249-8"><a href="confusion-matrix.html#cb249-8" tabindex="-1"></a><span class="do">##                                          </span></span>
+<span id="cb249-9"><a href="confusion-matrix.html#cb249-9" tabindex="-1"></a><span class="do">##                Accuracy : 0.7143         </span></span>
+<span id="cb249-10"><a href="confusion-matrix.html#cb249-10" tabindex="-1"></a><span class="do">##                  95% CI : (0.659, 0.7652)</span></span>
+<span id="cb249-11"><a href="confusion-matrix.html#cb249-11" tabindex="-1"></a><span class="do">##     No Information Rate : 0.8299         </span></span>
+<span id="cb249-12"><a href="confusion-matrix.html#cb249-12" tabindex="-1"></a><span class="do">##     P-Value [Acc &gt; NIR] : 1.0000         </span></span>
+<span id="cb249-13"><a href="confusion-matrix.html#cb249-13" tabindex="-1"></a><span class="do">##                                          </span></span>
+<span id="cb249-14"><a href="confusion-matrix.html#cb249-14" tabindex="-1"></a><span class="do">##                   Kappa : 0.0892         </span></span>
+<span id="cb249-15"><a href="confusion-matrix.html#cb249-15" tabindex="-1"></a><span class="do">##                                          </span></span>
+<span id="cb249-16"><a href="confusion-matrix.html#cb249-16" tabindex="-1"></a><span class="do">##  Mcnemar&#39;s Test P-Value : 0.1561         </span></span>
+<span id="cb249-17"><a href="confusion-matrix.html#cb249-17" tabindex="-1"></a><span class="do">##                                          </span></span>
+<span id="cb249-18"><a href="confusion-matrix.html#cb249-18" tabindex="-1"></a><span class="do">##             Sensitivity : 0.30000        </span></span>
+<span id="cb249-19"><a href="confusion-matrix.html#cb249-19" tabindex="-1"></a><span class="do">##             Specificity : 0.79918        </span></span>
+<span id="cb249-20"><a href="confusion-matrix.html#cb249-20" tabindex="-1"></a><span class="do">##          Pos Pred Value : 0.23438        </span></span>
+<span id="cb249-21"><a href="confusion-matrix.html#cb249-21" tabindex="-1"></a><span class="do">##          Neg Pred Value : 0.84783        </span></span>
+<span id="cb249-22"><a href="confusion-matrix.html#cb249-22" tabindex="-1"></a><span class="do">##              Prevalence : 0.17007        </span></span>
+<span id="cb249-23"><a href="confusion-matrix.html#cb249-23" tabindex="-1"></a><span class="do">##          Detection Rate : 0.05102        </span></span>
+<span id="cb249-24"><a href="confusion-matrix.html#cb249-24" tabindex="-1"></a><span class="do">##    Detection Prevalence : 0.21769        </span></span>
+<span id="cb249-25"><a href="confusion-matrix.html#cb249-25" tabindex="-1"></a><span class="do">##       Balanced Accuracy : 0.54959        </span></span>
+<span id="cb249-26"><a href="confusion-matrix.html#cb249-26" tabindex="-1"></a><span class="do">##                                          </span></span>
+<span id="cb249-27"><a href="confusion-matrix.html#cb249-27" tabindex="-1"></a><span class="do">##        &#39;Positive&#39; Class : Depressed      </span></span>
+<span id="cb249-28"><a href="confusion-matrix.html#cb249-28" tabindex="-1"></a><span class="do">## </span></span></code></pre></div>
 <ul>
 <li>195 people were correctly predicted to not be depressed (True Negative)</li>
 <li>49 people were incorrectly predicted to be depressed (False Positive)</li>
@@ -652,7 +704,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

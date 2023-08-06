@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.6 ROC Curves | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.6 ROC Curves | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -547,37 +599,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="roc-curves.html#cb250-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">prediction</span>(phat.depr, dep_sex_model<span class="sc">$</span>y)</span>
-<span id="cb250-2"><a href="roc-curves.html#cb250-2" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="at">x.measure=</span><span class="st">&quot;fpr&quot;</span>)</span>
-<span id="cb250-3"><a href="roc-curves.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf, <span class="at">colorize=</span><span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">print.cutoffs.at=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">by=</span><span class="fl">0.1</span>)))</span>
-<span id="cb250-4"><a href="roc-curves.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="roc-curves.html#cb250-1" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">prediction</span>(phat.depr, dep_sex_model<span class="sc">$</span>y)</span>
+<span id="cb250-2"><a href="roc-curves.html#cb250-2" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&quot;tpr&quot;</span>, <span class="at">x.measure=</span><span class="st">&quot;fpr&quot;</span>)</span>
+<span id="cb250-3"><a href="roc-curves.html#cb250-3" tabindex="-1"></a><span class="fu">plot</span>(perf, <span class="at">colorize=</span><span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">print.cutoffs.at=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">by=</span><span class="fl">0.1</span>)))</span>
+<span id="cb250-4"><a href="roc-curves.html#cb250-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="classification_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>We can also use the <code>performance()</code> function to evaluate the <span class="math inline">\(f1\)</span> measure</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="roc-curves.html#cb251-1" aria-hidden="true" tabindex="-1"></a>perf.f1 <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;f&quot;</span>)</span>
-<span id="cb251-2"><a href="roc-curves.html#cb251-2" aria-hidden="true" tabindex="-1"></a>perf.acc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;acc&quot;</span>)</span>
-<span id="cb251-3"><a href="roc-curves.html#cb251-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb251-4"><a href="roc-curves.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb251-5"><a href="roc-curves.html#cb251-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf.f1)</span>
-<span id="cb251-6"><a href="roc-curves.html#cb251-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(perf.acc)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="roc-curves.html#cb251-1" tabindex="-1"></a>perf.f1 <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;f&quot;</span>)</span>
+<span id="cb251-2"><a href="roc-curves.html#cb251-2" tabindex="-1"></a>perf.acc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr,<span class="at">measure=</span><span class="st">&quot;acc&quot;</span>)</span>
+<span id="cb251-3"><a href="roc-curves.html#cb251-3" tabindex="-1"></a></span>
+<span id="cb251-4"><a href="roc-curves.html#cb251-4" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb251-5"><a href="roc-curves.html#cb251-5" tabindex="-1"></a><span class="fu">plot</span>(perf.f1)</span>
+<span id="cb251-6"><a href="roc-curves.html#cb251-6" tabindex="-1"></a><span class="fu">plot</span>(perf.acc)</span></code></pre></div>
 <p><img src="classification_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>We can dig into the <code>perf.acc</code> object to get the maximum accuracy value (<code>y.value</code>), then find the row where that value occurs, and link it to the corresponding cutoff value of x.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="roc-curves.html#cb252-1" aria-hidden="true" tabindex="-1"></a>(max.f1 <span class="ot">&lt;-</span> <span class="fu">max</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]], <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb252-2"><a href="roc-curves.html#cb252-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8333333</span></span>
-<span id="cb252-3"><a href="roc-curves.html#cb252-3" aria-hidden="true" tabindex="-1"></a>(row.with.max <span class="ot">&lt;-</span> <span class="fu">which</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]]<span class="sc">==</span>max.f1))</span>
-<span id="cb252-4"><a href="roc-curves.html#cb252-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2 8</span></span>
-<span id="cb252-5"><a href="roc-curves.html#cb252-5" aria-hidden="true" tabindex="-1"></a>(cutoff.value <span class="ot">&lt;-</span> perf.acc<span class="sc">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</span>
-<span id="cb252-6"><a href="roc-curves.html#cb252-6" aria-hidden="true" tabindex="-1"></a><span class="do">##       124       256 </span></span>
-<span id="cb252-7"><a href="roc-curves.html#cb252-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.4508171 0.3946273</span></span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="roc-curves.html#cb252-1" tabindex="-1"></a>(max.f1 <span class="ot">&lt;-</span> <span class="fu">max</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]], <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb252-2"><a href="roc-curves.html#cb252-2" tabindex="-1"></a><span class="do">## [1] 0.8333333</span></span>
+<span id="cb252-3"><a href="roc-curves.html#cb252-3" tabindex="-1"></a>(row.with.max <span class="ot">&lt;-</span> <span class="fu">which</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]]<span class="sc">==</span>max.f1))</span>
+<span id="cb252-4"><a href="roc-curves.html#cb252-4" tabindex="-1"></a><span class="do">## [1] 2 8</span></span>
+<span id="cb252-5"><a href="roc-curves.html#cb252-5" tabindex="-1"></a>(cutoff.value <span class="ot">&lt;-</span> perf.acc<span class="sc">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</span>
+<span id="cb252-6"><a href="roc-curves.html#cb252-6" tabindex="-1"></a><span class="do">##       124       256 </span></span>
+<span id="cb252-7"><a href="roc-curves.html#cb252-7" tabindex="-1"></a><span class="do">## 0.4508171 0.3946273</span></span></code></pre></div>
 <p>Sometimes (like here) there is not one single maximum value for accuracy. In this case I would look at which of these two cutoff points maximize other metrics such as the <span class="math inline">\(f1\)</span> score.</p>
 <p>ROC curves:</p>
 <ul>
 <li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
 <li>The Area under the Curve (auc) also gives you a measure of overall model accuracy.</li>
 </ul>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="roc-curves.html#cb253-1" aria-hidden="true" tabindex="-1"></a>auc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&#39;auc&#39;</span>)</span>
-<span id="cb253-2"><a href="roc-curves.html#cb253-2" aria-hidden="true" tabindex="-1"></a>auc<span class="sc">@</span>y.values</span>
-<span id="cb253-3"><a href="roc-curves.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
-<span id="cb253-4"><a href="roc-curves.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.695041</span></span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="roc-curves.html#cb253-1" tabindex="-1"></a>auc <span class="ot">&lt;-</span> <span class="fu">performance</span>(pr, <span class="at">measure=</span><span class="st">&#39;auc&#39;</span>)</span>
+<span id="cb253-2"><a href="roc-curves.html#cb253-2" tabindex="-1"></a>auc<span class="sc">@</span>y.values</span>
+<span id="cb253-3"><a href="roc-curves.html#cb253-3" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb253-4"><a href="roc-curves.html#cb253-4" tabindex="-1"></a><span class="do">## [1] 0.695041</span></span></code></pre></div>
 </div>
             </section>
 
@@ -645,7 +697,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.4 Interpreting Coefficients | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.4 Interpreting Coefficients | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -538,32 +590,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Similar to simple linear regression, each <span class="math inline">\(\beta_{j}\)</span> coefficient is considered a slope. That is, the amount <span class="math inline">\(Y\)</span> will change for every 1 unit increase in <span class="math inline">\(X_{j}\)</span>. In a multiple variable regression model, <span class="math inline">\(\b_{j}\)</span> is the estimated change in <span class="math inline">\(Y\)</span> <em>after controlling for other predictors in the model</em>.</p>
 <div id="continuous-predictors" class="section level3 hasAnchor" number="9.4.1">
 <h3><span class="header-section-number">9.4.1</span> Continuous predictors<a href="interpreting-coefficients.html#continuous-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="interpreting-coefficients.html#cb176-1" aria-hidden="true" tabindex="-1"></a>mlr.dad.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FAGE <span class="sc">+</span> FHEIGHT, <span class="at">data=</span>fev)</span>
-<span id="cb176-2"><a href="interpreting-coefficients.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr.dad.model)</span>
-<span id="cb176-3"><a href="interpreting-coefficients.html#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb176-4"><a href="interpreting-coefficients.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb176-5"><a href="interpreting-coefficients.html#cb176-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></span>
-<span id="cb176-6"><a href="interpreting-coefficients.html#cb176-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb176-7"><a href="interpreting-coefficients.html#cb176-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb176-8"><a href="interpreting-coefficients.html#cb176-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb176-9"><a href="interpreting-coefficients.html#cb176-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></span>
-<span id="cb176-10"><a href="interpreting-coefficients.html#cb176-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb176-11"><a href="interpreting-coefficients.html#cb176-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb176-12"><a href="interpreting-coefficients.html#cb176-12" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb176-13"><a href="interpreting-coefficients.html#cb176-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></span>
-<span id="cb176-14"><a href="interpreting-coefficients.html#cb176-14" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></span>
-<span id="cb176-15"><a href="interpreting-coefficients.html#cb176-15" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></span>
-<span id="cb176-16"><a href="interpreting-coefficients.html#cb176-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb176-17"><a href="interpreting-coefficients.html#cb176-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb176-18"><a href="interpreting-coefficients.html#cb176-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb176-19"><a href="interpreting-coefficients.html#cb176-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.5348 on 147 degrees of freedom</span></span>
-<span id="cb176-20"><a href="interpreting-coefficients.html#cb176-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></span>
-<span id="cb176-21"><a href="interpreting-coefficients.html#cb176-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></span>
-<span id="cb176-22"><a href="interpreting-coefficients.html#cb176-22" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mlr.dad.model)</span>
-<span id="cb176-23"><a href="interpreting-coefficients.html#cb176-23" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2.5 %      97.5 %</span></span>
-<span id="cb176-24"><a href="interpreting-coefficients.html#cb176-24" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -5.00919751 -0.51229620</span></span>
-<span id="cb176-25"><a href="interpreting-coefficients.html#cb176-25" aria-hidden="true" tabindex="-1"></a><span class="do">## FAGE        -0.03922545 -0.01405323</span></span>
-<span id="cb176-26"><a href="interpreting-coefficients.html#cb176-26" aria-hidden="true" tabindex="-1"></a><span class="do">## FHEIGHT      0.08319434  0.14559974</span></span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="interpreting-coefficients.html#cb176-1" tabindex="-1"></a>mlr.dad.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FFEV1 <span class="sc">~</span> FAGE <span class="sc">+</span> FHEIGHT, <span class="at">data=</span>fev)</span>
+<span id="cb176-2"><a href="interpreting-coefficients.html#cb176-2" tabindex="-1"></a><span class="fu">summary</span>(mlr.dad.model)</span>
+<span id="cb176-3"><a href="interpreting-coefficients.html#cb176-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb176-4"><a href="interpreting-coefficients.html#cb176-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb176-5"><a href="interpreting-coefficients.html#cb176-5" tabindex="-1"></a><span class="do">## lm(formula = FFEV1 ~ FAGE + FHEIGHT, data = fev)</span></span>
+<span id="cb176-6"><a href="interpreting-coefficients.html#cb176-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb176-7"><a href="interpreting-coefficients.html#cb176-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb176-8"><a href="interpreting-coefficients.html#cb176-8" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb176-9"><a href="interpreting-coefficients.html#cb176-9" tabindex="-1"></a><span class="do">## -1.34708 -0.34142  0.00917  0.37174  1.41853 </span></span>
+<span id="cb176-10"><a href="interpreting-coefficients.html#cb176-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb176-11"><a href="interpreting-coefficients.html#cb176-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb176-12"><a href="interpreting-coefficients.html#cb176-12" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb176-13"><a href="interpreting-coefficients.html#cb176-13" tabindex="-1"></a><span class="do">## (Intercept) -2.760747   1.137746  -2.427   0.0165 *  </span></span>
+<span id="cb176-14"><a href="interpreting-coefficients.html#cb176-14" tabindex="-1"></a><span class="do">## FAGE        -0.026639   0.006369  -4.183 4.93e-05 ***</span></span>
+<span id="cb176-15"><a href="interpreting-coefficients.html#cb176-15" tabindex="-1"></a><span class="do">## FHEIGHT      0.114397   0.015789   7.245 2.25e-11 ***</span></span>
+<span id="cb176-16"><a href="interpreting-coefficients.html#cb176-16" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb176-17"><a href="interpreting-coefficients.html#cb176-17" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb176-18"><a href="interpreting-coefficients.html#cb176-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb176-19"><a href="interpreting-coefficients.html#cb176-19" tabindex="-1"></a><span class="do">## Residual standard error: 0.5348 on 147 degrees of freedom</span></span>
+<span id="cb176-20"><a href="interpreting-coefficients.html#cb176-20" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3337, Adjusted R-squared:  0.3247 </span></span>
+<span id="cb176-21"><a href="interpreting-coefficients.html#cb176-21" tabindex="-1"></a><span class="do">## F-statistic: 36.81 on 2 and 147 DF,  p-value: 1.094e-13</span></span>
+<span id="cb176-22"><a href="interpreting-coefficients.html#cb176-22" tabindex="-1"></a><span class="fu">confint</span>(mlr.dad.model)</span>
+<span id="cb176-23"><a href="interpreting-coefficients.html#cb176-23" tabindex="-1"></a><span class="do">##                   2.5 %      97.5 %</span></span>
+<span id="cb176-24"><a href="interpreting-coefficients.html#cb176-24" tabindex="-1"></a><span class="do">## (Intercept) -5.00919751 -0.51229620</span></span>
+<span id="cb176-25"><a href="interpreting-coefficients.html#cb176-25" tabindex="-1"></a><span class="do">## FAGE        -0.03922545 -0.01405323</span></span>
+<span id="cb176-26"><a href="interpreting-coefficients.html#cb176-26" tabindex="-1"></a><span class="do">## FHEIGHT      0.08319434  0.14559974</span></span></code></pre></div>
 <ul>
 <li>Holding height constant, a father who is one year older is expected to have a FEV value 0.03 (0.01, 0.04) liters less than another man (p&lt;.0001).</li>
 <li>Holding age constant, a father who is 1cm taller than another man is expected to have a FEV value of 0.11 (.08, 0.15) liter greater than the other man (p&lt;.0001).</li>
@@ -577,14 +629,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Note, the <code>fev</code> data set is in <em>wide</em> form right now, with different columns for mothers and fathers. First I need to reshape the data into <em>long</em> format, so gender is it’s own variable.</p>
 </blockquote>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="interpreting-coefficients.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a pivot_longer() probably would have worked here as well</span></span>
-<span id="cb177-2"><a href="interpreting-coefficients.html#cb177-2" aria-hidden="true" tabindex="-1"></a>fev_long <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
-<span id="cb177-3"><a href="interpreting-coefficients.html#cb177-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fev1 =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
-<span id="cb177-4"><a href="interpreting-coefficients.html#cb177-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
-<span id="cb177-5"><a href="interpreting-coefficients.html#cb177-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE), </span>
-<span id="cb177-6"><a href="interpreting-coefficients.html#cb177-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">area =</span> <span class="fu">c</span>(fev<span class="sc">$</span>AREA, fev<span class="sc">$</span>AREA))</span>
-<span id="cb177-7"><a href="interpreting-coefficients.html#cb177-7" aria-hidden="true" tabindex="-1"></a>fev_long<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
-<span id="cb177-8"><a href="interpreting-coefficients.html#cb177-8" aria-hidden="true" tabindex="-1"></a>fev_long<span class="sc">$</span>area   <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>area, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Burbank&quot;</span>, <span class="st">&quot;Lancaster&quot;</span>, <span class="st">&quot;Long Beach&quot;</span>, <span class="st">&quot;Glendora&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="interpreting-coefficients.html#cb177-1" tabindex="-1"></a><span class="co"># a pivot_longer() probably would have worked here as well</span></span>
+<span id="cb177-2"><a href="interpreting-coefficients.html#cb177-2" tabindex="-1"></a>fev_long <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
+<span id="cb177-3"><a href="interpreting-coefficients.html#cb177-3" tabindex="-1"></a>                   <span class="at">fev1 =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
+<span id="cb177-4"><a href="interpreting-coefficients.html#cb177-4" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
+<span id="cb177-5"><a href="interpreting-coefficients.html#cb177-5" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE), </span>
+<span id="cb177-6"><a href="interpreting-coefficients.html#cb177-6" tabindex="-1"></a>                   <span class="at">area =</span> <span class="fu">c</span>(fev<span class="sc">$</span>AREA, fev<span class="sc">$</span>AREA))</span>
+<span id="cb177-7"><a href="interpreting-coefficients.html#cb177-7" tabindex="-1"></a>fev_long<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
+<span id="cb177-8"><a href="interpreting-coefficients.html#cb177-8" tabindex="-1"></a>fev_long<span class="sc">$</span>area   <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev_long<span class="sc">$</span>area, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Burbank&quot;</span>, <span class="st">&quot;Lancaster&quot;</span>, <span class="st">&quot;Long Beach&quot;</span>, <span class="st">&quot;Glendora&quot;</span>))</span></code></pre></div>
 <p>So the model being fit looks like:</p>
 <p><span class="math display">\[ y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \epsilon_{i}\]</span></p>
 <p>where</p>
@@ -593,14 +645,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(x_{2}\)</span>: height</li>
 <li><span class="math inline">\(x_{3}\)</span>: 0 if Male, 1 if Female</li>
 </ul>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="interpreting-coefficients.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender, <span class="at">data=</span>fev_long)</span>
-<span id="cb178-2"><a href="interpreting-coefficients.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb178-3"><a href="interpreting-coefficients.html#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb178-4"><a href="interpreting-coefficients.html#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender, data = fev_long)</span></span>
-<span id="cb178-5"><a href="interpreting-coefficients.html#cb178-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb178-6"><a href="interpreting-coefficients.html#cb178-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb178-7"><a href="interpreting-coefficients.html#cb178-7" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)          age           ht      genderF  </span></span>
-<span id="cb178-8"><a href="interpreting-coefficients.html#cb178-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    -2.24051     -0.02354      0.10509     -0.63775</span></span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="interpreting-coefficients.html#cb178-1" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender, <span class="at">data=</span>fev_long)</span>
+<span id="cb178-2"><a href="interpreting-coefficients.html#cb178-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb178-3"><a href="interpreting-coefficients.html#cb178-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb178-4"><a href="interpreting-coefficients.html#cb178-4" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender, data = fev_long)</span></span>
+<span id="cb178-5"><a href="interpreting-coefficients.html#cb178-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb178-6"><a href="interpreting-coefficients.html#cb178-6" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb178-7"><a href="interpreting-coefficients.html#cb178-7" tabindex="-1"></a><span class="do">## (Intercept)          age           ht      genderF  </span></span>
+<span id="cb178-8"><a href="interpreting-coefficients.html#cb178-8" tabindex="-1"></a><span class="do">##    -2.24051     -0.02354      0.10509     -0.63775</span></span></code></pre></div>
 <p>In this model gender is a binary categorical variable, with reference group “Male”. This is detected because the variable that shows up in the regression model output is <code>genderF</code>. So the estimate shown is for males, compared to females.</p>
 <p>Note that I <strong>DID NOT</strong> have to convert the categorical variable <code>gender</code> to a binary numeric variable before fitting it into the model. R (and any other software program) will do this for you already.</p>
 <p>The regression equation for the model with gender is</p>
@@ -616,35 +668,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cat-predictors" class="section level3 hasAnchor" number="9.4.3">
 <h3><span class="header-section-number">9.4.3</span> Categorical Predictors<a href="interpreting-coefficients.html#cat-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s continue to model the FEV for individuals living in Southern California, but now we also consider the effect of city they live in. For those unfamiliar with the region, these cities represent very different environmental profiles.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="interpreting-coefficients.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fev_long<span class="sc">$</span>area)</span>
-<span id="cb179-2"><a href="interpreting-coefficients.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb179-3"><a href="interpreting-coefficients.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Burbank  Lancaster Long Beach   Glendora </span></span>
-<span id="cb179-4"><a href="interpreting-coefficients.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         48         98         38        116</span></span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="interpreting-coefficients.html#cb179-1" tabindex="-1"></a><span class="fu">table</span>(fev_long<span class="sc">$</span>area)</span>
+<span id="cb179-2"><a href="interpreting-coefficients.html#cb179-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb179-3"><a href="interpreting-coefficients.html#cb179-3" tabindex="-1"></a><span class="do">##    Burbank  Lancaster Long Beach   Glendora </span></span>
+<span id="cb179-4"><a href="interpreting-coefficients.html#cb179-4" tabindex="-1"></a><span class="do">##         48         98         38        116</span></span></code></pre></div>
 <p>Let’s fit a model with <code>area</code>, notice again I do not do anything to the variable <code>area</code> itself aside from add it into the model.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="interpreting-coefficients.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb180-2"><a href="interpreting-coefficients.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-3"><a href="interpreting-coefficients.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb180-4"><a href="interpreting-coefficients.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender + area, data = fev_long)</span></span>
-<span id="cb180-5"><a href="interpreting-coefficients.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-6"><a href="interpreting-coefficients.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb180-7"><a href="interpreting-coefficients.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb180-8"><a href="interpreting-coefficients.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.32809 -0.29573  0.00578  0.31588  1.37041 </span></span>
-<span id="cb180-9"><a href="interpreting-coefficients.html#cb180-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-10"><a href="interpreting-coefficients.html#cb180-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb180-11"><a href="interpreting-coefficients.html#cb180-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb180-12"><a href="interpreting-coefficients.html#cb180-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    -2.250564   0.752414  -2.991  0.00302 ** </span></span>
-<span id="cb180-13"><a href="interpreting-coefficients.html#cb180-13" aria-hidden="true" tabindex="-1"></a><span class="do">## age            -0.022801   0.004151  -5.493 8.59e-08 ***</span></span>
-<span id="cb180-14"><a href="interpreting-coefficients.html#cb180-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ht              0.103866   0.010555   9.841  &lt; 2e-16 ***</span></span>
-<span id="cb180-15"><a href="interpreting-coefficients.html#cb180-15" aria-hidden="true" tabindex="-1"></a><span class="do">## genderF        -0.642168   0.078400  -8.191 8.10e-15 ***</span></span>
-<span id="cb180-16"><a href="interpreting-coefficients.html#cb180-16" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLancaster   0.031549   0.084980   0.371  0.71072    </span></span>
-<span id="cb180-17"><a href="interpreting-coefficients.html#cb180-17" aria-hidden="true" tabindex="-1"></a><span class="do">## areaLong Beach  0.061963   0.104057   0.595  0.55199    </span></span>
-<span id="cb180-18"><a href="interpreting-coefficients.html#cb180-18" aria-hidden="true" tabindex="-1"></a><span class="do">## areaGlendora    0.121589   0.082097   1.481  0.13967    </span></span>
-<span id="cb180-19"><a href="interpreting-coefficients.html#cb180-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb180-20"><a href="interpreting-coefficients.html#cb180-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb180-21"><a href="interpreting-coefficients.html#cb180-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb180-22"><a href="interpreting-coefficients.html#cb180-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.4777 on 293 degrees of freedom</span></span>
-<span id="cb180-23"><a href="interpreting-coefficients.html#cb180-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6529, Adjusted R-squared:  0.6458 </span></span>
-<span id="cb180-24"><a href="interpreting-coefficients.html#cb180-24" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 91.86 on 6 and 293 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="interpreting-coefficients.html#cb180-1" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb180-2"><a href="interpreting-coefficients.html#cb180-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb180-3"><a href="interpreting-coefficients.html#cb180-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb180-4"><a href="interpreting-coefficients.html#cb180-4" tabindex="-1"></a><span class="do">## lm(formula = fev1 ~ age + ht + gender + area, data = fev_long)</span></span>
+<span id="cb180-5"><a href="interpreting-coefficients.html#cb180-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb180-6"><a href="interpreting-coefficients.html#cb180-6" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb180-7"><a href="interpreting-coefficients.html#cb180-7" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb180-8"><a href="interpreting-coefficients.html#cb180-8" tabindex="-1"></a><span class="do">## -1.32809 -0.29573  0.00578  0.31588  1.37041 </span></span>
+<span id="cb180-9"><a href="interpreting-coefficients.html#cb180-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb180-10"><a href="interpreting-coefficients.html#cb180-10" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb180-11"><a href="interpreting-coefficients.html#cb180-11" tabindex="-1"></a><span class="do">##                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb180-12"><a href="interpreting-coefficients.html#cb180-12" tabindex="-1"></a><span class="do">## (Intercept)    -2.250564   0.752414  -2.991  0.00302 ** </span></span>
+<span id="cb180-13"><a href="interpreting-coefficients.html#cb180-13" tabindex="-1"></a><span class="do">## age            -0.022801   0.004151  -5.493 8.59e-08 ***</span></span>
+<span id="cb180-14"><a href="interpreting-coefficients.html#cb180-14" tabindex="-1"></a><span class="do">## ht              0.103866   0.010555   9.841  &lt; 2e-16 ***</span></span>
+<span id="cb180-15"><a href="interpreting-coefficients.html#cb180-15" tabindex="-1"></a><span class="do">## genderF        -0.642168   0.078400  -8.191 8.10e-15 ***</span></span>
+<span id="cb180-16"><a href="interpreting-coefficients.html#cb180-16" tabindex="-1"></a><span class="do">## areaLancaster   0.031549   0.084980   0.371  0.71072    </span></span>
+<span id="cb180-17"><a href="interpreting-coefficients.html#cb180-17" tabindex="-1"></a><span class="do">## areaLong Beach  0.061963   0.104057   0.595  0.55199    </span></span>
+<span id="cb180-18"><a href="interpreting-coefficients.html#cb180-18" tabindex="-1"></a><span class="do">## areaGlendora    0.121589   0.082097   1.481  0.13967    </span></span>
+<span id="cb180-19"><a href="interpreting-coefficients.html#cb180-19" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb180-20"><a href="interpreting-coefficients.html#cb180-20" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb180-21"><a href="interpreting-coefficients.html#cb180-21" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb180-22"><a href="interpreting-coefficients.html#cb180-22" tabindex="-1"></a><span class="do">## Residual standard error: 0.4777 on 293 degrees of freedom</span></span>
+<span id="cb180-23"><a href="interpreting-coefficients.html#cb180-23" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6529, Adjusted R-squared:  0.6458 </span></span>
+<span id="cb180-24"><a href="interpreting-coefficients.html#cb180-24" tabindex="-1"></a><span class="do">## F-statistic: 91.86 on 6 and 293 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>Examine the coefficient names, <code>areaLancaster</code>, <code>areaLong Beach</code> and <code>areaGlendora</code>. Again R automatically take a categorical variable and turn it into a series of binary indicator variables where a 1 indicates if a person is from that area. Notice how someone from Burbank has 0’s for all of the three indicator variables, someone from Lancaster only has a 1 in the <code>areaLancaster</code> variable and 0 otherwise. And etc for each other area.</p>
 <table>
 <thead>
@@ -750,8 +802,8 @@ Glendora
 </ul></li>
 </ul>
 <p>Interpreting the regression coefficients are going to be <strong>compared to the reference group</strong>. In this case, it is the Burbank area. Why Burbank? Because that is what R sees as the first level. If you want something different, you need to change the factor ordering.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="interpreting-coefficients.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(fev_long<span class="sc">$</span>area)</span>
-<span id="cb181-2"><a href="interpreting-coefficients.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Burbank&quot;    &quot;Lancaster&quot;  &quot;Long Beach&quot; &quot;Glendora&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="interpreting-coefficients.html#cb181-1" tabindex="-1"></a><span class="fu">levels</span>(fev_long<span class="sc">$</span>area)</span>
+<span id="cb181-2"><a href="interpreting-coefficients.html#cb181-2" tabindex="-1"></a><span class="do">## [1] &quot;Burbank&quot;    &quot;Lancaster&quot;  &quot;Long Beach&quot; &quot;Glendora&quot;</span></span></code></pre></div>
 <p>The mathematical model is now written as follows,</p>
 <p><span class="math display">\[ Y_{i} = \beta_{0} + \beta_{1}x_{1i} + \beta_{2}x_{2i} +\beta_{3}x_{3i} + \beta_{4}x_{4i} + \beta_{5}x_{5i} +\beta_{6}x_{6i}\epsilon_{i}\]</span></p>
 <p>where</p>
@@ -788,15 +840,27 @@ y_{i.Long.Beach} = -2.19 - 0.023(age) + 0.10(ht) -0.64(female) \\
 y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
 \]</span></p>
 <p>Let’s look interpret the regression coefficients and their 95% confidence intervals from the main effects model again.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="interpreting-coefficients.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="iydbaessff" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="interpreting-coefficients.html#cb182-1" tabindex="-1"></a><span class="fu">lm</span>(fev1 <span class="sc">~</span> age <span class="sc">+</span> ht <span class="sc">+</span> gender <span class="sc">+</span> area, <span class="at">data=</span>fev_long) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
+<div id="szjhozihim" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#szjhozihim table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#iydbaessff .gt_table {
+#szjhozihim thead, #szjhozihim tbody, #szjhozihim tfoot, #szjhozihim tr, #szjhozihim td, #szjhozihim th {
+  border-style: none;
+}
+
+#szjhozihim p {
+  margin: 0;
+  padding: 0;
+}
+
+#szjhozihim .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -819,19 +883,12 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-left-color: #D3D3D3;
 }
 
-#iydbaessff .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#szjhozihim .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#iydbaessff .gt_title {
+#szjhozihim .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -843,25 +900,37 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-bottom-width: 0;
 }
 
-#iydbaessff .gt_subtitle {
+#szjhozihim .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#iydbaessff .gt_bottom_border {
+#szjhozihim .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#szjhozihim .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iydbaessff .gt_col_headings {
+#szjhozihim .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -876,7 +945,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-right-color: #D3D3D3;
 }
 
-#iydbaessff .gt_col_heading {
+#szjhozihim .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -896,7 +965,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   overflow-x: hidden;
 }
 
-#iydbaessff .gt_column_spanner_outer {
+#szjhozihim .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -908,15 +977,15 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   padding-right: 4px;
 }
 
-#iydbaessff .gt_column_spanner_outer:first-child {
+#szjhozihim .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iydbaessff .gt_column_spanner_outer:last-child {
+#szjhozihim .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iydbaessff .gt_column_spanner {
+#szjhozihim .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -928,7 +997,11 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   width: 100%;
 }
 
-#iydbaessff .gt_group_heading {
+#szjhozihim .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#szjhozihim .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -951,9 +1024,10 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#iydbaessff .gt_empty_group_heading {
+#szjhozihim .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -968,15 +1042,15 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   vertical-align: middle;
 }
 
-#iydbaessff .gt_from_md > :first-child {
+#szjhozihim .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iydbaessff .gt_from_md > :last-child {
+#szjhozihim .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iydbaessff .gt_row {
+#szjhozihim .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -995,7 +1069,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   overflow-x: hidden;
 }
 
-#iydbaessff .gt_stub {
+#szjhozihim .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1008,7 +1082,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   padding-right: 5px;
 }
 
-#iydbaessff .gt_stub_row_group {
+#szjhozihim .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1022,11 +1096,15 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   vertical-align: top;
 }
 
-#iydbaessff .gt_row_group_first td {
+#szjhozihim .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iydbaessff .gt_summary_row {
+#szjhozihim .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#szjhozihim .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1036,16 +1114,16 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   padding-right: 5px;
 }
 
-#iydbaessff .gt_first_summary_row {
+#szjhozihim .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iydbaessff .gt_first_summary_row.thick {
+#szjhozihim .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iydbaessff .gt_last_summary_row {
+#szjhozihim .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1055,7 +1133,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-bottom-color: #D3D3D3;
 }
 
-#iydbaessff .gt_grand_summary_row {
+#szjhozihim .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1065,7 +1143,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   padding-right: 5px;
 }
 
-#iydbaessff .gt_first_grand_summary_row {
+#szjhozihim .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1075,11 +1153,21 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-top-color: #D3D3D3;
 }
 
-#iydbaessff .gt_striped {
+#szjhozihim .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#szjhozihim .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iydbaessff .gt_table_body {
+#szjhozihim .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1088,7 +1176,7 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-bottom-color: #D3D3D3;
 }
 
-#iydbaessff .gt_footnotes {
+#szjhozihim .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1102,30 +1190,8 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   border-right-color: #D3D3D3;
 }
 
-#iydbaessff .gt_footnote {
+#szjhozihim .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iydbaessff .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iydbaessff .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1133,130 +1199,144 @@ y_{i.Glendora} = -2.13 - 0.023(age) + 0.10(ht) -0.64(female)
   padding-right: 5px;
 }
 
-#iydbaessff .gt_left {
+#szjhozihim .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#szjhozihim .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szjhozihim .gt_left {
   text-align: left;
 }
 
-#iydbaessff .gt_center {
+#szjhozihim .gt_center {
   text-align: center;
 }
 
-#iydbaessff .gt_right {
+#szjhozihim .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iydbaessff .gt_font_normal {
+#szjhozihim .gt_font_normal {
   font-weight: normal;
 }
 
-#iydbaessff .gt_font_bold {
+#szjhozihim .gt_font_bold {
   font-weight: bold;
 }
 
-#iydbaessff .gt_font_italic {
+#szjhozihim .gt_font_italic {
   font-style: italic;
 }
 
-#iydbaessff .gt_super {
+#szjhozihim .gt_super {
   font-size: 65%;
 }
 
-#iydbaessff .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#iydbaessff .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#szjhozihim .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#iydbaessff .gt_asterisk {
+#szjhozihim .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iydbaessff .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#szjhozihim .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#iydbaessff .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#szjhozihim .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#iydbaessff .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#szjhozihim .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#szjhozihim .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#szjhozihim .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">age</td>
-<td class="gt_row gt_center">-0.02</td>
-<td class="gt_row gt_center">-0.03, -0.01</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">ht</td>
-<td class="gt_row gt_center">0.10</td>
-<td class="gt_row gt_center">0.08, 0.12</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">gender</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
-<td class="gt_row gt_center">-0.64</td>
-<td class="gt_row gt_center">-0.80, -0.49</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">area</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Burbank</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Lancaster</td>
-<td class="gt_row gt_center">0.03</td>
-<td class="gt_row gt_center">-0.14, 0.20</td>
-<td class="gt_row gt_center">0.7</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Long Beach</td>
-<td class="gt_row gt_center">0.06</td>
-<td class="gt_row gt_center">-0.14, 0.27</td>
-<td class="gt_row gt_center">0.6</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Glendora</td>
-<td class="gt_row gt_center">0.12</td>
-<td class="gt_row gt_center">-0.04, 0.28</td>
-<td class="gt_row gt_center">0.14</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">age</td>
+<td headers="estimate" class="gt_row gt_center">-0.02</td>
+<td headers="ci" class="gt_row gt_center">-0.03, -0.01</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">ht</td>
+<td headers="estimate" class="gt_row gt_center">0.10</td>
+<td headers="ci" class="gt_row gt_center">0.08, 0.12</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">gender</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    M</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    F</td>
+<td headers="estimate" class="gt_row gt_center">-0.64</td>
+<td headers="ci" class="gt_row gt_center">-0.80, -0.49</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">area</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Burbank</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Lancaster</td>
+<td headers="estimate" class="gt_row gt_center">0.03</td>
+<td headers="ci" class="gt_row gt_center">-0.14, 0.20</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Long Beach</td>
+<td headers="estimate" class="gt_row gt_center">0.06</td>
+<td headers="ci" class="gt_row gt_center">-0.14, 0.27</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Glendora</td>
+<td headers="estimate" class="gt_row gt_center">0.12</td>
+<td headers="ci" class="gt_row gt_center">-0.04, 0.28</td>
+<td headers="p.value" class="gt_row gt_center">0.14</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
@@ -1337,7 +1417,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
