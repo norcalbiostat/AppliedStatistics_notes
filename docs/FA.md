@@ -250,26 +250,26 @@ print(pc.extract.norotate)
 ## Call: principal(r = stan.dta, nfactors = 2, rotate = "none")
 ## Standardized loadings (pattern matrix) based upon correlation matrix
 ##     PC1   PC2   h2    u2 com
-## X1 0.53  0.78 0.90 0.104 1.8
-## X2 0.59  0.74 0.89 0.106 1.9
-## X3 0.70 -0.39 0.64 0.360 1.6
-## X4 0.87 -0.38 0.90 0.099 1.4
-## X5 0.92 -0.27 0.91 0.087 1.2
+## X1 0.57  0.75 0.89 0.112 1.9
+## X2 0.61  0.72 0.89 0.113 1.9
+## X3 0.58 -0.51 0.59 0.406 2.0
+## X4 0.87 -0.38 0.89 0.109 1.4
+## X5 0.92 -0.27 0.91 0.086 1.2
 ## 
 ##                        PC1  PC2
-## SS loadings           2.71 1.53
-## Proportion Var        0.54 0.31
-## Cumulative Var        0.54 0.85
-## Proportion Explained  0.64 0.36
-## Cumulative Proportion 0.64 1.00
+## SS loadings           2.63 1.55
+## Proportion Var        0.53 0.31
+## Cumulative Var        0.53 0.83
+## Proportion Explained  0.63 0.37
+## Cumulative Proportion 0.63 1.00
 ## 
-## Mean item complexity =  1.6
+## Mean item complexity =  1.7
 ## Test of the hypothesis that 2 components are sufficient.
 ## 
-## The root mean square of the residuals (RMSR) is  0.08 
-##  with the empirical chi square  12.61  with prob <  0.00038 
+## The root mean square of the residuals (RMSR) is  0.09 
+##  with the empirical chi square  16.62  with prob <  4.6e-05 
 ## 
-## Fit based upon off diagonal values = 0.97
+## Fit based upon off diagonal values = 0.96
 ```
 
 $$
@@ -319,24 +319,24 @@ print(ml.extract.norotate, digits=2, cutoff=0)
 ## 
 ## Uniquenesses:
 ##   X1   X2   X3   X4   X5 
-## 0.37 0.00 0.63 0.06 0.04 
+## 0.33 0.06 0.72 0.08 0.01 
 ## 
 ## Loadings:
 ##    Factor1 Factor2
-## X1 -0.06    0.79  
-## X2 -0.07    1.00  
-## X3  0.58    0.19  
-## X4  0.93    0.28  
-## X5  0.90    0.39  
+## X1  0.35    0.74  
+## X2  0.41    0.88  
+## X3  0.50   -0.18  
+## X4  0.94   -0.19  
+## X5  0.99   -0.07  
 ## 
 ##                Factor1 Factor2
-## SS loadings       2.02    1.88
-## Proportion Var    0.40    0.38
-## Cumulative Var    0.40    0.78
+## SS loadings       2.41    1.39
+## Proportion Var    0.48    0.28
+## Cumulative Var    0.48    0.76
 ## 
 ## Test of the hypothesis that 2 factors are sufficient.
-## The chi square statistic is 0.2 on 1 degree of freedom.
-## The p-value is 0.652
+## The chi square statistic is 0.4 on 1 degree of freedom.
+## The p-value is 0.526
 ```
 
 The factor equations now are: 
@@ -361,10 +361,10 @@ Recall Factor analysis splits the variance of the observed X's into a part due t
 ```r
 pc.extract.norotate$uniquenesses
 ##         X1         X2         X3         X4         X5 
-## 0.10356406 0.10628541 0.35980869 0.09916082 0.08669813
+## 0.11151283 0.11336123 0.40564130 0.10890203 0.08591098
 ml.extract.norotate$uniquenesses
 ##         X1         X2         X3         X4         X5 
-## 0.37071467 0.00500000 0.62599425 0.06244190 0.03603453
+## 0.33432315 0.05506386 0.71685548 0.07508356 0.01414656
 ```
 
 Here we see that the uniqueness for X2, X4 and X5 under ML is pretty low compared to the PC extraction method, but that's almost offset by a much higher uniqueness for x1 and X3. 
@@ -428,27 +428,27 @@ print(pc.extract.varimax)
 ## Principal Components Analysis
 ## Call: principal(r = stan.dta, nfactors = 2, rotate = "varimax")
 ## Standardized loadings (pattern matrix) based upon correlation matrix
-##     RC1  RC2   h2    u2 com
-## X1 0.07 0.94 0.90 0.104 1.0
-## X2 0.13 0.94 0.89 0.106 1.0
-## X3 0.80 0.02 0.64 0.360 1.0
-## X4 0.94 0.11 0.90 0.099 1.0
-## X5 0.93 0.23 0.91 0.087 1.1
+##     RC1   RC2   h2    u2 com
+## X1 0.06  0.94 0.89 0.112 1.0
+## X2 0.11  0.93 0.89 0.113 1.0
+## X3 0.76 -0.10 0.59 0.406 1.0
+## X4 0.93  0.16 0.89 0.109 1.1
+## X5 0.91  0.28 0.91 0.086 1.2
 ## 
 ##                        RC1  RC2
-## SS loadings           2.41 1.83
-## Proportion Var        0.48 0.37
-## Cumulative Var        0.48 0.85
-## Proportion Explained  0.57 0.43
-## Cumulative Proportion 0.57 1.00
+## SS loadings           2.30 1.88
+## Proportion Var        0.46 0.38
+## Cumulative Var        0.46 0.83
+## Proportion Explained  0.55 0.45
+## Cumulative Proportion 0.55 1.00
 ## 
-## Mean item complexity =  1
+## Mean item complexity =  1.1
 ## Test of the hypothesis that 2 components are sufficient.
 ## 
-## The root mean square of the residuals (RMSR) is  0.08 
-##  with the empirical chi square  12.61  with prob <  0.00038 
+## The root mean square of the residuals (RMSR) is  0.09 
+##  with the empirical chi square  16.62  with prob <  4.6e-05 
 ## 
-## Fit based upon off diagonal values = 0.97
+## Fit based upon off diagonal values = 0.96
 ```
 
 Varimax rotation with maximum likelihood extraction. Here i'm using the cutoff argument to only show the values of loadings over 0.3. 
@@ -462,24 +462,24 @@ print(ml.extract.varimax, digits=2, cutoff=.3)
 ## 
 ## Uniquenesses:
 ##   X1   X2   X3   X4   X5 
-## 0.37 0.00 0.63 0.06 0.04 
+## 0.33 0.06 0.72 0.08 0.01 
 ## 
 ## Loadings:
 ##    Factor1 Factor2
-## X1         0.79   
-## X2         0.99   
-## X3 0.61           
-## X4 0.97           
-## X5 0.96           
+## X1          0.81  
+## X2          0.97  
+## X3  0.53          
+## X4  0.95          
+## X5  0.96          
 ## 
 ##                Factor1 Factor2
-## SS loadings       2.26    1.64
-## Proportion Var    0.45    0.33
-## Cumulative Var    0.45    0.78
+## SS loadings       2.13    1.67
+## Proportion Var    0.43    0.33
+## Cumulative Var    0.43    0.76
 ## 
 ## Test of the hypothesis that 2 factors are sufficient.
-## The chi square statistic is 0.2 on 1 degree of freedom.
-## The p-value is 0.652
+## The chi square statistic is 0.4 on 1 degree of freedom.
+## The p-value is 0.526
 ```
 
 
@@ -554,21 +554,21 @@ More commonly, we will use a **regression procedure** to compute factor scores. 
 ```r
 fa.ml.varimax <- factanal(stan.dta, factors=2, rotation="varimax", scores="regression")
 summary(fa.ml.varimax$scores)
-##     Factor1            Factor2        
-##  Min.   :-2.32732   Min.   :-2.79312  
-##  1st Qu.:-0.72413   1st Qu.:-0.54362  
-##  Median : 0.09196   Median :-0.02376  
-##  Mean   : 0.00000   Mean   : 0.00000  
-##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  
-##  Max.   : 2.43371   Max.   : 2.18992
+##     Factor1            Factor2         
+##  Min.   :-2.47094   Min.   :-2.335593  
+##  1st Qu.:-0.70659   1st Qu.:-0.737829  
+##  Median : 0.08397   Median :-0.002978  
+##  Mean   : 0.00000   Mean   : 0.000000  
+##  3rd Qu.: 0.67114   3rd Qu.: 0.792273  
+##  Max.   : 2.13449   Max.   : 1.670956
 head(fa.ml.varimax$scores)
-##          Factor1      Factor2
-## [1,] -1.49174313  0.003612941
-## [2,] -0.26254721  1.090864733
-## [3,]  0.55516045  0.631119886
-## [4,] -1.21028676 -1.281240452
-## [5,] -0.04852211 -1.575691468
-## [6,] -0.53768770  0.661138335
+##         Factor1     Factor2
+## [1,]  0.9713019  1.29838695
+## [2,] -1.1676730  0.57888326
+## [3,] -0.6068270 -0.09329792
+## [4,]  1.2569753  0.31231783
+## [5,]  1.3817494 -0.77707241
+## [6,]  0.2311359  1.11142513
 ```
 
 
@@ -601,61 +601,63 @@ kable(head(data.withscores))
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> -0.8236763 </td>
-   <td style="text-align:right;"> -0.1210726 </td>
-   <td style="text-align:right;"> -0.5970760 </td>
-   <td style="text-align:right;"> -1.4752693 </td>
-   <td style="text-align:right;"> -1.2355056 </td>
-   <td style="text-align:right;"> -1.4917431 </td>
-   <td style="text-align:right;"> 0.0036129 </td>
+   <td style="text-align:right;"> 0.5989843 </td>
+   <td style="text-align:right;"> 1.3729499 </td>
+   <td style="text-align:right;"> 1.0871992 </td>
+   <td style="text-align:right;"> 0.8597854 </td>
+   <td style="text-align:right;"> 1.2485892 </td>
+   <td style="text-align:right;"> 0.9713019 </td>
+   <td style="text-align:right;"> 1.2983869 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 1.4013214 </td>
-   <td style="text-align:right;"> 1.0733569 </td>
-   <td style="text-align:right;"> 0.7681035 </td>
-   <td style="text-align:right;"> -0.0509857 </td>
-   <td style="text-align:right;"> 0.0180061 </td>
-   <td style="text-align:right;"> -0.2625472 </td>
-   <td style="text-align:right;"> 1.0908647 </td>
+   <td style="text-align:right;"> 0.7429206 </td>
+   <td style="text-align:right;"> 0.3819301 </td>
+   <td style="text-align:right;"> -0.0113714 </td>
+   <td style="text-align:right;"> -1.1316383 </td>
+   <td style="text-align:right;"> -1.1316216 </td>
+   <td style="text-align:right;"> -1.1676730 </td>
+   <td style="text-align:right;"> 0.5788833 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.2781468 </td>
-   <td style="text-align:right;"> 0.7574632 </td>
-   <td style="text-align:right;"> 0.6445954 </td>
-   <td style="text-align:right;"> 0.6765583 </td>
-   <td style="text-align:right;"> 0.7532815 </td>
-   <td style="text-align:right;"> 0.5551604 </td>
-   <td style="text-align:right;"> 0.6311199 </td>
+   <td style="text-align:right;"> -0.5699028 </td>
+   <td style="text-align:right;"> -0.1331253 </td>
+   <td style="text-align:right;"> -0.3594030 </td>
+   <td style="text-align:right;"> -0.7153705 </td>
+   <td style="text-align:right;"> -0.7274903 </td>
+   <td style="text-align:right;"> -0.6068270 </td>
+   <td style="text-align:right;"> -0.0932979 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.1819544 </td>
-   <td style="text-align:right;"> -1.3228227 </td>
-   <td style="text-align:right;"> -1.0847105 </td>
-   <td style="text-align:right;"> -0.9574722 </td>
-   <td style="text-align:right;"> -1.3719843 </td>
-   <td style="text-align:right;"> -1.2102868 </td>
-   <td style="text-align:right;"> -1.2812405 </td>
+   <td style="text-align:right;"> 1.6526585 </td>
+   <td style="text-align:right;"> 0.2216533 </td>
+   <td style="text-align:right;"> 0.6564431 </td>
+   <td style="text-align:right;"> 1.4564378 </td>
+   <td style="text-align:right;"> 1.1959989 </td>
+   <td style="text-align:right;"> 1.2569753 </td>
+   <td style="text-align:right;"> 0.3123178 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> -1.6147171 </td>
-   <td style="text-align:right;"> -1.4254411 </td>
-   <td style="text-align:right;"> 0.3519605 </td>
-   <td style="text-align:right;"> -0.0124497 </td>
-   <td style="text-align:right;"> -0.2523487 </td>
-   <td style="text-align:right;"> -0.0485221 </td>
-   <td style="text-align:right;"> -1.5756915 </td>
+   <td style="text-align:right;"> -0.8582815 </td>
+   <td style="text-align:right;"> -0.6310620 </td>
+   <td style="text-align:right;"> 1.2474978 </td>
+   <td style="text-align:right;"> 1.2291103 </td>
+   <td style="text-align:right;"> 1.0684566 </td>
+   <td style="text-align:right;"> 1.3817494 </td>
+   <td style="text-align:right;"> -0.7770724 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.8251470 </td>
-   <td style="text-align:right;"> 0.6245702 </td>
-   <td style="text-align:right;"> -1.2923348 </td>
-   <td style="text-align:right;"> -0.6345633 </td>
-   <td style="text-align:right;"> -0.0885945 </td>
-   <td style="text-align:right;"> -0.5376877 </td>
-   <td style="text-align:right;"> 0.6611383 </td>
+   <td style="text-align:right;"> 1.1682966 </td>
+   <td style="text-align:right;"> 0.9849325 </td>
+   <td style="text-align:right;"> -0.8860830 </td>
+   <td style="text-align:right;"> -0.0713417 </td>
+   <td style="text-align:right;"> 0.5105760 </td>
+   <td style="text-align:right;"> 0.2311359 </td>
+   <td style="text-align:right;"> 1.1114251 </td>
   </tr>
 </tbody>
 </table>
+
+
 
 
 ## What to watch out for

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.5 Wide vs. Long data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.5 Wide vs. Long data | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -119,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -217,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -283,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -299,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -529,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -552,44 +588,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="wide-long" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Wide vs. Long data<a href="wide-long.html#wide-long" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data on Lung function originally was recorded in <em>wide</em> format, with separate variables for mother’s and father’s FEV1 score (<code>MFEV1</code> and <code>FFEV</code>). In this format, the data is one record per family.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="wide-long.html#cb39-1" aria-hidden="true" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, </span>
-<span id="cb39-2"><a href="wide-long.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-3"><a href="wide-long.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fev)</span>
-<span id="cb39-4"><a href="wide-long.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT MFVC</span></span>
-<span id="cb39-5"><a href="wide-long.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1    1    1   53      61     161  391  3.23    2   43      62     136  370</span></span>
-<span id="cb39-6"><a href="wide-long.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2    1    1   40      72     198  441  3.95    2   38      66     160  411</span></span>
-<span id="cb39-7"><a href="wide-long.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3    1    1   26      69     210  445  3.47    2   27      59     114  309</span></span>
-<span id="cb39-8"><a href="wide-long.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4    1    1   34      68     187  433  3.74    2   36      58     123  265</span></span>
-<span id="cb39-9"><a href="wide-long.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5    1    1   46      61     121  354  2.90    2   39      62     128  245</span></span>
-<span id="cb39-10"><a href="wide-long.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6    1    1   44      72     153  610  4.91    2   36      66     125  349</span></span>
-<span id="cb39-11"><a href="wide-long.html#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE MCHEIGHT</span></span>
-<span id="cb39-12"><a href="wide-long.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  3.31     2    12       59      115   296   2.79    NA    NA       NA</span></span>
-<span id="cb39-13"><a href="wide-long.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  3.47     1    10       56       66   323   2.39    NA    NA       NA</span></span>
-<span id="cb39-14"><a href="wide-long.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2.65     1     8       50       59   114   1.11    NA    NA       NA</span></span>
-<span id="cb39-15"><a href="wide-long.html#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2.06     2    11       57      106   256   1.85     1     9       49</span></span>
-<span id="cb39-16"><a href="wide-long.html#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  2.33     1    16       61       88   260   2.47     2    12       60</span></span>
-<span id="cb39-17"><a href="wide-long.html#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  3.06     1    15       67      100   389   3.55     1    13       57</span></span>
-<span id="cb39-18"><a href="wide-long.html#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC YCFEV1</span></span>
-<span id="cb39-19"><a href="wide-long.html#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-20"><a href="wide-long.html#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-21"><a href="wide-long.html#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 3       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-22"><a href="wide-long.html#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 4       56   159   1.30    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-23"><a href="wide-long.html#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 5       85   268   2.34     2    10       50       53   154   1.43</span></span>
-<span id="cb39-24"><a href="wide-long.html#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 6       87   276   2.37     2    10       55       72   195   1.69</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="wide-long.html#cb39-1" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, </span>
+<span id="cb39-2"><a href="wide-long.html#cb39-2" tabindex="-1"></a>                    <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-3"><a href="wide-long.html#cb39-3" tabindex="-1"></a><span class="fu">head</span>(fev)</span>
+<span id="cb39-4"><a href="wide-long.html#cb39-4" tabindex="-1"></a><span class="do">##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT MFVC</span></span>
+<span id="cb39-5"><a href="wide-long.html#cb39-5" tabindex="-1"></a><span class="do">## 1  1    1    1   53      61     161  391  3.23    2   43      62     136  370</span></span>
+<span id="cb39-6"><a href="wide-long.html#cb39-6" tabindex="-1"></a><span class="do">## 2  2    1    1   40      72     198  441  3.95    2   38      66     160  411</span></span>
+<span id="cb39-7"><a href="wide-long.html#cb39-7" tabindex="-1"></a><span class="do">## 3  3    1    1   26      69     210  445  3.47    2   27      59     114  309</span></span>
+<span id="cb39-8"><a href="wide-long.html#cb39-8" tabindex="-1"></a><span class="do">## 4  4    1    1   34      68     187  433  3.74    2   36      58     123  265</span></span>
+<span id="cb39-9"><a href="wide-long.html#cb39-9" tabindex="-1"></a><span class="do">## 5  5    1    1   46      61     121  354  2.90    2   39      62     128  245</span></span>
+<span id="cb39-10"><a href="wide-long.html#cb39-10" tabindex="-1"></a><span class="do">## 6  6    1    1   44      72     153  610  4.91    2   36      66     125  349</span></span>
+<span id="cb39-11"><a href="wide-long.html#cb39-11" tabindex="-1"></a><span class="do">##   MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE MCHEIGHT</span></span>
+<span id="cb39-12"><a href="wide-long.html#cb39-12" tabindex="-1"></a><span class="do">## 1  3.31     2    12       59      115   296   2.79    NA    NA       NA</span></span>
+<span id="cb39-13"><a href="wide-long.html#cb39-13" tabindex="-1"></a><span class="do">## 2  3.47     1    10       56       66   323   2.39    NA    NA       NA</span></span>
+<span id="cb39-14"><a href="wide-long.html#cb39-14" tabindex="-1"></a><span class="do">## 3  2.65     1     8       50       59   114   1.11    NA    NA       NA</span></span>
+<span id="cb39-15"><a href="wide-long.html#cb39-15" tabindex="-1"></a><span class="do">## 4  2.06     2    11       57      106   256   1.85     1     9       49</span></span>
+<span id="cb39-16"><a href="wide-long.html#cb39-16" tabindex="-1"></a><span class="do">## 5  2.33     1    16       61       88   260   2.47     2    12       60</span></span>
+<span id="cb39-17"><a href="wide-long.html#cb39-17" tabindex="-1"></a><span class="do">## 6  3.06     1    15       67      100   389   3.55     1    13       57</span></span>
+<span id="cb39-18"><a href="wide-long.html#cb39-18" tabindex="-1"></a><span class="do">##   MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC YCFEV1</span></span>
+<span id="cb39-19"><a href="wide-long.html#cb39-19" tabindex="-1"></a><span class="do">## 1       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb39-20"><a href="wide-long.html#cb39-20" tabindex="-1"></a><span class="do">## 2       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb39-21"><a href="wide-long.html#cb39-21" tabindex="-1"></a><span class="do">## 3       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb39-22"><a href="wide-long.html#cb39-22" tabindex="-1"></a><span class="do">## 4       56   159   1.30    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb39-23"><a href="wide-long.html#cb39-23" tabindex="-1"></a><span class="do">## 5       85   268   2.34     2    10       50       53   154   1.43</span></span>
+<span id="cb39-24"><a href="wide-long.html#cb39-24" tabindex="-1"></a><span class="do">## 6       87   276   2.37     2    10       55       72   195   1.69</span></span></code></pre></div>
 <p>To analyze the effect of gender on FEV, the data need to be in <em>long</em> format, with a single variable for <code>fev</code> and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="wide-long.html#cb40-1" aria-hidden="true" tabindex="-1"></a>fev2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
-<span id="cb40-2"><a href="wide-long.html#cb40-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rev =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
-<span id="cb40-3"><a href="wide-long.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
-<span id="cb40-4"><a href="wide-long.html#cb40-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE))</span>
-<span id="cb40-5"><a href="wide-long.html#cb40-5" aria-hidden="true" tabindex="-1"></a>fev2<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev2<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
-<span id="cb40-6"><a href="wide-long.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fev2)  </span>
-<span id="cb40-7"><a href="wide-long.html#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   gender  rev ht age</span></span>
-<span id="cb40-8"><a href="wide-long.html#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      M 3.23 61  53</span></span>
-<span id="cb40-9"><a href="wide-long.html#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2      M 3.95 72  40</span></span>
-<span id="cb40-10"><a href="wide-long.html#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3      M 3.47 69  26</span></span>
-<span id="cb40-11"><a href="wide-long.html#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4      M 3.74 68  34</span></span>
-<span id="cb40-12"><a href="wide-long.html#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5      M 2.90 61  46</span></span>
-<span id="cb40-13"><a href="wide-long.html#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6      M 4.91 72  44</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="wide-long.html#cb40-1" tabindex="-1"></a>fev2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
+<span id="cb40-2"><a href="wide-long.html#cb40-2" tabindex="-1"></a>                   <span class="at">rev =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
+<span id="cb40-3"><a href="wide-long.html#cb40-3" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
+<span id="cb40-4"><a href="wide-long.html#cb40-4" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE))</span>
+<span id="cb40-5"><a href="wide-long.html#cb40-5" tabindex="-1"></a>fev2<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev2<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
+<span id="cb40-6"><a href="wide-long.html#cb40-6" tabindex="-1"></a><span class="fu">head</span>(fev2)  </span>
+<span id="cb40-7"><a href="wide-long.html#cb40-7" tabindex="-1"></a><span class="do">##   gender  rev ht age</span></span>
+<span id="cb40-8"><a href="wide-long.html#cb40-8" tabindex="-1"></a><span class="do">## 1      M 3.23 61  53</span></span>
+<span id="cb40-9"><a href="wide-long.html#cb40-9" tabindex="-1"></a><span class="do">## 2      M 3.95 72  40</span></span>
+<span id="cb40-10"><a href="wide-long.html#cb40-10" tabindex="-1"></a><span class="do">## 3      M 3.47 69  26</span></span>
+<span id="cb40-11"><a href="wide-long.html#cb40-11" tabindex="-1"></a><span class="do">## 4      M 3.74 68  34</span></span>
+<span id="cb40-12"><a href="wide-long.html#cb40-12" tabindex="-1"></a><span class="do">## 5      M 2.90 61  46</span></span>
+<span id="cb40-13"><a href="wide-long.html#cb40-13" tabindex="-1"></a><span class="do">## 6      M 4.91 72  44</span></span></code></pre></div>
 <p>Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several <code>R</code> packages that can help with this including <code>reshape2</code> and <code>tidyr</code>.</p>
 </div>
             </section>

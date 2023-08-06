@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Workflow and Data Cleaning | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Workflow and Data Cleaning | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -119,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -217,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -283,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html#what-to-look-for-in-each-type-of-analysis"><i class="fa fa-check"></i><b>8.3.1</b> What to look for in each type of analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="example-2-cont.html"><a href="example-2-cont.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
+<li class="chapter" data-level="8.4" data-path="example-2-cont.-correlation-regression.html"><a href="example-2-cont.-correlation-regression.html"><i class="fa fa-check"></i><b>8.4</b> Example 2 (cont.) Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.5" data-path="example-3-anova.html"><a href="example-3-anova.html"><i class="fa fa-check"></i><b>8.5</b> Example 3: ANOVA</a></li>
 <li class="chapter" data-level="8.6" data-path="example-4-chi-squared.html"><a href="example-4-chi-squared.html"><i class="fa fa-check"></i><b>8.6</b> Example 4: Chi-Squared</a></li>
 </ul></li>
@@ -299,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -529,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -553,7 +589,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 1</span> Workflow and Data Cleaning<a href="data_prep.html#data_prep" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Once the data are available from a study there are still a number of steps that must be undertaken to get them into shape for analysis.</p>
 <p>One of the most misunderstood parts of the analysis process is the data preparation stage. To say that 70% of any analysis is spent on the data management stage is not an understatement.</p>
-<p>This chapter provides information on topics related to data processing and corresponds to :book: PMA6 Chapter 3.</p>
+<p>This chapter provides information on topics related to data processing and corresponds to PMA6 Chapter 3.</p>
 </div>
             </section>
 

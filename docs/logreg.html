@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.3 Logistic Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.3 Logistic Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -564,70 +616,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Binary predictor variable: Gender (<code>sex</code>) as an indicator of being female</li>
 </ul>
 <p>The outcome <span class="math inline">\(y\)</span> is a 0/1 Bernoulli random variable. The sum of a vector of Bernoulli’s (<span class="math inline">\(\sum_{i=1}^{n}y_{i}\)</span>) has a Binomial distribution. When we specify that <code>family = "binomial"</code> the <code>glm()</code> function auto-assigns “logit” link function.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logreg.html#cb222-1" aria-hidden="true" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb222-2"><a href="logreg.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
-<span id="cb222-3"><a href="logreg.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-4"><a href="logreg.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb222-5"><a href="logreg.html#cb222-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
-<span id="cb222-6"><a href="logreg.html#cb222-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-7"><a href="logreg.html#cb222-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb222-8"><a href="logreg.html#cb222-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb222-9"><a href="logreg.html#cb222-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.7023  -0.7023  -0.4345  -0.4345   2.1941  </span></span>
-<span id="cb222-10"><a href="logreg.html#cb222-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-11"><a href="logreg.html#cb222-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb222-12"><a href="logreg.html#cb222-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb222-13"><a href="logreg.html#cb222-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
-<span id="cb222-14"><a href="logreg.html#cb222-14" aria-hidden="true" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
-<span id="cb222-15"><a href="logreg.html#cb222-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb222-16"><a href="logreg.html#cb222-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb222-17"><a href="logreg.html#cb222-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-18"><a href="logreg.html#cb222-18" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb222-19"><a href="logreg.html#cb222-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-20"><a href="logreg.html#cb222-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb222-21"><a href="logreg.html#cb222-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
-<span id="cb222-22"><a href="logreg.html#cb222-22" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
-<span id="cb222-23"><a href="logreg.html#cb222-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-24"><a href="logreg.html#cb222-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logreg.html#cb222-1" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb222-2"><a href="logreg.html#cb222-2" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
+<span id="cb222-3"><a href="logreg.html#cb222-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-4"><a href="logreg.html#cb222-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb222-5"><a href="logreg.html#cb222-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
+<span id="cb222-6"><a href="logreg.html#cb222-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-7"><a href="logreg.html#cb222-7" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb222-8"><a href="logreg.html#cb222-8" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb222-9"><a href="logreg.html#cb222-9" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
+<span id="cb222-10"><a href="logreg.html#cb222-10" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
+<span id="cb222-11"><a href="logreg.html#cb222-11" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb222-12"><a href="logreg.html#cb222-12" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb222-13"><a href="logreg.html#cb222-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-14"><a href="logreg.html#cb222-14" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb222-15"><a href="logreg.html#cb222-15" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-16"><a href="logreg.html#cb222-16" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb222-17"><a href="logreg.html#cb222-17" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
+<span id="cb222-18"><a href="logreg.html#cb222-18" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
+<span id="cb222-19"><a href="logreg.html#cb222-19" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb222-20"><a href="logreg.html#cb222-20" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <p>We exponentiate the coefficients to back transform the <span class="math inline">\(\beta\)</span> estimates into Odds Ratios</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logreg.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
-<span id="cb223-2"><a href="logreg.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
-<span id="cb223-3"><a href="logreg.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
-<span id="cb223-4"><a href="logreg.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
-<span id="cb223-5"><a href="logreg.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
-<span id="cb223-6"><a href="logreg.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
-<span id="cb223-7"><a href="logreg.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logreg.html#cb223-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
+<span id="cb223-2"><a href="logreg.html#cb223-2" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
+<span id="cb223-3"><a href="logreg.html#cb223-3" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
+<span id="cb223-4"><a href="logreg.html#cb223-4" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
+<span id="cb223-5"><a href="logreg.html#cb223-5" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
+<span id="cb223-6"><a href="logreg.html#cb223-6" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
+<span id="cb223-7"><a href="logreg.html#cb223-7" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
 <p>Females have 2.8 (1.4, 6.2) times the odds of showing signs of depression compared to males.</p>
 </div>
 <div id="mlogreg" class="section level3 hasAnchor" number="11.3.4">
 <h3><span class="header-section-number">11.3.4</span> Multiple Logistic Regression<a href="logreg.html#mlogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s continue with the depression model, but now also include age and income as potential predictors of symptoms of depression.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="logreg.html#cb224-1" aria-hidden="true" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb224-2"><a href="logreg.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
-<span id="cb224-3"><a href="logreg.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-4"><a href="logreg.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb224-5"><a href="logreg.html#cb224-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
-<span id="cb224-6"><a href="logreg.html#cb224-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
-<span id="cb224-7"><a href="logreg.html#cb224-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-8"><a href="logreg.html#cb224-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb224-9"><a href="logreg.html#cb224-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb224-10"><a href="logreg.html#cb224-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.0249  -0.6524  -0.5050  -0.3179   2.5305  </span></span>
-<span id="cb224-11"><a href="logreg.html#cb224-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-12"><a href="logreg.html#cb224-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb224-13"><a href="logreg.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
-<span id="cb224-14"><a href="logreg.html#cb224-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
-<span id="cb224-15"><a href="logreg.html#cb224-15" aria-hidden="true" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
-<span id="cb224-16"><a href="logreg.html#cb224-16" aria-hidden="true" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
-<span id="cb224-17"><a href="logreg.html#cb224-17" aria-hidden="true" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
-<span id="cb224-18"><a href="logreg.html#cb224-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb224-19"><a href="logreg.html#cb224-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb224-20"><a href="logreg.html#cb224-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-21"><a href="logreg.html#cb224-21" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb224-22"><a href="logreg.html#cb224-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-23"><a href="logreg.html#cb224-23" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb224-24"><a href="logreg.html#cb224-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
-<span id="cb224-25"><a href="logreg.html#cb224-25" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
-<span id="cb224-26"><a href="logreg.html#cb224-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-27"><a href="logreg.html#cb224-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="logreg.html#cb224-1" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb224-2"><a href="logreg.html#cb224-2" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
+<span id="cb224-3"><a href="logreg.html#cb224-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-4"><a href="logreg.html#cb224-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb224-5"><a href="logreg.html#cb224-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
+<span id="cb224-6"><a href="logreg.html#cb224-6" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
+<span id="cb224-7"><a href="logreg.html#cb224-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-8"><a href="logreg.html#cb224-8" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb224-9"><a href="logreg.html#cb224-9" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb224-10"><a href="logreg.html#cb224-10" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
+<span id="cb224-11"><a href="logreg.html#cb224-11" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
+<span id="cb224-12"><a href="logreg.html#cb224-12" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
+<span id="cb224-13"><a href="logreg.html#cb224-13" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
+<span id="cb224-14"><a href="logreg.html#cb224-14" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb224-15"><a href="logreg.html#cb224-15" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb224-16"><a href="logreg.html#cb224-16" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-17"><a href="logreg.html#cb224-17" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb224-18"><a href="logreg.html#cb224-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-19"><a href="logreg.html#cb224-19" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb224-20"><a href="logreg.html#cb224-20" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
+<span id="cb224-21"><a href="logreg.html#cb224-21" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
+<span id="cb224-22"><a href="logreg.html#cb224-22" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb224-23"><a href="logreg.html#cb224-23" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <ul>
 <li>The sign of the <span class="math inline">\(\beta\)</span> coefficients can be interpreted in the same manner as with linear regression as having a positive or negative relationship.<br />
 </li>
@@ -650,11 +694,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ = \frac{e^{0.92945(1)}}
           {e^{0.92945(0)}}\]</span></p>
 <p><span class="math display">\[ = e^{0.92945} \]</span></p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logreg.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
-<span id="cb225-2"><a href="logreg.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
-<span id="cb225-3"><a href="logreg.html#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
-<span id="cb225-4"><a href="logreg.html#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      sex </span></span>
-<span id="cb225-5"><a href="logreg.html#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logreg.html#cb225-1" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
+<span id="cb225-2"><a href="logreg.html#cb225-2" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
+<span id="cb225-3"><a href="logreg.html#cb225-3" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
+<span id="cb225-4"><a href="logreg.html#cb225-4" tabindex="-1"></a><span class="do">##      sex </span></span>
+<span id="cb225-5"><a href="logreg.html#cb225-5" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
 </div>
 <div id="effect-of-a-k-unit-change" class="section level3 hasAnchor" number="11.3.5">
 <h3><span class="header-section-number">11.3.5</span> Effect of a k unit change<a href="logreg.html#effect-of-a-k-unit-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -662,15 +706,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Sometimes a 1 unit change in a continuous variable is not meaningful.</li>
 <li><span class="math inline">\(exp(kb)\)</span> is the incremental odds ratio corresponding to an increase of <span class="math inline">\(k\)</span> units in the variable X, assuming that the values of all other X variables remain unchanged.</li>
 </ul>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="logreg.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div id="swvnyhdtxt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="logreg.html#cb226-1" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="lbavrnxsdu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lbavrnxsdu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#swvnyhdtxt .gt_table {
+#lbavrnxsdu thead, #lbavrnxsdu tbody, #lbavrnxsdu tfoot, #lbavrnxsdu tr, #lbavrnxsdu td, #lbavrnxsdu th {
+  border-style: none;
+}
+
+#lbavrnxsdu p {
+  margin: 0;
+  padding: 0;
+}
+
+#lbavrnxsdu .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -693,19 +749,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#lbavrnxsdu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#swvnyhdtxt .gt_title {
+#lbavrnxsdu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -717,25 +766,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#swvnyhdtxt .gt_subtitle {
+#lbavrnxsdu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#swvnyhdtxt .gt_bottom_border {
+#lbavrnxsdu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lbavrnxsdu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_col_headings {
+#lbavrnxsdu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -750,7 +811,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_col_heading {
+#lbavrnxsdu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -770,7 +831,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#swvnyhdtxt .gt_column_spanner_outer {
+#lbavrnxsdu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -782,15 +843,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#swvnyhdtxt .gt_column_spanner_outer:first-child {
+#lbavrnxsdu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#swvnyhdtxt .gt_column_spanner_outer:last-child {
+#lbavrnxsdu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#swvnyhdtxt .gt_column_spanner {
+#lbavrnxsdu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -802,7 +863,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#swvnyhdtxt .gt_group_heading {
+#lbavrnxsdu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lbavrnxsdu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -825,9 +890,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#swvnyhdtxt .gt_empty_group_heading {
+#lbavrnxsdu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -842,15 +908,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#swvnyhdtxt .gt_from_md > :first-child {
+#lbavrnxsdu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#swvnyhdtxt .gt_from_md > :last-child {
+#lbavrnxsdu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#swvnyhdtxt .gt_row {
+#lbavrnxsdu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -869,7 +935,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#swvnyhdtxt .gt_stub {
+#lbavrnxsdu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -882,7 +948,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#swvnyhdtxt .gt_stub_row_group {
+#lbavrnxsdu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -896,11 +962,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#swvnyhdtxt .gt_row_group_first td {
+#lbavrnxsdu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#swvnyhdtxt .gt_summary_row {
+#lbavrnxsdu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lbavrnxsdu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -910,16 +980,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#swvnyhdtxt .gt_first_summary_row {
+#lbavrnxsdu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_first_summary_row.thick {
+#lbavrnxsdu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#swvnyhdtxt .gt_last_summary_row {
+#lbavrnxsdu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -929,7 +999,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_grand_summary_row {
+#lbavrnxsdu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -939,7 +1009,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#swvnyhdtxt .gt_first_grand_summary_row {
+#lbavrnxsdu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -949,11 +1019,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_striped {
+#lbavrnxsdu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lbavrnxsdu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#swvnyhdtxt .gt_table_body {
+#lbavrnxsdu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -962,7 +1042,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_footnotes {
+#lbavrnxsdu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -976,30 +1056,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#swvnyhdtxt .gt_footnote {
+#lbavrnxsdu .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#swvnyhdtxt .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#swvnyhdtxt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1007,102 +1065,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#swvnyhdtxt .gt_left {
+#lbavrnxsdu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lbavrnxsdu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lbavrnxsdu .gt_left {
   text-align: left;
 }
 
-#swvnyhdtxt .gt_center {
+#lbavrnxsdu .gt_center {
   text-align: center;
 }
 
-#swvnyhdtxt .gt_right {
+#lbavrnxsdu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#swvnyhdtxt .gt_font_normal {
+#lbavrnxsdu .gt_font_normal {
   font-weight: normal;
 }
 
-#swvnyhdtxt .gt_font_bold {
+#lbavrnxsdu .gt_font_bold {
   font-weight: bold;
 }
 
-#swvnyhdtxt .gt_font_italic {
+#lbavrnxsdu .gt_font_italic {
   font-style: italic;
 }
 
-#swvnyhdtxt .gt_super {
+#lbavrnxsdu .gt_super {
   font-size: 65%;
 }
 
-#swvnyhdtxt .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#swvnyhdtxt .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#lbavrnxsdu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#swvnyhdtxt .gt_asterisk {
+#lbavrnxsdu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#swvnyhdtxt .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#lbavrnxsdu .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#swvnyhdtxt .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#lbavrnxsdu .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#swvnyhdtxt .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#lbavrnxsdu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lbavrnxsdu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lbavrnxsdu .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>OR</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;OR&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">age</td>
-<td class="gt_row gt_center">0.98</td>
-<td class="gt_row gt_center">0.96, 1.00</td>
-<td class="gt_row gt_center">0.020</td></tr>
-    <tr><td class="gt_row gt_left">income</td>
-<td class="gt_row gt_center">0.96</td>
-<td class="gt_row gt_center">0.94, 0.99</td>
-<td class="gt_row gt_center">0.009</td></tr>
-    <tr><td class="gt_row gt_left">sex</td>
-<td class="gt_row gt_center">2.53</td>
-<td class="gt_row gt_center">1.23, 5.66</td>
-<td class="gt_row gt_center">0.016</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">age</td>
+<td headers="estimate" class="gt_row gt_center">0.98</td>
+<td headers="ci" class="gt_row gt_center">0.96, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.020</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">income</td>
+<td headers="estimate" class="gt_row gt_center">0.96</td>
+<td headers="ci" class="gt_row gt_center">0.94, 0.99</td>
+<td headers="p.value" class="gt_row gt_center">0.009</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">sex</td>
+<td headers="estimate" class="gt_row gt_center">2.53</td>
+<td headers="ci" class="gt_row gt_center">1.23, 5.66</td>
+<td headers="p.value" class="gt_row gt_center">0.016</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> OR = Odds Ratio, CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
@@ -1114,13 +1186,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In generalized linear models, the assumptions on <span class="math inline">\(\beta\)</span> having a normal distribution</p>
 <p>Refer back to equation <a href="logreg.html#or-ci">11.3.2</a>, the linearity of the relationship is on the <span class="math inline">\(\beta\)</span> level, not the odds ratio. Do all transformations on the <span class="math inline">\(\beta\)</span>’s, then the last step is the non-linear transformation of exponentiation.</p>
 <p>So the mathmatical order of operations is important! First use <code>coef</code> to extract the coefficients out of the model object (here named <code>mvmodel</code>), then pull the 2nd item out <code>coef(mvmodel)[2]</code>, then multiply it by 10, then lastly exponentiate this value.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logreg.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
-<span id="cb227-2"><a href="logreg.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       age </span></span>
-<span id="cb227-3"><a href="logreg.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logreg.html#cb227-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
+<span id="cb227-2"><a href="logreg.html#cb227-2" tabindex="-1"></a><span class="do">##       age </span></span>
+<span id="cb227-3"><a href="logreg.html#cb227-3" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
 <p>Do the same to calculate the confidence interval for a 10 year time span.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logreg.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
-<span id="cb228-2"><a href="logreg.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
-<span id="cb228-3"><a href="logreg.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logreg.html#cb228-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
+<span id="cb228-2"><a href="logreg.html#cb228-2" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
+<span id="cb228-3"><a href="logreg.html#cb228-3" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
 <p>Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them.</p>
 </div>
 <div id="example-predictors-of-smoking-status" class="section level3 hasAnchor" number="11.3.6">
@@ -1130,16 +1202,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)}
 + \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
 \]</span></p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="logreg.html#cb229-1" aria-hidden="true" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
-<span id="cb229-2"><a href="logreg.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div id="vlzpibhdwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="logreg.html#cb229-1" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
+<span id="cb229-2"><a href="logreg.html#cb229-2" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="tzjbqivwdk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tzjbqivwdk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#vlzpibhdwv .gt_table {
+#tzjbqivwdk thead, #tzjbqivwdk tbody, #tzjbqivwdk tfoot, #tzjbqivwdk tr, #tzjbqivwdk td, #tzjbqivwdk th {
+  border-style: none;
+}
+
+#tzjbqivwdk p {
+  margin: 0;
+  padding: 0;
+}
+
+#tzjbqivwdk .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1162,19 +1246,12 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-left-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#tzjbqivwdk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#vlzpibhdwv .gt_title {
+#tzjbqivwdk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1186,25 +1263,37 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-width: 0;
 }
 
-#vlzpibhdwv .gt_subtitle {
+#tzjbqivwdk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#vlzpibhdwv .gt_bottom_border {
+#tzjbqivwdk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tzjbqivwdk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_col_headings {
+#tzjbqivwdk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1219,7 +1308,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_col_heading {
+#tzjbqivwdk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1239,7 +1328,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   overflow-x: hidden;
 }
 
-#vlzpibhdwv .gt_column_spanner_outer {
+#tzjbqivwdk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1251,15 +1340,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 4px;
 }
 
-#vlzpibhdwv .gt_column_spanner_outer:first-child {
+#tzjbqivwdk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vlzpibhdwv .gt_column_spanner_outer:last-child {
+#tzjbqivwdk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vlzpibhdwv .gt_column_spanner {
+#tzjbqivwdk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1271,7 +1360,11 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   width: 100%;
 }
 
-#vlzpibhdwv .gt_group_heading {
+#tzjbqivwdk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tzjbqivwdk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1294,9 +1387,10 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#vlzpibhdwv .gt_empty_group_heading {
+#tzjbqivwdk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1311,15 +1405,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   vertical-align: middle;
 }
 
-#vlzpibhdwv .gt_from_md > :first-child {
+#tzjbqivwdk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vlzpibhdwv .gt_from_md > :last-child {
+#tzjbqivwdk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vlzpibhdwv .gt_row {
+#tzjbqivwdk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1338,7 +1432,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   overflow-x: hidden;
 }
 
-#vlzpibhdwv .gt_stub {
+#tzjbqivwdk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1351,7 +1445,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#vlzpibhdwv .gt_stub_row_group {
+#tzjbqivwdk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1365,11 +1459,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   vertical-align: top;
 }
 
-#vlzpibhdwv .gt_row_group_first td {
+#tzjbqivwdk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vlzpibhdwv .gt_summary_row {
+#tzjbqivwdk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tzjbqivwdk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1379,16 +1477,16 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#vlzpibhdwv .gt_first_summary_row {
+#tzjbqivwdk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_first_summary_row.thick {
+#tzjbqivwdk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vlzpibhdwv .gt_last_summary_row {
+#tzjbqivwdk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1496,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_grand_summary_row {
+#tzjbqivwdk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1408,7 +1506,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#vlzpibhdwv .gt_first_grand_summary_row {
+#tzjbqivwdk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1418,11 +1516,21 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-top-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_striped {
+#tzjbqivwdk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tzjbqivwdk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vlzpibhdwv .gt_table_body {
+#tzjbqivwdk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1431,7 +1539,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_footnotes {
+#tzjbqivwdk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1445,30 +1553,8 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#vlzpibhdwv .gt_footnote {
+#tzjbqivwdk .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vlzpibhdwv .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#vlzpibhdwv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1476,136 +1562,150 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#vlzpibhdwv .gt_left {
+#tzjbqivwdk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tzjbqivwdk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tzjbqivwdk .gt_left {
   text-align: left;
 }
 
-#vlzpibhdwv .gt_center {
+#tzjbqivwdk .gt_center {
   text-align: center;
 }
 
-#vlzpibhdwv .gt_right {
+#tzjbqivwdk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vlzpibhdwv .gt_font_normal {
+#tzjbqivwdk .gt_font_normal {
   font-weight: normal;
 }
 
-#vlzpibhdwv .gt_font_bold {
+#tzjbqivwdk .gt_font_bold {
   font-weight: bold;
 }
 
-#vlzpibhdwv .gt_font_italic {
+#tzjbqivwdk .gt_font_italic {
   font-style: italic;
 }
 
-#vlzpibhdwv .gt_super {
+#tzjbqivwdk .gt_super {
   font-size: 65%;
 }
 
-#vlzpibhdwv .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#vlzpibhdwv .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#tzjbqivwdk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#vlzpibhdwv .gt_asterisk {
+#tzjbqivwdk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vlzpibhdwv .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#tzjbqivwdk .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#vlzpibhdwv .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#tzjbqivwdk .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#vlzpibhdwv .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#tzjbqivwdk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tzjbqivwdk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tzjbqivwdk .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>OR</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;OR&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">female_c</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Male</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Female</td>
-<td class="gt_row gt_center">0.54</td>
-<td class="gt_row gt_center">0.46, 0.63</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">income</td>
-<td class="gt_row gt_center">1.00</td>
-<td class="gt_row gt_center">1.00, 1.00</td>
-<td class="gt_row gt_center">0.005</td></tr>
-    <tr><td class="gt_row gt_left">bp_class</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Normal</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Pre-HTN</td>
-<td class="gt_row gt_center">1.08</td>
-<td class="gt_row gt_center">0.92, 1.26</td>
-<td class="gt_row gt_center">0.4</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">HTN-I</td>
-<td class="gt_row gt_center">0.98</td>
-<td class="gt_row gt_center">0.79, 1.21</td>
-<td class="gt_row gt_center">0.8</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">HTN-II</td>
-<td class="gt_row gt_center">1.03</td>
-<td class="gt_row gt_center">0.71, 1.50</td>
-<td class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">female_c</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Female</td>
+<td headers="estimate" class="gt_row gt_center">0.54</td>
+<td headers="ci" class="gt_row gt_center">0.46, 0.63</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">income</td>
+<td headers="estimate" class="gt_row gt_center">1.00</td>
+<td headers="ci" class="gt_row gt_center">1.00, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.005</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">bp_class</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Normal</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Pre-HTN</td>
+<td headers="estimate" class="gt_row gt_center">1.08</td>
+<td headers="ci" class="gt_row gt_center">0.92, 1.26</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    HTN-I</td>
+<td headers="estimate" class="gt_row gt_center">0.98</td>
+<td headers="ci" class="gt_row gt_center">0.79, 1.21</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    HTN-II</td>
+<td headers="estimate" class="gt_row gt_center">1.03</td>
+<td headers="ci" class="gt_row gt_center">0.71, 1.50</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> OR = Odds Ratio, CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
 </div>
 <p>It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let’s test that hypothesis formally using a Wald Test.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logreg.html#cb230-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
-<span id="cb230-2"><a href="logreg.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
-<span id="cb230-3"><a href="logreg.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
-<span id="cb230-4"><a href="logreg.html#cb230-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
-<span id="cb230-5"><a href="logreg.html#cb230-5" aria-hidden="true" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logreg.html#cb230-1" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
+<span id="cb230-2"><a href="logreg.html#cb230-2" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
+<span id="cb230-3"><a href="logreg.html#cb230-3" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
+<span id="cb230-4"><a href="logreg.html#cb230-4" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
+<span id="cb230-5"><a href="logreg.html#cb230-5" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
 <p>The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.</p>
 <ul>
 <li>This means blood pressure classification should not be included in a model to explain smoking status.</li>
@@ -1708,7 +1808,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -1,7 +1,7 @@
 --- 
 title: "Applied Statistics"
 author: "Robin Donatello, Edward Roualdes"
-date: "Last Updated 2023-03-26"
+date: "Last Updated 2023-08-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.9 Troubleshooting | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.9 Troubleshooting | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -537,34 +589,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.9</span> Troubleshooting<a href="troubleshooting.html#troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Problem:</strong> Missing data showing up as a category in ggplot?</p>
 <p>Get rid of that far right bar!</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="troubleshooting.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NCbirths, <span class="fu">aes</span>(<span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="troubleshooting.html#cb124-1" tabindex="-1"></a><span class="fu">ggplot</span>(NCbirths, <span class="fu">aes</span>(<span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
 <p><strong>Solution:</strong> Use <code>dplyr</code> to select only the variables you are going to plot, then pipe in the <code>na.omit()</code> at the end. It will create a temporary data frame (e.g) <code>plot.data</code> that you then provide to <code>ggplot()</code>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="troubleshooting.html#cb125-1" aria-hidden="true" tabindex="-1"></a>plot.data <span class="ot">&lt;-</span> NCbirths <span class="sc">%&gt;%</span> <span class="fu">select</span>(marital) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
-<span id="cb125-2"><a href="troubleshooting.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot.data, <span class="fu">aes</span>(<span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="troubleshooting.html#cb125-1" tabindex="-1"></a>plot.data <span class="ot">&lt;-</span> NCbirths <span class="sc">%&gt;%</span> <span class="fu">select</span>(marital) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
+<span id="cb125-2"><a href="troubleshooting.html#cb125-2" tabindex="-1"></a><span class="fu">ggplot</span>(plot.data, <span class="fu">aes</span>(<span class="at">x=</span>marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 <p><strong>Problem:</strong> Got numerical binary 0/1 data but want to plot it as categorical?
 &gt; Other related error messages:
 &gt; * Continuous x aesthetic – did you forget aes(group=…)?</p>
 <p>Consider a continuous variable for the number of characters in an email <code>num_char</code>, and a 0/1 binary variable <code>spam</code>.</p>
 <p><strong>Solution:</strong> Create a second variable <code>var_factor</code> for plotting and keep the binary <code>var</code> as 0/1 for analysis.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="troubleshooting.html#cb126-1" aria-hidden="true" tabindex="-1"></a>email<span class="sc">$</span>spam_cat <span class="ot">&lt;-</span> <span class="fu">factor</span>(email<span class="sc">$</span>spam, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Ham&quot;</span>, <span class="st">&quot;Spam&quot;</span>))</span>
-<span id="cb126-2"><a href="troubleshooting.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">y=</span>num_char, <span class="at">x=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="troubleshooting.html#cb126-1" tabindex="-1"></a>email<span class="sc">$</span>spam_cat <span class="ot">&lt;-</span> <span class="fu">factor</span>(email<span class="sc">$</span>spam, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Ham&quot;</span>, <span class="st">&quot;Spam&quot;</span>))</span>
+<span id="cb126-2"><a href="troubleshooting.html#cb126-2" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">y=</span>num_char, <span class="at">x=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 <p><strong>Problem:</strong> You want to change the legend title for a <code>fill</code> or <code>color</code> scale.</p>
 <p><strong>Solution:</strong> Add the <code>name=</code> argument to whatever layer you added that created the legend. Here I speciefied a <code>fill</code>, and it was a <code>discrete</code> variable. So I use the <code>scale_fill_discrete()</code> layer.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="troubleshooting.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">y=</span>num_char, <span class="at">x=</span>spam_cat, <span class="at">fill=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb127-2"><a href="troubleshooting.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">&quot;Ya like Spam?&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="troubleshooting.html#cb127-1" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">y=</span>num_char, <span class="at">x=</span>spam_cat, <span class="at">fill=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb127-2"><a href="troubleshooting.html#cb127-2" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">&quot;Ya like Spam?&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>Here, I <code>col</code>ored the points by a discrete variable, so the layer is <code>scale_color_discrete()</code>.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="troubleshooting.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">x=</span>num_char, <span class="at">y=</span>line_breaks, <span class="at">col=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb128-2"><a href="troubleshooting.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Ya like Spam?&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="troubleshooting.html#cb128-1" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">x=</span>num_char, <span class="at">y=</span>line_breaks, <span class="at">col=</span>spam_cat)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb128-2"><a href="troubleshooting.html#cb128-2" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name=</span><span class="st">&quot;Ya like Spam?&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 <p><strong>Problem:</strong> You want to add means to boxplots.
 Boxplots are great. Even better with violin overlays. Know what makes them even better than butter? Adding a point for the mean. <code>stat_summary</code> is the layer you want to add. Check out <a href="https://stackoverflow.com/questions/23942959/ggplot2-show-separate-mean-values-in-box-plot-for-grouped-data">this stack overflow post</a> for more context.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="troubleshooting.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">x=</span>spam_cat, <span class="at">y=</span>num_char, <span class="at">fill=</span>spam_cat)) <span class="sc">+</span></span>
-<span id="cb129-2"><a href="troubleshooting.html#cb129-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb129-3"><a href="troubleshooting.html#cb129-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">pch=</span><span class="dv">17</span>,<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="troubleshooting.html#cb129-1" tabindex="-1"></a><span class="fu">ggplot</span>(email, <span class="fu">aes</span>(<span class="at">x=</span>spam_cat, <span class="at">y=</span>num_char, <span class="at">fill=</span>spam_cat)) <span class="sc">+</span></span>
+<span id="cb129-2"><a href="troubleshooting.html#cb129-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb129-3"><a href="troubleshooting.html#cb129-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">pch=</span><span class="dv">17</span>,<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="data_viz_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <p>I suggest playing around with <code>size</code> and plotting character <code>pch</code> to get a feel for how these work. You can also look at <code>?pch</code> (and scroll down in the help file) to see the 25 default plotting characters.</p>
 </div>
@@ -634,7 +686,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.4 R commands | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.4 R commands | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -214,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -296,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -526,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -556,21 +595,21 @@ Corresponding reading: PMA6 Ch 14.3-14.4
 <div id="generating-pcs" class="section level3 hasAnchor" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Generating PC’s<a href="r-commands.html#generating-pcs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The matrix that is used in <code>princomp</code> must be fully numeric.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-commands.html#cb2-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">princomp</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="r-commands.html#cb256-1" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">princomp</span>(data)</span></code></pre></div>
 </div>
 <div id="viewing-the-amount-of-variance-contained-by-each-pc" class="section level3 hasAnchor" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Viewing the amount of variance contained by each PC<a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Use <code>summary</code> or <code>get_eigenvalue</code> to see the variance breakdown.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-commands.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr)</span>
-<span id="cb3-2"><a href="r-commands.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb3-3"><a href="r-commands.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                            Comp.1    Comp.2</span></span>
-<span id="cb3-4"><a href="r-commands.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     11.4019265 4.2236767</span></span>
-<span id="cb3-5"><a href="r-commands.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance  0.8793355 0.1206645</span></span>
-<span id="cb3-6"><a href="r-commands.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion   0.8793355 1.0000000</span></span>
-<span id="cb3-7"><a href="r-commands.html#cb3-7" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">get_eigenvalue</span>(pr)</span>
-<span id="cb3-8"><a href="r-commands.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       eigenvalue variance.percent cumulative.variance.percent</span></span>
-<span id="cb3-9"><a href="r-commands.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.1  130.00393         87.93355                    87.93355</span></span>
-<span id="cb3-10"><a href="r-commands.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Dim.2   17.83944         12.06645                   100.00000</span></span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="r-commands.html#cb257-1" tabindex="-1"></a><span class="fu">summary</span>(pr)</span>
+<span id="cb257-2"><a href="r-commands.html#cb257-2" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb257-3"><a href="r-commands.html#cb257-3" tabindex="-1"></a><span class="do">##                            Comp.1    Comp.2</span></span>
+<span id="cb257-4"><a href="r-commands.html#cb257-4" tabindex="-1"></a><span class="do">## Standard deviation     11.4019265 4.2236767</span></span>
+<span id="cb257-5"><a href="r-commands.html#cb257-5" tabindex="-1"></a><span class="do">## Proportion of Variance  0.8793355 0.1206645</span></span>
+<span id="cb257-6"><a href="r-commands.html#cb257-6" tabindex="-1"></a><span class="do">## Cumulative Proportion   0.8793355 1.0000000</span></span>
+<span id="cb257-7"><a href="r-commands.html#cb257-7" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">get_eigenvalue</span>(pr)</span>
+<span id="cb257-8"><a href="r-commands.html#cb257-8" tabindex="-1"></a><span class="do">##       eigenvalue variance.percent cumulative.variance.percent</span></span>
+<span id="cb257-9"><a href="r-commands.html#cb257-9" tabindex="-1"></a><span class="do">## Dim.1  130.00393         87.93355                    87.93355</span></span>
+<span id="cb257-10"><a href="r-commands.html#cb257-10" tabindex="-1"></a><span class="do">## Dim.2   17.83944         12.06645                   100.00000</span></span></code></pre></div>
 <p>The first PC (<code>Comp.1</code>) will always explain the highest proportion of variance (by mathematical design).</p>
 </div>
 <div id="vizualize-loadings" class="section level3 hasAnchor" number="14.4.3">
@@ -580,28 +619,28 @@ Corresponding reading: PMA6 Ch 14.3-14.4
 <ul>
 <li>The values for the matrix <span class="math inline">\(\mathbf{A}\)</span> is contained in <code>pr$loadings</code>. Alternatively the <code>loadings</code> function will extract this matrix.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-commands.html#cb4-1" aria-hidden="true" tabindex="-1"></a>pr<span class="sc">$</span>loadings</span>
-<span id="cb4-2"><a href="r-commands.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-3"><a href="r-commands.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
-<span id="cb4-4"><a href="r-commands.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
-<span id="cb4-5"><a href="r-commands.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
-<span id="cb4-6"><a href="r-commands.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
-<span id="cb4-7"><a href="r-commands.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-8"><a href="r-commands.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
-<span id="cb4-9"><a href="r-commands.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
-<span id="cb4-10"><a href="r-commands.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
-<span id="cb4-11"><a href="r-commands.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span>
-<span id="cb4-12"><a href="r-commands.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">loadings</span>(pr)</span>
-<span id="cb4-13"><a href="r-commands.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-14"><a href="r-commands.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
-<span id="cb4-15"><a href="r-commands.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
-<span id="cb4-16"><a href="r-commands.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
-<span id="cb4-17"><a href="r-commands.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
-<span id="cb4-18"><a href="r-commands.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-19"><a href="r-commands.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
-<span id="cb4-20"><a href="r-commands.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
-<span id="cb4-21"><a href="r-commands.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
-<span id="cb4-22"><a href="r-commands.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="r-commands.html#cb258-1" tabindex="-1"></a>pr<span class="sc">$</span>loadings</span>
+<span id="cb258-2"><a href="r-commands.html#cb258-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb258-3"><a href="r-commands.html#cb258-3" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb258-4"><a href="r-commands.html#cb258-4" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
+<span id="cb258-5"><a href="r-commands.html#cb258-5" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
+<span id="cb258-6"><a href="r-commands.html#cb258-6" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
+<span id="cb258-7"><a href="r-commands.html#cb258-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb258-8"><a href="r-commands.html#cb258-8" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
+<span id="cb258-9"><a href="r-commands.html#cb258-9" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
+<span id="cb258-10"><a href="r-commands.html#cb258-10" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
+<span id="cb258-11"><a href="r-commands.html#cb258-11" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span>
+<span id="cb258-12"><a href="r-commands.html#cb258-12" tabindex="-1"></a><span class="fu">loadings</span>(pr)</span>
+<span id="cb258-13"><a href="r-commands.html#cb258-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb258-14"><a href="r-commands.html#cb258-14" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb258-15"><a href="r-commands.html#cb258-15" tabindex="-1"></a><span class="do">##    Comp.1 Comp.2</span></span>
+<span id="cb258-16"><a href="r-commands.html#cb258-16" tabindex="-1"></a><span class="do">## X1  0.854  0.519</span></span>
+<span id="cb258-17"><a href="r-commands.html#cb258-17" tabindex="-1"></a><span class="do">## X2  0.519 -0.854</span></span>
+<span id="cb258-18"><a href="r-commands.html#cb258-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb258-19"><a href="r-commands.html#cb258-19" tabindex="-1"></a><span class="do">##                Comp.1 Comp.2</span></span>
+<span id="cb258-20"><a href="r-commands.html#cb258-20" tabindex="-1"></a><span class="do">## SS loadings       1.0    1.0</span></span>
+<span id="cb258-21"><a href="r-commands.html#cb258-21" tabindex="-1"></a><span class="do">## Proportion Var    0.5    0.5</span></span>
+<span id="cb258-22"><a href="r-commands.html#cb258-22" tabindex="-1"></a><span class="do">## Cumulative Var    0.5    1.0</span></span></code></pre></div>
 <p><span class="math display">\[
 C_{1} = 0.854x_1 + 0.519X_2 \\
 C_{2} =  0.519x_1 - 0.854X_2
@@ -610,20 +649,20 @@ C_{2} =  0.519x_1 - 0.854X_2
 <div id="as-a-vector-plot" class="section level4 hasAnchor" number="14.4.3.2">
 <h4><span class="header-section-number">14.4.3.2</span> As a vector plot<a href="r-commands.html#as-a-vector-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To visualize how these two new PC’s create new axes these new axes, we plot the centered data.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-commands.html#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> pr<span class="sc">$</span>loadings</span>
-<span id="cb5-2"><a href="r-commands.html#cb5-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X1 <span class="sc">-</span> <span class="fu">mean</span>(X1))</span>
-<span id="cb5-3"><a href="r-commands.html#cb5-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X2 <span class="sc">-</span> <span class="fu">mean</span>(X2))</span>
-<span id="cb5-4"><a href="r-commands.html#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="r-commands.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="at">type=</span><span class="st">&quot;n&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;x2&quot;</span>)</span>
-<span id="cb5-6"><a href="r-commands.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x=</span>x1, <span class="at">y=</span>x2, <span class="at">pch=</span><span class="dv">16</span>)</span>
-<span id="cb5-7"><a href="r-commands.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="fu">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="fu">expression</span>(C[<span class="dv">1</span>]))</span>
-<span id="cb5-8"><a href="r-commands.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="fu">text</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="fu">expression</span>(C[<span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="r-commands.html#cb259-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> pr<span class="sc">$</span>loadings</span>
+<span id="cb259-2"><a href="r-commands.html#cb259-2" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X1 <span class="sc">-</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb259-3"><a href="r-commands.html#cb259-3" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">with</span>(data, X2 <span class="sc">-</span> <span class="fu">mean</span>(X2))</span>
+<span id="cb259-4"><a href="r-commands.html#cb259-4" tabindex="-1"></a></span>
+<span id="cb259-5"><a href="r-commands.html#cb259-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">40</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="at">type=</span><span class="st">&quot;n&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;x1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;x2&quot;</span>)</span>
+<span id="cb259-6"><a href="r-commands.html#cb259-6" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x=</span>x1, <span class="at">y=</span>x2, <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb259-7"><a href="r-commands.html#cb259-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">1</span>]); <span class="fu">text</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="fu">expression</span>(C[<span class="dv">1</span>]))</span>
+<span id="cb259-8"><a href="r-commands.html#cb259-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, a[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>a[<span class="dv">1</span>,<span class="dv">2</span>]); <span class="fu">text</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="fu">expression</span>(C[<span class="dv">2</span>]))</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p>Another useful plot is called a <strong>biplot</strong>. Here the PC’s are on the dominant axes, and the red vectors show you the magnitude and direction of the original variables on this new axis.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-commands.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pr)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="r-commands.html#cb260-1" tabindex="-1"></a><span class="fu">biplot</span>(pr)</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-commands.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb7-2"><a href="r-commands.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pr)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="r-commands.html#cb261-1" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb261-2"><a href="r-commands.html#cb261-2" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(pr)</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <ul>
 <li>X1 is positively correlated with both PC1 and PC2</li>
@@ -637,14 +676,14 @@ C_{2} =  0.519x_1 - 0.854X_2
 <li>Often in high dimensional studies, the loadings are visualized using a heatmap.</li>
 <li>Here we use the <code>heatmap.2()</code> in the <code>gplots</code> package. I encourage you to play with the options such as <code>dendogram</code> and <code>trace</code> to see what they remove/add, and review the <code>?heatmap.2</code> help file.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-commands.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gplots)</span>
-<span id="cb8-2"><a href="r-commands.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap.2</span>(pr<span class="sc">$</span>loadings, <span class="at">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="at">trace=</span><span class="st">&quot;none&quot;</span>, <span class="at">density.info=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="r-commands.html#cb262-1" tabindex="-1"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb262-2"><a href="r-commands.html#cb262-2" tabindex="-1"></a><span class="fu">heatmap.2</span>(pr<span class="sc">$</span>loadings, <span class="at">dendrogram=</span><span class="st">&quot;none&quot;</span>, <span class="at">trace=</span><span class="st">&quot;none&quot;</span>, <span class="at">density.info=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="as-a-strength-of-reprensetation" class="section level4 hasAnchor" number="14.4.3.4">
 <h4><span class="header-section-number">14.4.3.4</span> As a strength of reprensetation<a href="r-commands.html#as-a-strength-of-reprensetation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Contribution of rows/columns to the PC’s. For a given dimension, any row/column with a contribution above the reference line could be considered as important in contributing to the dimension.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-commands.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(pr, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">axes =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="r-commands.html#cb263-1" tabindex="-1"></a><span class="fu">fviz_contrib</span>(pr, <span class="at">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="at">axes =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>X1 contributes more than half of the amount of information to PC1 compared to X2</p>
 </div>
@@ -652,10 +691,10 @@ C_{2} =  0.519x_1 - 0.854X_2
 <h4><span class="header-section-number">14.4.3.5</span> As a correlation circle<a href="r-commands.html#as-a-correlation-circle" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>With only 2 PC’s this isn’t that informative. The later example and the vignette are likely more helpful.</p>
 <p>See <a href="http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials#graph-of-variables">STDHA correlation circle</a> for detailed information.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-commands.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pr, <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>, <span class="at">axes=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
-<span id="cb10-2"><a href="r-commands.html#cb10-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), </span>
-<span id="cb10-3"><a href="r-commands.html#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
-<span id="cb10-4"><a href="r-commands.html#cb10-4" aria-hidden="true" tabindex="-1"></a>             )</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="r-commands.html#cb264-1" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pr, <span class="at">col.var =</span> <span class="st">&quot;contrib&quot;</span>, <span class="at">axes=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb264-2"><a href="r-commands.html#cb264-2" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), </span>
+<span id="cb264-3"><a href="r-commands.html#cb264-3" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
+<span id="cb264-4"><a href="r-commands.html#cb264-4" tabindex="-1"></a>             )</span></code></pre></div>
 <p><img src="PCA_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
@@ -726,7 +765,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

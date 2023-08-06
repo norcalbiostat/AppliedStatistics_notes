@@ -744,9 +744,9 @@ Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.W
 model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
 summary(pool(model))
 ##                term   estimate  std.error statistic        df      p.value
-## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.942002e-12
+## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.941986e-12
 ## 2       Sepal.Width  0.4324051 0.09212873  4.693488  88.97127 9.678996e-06
-## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 0.000000e+00
+## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 3.421864e-20
 ## 4 Speciesversicolor -1.0848839 0.24416495 -4.443242  96.69963 2.360206e-05
 ## 5  Speciesvirginica -1.6001933 0.31893115 -5.017363 103.29187 2.189018e-06
 ```
@@ -760,15 +760,28 @@ We can leverage the `gtsummary` package to tidy and print the results of a `mids
 gtsummary::tbl_regression(model)
 ```
 
+
 ```{=html}
-<div id="ogjzwdjdmy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div id="wexhgkamaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wexhgkamaj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#ogjzwdjdmy .gt_table {
+#wexhgkamaj thead, #wexhgkamaj tbody, #wexhgkamaj tfoot, #wexhgkamaj tr, #wexhgkamaj td, #wexhgkamaj th {
+  border-style: none;
+}
+
+#wexhgkamaj p {
+  margin: 0;
+  padding: 0;
+}
+
+#wexhgkamaj .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -791,19 +804,12 @@ gtsummary::tbl_regression(model)
   border-left-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#wexhgkamaj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#ogjzwdjdmy .gt_title {
+#wexhgkamaj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -815,25 +821,37 @@ gtsummary::tbl_regression(model)
   border-bottom-width: 0;
 }
 
-#ogjzwdjdmy .gt_subtitle {
+#wexhgkamaj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#ogjzwdjdmy .gt_bottom_border {
+#wexhgkamaj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wexhgkamaj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_col_headings {
+#wexhgkamaj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -848,7 +866,7 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_col_heading {
+#wexhgkamaj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -868,7 +886,7 @@ gtsummary::tbl_regression(model)
   overflow-x: hidden;
 }
 
-#ogjzwdjdmy .gt_column_spanner_outer {
+#wexhgkamaj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -880,15 +898,15 @@ gtsummary::tbl_regression(model)
   padding-right: 4px;
 }
 
-#ogjzwdjdmy .gt_column_spanner_outer:first-child {
+#wexhgkamaj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ogjzwdjdmy .gt_column_spanner_outer:last-child {
+#wexhgkamaj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ogjzwdjdmy .gt_column_spanner {
+#wexhgkamaj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -900,7 +918,11 @@ gtsummary::tbl_regression(model)
   width: 100%;
 }
 
-#ogjzwdjdmy .gt_group_heading {
+#wexhgkamaj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wexhgkamaj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -923,9 +945,10 @@ gtsummary::tbl_regression(model)
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#ogjzwdjdmy .gt_empty_group_heading {
+#wexhgkamaj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -940,15 +963,15 @@ gtsummary::tbl_regression(model)
   vertical-align: middle;
 }
 
-#ogjzwdjdmy .gt_from_md > :first-child {
+#wexhgkamaj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ogjzwdjdmy .gt_from_md > :last-child {
+#wexhgkamaj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ogjzwdjdmy .gt_row {
+#wexhgkamaj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -967,7 +990,7 @@ gtsummary::tbl_regression(model)
   overflow-x: hidden;
 }
 
-#ogjzwdjdmy .gt_stub {
+#wexhgkamaj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -980,7 +1003,7 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#ogjzwdjdmy .gt_stub_row_group {
+#wexhgkamaj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -994,11 +1017,15 @@ gtsummary::tbl_regression(model)
   vertical-align: top;
 }
 
-#ogjzwdjdmy .gt_row_group_first td {
+#wexhgkamaj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ogjzwdjdmy .gt_summary_row {
+#wexhgkamaj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wexhgkamaj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1008,16 +1035,16 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#ogjzwdjdmy .gt_first_summary_row {
+#wexhgkamaj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_first_summary_row.thick {
+#wexhgkamaj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ogjzwdjdmy .gt_last_summary_row {
+#wexhgkamaj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1027,7 +1054,7 @@ gtsummary::tbl_regression(model)
   border-bottom-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_grand_summary_row {
+#wexhgkamaj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1037,7 +1064,7 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#ogjzwdjdmy .gt_first_grand_summary_row {
+#wexhgkamaj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1047,11 +1074,21 @@ gtsummary::tbl_regression(model)
   border-top-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_striped {
+#wexhgkamaj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wexhgkamaj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ogjzwdjdmy .gt_table_body {
+#wexhgkamaj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1060,7 +1097,7 @@ gtsummary::tbl_regression(model)
   border-bottom-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_footnotes {
+#wexhgkamaj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1074,30 +1111,8 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#ogjzwdjdmy .gt_footnote {
+#wexhgkamaj .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ogjzwdjdmy .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ogjzwdjdmy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1105,119 +1120,134 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#ogjzwdjdmy .gt_left {
+#wexhgkamaj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wexhgkamaj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wexhgkamaj .gt_left {
   text-align: left;
 }
 
-#ogjzwdjdmy .gt_center {
+#wexhgkamaj .gt_center {
   text-align: center;
 }
 
-#ogjzwdjdmy .gt_right {
+#wexhgkamaj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ogjzwdjdmy .gt_font_normal {
+#wexhgkamaj .gt_font_normal {
   font-weight: normal;
 }
 
-#ogjzwdjdmy .gt_font_bold {
+#wexhgkamaj .gt_font_bold {
   font-weight: bold;
 }
 
-#ogjzwdjdmy .gt_font_italic {
+#wexhgkamaj .gt_font_italic {
   font-style: italic;
 }
 
-#ogjzwdjdmy .gt_super {
+#wexhgkamaj .gt_super {
   font-size: 65%;
 }
 
-#ogjzwdjdmy .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#ogjzwdjdmy .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#wexhgkamaj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#ogjzwdjdmy .gt_asterisk {
+#wexhgkamaj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ogjzwdjdmy .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#wexhgkamaj .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#ogjzwdjdmy .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#wexhgkamaj .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#ogjzwdjdmy .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#wexhgkamaj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wexhgkamaj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wexhgkamaj .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Sepal.Width</td>
-<td class="gt_row gt_center">0.43</td>
-<td class="gt_row gt_center">0.25, 0.62</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">Petal.Length</td>
-<td class="gt_row gt_center">0.82</td>
-<td class="gt_row gt_center">0.67, 1.0</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">Species</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">setosa</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">versicolor</td>
-<td class="gt_row gt_center">-1.1</td>
-<td class="gt_row gt_center">-1.6, -0.60</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">virginica</td>
-<td class="gt_row gt_center">-1.6</td>
-<td class="gt_row gt_center">-2.2, -1.0</td>
-<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Sepal.Width</td>
+<td headers="estimate" class="gt_row gt_center">0.43</td>
+<td headers="ci" class="gt_row gt_center">0.25, 0.62</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Petal.Length</td>
+<td headers="estimate" class="gt_row gt_center">0.82</td>
+<td headers="ci" class="gt_row gt_center">0.67, 0.96</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Species</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    setosa</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    versicolor</td>
+<td headers="estimate" class="gt_row gt_center">-1.1</td>
+<td headers="ci" class="gt_row gt_center">-1.6, -0.60</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    virginica</td>
+<td headers="estimate" class="gt_row gt_center">-1.6</td>
+<td headers="ci" class="gt_row gt_center">-2.2, -0.97</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
 </div>
 ```
+
 
 
 Additionally digging deeper into the object created by `pool(model)`, specifically the `pooled` list, we can pull out additional information including the number of missing values, the _fraction of missing information_ (`fmi`) as defined by Rubin (1987), and `lambda`, the proportion of total variance that is attributable to the missing data ($\lambda = (B + B/m)/T)$. 
@@ -1281,6 +1311,8 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
   </tr>
 </tbody>
 </table>
+
+
 
 
 ### Calculating bias

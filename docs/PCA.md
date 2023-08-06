@@ -446,6 +446,8 @@ data.frame(PC1.cov = loadings(pr)[,1],
 </tbody>
 </table>
 
+
+
 ## Example
 
 This example follows _Analysis of depression data set_ section in PMA6 Section 14.5. This survey asks 20 questions on emotional states that relate to depression. The data is recorded as numeric, but are categorical in nature where 0 - "rarely or none of the time", 1 - "some or a little of the time" and so forth. 
@@ -711,6 +713,8 @@ dim(pc_dep$scores); kable(pc_dep$scores[1:5, 1:5])
 </tbody>
 </table>
 
+
+
 ```r
 depress$pc1 <- pc_dep$scores[,1]
 depress$pc2 <- pc_dep$scores[,2]
@@ -726,10 +730,6 @@ glm(acuteill~pc1+pc2, data=depress, family='binomial') %>% summary()
 ## 
 ## Call:
 ## glm(formula = acuteill ~ pc1 + pc2, family = "binomial", data = depress)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.3289  -0.8242  -0.7894   1.4447   1.6898  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)    
@@ -750,10 +750,6 @@ glm(acuteill~cesd, data=depress, family='binomial') %>% summary()
 ## 
 ## Call:
 ## glm(formula = acuteill ~ cesd, family = "binomial", data = depress)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.1354  -0.8356  -0.7840   1.4622   1.6645  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)    

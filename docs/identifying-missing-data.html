@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>18.1 Identifying missing data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="18.1 Identifying missing data | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -214,14 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -296,10 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
-</ul></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -391,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -518,6 +530,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
 <li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
 </ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
 
@@ -544,59 +591,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Missing data in <code>R</code> is denoted as <code>NA</code></li>
 <li>Arithmetic functions on missing data will return missing</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="identifying-missing-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> MASS<span class="sc">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></span>
-<span id="cb1-2"><a href="identifying-missing-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb1-3"><a href="identifying-missing-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  92 104  87  NA  35  64</span></span>
-<span id="cb1-4"><a href="identifying-missing-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb1-5"><a href="identifying-missing-data.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="identifying-missing-data.html#cb308-1" tabindex="-1"></a>survey <span class="ot">&lt;-</span> MASS<span class="sc">::</span>survey <span class="co"># to avoid loading the MASS library which will conflict with dplyr</span></span>
+<span id="cb308-2"><a href="identifying-missing-data.html#cb308-2" tabindex="-1"></a><span class="fu">head</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb308-3"><a href="identifying-missing-data.html#cb308-3" tabindex="-1"></a><span class="do">## [1]  92 104  87  NA  35  64</span></span>
+<span id="cb308-4"><a href="identifying-missing-data.html#cb308-4" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb308-5"><a href="identifying-missing-data.html#cb308-5" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div>
 <p>The <code>summary()</code> function will always show missing.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="identifying-missing-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>Pulse)</span>
-<span id="cb2-2"><a href="identifying-missing-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
-<span id="cb2-3"><a href="identifying-missing-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="identifying-missing-data.html#cb309-1" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>Pulse)</span>
+<span id="cb309-2"><a href="identifying-missing-data.html#cb309-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
+<span id="cb309-3"><a href="identifying-missing-data.html#cb309-3" tabindex="-1"></a><span class="do">##   35.00   66.00   72.50   74.15   80.00  104.00      45</span></span></code></pre></div>
 <p>The <code>is.na()</code> function is helpful to identify rows with missing data</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="identifying-missing-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(survey<span class="sc">$</span>Pulse))</span>
-<span id="cb3-2"><a href="identifying-missing-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb3-3"><a href="identifying-missing-data.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb3-4"><a href="identifying-missing-data.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   192    45</span></span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="identifying-missing-data.html#cb310-1" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(survey<span class="sc">$</span>Pulse))</span>
+<span id="cb310-2"><a href="identifying-missing-data.html#cb310-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb310-3"><a href="identifying-missing-data.html#cb310-3" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb310-4"><a href="identifying-missing-data.html#cb310-4" tabindex="-1"></a><span class="do">##   192    45</span></span></code></pre></div>
 <p>The function <code>table()</code> will not show NA by default.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="identifying-missing-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I)</span>
-<span id="cb4-2"><a href="identifying-missing-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-3"><a href="identifying-missing-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric </span></span>
-<span id="cb4-4"><a href="identifying-missing-data.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141</span></span>
-<span id="cb4-5"><a href="identifying-missing-data.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb4-6"><a href="identifying-missing-data.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-7"><a href="identifying-missing-data.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Imperial   Metric     &lt;NA&gt; </span></span>
-<span id="cb4-8"><a href="identifying-missing-data.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       68      141       28</span></span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="identifying-missing-data.html#cb311-1" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I)</span>
+<span id="cb311-2"><a href="identifying-missing-data.html#cb311-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb311-3"><a href="identifying-missing-data.html#cb311-3" tabindex="-1"></a><span class="do">## Imperial   Metric </span></span>
+<span id="cb311-4"><a href="identifying-missing-data.html#cb311-4" tabindex="-1"></a><span class="do">##       68      141</span></span>
+<span id="cb311-5"><a href="identifying-missing-data.html#cb311-5" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>M.I, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb311-6"><a href="identifying-missing-data.html#cb311-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb311-7"><a href="identifying-missing-data.html#cb311-7" tabindex="-1"></a><span class="do">## Imperial   Metric     &lt;NA&gt; </span></span>
+<span id="cb311-8"><a href="identifying-missing-data.html#cb311-8" tabindex="-1"></a><span class="do">##       68      141       28</span></span></code></pre></div>
 <ul>
 <li>What percent of the data set is missing?</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="identifying-missing-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(survey)))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="identifying-missing-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-3"><a href="identifying-missing-data.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb5-4"><a href="identifying-missing-data.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  96.2   3.8</span></span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="identifying-missing-data.html#cb312-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">is.na</span>(survey)))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb312-2"><a href="identifying-missing-data.html#cb312-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb312-3"><a href="identifying-missing-data.html#cb312-3" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb312-4"><a href="identifying-missing-data.html#cb312-4" tabindex="-1"></a><span class="do">##  96.2   3.8</span></span></code></pre></div>
 <p>4% of the data points are missing.</p>
 <ul>
 <li>How much missing is there per variable?</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="identifying-missing-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>prop.miss <span class="ot">&lt;-</span> <span class="fu">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">NROW</span>(x),<span class="dv">4</span>))</span>
-<span id="cb6-2"><a href="identifying-missing-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a>prop.miss</span>
-<span id="cb6-3"><a href="identifying-missing-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height    M.I </span></span>
-<span id="cb6-4"><a href="identifying-missing-data.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 0.1181 </span></span>
-<span id="cb6-5"><a href="identifying-missing-data.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    Age </span></span>
-<span id="cb6-6"><a href="identifying-missing-data.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.0000</span></span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="identifying-missing-data.html#cb313-1" tabindex="-1"></a>prop.miss <span class="ot">&lt;-</span> <span class="fu">apply</span>(survey, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">NROW</span>(x),<span class="dv">4</span>))</span>
+<span id="cb313-2"><a href="identifying-missing-data.html#cb313-2" tabindex="-1"></a>prop.miss</span>
+<span id="cb313-3"><a href="identifying-missing-data.html#cb313-3" tabindex="-1"></a><span class="do">##    Sex Wr.Hnd NW.Hnd  W.Hnd   Fold  Pulse   Clap   Exer  Smoke Height    M.I </span></span>
+<span id="cb313-4"><a href="identifying-missing-data.html#cb313-4" tabindex="-1"></a><span class="do">## 0.0042 0.0042 0.0042 0.0042 0.0000 0.1899 0.0042 0.0000 0.0042 0.1181 0.1181 </span></span>
+<span id="cb313-5"><a href="identifying-missing-data.html#cb313-5" tabindex="-1"></a><span class="do">##    Age </span></span>
+<span id="cb313-6"><a href="identifying-missing-data.html#cb313-6" tabindex="-1"></a><span class="do">## 0.0000</span></span></code></pre></div>
 <p>The amount of missing data per variable varies from 0 to 19%.</p>
 <div id="visualize-missing-patterns" class="section level3 hasAnchor" number="18.1.1">
 <h3><span class="header-section-number">18.1.1</span> Visualize missing patterns<a href="identifying-missing-data.html#visualize-missing-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Using <code>ggplot2</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="identifying-missing-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>pmpv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">variable =</span> <span class="fu">names</span>(survey), <span class="at">pct.miss =</span>prop.miss)</span>
-<span id="cb7-2"><a href="identifying-missing-data.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="identifying-missing-data.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pmpv, <span class="fu">aes</span>(<span class="at">x=</span>variable, <span class="at">y=</span>pct.miss)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="identifying-missing-data.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span>percent, <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb7-5"><a href="identifying-missing-data.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>pmpv, <span class="fu">aes</span>(<span class="at">label=</span><span class="fu">paste0</span>(<span class="fu">round</span>(pct.miss<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="at">y=</span>pct.miss<span class="fl">+.025</span>), <span class="at">size=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="identifying-missing-data.html#cb314-1" tabindex="-1"></a>pmpv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">variable =</span> <span class="fu">names</span>(survey), <span class="at">pct.miss =</span>prop.miss)</span>
+<span id="cb314-2"><a href="identifying-missing-data.html#cb314-2" tabindex="-1"></a></span>
+<span id="cb314-3"><a href="identifying-missing-data.html#cb314-3" tabindex="-1"></a><span class="fu">ggplot</span>(pmpv, <span class="fu">aes</span>(<span class="at">x=</span>variable, <span class="at">y=</span>pct.miss)) <span class="sc">+</span></span>
+<span id="cb314-4"><a href="identifying-missing-data.html#cb314-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Percent&quot;</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span>percent, <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb314-5"><a href="identifying-missing-data.html#cb314-5" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>pmpv, <span class="fu">aes</span>(<span class="at">label=</span><span class="fu">paste0</span>(<span class="fu">round</span>(pct.miss<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="st">&quot;%&quot;</span>), <span class="at">y=</span>pct.miss<span class="fl">+.025</span>), <span class="at">size=</span><span class="dv">4</span>)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Using <code>mice</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="identifying-missing-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
-<span id="cb8-2"><a href="identifying-missing-data.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(survey)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="identifying-missing-data.html#cb315-1" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb315-2"><a href="identifying-missing-data.html#cb315-2" tabindex="-1"></a><span class="fu">md.pattern</span>(survey)</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre><code>##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
 ## 168    1    1   1   1      1      1     1    1     1      1   1     1   0
@@ -610,11 +657,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        0    0   0   1      1      1     1    1     1     28  28    45 107</code></pre>
 <p>This somewhat ugly output tells us that 168 records have no missing data, 38 records are missing only <code>Pulse</code> and 20 are missing both <code>Height</code> and <code>M.I</code>.</p>
 <p>Using <code>VIM</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="identifying-missing-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
-<span id="cb10-2"><a href="identifying-missing-data.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(survey, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</span>
-<span id="cb10-3"><a href="identifying-missing-data.html#cb10-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
-<span id="cb10-4"><a href="identifying-missing-data.html#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(survey), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
-<span id="cb10-5"><a href="identifying-missing-data.html#cb10-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="identifying-missing-data.html#cb317-1" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
+<span id="cb317-2"><a href="identifying-missing-data.html#cb317-2" tabindex="-1"></a><span class="fu">aggr</span>(survey, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;chartreuse3&#39;</span>,<span class="st">&#39;mediumvioletred&#39;</span>),</span>
+<span id="cb317-3"><a href="identifying-missing-data.html#cb317-3" tabindex="-1"></a>              <span class="at">numbers=</span><span class="cn">TRUE</span>, <span class="at">sortVars=</span><span class="cn">TRUE</span>,</span>
+<span id="cb317-4"><a href="identifying-missing-data.html#cb317-4" tabindex="-1"></a>              <span class="at">labels=</span><span class="fu">names</span>(survey), <span class="at">cex.axis=</span>.<span class="dv">7</span>,</span>
+<span id="cb317-5"><a href="identifying-missing-data.html#cb317-5" tabindex="-1"></a>              <span class="at">gap=</span><span class="dv">3</span>, <span class="at">ylab=</span><span class="fu">c</span>(<span class="st">&quot;Missing data&quot;</span>,<span class="st">&quot;Pattern&quot;</span>))</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p>The plot on the left is a simplified, and ordered version of the ggplot from above, except the bars appear to be inflated because the y-axis goes up to 15% instead of 100%.</p>
 <p>The plot on the right shows the missing data patterns, and indicate that 71% of the records has complete cases, and that everyone who is missing <code>M.I.</code> is also missing Height.</p>
@@ -627,7 +674,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>The darkred text indicates how many records are missing on both.</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="identifying-missing-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">marginplot</span>(survey[,<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="identifying-missing-data.html#cb318-1" tabindex="-1"></a><span class="fu">marginplot</span>(survey[,<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">10</span>)])</span></code></pre></div>
 <p><img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate.</p>
 </div>
@@ -698,7 +745,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

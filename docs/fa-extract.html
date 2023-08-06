@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>15.4 Factor Extraction Methods | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="15.4 Factor Extraction Methods | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -577,33 +629,33 @@ X_{i} &amp;=  \sum_{j=1}^{P}a_{ji}C_{j} \\
 <div id="r-code" class="section level4 hasAnchor" number="15.4.1.1">
 <h4><span class="header-section-number">15.4.1.1</span> R code<a href="fa-extract.html#r-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Factor extraction via principal components can be done using the <code>principal</code> function in the <code>psych</code> package. We choose <code>nfactors=2</code> here because we know there are 2 underlying factors in the data generation model.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="fa-extract.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(psych)</span></span>
-<span id="cb274-2"><a href="fa-extract.html#cb274-2" aria-hidden="true" tabindex="-1"></a>pc.extract.norotate <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb274-3"><a href="fa-extract.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pc.extract.norotate)</span>
-<span id="cb274-4"><a href="fa-extract.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Principal Components Analysis</span></span>
-<span id="cb274-5"><a href="fa-extract.html#cb274-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span></span>
-<span id="cb274-6"><a href="fa-extract.html#cb274-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized loadings (pattern matrix) based upon correlation matrix</span></span>
-<span id="cb274-7"><a href="fa-extract.html#cb274-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     PC1   PC2   h2    u2 com</span></span>
-<span id="cb274-8"><a href="fa-extract.html#cb274-8" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 0.53  0.78 0.90 0.104 1.8</span></span>
-<span id="cb274-9"><a href="fa-extract.html#cb274-9" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 0.59  0.74 0.89 0.106 1.9</span></span>
-<span id="cb274-10"><a href="fa-extract.html#cb274-10" aria-hidden="true" tabindex="-1"></a><span class="do">## X3 0.70 -0.39 0.64 0.360 1.6</span></span>
-<span id="cb274-11"><a href="fa-extract.html#cb274-11" aria-hidden="true" tabindex="-1"></a><span class="do">## X4 0.87 -0.38 0.90 0.099 1.4</span></span>
-<span id="cb274-12"><a href="fa-extract.html#cb274-12" aria-hidden="true" tabindex="-1"></a><span class="do">## X5 0.92 -0.27 0.91 0.087 1.2</span></span>
-<span id="cb274-13"><a href="fa-extract.html#cb274-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb274-14"><a href="fa-extract.html#cb274-14" aria-hidden="true" tabindex="-1"></a><span class="do">##                        PC1  PC2</span></span>
-<span id="cb274-15"><a href="fa-extract.html#cb274-15" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings           2.71 1.53</span></span>
-<span id="cb274-16"><a href="fa-extract.html#cb274-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var        0.54 0.31</span></span>
-<span id="cb274-17"><a href="fa-extract.html#cb274-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var        0.54 0.85</span></span>
-<span id="cb274-18"><a href="fa-extract.html#cb274-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.64 0.36</span></span>
-<span id="cb274-19"><a href="fa-extract.html#cb274-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.64 1.00</span></span>
-<span id="cb274-20"><a href="fa-extract.html#cb274-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb274-21"><a href="fa-extract.html#cb274-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean item complexity =  1.6</span></span>
-<span id="cb274-22"><a href="fa-extract.html#cb274-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 components are sufficient.</span></span>
-<span id="cb274-23"><a href="fa-extract.html#cb274-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb274-24"><a href="fa-extract.html#cb274-24" aria-hidden="true" tabindex="-1"></a><span class="do">## The root mean square of the residuals (RMSR) is  0.08 </span></span>
-<span id="cb274-25"><a href="fa-extract.html#cb274-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  with the empirical chi square  12.61  with prob &lt;  0.00038 </span></span>
-<span id="cb274-26"><a href="fa-extract.html#cb274-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb274-27"><a href="fa-extract.html#cb274-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit based upon off diagonal values = 0.97</span></span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="fa-extract.html#cb285-1" tabindex="-1"></a><span class="co">#library(psych)</span></span>
+<span id="cb285-2"><a href="fa-extract.html#cb285-2" tabindex="-1"></a>pc.extract.norotate <span class="ot">&lt;-</span> <span class="fu">principal</span>(stan.dta, <span class="at">nfactors=</span><span class="dv">2</span>, <span class="at">rotate=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb285-3"><a href="fa-extract.html#cb285-3" tabindex="-1"></a><span class="fu">print</span>(pc.extract.norotate)</span>
+<span id="cb285-4"><a href="fa-extract.html#cb285-4" tabindex="-1"></a><span class="do">## Principal Components Analysis</span></span>
+<span id="cb285-5"><a href="fa-extract.html#cb285-5" tabindex="-1"></a><span class="do">## Call: principal(r = stan.dta, nfactors = 2, rotate = &quot;none&quot;)</span></span>
+<span id="cb285-6"><a href="fa-extract.html#cb285-6" tabindex="-1"></a><span class="do">## Standardized loadings (pattern matrix) based upon correlation matrix</span></span>
+<span id="cb285-7"><a href="fa-extract.html#cb285-7" tabindex="-1"></a><span class="do">##     PC1   PC2   h2    u2 com</span></span>
+<span id="cb285-8"><a href="fa-extract.html#cb285-8" tabindex="-1"></a><span class="do">## X1 0.57  0.75 0.89 0.112 1.9</span></span>
+<span id="cb285-9"><a href="fa-extract.html#cb285-9" tabindex="-1"></a><span class="do">## X2 0.61  0.72 0.89 0.113 1.9</span></span>
+<span id="cb285-10"><a href="fa-extract.html#cb285-10" tabindex="-1"></a><span class="do">## X3 0.58 -0.51 0.59 0.406 2.0</span></span>
+<span id="cb285-11"><a href="fa-extract.html#cb285-11" tabindex="-1"></a><span class="do">## X4 0.87 -0.38 0.89 0.109 1.4</span></span>
+<span id="cb285-12"><a href="fa-extract.html#cb285-12" tabindex="-1"></a><span class="do">## X5 0.92 -0.27 0.91 0.086 1.2</span></span>
+<span id="cb285-13"><a href="fa-extract.html#cb285-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb285-14"><a href="fa-extract.html#cb285-14" tabindex="-1"></a><span class="do">##                        PC1  PC2</span></span>
+<span id="cb285-15"><a href="fa-extract.html#cb285-15" tabindex="-1"></a><span class="do">## SS loadings           2.63 1.55</span></span>
+<span id="cb285-16"><a href="fa-extract.html#cb285-16" tabindex="-1"></a><span class="do">## Proportion Var        0.53 0.31</span></span>
+<span id="cb285-17"><a href="fa-extract.html#cb285-17" tabindex="-1"></a><span class="do">## Cumulative Var        0.53 0.83</span></span>
+<span id="cb285-18"><a href="fa-extract.html#cb285-18" tabindex="-1"></a><span class="do">## Proportion Explained  0.63 0.37</span></span>
+<span id="cb285-19"><a href="fa-extract.html#cb285-19" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.63 1.00</span></span>
+<span id="cb285-20"><a href="fa-extract.html#cb285-20" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb285-21"><a href="fa-extract.html#cb285-21" tabindex="-1"></a><span class="do">## Mean item complexity =  1.7</span></span>
+<span id="cb285-22"><a href="fa-extract.html#cb285-22" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 components are sufficient.</span></span>
+<span id="cb285-23"><a href="fa-extract.html#cb285-23" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb285-24"><a href="fa-extract.html#cb285-24" tabindex="-1"></a><span class="do">## The root mean square of the residuals (RMSR) is  0.09 </span></span>
+<span id="cb285-25"><a href="fa-extract.html#cb285-25" tabindex="-1"></a><span class="do">##  with the empirical chi square  16.62  with prob &lt;  4.6e-05 </span></span>
+<span id="cb285-26"><a href="fa-extract.html#cb285-26" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb285-27"><a href="fa-extract.html#cb285-27" tabindex="-1"></a><span class="do">## Fit based upon off diagonal values = 0.96</span></span></code></pre></div>
 <p><span class="math display">\[
 \begin{equation}
 \begin{aligned}
@@ -639,32 +691,32 @@ X_{5} &amp;=  0.92F_{1} - 0.27F_{2} + e_{5} \\
 <div id="r-code-1" class="section level4 hasAnchor" number="15.4.3.1">
 <h4><span class="header-section-number">15.4.3.1</span> R code<a href="fa-extract.html#r-code-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The <code>cutoff</code> argument hides loadings under that value for ease of interpretation. Here I am setting that cutoff at 0 so that all loadings are being displayed. I encourage you to adjust this cutoff value in practice to see how it can be useful in reducing cognitave load of looking through a grid of numbers.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="fa-extract.html#cb275-1" aria-hidden="true" tabindex="-1"></a>ml.extract.norotate <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb275-2"><a href="fa-extract.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ml.extract.norotate, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">cutoff=</span><span class="dv">0</span>)</span>
-<span id="cb275-3"><a href="fa-extract.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb275-4"><a href="fa-extract.html#cb275-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb275-5"><a href="fa-extract.html#cb275-5" aria-hidden="true" tabindex="-1"></a><span class="do">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span></span>
-<span id="cb275-6"><a href="fa-extract.html#cb275-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb275-7"><a href="fa-extract.html#cb275-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Uniquenesses:</span></span>
-<span id="cb275-8"><a href="fa-extract.html#cb275-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   X1   X2   X3   X4   X5 </span></span>
-<span id="cb275-9"><a href="fa-extract.html#cb275-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.37 0.00 0.63 0.06 0.04 </span></span>
-<span id="cb275-10"><a href="fa-extract.html#cb275-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb275-11"><a href="fa-extract.html#cb275-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Loadings:</span></span>
-<span id="cb275-12"><a href="fa-extract.html#cb275-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    Factor1 Factor2</span></span>
-<span id="cb275-13"><a href="fa-extract.html#cb275-13" aria-hidden="true" tabindex="-1"></a><span class="do">## X1 -0.06    0.79  </span></span>
-<span id="cb275-14"><a href="fa-extract.html#cb275-14" aria-hidden="true" tabindex="-1"></a><span class="do">## X2 -0.07    1.00  </span></span>
-<span id="cb275-15"><a href="fa-extract.html#cb275-15" aria-hidden="true" tabindex="-1"></a><span class="do">## X3  0.58    0.19  </span></span>
-<span id="cb275-16"><a href="fa-extract.html#cb275-16" aria-hidden="true" tabindex="-1"></a><span class="do">## X4  0.93    0.28  </span></span>
-<span id="cb275-17"><a href="fa-extract.html#cb275-17" aria-hidden="true" tabindex="-1"></a><span class="do">## X5  0.90    0.39  </span></span>
-<span id="cb275-18"><a href="fa-extract.html#cb275-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb275-19"><a href="fa-extract.html#cb275-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                Factor1 Factor2</span></span>
-<span id="cb275-20"><a href="fa-extract.html#cb275-20" aria-hidden="true" tabindex="-1"></a><span class="do">## SS loadings       2.02    1.88</span></span>
-<span id="cb275-21"><a href="fa-extract.html#cb275-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Var    0.40    0.38</span></span>
-<span id="cb275-22"><a href="fa-extract.html#cb275-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Var    0.40    0.78</span></span>
-<span id="cb275-23"><a href="fa-extract.html#cb275-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb275-24"><a href="fa-extract.html#cb275-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 factors are sufficient.</span></span>
-<span id="cb275-25"><a href="fa-extract.html#cb275-25" aria-hidden="true" tabindex="-1"></a><span class="do">## The chi square statistic is 0.2 on 1 degree of freedom.</span></span>
-<span id="cb275-26"><a href="fa-extract.html#cb275-26" aria-hidden="true" tabindex="-1"></a><span class="do">## The p-value is 0.652</span></span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="fa-extract.html#cb286-1" tabindex="-1"></a>ml.extract.norotate <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb286-2"><a href="fa-extract.html#cb286-2" tabindex="-1"></a><span class="fu">print</span>(ml.extract.norotate, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">cutoff=</span><span class="dv">0</span>)</span>
+<span id="cb286-3"><a href="fa-extract.html#cb286-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-4"><a href="fa-extract.html#cb286-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb286-5"><a href="fa-extract.html#cb286-5" tabindex="-1"></a><span class="do">## factanal(x = stan.dta, factors = 2, rotation = &quot;none&quot;)</span></span>
+<span id="cb286-6"><a href="fa-extract.html#cb286-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-7"><a href="fa-extract.html#cb286-7" tabindex="-1"></a><span class="do">## Uniquenesses:</span></span>
+<span id="cb286-8"><a href="fa-extract.html#cb286-8" tabindex="-1"></a><span class="do">##   X1   X2   X3   X4   X5 </span></span>
+<span id="cb286-9"><a href="fa-extract.html#cb286-9" tabindex="-1"></a><span class="do">## 0.33 0.06 0.72 0.08 0.01 </span></span>
+<span id="cb286-10"><a href="fa-extract.html#cb286-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-11"><a href="fa-extract.html#cb286-11" tabindex="-1"></a><span class="do">## Loadings:</span></span>
+<span id="cb286-12"><a href="fa-extract.html#cb286-12" tabindex="-1"></a><span class="do">##    Factor1 Factor2</span></span>
+<span id="cb286-13"><a href="fa-extract.html#cb286-13" tabindex="-1"></a><span class="do">## X1  0.35    0.74  </span></span>
+<span id="cb286-14"><a href="fa-extract.html#cb286-14" tabindex="-1"></a><span class="do">## X2  0.41    0.88  </span></span>
+<span id="cb286-15"><a href="fa-extract.html#cb286-15" tabindex="-1"></a><span class="do">## X3  0.50   -0.18  </span></span>
+<span id="cb286-16"><a href="fa-extract.html#cb286-16" tabindex="-1"></a><span class="do">## X4  0.94   -0.19  </span></span>
+<span id="cb286-17"><a href="fa-extract.html#cb286-17" tabindex="-1"></a><span class="do">## X5  0.99   -0.07  </span></span>
+<span id="cb286-18"><a href="fa-extract.html#cb286-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-19"><a href="fa-extract.html#cb286-19" tabindex="-1"></a><span class="do">##                Factor1 Factor2</span></span>
+<span id="cb286-20"><a href="fa-extract.html#cb286-20" tabindex="-1"></a><span class="do">## SS loadings       2.41    1.39</span></span>
+<span id="cb286-21"><a href="fa-extract.html#cb286-21" tabindex="-1"></a><span class="do">## Proportion Var    0.48    0.28</span></span>
+<span id="cb286-22"><a href="fa-extract.html#cb286-22" tabindex="-1"></a><span class="do">## Cumulative Var    0.48    0.76</span></span>
+<span id="cb286-23"><a href="fa-extract.html#cb286-23" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb286-24"><a href="fa-extract.html#cb286-24" tabindex="-1"></a><span class="do">## Test of the hypothesis that 2 factors are sufficient.</span></span>
+<span id="cb286-25"><a href="fa-extract.html#cb286-25" tabindex="-1"></a><span class="do">## The chi square statistic is 0.4 on 1 degree of freedom.</span></span>
+<span id="cb286-26"><a href="fa-extract.html#cb286-26" tabindex="-1"></a><span class="do">## The p-value is 0.526</span></span></code></pre></div>
 <p>The factor equations now are:</p>
 <p><span class="math display">\[
 \begin{equation}
@@ -681,26 +733,26 @@ X_{3} &amp;=  0.58F_{1} + 0.19F_{2} + e_{3} \\
 <div id="uniqueness" class="section level3 hasAnchor" number="15.4.4">
 <h3><span class="header-section-number">15.4.4</span> Uniqueness<a href="fa-extract.html#uniqueness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall Factor analysis splits the variance of the observed X’s into a part due to the communality <span class="math inline">\(h_{i}^{2}\)</span> and specificity <span class="math inline">\(u_{i}^{2}\)</span>. This last term is the portion of the variance that is due to the <em>unique</em> factor. Let’s look at how those differ depending on the extraction method:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="fa-extract.html#cb276-1" aria-hidden="true" tabindex="-1"></a>pc.extract.norotate<span class="sc">$</span>uniquenesses</span>
-<span id="cb276-2"><a href="fa-extract.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         X1         X2         X3         X4         X5 </span></span>
-<span id="cb276-3"><a href="fa-extract.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.10356406 0.10628541 0.35980869 0.09916082 0.08669813</span></span>
-<span id="cb276-4"><a href="fa-extract.html#cb276-4" aria-hidden="true" tabindex="-1"></a>ml.extract.norotate<span class="sc">$</span>uniquenesses</span>
-<span id="cb276-5"><a href="fa-extract.html#cb276-5" aria-hidden="true" tabindex="-1"></a><span class="do">##         X1         X2         X3         X4         X5 </span></span>
-<span id="cb276-6"><a href="fa-extract.html#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.37071467 0.00500000 0.62599425 0.06244190 0.03603453</span></span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="fa-extract.html#cb287-1" tabindex="-1"></a>pc.extract.norotate<span class="sc">$</span>uniquenesses</span>
+<span id="cb287-2"><a href="fa-extract.html#cb287-2" tabindex="-1"></a><span class="do">##         X1         X2         X3         X4         X5 </span></span>
+<span id="cb287-3"><a href="fa-extract.html#cb287-3" tabindex="-1"></a><span class="do">## 0.11151283 0.11336123 0.40564130 0.10890203 0.08591098</span></span>
+<span id="cb287-4"><a href="fa-extract.html#cb287-4" tabindex="-1"></a>ml.extract.norotate<span class="sc">$</span>uniquenesses</span>
+<span id="cb287-5"><a href="fa-extract.html#cb287-5" tabindex="-1"></a><span class="do">##         X1         X2         X3         X4         X5 </span></span>
+<span id="cb287-6"><a href="fa-extract.html#cb287-6" tabindex="-1"></a><span class="do">## 0.33432315 0.05506386 0.71685548 0.07508356 0.01414656</span></span></code></pre></div>
 <p>Here we see that the uniqueness for X2, X4 and X5 under ML is pretty low compared to the PC extraction method, but that’s almost offset by a much higher uniqueness for x1 and X3.</p>
 <p>Ideally we want the variance in the X’s to be captured by the factors. So we want to see a low unique variance.</p>
 </div>
 <div id="resulting-factors" class="section level3 hasAnchor" number="15.4.5">
 <h3><span class="header-section-number">15.4.5</span> Resulting factors<a href="fa-extract.html#resulting-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="fa-extract.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># grid of 2 columns and 1 row</span></span>
-<span id="cb277-2"><a href="fa-extract.html#cb277-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb277-3"><a href="fa-extract.html#cb277-3" aria-hidden="true" tabindex="-1"></a>pc.load <span class="ot">&lt;-</span> pc.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb277-4"><a href="fa-extract.html#cb277-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc.load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;PCA Extraction&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></span>
-<span id="cb277-5"><a href="fa-extract.html#cb277-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(pc.load, <span class="at">labels=</span><span class="fu">rownames</span>(pc.load)) <span class="co"># put names instead of points</span></span>
-<span id="cb277-6"><a href="fa-extract.html#cb277-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb277-7"><a href="fa-extract.html#cb277-7" aria-hidden="true" tabindex="-1"></a>ml.load <span class="ot">&lt;-</span> ml.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb277-8"><a href="fa-extract.html#cb277-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ml.load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML Extraction&quot;</span>) </span>
-<span id="cb277-9"><a href="fa-extract.html#cb277-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(ml.load, <span class="at">labels=</span><span class="fu">rownames</span>(ml.load))</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="fa-extract.html#cb288-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># grid of 2 columns and 1 row</span></span>
+<span id="cb288-2"><a href="fa-extract.html#cb288-2" tabindex="-1"></a></span>
+<span id="cb288-3"><a href="fa-extract.html#cb288-3" tabindex="-1"></a>pc.load <span class="ot">&lt;-</span> pc.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb288-4"><a href="fa-extract.html#cb288-4" tabindex="-1"></a><span class="fu">plot</span>(pc.load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;PCA Extraction&quot;</span>) <span class="co"># set up the plot but don&#39;t put points down</span></span>
+<span id="cb288-5"><a href="fa-extract.html#cb288-5" tabindex="-1"></a><span class="fu">text</span>(pc.load, <span class="at">labels=</span><span class="fu">rownames</span>(pc.load)) <span class="co"># put names instead of points</span></span>
+<span id="cb288-6"><a href="fa-extract.html#cb288-6" tabindex="-1"></a></span>
+<span id="cb288-7"><a href="fa-extract.html#cb288-7" tabindex="-1"></a>ml.load <span class="ot">&lt;-</span> ml.extract.norotate<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb288-8"><a href="fa-extract.html#cb288-8" tabindex="-1"></a><span class="fu">plot</span>(ml.load, <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">main=</span><span class="st">&quot;ML Extraction&quot;</span>) </span>
+<span id="cb288-9"><a href="fa-extract.html#cb288-9" tabindex="-1"></a><span class="fu">text</span>(ml.load, <span class="at">labels=</span><span class="fu">rownames</span>(ml.load))</span></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
 <p>PCA Extraction</p>
 <ul>
@@ -784,7 +836,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

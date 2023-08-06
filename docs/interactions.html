@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.1 Interactions | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.1 Interactions | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -536,8 +588,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="interactions" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Interactions<a href="interactions.html#interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this <em>main effects</em> model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. Reviewing the scatterplot below, do you think this is a reasonable model to fit the observed relationship?</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="interactions.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Petal.Length, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
-<span id="cb187-2"><a href="interactions.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="interactions.html#cb187-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Petal.Length, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
+<span id="cb187-2"><a href="interactions.html#cb187-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="model_building_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>If we care about how species <em>changes</em> the relationship between petal and sepal length, we can fit a model with an <strong>interaction</strong> between sepal length (<span class="math inline">\(x_{1}\)</span>) and species. For this first example let <span class="math inline">\(x_{2}\)</span> be an indicator for when <code>species == setosa</code>. Note that both <em>main effects</em> of sepal length, and setosa species are also included in the model. Interactions are mathematically represented as a multiplication between the two variables that are interacting.</p>
 <p><span class="math display">\[ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{1i}x_{2i}\]</span></p>
@@ -554,16 +606,28 @@ which simplifies to
 <div id="fitting-interaction-models-interpreting-coefficients" class="section level3 hasAnchor" number="10.1.1">
 <h3><span class="header-section-number">10.1.1</span> Fitting interaction models &amp; interpreting coefficients<a href="interactions.html#fitting-interaction-models-interpreting-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Interactions are fit in <code>R</code> by simply multiplying <code>*</code> the two variables together in the model statement.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="interactions.html#cb188-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>setosa <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb188-2"><a href="interactions.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> setosa <span class="sc">+</span> Sepal.Length<span class="sc">*</span>setosa, <span class="at">data=</span>iris) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
-<div id="lsebiubemv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="interactions.html#cb188-1" tabindex="-1"></a>iris<span class="sc">$</span>setosa <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb188-2"><a href="interactions.html#cb188-2" tabindex="-1"></a><span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> setosa <span class="sc">+</span> Sepal.Length<span class="sc">*</span>setosa, <span class="at">data=</span>iris) <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>()</span></code></pre></div>
+<div id="pzuvfjsfwq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzuvfjsfwq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#lsebiubemv .gt_table {
+#pzuvfjsfwq thead, #pzuvfjsfwq tbody, #pzuvfjsfwq tfoot, #pzuvfjsfwq tr, #pzuvfjsfwq td, #pzuvfjsfwq th {
+  border-style: none;
+}
+
+#pzuvfjsfwq p {
+  margin: 0;
+  padding: 0;
+}
+
+#pzuvfjsfwq .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -586,19 +650,12 @@ which simplifies to
   border-left-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#pzuvfjsfwq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#lsebiubemv .gt_title {
+#pzuvfjsfwq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -610,25 +667,37 @@ which simplifies to
   border-bottom-width: 0;
 }
 
-#lsebiubemv .gt_subtitle {
+#pzuvfjsfwq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#lsebiubemv .gt_bottom_border {
+#pzuvfjsfwq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzuvfjsfwq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_col_headings {
+#pzuvfjsfwq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -643,7 +712,7 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_col_heading {
+#pzuvfjsfwq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -663,7 +732,7 @@ which simplifies to
   overflow-x: hidden;
 }
 
-#lsebiubemv .gt_column_spanner_outer {
+#pzuvfjsfwq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -675,15 +744,15 @@ which simplifies to
   padding-right: 4px;
 }
 
-#lsebiubemv .gt_column_spanner_outer:first-child {
+#pzuvfjsfwq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lsebiubemv .gt_column_spanner_outer:last-child {
+#pzuvfjsfwq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lsebiubemv .gt_column_spanner {
+#pzuvfjsfwq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -695,7 +764,11 @@ which simplifies to
   width: 100%;
 }
 
-#lsebiubemv .gt_group_heading {
+#pzuvfjsfwq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pzuvfjsfwq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -718,9 +791,10 @@ which simplifies to
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#lsebiubemv .gt_empty_group_heading {
+#pzuvfjsfwq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -735,15 +809,15 @@ which simplifies to
   vertical-align: middle;
 }
 
-#lsebiubemv .gt_from_md > :first-child {
+#pzuvfjsfwq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lsebiubemv .gt_from_md > :last-child {
+#pzuvfjsfwq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lsebiubemv .gt_row {
+#pzuvfjsfwq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -762,7 +836,7 @@ which simplifies to
   overflow-x: hidden;
 }
 
-#lsebiubemv .gt_stub {
+#pzuvfjsfwq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -775,7 +849,7 @@ which simplifies to
   padding-right: 5px;
 }
 
-#lsebiubemv .gt_stub_row_group {
+#pzuvfjsfwq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -789,11 +863,15 @@ which simplifies to
   vertical-align: top;
 }
 
-#lsebiubemv .gt_row_group_first td {
+#pzuvfjsfwq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lsebiubemv .gt_summary_row {
+#pzuvfjsfwq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pzuvfjsfwq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -803,16 +881,16 @@ which simplifies to
   padding-right: 5px;
 }
 
-#lsebiubemv .gt_first_summary_row {
+#pzuvfjsfwq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_first_summary_row.thick {
+#pzuvfjsfwq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lsebiubemv .gt_last_summary_row {
+#pzuvfjsfwq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -822,7 +900,7 @@ which simplifies to
   border-bottom-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_grand_summary_row {
+#pzuvfjsfwq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -832,7 +910,7 @@ which simplifies to
   padding-right: 5px;
 }
 
-#lsebiubemv .gt_first_grand_summary_row {
+#pzuvfjsfwq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -842,11 +920,21 @@ which simplifies to
   border-top-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_striped {
+#pzuvfjsfwq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzuvfjsfwq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lsebiubemv .gt_table_body {
+#pzuvfjsfwq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -855,7 +943,7 @@ which simplifies to
   border-bottom-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_footnotes {
+#pzuvfjsfwq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -869,30 +957,8 @@ which simplifies to
   border-right-color: #D3D3D3;
 }
 
-#lsebiubemv .gt_footnote {
+#pzuvfjsfwq .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lsebiubemv .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lsebiubemv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -900,102 +966,116 @@ which simplifies to
   padding-right: 5px;
 }
 
-#lsebiubemv .gt_left {
+#pzuvfjsfwq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzuvfjsfwq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzuvfjsfwq .gt_left {
   text-align: left;
 }
 
-#lsebiubemv .gt_center {
+#pzuvfjsfwq .gt_center {
   text-align: center;
 }
 
-#lsebiubemv .gt_right {
+#pzuvfjsfwq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lsebiubemv .gt_font_normal {
+#pzuvfjsfwq .gt_font_normal {
   font-weight: normal;
 }
 
-#lsebiubemv .gt_font_bold {
+#pzuvfjsfwq .gt_font_bold {
   font-weight: bold;
 }
 
-#lsebiubemv .gt_font_italic {
+#pzuvfjsfwq .gt_font_italic {
   font-style: italic;
 }
 
-#lsebiubemv .gt_super {
+#pzuvfjsfwq .gt_super {
   font-size: 65%;
 }
 
-#lsebiubemv .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#lsebiubemv .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#pzuvfjsfwq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#lsebiubemv .gt_asterisk {
+#pzuvfjsfwq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lsebiubemv .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#pzuvfjsfwq .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#lsebiubemv .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#pzuvfjsfwq .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#lsebiubemv .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#pzuvfjsfwq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pzuvfjsfwq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pzuvfjsfwq .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Sepal.Length</td>
-<td class="gt_row gt_center">1.0</td>
-<td class="gt_row gt_center">0.91, 1.1</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">setosa</td>
-<td class="gt_row gt_center">2.4</td>
-<td class="gt_row gt_center">0.61, 4.1</td>
-<td class="gt_row gt_center">0.008</td></tr>
-    <tr><td class="gt_row gt_left">Sepal.Length * setosa</td>
-<td class="gt_row gt_center">-0.90</td>
-<td class="gt_row gt_center">-1.2, -0.56</td>
-<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Sepal.Length</td>
+<td headers="estimate" class="gt_row gt_center">1.0</td>
+<td headers="ci" class="gt_row gt_center">0.91, 1.1</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">setosa</td>
+<td headers="estimate" class="gt_row gt_center">2.4</td>
+<td headers="ci" class="gt_row gt_center">0.61, 4.1</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Sepal.Length * setosa</td>
+<td headers="estimate" class="gt_row gt_center">-0.90</td>
+<td headers="ci" class="gt_row gt_center">-1.2, -0.56</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
@@ -1023,30 +1103,30 @@ The main effects (<span class="math inline">\(b_{1}\)</span>, <span class="math 
 <p>Let’s up the game now and look at the full interaction model with a categorical version of species.
 Recall <span class="math inline">\(x_{1}\)</span> is Sepal Length, <span class="math inline">\(x_{2}\)</span> is the indicator for <em>versicolor</em>, and <span class="math inline">\(x_{3}\)</span> the indicator for <em>virginica</em> . Refer to <a href="interpreting-coefficients.html#cat-predictors">9.4.3</a> for information on how to interpret categorical predictors as main effects.</p>
 <p><span class="math display">\[ Y_{i} \sim \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{2i} + \beta_{3}x_{3i} + \beta_{4}x_{1i}x_{2i} + \beta_{5}x_{1i}x_{3i}+\epsilon_{i}\]</span></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="interactions.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Species <span class="sc">+</span> Sepal.Length<span class="sc">*</span>Species, <span class="at">data=</span>iris))</span>
-<span id="cb189-2"><a href="interactions.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb189-3"><a href="interactions.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb189-4"><a href="interactions.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span></span>
-<span id="cb189-5"><a href="interactions.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     Species, data = iris)</span></span>
-<span id="cb189-6"><a href="interactions.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb189-7"><a href="interactions.html#cb189-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb189-8"><a href="interactions.html#cb189-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb189-9"><a href="interactions.html#cb189-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span></span>
-<span id="cb189-10"><a href="interactions.html#cb189-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb189-11"><a href="interactions.html#cb189-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb189-12"><a href="interactions.html#cb189-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb189-13"><a href="interactions.html#cb189-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span></span>
-<span id="cb189-14"><a href="interactions.html#cb189-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span></span>
-<span id="cb189-15"><a href="interactions.html#cb189-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span></span>
-<span id="cb189-16"><a href="interactions.html#cb189-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span></span>
-<span id="cb189-17"><a href="interactions.html#cb189-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span></span>
-<span id="cb189-18"><a href="interactions.html#cb189-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span></span>
-<span id="cb189-19"><a href="interactions.html#cb189-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb189-20"><a href="interactions.html#cb189-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb189-21"><a href="interactions.html#cb189-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb189-22"><a href="interactions.html#cb189-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.2611 on 144 degrees of freedom</span></span>
-<span id="cb189-23"><a href="interactions.html#cb189-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span></span>
-<span id="cb189-24"><a href="interactions.html#cb189-24" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="interactions.html#cb189-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Species <span class="sc">+</span> Sepal.Length<span class="sc">*</span>Species, <span class="at">data=</span>iris))</span>
+<span id="cb189-2"><a href="interactions.html#cb189-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb189-3"><a href="interactions.html#cb189-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb189-4"><a href="interactions.html#cb189-4" tabindex="-1"></a><span class="do">## lm(formula = Petal.Length ~ Sepal.Length + Species + Sepal.Length * </span></span>
+<span id="cb189-5"><a href="interactions.html#cb189-5" tabindex="-1"></a><span class="do">##     Species, data = iris)</span></span>
+<span id="cb189-6"><a href="interactions.html#cb189-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb189-7"><a href="interactions.html#cb189-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb189-8"><a href="interactions.html#cb189-8" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb189-9"><a href="interactions.html#cb189-9" tabindex="-1"></a><span class="do">## -0.68611 -0.13442 -0.00856  0.15966  0.79607 </span></span>
+<span id="cb189-10"><a href="interactions.html#cb189-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb189-11"><a href="interactions.html#cb189-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb189-12"><a href="interactions.html#cb189-12" tabindex="-1"></a><span class="do">##                                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb189-13"><a href="interactions.html#cb189-13" tabindex="-1"></a><span class="do">## (Intercept)                      0.8031     0.5310   1.512    0.133    </span></span>
+<span id="cb189-14"><a href="interactions.html#cb189-14" tabindex="-1"></a><span class="do">## Sepal.Length                     0.1316     0.1058   1.244    0.216    </span></span>
+<span id="cb189-15"><a href="interactions.html#cb189-15" tabindex="-1"></a><span class="do">## Speciesversicolor               -0.6179     0.6837  -0.904    0.368    </span></span>
+<span id="cb189-16"><a href="interactions.html#cb189-16" tabindex="-1"></a><span class="do">## Speciesvirginica                -0.1926     0.6578  -0.293    0.770    </span></span>
+<span id="cb189-17"><a href="interactions.html#cb189-17" tabindex="-1"></a><span class="do">## Sepal.Length:Speciesversicolor   0.5548     0.1281   4.330 2.78e-05 ***</span></span>
+<span id="cb189-18"><a href="interactions.html#cb189-18" tabindex="-1"></a><span class="do">## Sepal.Length:Speciesvirginica    0.6184     0.1210   5.111 1.00e-06 ***</span></span>
+<span id="cb189-19"><a href="interactions.html#cb189-19" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb189-20"><a href="interactions.html#cb189-20" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb189-21"><a href="interactions.html#cb189-21" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb189-22"><a href="interactions.html#cb189-22" tabindex="-1"></a><span class="do">## Residual standard error: 0.2611 on 144 degrees of freedom</span></span>
+<span id="cb189-23"><a href="interactions.html#cb189-23" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9789, Adjusted R-squared:  0.9781 </span></span>
+<span id="cb189-24"><a href="interactions.html#cb189-24" tabindex="-1"></a><span class="do">## F-statistic:  1333 on 5 and 144 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>The slope of the relationship between sepal length and petal length is calculated as follows, for each species:</p>
 <ul>
 <li><em>setosa</em> <span class="math inline">\((x_{2}=0, x_{3}=0): b_{1}=0.13\)</span></li>
@@ -1054,48 +1134,48 @@ Recall <span class="math inline">\(x_{1}\)</span> is Sepal Length, <span class="
 <li><em>virginica</em> <span class="math inline">\((x_{2}=0, x_{3}=1): b_{1} + b_{3} + b_{5} = 0.13+0.62 = 0.75\)</span></li>
 </ul>
 <p>Compare this to the estimates gained from the stratified model:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="interactions.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(iris, iris<span class="sc">$</span>Species, <span class="cf">function</span>(x){</span>
-<span id="cb190-2"><a href="interactions.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length, <span class="at">data=</span>x) <span class="sc">%&gt;%</span> <span class="fu">coef</span>()</span>
-<span id="cb190-3"><a href="interactions.html#cb190-3" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb190-4"><a href="interactions.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="do">## iris$Species: setosa</span></span>
-<span id="cb190-5"><a href="interactions.html#cb190-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
-<span id="cb190-6"><a href="interactions.html#cb190-6" aria-hidden="true" tabindex="-1"></a><span class="do">##    0.8030518    0.1316317 </span></span>
-<span id="cb190-7"><a href="interactions.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
-<span id="cb190-8"><a href="interactions.html#cb190-8" aria-hidden="true" tabindex="-1"></a><span class="do">## iris$Species: versicolor</span></span>
-<span id="cb190-9"><a href="interactions.html#cb190-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
-<span id="cb190-10"><a href="interactions.html#cb190-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    0.1851155    0.6864698 </span></span>
-<span id="cb190-11"><a href="interactions.html#cb190-11" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
-<span id="cb190-12"><a href="interactions.html#cb190-12" aria-hidden="true" tabindex="-1"></a><span class="do">## iris$Species: virginica</span></span>
-<span id="cb190-13"><a href="interactions.html#cb190-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
-<span id="cb190-14"><a href="interactions.html#cb190-14" aria-hidden="true" tabindex="-1"></a><span class="do">##    0.6104680    0.7500808</span></span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="interactions.html#cb190-1" tabindex="-1"></a><span class="fu">by</span>(iris, iris<span class="sc">$</span>Species, <span class="cf">function</span>(x){</span>
+<span id="cb190-2"><a href="interactions.html#cb190-2" tabindex="-1"></a>  <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length, <span class="at">data=</span>x) <span class="sc">%&gt;%</span> <span class="fu">coef</span>()</span>
+<span id="cb190-3"><a href="interactions.html#cb190-3" tabindex="-1"></a>})</span>
+<span id="cb190-4"><a href="interactions.html#cb190-4" tabindex="-1"></a><span class="do">## iris$Species: setosa</span></span>
+<span id="cb190-5"><a href="interactions.html#cb190-5" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
+<span id="cb190-6"><a href="interactions.html#cb190-6" tabindex="-1"></a><span class="do">##    0.8030518    0.1316317 </span></span>
+<span id="cb190-7"><a href="interactions.html#cb190-7" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb190-8"><a href="interactions.html#cb190-8" tabindex="-1"></a><span class="do">## iris$Species: versicolor</span></span>
+<span id="cb190-9"><a href="interactions.html#cb190-9" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
+<span id="cb190-10"><a href="interactions.html#cb190-10" tabindex="-1"></a><span class="do">##    0.1851155    0.6864698 </span></span>
+<span id="cb190-11"><a href="interactions.html#cb190-11" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb190-12"><a href="interactions.html#cb190-12" tabindex="-1"></a><span class="do">## iris$Species: virginica</span></span>
+<span id="cb190-13"><a href="interactions.html#cb190-13" tabindex="-1"></a><span class="do">##  (Intercept) Sepal.Length </span></span>
+<span id="cb190-14"><a href="interactions.html#cb190-14" tabindex="-1"></a><span class="do">##    0.6104680    0.7500808</span></span></code></pre></div>
 <p>They’re the same! Proof that an interaction is equivalent to stratification.</p>
 </div>
 <div id="example-2" class="section level3 hasAnchor" number="10.1.3">
 <h3><span class="header-section-number">10.1.3</span> Example 2<a href="interactions.html#example-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What if we now wanted to include other predictors in the model? How does sepal length relate to petal length after controlling for petal width? We add the variable for petal width into the model</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="interactions.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> setosa <span class="sc">+</span> Sepal.Length<span class="sc">*</span>setosa <span class="sc">+</span> Petal.Width, <span class="at">data=</span>iris))</span>
-<span id="cb191-2"><a href="interactions.html#cb191-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb191-3"><a href="interactions.html#cb191-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb191-4"><a href="interactions.html#cb191-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></span>
-<span id="cb191-5"><a href="interactions.html#cb191-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     setosa + Petal.Width, data = iris)</span></span>
-<span id="cb191-6"><a href="interactions.html#cb191-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb191-7"><a href="interactions.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb191-8"><a href="interactions.html#cb191-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb191-9"><a href="interactions.html#cb191-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span></span>
-<span id="cb191-10"><a href="interactions.html#cb191-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb191-11"><a href="interactions.html#cb191-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb191-12"><a href="interactions.html#cb191-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb191-13"><a href="interactions.html#cb191-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span></span>
-<span id="cb191-14"><a href="interactions.html#cb191-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span></span>
-<span id="cb191-15"><a href="interactions.html#cb191-15" aria-hidden="true" tabindex="-1"></a><span class="do">## setosa               1.83713    0.62355   2.946  0.00375 ** </span></span>
-<span id="cb191-16"><a href="interactions.html#cb191-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span></span>
-<span id="cb191-17"><a href="interactions.html#cb191-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span></span>
-<span id="cb191-18"><a href="interactions.html#cb191-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb191-19"><a href="interactions.html#cb191-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb191-20"><a href="interactions.html#cb191-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb191-21"><a href="interactions.html#cb191-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.2769 on 145 degrees of freedom</span></span>
-<span id="cb191-22"><a href="interactions.html#cb191-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span></span>
-<span id="cb191-23"><a href="interactions.html#cb191-23" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="interactions.html#cb191-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length <span class="sc">+</span> setosa <span class="sc">+</span> Sepal.Length<span class="sc">*</span>setosa <span class="sc">+</span> Petal.Width, <span class="at">data=</span>iris))</span>
+<span id="cb191-2"><a href="interactions.html#cb191-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb191-3"><a href="interactions.html#cb191-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb191-4"><a href="interactions.html#cb191-4" tabindex="-1"></a><span class="do">## lm(formula = Petal.Length ~ Sepal.Length + setosa + Sepal.Length * </span></span>
+<span id="cb191-5"><a href="interactions.html#cb191-5" tabindex="-1"></a><span class="do">##     setosa + Petal.Width, data = iris)</span></span>
+<span id="cb191-6"><a href="interactions.html#cb191-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb191-7"><a href="interactions.html#cb191-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb191-8"><a href="interactions.html#cb191-8" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb191-9"><a href="interactions.html#cb191-9" tabindex="-1"></a><span class="do">## -0.83519 -0.18278 -0.01812  0.17004  1.06968 </span></span>
+<span id="cb191-10"><a href="interactions.html#cb191-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb191-11"><a href="interactions.html#cb191-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb191-12"><a href="interactions.html#cb191-12" tabindex="-1"></a><span class="do">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb191-13"><a href="interactions.html#cb191-13" tabindex="-1"></a><span class="do">## (Intercept)         -0.86850    0.27028  -3.213  0.00162 ** </span></span>
+<span id="cb191-14"><a href="interactions.html#cb191-14" tabindex="-1"></a><span class="do">## Sepal.Length         0.66181    0.05179  12.779  &lt; 2e-16 ***</span></span>
+<span id="cb191-15"><a href="interactions.html#cb191-15" tabindex="-1"></a><span class="do">## setosa               1.83713    0.62355   2.946  0.00375 ** </span></span>
+<span id="cb191-16"><a href="interactions.html#cb191-16" tabindex="-1"></a><span class="do">## Petal.Width          0.97269    0.07970  12.204  &lt; 2e-16 ***</span></span>
+<span id="cb191-17"><a href="interactions.html#cb191-17" tabindex="-1"></a><span class="do">## Sepal.Length:setosa -0.61106    0.12213  -5.003 1.61e-06 ***</span></span>
+<span id="cb191-18"><a href="interactions.html#cb191-18" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb191-19"><a href="interactions.html#cb191-19" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb191-20"><a href="interactions.html#cb191-20" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb191-21"><a href="interactions.html#cb191-21" tabindex="-1"></a><span class="do">## Residual standard error: 0.2769 on 145 degrees of freedom</span></span>
+<span id="cb191-22"><a href="interactions.html#cb191-22" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9761, Adjusted R-squared:  0.9754 </span></span>
+<span id="cb191-23"><a href="interactions.html#cb191-23" tabindex="-1"></a><span class="do">## F-statistic:  1478 on 4 and 145 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>So far, petal width, and the combination of species and sepal length are both significantly associated with petal length.</p>
 <p><em>Note of caution: Stratification implies that the stratifying variable interacts with all other variables.</em>
 So if we were to go back to the stratified model where we fit the model of petal length on sepal length AND petal width, stratified by species, we would be implying that species interacts with both sepal length and petal width.</p>
@@ -1114,81 +1194,73 @@ So if we were to go back to the stratified model where we fit the model of petal
 <p>Let’s explore the relationship between income, employment status and depression.
 This example follows a logistic regression example from section <a href="logreg.html#mlogreg">11.3.4</a>.</p>
 <p>Here I create the binary indicators of <code>lowincome</code> (annual income &lt;$10k/year) and underemployed (part time or unemployed).</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="interactions.html#cb192-1" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>lowincome <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>income <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb192-2"><a href="interactions.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>lowincome, depress<span class="sc">$</span>income, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb192-3"><a href="interactions.html#cb192-3" aria-hidden="true" tabindex="-1"></a><span class="do">##       </span></span>
-<span id="cb192-4"><a href="interactions.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31 32 35</span></span>
-<span id="cb192-5"><a href="interactions.html#cb192-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1  1 24</span></span>
-<span id="cb192-6"><a href="interactions.html#cb192-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span></span>
-<span id="cb192-7"><a href="interactions.html#cb192-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;NA&gt;  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span></span>
-<span id="cb192-8"><a href="interactions.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       </span></span>
-<span id="cb192-9"><a href="interactions.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="do">##        36 37 42 45 55 65 &lt;NA&gt;</span></span>
-<span id="cb192-10"><a href="interactions.html#cb192-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   0     1  1  1 15  9 10    0</span></span>
-<span id="cb192-11"><a href="interactions.html#cb192-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   1     0  0  0  0  0  0    0</span></span>
-<span id="cb192-12"><a href="interactions.html#cb192-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;NA&gt;  0  0  0  0  0  0    0</span></span>
-<span id="cb192-13"><a href="interactions.html#cb192-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-14"><a href="interactions.html#cb192-14" aria-hidden="true" tabindex="-1"></a>depress<span class="sc">$</span>underemployed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>employ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;PT&quot;</span>, <span class="st">&quot;Unemp&quot;</span>), <span class="dv">1</span>, <span class="dv">0</span> )</span>
-<span id="cb192-15"><a href="interactions.html#cb192-15" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>underemployed, depress<span class="sc">$</span>employ, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
-<span id="cb192-16"><a href="interactions.html#cb192-16" aria-hidden="true" tabindex="-1"></a><span class="do">##       </span></span>
-<span id="cb192-17"><a href="interactions.html#cb192-17" aria-hidden="true" tabindex="-1"></a><span class="do">##         FT Houseperson In School Other  PT Retired Unemp &lt;NA&gt;</span></span>
-<span id="cb192-18"><a href="interactions.html#cb192-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   0    167          27         2     4   0      38     0    0</span></span>
-<span id="cb192-19"><a href="interactions.html#cb192-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   1      0           0         0     0  42       0    14    0</span></span>
-<span id="cb192-20"><a href="interactions.html#cb192-20" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;NA&gt;   0           0         0     0   0       0     0    0</span></span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="interactions.html#cb192-1" tabindex="-1"></a>depress<span class="sc">$</span>lowincome <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>income <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb192-2"><a href="interactions.html#cb192-2" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>lowincome, depress<span class="sc">$</span>income, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb192-3"><a href="interactions.html#cb192-3" tabindex="-1"></a><span class="do">##       </span></span>
+<span id="cb192-4"><a href="interactions.html#cb192-4" tabindex="-1"></a><span class="do">##         2  4  5  6  7  8  9 11 12 13 15 16 18 19 20 23 24 25 26 27 28 31 32 35</span></span>
+<span id="cb192-5"><a href="interactions.html#cb192-5" tabindex="-1"></a><span class="do">##   0     0  0  0  0  0  0  0 17  2 18 24  1  1 25  3 25  2  1  1  1 19  1  1 24</span></span>
+<span id="cb192-6"><a href="interactions.html#cb192-6" tabindex="-1"></a><span class="do">##   1     7  8 10 12 18 14 22  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span id="cb192-7"><a href="interactions.html#cb192-7" tabindex="-1"></a><span class="do">##   &lt;NA&gt;  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span id="cb192-8"><a href="interactions.html#cb192-8" tabindex="-1"></a><span class="do">##       </span></span>
+<span id="cb192-9"><a href="interactions.html#cb192-9" tabindex="-1"></a><span class="do">##        36 37 42 45 55 65 &lt;NA&gt;</span></span>
+<span id="cb192-10"><a href="interactions.html#cb192-10" tabindex="-1"></a><span class="do">##   0     1  1  1 15  9 10    0</span></span>
+<span id="cb192-11"><a href="interactions.html#cb192-11" tabindex="-1"></a><span class="do">##   1     0  0  0  0  0  0    0</span></span>
+<span id="cb192-12"><a href="interactions.html#cb192-12" tabindex="-1"></a><span class="do">##   &lt;NA&gt;  0  0  0  0  0  0    0</span></span>
+<span id="cb192-13"><a href="interactions.html#cb192-13" tabindex="-1"></a></span>
+<span id="cb192-14"><a href="interactions.html#cb192-14" tabindex="-1"></a>depress<span class="sc">$</span>underemployed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>employ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;PT&quot;</span>, <span class="st">&quot;Unemp&quot;</span>), <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb192-15"><a href="interactions.html#cb192-15" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>underemployed, depress<span class="sc">$</span>employ, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb192-16"><a href="interactions.html#cb192-16" tabindex="-1"></a><span class="do">##       </span></span>
+<span id="cb192-17"><a href="interactions.html#cb192-17" tabindex="-1"></a><span class="do">##         FT Houseperson In School Other  PT Retired Unemp &lt;NA&gt;</span></span>
+<span id="cb192-18"><a href="interactions.html#cb192-18" tabindex="-1"></a><span class="do">##   0    167          27         2     4   0      38     0    0</span></span>
+<span id="cb192-19"><a href="interactions.html#cb192-19" tabindex="-1"></a><span class="do">##   1      0           0         0     0  42       0    14    0</span></span>
+<span id="cb192-20"><a href="interactions.html#cb192-20" tabindex="-1"></a><span class="do">##   &lt;NA&gt;   0           0         0     0   0       0     0    0</span></span></code></pre></div>
 <p>The <strong>Main Effects</strong> model assumes that the effect of income on depression is independent of employment status, and the effect of employment status on depression is independent of income.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="interactions.html#cb193-1" aria-hidden="true" tabindex="-1"></a>me_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> lowincome <span class="sc">+</span> underemployed, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb193-2"><a href="interactions.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(me_model)</span>
-<span id="cb193-3"><a href="interactions.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-4"><a href="interactions.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb193-5"><a href="interactions.html#cb193-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ lowincome + underemployed, family = &quot;binomial&quot;, </span></span>
-<span id="cb193-6"><a href="interactions.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
-<span id="cb193-7"><a href="interactions.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-8"><a href="interactions.html#cb193-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb193-9"><a href="interactions.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb193-10"><a href="interactions.html#cb193-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.9085  -0.5843  -0.5279  -0.5279   2.0197  </span></span>
-<span id="cb193-11"><a href="interactions.html#cb193-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-12"><a href="interactions.html#cb193-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb193-13"><a href="interactions.html#cb193-13" aria-hidden="true" tabindex="-1"></a><span class="do">##               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb193-14"><a href="interactions.html#cb193-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)    -1.9003     0.2221  -8.556  &lt; 2e-16 ***</span></span>
-<span id="cb193-15"><a href="interactions.html#cb193-15" aria-hidden="true" tabindex="-1"></a><span class="do">## lowincome       0.2192     0.3353   0.654  0.51322    </span></span>
-<span id="cb193-16"><a href="interactions.html#cb193-16" aria-hidden="true" tabindex="-1"></a><span class="do">## underemployed   1.0094     0.3470   2.909  0.00363 ** </span></span>
-<span id="cb193-17"><a href="interactions.html#cb193-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb193-18"><a href="interactions.html#cb193-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb193-19"><a href="interactions.html#cb193-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-20"><a href="interactions.html#cb193-20" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb193-21"><a href="interactions.html#cb193-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-22"><a href="interactions.html#cb193-22" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb193-23"><a href="interactions.html#cb193-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 259.93  on 291  degrees of freedom</span></span>
-<span id="cb193-24"><a href="interactions.html#cb193-24" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 265.93</span></span>
-<span id="cb193-25"><a href="interactions.html#cb193-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb193-26"><a href="interactions.html#cb193-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="interactions.html#cb193-1" tabindex="-1"></a>me_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> lowincome <span class="sc">+</span> underemployed, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb193-2"><a href="interactions.html#cb193-2" tabindex="-1"></a><span class="fu">summary</span>(me_model)</span>
+<span id="cb193-3"><a href="interactions.html#cb193-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb193-4"><a href="interactions.html#cb193-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb193-5"><a href="interactions.html#cb193-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ lowincome + underemployed, family = &quot;binomial&quot;, </span></span>
+<span id="cb193-6"><a href="interactions.html#cb193-6" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
+<span id="cb193-7"><a href="interactions.html#cb193-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb193-8"><a href="interactions.html#cb193-8" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb193-9"><a href="interactions.html#cb193-9" tabindex="-1"></a><span class="do">##               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb193-10"><a href="interactions.html#cb193-10" tabindex="-1"></a><span class="do">## (Intercept)    -1.9003     0.2221  -8.556  &lt; 2e-16 ***</span></span>
+<span id="cb193-11"><a href="interactions.html#cb193-11" tabindex="-1"></a><span class="do">## lowincome       0.2192     0.3353   0.654  0.51322    </span></span>
+<span id="cb193-12"><a href="interactions.html#cb193-12" tabindex="-1"></a><span class="do">## underemployed   1.0094     0.3470   2.909  0.00363 ** </span></span>
+<span id="cb193-13"><a href="interactions.html#cb193-13" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb193-14"><a href="interactions.html#cb193-14" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb193-15"><a href="interactions.html#cb193-15" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb193-16"><a href="interactions.html#cb193-16" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb193-17"><a href="interactions.html#cb193-17" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb193-18"><a href="interactions.html#cb193-18" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb193-19"><a href="interactions.html#cb193-19" tabindex="-1"></a><span class="do">## Residual deviance: 259.93  on 291  degrees of freedom</span></span>
+<span id="cb193-20"><a href="interactions.html#cb193-20" tabindex="-1"></a><span class="do">## AIC: 265.93</span></span>
+<span id="cb193-21"><a href="interactions.html#cb193-21" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb193-22"><a href="interactions.html#cb193-22" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
 <p>To formally test whether an interaction term is necessary, we add the interaction term into the model and assess whether the coefficient for the interaction term is significantly different from zero.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="interactions.html#cb194-1" aria-hidden="true" tabindex="-1"></a>me_intx_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> lowincome <span class="sc">+</span> underemployed <span class="sc">+</span> lowincome<span class="sc">*</span>underemployed, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>) </span>
-<span id="cb194-2"><a href="interactions.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(me_intx_model)</span>
-<span id="cb194-3"><a href="interactions.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-4"><a href="interactions.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb194-5"><a href="interactions.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="do">## glm(formula = cases ~ lowincome + underemployed + lowincome * </span></span>
-<span id="cb194-6"><a href="interactions.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     underemployed, family = &quot;binomial&quot;, data = depress)</span></span>
-<span id="cb194-7"><a href="interactions.html#cb194-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-8"><a href="interactions.html#cb194-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Deviance Residuals: </span></span>
-<span id="cb194-9"><a href="interactions.html#cb194-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min       1Q   Median       3Q      Max  </span></span>
-<span id="cb194-10"><a href="interactions.html#cb194-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.3537  -0.5790  -0.5790  -0.4717   2.1219  </span></span>
-<span id="cb194-11"><a href="interactions.html#cb194-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-12"><a href="interactions.html#cb194-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb194-13"><a href="interactions.html#cb194-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                         Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb194-14"><a href="interactions.html#cb194-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)              -1.7011     0.2175  -7.822 5.21e-15 ***</span></span>
-<span id="cb194-15"><a href="interactions.html#cb194-15" aria-hidden="true" tabindex="-1"></a><span class="do">## lowincome                -0.4390     0.4324  -1.015  0.31005    </span></span>
-<span id="cb194-16"><a href="interactions.html#cb194-16" aria-hidden="true" tabindex="-1"></a><span class="do">## underemployed             0.2840     0.4501   0.631  0.52802    </span></span>
-<span id="cb194-17"><a href="interactions.html#cb194-17" aria-hidden="true" tabindex="-1"></a><span class="do">## lowincome:underemployed   2.2615     0.7874   2.872  0.00408 ** </span></span>
-<span id="cb194-18"><a href="interactions.html#cb194-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb194-19"><a href="interactions.html#cb194-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb194-20"><a href="interactions.html#cb194-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-21"><a href="interactions.html#cb194-21" aria-hidden="true" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb194-22"><a href="interactions.html#cb194-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-23"><a href="interactions.html#cb194-23" aria-hidden="true" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb194-24"><a href="interactions.html#cb194-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual deviance: 251.17  on 290  degrees of freedom</span></span>
-<span id="cb194-25"><a href="interactions.html#cb194-25" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 259.17</span></span>
-<span id="cb194-26"><a href="interactions.html#cb194-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb194-27"><a href="interactions.html#cb194-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="interactions.html#cb194-1" tabindex="-1"></a>me_intx_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> lowincome <span class="sc">+</span> underemployed <span class="sc">+</span> lowincome<span class="sc">*</span>underemployed, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>) </span>
+<span id="cb194-2"><a href="interactions.html#cb194-2" tabindex="-1"></a><span class="fu">summary</span>(me_intx_model)</span>
+<span id="cb194-3"><a href="interactions.html#cb194-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb194-4"><a href="interactions.html#cb194-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb194-5"><a href="interactions.html#cb194-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ lowincome + underemployed + lowincome * </span></span>
+<span id="cb194-6"><a href="interactions.html#cb194-6" tabindex="-1"></a><span class="do">##     underemployed, family = &quot;binomial&quot;, data = depress)</span></span>
+<span id="cb194-7"><a href="interactions.html#cb194-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb194-8"><a href="interactions.html#cb194-8" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb194-9"><a href="interactions.html#cb194-9" tabindex="-1"></a><span class="do">##                         Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb194-10"><a href="interactions.html#cb194-10" tabindex="-1"></a><span class="do">## (Intercept)              -1.7011     0.2175  -7.822 5.21e-15 ***</span></span>
+<span id="cb194-11"><a href="interactions.html#cb194-11" tabindex="-1"></a><span class="do">## lowincome                -0.4390     0.4324  -1.015  0.31005    </span></span>
+<span id="cb194-12"><a href="interactions.html#cb194-12" tabindex="-1"></a><span class="do">## underemployed             0.2840     0.4501   0.631  0.52802    </span></span>
+<span id="cb194-13"><a href="interactions.html#cb194-13" tabindex="-1"></a><span class="do">## lowincome:underemployed   2.2615     0.7874   2.872  0.00408 ** </span></span>
+<span id="cb194-14"><a href="interactions.html#cb194-14" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb194-15"><a href="interactions.html#cb194-15" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb194-16"><a href="interactions.html#cb194-16" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb194-17"><a href="interactions.html#cb194-17" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb194-18"><a href="interactions.html#cb194-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb194-19"><a href="interactions.html#cb194-19" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb194-20"><a href="interactions.html#cb194-20" tabindex="-1"></a><span class="do">## Residual deviance: 251.17  on 290  degrees of freedom</span></span>
+<span id="cb194-21"><a href="interactions.html#cb194-21" tabindex="-1"></a><span class="do">## AIC: 259.17</span></span>
+<span id="cb194-22"><a href="interactions.html#cb194-22" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb194-23"><a href="interactions.html#cb194-23" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
 </div>
 </div>
             </section>
@@ -1257,7 +1329,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

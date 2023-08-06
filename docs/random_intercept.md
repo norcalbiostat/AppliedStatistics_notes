@@ -302,6 +302,8 @@ kable(head(showri))
 
 
 
+
+
 ### Comparison of estimates
 
 * By allowing individuals within counties to be correlated, and at the same time let counties be correlated, we allow for some information to be shared across counties. 
@@ -364,6 +366,8 @@ kable(head(cmpr.est))
   </tr>
 </tbody>
 </table>
+
+
 
 
 
@@ -430,6 +434,8 @@ You can change the fitting algorithm to use the Log Likelihood anyhow, it may be
 </tbody>
 </table>
 
+
+
 and the same estimates for the variance terms. 
 
 ```r
@@ -465,7 +471,7 @@ tab_model(ri.with.x, show.r2=FALSE)
 <table style="border-collapse:collapse; border:none;">
 <tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log radon</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log_radon</th>
 </tr>
 <tr>
 <td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
@@ -511,6 +517,7 @@ tab_model(ri.with.x, show.r2=FALSE)
 </tr>
 
 </table>
+
 
 Note that in this table format, $\tau_{00} = \sigma^{2}_{\alpha}$ and $\sigma^{2} = \sigma^{2}_{\epsilon}$. The estimated random effects can also be easily visualized using functions from the [sjPlot](http://www.strengejacke.de/sjPlot/) package. 
 

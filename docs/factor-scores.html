@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>15.6 Factor Scores | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="15.6 Factor Scores | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,7 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
 <li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
+<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
 <ul>
@@ -387,8 +395,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1" data-path="when-is-principal-components-analysis-pca-used.html"><a href="when-is-principal-components-analysis-pca-used.html"><i class="fa fa-check"></i><b>14.1</b> When is Principal Components Analysis (PCA) used?</a></li>
 <li class="chapter" data-level="14.2" data-path="basic-idea.html"><a href="basic-idea.html"><i class="fa fa-check"></i><b>14.2</b> Basic Idea - change of coordinates</a></li>
 <li class="chapter" data-level="14.3" data-path="more-generally.html"><a href="more-generally.html"><i class="fa fa-check"></i><b>14.3</b> More Generally</a></li>
-<li class="chapter" data-level="14.4" data-path="generating-pcs-using-r.html"><a href="generating-pcs-using-r.html"><i class="fa fa-check"></i><b>14.4</b> Generating PC’s using R</a></li>
-<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a></li>
+<li class="chapter" data-level="14.4" data-path="r-commands.html"><a href="r-commands.html"><i class="fa fa-check"></i><b>14.4</b> R commands</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="r-commands.html"><a href="r-commands.html#generating-pcs"><i class="fa fa-check"></i><b>14.4.1</b> Generating PC’s</a></li>
+<li class="chapter" data-level="14.4.2" data-path="r-commands.html"><a href="r-commands.html#viewing-the-amount-of-variance-contained-by-each-pc"><i class="fa fa-check"></i><b>14.4.2</b> Viewing the amount of variance contained by each PC</a></li>
+<li class="chapter" data-level="14.4.3" data-path="r-commands.html"><a href="r-commands.html#vizualize-loadings"><i class="fa fa-check"></i><b>14.4.3</b> Vizualize Loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-reduction.html"><a href="data-reduction.html"><i class="fa fa-check"></i><b>14.5</b> Data Reduction</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="data-reduction.html"><a href="data-reduction.html#choosing-m"><i class="fa fa-check"></i><b>14.5.1</b> Choosing <span class="math inline">\(m\)</span></a></li>
+</ul></li>
 <li class="chapter" data-level="14.6" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i><b>14.6</b> Standardizing</a></li>
 <li class="chapter" data-level="14.7" data-path="example-5.html"><a href="example-5.html"><i class="fa fa-check"></i><b>14.7</b> Example</a></li>
 <li class="chapter" data-level="14.8" data-path="use-in-multiple-regression.html"><a href="use-in-multiple-regression.html"><i class="fa fa-check"></i><b>14.8</b> Use in Multiple Regression</a>
@@ -510,8 +526,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.9.6" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#visualize-imputations"><i class="fa fa-check"></i><b>18.9.6</b> Visualize Imputations</a></li>
 <li class="chapter" data-level="18.9.7" data-path="example-prescribed-amount-of-missing..html"><a href="example-prescribed-amount-of-missing..html#calculating-bias"><i class="fa fa-check"></i><b>18.9.7</b> Calculating bias</a></li>
 </ul></li>
-<li class="chapter" data-level="18.10" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.10</b> Final thoughts</a></li>
-<li class="chapter" data-level="18.11" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.11</b> Additional References</a></li>
+<li class="chapter" data-level="18.10" data-path="post-mice-data-management.html"><a href="post-mice-data-management.html"><i class="fa fa-check"></i><b>18.10</b> Post MICE data management</a></li>
+<li class="chapter" data-level="18.11" data-path="final-thoughts.html"><a href="final-thoughts.html"><i class="fa fa-check"></i><b>18.11</b> Final thoughts</a></li>
+<li class="chapter" data-level="18.12" data-path="additional-references-2.html"><a href="additional-references-2.html"><i class="fa fa-check"></i><b>18.12</b> Additional References</a></li>
+</ul></li>
+<li class="part"><span><b>VII APPENDIX</b></span></li>
+<li class="chapter" data-level="19" data-path="setup_intro.html"><a href="setup_intro.html"><i class="fa fa-check"></i><b>19</b> Setup R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="before-you-begin.html"><a href="before-you-begin.html"><i class="fa fa-check"></i><b>19.1</b> ⚠️ Before you begin</a></li>
+<li class="chapter" data-level="19.2" data-path="download-and-install-r.html"><a href="download-and-install-r.html"><i class="fa fa-check"></i><b>19.2</b> Download and install R</a>
+<ul>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#download_r"><i class="fa fa-check"></i>🔽 Download R v 4.1+</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_r"><i class="fa fa-check"></i>✏️ Install</a></li>
+<li class="chapter" data-level="" data-path="download-and-install-r.html"><a href="download-and-install-r.html#install_vid"><i class="fa fa-check"></i>🎦 Video Tutorials for both R and R Studio.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="download-and-install-r-studio.html"><a href="download-and-install-r-studio.html"><i class="fa fa-check"></i><b>19.3</b> Download and install R Studio</a></li>
+<li class="chapter" data-level="19.4" data-path="nav-rstudio.html"><a href="nav-rstudio.html"><i class="fa fa-check"></i><b>19.4</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="19.5" data-path="setting-preferences.html"><a href="setting-preferences.html"><i class="fa fa-check"></i><b>19.5</b> Setting preferences</a></li>
+<li class="chapter" data-level="19.6" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>19.6</b> Installing packages</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="installing-packages.html"><a href="installing-packages.html#common-packages-used-in-this-notebook"><i class="fa fa-check"></i><b>19.6.1</b> Common packages used in this notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="organization-using-r-projects.html"><a href="organization-using-r-projects.html"><i class="fa fa-check"></i><b>19.7</b> Organization using R Projects</a></li>
+<li class="chapter" data-level="19.8" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html"><i class="fa fa-check"></i><b>19.8</b> Literate programming with Quarto</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="literate-programming-with-quarto.html"><a href="literate-programming-with-quarto.html#creating-pdfs"><i class="fa fa-check"></i><b>19.8.1</b> Creating PDF’s</a></li>
+</ul></li>
+<li class="chapter" data-level="19.9" data-path="seeking-help.html"><a href="seeking-help.html"><i class="fa fa-check"></i><b>19.9</b> Seeking Help</a>
+<ul>
+<li class="chapter" data-level="19.9.1" data-path="seeking-help.html"><a href="seeking-help.html#advice-on-asking-for-help"><i class="fa fa-check"></i><b>19.9.1</b> Advice on asking for help</a></li>
+<li class="chapter" data-level="19.9.2" data-path="seeking-help.html"><a href="seeking-help.html#help-from-inside-r-studio"><i class="fa fa-check"></i><b>19.9.2</b> Help from inside R Studio</a></li>
+<li class="chapter" data-level="19.9.3" data-path="seeking-help.html"><a href="seeking-help.html#other-online"><i class="fa fa-check"></i><b>19.9.3</b> Other Online</a></li>
+<li class="chapter" data-level="19.9.4" data-path="seeking-help.html"><a href="seeking-help.html#written"><i class="fa fa-check"></i><b>19.9.4</b> Written</a></li>
+</ul></li>
+<li class="chapter" data-level="19.10" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html"><i class="fa fa-check"></i><b>19.10</b> Saving and closing your work.</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="saving-and-closing-your-work..html"><a href="saving-and-closing-your-work..html#restart-r"><i class="fa fa-check"></i><b>19.10.1</b> Restart R</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>19.11</b> Acknowledgements</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/norcalbiostat/AppliedStatistics_notes" target="blank">View source on Github</a></li>
@@ -552,29 +604,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 impute missing values.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="factor-scores.html#cb282-1" aria-hidden="true" tabindex="-1"></a>fa.ml.varimax <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="at">scores=</span><span class="st">&quot;regression&quot;</span>)</span>
-<span id="cb282-2"><a href="factor-scores.html#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fa.ml.varimax<span class="sc">$</span>scores)</span>
-<span id="cb282-3"><a href="factor-scores.html#cb282-3" aria-hidden="true" tabindex="-1"></a><span class="do">##     Factor1            Factor2        </span></span>
-<span id="cb282-4"><a href="factor-scores.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :-2.32732   Min.   :-2.79312  </span></span>
-<span id="cb282-5"><a href="factor-scores.html#cb282-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:-0.72413   1st Qu.:-0.54362  </span></span>
-<span id="cb282-6"><a href="factor-scores.html#cb282-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median : 0.09196   Median :-0.02376  </span></span>
-<span id="cb282-7"><a href="factor-scores.html#cb282-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   : 0.00000   Mean   : 0.00000  </span></span>
-<span id="cb282-8"><a href="factor-scores.html#cb282-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.: 0.70603   3rd Qu.: 0.65339  </span></span>
-<span id="cb282-9"><a href="factor-scores.html#cb282-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   : 2.43371   Max.   : 2.18992</span></span>
-<span id="cb282-10"><a href="factor-scores.html#cb282-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fa.ml.varimax<span class="sc">$</span>scores)</span>
-<span id="cb282-11"><a href="factor-scores.html#cb282-11" aria-hidden="true" tabindex="-1"></a><span class="do">##          Factor1      Factor2</span></span>
-<span id="cb282-12"><a href="factor-scores.html#cb282-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,] -1.49174313  0.003612941</span></span>
-<span id="cb282-13"><a href="factor-scores.html#cb282-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,] -0.26254721  1.090864733</span></span>
-<span id="cb282-14"><a href="factor-scores.html#cb282-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]  0.55516045  0.631119886</span></span>
-<span id="cb282-15"><a href="factor-scores.html#cb282-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [4,] -1.21028676 -1.281240452</span></span>
-<span id="cb282-16"><a href="factor-scores.html#cb282-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [5,] -0.04852211 -1.575691468</span></span>
-<span id="cb282-17"><a href="factor-scores.html#cb282-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [6,] -0.53768770  0.661138335</span></span></code></pre></div>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="factor-scores.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggforitfy)</span></span>
-<span id="cb283-2"><a href="factor-scores.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="factor-scores.html#cb293-1" tabindex="-1"></a>fa.ml.varimax <span class="ot">&lt;-</span> <span class="fu">factanal</span>(stan.dta, <span class="at">factors=</span><span class="dv">2</span>, <span class="at">rotation=</span><span class="st">&quot;varimax&quot;</span>, <span class="at">scores=</span><span class="st">&quot;regression&quot;</span>)</span>
+<span id="cb293-2"><a href="factor-scores.html#cb293-2" tabindex="-1"></a><span class="fu">summary</span>(fa.ml.varimax<span class="sc">$</span>scores)</span>
+<span id="cb293-3"><a href="factor-scores.html#cb293-3" tabindex="-1"></a><span class="do">##     Factor1            Factor2         </span></span>
+<span id="cb293-4"><a href="factor-scores.html#cb293-4" tabindex="-1"></a><span class="do">##  Min.   :-2.47094   Min.   :-2.335593  </span></span>
+<span id="cb293-5"><a href="factor-scores.html#cb293-5" tabindex="-1"></a><span class="do">##  1st Qu.:-0.70659   1st Qu.:-0.737829  </span></span>
+<span id="cb293-6"><a href="factor-scores.html#cb293-6" tabindex="-1"></a><span class="do">##  Median : 0.08397   Median :-0.002978  </span></span>
+<span id="cb293-7"><a href="factor-scores.html#cb293-7" tabindex="-1"></a><span class="do">##  Mean   : 0.00000   Mean   : 0.000000  </span></span>
+<span id="cb293-8"><a href="factor-scores.html#cb293-8" tabindex="-1"></a><span class="do">##  3rd Qu.: 0.67114   3rd Qu.: 0.792273  </span></span>
+<span id="cb293-9"><a href="factor-scores.html#cb293-9" tabindex="-1"></a><span class="do">##  Max.   : 2.13449   Max.   : 1.670956</span></span>
+<span id="cb293-10"><a href="factor-scores.html#cb293-10" tabindex="-1"></a><span class="fu">head</span>(fa.ml.varimax<span class="sc">$</span>scores)</span>
+<span id="cb293-11"><a href="factor-scores.html#cb293-11" tabindex="-1"></a><span class="do">##         Factor1     Factor2</span></span>
+<span id="cb293-12"><a href="factor-scores.html#cb293-12" tabindex="-1"></a><span class="do">## [1,]  0.9713019  1.29838695</span></span>
+<span id="cb293-13"><a href="factor-scores.html#cb293-13" tabindex="-1"></a><span class="do">## [2,] -1.1676730  0.57888326</span></span>
+<span id="cb293-14"><a href="factor-scores.html#cb293-14" tabindex="-1"></a><span class="do">## [3,] -0.6068270 -0.09329792</span></span>
+<span id="cb293-15"><a href="factor-scores.html#cb293-15" tabindex="-1"></a><span class="do">## [4,]  1.2569753  0.31231783</span></span>
+<span id="cb293-16"><a href="factor-scores.html#cb293-16" tabindex="-1"></a><span class="do">## [5,]  1.3817494 -0.77707241</span></span>
+<span id="cb293-17"><a href="factor-scores.html#cb293-17" tabindex="-1"></a><span class="do">## [6,]  0.2311359  1.11142513</span></span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="factor-scores.html#cb294-1" tabindex="-1"></a><span class="co">#library(ggforitfy)</span></span>
+<span id="cb294-2"><a href="factor-scores.html#cb294-2" tabindex="-1"></a><span class="fu">autoplot</span>(fa.ml.varimax) <span class="co"># see vignette for more info. Link at bottom</span></span></code></pre></div>
 <p><img src="FA_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>To merge these scores back onto the original data set <strong>providing there is no missing data</strong> you can use the <code>bind_cols()</code> function in <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="factor-scores.html#cb284-1" aria-hidden="true" tabindex="-1"></a>data.withscores <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(data, <span class="fu">data.frame</span>(fa.ml.varimax<span class="sc">$</span>scores))</span>
-<span id="cb284-2"><a href="factor-scores.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(data.withscores))</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="factor-scores.html#cb295-1" tabindex="-1"></a>data.withscores <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(data, <span class="fu">data.frame</span>(fa.ml.varimax<span class="sc">$</span>scores))</span>
+<span id="cb295-2"><a href="factor-scores.html#cb295-2" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(data.withscores))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -604,140 +656,140 @@ Factor2
 <tbody>
 <tr>
 <td style="text-align:right;">
--0.8236763
+0.5989843
 </td>
 <td style="text-align:right;">
--0.1210726
+1.3729499
 </td>
 <td style="text-align:right;">
--0.5970760
+1.0871992
 </td>
 <td style="text-align:right;">
--1.4752693
+0.8597854
 </td>
 <td style="text-align:right;">
--1.2355056
+1.2485892
 </td>
 <td style="text-align:right;">
--1.4917431
+0.9713019
 </td>
 <td style="text-align:right;">
-0.0036129
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1.4013214
-</td>
-<td style="text-align:right;">
-1.0733569
-</td>
-<td style="text-align:right;">
-0.7681035
-</td>
-<td style="text-align:right;">
--0.0509857
-</td>
-<td style="text-align:right;">
-0.0180061
-</td>
-<td style="text-align:right;">
--0.2625472
-</td>
-<td style="text-align:right;">
-1.0908647
+1.2983869
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-0.2781468
+0.7429206
 </td>
 <td style="text-align:right;">
-0.7574632
+0.3819301
 </td>
 <td style="text-align:right;">
-0.6445954
+-0.0113714
 </td>
 <td style="text-align:right;">
-0.6765583
+-1.1316383
 </td>
 <td style="text-align:right;">
-0.7532815
+-1.1316216
 </td>
 <td style="text-align:right;">
-0.5551604
+-1.1676730
 </td>
 <td style="text-align:right;">
-0.6311199
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-0.1819544
-</td>
-<td style="text-align:right;">
--1.3228227
-</td>
-<td style="text-align:right;">
--1.0847105
-</td>
-<td style="text-align:right;">
--0.9574722
-</td>
-<td style="text-align:right;">
--1.3719843
-</td>
-<td style="text-align:right;">
--1.2102868
-</td>
-<td style="text-align:right;">
--1.2812405
+0.5788833
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
--1.6147171
+-0.5699028
 </td>
 <td style="text-align:right;">
--1.4254411
+-0.1331253
 </td>
 <td style="text-align:right;">
-0.3519605
+-0.3594030
 </td>
 <td style="text-align:right;">
--0.0124497
+-0.7153705
 </td>
 <td style="text-align:right;">
--0.2523487
+-0.7274903
 </td>
 <td style="text-align:right;">
--0.0485221
+-0.6068270
 </td>
 <td style="text-align:right;">
--1.5756915
+-0.0932979
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-0.8251470
+1.6526585
 </td>
 <td style="text-align:right;">
-0.6245702
+0.2216533
 </td>
 <td style="text-align:right;">
--1.2923348
+0.6564431
 </td>
 <td style="text-align:right;">
--0.6345633
+1.4564378
 </td>
 <td style="text-align:right;">
--0.0885945
+1.1959989
 </td>
 <td style="text-align:right;">
--0.5376877
+1.2569753
 </td>
 <td style="text-align:right;">
-0.6611383
+0.3123178
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.8582815
+</td>
+<td style="text-align:right;">
+-0.6310620
+</td>
+<td style="text-align:right;">
+1.2474978
+</td>
+<td style="text-align:right;">
+1.2291103
+</td>
+<td style="text-align:right;">
+1.0684566
+</td>
+<td style="text-align:right;">
+1.3817494
+</td>
+<td style="text-align:right;">
+-0.7770724
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.1682966
+</td>
+<td style="text-align:right;">
+0.9849325
+</td>
+<td style="text-align:right;">
+-0.8860830
+</td>
+<td style="text-align:right;">
+-0.0713417
+</td>
+<td style="text-align:right;">
+0.5105760
+</td>
+<td style="text-align:right;">
+0.2311359
+</td>
+<td style="text-align:right;">
+1.1114251
 </td>
 </tr>
 </tbody>
@@ -809,7 +861,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

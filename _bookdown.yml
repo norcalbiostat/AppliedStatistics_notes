@@ -18,10 +18,10 @@ rmd_files: ["index.Rmd"
             ,"GLM.Rmd"
             ,"classification.Rmd"
             
-             ,"multivariate_intro.Rmd"
-             ,"PCA.Rmd"
-             ,"FA.Rmd"
-#            ,"cluster.Rmd"
+            ,"multivariate_intro.Rmd"
+            ,"PCA.Rmd"
+            ,"FA.Rmd"
+#           ,"cluster.Rmd"
             
             ,"MLM_intro.Rmd"
             ,"random_intercept.Rmd"
@@ -30,7 +30,8 @@ rmd_files: ["index.Rmd"
             
             ,"other_intro.Rmd"
             ,"missing_data.Rmd"
-            ]
+            
+            ,"setup_R.Rmd"            ]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
 
