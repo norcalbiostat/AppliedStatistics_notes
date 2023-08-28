@@ -1,0 +1,33 @@
+SPSS SYntax
+
+
+SPSS syntax will look similar like this: 
+
+```
+GET DATA /TYPE=XLSX 
+  /FILE='C:\path\to\file.xlsx' 
+  /SHEET=name 'Name-of-Sheet' 
+  /CELLRANGE=full
+  /READNAMES=on
+  /ASSUMEDSTRWIDTH=32767.
+EXECUTE. 
+DATASET NAME DataSetExcel WINDOW=FRONT.
+```
+
+Reference on importing data into SPSS: https://libguides.library.kent.edu/SPSS/ImportData. 
+
+
+In SPSS you'll the following set of icons to tell you what data types the program thinks each column is: 
+
+![](images/spss_icons.png)
+
+
+Consider the variable that measures marital status. 
+
+```{r}
+table(depress$marital)
+str(depress$marital)
+class(depress$marital)
+```
+![q](images/q.png) What data type does R see this variable as? 
+

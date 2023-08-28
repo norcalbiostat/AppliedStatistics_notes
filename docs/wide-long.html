@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.5 Wide vs. Long data | Applied Statistics</title>
+  <title>1.16 Wide vs. Long data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.5 Wide vs. Long data | Applied Statistics" />
+  <meta property="og:title" content="1.16 Wide vs. Long data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.5 Wide vs. Long data | Applied Statistics" />
+  <meta name="twitter:title" content="1.16 Wide vs. Long data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="saving-your-changes.html"/>
-<link rel="next" href="dealing-with-missing-data-post-analysis.html"/>
+<link rel="prev" href="export-and-save.html"/>
+<link rel="next" href="missing-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -120,10 +120,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -145,28 +141,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>I Preparing Data for Analysis</b></span></li>
 <li class="chapter" data-level="1" data-path="data_prep.html"><a href="data_prep.html"><i class="fa fa-check"></i><b>1</b> Workflow and Data Cleaning</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible workflows</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
-<li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
+<li class="chapter" data-level="1.1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a>
+<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a></li>
+<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a></li>
+<li class="chapter" data-level="1.4" data-path="renaming-variable-names-for-sanity-sake.html"><a href="renaming-variable-names-for-sanity-sake.html"><i class="fa fa-check"></i><b>1.4</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.5" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.5</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.6" data-path="convert-number-to-factor.html"><a href="convert-number-to-factor.html"><i class="fa fa-check"></i><b>1.6</b> Convert number to factor</a></li>
+<li class="chapter" data-level="1.7" data-path="identifying-outliers.html"><a href="identifying-outliers.html"><i class="fa fa-check"></i><b>1.7</b> Identifying Outliers</a></li>
+<li class="chapter" data-level="1.8" data-path="changing-numeric-values.html"><a href="changing-numeric-values.html"><i class="fa fa-check"></i><b>1.8</b> Changing numeric values</a></li>
+<li class="chapter" data-level="1.9" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html"><i class="fa fa-check"></i><b>1.9</b> Creating secondary variables</a></li>
+<li class="chapter" data-level="1.10" data-path="wrangling-factors.html"><a href="wrangling-factors.html"><i class="fa fa-check"></i><b>1.10</b> Wrangling Factors</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-variable-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.10.1" data-path="wrangling-factors.html"><a href="wrangling-factors.html#collapsing-categorical-variables-into-fewer-categories"><i class="fa fa-check"></i><b>1.10.1</b> Collapsing categorical variables into fewer categories</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a>
+<li class="chapter" data-level="1.11" data-path="binning-a-continuous-variable-into-categorical-ranges..html"><a href="binning-a-continuous-variable-into-categorical-ranges..html"><i class="fa fa-check"></i><b>1.11</b> Binning a continuous variable into categorical ranges.</a></li>
+<li class="chapter" data-level="1.12" data-path="dichotomizing-a-measure-into-2-categories.html"><a href="dichotomizing-a-measure-into-2-categories.html"><i class="fa fa-check"></i><b>1.12</b> Dichotomizing a measure into 2 categories</a></li>
+<li class="chapter" data-level="1.13" data-path="sum-or-average-values-across-multiple-variables.html"><a href="sum-or-average-values-across-multiple-variables.html"><i class="fa fa-check"></i><b>1.13</b> Sum or Average values across multiple variables</a></li>
+<li class="chapter" data-level="1.14" data-path="transformations-for-normality.html"><a href="transformations-for-normality.html"><i class="fa fa-check"></i><b>1.14</b> Transformations for Normality</a></li>
+<li class="chapter" data-level="1.15" data-path="export-and-save.html"><a href="export-and-save.html"><i class="fa fa-check"></i><b>1.15</b> Export and Save</a></li>
+<li class="chapter" data-level="1.16" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.16</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.17" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>1.17</b> Missing data</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
-<li class="chapter" data-level="1.3.2" data-path="data-management.html"><a href="data-management.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.3.2</b> Identifying Variable Types</a></li>
-<li class="chapter" data-level="1.3.3" data-path="data-management.html"><a href="data-management.html#outliers"><i class="fa fa-check"></i><b>1.3.3</b> Outliers</a></li>
-<li class="chapter" data-level="1.3.4" data-path="data-management.html"><a href="data-management.html#creating-secondary-variables"><i class="fa fa-check"></i><b>1.3.4</b> Creating secondary variables</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
-<li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
-<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+<li class="chapter" data-level="1.17.1" data-path="missing-data.html"><a href="missing-data.html#identifying-missing-data"><i class="fa fa-check"></i><b>1.17.1</b> Identifying missing data</a></li>
+<li class="chapter" data-level="1.17.2" data-path="missing-data.html"><a href="missing-data.html#model-predictions"><i class="fa fa-check"></i><b>1.17.2</b> Model predictions</a></li>
+<li class="chapter" data-level="1.17.3" data-path="missing-data.html"><a href="missing-data.html#regression"><i class="fa fa-check"></i><b>1.17.3</b> Regression</a></li>
+<li class="chapter" data-level="1.17.4" data-path="missing-data.html"><a href="missing-data.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.17.4</b> Factor Analysis and Principle Components</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
@@ -222,13 +224,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -303,7 +306,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -485,9 +491,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI Other Topics</b></span></li>
 <li class="chapter" data-level="18" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>18</b> Missing Data</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
+<li class="chapter" data-level="18.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
+<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="18.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>18.2</b> Effects of Nonresponse</a></li>
 <li class="chapter" data-level="18.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>18.3</b> Missing Data Mechanisms</a>
@@ -585,47 +591,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="wide-long" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Wide vs. Long data<a href="wide-long.html#wide-long" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="wide-long" class="section level2 hasAnchor" number="1.16">
+<h2><span class="header-section-number">1.16</span> Wide vs. Long data<a href="wide-long.html#wide-long" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Read more on tidy data here: <a href="https://r4ds.hadley.nz/data-tidy">https://r4ds.hadley.nz/data-tidy</a></p>
 <p>The data on Lung function originally was recorded in <em>wide</em> format, with separate variables for mother’s and father’s FEV1 score (<code>MFEV1</code> and <code>FFEV</code>). In this format, the data is one record per family.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="wide-long.html#cb39-1" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, </span>
-<span id="cb39-2"><a href="wide-long.html#cb39-2" tabindex="-1"></a>                    <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-3"><a href="wide-long.html#cb39-3" tabindex="-1"></a><span class="fu">head</span>(fev)</span>
-<span id="cb39-4"><a href="wide-long.html#cb39-4" tabindex="-1"></a><span class="do">##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT MFVC</span></span>
-<span id="cb39-5"><a href="wide-long.html#cb39-5" tabindex="-1"></a><span class="do">## 1  1    1    1   53      61     161  391  3.23    2   43      62     136  370</span></span>
-<span id="cb39-6"><a href="wide-long.html#cb39-6" tabindex="-1"></a><span class="do">## 2  2    1    1   40      72     198  441  3.95    2   38      66     160  411</span></span>
-<span id="cb39-7"><a href="wide-long.html#cb39-7" tabindex="-1"></a><span class="do">## 3  3    1    1   26      69     210  445  3.47    2   27      59     114  309</span></span>
-<span id="cb39-8"><a href="wide-long.html#cb39-8" tabindex="-1"></a><span class="do">## 4  4    1    1   34      68     187  433  3.74    2   36      58     123  265</span></span>
-<span id="cb39-9"><a href="wide-long.html#cb39-9" tabindex="-1"></a><span class="do">## 5  5    1    1   46      61     121  354  2.90    2   39      62     128  245</span></span>
-<span id="cb39-10"><a href="wide-long.html#cb39-10" tabindex="-1"></a><span class="do">## 6  6    1    1   44      72     153  610  4.91    2   36      66     125  349</span></span>
-<span id="cb39-11"><a href="wide-long.html#cb39-11" tabindex="-1"></a><span class="do">##   MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE MCHEIGHT</span></span>
-<span id="cb39-12"><a href="wide-long.html#cb39-12" tabindex="-1"></a><span class="do">## 1  3.31     2    12       59      115   296   2.79    NA    NA       NA</span></span>
-<span id="cb39-13"><a href="wide-long.html#cb39-13" tabindex="-1"></a><span class="do">## 2  3.47     1    10       56       66   323   2.39    NA    NA       NA</span></span>
-<span id="cb39-14"><a href="wide-long.html#cb39-14" tabindex="-1"></a><span class="do">## 3  2.65     1     8       50       59   114   1.11    NA    NA       NA</span></span>
-<span id="cb39-15"><a href="wide-long.html#cb39-15" tabindex="-1"></a><span class="do">## 4  2.06     2    11       57      106   256   1.85     1     9       49</span></span>
-<span id="cb39-16"><a href="wide-long.html#cb39-16" tabindex="-1"></a><span class="do">## 5  2.33     1    16       61       88   260   2.47     2    12       60</span></span>
-<span id="cb39-17"><a href="wide-long.html#cb39-17" tabindex="-1"></a><span class="do">## 6  3.06     1    15       67      100   389   3.55     1    13       57</span></span>
-<span id="cb39-18"><a href="wide-long.html#cb39-18" tabindex="-1"></a><span class="do">##   MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC YCFEV1</span></span>
-<span id="cb39-19"><a href="wide-long.html#cb39-19" tabindex="-1"></a><span class="do">## 1       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-20"><a href="wide-long.html#cb39-20" tabindex="-1"></a><span class="do">## 2       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-21"><a href="wide-long.html#cb39-21" tabindex="-1"></a><span class="do">## 3       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-22"><a href="wide-long.html#cb39-22" tabindex="-1"></a><span class="do">## 4       56   159   1.30    NA    NA       NA       NA    NA     NA</span></span>
-<span id="cb39-23"><a href="wide-long.html#cb39-23" tabindex="-1"></a><span class="do">## 5       85   268   2.34     2    10       50       53   154   1.43</span></span>
-<span id="cb39-24"><a href="wide-long.html#cb39-24" tabindex="-1"></a><span class="do">## 6       87   276   2.37     2    10       55       72   195   1.69</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="wide-long.html#cb34-1" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;https://norcalbiostat.netlify.com/data/Lung_081217.txt&quot;</span>, </span>
+<span id="cb34-2"><a href="wide-long.html#cb34-2" tabindex="-1"></a>                    <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb34-3"><a href="wide-long.html#cb34-3" tabindex="-1"></a><span class="fu">head</span>(fev)</span>
+<span id="cb34-4"><a href="wide-long.html#cb34-4" tabindex="-1"></a><span class="do">##   ID AREA FSEX FAGE FHEIGHT FWEIGHT FFVC FFEV1 MSEX MAGE MHEIGHT MWEIGHT MFVC</span></span>
+<span id="cb34-5"><a href="wide-long.html#cb34-5" tabindex="-1"></a><span class="do">## 1  1    1    1   53      61     161  391  3.23    2   43      62     136  370</span></span>
+<span id="cb34-6"><a href="wide-long.html#cb34-6" tabindex="-1"></a><span class="do">## 2  2    1    1   40      72     198  441  3.95    2   38      66     160  411</span></span>
+<span id="cb34-7"><a href="wide-long.html#cb34-7" tabindex="-1"></a><span class="do">## 3  3    1    1   26      69     210  445  3.47    2   27      59     114  309</span></span>
+<span id="cb34-8"><a href="wide-long.html#cb34-8" tabindex="-1"></a><span class="do">## 4  4    1    1   34      68     187  433  3.74    2   36      58     123  265</span></span>
+<span id="cb34-9"><a href="wide-long.html#cb34-9" tabindex="-1"></a><span class="do">## 5  5    1    1   46      61     121  354  2.90    2   39      62     128  245</span></span>
+<span id="cb34-10"><a href="wide-long.html#cb34-10" tabindex="-1"></a><span class="do">## 6  6    1    1   44      72     153  610  4.91    2   36      66     125  349</span></span>
+<span id="cb34-11"><a href="wide-long.html#cb34-11" tabindex="-1"></a><span class="do">##   MFEV1 OCSEX OCAGE OCHEIGHT OCWEIGHT OCFVC OCFEV1 MCSEX MCAGE MCHEIGHT</span></span>
+<span id="cb34-12"><a href="wide-long.html#cb34-12" tabindex="-1"></a><span class="do">## 1  3.31     2    12       59      115   296   2.79    NA    NA       NA</span></span>
+<span id="cb34-13"><a href="wide-long.html#cb34-13" tabindex="-1"></a><span class="do">## 2  3.47     1    10       56       66   323   2.39    NA    NA       NA</span></span>
+<span id="cb34-14"><a href="wide-long.html#cb34-14" tabindex="-1"></a><span class="do">## 3  2.65     1     8       50       59   114   1.11    NA    NA       NA</span></span>
+<span id="cb34-15"><a href="wide-long.html#cb34-15" tabindex="-1"></a><span class="do">## 4  2.06     2    11       57      106   256   1.85     1     9       49</span></span>
+<span id="cb34-16"><a href="wide-long.html#cb34-16" tabindex="-1"></a><span class="do">## 5  2.33     1    16       61       88   260   2.47     2    12       60</span></span>
+<span id="cb34-17"><a href="wide-long.html#cb34-17" tabindex="-1"></a><span class="do">## 6  3.06     1    15       67      100   389   3.55     1    13       57</span></span>
+<span id="cb34-18"><a href="wide-long.html#cb34-18" tabindex="-1"></a><span class="do">##   MCWEIGHT MCFVC MCFEV1 YCSEX YCAGE YCHEIGHT YCWEIGHT YCFVC YCFEV1</span></span>
+<span id="cb34-19"><a href="wide-long.html#cb34-19" tabindex="-1"></a><span class="do">## 1       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb34-20"><a href="wide-long.html#cb34-20" tabindex="-1"></a><span class="do">## 2       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb34-21"><a href="wide-long.html#cb34-21" tabindex="-1"></a><span class="do">## 3       NA    NA     NA    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb34-22"><a href="wide-long.html#cb34-22" tabindex="-1"></a><span class="do">## 4       56   159   1.30    NA    NA       NA       NA    NA     NA</span></span>
+<span id="cb34-23"><a href="wide-long.html#cb34-23" tabindex="-1"></a><span class="do">## 5       85   268   2.34     2    10       50       53   154   1.43</span></span>
+<span id="cb34-24"><a href="wide-long.html#cb34-24" tabindex="-1"></a><span class="do">## 6       87   276   2.37     2    10       55       72   195   1.69</span></span></code></pre></div>
 <p>To analyze the effect of gender on FEV, the data need to be in <em>long</em> format, with a single variable for <code>fev</code> and a separate variable for gender. The following code chunk demonstrates one method of combining data on height, gender, age and FEV1 for both males and females.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="wide-long.html#cb40-1" tabindex="-1"></a>fev2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
-<span id="cb40-2"><a href="wide-long.html#cb40-2" tabindex="-1"></a>                   <span class="at">rev =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
-<span id="cb40-3"><a href="wide-long.html#cb40-3" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
-<span id="cb40-4"><a href="wide-long.html#cb40-4" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE))</span>
-<span id="cb40-5"><a href="wide-long.html#cb40-5" tabindex="-1"></a>fev2<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev2<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
-<span id="cb40-6"><a href="wide-long.html#cb40-6" tabindex="-1"></a><span class="fu">head</span>(fev2)  </span>
-<span id="cb40-7"><a href="wide-long.html#cb40-7" tabindex="-1"></a><span class="do">##   gender  rev ht age</span></span>
-<span id="cb40-8"><a href="wide-long.html#cb40-8" tabindex="-1"></a><span class="do">## 1      M 3.23 61  53</span></span>
-<span id="cb40-9"><a href="wide-long.html#cb40-9" tabindex="-1"></a><span class="do">## 2      M 3.95 72  40</span></span>
-<span id="cb40-10"><a href="wide-long.html#cb40-10" tabindex="-1"></a><span class="do">## 3      M 3.47 69  26</span></span>
-<span id="cb40-11"><a href="wide-long.html#cb40-11" tabindex="-1"></a><span class="do">## 4      M 3.74 68  34</span></span>
-<span id="cb40-12"><a href="wide-long.html#cb40-12" tabindex="-1"></a><span class="do">## 5      M 2.90 61  46</span></span>
-<span id="cb40-13"><a href="wide-long.html#cb40-13" tabindex="-1"></a><span class="do">## 6      M 4.91 72  44</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="wide-long.html#cb35-1" tabindex="-1"></a>fev2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gender =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FSEX, fev<span class="sc">$</span>MSEX), </span>
+<span id="cb35-2"><a href="wide-long.html#cb35-2" tabindex="-1"></a>                   <span class="at">rev =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FFEV1, fev<span class="sc">$</span>MFEV1), </span>
+<span id="cb35-3"><a href="wide-long.html#cb35-3" tabindex="-1"></a>                   <span class="at">ht =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FHEIGHT, fev<span class="sc">$</span>MHEIGHT), </span>
+<span id="cb35-4"><a href="wide-long.html#cb35-4" tabindex="-1"></a>                   <span class="at">age =</span> <span class="fu">c</span>(fev<span class="sc">$</span>FAGE, fev<span class="sc">$</span>MAGE))</span>
+<span id="cb35-5"><a href="wide-long.html#cb35-5" tabindex="-1"></a>fev2<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(fev2<span class="sc">$</span>gender, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
+<span id="cb35-6"><a href="wide-long.html#cb35-6" tabindex="-1"></a><span class="fu">head</span>(fev2)  </span>
+<span id="cb35-7"><a href="wide-long.html#cb35-7" tabindex="-1"></a><span class="do">##   gender  rev ht age</span></span>
+<span id="cb35-8"><a href="wide-long.html#cb35-8" tabindex="-1"></a><span class="do">## 1      M 3.23 61  53</span></span>
+<span id="cb35-9"><a href="wide-long.html#cb35-9" tabindex="-1"></a><span class="do">## 2      M 3.95 72  40</span></span>
+<span id="cb35-10"><a href="wide-long.html#cb35-10" tabindex="-1"></a><span class="do">## 3      M 3.47 69  26</span></span>
+<span id="cb35-11"><a href="wide-long.html#cb35-11" tabindex="-1"></a><span class="do">## 4      M 3.74 68  34</span></span>
+<span id="cb35-12"><a href="wide-long.html#cb35-12" tabindex="-1"></a><span class="do">## 5      M 2.90 61  46</span></span>
+<span id="cb35-13"><a href="wide-long.html#cb35-13" tabindex="-1"></a><span class="do">## 6      M 4.91 72  44</span></span></code></pre></div>
 <p>Nearly all analysis procedures and most graphing procedures require the data to be in long format. There are several <code>R</code> packages that can help with this including <code>reshape2</code> and <code>tidyr</code>.</p>
 </div>
             </section>
@@ -633,8 +640,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="saving-your-changes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dealing-with-missing-data-post-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="export-and-save.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="missing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -694,7 +701,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

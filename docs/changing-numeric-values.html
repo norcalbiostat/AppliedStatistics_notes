@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.8 Changing numeric values | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.8 Changing numeric values | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.8 Changing numeric values | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="identifying-outliers.html"/>
+<link rel="next" href="creating-secondary-variables.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
-<ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
-<ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<div id="changing-numeric-values" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Changing numeric values<a href="changing-numeric-values.html#changing-numeric-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As an example of a common data entry error, and for demonstration purposes, I went in and changed a 19 to a 9. So the correct thing to do here is to change that 9, back to a 19. This is a very good use of the <code>ifelse()</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="changing-numeric-values.html#cb12-1" tabindex="-1"></a>depress<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>, <span class="dv">19</span>, depress<span class="sc">$</span>age)</span></code></pre></div>
+<p>The logical statement is <code>depress$age9</code>. Wherever this is true, replace the value of <code>depress$age</code> with 19, wherever this is false then keep the value of <code>depress$age</code> unchanged (by “replacing” the new value with the same old value).</p>
+<p>Alternatively, you can change that one value using bracket notation. Here you are specifying that you only want the rows where <code>age==9</code>, and directly assign a value of 19 to those rows.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="changing-numeric-values.html#cb13-1" tabindex="-1"></a>depress<span class="sc">$</span>age[depress<span class="sc">$</span>age<span class="sc">==</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="dv">19</span></span></code></pre></div>
+<p>Confirm the recode.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="changing-numeric-values.html#cb14-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>age)</span>
+<span id="cb14-2"><a href="changing-numeric-values.html#cb14-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb14-3"><a href="changing-numeric-values.html#cb14-3" tabindex="-1"></a><span class="do">##   18.00   28.00   42.50   44.41   59.00   89.00</span></span></code></pre></div>
+<p>Looks like it worked.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="identifying-outliers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-secondary-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

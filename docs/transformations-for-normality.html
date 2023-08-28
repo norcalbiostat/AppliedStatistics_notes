@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.14 Transformations for Normality | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.14 Transformations for Normality | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.14 Transformations for Normality | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="sum-or-average-values-across-multiple-variables.html"/>
+<link rel="next" href="export-and-save.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
+<div id="transformations-for-normality" class="section level2 hasAnchor" number="1.14">
+<h2><span class="header-section-number">1.14</span> Transformations for Normality<a href="transformations-for-normality.html#transformations-for-normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s look at assessing normal distributions using the <strong>cleaned</strong> depression data set.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="transformations-for-normality.html#cb25-1" tabindex="-1"></a><span class="fu">hist</span>(depress<span class="sc">$</span>income, <span class="at">prob=</span><span class="cn">TRUE</span>, <span class="at">xlab=</span><span class="st">&quot;Annual income (in thousands)&quot;</span>, </span>
+<span id="cb25-2"><a href="transformations-for-normality.html#cb25-2" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Histogram and Density curve of Income&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb25-3"><a href="transformations-for-normality.html#cb25-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(depress<span class="sc">$</span>income), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="data_prep_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="transformations-for-normality.html#cb26-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb26-2"><a href="transformations-for-normality.html#cb26-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb26-3"><a href="transformations-for-normality.html#cb26-3" tabindex="-1"></a><span class="do">##    2.00    9.00   15.00   20.57   28.00   65.00</span></span></code></pre></div>
+<p>The distribution of annual income is slightly skewed right with a mean of $20.5k per year and a median of $15k per year income. The range of values goes from $2k to $65k. Reported income above $40k appear to have been rounded to the nearest $10k, because there are noticeable peaks at $40k, $50k, and $60k.</p>
+<p>In general, transformations are more effective when the the standard deviation is large relative to the mean. One rule of thumb is if the sd/mean ratio is less than 1/4, a transformation may not be necessary.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="transformations-for-normality.html#cb27-1" tabindex="-1"></a><span class="fu">sd</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> <span class="fu">mean</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb27-2"><a href="transformations-for-normality.html#cb27-2" tabindex="-1"></a><span class="do">## [1] 0.743147</span></span></code></pre></div>
+<p>Alternatively Hoaglin, Mosteller and Tukey (1985) showed that if the largest observation divided by the smallest observation is over 2, then the data may not be sufficiently variable for the transformation to be decisive.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="transformations-for-normality.html#cb28-1" tabindex="-1"></a><span class="fu">max</span>(depress<span class="sc">$</span>income) <span class="sc">/</span> (<span class="fu">min</span>(depress<span class="sc">$</span>income)<span class="sc">+</span>.<span class="dv">1</span>)</span>
+<span id="cb28-2"><a href="transformations-for-normality.html#cb28-2" tabindex="-1"></a><span class="do">## [1] 30.95238</span></span></code></pre></div>
+<p>Note these rules are not meaningful for data without a natural zero.</p>
+<p>Another common method of assessing normality is to create a normal probability (or normal quantile) plot.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="transformations-for-normality.html#cb29-1" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income);<span class="fu">qqline</span>(depress<span class="sc">$</span>income, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="data_prep_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>The points on the normal probability plot do not follow the red reference line very well. The dots show a more curved, or <code>U</code> shaped form rather than following a linear line. This is another indication that the data is skewed and a transformation for normality should be created.</p>
 <ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
+<li>Create three new variables: <code>log10inc</code> as the log base 10 of Income, <code>loginc</code> as the natural log of Income, and <code>xincome</code> which is equal to the negative of one divided by the cubic root of income.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="transformations-for-normality.html#cb30-1" tabindex="-1"></a>log10inc <span class="ot">&lt;-</span> <span class="fu">log10</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb30-2"><a href="transformations-for-normality.html#cb30-2" tabindex="-1"></a>loginc   <span class="ot">&lt;-</span> <span class="fu">log</span>(depress<span class="sc">$</span>income)</span>
+<span id="cb30-3"><a href="transformations-for-normality.html#cb30-3" tabindex="-1"></a>xincome  <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>(depress<span class="sc">$</span>income)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code></pre></div>
 <ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<li>Create a single plot that display normal probability plots for the original, and each of the three transformations of income. Use the base graphics grid organizer <code>par(mfrow=c(r,c))</code> where <code>r</code> is the number of rows and <code>c</code> is the number of columns. Which transformation does a better job of normalizing the distribution of Income?</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="transformations-for-normality.html#cb31-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># Try (4,1) and (1,4) to see how this works. </span></span>
+<span id="cb31-2"><a href="transformations-for-normality.html#cb31-2" tabindex="-1"></a><span class="fu">qqnorm</span>(depress<span class="sc">$</span>income, <span class="at">main=</span><span class="st">&quot;Income&quot;</span>); <span class="fu">qqline</span>(depress<span class="sc">$</span>income,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb31-3"><a href="transformations-for-normality.html#cb31-3" tabindex="-1"></a><span class="fu">qqnorm</span>(log10inc, <span class="at">main=</span><span class="st">&quot;Log 10&quot;</span>); <span class="fu">qqline</span>(log10inc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb31-4"><a href="transformations-for-normality.html#cb31-4" tabindex="-1"></a><span class="fu">qqnorm</span>(loginc, <span class="at">main =</span> <span class="st">&quot;Natural Log&quot;</span>); <span class="fu">qqline</span>(loginc, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb31-5"><a href="transformations-for-normality.html#cb31-5" tabindex="-1"></a><span class="fu">qqnorm</span>(xincome, <span class="at">main=</span><span class="st">&quot;-1/cuberoot(income)&quot;</span>); <span class="fu">qqline</span>(xincome, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="data_prep_files/figure-html/unnamed-chunk-21-1.png" width="960" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sum-or-average-values-across-multiple-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="export-and-save.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

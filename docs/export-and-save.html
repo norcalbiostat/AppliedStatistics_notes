@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.15 Export and Save | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.15 Export and Save | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.15 Export and Save | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="transformations-for-normality.html"/>
+<link rel="next" href="wide-long.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
+<div id="export-and-save" class="section level2 hasAnchor" number="1.15">
+<h2><span class="header-section-number">1.15</span> Export and Save<a href="export-and-save.html#export-and-save" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You’ve just made a ton of changes!</p>
 <ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
+<li>Save or export the new data set to your computer.</li>
+<li>Edit the codebook to reflect the changes that you made.</li>
+<li>Keep the data, codebook and data management file in the same folder.</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="export-and-save.html#cb32-1" tabindex="-1"></a>depress_clean <span class="ot">&lt;-</span> depress <span class="sc">%&gt;%</span> <span class="fu">select</span>(var1, var2, var3)</span>
+<span id="cb32-2"><a href="export-and-save.html#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="export-and-save.html#cb32-3" tabindex="-1"></a><span class="co"># Save as a .Rdata file for later use in R</span></span>
+<span id="cb32-4"><a href="export-and-save.html#cb32-4" tabindex="-1"></a><span class="fu">save</span>(depress_clean, <span class="st">&quot;data/depress_clean.Rdata&quot;</span>) </span></code></pre></div>
+<p>Now every time you run your data cleaning script file, it will make all the changes and save/overwrite the <code>depress_clean.Rdata</code> data file. This ensures that any analysis script that uses this data has the most up to date varibles.</p>
+<p>Need to export to a different software program? Look into the <code>haven</code> package.</p>
+<p>SPSS users commonly save cleaned data as a <code>.sav</code> format.</p>
+<pre><code>SAVE outfile=&#39;FilePath\depress_sysdate.sav&#39;
+/KEEP = Variable_Name1 Variable_Name2.
+EXECUTE.</code></pre>
+<p><strong>Saving only selected variables</strong></p>
 <ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<li>In SPSS the <code>/KEEP</code> statement demonstrated above only writes the variable names listed to the saved data set. This can be very useful when dealing with data sets with a large number of variables.</li>
+<li>For R users, using <code>dplyr</code> select is generally the fastest.</li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="transformations-for-normality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wide-long.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -328,3 +328,16 @@ written
 saving-and-closing-your-work.
 restart-r
 acknowledgements
+more-references
+identifying-outliers
+export-and-save
+model-predictions
+terminology
+example-does-smoking-affect-pulse-rate
+autoregressive
+identifying-missing-data-1
+reproducible-workflows
+learn-more
+convert-number-to-factor
+changing-numeric-values
+wrangling-factors

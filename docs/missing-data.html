@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.17 Missing data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.17 Missing data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.17 Missing data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="wide-long.html"/>
+<link rel="next" href="data_viz.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
-<ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
-<ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<div id="missing-data" class="section level2 hasAnchor" number="1.17">
+<h2><span class="header-section-number">1.17</span> Missing data<a href="missing-data.html#missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identifying-missing-data" class="section level3 hasAnchor" number="1.17.1">
+<h3><span class="header-section-number">1.17.1</span> Identifying missing data<a href="missing-data.html#identifying-missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In Excel, missing data can show up as a blank cell. In SPSS it is represented as a <code>.</code> period. R displays missing data as <code>NA</code> values.</p>
+<p>Missing Data in SPSS: <a href="https://stats.idre.ucla.edu/spss/modules/missing-data/" class="uri">https://stats.idre.ucla.edu/spss/modules/missing-data/</a></p>
+<p>Why would data be missing? Other than the obvious data entry errors, tech glitches or just non-cooperative plants or people, sometimes values are out of range and you would rather delete them than change their value (data edit).</p>
+<p>Lets look at the religion variable in the depression data set.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="missing-data.html#cb36-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb36-2"><a href="missing-data.html#cb36-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb36-3"><a href="missing-data.html#cb36-3" tabindex="-1"></a><span class="do">##    1    2    3    4    6 &lt;NA&gt; </span></span>
+<span id="cb36-4"><a href="missing-data.html#cb36-4" tabindex="-1"></a><span class="do">##  155   51   30   56    2    0</span></span></code></pre></div>
+<p>Looking at the codebook, there is no category <code>6</code> for religion. Let’s change all values to <code>NA</code>.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="missing-data.html#cb37-1" tabindex="-1"></a>depress<span class="sc">$</span>relig[depress<span class="sc">$</span>relig<span class="sc">==</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>This code says take all rows where <code>relig</code> is equal to 6, and change them to <code>NA</code>.</p>
+<p>Confirm recode.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="missing-data.html#cb38-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig, <span class="at">useNA=</span><span class="st">&quot;always&quot;</span>)</span>
+<span id="cb38-2"><a href="missing-data.html#cb38-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb38-3"><a href="missing-data.html#cb38-3" tabindex="-1"></a><span class="do">##    1    2    3    4 &lt;NA&gt; </span></span>
+<span id="cb38-4"><a href="missing-data.html#cb38-4" tabindex="-1"></a><span class="do">##  155   51   30   56    2</span></span></code></pre></div>
+<p>Notice the use of the <code>useNA="always"</code> argument. If we just looked at the base table without this argument, we would have never known there was missing data!</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="missing-data.html#cb39-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>relig)</span>
+<span id="cb39-2"><a href="missing-data.html#cb39-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb39-3"><a href="missing-data.html#cb39-3" tabindex="-1"></a><span class="do">##   1   2   3   4 </span></span>
+<span id="cb39-4"><a href="missing-data.html#cb39-4" tabindex="-1"></a><span class="do">## 155  51  30  56</span></span></code></pre></div>
+<p>What about continuous variables? Well there happens to be no other missing data in this data set, so let’s make up a set of 7 data points stored in a variable named <code>y</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="missing-data.html#cb40-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">6</span>)</span>
+<span id="cb40-2"><a href="missing-data.html#cb40-2" tabindex="-1"></a>y</span>
+<span id="cb40-3"><a href="missing-data.html#cb40-3" tabindex="-1"></a><span class="do">## [1]  1  2  3 NA  4 NA  6</span></span></code></pre></div>
+<p>The #1 way to identify missing data in a continuous variable is by looking at the <code>summary()</code> values.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="missing-data.html#cb41-1" tabindex="-1"></a><span class="fu">mean</span>(y)</span>
+<span id="cb41-2"><a href="missing-data.html#cb41-2" tabindex="-1"></a><span class="do">## [1] NA</span></span>
+<span id="cb41-3"><a href="missing-data.html#cb41-3" tabindex="-1"></a><span class="fu">summary</span>(y)</span>
+<span id="cb41-4"><a href="missing-data.html#cb41-4" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></span>
+<span id="cb41-5"><a href="missing-data.html#cb41-5" tabindex="-1"></a><span class="do">##     1.0     2.0     3.0     3.2     4.0     6.0       2</span></span>
+<span id="cb41-6"><a href="missing-data.html#cb41-6" tabindex="-1"></a><span class="fu">mean</span>(y, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb41-7"><a href="missing-data.html#cb41-7" tabindex="-1"></a><span class="do">## [1] 3.2</span></span></code></pre></div>
+<p>In R, any arithmetic function (like addition, multiplication) on missing data results in a missing value. The <code>na.rm=TRUE</code> toggle tells R to calculate the <em>complete case</em> mean. This is a biased measure of the mean, but missing data is a topic worthy of it’s own course and is introduced in Chapter <a href="mda.html#mda">18</a>.</p>
 </div>
+<div id="model-predictions" class="section level3 hasAnchor" number="1.17.2">
+<h3><span class="header-section-number">1.17.2</span> Model predictions<a href="missing-data.html#model-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Situation</strong>: You want to add model predictions to the data set, but you have missing data that was automatically dropped prior to analysis.</p>
+</div>
+<div id="regression" class="section level3 hasAnchor" number="1.17.3">
+<h3><span class="header-section-number">1.17.3</span> Regression<a href="missing-data.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R objects created by methods such as <code>lm</code> and <code>glm</code> will store the data used in the model in the model object itself in <code>model$data</code>. See Chapter <a href="binary-classification.html#binary-classification">12</a> for an example.</p>
+</div>
+<div id="factor-analysis-and-principle-components" class="section level3 hasAnchor" number="1.17.4">
+<h3><span class="header-section-number">1.17.4</span> Factor Analysis and Principle Components<a href="missing-data.html#factor-analysis-and-principle-components" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If your original data had missing values, here is one way to get the PC’s / factor scores for available data back onto the data set.</p>
+<p><strong>Method 1) Create an ID column and merge new variables onto original data. (add columns)</strong></p>
+<ol style="list-style-type: decimal">
+<li>If no ID column exists, create one on the original dataset <code>id = 1:NROW(data)</code></li>
+<li>Use <code>select()</code> to extract the ID and all variables used in the factor analysis, then do a <code>na.omit()</code> to drop rows with any missing data. Save this as a new complete case data set.</li>
+<li>Conduct PCA / Factor analysis on this new complete case data set (MINUS THE ID). Extract the PCs or factor scores.</li>
+<li>Use <code>bind_cols()</code> to add the ID variable to the data containing factor scores.</li>
+<li>Then <code>left_join(original_data, factor_score_data)</code> the factor scores back to the original data, using the ID variable as the joining key.</li>
+</ol>
+<p><strong>Method 2) Split the data, analyze one part then concatenate back together. (add rows)</strong></p>
+<ol style="list-style-type: decimal">
+<li>Use the <code>complete.cases()</code> function to create a boolean vector for if each row is complete</li>
+<li>Split the data into complete and incomplete.</li>
+<li>Do the analysis on the complete rows, extracting the PC’s/Factors</li>
+<li>Add the PC/Factor data onto the complete rows using <code>bind_cols</code></li>
+<li>Then <code>bind_rows</code> the two parts back together.</li>
+</ol>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="missing-data.html#cb42-1" tabindex="-1"></a>cc.idx <span class="ot">&lt;-</span> hiv <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;pb&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">complete.cases</span>() <span class="co"># 1</span></span>
+<span id="cb42-2"><a href="missing-data.html#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="missing-data.html#cb42-3" tabindex="-1"></a>complete.rows <span class="ot">&lt;-</span> hiv[cc.idx,] <span class="co">#2</span></span>
+<span id="cb42-4"><a href="missing-data.html#cb42-4" tabindex="-1"></a>incomplete.rows <span class="ot">&lt;-</span> hiv[<span class="sc">!</span>cc.idx,]</span>
+<span id="cb42-5"><a href="missing-data.html#cb42-5" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="missing-data.html#cb42-6" tabindex="-1"></a>pc.scores <span class="ot">&lt;-</span> <span class="fu">princomp</span>(pb)<span class="sc">$</span>scores <span class="co">#3 </span></span>
+<span id="cb42-7"><a href="missing-data.html#cb42-7" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="missing-data.html#cb42-8" tabindex="-1"></a>complete.add.pc <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(complete.rows, pc.scores) <span class="co">#4</span></span>
+<span id="cb42-9"><a href="missing-data.html#cb42-9" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="missing-data.html#cb42-10" tabindex="-1"></a>hiv.with.pcs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(complete.add.pc, incomplete.rows) <span class="co">#5</span></span></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="wide-long.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data_viz.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

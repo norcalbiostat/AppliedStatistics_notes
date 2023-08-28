@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.13 Sum or Average values across multiple variables | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.13 Sum or Average values across multiple variables | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.13 Sum or Average values across multiple variables | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="dichotomizing-a-measure-into-2-categories.html"/>
+<link rel="next" href="transformations-for-normality.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
-<ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
-<ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<div id="sum-or-average-values-across-multiple-variables" class="section level2 hasAnchor" number="1.13">
+<h2><span class="header-section-number">1.13</span> Sum or Average values across multiple variables<a href="sum-or-average-values-across-multiple-variables.html#sum-or-average-values-across-multiple-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Center for Epidemiological Studies Depression Scale (CESD) is series of questions asked to a person to measure their level of depression. <code>CESD</code> is calculated as the sum of all 20 component variables, and is already on this data set. Let’s create a new variable named <code>sleep</code> as subscale for sleep quality by adding up question numbers 5, 11, and 19.</p>
+<p>Reference: <a href="http://cesd-r.com/cesdr/" class="uri">http://cesd-r.com/cesdr/</a></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sum-or-average-values-across-multiple-variables.html#cb23-1" tabindex="-1"></a>depress<span class="sc">$</span>sleep <span class="ot">&lt;-</span> depress<span class="sc">$</span>c5 <span class="sc">+</span> depress<span class="sc">$</span>c11 <span class="sc">+</span> depress<span class="sc">$</span>c19</span>
+<span id="cb23-2"><a href="sum-or-average-values-across-multiple-variables.html#cb23-2" tabindex="-1"></a><span class="do">## # depress &lt;- depress %&gt;% mutate(sleep = c5+c11+c19) # Not run. dplyr example</span></span>
+<span id="cb23-3"><a href="sum-or-average-values-across-multiple-variables.html#cb23-3" tabindex="-1"></a><span class="do">## # depress &lt;- depress %&gt;% mutate(across(c(c5, c11, c19), mean)) # Not run, across() example</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sum-or-average-values-across-multiple-variables.html#cb24-1" tabindex="-1"></a><span class="fu">summary</span>(depress<span class="sc">$</span>sleep)</span>
+<span id="cb24-2"><a href="sum-or-average-values-across-multiple-variables.html#cb24-2" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb24-3"><a href="sum-or-average-values-across-multiple-variables.html#cb24-3" tabindex="-1"></a><span class="do">##   0.000   0.000   1.000   1.167   2.000   7.000</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dichotomizing-a-measure-into-2-categories.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformations-for-normality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

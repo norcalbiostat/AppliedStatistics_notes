@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.6 Convert number to factor | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.6 Convert number to factor | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.6 Convert number to factor | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="identifying-variable-types.html"/>
+<link rel="next" href="identifying-outliers.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
-<ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
-<ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
-<ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
-</ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<div id="convert-number-to-factor" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Convert number to factor<a href="convert-number-to-factor.html#convert-number-to-factor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When variables have numerical levels it is necessary to ensure that the program knows it is a factor variable.</p>
+<p>The following code uses the <code>factor()</code> function to take the marital status variable and convert it into a factor variable with specified labels that match the codebook.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="convert-number-to-factor.html#cb7-1" tabindex="-1"></a>depress<span class="sc">$</span>marital <span class="ot">&lt;-</span> <span class="fu">factor</span>(depress<span class="sc">$</span>marital, </span>
+<span id="cb7-2"><a href="convert-number-to-factor.html#cb7-2" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Never Married&quot;</span>, <span class="st">&quot;Married&quot;</span>, <span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>))</span></code></pre></div>
+<p>It is important to confirm the recode worked. If it did not you will have to re-read in the raw data set again since the variable <code>marital</code> was replaced.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="convert-number-to-factor.html#cb8-1" tabindex="-1"></a><span class="fu">table</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb8-2"><a href="convert-number-to-factor.html#cb8-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-3"><a href="convert-number-to-factor.html#cb8-3" tabindex="-1"></a><span class="do">## Never Married       Married      Divorced     Separated       Widowed </span></span>
+<span id="cb8-4"><a href="convert-number-to-factor.html#cb8-4" tabindex="-1"></a><span class="do">##            73           127            43            13            38</span></span>
+<span id="cb8-5"><a href="convert-number-to-factor.html#cb8-5" tabindex="-1"></a><span class="fu">class</span>(depress<span class="sc">$</span>marital)</span>
+<span id="cb8-6"><a href="convert-number-to-factor.html#cb8-6" tabindex="-1"></a><span class="do">## [1] &quot;factor&quot;</span></span></code></pre></div>
+<p><strong>See more examples on <a href="https://norcalbiostat.github.io/MATH130/notes/06_factors.html#Convert_a_number_to_Factor_(Video)">Math 130 Lesson 06</a></strong></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="identifying-variable-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="identifying-outliers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

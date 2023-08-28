@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Data Management | Applied Statistics</title>
+  <title>1.1 Reproducible workflows | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Data Management | Applied Statistics" />
+  <meta property="og:title" content="1.1 Reproducible workflows | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Data Management | Applied Statistics" />
+  <meta name="twitter:title" content="1.1 Reproducible workflows | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="import-data.html"/>
-<link rel="next" href="renaming-variable-names-for-sanity-sake.html"/>
+<link rel="prev" href="data_prep.html"/>
+<link rel="next" href="import-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -591,32 +591,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Data Management<a href="data-management.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Questions to ask yourself while reviewing the codebook to choose variables to be used in an analysis.</p>
+<div id="reproducible-workflows" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Reproducible workflows<a href="reproducible-workflows.html#reproducible-workflows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reproducibility is the ability for any researcher to take the same data set and run the same
+set of software program instructions as another researcher and achieve the same results.</p>
+<p>The goal is to create an exact record of what was done to a data set to produce a specific result. To achieve
+reproducibility, we believe that three things must be present:</p>
 <ol style="list-style-type: decimal">
-<li>Are there codes that indicate missing? E.g. <em>MISSING</em> or <em>-99</em>?</li>
-<li>Do you need to make response codes more logical?
-<ul>
-<li>Some systems will record 1=YES and 2=NO. This should be changed to 0=NO.</li>
-</ul></li>
-<li>Do you need to recode numerical variables to categorical?
-<ul>
-<li>Sometimes categorical data will be recorded as 1, 2, 3 etc when those numbers represent named categories.</li>
-</ul></li>
-<li>Do you need to create secondary variables such as an average across measures to create a score.</li>
-<li>Are the variable names user friendly? Mixtures of CAPS and lower case, names with spaces or special characters should all be changed.</li>
+<li>The un-processed data are connected directly to software code file(s) that perform data preparation techniques.</li>
+<li>The processed data are connected directly to other software code file(s) that perform the analyses.</li>
+<li>All data and code files are self-contained such that they could be given to another researcher to execute the code commands on a separate computer and achieve the same results as the original author.</li>
 </ol>
-<p>Some of these answers will come only after you look at your data. This can be looking at the raw data itself but also looking at tables and charts generated from the data. Often when you try to create a plot or table you will encounter an error or something odd looking that will be the notification that something has to be adjusted.</p>
-<p>The next sections go over a <em>few</em> of the common data management processes, but is not comprehensive, and may only show one method for cleaning. There are always different ways to accomplish tasks.</p>
+<div class="float">
+<img src="images/Afifi_Fig3_1.png" alt="PrepareData" />
+<div class="figcaption">PrepareData</div>
+</div>
+<p><img src="images/q.png" alt="q" /> Why do we need a codebook?</p>
+<ul>
+<li>You are your own collaborator 6 months from now. Make sure you will be able to understand what you were doing.</li>
+<li>Investing the time to do things clearly and in a reproducible manner will make your future self happy.</li>
+<li>Comment your code with explanations and instructions.
+<ul>
+<li>How did you get from point A to B?</li>
+<li>Why did you recode this variable in this manner?</li>
+</ul></li>
+<li>We need to record those steps (not just for posterity).</li>
+<li>This means your code must be saved in a script file.
+<ul>
+<li>Include sufficient notes to yourself describing what you are doing and why.</li>
+<li>For R, this can be in a <code>.R</code>, <code>.Rmd</code> or <code>.qmd</code> file. I always prefer the latter.</li>
+<li>For SPSS you can specify to <code>paste the syntax</code> and copy into a <code>.sps</code> script file.</li>
+<li>For SAS you’ll use a <code>.sas</code> file</li>
+<li>For STATA this will be a <code>.do</code> file</li>
+</ul></li>
+</ul>
+<div class="float">
+<img src="images/pipeline.PNG" alt="Repro" />
+<div class="figcaption">Repro</div>
+</div>
+<p>Figure Credits: <a href="http://www.biostat.jhsph.edu/~rpeng/">Roger Peng</a></p>
+<div id="literate-programming" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Literate programming<a href="reproducible-workflows.html#literate-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Programming paradigm introduced by Knuth (1984)</li>
+<li>Explain the logic of the program or analysis process in a natural language,</li>
+<li>Small code snippets included at each step act as a full set of instructions that can be executed to reproduce the result/analysis being discussed.</li>
+</ul>
+<p>Literate programming tools are integrated into most common statistical packages</p>
+<ul>
+<li>Markdown (R, Stata), Quarto (R, Python, others)</li>
+<li><span class="math inline">\(\LaTeX\)</span> (R, SAS, Stata)</li>
+</ul>
+
+<div class="rmdnote">
+The current gold standard for writing reproducible literate documents in R is to use <a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto</a>. This works with Python, julia and other code editing platforms.
+</div>
+<p>Practicing reproducible research techniques using literate programming tools allows such major updates to be a simple matter of re-compiling all coded instructions using the updated data set.</p>
+<p>The effort then is reduced to a careful review and update of any written results.</p>
+<p>Using literate programming tools create formatted documents</p>
+<ul>
+<li>section headers</li>
+<li>bold and italicized words</li>
+<li>tables and graphics with built-in captions</li>
+</ul>
+<p>in a streamlined manner that is fully synchronized with the code itself.</p>
+<p>The author writes the text explanations, interpretations, and code in the statistical software program itself, and the program will execute all commands and combine the text, code and output all together into a final dynamic document.</p>
+<p><img src="images/q.png" alt="q" /> What stages of the pipeline shown above can we conduct using literate programming tools?</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="renaming-variable-names-for-sanity-sake.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data_prep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="import-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
