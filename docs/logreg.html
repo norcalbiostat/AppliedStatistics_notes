@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.3 Logistic Regression | Applied Statistics</title>
+  <title>11.4 Logistic Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.3 Logistic Regression | Applied Statistics" />
+  <meta property="og:title" content="11.4 Logistic Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.3 Logistic Regression | Applied Statistics" />
+  <meta name="twitter:title" content="11.4 Logistic Regression | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="binary-outcome-data.html"/>
-<link rel="next" href="log-linear.html"/>
+<link rel="next" href="poisson-reg.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -145,28 +144,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>I Preparing Data for Analysis</b></span></li>
 <li class="chapter" data-level="1" data-path="data_prep.html"><a href="data_prep.html"><i class="fa fa-check"></i><b>1</b> Workflow and Data Cleaning</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible workflows</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
-<li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
+<li class="chapter" data-level="1.1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a>
+<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a></li>
+<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a></li>
+<li class="chapter" data-level="1.4" data-path="renaming-variable-names-for-sanity-sake.html"><a href="renaming-variable-names-for-sanity-sake.html"><i class="fa fa-check"></i><b>1.4</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.5" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.5</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.6" data-path="convert-number-to-factor.html"><a href="convert-number-to-factor.html"><i class="fa fa-check"></i><b>1.6</b> Convert number to factor</a></li>
+<li class="chapter" data-level="1.7" data-path="identifying-outliers.html"><a href="identifying-outliers.html"><i class="fa fa-check"></i><b>1.7</b> Identifying Outliers</a></li>
+<li class="chapter" data-level="1.8" data-path="changing-numeric-values.html"><a href="changing-numeric-values.html"><i class="fa fa-check"></i><b>1.8</b> Changing numeric values</a></li>
+<li class="chapter" data-level="1.9" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html"><i class="fa fa-check"></i><b>1.9</b> Creating secondary variables</a></li>
+<li class="chapter" data-level="1.10" data-path="wrangling-factors.html"><a href="wrangling-factors.html"><i class="fa fa-check"></i><b>1.10</b> Wrangling Factors</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-variable-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.10.1" data-path="wrangling-factors.html"><a href="wrangling-factors.html#collapsing-categorical-variables-into-fewer-categories"><i class="fa fa-check"></i><b>1.10.1</b> Collapsing categorical variables into fewer categories</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a>
+<li class="chapter" data-level="1.11" data-path="binning-a-continuous-variable-into-categorical-ranges..html"><a href="binning-a-continuous-variable-into-categorical-ranges..html"><i class="fa fa-check"></i><b>1.11</b> Binning a continuous variable into categorical ranges.</a></li>
+<li class="chapter" data-level="1.12" data-path="dichotomizing-a-measure-into-2-categories.html"><a href="dichotomizing-a-measure-into-2-categories.html"><i class="fa fa-check"></i><b>1.12</b> Dichotomizing a measure into 2 categories</a></li>
+<li class="chapter" data-level="1.13" data-path="sum-or-average-values-across-multiple-variables.html"><a href="sum-or-average-values-across-multiple-variables.html"><i class="fa fa-check"></i><b>1.13</b> Sum or Average values across multiple variables</a></li>
+<li class="chapter" data-level="1.14" data-path="transformations-for-normality.html"><a href="transformations-for-normality.html"><i class="fa fa-check"></i><b>1.14</b> Transformations for Normality</a></li>
+<li class="chapter" data-level="1.15" data-path="export-and-save.html"><a href="export-and-save.html"><i class="fa fa-check"></i><b>1.15</b> Export and Save</a></li>
+<li class="chapter" data-level="1.16" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.16</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.17" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>1.17</b> Missing data</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
-<li class="chapter" data-level="1.3.2" data-path="data-management.html"><a href="data-management.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.3.2</b> Identifying Variable Types</a></li>
-<li class="chapter" data-level="1.3.3" data-path="data-management.html"><a href="data-management.html#outliers"><i class="fa fa-check"></i><b>1.3.3</b> Outliers</a></li>
-<li class="chapter" data-level="1.3.4" data-path="data-management.html"><a href="data-management.html#creating-secondary-variables"><i class="fa fa-check"></i><b>1.3.4</b> Creating secondary variables</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
-<li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
-<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+<li class="chapter" data-level="1.17.1" data-path="missing-data.html"><a href="missing-data.html#identifying-missing-data"><i class="fa fa-check"></i><b>1.17.1</b> Identifying missing data</a></li>
+<li class="chapter" data-level="1.17.2" data-path="missing-data.html"><a href="missing-data.html#model-predictions"><i class="fa fa-check"></i><b>1.17.2</b> Model predictions</a></li>
+<li class="chapter" data-level="1.17.3" data-path="missing-data.html"><a href="missing-data.html#regression"><i class="fa fa-check"></i><b>1.17.3</b> Regression</a></li>
+<li class="chapter" data-level="1.17.4" data-path="missing-data.html"><a href="missing-data.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.17.4</b> Factor Analysis and Principle Components</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
@@ -222,13 +227,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -303,7 +309,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -351,26 +360,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>11.1</b> Fitting GLMs</a>
+<li class="chapter" data-level="11.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>11.1</b> Fitting GLMs</a></li>
+<li class="chapter" data-level="11.2" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.2</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="fitting-glms.html"><a href="fitting-glms.html#r"><i class="fa fa-check"></i><b>11.1.1</b> R</a></li>
-<li class="chapter" data-level="11.1.2" data-path="fitting-glms.html"><a href="fitting-glms.html#spss"><i class="fa fa-check"></i><b>11.1.2</b> SPSS</a></li>
-<li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
+<li class="chapter" data-level="11.2.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.2.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.3</b> Binary outcome data</a></li>
+<li class="chapter" data-level="11.4" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.4</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
-<ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.4.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.4.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.4.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.4.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.4.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.4.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.4.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.4.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.4.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.4.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.4.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.4.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.4.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
 <li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
@@ -485,9 +489,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI Other Topics</b></span></li>
 <li class="chapter" data-level="18" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>18</b> Missing Data</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
+<li class="chapter" data-level="18.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
+<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="18.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>18.2</b> Effects of Nonresponse</a></li>
 <li class="chapter" data-level="18.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>18.3</b> Missing Data Mechanisms</a>
@@ -585,14 +589,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logreg" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Logistic Regression<a href="logreg.html#logreg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="logreg" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Logistic Regression<a href="logreg.html#logreg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Since the link between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is no longer linear, a one unit increase in <span class="math inline">\(X_{p}\)</span> is no longer associated with a <span class="math inline">\(b_{p}\)</span> increase in <span class="math inline">\(Y\)</span>. The regression coefficients <span class="math inline">\(b_{p}\)</span> from a logistic regression must be <em>exponentiated</em> before interpretation.</p>
 <p><span class="math display">\[OR = e^{b}\]</span></p>
-<p>The Odds Ratio (OR) provides a directly understandable statistic for the relationship between <span class="math inline">\(y\)</span> and a specific <span class="math inline">\(x\)</span> given all other <span class="math inline">\(x\)</span>’s in the model are fixed. A later example in <a href="logreg.html#mlogreg">11.3.4</a> provides a numeric example of how Odds Ratios are calculated.</p>
+<p>The Odds Ratio (OR) provides a directly understandable statistic for the relationship between <span class="math inline">\(y\)</span> and a specific <span class="math inline">\(x\)</span> given all other <span class="math inline">\(x\)</span>’s in the model are fixed. A later example in <a href="logreg.html#mlogreg">11.4.4</a> provides a numeric example of how Odds Ratios are calculated.</p>
 <p>In testing for a relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, our hypothesis is that <span class="math inline">\(\beta_{p}=0\)</span>. Since <span class="math inline">\(e^{0}=1\)</span>, the reference value for the Odds Ratio that signifies no relationship, is 1, not 0.</p>
-<div id="interpreting-odds-ratios" class="section level3 hasAnchor" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Interpreting Odds Ratios<a href="logreg.html#interpreting-odds-ratios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interpreting-odds-ratios" class="section level3 hasAnchor" number="11.4.1">
+<h3><span class="header-section-number">11.4.1</span> Interpreting Odds Ratios<a href="logreg.html#interpreting-odds-ratios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider a binary outcome with values YES, coded as 1, and NO, coded as 0.</p>
 <ul>
 <li><strong>OR = 1</strong> = equal chance of response variable being YES given any explanatory variable value. You are not able to predict participants’ responses by knowing their explanatory variable value. This would be a non significant model when looking at the p-value for the explanatory variable in the parameter estimate table.</li>
@@ -601,77 +605,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>For a continuous variable X with slope coefficient <span class="math inline">\(\beta\)</span>, the quantity <span class="math inline">\(e^{b}\)</span> is interpreted as the ratio of the odds for a person with value (X+1) relative to the odds for a person with value X.</p>
 </div>
-<div id="or-ci" class="section level3 hasAnchor" number="11.3.2">
-<h3><span class="header-section-number">11.3.2</span> Confidence Intervals<a href="logreg.html#or-ci" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="or-ci" class="section level3 hasAnchor" number="11.4.2">
+<h3><span class="header-section-number">11.4.2</span> Confidence Intervals<a href="logreg.html#or-ci" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Confidence intervals are a range for the population’s predicted odds ratio based on the sample data. We are 95% confident that any given population’s odds ratio would range between those two values.</p>
 <p>The OR is <strong>not</strong> a linear function of the <span class="math inline">\(x&#39;s\)</span>, but <span class="math inline">\(\beta\)</span> is. This means that a CI for the OR is created by calculating a CI for <span class="math inline">\(\beta\)</span>, and then exponentiating the endpoints. A 95% CI for the OR is calculated as:</p>
 <p><span class="math display">\[e^{\hat{\beta} \pm 1.96 SE_{\beta}} \]</span></p>
 <p>This math holds for any <span class="math inline">\(k\)</span> unit change in x. The linearity of the confidence interval only applies at the untransformed level of the <span class="math inline">\(\beta\)</span>’s. NOT the odds ratio.</p>
 </div>
-<div id="logreg-dep-ex" class="section level3 hasAnchor" number="11.3.3">
-<h3><span class="header-section-number">11.3.3</span> Example: The effect of gender on Depression<a href="logreg.html#logreg-dep-ex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="logreg-dep-ex" class="section level3 hasAnchor" number="11.4.3">
+<h3><span class="header-section-number">11.4.3</span> Example: The effect of gender on Depression<a href="logreg.html#logreg-dep-ex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This uses a cleaned version of the depression data set from PMAS6.</p>
 <ul>
 <li>Binary outcome variable: Symptoms of Depression (<code>cases</code>)</li>
 <li>Binary predictor variable: Gender (<code>sex</code>) as an indicator of being female</li>
 </ul>
 <p>The outcome <span class="math inline">\(y\)</span> is a 0/1 Bernoulli random variable. The sum of a vector of Bernoulli’s (<span class="math inline">\(\sum_{i=1}^{n}y_{i}\)</span>) has a Binomial distribution. When we specify that <code>family = "binomial"</code> the <code>glm()</code> function auto-assigns “logit” link function.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logreg.html#cb222-1" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb222-2"><a href="logreg.html#cb222-2" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
-<span id="cb222-3"><a href="logreg.html#cb222-3" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-4"><a href="logreg.html#cb222-4" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb222-5"><a href="logreg.html#cb222-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
-<span id="cb222-6"><a href="logreg.html#cb222-6" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-7"><a href="logreg.html#cb222-7" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb222-8"><a href="logreg.html#cb222-8" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb222-9"><a href="logreg.html#cb222-9" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
-<span id="cb222-10"><a href="logreg.html#cb222-10" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
-<span id="cb222-11"><a href="logreg.html#cb222-11" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb222-12"><a href="logreg.html#cb222-12" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb222-13"><a href="logreg.html#cb222-13" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-14"><a href="logreg.html#cb222-14" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb222-15"><a href="logreg.html#cb222-15" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-16"><a href="logreg.html#cb222-16" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb222-17"><a href="logreg.html#cb222-17" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
-<span id="cb222-18"><a href="logreg.html#cb222-18" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
-<span id="cb222-19"><a href="logreg.html#cb222-19" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb222-20"><a href="logreg.html#cb222-20" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="logreg.html#cb6-1" tabindex="-1"></a>dep_sex_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb6-2"><a href="logreg.html#cb6-2" tabindex="-1"></a><span class="fu">summary</span>(dep_sex_model)</span>
+<span id="cb6-3"><a href="logreg.html#cb6-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-4"><a href="logreg.html#cb6-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb6-5"><a href="logreg.html#cb6-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ sex, family = &quot;binomial&quot;, data = depress)</span></span>
+<span id="cb6-6"><a href="logreg.html#cb6-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-7"><a href="logreg.html#cb6-7" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb6-8"><a href="logreg.html#cb6-8" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-9"><a href="logreg.html#cb6-9" tabindex="-1"></a><span class="do">## (Intercept)  -2.3125     0.3315  -6.976 3.04e-12 ***</span></span>
+<span id="cb6-10"><a href="logreg.html#cb6-10" tabindex="-1"></a><span class="do">## sex           1.0386     0.3767   2.757  0.00583 ** </span></span>
+<span id="cb6-11"><a href="logreg.html#cb6-11" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb6-12"><a href="logreg.html#cb6-12" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-13"><a href="logreg.html#cb6-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-14"><a href="logreg.html#cb6-14" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-15"><a href="logreg.html#cb6-15" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-16"><a href="logreg.html#cb6-16" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb6-17"><a href="logreg.html#cb6-17" tabindex="-1"></a><span class="do">## Residual deviance: 259.40  on 292  degrees of freedom</span></span>
+<span id="cb6-18"><a href="logreg.html#cb6-18" tabindex="-1"></a><span class="do">## AIC: 263.4</span></span>
+<span id="cb6-19"><a href="logreg.html#cb6-19" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-20"><a href="logreg.html#cb6-20" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <p>We exponentiate the coefficients to back transform the <span class="math inline">\(\beta\)</span> estimates into Odds Ratios</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logreg.html#cb223-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
-<span id="cb223-2"><a href="logreg.html#cb223-2" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
-<span id="cb223-3"><a href="logreg.html#cb223-3" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
-<span id="cb223-4"><a href="logreg.html#cb223-4" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
-<span id="cb223-5"><a href="logreg.html#cb223-5" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
-<span id="cb223-6"><a href="logreg.html#cb223-6" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
-<span id="cb223-7"><a href="logreg.html#cb223-7" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="logreg.html#cb7-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(dep_sex_model))</span>
+<span id="cb7-2"><a href="logreg.html#cb7-2" tabindex="-1"></a><span class="do">## (Intercept)         sex </span></span>
+<span id="cb7-3"><a href="logreg.html#cb7-3" tabindex="-1"></a><span class="do">##   0.0990099   2.8251748</span></span>
+<span id="cb7-4"><a href="logreg.html#cb7-4" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(dep_sex_model))</span>
+<span id="cb7-5"><a href="logreg.html#cb7-5" tabindex="-1"></a><span class="do">##                  2.5 %    97.5 %</span></span>
+<span id="cb7-6"><a href="logreg.html#cb7-6" tabindex="-1"></a><span class="do">## (Intercept) 0.04843014 0.1801265</span></span>
+<span id="cb7-7"><a href="logreg.html#cb7-7" tabindex="-1"></a><span class="do">## sex         1.39911056 6.2142384</span></span></code></pre></div>
 <p>Females have 2.8 (1.4, 6.2) times the odds of showing signs of depression compared to males.</p>
 </div>
-<div id="mlogreg" class="section level3 hasAnchor" number="11.3.4">
-<h3><span class="header-section-number">11.3.4</span> Multiple Logistic Regression<a href="logreg.html#mlogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mlogreg" class="section level3 hasAnchor" number="11.4.4">
+<h3><span class="header-section-number">11.4.4</span> Multiple Logistic Regression<a href="logreg.html#mlogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s continue with the depression model, but now also include age and income as potential predictors of symptoms of depression.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="logreg.html#cb224-1" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb224-2"><a href="logreg.html#cb224-2" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
-<span id="cb224-3"><a href="logreg.html#cb224-3" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-4"><a href="logreg.html#cb224-4" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb224-5"><a href="logreg.html#cb224-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
-<span id="cb224-6"><a href="logreg.html#cb224-6" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
-<span id="cb224-7"><a href="logreg.html#cb224-7" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-8"><a href="logreg.html#cb224-8" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb224-9"><a href="logreg.html#cb224-9" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
-<span id="cb224-10"><a href="logreg.html#cb224-10" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
-<span id="cb224-11"><a href="logreg.html#cb224-11" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
-<span id="cb224-12"><a href="logreg.html#cb224-12" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
-<span id="cb224-13"><a href="logreg.html#cb224-13" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
-<span id="cb224-14"><a href="logreg.html#cb224-14" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb224-15"><a href="logreg.html#cb224-15" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb224-16"><a href="logreg.html#cb224-16" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-17"><a href="logreg.html#cb224-17" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb224-18"><a href="logreg.html#cb224-18" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-19"><a href="logreg.html#cb224-19" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
-<span id="cb224-20"><a href="logreg.html#cb224-20" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
-<span id="cb224-21"><a href="logreg.html#cb224-21" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
-<span id="cb224-22"><a href="logreg.html#cb224-22" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb224-23"><a href="logreg.html#cb224-23" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="logreg.html#cb8-1" tabindex="-1"></a>mvmodel <span class="ot">&lt;-</span> <span class="fu">glm</span>(cases <span class="sc">~</span> age <span class="sc">+</span> income <span class="sc">+</span> sex, <span class="at">data=</span>depress, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb8-2"><a href="logreg.html#cb8-2" tabindex="-1"></a><span class="fu">summary</span>(mvmodel)</span>
+<span id="cb8-3"><a href="logreg.html#cb8-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-4"><a href="logreg.html#cb8-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb8-5"><a href="logreg.html#cb8-5" tabindex="-1"></a><span class="do">## glm(formula = cases ~ age + income + sex, family = &quot;binomial&quot;, </span></span>
+<span id="cb8-6"><a href="logreg.html#cb8-6" tabindex="-1"></a><span class="do">##     data = depress)</span></span>
+<span id="cb8-7"><a href="logreg.html#cb8-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-8"><a href="logreg.html#cb8-8" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb8-9"><a href="logreg.html#cb8-9" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb8-10"><a href="logreg.html#cb8-10" tabindex="-1"></a><span class="do">## (Intercept) -0.67646    0.57881  -1.169  0.24253   </span></span>
+<span id="cb8-11"><a href="logreg.html#cb8-11" tabindex="-1"></a><span class="do">## age         -0.02096    0.00904  -2.318  0.02043 * </span></span>
+<span id="cb8-12"><a href="logreg.html#cb8-12" tabindex="-1"></a><span class="do">## income      -0.03656    0.01409  -2.595  0.00946 **</span></span>
+<span id="cb8-13"><a href="logreg.html#cb8-13" tabindex="-1"></a><span class="do">## sex          0.92945    0.38582   2.409  0.01600 * </span></span>
+<span id="cb8-14"><a href="logreg.html#cb8-14" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb8-15"><a href="logreg.html#cb8-15" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb8-16"><a href="logreg.html#cb8-16" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-17"><a href="logreg.html#cb8-17" tabindex="-1"></a><span class="do">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb8-18"><a href="logreg.html#cb8-18" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-19"><a href="logreg.html#cb8-19" tabindex="-1"></a><span class="do">##     Null deviance: 268.12  on 293  degrees of freedom</span></span>
+<span id="cb8-20"><a href="logreg.html#cb8-20" tabindex="-1"></a><span class="do">## Residual deviance: 247.54  on 290  degrees of freedom</span></span>
+<span id="cb8-21"><a href="logreg.html#cb8-21" tabindex="-1"></a><span class="do">## AIC: 255.54</span></span>
+<span id="cb8-22"><a href="logreg.html#cb8-22" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-23"><a href="logreg.html#cb8-23" tabindex="-1"></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
 <ul>
 <li>The sign of the <span class="math inline">\(\beta\)</span> coefficients can be interpreted in the same manner as with linear regression as having a positive or negative relationship.<br />
 </li>
@@ -694,36 +698,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ = \frac{e^{0.92945(1)}}
           {e^{0.92945(0)}}\]</span></p>
 <p><span class="math display">\[ = e^{0.92945} \]</span></p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logreg.html#cb225-1" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
-<span id="cb225-2"><a href="logreg.html#cb225-2" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
-<span id="cb225-3"><a href="logreg.html#cb225-3" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
-<span id="cb225-4"><a href="logreg.html#cb225-4" tabindex="-1"></a><span class="do">##      sex </span></span>
-<span id="cb225-5"><a href="logreg.html#cb225-5" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="logreg.html#cb9-1" tabindex="-1"></a><span class="fu">exp</span>(.<span class="dv">92945</span>)</span>
+<span id="cb9-2"><a href="logreg.html#cb9-2" tabindex="-1"></a><span class="do">## [1] 2.533116</span></span>
+<span id="cb9-3"><a href="logreg.html#cb9-3" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mvmodel)[<span class="dv">4</span>])</span>
+<span id="cb9-4"><a href="logreg.html#cb9-4" tabindex="-1"></a><span class="do">##      sex </span></span>
+<span id="cb9-5"><a href="logreg.html#cb9-5" tabindex="-1"></a><span class="do">## 2.533112</span></span></code></pre></div>
 </div>
-<div id="effect-of-a-k-unit-change" class="section level3 hasAnchor" number="11.3.5">
-<h3><span class="header-section-number">11.3.5</span> Effect of a k unit change<a href="logreg.html#effect-of-a-k-unit-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="effect-of-a-k-unit-change" class="section level3 hasAnchor" number="11.4.5">
+<h3><span class="header-section-number">11.4.5</span> Effect of a k unit change<a href="logreg.html#effect-of-a-k-unit-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Sometimes a 1 unit change in a continuous variable is not meaningful.</li>
 <li><span class="math inline">\(exp(kb)\)</span> is the incremental odds ratio corresponding to an increase of <span class="math inline">\(k\)</span> units in the variable X, assuming that the values of all other X variables remain unchanged.</li>
 </ul>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="logreg.html#cb226-1" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div id="lbavrnxsdu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lbavrnxsdu table {
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="logreg.html#cb10-1" tabindex="-1"></a><span class="fu">tbl_regression</span>(mvmodel, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="pzgyzpwmms" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzgyzpwmms table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lbavrnxsdu thead, #lbavrnxsdu tbody, #lbavrnxsdu tfoot, #lbavrnxsdu tr, #lbavrnxsdu td, #lbavrnxsdu th {
+#pzgyzpwmms thead, #pzgyzpwmms tbody, #pzgyzpwmms tfoot, #pzgyzpwmms tr, #pzgyzpwmms td, #pzgyzpwmms th {
   border-style: none;
 }
 
-#lbavrnxsdu p {
+#pzgyzpwmms p {
   margin: 0;
   padding: 0;
 }
 
-#lbavrnxsdu .gt_table {
+#pzgyzpwmms .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -749,12 +753,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_caption {
+#pzgyzpwmms .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lbavrnxsdu .gt_title {
+#pzgyzpwmms .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -766,7 +770,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#lbavrnxsdu .gt_subtitle {
+#pzgyzpwmms .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -778,7 +782,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#lbavrnxsdu .gt_heading {
+#pzgyzpwmms .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -790,13 +794,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_bottom_border {
+#pzgyzpwmms .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_col_headings {
+#pzgyzpwmms .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -811,7 +815,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_col_heading {
+#pzgyzpwmms .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -831,7 +835,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer {
+#pzgyzpwmms .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -843,15 +847,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer:first-child {
+#pzgyzpwmms .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer:last-child {
+#pzgyzpwmms .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbavrnxsdu .gt_column_spanner {
+#pzgyzpwmms .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -863,11 +867,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#lbavrnxsdu .gt_spanner_row {
+#pzgyzpwmms .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lbavrnxsdu .gt_group_heading {
+#pzgyzpwmms .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -893,7 +897,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-#lbavrnxsdu .gt_empty_group_heading {
+#pzgyzpwmms .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -908,15 +912,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#lbavrnxsdu .gt_from_md > :first-child {
+#pzgyzpwmms .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbavrnxsdu .gt_from_md > :last-child {
+#pzgyzpwmms .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbavrnxsdu .gt_row {
+#pzgyzpwmms .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -935,7 +939,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#lbavrnxsdu .gt_stub {
+#pzgyzpwmms .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -948,7 +952,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_stub_row_group {
+#pzgyzpwmms .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -962,15 +966,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#lbavrnxsdu .gt_row_group_first td {
+#pzgyzpwmms .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_row_group_first th {
+#pzgyzpwmms .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_summary_row {
+#pzgyzpwmms .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -980,16 +984,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_first_summary_row {
+#pzgyzpwmms .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_first_summary_row.thick {
+#pzgyzpwmms .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_last_summary_row {
+#pzgyzpwmms .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +1003,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_grand_summary_row {
+#pzgyzpwmms .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1009,7 +1013,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_first_grand_summary_row {
+#pzgyzpwmms .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1019,7 +1023,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_last_grand_summary_row_top {
+#pzgyzpwmms .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1029,11 +1033,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_striped {
+#pzgyzpwmms .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbavrnxsdu .gt_table_body {
+#pzgyzpwmms .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1042,7 +1046,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_footnotes {
+#pzgyzpwmms .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1056,7 +1060,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_footnote {
+#pzgyzpwmms .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1065,7 +1069,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_sourcenotes {
+#pzgyzpwmms .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1079,7 +1083,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_sourcenote {
+#pzgyzpwmms .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1087,63 +1091,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_left {
+#pzgyzpwmms .gt_left {
   text-align: left;
 }
 
-#lbavrnxsdu .gt_center {
+#pzgyzpwmms .gt_center {
   text-align: center;
 }
 
-#lbavrnxsdu .gt_right {
+#pzgyzpwmms .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbavrnxsdu .gt_font_normal {
+#pzgyzpwmms .gt_font_normal {
   font-weight: normal;
 }
 
-#lbavrnxsdu .gt_font_bold {
+#pzgyzpwmms .gt_font_bold {
   font-weight: bold;
 }
 
-#lbavrnxsdu .gt_font_italic {
+#pzgyzpwmms .gt_font_italic {
   font-style: italic;
 }
 
-#lbavrnxsdu .gt_super {
+#pzgyzpwmms .gt_super {
   font-size: 65%;
 }
 
-#lbavrnxsdu .gt_footnote_marks {
+#pzgyzpwmms .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lbavrnxsdu .gt_asterisk {
+#pzgyzpwmms .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbavrnxsdu .gt_indent_1 {
+#pzgyzpwmms .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbavrnxsdu .gt_indent_2 {
+#pzgyzpwmms .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbavrnxsdu .gt_indent_3 {
+#pzgyzpwmms .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbavrnxsdu .gt_indent_4 {
+#pzgyzpwmms .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbavrnxsdu .gt_indent_5 {
+#pzgyzpwmms .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1184,43 +1188,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>How about a 10 year increase in age? <span class="math inline">\(e^{10*\beta_{age}} = e^{-.21} = .81\)</span></li>
 </ul>
 <p>In generalized linear models, the assumptions on <span class="math inline">\(\beta\)</span> having a normal distribution</p>
-<p>Refer back to equation <a href="logreg.html#or-ci">11.3.2</a>, the linearity of the relationship is on the <span class="math inline">\(\beta\)</span> level, not the odds ratio. Do all transformations on the <span class="math inline">\(\beta\)</span>’s, then the last step is the non-linear transformation of exponentiation.</p>
+<p>Refer back to equation <a href="logreg.html#or-ci">11.4.2</a>, the linearity of the relationship is on the <span class="math inline">\(\beta\)</span> level, not the odds ratio. Do all transformations on the <span class="math inline">\(\beta\)</span>’s, then the last step is the non-linear transformation of exponentiation.</p>
 <p>So the mathmatical order of operations is important! First use <code>coef</code> to extract the coefficients out of the model object (here named <code>mvmodel</code>), then pull the 2nd item out <code>coef(mvmodel)[2]</code>, then multiply it by 10, then lastly exponentiate this value.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logreg.html#cb227-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
-<span id="cb227-2"><a href="logreg.html#cb227-2" tabindex="-1"></a><span class="do">##       age </span></span>
-<span id="cb227-3"><a href="logreg.html#cb227-3" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="logreg.html#cb11-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">coef</span>(mvmodel)[<span class="dv">2</span>])</span>
+<span id="cb11-2"><a href="logreg.html#cb11-2" tabindex="-1"></a><span class="do">##       age </span></span>
+<span id="cb11-3"><a href="logreg.html#cb11-3" tabindex="-1"></a><span class="do">## 0.8109285</span></span></code></pre></div>
 <p>Do the same to calculate the confidence interval for a 10 year time span.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logreg.html#cb228-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
-<span id="cb228-2"><a href="logreg.html#cb228-2" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
-<span id="cb228-3"><a href="logreg.html#cb228-3" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="logreg.html#cb12-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="dv">10</span><span class="sc">*</span><span class="fu">confint</span>(mvmodel)[<span class="dv">2</span>,]),<span class="dv">3</span>)</span>
+<span id="cb12-2"><a href="logreg.html#cb12-2" tabindex="-1"></a><span class="do">##  2.5 % 97.5 % </span></span>
+<span id="cb12-3"><a href="logreg.html#cb12-3" tabindex="-1"></a><span class="do">##  0.676  0.965</span></span></code></pre></div>
 <p>Controlling for gender and income, an individual has 0.81 (95% CI 0.68, 0.97) times the odds of being depressed compared to someone who is 10 years younger than them.</p>
 </div>
-<div id="example-predictors-of-smoking-status" class="section level3 hasAnchor" number="11.3.6">
-<h3><span class="header-section-number">11.3.6</span> Example: Predictors of smoking status<a href="logreg.html#example-predictors-of-smoking-status" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="example-predictors-of-smoking-status" class="section level3 hasAnchor" number="11.4.6">
+<h3><span class="header-section-number">11.4.6</span> Example: Predictors of smoking status<a href="logreg.html#example-predictors-of-smoking-status" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider a logistic model on smoking status (0= never smoked, 1=has smoked) using gender, income, and blood pressure class (<code>bp_class</code>) as predictors.</p>
 <p><span class="math display">\[
 logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \beta_{3}\mbox{(Pre-HTN)}
 + \beta_{4}\mbox{(HTN-I)} + \beta_{5}\mbox{(HTN-II)}
 \]</span></p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="logreg.html#cb229-1" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
-<span id="cb229-2"><a href="logreg.html#cb229-2" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div id="tzjbqivwdk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzjbqivwdk table {
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="logreg.html#cb13-1" tabindex="-1"></a>bp.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(smoke <span class="sc">~</span> female_c <span class="sc">+</span> income <span class="sc">+</span> bp_class, <span class="at">data=</span>addhealth, <span class="at">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
+<span id="cb13-2"><a href="logreg.html#cb13-2" tabindex="-1"></a><span class="fu">tbl_regression</span>(bp.mod, <span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="xegwmbxwrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xegwmbxwrm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzjbqivwdk thead, #tzjbqivwdk tbody, #tzjbqivwdk tfoot, #tzjbqivwdk tr, #tzjbqivwdk td, #tzjbqivwdk th {
+#xegwmbxwrm thead, #xegwmbxwrm tbody, #xegwmbxwrm tfoot, #xegwmbxwrm tr, #xegwmbxwrm td, #xegwmbxwrm th {
   border-style: none;
 }
 
-#tzjbqivwdk p {
+#xegwmbxwrm p {
   margin: 0;
   padding: 0;
 }
 
-#tzjbqivwdk .gt_table {
+#xegwmbxwrm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1246,12 +1250,12 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-left-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_caption {
+#xegwmbxwrm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzjbqivwdk .gt_title {
+#xegwmbxwrm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1263,7 +1267,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-width: 0;
 }
 
-#tzjbqivwdk .gt_subtitle {
+#xegwmbxwrm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1275,7 +1279,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-top-width: 0;
 }
 
-#tzjbqivwdk .gt_heading {
+#xegwmbxwrm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1287,13 +1291,13 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_bottom_border {
+#xegwmbxwrm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_col_headings {
+#xegwmbxwrm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1308,7 +1312,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_col_heading {
+#xegwmbxwrm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1328,7 +1332,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   overflow-x: hidden;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer {
+#xegwmbxwrm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1340,15 +1344,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 4px;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer:first-child {
+#xegwmbxwrm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer:last-child {
+#xegwmbxwrm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzjbqivwdk .gt_column_spanner {
+#xegwmbxwrm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1360,11 +1364,11 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   width: 100%;
 }
 
-#tzjbqivwdk .gt_spanner_row {
+#xegwmbxwrm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzjbqivwdk .gt_group_heading {
+#xegwmbxwrm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1390,7 +1394,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   text-align: left;
 }
 
-#tzjbqivwdk .gt_empty_group_heading {
+#xegwmbxwrm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1405,15 +1409,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   vertical-align: middle;
 }
 
-#tzjbqivwdk .gt_from_md > :first-child {
+#xegwmbxwrm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzjbqivwdk .gt_from_md > :last-child {
+#xegwmbxwrm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzjbqivwdk .gt_row {
+#xegwmbxwrm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1432,7 +1436,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   overflow-x: hidden;
 }
 
-#tzjbqivwdk .gt_stub {
+#xegwmbxwrm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1445,7 +1449,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_stub_row_group {
+#xegwmbxwrm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1459,15 +1463,15 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   vertical-align: top;
 }
 
-#tzjbqivwdk .gt_row_group_first td {
+#xegwmbxwrm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_row_group_first th {
+#xegwmbxwrm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_summary_row {
+#xegwmbxwrm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1477,16 +1481,16 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_first_summary_row {
+#xegwmbxwrm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_first_summary_row.thick {
+#xegwmbxwrm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_last_summary_row {
+#xegwmbxwrm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1496,7 +1500,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_grand_summary_row {
+#xegwmbxwrm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1506,7 +1510,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_first_grand_summary_row {
+#xegwmbxwrm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1516,7 +1520,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-top-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_last_grand_summary_row_top {
+#xegwmbxwrm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1526,11 +1530,11 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_striped {
+#xegwmbxwrm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzjbqivwdk .gt_table_body {
+#xegwmbxwrm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1539,7 +1543,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_footnotes {
+#xegwmbxwrm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1553,7 +1557,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_footnote {
+#xegwmbxwrm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1562,7 +1566,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_sourcenotes {
+#xegwmbxwrm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1576,7 +1580,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_sourcenote {
+#xegwmbxwrm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1584,63 +1588,63 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_left {
+#xegwmbxwrm .gt_left {
   text-align: left;
 }
 
-#tzjbqivwdk .gt_center {
+#xegwmbxwrm .gt_center {
   text-align: center;
 }
 
-#tzjbqivwdk .gt_right {
+#xegwmbxwrm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzjbqivwdk .gt_font_normal {
+#xegwmbxwrm .gt_font_normal {
   font-weight: normal;
 }
 
-#tzjbqivwdk .gt_font_bold {
+#xegwmbxwrm .gt_font_bold {
   font-weight: bold;
 }
 
-#tzjbqivwdk .gt_font_italic {
+#xegwmbxwrm .gt_font_italic {
   font-style: italic;
 }
 
-#tzjbqivwdk .gt_super {
+#xegwmbxwrm .gt_super {
   font-size: 65%;
 }
 
-#tzjbqivwdk .gt_footnote_marks {
+#xegwmbxwrm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzjbqivwdk .gt_asterisk {
+#xegwmbxwrm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzjbqivwdk .gt_indent_1 {
+#xegwmbxwrm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzjbqivwdk .gt_indent_2 {
+#xegwmbxwrm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzjbqivwdk .gt_indent_3 {
+#xegwmbxwrm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzjbqivwdk .gt_indent_4 {
+#xegwmbxwrm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzjbqivwdk .gt_indent_5 {
+#xegwmbxwrm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1701,25 +1705,25 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
 </table>
 </div>
 <p>It is unlikely that blood pressure is associated with smoking status, all groups are not statistically significantly different from the reference group (all p-values are large). Let’s test that hypothesis formally using a Wald Test.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logreg.html#cb230-1" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
-<span id="cb230-2"><a href="logreg.html#cb230-2" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
-<span id="cb230-3"><a href="logreg.html#cb230-3" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
-<span id="cb230-4"><a href="logreg.html#cb230-4" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
-<span id="cb230-5"><a href="logreg.html#cb230-5" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="logreg.html#cb14-1" tabindex="-1"></a>survey<span class="sc">::</span><span class="fu">regTermTest</span>(bp.mod, <span class="st">&quot;bp_class&quot;</span>)</span>
+<span id="cb14-2"><a href="logreg.html#cb14-2" tabindex="-1"></a><span class="do">## Wald test for bp_class</span></span>
+<span id="cb14-3"><a href="logreg.html#cb14-3" tabindex="-1"></a><span class="do">##  in glm(formula = smoke ~ female_c + income + bp_class, family = &quot;binomial&quot;, </span></span>
+<span id="cb14-4"><a href="logreg.html#cb14-4" tabindex="-1"></a><span class="do">##     data = addhealth)</span></span>
+<span id="cb14-5"><a href="logreg.html#cb14-5" tabindex="-1"></a><span class="do">## F =  0.428004  on  3  and  3723  df: p= 0.73294</span></span></code></pre></div>
 <p>The Wald Test has a large p-value of 0.73, thus blood pressure classification is not associated with smoking status.</p>
 <ul>
 <li>This means blood pressure classification should not be included in a model to explain smoking status.</li>
 </ul>
 </div>
-<div id="model-fit" class="section level3 hasAnchor" number="11.3.7">
-<h3><span class="header-section-number">11.3.7</span> Model Fit<a href="logreg.html#model-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="model-fit" class="section level3 hasAnchor" number="11.4.7">
+<h3><span class="header-section-number">11.4.7</span> Model Fit<a href="logreg.html#model-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>📖 PMA6 12.8</p>
-<div id="pseudo-r2" class="section level4 hasAnchor" number="11.3.7.1">
-<h4><span class="header-section-number">11.3.7.1</span> Pseudo <span class="math inline">\(R^{2}\)</span><a href="logreg.html#pseudo-r2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="pseudo-r2" class="section level4 hasAnchor" number="11.4.7.1">
+<h4><span class="header-section-number">11.4.7.1</span> Pseudo <span class="math inline">\(R^{2}\)</span><a href="logreg.html#pseudo-r2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Recall in linear regression, the coefficient of determination <span class="math inline">\(R^{2}\)</span> could be used as a measure of model fit, as it represents the proportion of variance in the outcome explained by the model. This statistic can’t be calculated for Logistic regression, but several versions of a <em>Pseudo <span class="math inline">\(R^{2}\)</span></em> have been proposed, and are printed as part of the output for many statistical packages such as Stata.</p>
 </div>
-<div id="goodness-of-fit" class="section level4 hasAnchor" number="11.3.7.2">
-<h4><span class="header-section-number">11.3.7.2</span> Goodness of Fit<a href="logreg.html#goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="goodness-of-fit" class="section level4 hasAnchor" number="11.4.7.2">
+<h4><span class="header-section-number">11.4.7.2</span> Goodness of Fit<a href="logreg.html#goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another way to assess model fit for the entire model is to perform a <em>goodness-of-fit</em> test. The one developed by Hosmer and Lemeshow (1980) is the most commonly used GoF test. In this approach,</p>
 <ol style="list-style-type: decimal">
 <li>the predicted probability of belonging to the event group (y=1) is calculated for every observation.</li>
@@ -1736,8 +1740,8 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
 <p>R package: <code>MKmisc</code>, function <code>HLgof.test</code>.</p>
 <pre><code>Mkmisc::HLgof.test(fit=fitted(model), obs=model$y)</code></pre>
 </div>
-<div id="accurate-predictions" class="section level4 hasAnchor" number="11.3.7.3">
-<h4><span class="header-section-number">11.3.7.3</span> Accurate predictions<a href="logreg.html#accurate-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="accurate-predictions" class="section level4 hasAnchor" number="11.4.7.3">
+<h4><span class="header-section-number">11.4.7.3</span> Accurate predictions<a href="logreg.html#accurate-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Since the logistic regression is all about modeling the probability of an event occurring, we can use that model to create predicted probabilities. The next chapter discusses how to use a logistic regression model for prediction, and what measures of fit are used to assess how “accurate” the model is.</p>
 </div>
 </div>
@@ -1748,7 +1752,7 @@ logit(Y) = \beta_{0} + \beta_{1}\mbox{(female)} + \beta_{2}\mbox{(income)} + \be
         </div>
       </div>
 <a href="binary-outcome-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="log-linear.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="poisson-reg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

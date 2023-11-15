@@ -34,7 +34,7 @@ Depending on the data type of $Y$, this link function takes different forms. Exa
 * Poisson regression: C = log function
 
 
-### R
+**R**
 
 The general syntax is similar to `lm()`, with the additional required `family=` argument. See `?family` for a list of options. Example for Logistic regression would be: 
 
@@ -43,7 +43,7 @@ The general syntax is similar to `lm()`, with the additional required `family=` 
 glm(y ~ x1 + x2 + x3, data=DATA, family="binomial") 
 ```
 
-### SPSS 
+**SPSS**
 
 File menu: `Regression` --> Binary Logistic. 
 
@@ -56,11 +56,126 @@ logistic regression Y with x1 x2 x3
 
 https://www.ibm.com/support/knowledgecenter/en/SSLVMB_26.0.0/statistics_reference_project_ddita/spss/regression/syn_logistic_regression_overview.html
 
-### Stata
+**Stata**
 
 `logistic Y x1 x2`
 
 https://www.stata.com/features/overview/logistic-regression/
+
+
+## Log-linear models {#log-linear}
+
+A *log-linear* model is when the log of the response variable is modeled using a linear combination of predictors. 
+
+$$ln(Y) \sim XB +\epsilon$$
+
+Recall that in statistics, when we refer to the _log_, we mean the natural log _ln_.
+
+This type of model is often use to model count data using the Poisson distribution (Section \@ref(poisson-reg)).
+
+Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed. 
+
+**Interpreting results**
+
+Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to _exponentiate_ the regression coefficient before interpreting. 
+
+When using log transformed outcomes, the effect on Y becomes **multiplicative** instead of additive. 
+
+* **Additive** For every 1 unit increase in X, y increases by b1
+* **Multiplicative** For every 1 unit increase in X, y is multiplied by $e^{b1}$
+
+Example, let $b_{1} = 0.2$. 
+
+* **Additive** For every 1 unit increase in X, y increases by 0.2 units.
+* **Multiplicative** For every 1 unit increase in X, y changes by $e^{0.2} = 1.22$ = 22%
+
+
+Thus we interpret the coefficient as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
+
+* **$b_{j}<0$** : Positive slope, positive association. The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
+* **$b_{j} \geq 0$** : Negative slope, negative association. The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
+
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">This UCLA resource is my "go-to" reference on how to interpret the results when your response, predictor, or both variables are log transformed. 
+
+https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</div>\EndKnitrBlock{rmdtip}
+
+
+### Example
+
+We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings `H4EC2` by following the steps below _in order_. 
+
+1. Remove values above 999995 (structural missing). 
+3. Create a new variable called `income`, that sets all values of personal income to be NA if below the federal poverty line. 
+    - First set `income= H4EC2`
+    - Then set income to missing, if `H4EC2 < 10210` (the federal poverty limit from 2008)
+4. Then create a new variable: `logincome` that is the natural log (_ln_) of income. e.g. `addhealth$logincome = log(addhealth$income)`
+
+Why are we transforming income? To achieve normality. 
+
+```r
+par(mfrow=c(2,2))
+hist(addhealth$income, probability = TRUE); lines(density(addhealth$income, na.rm=TRUE), col="red")
+hist(addhealth$logincome, probability = TRUE); lines(density(addhealth$logincome, na.rm=TRUE), col="blue")
+qqnorm(addhealth$income); qqline(addhealth$income, col="red")
+qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
+```
+
+<img src="GLM_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+**Identify variables**
+
+* Quantitative outcome that has been log transformed: Income (variable `logincome`)
+* Binary predictor: Ever smoked a cigarette (variable `eversmoke_c`)
+* Binary confounder: Gender (variable `female_c`)
+ 
+The mathematical multivariable model looks like: 
+
+$$ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}$$
+
+**Fit a linear regression model**
+
+
+```r
+ln.mod.2 <- lm(logincome~wakeup + female_c, data=addhealth)
+summary(ln.mod.2) %>% pander()
+```
+
+
+------------------------------------------------------------------
+       &nbsp;         Estimate   Std. Error   t value   Pr(>|t|)  
+-------------------- ---------- ------------ --------- -----------
+  **(Intercept)**      10.65       0.026       409.8        0     
+
+     **wakeup**       -0.01491    0.003218    -4.633    3.73e-06  
+
+ **female_cFemale**   -0.1927      0.017      -11.34    2.564e-29 
+------------------------------------------------------------------
+
+
+---------------------------------------------------------------
+ Observations   Residual Std. Error    $R^2$    Adjusted $R^2$ 
+-------------- --------------------- --------- ----------------
+     3813             0.5233          0.03611       0.0356     
+---------------------------------------------------------------
+
+Table: Fitting linear model: logincome ~ wakeup + female_c
+
+
+
+```r
+1-exp(confint(ln.mod.2)[-1,])
+##                     2.5 %      97.5 %
+## wakeup         0.02099299 0.008561652
+## female_cFemale 0.20231394 0.147326777
+```
+
+**Interpret the results**
+
+* For every hour later one wakes up in the morning, one can expect to earn `1-exp(-0.015)` = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender. 
+* Females have on average `1-exp(-0.19)` = 17% percent lower income than males, after controlling for the wake up time. 
+
+Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p<.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p<.0001) percent lower income than males. 
 
 
 ## Binary outcome data
@@ -93,7 +208,7 @@ This in essence takes a binary outcome 0/1 variable, turns it into a continuous 
 
 The probit function uses the inverse CDF for the normal distribution as the link function. The effect of the transformation is very similar. For social science interpretation of the coefficients, we tend to choose the _logit_ transformation and conduct a Logistic Regression. For classification purposes, often researchers will test out both transformations to see which one gives the best predictions. 
 
-<img src="GLM_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" />
+<img src="GLM_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" />
 
 
 ## Logistic Regression {#logreg}
@@ -255,23 +370,23 @@ tbl_regression(mvmodel, exponentiate=TRUE)
 
 
 ```{=html}
-<div id="lbavrnxsdu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lbavrnxsdu table {
+<div id="pzgyzpwmms" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzgyzpwmms table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lbavrnxsdu thead, #lbavrnxsdu tbody, #lbavrnxsdu tfoot, #lbavrnxsdu tr, #lbavrnxsdu td, #lbavrnxsdu th {
+#pzgyzpwmms thead, #pzgyzpwmms tbody, #pzgyzpwmms tfoot, #pzgyzpwmms tr, #pzgyzpwmms td, #pzgyzpwmms th {
   border-style: none;
 }
 
-#lbavrnxsdu p {
+#pzgyzpwmms p {
   margin: 0;
   padding: 0;
 }
 
-#lbavrnxsdu .gt_table {
+#pzgyzpwmms .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -297,12 +412,12 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-left-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_caption {
+#pzgyzpwmms .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lbavrnxsdu .gt_title {
+#pzgyzpwmms .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -314,7 +429,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-bottom-width: 0;
 }
 
-#lbavrnxsdu .gt_subtitle {
+#pzgyzpwmms .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -326,7 +441,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-top-width: 0;
 }
 
-#lbavrnxsdu .gt_heading {
+#pzgyzpwmms .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -338,13 +453,13 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_bottom_border {
+#pzgyzpwmms .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_col_headings {
+#pzgyzpwmms .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -359,7 +474,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_col_heading {
+#pzgyzpwmms .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -379,7 +494,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   overflow-x: hidden;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer {
+#pzgyzpwmms .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -391,15 +506,15 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 4px;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer:first-child {
+#pzgyzpwmms .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbavrnxsdu .gt_column_spanner_outer:last-child {
+#pzgyzpwmms .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbavrnxsdu .gt_column_spanner {
+#pzgyzpwmms .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -411,11 +526,11 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   width: 100%;
 }
 
-#lbavrnxsdu .gt_spanner_row {
+#pzgyzpwmms .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lbavrnxsdu .gt_group_heading {
+#pzgyzpwmms .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -441,7 +556,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   text-align: left;
 }
 
-#lbavrnxsdu .gt_empty_group_heading {
+#pzgyzpwmms .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -456,15 +571,15 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   vertical-align: middle;
 }
 
-#lbavrnxsdu .gt_from_md > :first-child {
+#pzgyzpwmms .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbavrnxsdu .gt_from_md > :last-child {
+#pzgyzpwmms .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbavrnxsdu .gt_row {
+#pzgyzpwmms .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -483,7 +598,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   overflow-x: hidden;
 }
 
-#lbavrnxsdu .gt_stub {
+#pzgyzpwmms .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,7 +611,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_stub_row_group {
+#pzgyzpwmms .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -510,15 +625,15 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   vertical-align: top;
 }
 
-#lbavrnxsdu .gt_row_group_first td {
+#pzgyzpwmms .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_row_group_first th {
+#pzgyzpwmms .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_summary_row {
+#pzgyzpwmms .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -528,16 +643,16 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_first_summary_row {
+#pzgyzpwmms .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_first_summary_row.thick {
+#pzgyzpwmms .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbavrnxsdu .gt_last_summary_row {
+#pzgyzpwmms .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -547,7 +662,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_grand_summary_row {
+#pzgyzpwmms .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -557,7 +672,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_first_grand_summary_row {
+#pzgyzpwmms .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -567,7 +682,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-top-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_last_grand_summary_row_top {
+#pzgyzpwmms .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -577,11 +692,11 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_striped {
+#pzgyzpwmms .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbavrnxsdu .gt_table_body {
+#pzgyzpwmms .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -590,7 +705,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_footnotes {
+#pzgyzpwmms .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -604,7 +719,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_footnote {
+#pzgyzpwmms .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -613,7 +728,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_sourcenotes {
+#pzgyzpwmms .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -627,7 +742,7 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#lbavrnxsdu .gt_sourcenote {
+#pzgyzpwmms .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -635,63 +750,63 @@ tbl_regression(mvmodel, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#lbavrnxsdu .gt_left {
+#pzgyzpwmms .gt_left {
   text-align: left;
 }
 
-#lbavrnxsdu .gt_center {
+#pzgyzpwmms .gt_center {
   text-align: center;
 }
 
-#lbavrnxsdu .gt_right {
+#pzgyzpwmms .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbavrnxsdu .gt_font_normal {
+#pzgyzpwmms .gt_font_normal {
   font-weight: normal;
 }
 
-#lbavrnxsdu .gt_font_bold {
+#pzgyzpwmms .gt_font_bold {
   font-weight: bold;
 }
 
-#lbavrnxsdu .gt_font_italic {
+#pzgyzpwmms .gt_font_italic {
   font-style: italic;
 }
 
-#lbavrnxsdu .gt_super {
+#pzgyzpwmms .gt_super {
   font-size: 65%;
 }
 
-#lbavrnxsdu .gt_footnote_marks {
+#pzgyzpwmms .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lbavrnxsdu .gt_asterisk {
+#pzgyzpwmms .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbavrnxsdu .gt_indent_1 {
+#pzgyzpwmms .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbavrnxsdu .gt_indent_2 {
+#pzgyzpwmms .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbavrnxsdu .gt_indent_3 {
+#pzgyzpwmms .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbavrnxsdu .gt_indent_4 {
+#pzgyzpwmms .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbavrnxsdu .gt_indent_5 {
+#pzgyzpwmms .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -774,23 +889,23 @@ tbl_regression(bp.mod, exponentiate=TRUE)
 
 
 ```{=html}
-<div id="tzjbqivwdk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzjbqivwdk table {
+<div id="xegwmbxwrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xegwmbxwrm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzjbqivwdk thead, #tzjbqivwdk tbody, #tzjbqivwdk tfoot, #tzjbqivwdk tr, #tzjbqivwdk td, #tzjbqivwdk th {
+#xegwmbxwrm thead, #xegwmbxwrm tbody, #xegwmbxwrm tfoot, #xegwmbxwrm tr, #xegwmbxwrm td, #xegwmbxwrm th {
   border-style: none;
 }
 
-#tzjbqivwdk p {
+#xegwmbxwrm p {
   margin: 0;
   padding: 0;
 }
 
-#tzjbqivwdk .gt_table {
+#xegwmbxwrm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -816,12 +931,12 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-left-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_caption {
+#xegwmbxwrm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzjbqivwdk .gt_title {
+#xegwmbxwrm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -833,7 +948,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-bottom-width: 0;
 }
 
-#tzjbqivwdk .gt_subtitle {
+#xegwmbxwrm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -845,7 +960,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-top-width: 0;
 }
 
-#tzjbqivwdk .gt_heading {
+#xegwmbxwrm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -857,13 +972,13 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_bottom_border {
+#xegwmbxwrm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_col_headings {
+#xegwmbxwrm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -878,7 +993,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_col_heading {
+#xegwmbxwrm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -898,7 +1013,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   overflow-x: hidden;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer {
+#xegwmbxwrm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -910,15 +1025,15 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 4px;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer:first-child {
+#xegwmbxwrm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzjbqivwdk .gt_column_spanner_outer:last-child {
+#xegwmbxwrm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzjbqivwdk .gt_column_spanner {
+#xegwmbxwrm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -930,11 +1045,11 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   width: 100%;
 }
 
-#tzjbqivwdk .gt_spanner_row {
+#xegwmbxwrm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzjbqivwdk .gt_group_heading {
+#xegwmbxwrm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -960,7 +1075,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   text-align: left;
 }
 
-#tzjbqivwdk .gt_empty_group_heading {
+#xegwmbxwrm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -975,15 +1090,15 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   vertical-align: middle;
 }
 
-#tzjbqivwdk .gt_from_md > :first-child {
+#xegwmbxwrm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzjbqivwdk .gt_from_md > :last-child {
+#xegwmbxwrm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzjbqivwdk .gt_row {
+#xegwmbxwrm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1002,7 +1117,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   overflow-x: hidden;
 }
 
-#tzjbqivwdk .gt_stub {
+#xegwmbxwrm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1015,7 +1130,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_stub_row_group {
+#xegwmbxwrm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1029,15 +1144,15 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   vertical-align: top;
 }
 
-#tzjbqivwdk .gt_row_group_first td {
+#xegwmbxwrm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_row_group_first th {
+#xegwmbxwrm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_summary_row {
+#xegwmbxwrm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1047,16 +1162,16 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_first_summary_row {
+#xegwmbxwrm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_first_summary_row.thick {
+#xegwmbxwrm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzjbqivwdk .gt_last_summary_row {
+#xegwmbxwrm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1066,7 +1181,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_grand_summary_row {
+#xegwmbxwrm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1076,7 +1191,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_first_grand_summary_row {
+#xegwmbxwrm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1086,7 +1201,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-top-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_last_grand_summary_row_top {
+#xegwmbxwrm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1096,11 +1211,11 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_striped {
+#xegwmbxwrm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzjbqivwdk .gt_table_body {
+#xegwmbxwrm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1109,7 +1224,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_footnotes {
+#xegwmbxwrm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1123,7 +1238,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_footnote {
+#xegwmbxwrm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1132,7 +1247,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_sourcenotes {
+#xegwmbxwrm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1146,7 +1261,7 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   border-right-color: #D3D3D3;
 }
 
-#tzjbqivwdk .gt_sourcenote {
+#xegwmbxwrm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1154,63 +1269,63 @@ tbl_regression(bp.mod, exponentiate=TRUE)
   padding-right: 5px;
 }
 
-#tzjbqivwdk .gt_left {
+#xegwmbxwrm .gt_left {
   text-align: left;
 }
 
-#tzjbqivwdk .gt_center {
+#xegwmbxwrm .gt_center {
   text-align: center;
 }
 
-#tzjbqivwdk .gt_right {
+#xegwmbxwrm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzjbqivwdk .gt_font_normal {
+#xegwmbxwrm .gt_font_normal {
   font-weight: normal;
 }
 
-#tzjbqivwdk .gt_font_bold {
+#xegwmbxwrm .gt_font_bold {
   font-weight: bold;
 }
 
-#tzjbqivwdk .gt_font_italic {
+#xegwmbxwrm .gt_font_italic {
   font-style: italic;
 }
 
-#tzjbqivwdk .gt_super {
+#xegwmbxwrm .gt_super {
   font-size: 65%;
 }
 
-#tzjbqivwdk .gt_footnote_marks {
+#xegwmbxwrm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzjbqivwdk .gt_asterisk {
+#xegwmbxwrm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzjbqivwdk .gt_indent_1 {
+#xegwmbxwrm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzjbqivwdk .gt_indent_2 {
+#xegwmbxwrm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzjbqivwdk .gt_indent_3 {
+#xegwmbxwrm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzjbqivwdk .gt_indent_4 {
+#xegwmbxwrm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzjbqivwdk .gt_indent_5 {
+#xegwmbxwrm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1327,120 +1442,6 @@ Since the logistic regression is all about modeling the probability of an event 
 
 
 
-## Log-linear models {#log-linear}
-
-A *log-linear* model is when the log of the response variable is modeled using a linear combination of predictors. 
-
-$$ln(Y) \sim XB +\epsilon$$
-
-Recall that in statistics, when we refer to the _log_, we mean the natural log _ln_.
-
-This type of model is often use to model count data using the Poisson distribution (Section \@ref(poisson-reg)).
-
-Why are we transforming the outcome? Typically to achieve normality when the response variable is highly skewed. 
-
-**Interpreting results**
-
-Since we transformed our outcome before performing the regression, we have to back-transform the coefficient before interpretation. Similar to logistic regression, we need to _exponentiate_ the regression coefficient before interpreting. 
-
-When using log transformed outcomes, the effect on Y becomes **multiplicative** instead of additive. 
-
-* **Additive** For every 1 unit increase in X, y increases by b1
-* **Multiplicative** For every 1 unit increase in X, y is multiplied by $e^{b1}$
-
-Example, let $b_{1} = 0.2$. 
-
-* **Additive** For every 1 unit increase in X, y increases by 0.2 units.
-* **Multiplicative** For every 1 unit increase in X, y changes by $e^{0.2} = 1.22$ = 22%
-
-
-Thus we interpret the coefficient as a **percentage** change in $Y$ for a unit increase in $x_{j}$.
-
-* **$b_{j}<1$** : The expected value of $Y$ for when $x=0$ is $1 - e^{b_{j}}$ percent _lower_ than when $x=1$
-* **$b_{j} \geq 1$** : The expected value of $Y$ for when $x=0$ is $e^{b_{j}}$ percent _higher_ than when $x=1$
-
-
-\BeginKnitrBlock{rmdtip}<div class="rmdtip">This UCLA resource is my "go-to" reference on how to interpret the results when your response, predictor, or both variables are log transformed. 
-
-https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-do-i-interpret-a-regression-model-when-some-variables-are-log-transformed/</div>\EndKnitrBlock{rmdtip}
-
-
-### Example
-
-We are going to analyze personal income from the AddHealth data set. First I need to clean up, and log transform the variable for personal earnings `H4EC2` by following the steps below _in order_. 
-
-1. Remove values above 999995 (structural missing). 
-3. Create a new variable called `income`, that sets all values of personal income to be NA if below the federal poverty line. 
-    - First set `income= H4EC2`
-    - Then set income to missing, if `H4EC2 < 10210` (the federal poverty limit from 2008)
-4. Then create a new variable: `logincome` that is the natural log (_ln_) of income. e.g. `addhealth$logincome = log(addhealth$income)`
-
-Why are we transforming income? To achieve normality. 
-
-```r
-par(mfrow=c(2,2))
-hist(addhealth$income, probability = TRUE); lines(density(addhealth$income, na.rm=TRUE), col="red")
-hist(addhealth$logincome, probability = TRUE); lines(density(addhealth$logincome, na.rm=TRUE), col="blue")
-qqnorm(addhealth$income); qqline(addhealth$income, col="red")
-qqnorm(addhealth$logincome); qqline(addhealth$logincome, col="blue")
-```
-
-<img src="GLM_files/figure-html/unnamed-chunk-16-1.png" width="672" />
-
-**Identify variables**
-
-* Quantitative outcome that has been log transformed: Income (variable `logincome`)
-* Binary predictor: Ever smoked a cigarette (variable `eversmoke_c`)
-* Binary confounder: Gender (variable `female_c`)
- 
-The mathematical multivariable model looks like: 
-
-$$ln(Y) \sim \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}$$
-
-**Fit a linear regression model**
-
-
-```r
-ln.mod.2 <- lm(logincome~wakeup + female_c, data=addhealth)
-summary(ln.mod.2) %>% pander()
-```
-
-
-------------------------------------------------------------------
-       &nbsp;         Estimate   Std. Error   t value   Pr(>|t|)  
--------------------- ---------- ------------ --------- -----------
-  **(Intercept)**      10.65       0.026       409.8        0     
-
-     **wakeup**       -0.01491    0.003218    -4.633    3.73e-06  
-
- **female_cFemale**   -0.1927      0.017      -11.34    2.564e-29 
-------------------------------------------------------------------
-
-
----------------------------------------------------------------
- Observations   Residual Std. Error    $R^2$    Adjusted $R^2$ 
--------------- --------------------- --------- ----------------
-     3813             0.5233          0.03611       0.0356     
----------------------------------------------------------------
-
-Table: Fitting linear model: logincome ~ wakeup + female_c
-
-
-
-```r
-1-exp(confint(ln.mod.2)[-1,])
-##                     2.5 %      97.5 %
-## wakeup         0.02099299 0.008561652
-## female_cFemale 0.20231394 0.147326777
-```
-
-**Interpret the results**
-
-* For every hour later one wakes up in the morning, one can expect to earn `1-exp(-0.015)` = 1.4% less income than someone who wakes up one hour earlier. This is after controlling for gender. 
-* Females have on average `1-exp(-0.19)` = 17% percent lower income than males, after controlling for the wake up time. 
-
-Both gender and time one wakes up are significantly associated with the amount of personal earnings one makes. Waking up later in the morning is associated with 1.4% (95% CI 0.8%-2%, p<.0001) percent lower income than someone who wakes up one hour earlier. Females have 17% (95% CI 15%-20%, p<.0001) percent lower income than males. 
-
 
 
 ## Count outcome data {#poisson-reg}
@@ -1548,28 +1549,15 @@ nsib.model <- glm(nsib ~ agew1 + female, data=addhealth, family="poisson")
 tbl_regression(nsib.model, exponentiate = TRUE)
 ```
 
-
 ```{=html}
-<div id="cfmobukqnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cfmobukqnx table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<div id="mxjtzxkmpu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#cfmobukqnx thead, #cfmobukqnx tbody, #cfmobukqnx tfoot, #cfmobukqnx tr, #cfmobukqnx td, #cfmobukqnx th {
-  border-style: none;
-}
-
-#cfmobukqnx p {
-  margin: 0;
-  padding: 0;
-}
-
-#cfmobukqnx .gt_table {
+#mxjtzxkmpu .gt_table {
   display: table;
   border-collapse: collapse;
-  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1592,36 +1580,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-left-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#cfmobukqnx .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#cfmobukqnx .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#cfmobukqnx .gt_heading {
+#mxjtzxkmpu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1633,13 +1592,37 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-right-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_bottom_border {
+#mxjtzxkmpu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mxjtzxkmpu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mxjtzxkmpu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_col_headings {
+#mxjtzxkmpu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1654,7 +1637,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-right-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_col_heading {
+#mxjtzxkmpu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1674,7 +1657,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   overflow-x: hidden;
 }
 
-#cfmobukqnx .gt_column_spanner_outer {
+#mxjtzxkmpu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1686,15 +1669,15 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   padding-right: 4px;
 }
 
-#cfmobukqnx .gt_column_spanner_outer:first-child {
+#mxjtzxkmpu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cfmobukqnx .gt_column_spanner_outer:last-child {
+#mxjtzxkmpu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cfmobukqnx .gt_column_spanner {
+#mxjtzxkmpu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1706,11 +1689,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   width: 100%;
 }
 
-#cfmobukqnx .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#cfmobukqnx .gt_group_heading {
+#mxjtzxkmpu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1733,10 +1712,9 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
-  text-align: left;
 }
 
-#cfmobukqnx .gt_empty_group_heading {
+#mxjtzxkmpu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1751,15 +1729,15 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   vertical-align: middle;
 }
 
-#cfmobukqnx .gt_from_md > :first-child {
+#mxjtzxkmpu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cfmobukqnx .gt_from_md > :last-child {
+#mxjtzxkmpu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cfmobukqnx .gt_row {
+#mxjtzxkmpu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1778,7 +1756,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   overflow-x: hidden;
 }
 
-#cfmobukqnx .gt_stub {
+#mxjtzxkmpu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1791,7 +1769,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   padding-right: 5px;
 }
 
-#cfmobukqnx .gt_stub_row_group {
+#mxjtzxkmpu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1805,15 +1783,11 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   vertical-align: top;
 }
 
-#cfmobukqnx .gt_row_group_first td {
+#mxjtzxkmpu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cfmobukqnx .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#cfmobukqnx .gt_summary_row {
+#mxjtzxkmpu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1823,16 +1797,16 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   padding-right: 5px;
 }
 
-#cfmobukqnx .gt_first_summary_row {
+#mxjtzxkmpu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_first_summary_row.thick {
+#mxjtzxkmpu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cfmobukqnx .gt_last_summary_row {
+#mxjtzxkmpu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1842,7 +1816,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_grand_summary_row {
+#mxjtzxkmpu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1852,7 +1826,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   padding-right: 5px;
 }
 
-#cfmobukqnx .gt_first_grand_summary_row {
+#mxjtzxkmpu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1862,21 +1836,11 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-top-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#cfmobukqnx .gt_striped {
+#mxjtzxkmpu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cfmobukqnx .gt_table_body {
+#mxjtzxkmpu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1885,7 +1849,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-bottom-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_footnotes {
+#mxjtzxkmpu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1899,16 +1863,16 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-right-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_footnote {
+#mxjtzxkmpu .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#cfmobukqnx .gt_sourcenotes {
+#mxjtzxkmpu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1922,7 +1886,7 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   border-right-color: #D3D3D3;
 }
 
-#cfmobukqnx .gt_sourcenote {
+#mxjtzxkmpu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1930,96 +1894,96 @@ tbl_regression(nsib.model, exponentiate = TRUE)
   padding-right: 5px;
 }
 
-#cfmobukqnx .gt_left {
+#mxjtzxkmpu .gt_left {
   text-align: left;
 }
 
-#cfmobukqnx .gt_center {
+#mxjtzxkmpu .gt_center {
   text-align: center;
 }
 
-#cfmobukqnx .gt_right {
+#mxjtzxkmpu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cfmobukqnx .gt_font_normal {
+#mxjtzxkmpu .gt_font_normal {
   font-weight: normal;
 }
 
-#cfmobukqnx .gt_font_bold {
+#mxjtzxkmpu .gt_font_bold {
   font-weight: bold;
 }
 
-#cfmobukqnx .gt_font_italic {
+#mxjtzxkmpu .gt_font_italic {
   font-style: italic;
 }
 
-#cfmobukqnx .gt_super {
+#mxjtzxkmpu .gt_super {
   font-size: 65%;
 }
 
-#cfmobukqnx .gt_footnote_marks {
+#mxjtzxkmpu .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
-  position: initial;
 }
 
-#cfmobukqnx .gt_asterisk {
+#mxjtzxkmpu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cfmobukqnx .gt_indent_1 {
+#mxjtzxkmpu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cfmobukqnx .gt_indent_2 {
+#mxjtzxkmpu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cfmobukqnx .gt_indent_3 {
+#mxjtzxkmpu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cfmobukqnx .gt_indent_4 {
+#mxjtzxkmpu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cfmobukqnx .gt_indent_5 {
+#mxjtzxkmpu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;IRR&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>IRR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>IRR</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>p-value</strong></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="label" class="gt_row gt_left">agew1</td>
-<td headers="estimate" class="gt_row gt_center">1.05</td>
-<td headers="ci" class="gt_row gt_center">1.03, 1.06</td>
-<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">female</td>
-<td headers="estimate" class="gt_row gt_center">1.10</td>
-<td headers="ci" class="gt_row gt_center">1.06, 1.14</td>
-<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">agew1</td>
+<td class="gt_row gt_center">1.05</td>
+<td class="gt_row gt_center">1.03, 1.06</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">female</td>
+<td class="gt_row gt_center">1.10</td>
+<td class="gt_row gt_center">1.06, 1.14</td>
+<td class="gt_row gt_center"><0.001</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
     <tr>
-      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> IRR = Incidence Rate Ratio, CI = Confidence Interval</td>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> IRR = Incidence Rate Ratio, CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
 </div>
 ```
-
 
 
 ## Categorical outcome data {#multinomial-reg}

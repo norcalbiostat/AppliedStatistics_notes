@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.2 Binary outcome data | Applied Statistics</title>
+  <title>11.3 Binary outcome data | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.2 Binary outcome data | Applied Statistics" />
+  <meta property="og:title" content="11.3 Binary outcome data | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.2 Binary outcome data | Applied Statistics" />
+  <meta name="twitter:title" content="11.3 Binary outcome data | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fitting-glms.html"/>
+<link rel="prev" href="log-linear.html"/>
 <link rel="next" href="logreg.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -145,28 +144,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>I Preparing Data for Analysis</b></span></li>
 <li class="chapter" data-level="1" data-path="data_prep.html"><a href="data_prep.html"><i class="fa fa-check"></i><b>1</b> Workflow and Data Cleaning</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Generating a reproducible workflows</a>
+<li class="chapter" data-level="1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i><b>1.1</b> Reproducible workflows</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
-<li class="chapter" data-level="1.1.2" data-path="generating-a-reproducible-workflows.html"><a href="generating-a-reproducible-workflows.html#reproducible-research-literate-programming"><i class="fa fa-check"></i><b>1.1.2</b> Reproducible Research + Literate Programming</a></li>
+<li class="chapter" data-level="1.1.1" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#literate-programming"><i class="fa fa-check"></i><b>1.1.1</b> Literate programming</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a>
+<li class="chapter" data-level="1.2" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>1.2</b> Import data</a></li>
+<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a></li>
+<li class="chapter" data-level="1.4" data-path="renaming-variable-names-for-sanity-sake.html"><a href="renaming-variable-names-for-sanity-sake.html"><i class="fa fa-check"></i><b>1.4</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.5" data-path="identifying-variable-types.html"><a href="identifying-variable-types.html"><i class="fa fa-check"></i><b>1.5</b> Identifying Variable Types</a></li>
+<li class="chapter" data-level="1.6" data-path="convert-number-to-factor.html"><a href="convert-number-to-factor.html"><i class="fa fa-check"></i><b>1.6</b> Convert number to factor</a></li>
+<li class="chapter" data-level="1.7" data-path="identifying-outliers.html"><a href="identifying-outliers.html"><i class="fa fa-check"></i><b>1.7</b> Identifying Outliers</a></li>
+<li class="chapter" data-level="1.8" data-path="changing-numeric-values.html"><a href="changing-numeric-values.html"><i class="fa fa-check"></i><b>1.8</b> Changing numeric values</a></li>
+<li class="chapter" data-level="1.9" data-path="creating-secondary-variables.html"><a href="creating-secondary-variables.html"><i class="fa fa-check"></i><b>1.9</b> Creating secondary variables</a></li>
+<li class="chapter" data-level="1.10" data-path="wrangling-factors.html"><a href="wrangling-factors.html"><i class="fa fa-check"></i><b>1.10</b> Wrangling Factors</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="import-data.html"><a href="import-data.html#renaming-variable-names-for-sanity-sake"><i class="fa fa-check"></i><b>1.2.1</b> Renaming variable names for sanity sake</a></li>
+<li class="chapter" data-level="1.10.1" data-path="wrangling-factors.html"><a href="wrangling-factors.html#collapsing-categorical-variables-into-fewer-categories"><i class="fa fa-check"></i><b>1.10.1</b> Collapsing categorical variables into fewer categories</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>1.3</b> Data Management</a>
+<li class="chapter" data-level="1.11" data-path="binning-a-continuous-variable-into-categorical-ranges..html"><a href="binning-a-continuous-variable-into-categorical-ranges..html"><i class="fa fa-check"></i><b>1.11</b> Binning a continuous variable into categorical ranges.</a></li>
+<li class="chapter" data-level="1.12" data-path="dichotomizing-a-measure-into-2-categories.html"><a href="dichotomizing-a-measure-into-2-categories.html"><i class="fa fa-check"></i><b>1.12</b> Dichotomizing a measure into 2 categories</a></li>
+<li class="chapter" data-level="1.13" data-path="sum-or-average-values-across-multiple-variables.html"><a href="sum-or-average-values-across-multiple-variables.html"><i class="fa fa-check"></i><b>1.13</b> Sum or Average values across multiple variables</a></li>
+<li class="chapter" data-level="1.14" data-path="transformations-for-normality.html"><a href="transformations-for-normality.html"><i class="fa fa-check"></i><b>1.14</b> Transformations for Normality</a></li>
+<li class="chapter" data-level="1.15" data-path="export-and-save.html"><a href="export-and-save.html"><i class="fa fa-check"></i><b>1.15</b> Export and Save</a></li>
+<li class="chapter" data-level="1.16" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.16</b> Wide vs. Long data</a></li>
+<li class="chapter" data-level="1.17" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>1.17</b> Missing data</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="data-management.html"><a href="data-management.html#missing-data"><i class="fa fa-check"></i><b>1.3.1</b> Missing data</a></li>
-<li class="chapter" data-level="1.3.2" data-path="data-management.html"><a href="data-management.html#identifying-variable-types"><i class="fa fa-check"></i><b>1.3.2</b> Identifying Variable Types</a></li>
-<li class="chapter" data-level="1.3.3" data-path="data-management.html"><a href="data-management.html#outliers"><i class="fa fa-check"></i><b>1.3.3</b> Outliers</a></li>
-<li class="chapter" data-level="1.3.4" data-path="data-management.html"><a href="data-management.html#creating-secondary-variables"><i class="fa fa-check"></i><b>1.3.4</b> Creating secondary variables</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="saving-your-changes.html"><a href="saving-your-changes.html"><i class="fa fa-check"></i><b>1.4</b> Saving your changes</a></li>
-<li class="chapter" data-level="1.5" data-path="wide-long.html"><a href="wide-long.html"><i class="fa fa-check"></i><b>1.5</b> Wide vs. Long data</a></li>
-<li class="chapter" data-level="1.6" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html"><i class="fa fa-check"></i><b>1.6</b> Dealing with missing data post-analysis</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#regression"><i class="fa fa-check"></i><b>1.6.1</b> Regression</a></li>
-<li class="chapter" data-level="1.6.2" data-path="dealing-with-missing-data-post-analysis.html"><a href="dealing-with-missing-data-post-analysis.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.6.2</b> Factor Analysis and Principle Components</a></li>
+<li class="chapter" data-level="1.17.1" data-path="missing-data.html"><a href="missing-data.html#identifying-missing-data"><i class="fa fa-check"></i><b>1.17.1</b> Identifying missing data</a></li>
+<li class="chapter" data-level="1.17.2" data-path="missing-data.html"><a href="missing-data.html#model-predictions"><i class="fa fa-check"></i><b>1.17.2</b> Model predictions</a></li>
+<li class="chapter" data-level="1.17.3" data-path="missing-data.html"><a href="missing-data.html#regression"><i class="fa fa-check"></i><b>1.17.3</b> Regression</a></li>
+<li class="chapter" data-level="1.17.4" data-path="missing-data.html"><a href="missing-data.html#factor-analysis-and-principle-components"><i class="fa fa-check"></i><b>1.17.4</b> Factor Analysis and Principle Components</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>2</b> Visualizing Data</a>
@@ -222,13 +227,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="bv-anova.html"><a href="bv-anova.html"><i class="fa fa-check"></i><b>5.4</b> (Q~C) Multiple means: ANOVA</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.1</b> Formulation of the One-way ANOVA model</a></li>
-<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.2</b> Analysis of Variance Table*:</a></li>
-<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.3</b> The F-distribution</a></li>
-<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.4</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.5</b> Example: A comparison of plant species under low water conditions</a></li>
-<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.6</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
-<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.7</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="5.4.1" data-path="bv-anova.html"><a href="bv-anova.html#terminology"><i class="fa fa-check"></i><b>5.4.1</b> Terminology</a></li>
+<li class="chapter" data-level="5.4.2" data-path="bv-anova.html"><a href="bv-anova.html#formulation-of-the-one-way-anova-model"><i class="fa fa-check"></i><b>5.4.2</b> Formulation of the One-way ANOVA model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="bv-anova.html"><a href="bv-anova.html#analysis-of-variance-table"><i class="fa fa-check"></i><b>5.4.3</b> Analysis of Variance Table*:</a></li>
+<li class="chapter" data-level="5.4.4" data-path="bv-anova.html"><a href="bv-anova.html#the-f-distribution"><i class="fa fa-check"></i><b>5.4.4</b> The F-distribution</a></li>
+<li class="chapter" data-level="5.4.5" data-path="bv-anova.html"><a href="bv-anova.html#assumptions-1"><i class="fa fa-check"></i><b>5.4.5</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="bv-anova.html"><a href="bv-anova.html#example-a-comparison-of-plant-species-under-low-water-conditions"><i class="fa fa-check"></i><b>5.4.6</b> Example: A comparison of plant species under low water conditions</a></li>
+<li class="chapter" data-level="5.4.7" data-path="bv-anova.html"><a href="bv-anova.html#coefficient-of-determination-r2"><i class="fa fa-check"></i><b>5.4.7</b> Coefficient of determination <span class="math inline">\(R^{2}\)</span></a></li>
+<li class="chapter" data-level="5.4.8" data-path="bv-anova.html"><a href="bv-anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>5.4.8</b> Multiple Comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="bv-chisq.html"><a href="bv-chisq.html"><i class="fa fa-check"></i><b>5.5</b> (C~C) Multiple Proportions: <span class="math inline">\(\chi^{2}\)</span></a>
 <ul>
@@ -303,7 +309,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="interpreting-coefficients.html"><a href="interpreting-coefficients.html#cat-predictors"><i class="fa fa-check"></i><b>9.4.3</b> Categorical Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="presenting-results.html"><a href="presenting-results.html"><i class="fa fa-check"></i><b>9.5</b> Presenting results</a></li>
-<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a></li>
+<li class="chapter" data-level="9.6" data-path="confounding.html"><a href="confounding.html"><i class="fa fa-check"></i><b>9.6</b> Confounding</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="confounding.html"><a href="confounding.html#example-does-smoking-affect-pulse-rate"><i class="fa fa-check"></i><b>9.6.1</b> Example: Does smoking affect pulse rate?</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="what-to-watch-out-for.html"><a href="what-to-watch-out-for.html"><i class="fa fa-check"></i><b>9.7</b> What to watch out for</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>10</b> Model Building</a>
@@ -351,26 +360,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Models</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>11.1</b> Fitting GLMs</a>
+<li class="chapter" data-level="11.1" data-path="fitting-glms.html"><a href="fitting-glms.html"><i class="fa fa-check"></i><b>11.1</b> Fitting GLMs</a></li>
+<li class="chapter" data-level="11.2" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.2</b> Log-linear models</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="fitting-glms.html"><a href="fitting-glms.html#r"><i class="fa fa-check"></i><b>11.1.1</b> R</a></li>
-<li class="chapter" data-level="11.1.2" data-path="fitting-glms.html"><a href="fitting-glms.html#spss"><i class="fa fa-check"></i><b>11.1.2</b> SPSS</a></li>
-<li class="chapter" data-level="11.1.3" data-path="fitting-glms.html"><a href="fitting-glms.html#stata"><i class="fa fa-check"></i><b>11.1.3</b> Stata</a></li>
+<li class="chapter" data-level="11.2.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.2.1</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.2</b> Binary outcome data</a></li>
-<li class="chapter" data-level="11.3" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.3</b> Logistic Regression</a>
+<li class="chapter" data-level="11.3" data-path="binary-outcome-data.html"><a href="binary-outcome-data.html"><i class="fa fa-check"></i><b>11.3</b> Binary outcome data</a></li>
+<li class="chapter" data-level="11.4" data-path="logreg.html"><a href="logreg.html"><i class="fa fa-check"></i><b>11.4</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.3.1</b> Interpreting Odds Ratios</a></li>
-<li class="chapter" data-level="11.3.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.3.2</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="11.3.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.3.3</b> Example: The effect of gender on Depression</a></li>
-<li class="chapter" data-level="11.3.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.3.4</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="11.3.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.3.5</b> Effect of a k unit change</a></li>
-<li class="chapter" data-level="11.3.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.3.6</b> Example: Predictors of smoking status</a></li>
-<li class="chapter" data-level="11.3.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.3.7</b> Model Fit</a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="log-linear.html"><a href="log-linear.html"><i class="fa fa-check"></i><b>11.4</b> Log-linear models</a>
-<ul>
-<li class="chapter" data-level="11.4.1" data-path="log-linear.html"><a href="log-linear.html#example-4"><i class="fa fa-check"></i><b>11.4.1</b> Example</a></li>
+<li class="chapter" data-level="11.4.1" data-path="logreg.html"><a href="logreg.html#interpreting-odds-ratios"><i class="fa fa-check"></i><b>11.4.1</b> Interpreting Odds Ratios</a></li>
+<li class="chapter" data-level="11.4.2" data-path="logreg.html"><a href="logreg.html#or-ci"><i class="fa fa-check"></i><b>11.4.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="11.4.3" data-path="logreg.html"><a href="logreg.html#logreg-dep-ex"><i class="fa fa-check"></i><b>11.4.3</b> Example: The effect of gender on Depression</a></li>
+<li class="chapter" data-level="11.4.4" data-path="logreg.html"><a href="logreg.html#mlogreg"><i class="fa fa-check"></i><b>11.4.4</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="11.4.5" data-path="logreg.html"><a href="logreg.html#effect-of-a-k-unit-change"><i class="fa fa-check"></i><b>11.4.5</b> Effect of a k unit change</a></li>
+<li class="chapter" data-level="11.4.6" data-path="logreg.html"><a href="logreg.html#example-predictors-of-smoking-status"><i class="fa fa-check"></i><b>11.4.6</b> Example: Predictors of smoking status</a></li>
+<li class="chapter" data-level="11.4.7" data-path="logreg.html"><a href="logreg.html#model-fit"><i class="fa fa-check"></i><b>11.4.7</b> Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="poisson-reg.html"><a href="poisson-reg.html"><i class="fa fa-check"></i><b>11.5</b> Count outcome data</a></li>
 <li class="chapter" data-level="11.6" data-path="multinomial-reg.html"><a href="multinomial-reg.html"><i class="fa fa-check"></i><b>11.6</b> Categorical outcome data</a></li>
@@ -485,9 +489,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI Other Topics</b></span></li>
 <li class="chapter" data-level="18" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>18</b> Missing Data</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
+<li class="chapter" data-level="18.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html"><i class="fa fa-check"></i><b>18.1</b> Identifying missing data</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data.html"><a href="identifying-missing-data.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
+<li class="chapter" data-level="18.1.1" data-path="identifying-missing-data-1.html"><a href="identifying-missing-data-1.html#visualize-missing-patterns"><i class="fa fa-check"></i><b>18.1.1</b> Visualize missing patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="18.2" data-path="effects-of-nonresponse.html"><a href="effects-of-nonresponse.html"><i class="fa fa-check"></i><b>18.2</b> Effects of Nonresponse</a></li>
 <li class="chapter" data-level="18.3" data-path="missing-data-mechanisms.html"><a href="missing-data-mechanisms.html"><i class="fa fa-check"></i><b>18.3</b> Missing Data Mechanisms</a>
@@ -585,8 +589,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-outcome-data" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Binary outcome data<a href="binary-outcome-data.html#binary-outcome-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-outcome-data" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Binary outcome data<a href="binary-outcome-data.html#binary-outcome-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Consider an outcome variable <span class="math inline">\(Y\)</span> with two levels: Y = 1 if event, = 0 if no event.</p>
 <p>Let <span class="math inline">\(p_{i} = P(y_{i}=1)\)</span>.</p>
 <p>Two goals:</p>
@@ -604,14 +608,14 @@ log\left(
 <p>Since the <em>odds</em> are defined as the probability an event occurs divided by the probability it does not occur: <span class="math inline">\((p/(1-p))\)</span>, the function <span class="math inline">\(log\left(\frac{p_{i}}{1-p_{i}}\right)\)</span> is also known as the <em>log odds</em>, or more commonly called the <strong><em>logit</em></strong>. This is the <em>link</em> function for the logistic regression model.</p>
 <p>This in essence takes a binary outcome 0/1 variable, turns it into a continuous probability (which only has a range from 0 to 1) Then the logit(p) has a continuous distribution ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, which is the same form as a Multiple Linear Regression (continuous outcome modeled on a set of covariates)</p>
 <p>The probit function uses the inverse CDF for the normal distribution as the link function. The effect of the transformation is very similar. For social science interpretation of the coefficients, we tend to choose the <em>logit</em> transformation and conduct a Logistic Regression. For classification purposes, often researchers will test out both transformations to see which one gives the best predictions.</p>
-<p><img src="GLM_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="GLM_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="fitting-glms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="log-linear.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="logreg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
