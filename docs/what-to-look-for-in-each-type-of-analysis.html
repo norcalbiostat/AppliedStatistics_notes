@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Model Building | Applied Statistics</title>
+  <title>8.4 What to look for in each type of analysis | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.4 What to look for in each type of analysis | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.4 What to look for in each type of analysis | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="interactions.html"/>
+<link rel="prev" href="identifying-a-moderator.html"/>
+<link rel="next" href="ex-correlation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,22 +589,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Model Building<a href="model-building.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit.</p>
-
-<div class="rmdnote">
-This section uses functions from the <code>gtsummary</code> and <code>survey</code> packages to help tidy and visualize results from regression models. It also uses functions from the <code>performance</code> and <code>glmnet</code> packages to perform model selection and assessment.
-</div>
+<div id="what-to-look-for-in-each-type-of-analysis" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> What to look for in each type of analysis<a href="what-to-look-for-in-each-type-of-analysis.html#what-to-look-for-in-each-type-of-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>ANOVA</strong> - look at the <span class="math inline">\(p\)</span>-value, <span class="math inline">\(r\)</span>-squared, means, and the graph of the ANOVA and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is moderator or not.</li>
+<li><strong>Chi-Square</strong> - look at the <span class="math inline">\(p\)</span>-value, the percents for the columns in the crosstab table, and the graph for the Chi-Square and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.</li>
+<li><strong>Correlation and Linear Regression</strong> - look at the correlation coefficient (<span class="math inline">\(r\)</span>), <span class="math inline">\(p\)</span>-value, regression coefficients, <span class="math inline">\(r\)</span>-squared, and the scatterplot. Compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.</li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="identifying-a-moderator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

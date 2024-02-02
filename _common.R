@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 list.of.packages <- c("ggplot2", "Rcpp", "rstanarm", "lme4", "mice", "VIM", "pander", "kableExtra",
                       "corrplot", "psych", "ggfortify", "GPArotation", "sjPlot", "gridExtra", "knitr", 
                       "ggmap", "spdep", "housingData", "Hmisc", "waffle", "ROCR", "caret", "ggjoy", 
-                      "ggdist", "glmmTMB",
+                      "ggdist", "glmmTMB", "ggpubr", 
                       "stargazer", "missForest", "forestplot", "emo", "tidyr", "factoextra", 
                       "performance", "broom", "dotwhisker", "survey", "marginaleffects", "gtsummary", 
                       "sjPlot", "mice", "palmerpenguins")

@@ -341,3 +341,11 @@ learn-more
 convert-number-to-factor
 changing-numeric-values
 wrangling-factors
+motivating-example---admissions-at-uc-berkeley
+motivating-example-penguin-body-mass
+ex-correlation-regression
+ex-regression
+ex-anova
+ex-4-chi-squared
+motivating-example-association-of-flower-parts
+ex-correlation

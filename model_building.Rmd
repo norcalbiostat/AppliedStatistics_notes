@@ -145,7 +145,7 @@ summary(me_intx_model)
 ```
 
 
-## Wald test
+## Wald test {#wald-test}
 
 The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 

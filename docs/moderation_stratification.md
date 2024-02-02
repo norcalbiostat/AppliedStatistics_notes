@@ -2,11 +2,18 @@
 
 Sometimes the relationship between X and Y may change depending on the value of a third variable. This section provides some motivation for why we need a single model formation that can accommodate more than a single predictor. 
 
+This section uses the additional following packages and data: 
 
+
+```r
+library(ggdist) # for the "half-violin" plot (stat_slab)
+library(ggpubr) # for the penguin scatterplot with ellipses (ggscatter)
+pen <- palmerpenguins::penguins
+```
 
 ## Moderation
 
-Moderation occurs when the relationship between two variables depends on a third variable.
+_Moderation_ occurs when the relationship between two variables depends on a third variable.
 
 * The third variable is referred to as the moderating variable or simply the moderator. 
 * The moderator affects the direction and/or strength of the relationship between the explanatory ($x$) and response ($y$) variable.
@@ -14,13 +21,42 @@ Moderation occurs when the relationship between two variables depends on a third
 * When testing a potential moderator, we are asking the question whether there is an association between two constructs, **but separately for different subgroups within the sample.**
     - This is also called a _stratified_ model, or a _subgroup analysis_.
 
-### Example 1: Simpson's Paradox
+### Motivating Example - Admissions at UC Berkeley
 
-Sometimes moderating variables can result in what's known as _Simpson's Paradox_. This has had legal consequences in the past at UC Berkeley. 
+Sometimes moderating variables can result in what's known as [Simpson's Paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox). This has had legal consequences in the past at UC Berkeley. 
 
-https://en.wikipedia.org/wiki/Simpson%27s_paradox
 
-### Example 2: Sepal vs Petal Length in Iris flowers
+Below are the admissions figures for Fall 1973 at UC Berkeley.
+
+|       | Applicants | Admitted |
+|-------|------------|----------|
+| Total | 12,763     | 41%      |
+| Men   | 8,442      | 44%      |
+| Women | 4,321      | 35%      |
+
+: Table of admissions rates at UC Berkeley in 1973
+
+Is there evidence of gender bias in college admissions? Do you think a difference of 35% vs 44% is too large to be by chance?
+
+Department specific data
+
+|            |            |          |            |          |            |          |
+|------------|------------|----------|------------|----------|------------|----------|
+|            | All        |          | Men        |          | Women      |          |
+| Department | Applicants | Admitted | Applicants | Admitted | Applicants | Admitted |
+| A          | 933        | 64%      | 825        | 62%      | 108        | **82%**  |
+| B          | 585        | 63%      | 560        | 63%      | 25         | **68%**  |
+| C          | 918        | 35%      | 325        | 37%      | 593        | 34%      |
+| D          | 792        | 34%      | 417        | 33%      | 375        | **35%**  |
+| E          | 584        | 25%      | 191        | 28%      | 393        | 24%      |
+| F          | 714        | 6%       | 373        | 6%       | 341        | **7%**   |
+| Total      | 4526       | 39%      | 2691       | 45%      | 1835       | 30%      |
+
+: The table of admissions rates for the 6 largest departments show a different story.
+
+After adjusting for features such as size and competitiveness of the department, the pooled data showed a "small but statistically significant bias in favor of women"
+
+### Motivating Example: Association of flower parts
 
 Let's explore the relationship between the length of the sepal in an iris flower, and the length (cm) of it's petal. 
 
@@ -40,7 +76,6 @@ gridExtra::grid.arrange(overall, by_spec , ncol=2)
 <img src="moderation_stratification_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
-
 
 ## Stratification
 
@@ -63,52 +98,97 @@ In each model, the intercept, slope, and variance of the residuals can all be di
 
 Here are 3 scenarios demonstrating how a third variable can modify the relationship between the original two variables. 
 
-**Scenario 1** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the strength (i.e., p-value is Non-Significant) of the relationship changes. Could just change strength for one level of third variable, not necessarily all levels of the third variable.
+* **Significant --\> Non-Significant**
+    * Significant relationship at bivariate level
+    * We expect the effect to exist in the entire population
+    * Within at least one level of the third variable the strength of the relationship changes
+    * P-value is no longer significant within at least one subgroup
 
-**Scenario 2** - Non-significant relationship at bivariate level (saying do not expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the relationship becomes significant (saying expect to see it in at least one of the sub-groups or levels of third variable, but not in entire population because was not significant before tested for moderation). Could just become significant in one level of the third variable, not necessarily all levels of the third variable.
+* **Non-Significant --\> Significant**
+    * Non-significant relationship at bivariate level
+    * We do not expect the effect to exist in the entire population
+    * Within at least one level of the third variable the relationship becomes significant
+    * P-value is now significant within at least one subgroup
 
-**Scenario 3** - Significant relationship at bivariate level (saying expect the effect to exist in the entire population) then when test for moderation the third variable is a moderator if the direction (i.e., means change order/direction) of the relationship changes. Could just change direction for one level of third variable, not necessarily all levels of the third variable.
+* **Change in Direction of Association**
+    * Significant relationship at bivariate level
+    * We expect the effect to exist in the entire population
+    * Within at least one level of the third variable the direction of the relationship changes
+    * Means change order, positive to negative correlation etc.
 
 
-### What to look for in each type of analysis
+## What to look for in each type of analysis
 
 * **ANOVA** - look at the $p$-value, $r$-squared, means, and the graph of the ANOVA and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is moderator or not.
 * **Chi-Square** - look at the $p$-value, the percents for the columns in the crosstab table, and the graph for the Chi-Square and compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.
 * **Correlation and Linear Regression** - look at the correlation coefficient ($r$), $p$-value, regression coefficients, $r$-squared, and the scatterplot. Compare to those values in the Moderation (i.e., each level of third variable) output to determine if third variable is a moderator or not.
 
 
-## Example 2 (cont.) Correlation & Regression
+## Ex: Correlation 
 
-![q](images/q.png) Is the relationship between sepal length and petal length the same within each species? 
+Can we predict penguin body mass from the flipper length?
 
 
-Let's look at the correlation between these two continuous variables
+```r
+ggscatter(pen, x="flipper_length_mm", y = "body_mass_g", add = "reg.line", 
+          color = "island", ellipse = TRUE)
+```
+
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+Probably, but the relationship between flipper length and body mass changes depending on what island they are found on.
+
 
 **overall**
 
 ```r
-cor(iris$Sepal.Length, iris$Petal.Length)
-## [1] 0.8717538
+cor(pen$flipper_length_mm, pen$body_mass_g, use="pairwise.complete.obs")
+## [1] 0.8712018
 ```
 
 **stratified by species**
 
 ```r
-by(iris, iris$Species, function(x) cor(x$Sepal.Length, x$Petal.Length))
-## iris$Species: setosa
-## [1] 0.2671758
+by(pen, pen$species, function(x){
+  cor(x$flipper_length_mm, x$body_mass_g, use="pairwise.complete.obs")
+})
+## pen$species: Adelie
+## [1] 0.4682017
 ## ------------------------------------------------------------ 
-## iris$Species: versicolor
-## [1] 0.754049
+## pen$species: Chinstrap
+## [1] 0.6415594
 ## ------------------------------------------------------------ 
-## iris$Species: virginica
-## [1] 0.8642247
+## pen$species: Gentoo
+## [1] 0.7026665
 ```
 
-There is a strong, positive, linear relationship between the sepal length of the flower and the petal length when ignoring the species. The correlation coefficient $r$ for virginica and veriscolor are similar to the overall $r$ value, 0.86 and 0.75 respectively compared to 0.87. However the correlation between sepal and petal length for species setosa is only 0.26.
+There is a strong, positive, linear relationship (r=.87) between the flipper length and body mass of penguins when ignoring the species. This association is attenuated however within each species. _Gentoo_ and _Chinstrap_ still have strong correlations between flipper length and body mass, $r$=.70 and .64 respectively. However _Adelie_ species penguins only have a moderate correlation with $r=.45$. 
+
+So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section \@ref(wald-test).
+ 
+## Ex: Regression
+
+Let's explore the relationship between the length of the sepal in an iris flower, and the length (cm) of it's petal. 
 
 
-![q](images/q.png) How does the species change the regression equation? 
+```r
+overall <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length)) + 
+                geom_point() + geom_smooth(se=FALSE) + 
+                theme_bw()
+
+by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) + 
+                  geom_point() + geom_smooth(se=FALSE) + 
+                  theme_bw() + theme(legend.position="top")
+
+gridExtra::grid.arrange(overall, by_spec , ncol=2)
+```
+
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
+
+
+How does the species change the regression equation? 
 
 **overall**
 
@@ -125,28 +205,28 @@ lm(iris$Petal.Length ~ iris$Sepal.Length) |> summary() |> broom::tidy()
 
 ```r
 by(iris, iris$Species, function(x) {
-  lm(x$Petal.Length ~ x$Sepal.Length) |> summary() |> broom::tidy()
+  lm(Petal.Length ~ Sepal.Length, data = x) |> summary() |> broom::tidy()
   })
 ## iris$Species: setosa
 ## # A tibble: 2 × 5
-##   term           estimate std.error statistic p.value
-##   <chr>             <dbl>     <dbl>     <dbl>   <dbl>
-## 1 (Intercept)       0.803    0.344       2.34  0.0238
-## 2 x$Sepal.Length    0.132    0.0685      1.92  0.0607
+##   term         estimate std.error statistic p.value
+##   <chr>           <dbl>     <dbl>     <dbl>   <dbl>
+## 1 (Intercept)     0.803    0.344       2.34  0.0238
+## 2 Sepal.Length    0.132    0.0685      1.92  0.0607
 ## ------------------------------------------------------------ 
 ## iris$Species: versicolor
 ## # A tibble: 2 × 5
-##   term           estimate std.error statistic  p.value
-##   <chr>             <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)       0.185    0.514      0.360 7.20e- 1
-## 2 x$Sepal.Length    0.686    0.0863     7.95  2.59e-10
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     0.185    0.514      0.360 7.20e- 1
+## 2 Sepal.Length    0.686    0.0863     7.95  2.59e-10
 ## ------------------------------------------------------------ 
 ## iris$Species: virginica
 ## # A tibble: 2 × 5
-##   term           estimate std.error statistic  p.value
-##   <chr>             <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)       0.610    0.417       1.46 1.50e- 1
-## 2 x$Sepal.Length    0.750    0.0630     11.9  6.30e-16
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     0.610    0.417       1.46 1.50e- 1
+## 2 Sepal.Length    0.750    0.0630     11.9  6.30e-16
 ```
 
 * Overall: -7.1 + 1.86x, significant positive slope p = 1.04x10-47
@@ -157,7 +237,7 @@ by(iris, iris$Species, function(x) {
 
 So we can say that iris specis **moderates** the relationship between sepal and petal length. 
 
-## Example 3: ANOVA
+## Ex: ANOVA
 
 Is the relationship between flipper length and species the same for each sex of penguin? 
 
@@ -173,7 +253,7 @@ ggplot(pen, aes(x=flipper_length_mm, y=species, fill=species)) +
       theme(legend.position = "none")
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
 ```r
@@ -189,7 +269,7 @@ ggplot(aes(x=flipper_length_mm, y=species, fill=species)) +
   facet_wrap(~sex)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 The pattern of distributions of flipper length by species seems the same for both sexes of penguin. Sex is likely not a moderator. Let's check the ANOVA anyhow
 
@@ -227,7 +307,7 @@ by(pen, pen$sex, function(x) {
 Sex is **not** a modifier, the relationship between species and flipper length is the same within male and female penguins. 
 
 
-## Example 4: Chi-Squared
+## Ex: 4 Chi-Squared
 
 **Identify response, explanatory, and moderating variables**
 
@@ -244,7 +324,7 @@ plot_xtab(addhealth$genhealth, addhealth$eversmoke_c,
   ggtitle("Overall")
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 ```r
@@ -261,7 +341,7 @@ mal.plot <- plot_xtab(mal$genhealth, mal$eversmoke_c,
 gridExtra::grid.arrange(fem.plot, mal.plot)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 A general pattern is seen where the proportion of smokers increases as the level of general health decreases. This pattern is similar within males and females, but it is noteworthy that a higher proportion of  non smokers are female. 
 

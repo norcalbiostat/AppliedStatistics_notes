@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Model Building | Applied Statistics</title>
+  <title>8.6 Ex: Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.6 Ex: Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.6 Ex: Regression | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="interactions.html"/>
+<link rel="prev" href="ex-correlation.html"/>
+<link rel="next" href="ex-anova.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,22 +589,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Model Building<a href="model-building.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit.</p>
-
-<div class="rmdnote">
-This section uses functions from the <code>gtsummary</code> and <code>survey</code> packages to help tidy and visualize results from regression models. It also uses functions from the <code>performance</code> and <code>glmnet</code> packages to perform model selection and assessment.
-</div>
+<div id="ex-regression" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Ex: Regression<a href="ex-regression.html#ex-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s explore the relationship between the length of the sepal in an iris flower, and the length (cm) of it’s petal.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ex-regression.html#cb6-1" tabindex="-1"></a>overall <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Petal.Length)) <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="ex-regression.html#cb6-2" tabindex="-1"></a>                <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="ex-regression.html#cb6-3" tabindex="-1"></a>                <span class="fu">theme_bw</span>()</span>
+<span id="cb6-4"><a href="ex-regression.html#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="ex-regression.html#cb6-5" tabindex="-1"></a>by_spec <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Petal.Length, <span class="at">col=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="ex-regression.html#cb6-6" tabindex="-1"></a>                  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb6-7"><a href="ex-regression.html#cb6-7" tabindex="-1"></a>                  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;top&quot;</span>)</span>
+<span id="cb6-8"><a href="ex-regression.html#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="ex-regression.html#cb6-9" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(overall, by_spec , <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="moderation_stratification_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.</p>
+<p>How does the species change the regression equation?</p>
+<p><strong>overall</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ex-regression.html#cb7-1" tabindex="-1"></a><span class="fu">lm</span>(iris<span class="sc">$</span>Petal.Length <span class="sc">~</span> iris<span class="sc">$</span>Sepal.Length) <span class="sc">|&gt;</span> <span class="fu">summary</span>() <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb7-2"><a href="ex-regression.html#cb7-2" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb7-3"><a href="ex-regression.html#cb7-3" tabindex="-1"></a><span class="do">##   term              estimate std.error statistic  p.value</span></span>
+<span id="cb7-4"><a href="ex-regression.html#cb7-4" tabindex="-1"></a><span class="do">##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb7-5"><a href="ex-regression.html#cb7-5" tabindex="-1"></a><span class="do">## 1 (Intercept)          -7.10    0.507      -14.0 6.13e-29</span></span>
+<span id="cb7-6"><a href="ex-regression.html#cb7-6" tabindex="-1"></a><span class="do">## 2 iris$Sepal.Length     1.86    0.0859      21.6 1.04e-47</span></span></code></pre></div>
+<p><strong>stratified by species</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ex-regression.html#cb8-1" tabindex="-1"></a><span class="fu">by</span>(iris, iris<span class="sc">$</span>Species, <span class="cf">function</span>(x) {</span>
+<span id="cb8-2"><a href="ex-regression.html#cb8-2" tabindex="-1"></a>  <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Sepal.Length, <span class="at">data =</span> x) <span class="sc">|&gt;</span> <span class="fu">summary</span>() <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb8-3"><a href="ex-regression.html#cb8-3" tabindex="-1"></a>  })</span>
+<span id="cb8-4"><a href="ex-regression.html#cb8-4" tabindex="-1"></a><span class="do">## iris$Species: setosa</span></span>
+<span id="cb8-5"><a href="ex-regression.html#cb8-5" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb8-6"><a href="ex-regression.html#cb8-6" tabindex="-1"></a><span class="do">##   term         estimate std.error statistic p.value</span></span>
+<span id="cb8-7"><a href="ex-regression.html#cb8-7" tabindex="-1"></a><span class="do">##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb8-8"><a href="ex-regression.html#cb8-8" tabindex="-1"></a><span class="do">## 1 (Intercept)     0.803    0.344       2.34  0.0238</span></span>
+<span id="cb8-9"><a href="ex-regression.html#cb8-9" tabindex="-1"></a><span class="do">## 2 Sepal.Length    0.132    0.0685      1.92  0.0607</span></span>
+<span id="cb8-10"><a href="ex-regression.html#cb8-10" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb8-11"><a href="ex-regression.html#cb8-11" tabindex="-1"></a><span class="do">## iris$Species: versicolor</span></span>
+<span id="cb8-12"><a href="ex-regression.html#cb8-12" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb8-13"><a href="ex-regression.html#cb8-13" tabindex="-1"></a><span class="do">##   term         estimate std.error statistic  p.value</span></span>
+<span id="cb8-14"><a href="ex-regression.html#cb8-14" tabindex="-1"></a><span class="do">##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb8-15"><a href="ex-regression.html#cb8-15" tabindex="-1"></a><span class="do">## 1 (Intercept)     0.185    0.514      0.360 7.20e- 1</span></span>
+<span id="cb8-16"><a href="ex-regression.html#cb8-16" tabindex="-1"></a><span class="do">## 2 Sepal.Length    0.686    0.0863     7.95  2.59e-10</span></span>
+<span id="cb8-17"><a href="ex-regression.html#cb8-17" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb8-18"><a href="ex-regression.html#cb8-18" tabindex="-1"></a><span class="do">## iris$Species: virginica</span></span>
+<span id="cb8-19"><a href="ex-regression.html#cb8-19" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb8-20"><a href="ex-regression.html#cb8-20" tabindex="-1"></a><span class="do">##   term         estimate std.error statistic  p.value</span></span>
+<span id="cb8-21"><a href="ex-regression.html#cb8-21" tabindex="-1"></a><span class="do">##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb8-22"><a href="ex-regression.html#cb8-22" tabindex="-1"></a><span class="do">## 1 (Intercept)     0.610    0.417       1.46 1.50e- 1</span></span>
+<span id="cb8-23"><a href="ex-regression.html#cb8-23" tabindex="-1"></a><span class="do">## 2 Sepal.Length    0.750    0.0630     11.9  6.30e-16</span></span></code></pre></div>
+<ul>
+<li>Overall: -7.1 + 1.86x, significant positive slope p = 1.04x10-47</li>
+<li>Setosa: 0.08 + 0.13x, non-significant slope, p=.06</li>
+<li>Versicolor: 0.19 + 0.69x, significant positive slope p=2.6x10-10</li>
+<li>Virginica: 0.61 + 0.75x, significant positive slope p= 6.3x10-16</li>
+</ul>
+<p>So we can say that iris specis <strong>moderates</strong> the relationship between sepal and petal length.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

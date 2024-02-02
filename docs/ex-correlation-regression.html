@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Model Building | Applied Statistics</title>
+  <title>8.5 Ex: Correlation &amp; Regression | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.5 Ex: Correlation &amp; Regression | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.5 Ex: Correlation &amp; Regression | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="interactions.html"/>
+<link rel="prev" href="what-to-look-for-in-each-type-of-analysis.html"/>
+<link rel="next" href="ex-regression.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -287,12 +287,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="moderation.html"><a href="moderation.html"><i class="fa fa-check"></i><b>8.1</b> Moderation</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="moderation.html"><a href="moderation.html#motivating-example---admissions-at-uc-berkeley"><i class="fa fa-check"></i><b>8.1.1</b> Motivating Example - Admissions at UC Berkeley</a></li>
-<li class="chapter" data-level="8.1.2" data-path="moderation.html"><a href="moderation.html#motivating-example-association-of-flower-parts"><i class="fa fa-check"></i><b>8.1.2</b> Motivating Example: Association of flower parts</a></li>
+<li class="chapter" data-level="8.1.2" data-path="moderation.html"><a href="moderation.html#motivating-example-penguin-body-mass"><i class="fa fa-check"></i><b>8.1.2</b> Motivating Example: Penguin body mass</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>8.2</b> Stratification</a></li>
 <li class="chapter" data-level="8.3" data-path="identifying-a-moderator.html"><a href="identifying-a-moderator.html"><i class="fa fa-check"></i><b>8.3</b> Identifying a moderator</a></li>
 <li class="chapter" data-level="8.4" data-path="what-to-look-for-in-each-type-of-analysis.html"><a href="what-to-look-for-in-each-type-of-analysis.html"><i class="fa fa-check"></i><b>8.4</b> What to look for in each type of analysis</a></li>
-<li class="chapter" data-level="8.5" data-path="ex-correlation.html"><a href="ex-correlation.html"><i class="fa fa-check"></i><b>8.5</b> Ex: Correlation</a></li>
+<li class="chapter" data-level="8.5" data-path="ex-correlation-regression.html"><a href="ex-correlation-regression.html"><i class="fa fa-check"></i><b>8.5</b> Ex: Correlation &amp; Regression</a></li>
 <li class="chapter" data-level="8.6" data-path="ex-regression.html"><a href="ex-regression.html"><i class="fa fa-check"></i><b>8.6</b> Ex: Regression</a></li>
 <li class="chapter" data-level="8.7" data-path="ex-anova.html"><a href="ex-anova.html"><i class="fa fa-check"></i><b>8.7</b> Ex: ANOVA</a></li>
 <li class="chapter" data-level="8.8" data-path="ex-4-chi-squared.html"><a href="ex-4-chi-squared.html"><i class="fa fa-check"></i><b>8.8</b> Ex: 4 Chi-Squared</a></li>
@@ -589,22 +589,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Model Building<a href="model-building.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit.</p>
-
-<div class="rmdnote">
-This section uses functions from the <code>gtsummary</code> and <code>survey</code> packages to help tidy and visualize results from regression models. It also uses functions from the <code>performance</code> and <code>glmnet</code> packages to perform model selection and assessment.
-</div>
+<div id="ex-correlation-regression" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Ex: Correlation &amp; Regression<a href="ex-correlation-regression.html#ex-correlation-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s look at those penguins again</p>
+<p><strong>overall</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ex-correlation-regression.html#cb3-1" tabindex="-1"></a><span class="fu">cor</span>(pen<span class="sc">$</span>flipper_length_mm, pen<span class="sc">$</span>body_mass_g, <span class="at">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb3-2"><a href="ex-correlation-regression.html#cb3-2" tabindex="-1"></a><span class="do">## [1] 0.8712018</span></span></code></pre></div>
+<p><strong>stratified by species</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ex-correlation-regression.html#cb4-1" tabindex="-1"></a><span class="fu">by</span>(pen, pen<span class="sc">$</span>species, <span class="cf">function</span>(x){</span>
+<span id="cb4-2"><a href="ex-correlation-regression.html#cb4-2" tabindex="-1"></a>  <span class="fu">cor</span>(x<span class="sc">$</span>flipper_length_mm, x<span class="sc">$</span>body_mass_g, <span class="at">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb4-3"><a href="ex-correlation-regression.html#cb4-3" tabindex="-1"></a>})</span>
+<span id="cb4-4"><a href="ex-correlation-regression.html#cb4-4" tabindex="-1"></a><span class="do">## pen$species: Adelie</span></span>
+<span id="cb4-5"><a href="ex-correlation-regression.html#cb4-5" tabindex="-1"></a><span class="do">## [1] 0.4682017</span></span>
+<span id="cb4-6"><a href="ex-correlation-regression.html#cb4-6" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb4-7"><a href="ex-correlation-regression.html#cb4-7" tabindex="-1"></a><span class="do">## pen$species: Chinstrap</span></span>
+<span id="cb4-8"><a href="ex-correlation-regression.html#cb4-8" tabindex="-1"></a><span class="do">## [1] 0.6415594</span></span>
+<span id="cb4-9"><a href="ex-correlation-regression.html#cb4-9" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb4-10"><a href="ex-correlation-regression.html#cb4-10" tabindex="-1"></a><span class="do">## pen$species: Gentoo</span></span>
+<span id="cb4-11"><a href="ex-correlation-regression.html#cb4-11" tabindex="-1"></a><span class="do">## [1] 0.7026665</span></span></code></pre></div>
+<p>There is a strong, positive, linear relationship (r=.87) between the flipper length and body mass of penguins when ignoring the species. This association is attenuated however within each species. <em>Gentoo</em> and <em>Chinstrap</em> still have strong correlations between flipper length and body mass, <span class="math inline">\(r\)</span>=.70 and .64 respectively. However <em>Adelie</em> species penguins only have a moderate correlation with <span class="math inline">\(r=.45\)</span>.</p>
+<p>So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section <a href="interactions.html#interactions">10.1</a>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-to-look-for-in-each-type-of-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

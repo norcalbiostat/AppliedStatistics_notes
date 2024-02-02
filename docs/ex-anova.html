@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Model Building | Applied Statistics</title>
+  <title>8.7 Ex: ANOVA | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.7 Ex: ANOVA | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.7 Ex: ANOVA | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="interactions.html"/>
+<link rel="prev" href="ex-regression.html"/>
+<link rel="next" href="ex-4-chi-squared.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,22 +589,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Model Building<a href="model-building.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit.</p>
-
-<div class="rmdnote">
-This section uses functions from the <code>gtsummary</code> and <code>survey</code> packages to help tidy and visualize results from regression models. It also uses functions from the <code>performance</code> and <code>glmnet</code> packages to perform model selection and assessment.
-</div>
+<div id="ex-anova" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Ex: ANOVA<a href="ex-anova.html#ex-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Is the relationship between flipper length and species the same for each sex of penguin?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ex-anova.html#cb9-1" tabindex="-1"></a><span class="fu">ggplot</span>(pen, <span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="ex-anova.html#cb9-2" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="ex-anova.html#cb9-3" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="ex-anova.html#cb9-4" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="ex-anova.html#cb9-5" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
+<span id="cb9-6"><a href="ex-anova.html#cb9-6" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="ex-anova.html#cb9-7" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="ex-anova.html#cb9-8" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="moderation_stratification_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ex-anova.html#cb10-1" tabindex="-1"></a>pen <span class="sc">%&gt;%</span> <span class="fu">select</span>(flipper_length_mm, species, sex) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="ex-anova.html#cb10-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>species, <span class="at">fill=</span>species)) <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="ex-anova.html#cb10-3" tabindex="-1"></a>      <span class="fu">stat_slab</span>(<span class="at">alpha=</span>.<span class="dv">5</span>, <span class="at">justification =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="ex-anova.html#cb10-4" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,  <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="ex-anova.html#cb10-5" tabindex="-1"></a>      <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">height =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="ex-anova.html#cb10-6" tabindex="-1"></a>      <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">pch=</span><span class="dv">17</span>) <span class="sc">+</span> </span>
+<span id="cb10-7"><a href="ex-anova.html#cb10-7" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb10-8"><a href="ex-anova.html#cb10-8" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Species&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Overall&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-9"><a href="ex-anova.html#cb10-9" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-10"><a href="ex-anova.html#cb10-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
+<p><img src="moderation_stratification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The pattern of distributions of flipper length by species seems the same for both sexes of penguin. Sex is likely not a moderator. Let’s check the ANOVA anyhow</p>
+<p><strong>Overall</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ex-anova.html#cb11-1" tabindex="-1"></a><span class="fu">aov</span>(pen<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> pen<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb11-2"><a href="ex-anova.html#cb11-2" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    </span></span>
+<span id="cb11-3"><a href="ex-anova.html#cb11-3" tabindex="-1"></a><span class="do">## pen$species   2  52473   26237   594.8 &lt;2e-16 ***</span></span>
+<span id="cb11-4"><a href="ex-anova.html#cb11-4" tabindex="-1"></a><span class="do">## Residuals   339  14953      44                   </span></span>
+<span id="cb11-5"><a href="ex-anova.html#cb11-5" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb11-6"><a href="ex-anova.html#cb11-6" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb11-7"><a href="ex-anova.html#cb11-7" tabindex="-1"></a><span class="do">## 2 observations deleted due to missingness</span></span></code></pre></div>
+<p><strong>By Sex</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ex-anova.html#cb12-1" tabindex="-1"></a><span class="fu">by</span>(pen, pen<span class="sc">$</span>sex, <span class="cf">function</span>(x) {</span>
+<span id="cb12-2"><a href="ex-anova.html#cb12-2" tabindex="-1"></a>  <span class="fu">aov</span>(x<span class="sc">$</span>flipper_length_mm <span class="sc">~</span> x<span class="sc">$</span>species) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb12-3"><a href="ex-anova.html#cb12-3" tabindex="-1"></a>  })</span>
+<span id="cb12-4"><a href="ex-anova.html#cb12-4" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb12-5"><a href="ex-anova.html#cb12-5" tabindex="-1"></a><span class="do">## x$species     2 21415.6   10708  411.79 &lt; 2.2e-16 ***</span></span>
+<span id="cb12-6"><a href="ex-anova.html#cb12-6" tabindex="-1"></a><span class="do">## Residuals   162  4212.6      26                      </span></span>
+<span id="cb12-7"><a href="ex-anova.html#cb12-7" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb12-8"><a href="ex-anova.html#cb12-8" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb12-9"><a href="ex-anova.html#cb12-9" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb12-10"><a href="ex-anova.html#cb12-10" tabindex="-1"></a><span class="do">##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
+<span id="cb12-11"><a href="ex-anova.html#cb12-11" tabindex="-1"></a><span class="do">## x$species     2 29098.4 14549.2  384.37 &lt; 2.2e-16 ***</span></span>
+<span id="cb12-12"><a href="ex-anova.html#cb12-12" tabindex="-1"></a><span class="do">## Residuals   165  6245.6    37.9                      </span></span>
+<span id="cb12-13"><a href="ex-anova.html#cb12-13" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb12-14"><a href="ex-anova.html#cb12-14" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<p>Sex is <strong>not</strong> a modifier, the relationship between species and flipper length is the same within male and female penguins.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-4-chi-squared.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Model Building | Applied Statistics</title>
+  <title>8.8 Ex: 4 Chi-Squared | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta property="og:title" content="8.8 Ex: 4 Chi-Squared | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Model Building | Applied Statistics" />
+  <meta name="twitter:title" content="8.8 Ex: 4 Chi-Squared | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-to-watch-out-for.html"/>
-<link rel="next" href="interactions.html"/>
+<link rel="prev" href="ex-anova.html"/>
+<link rel="next" href="mlr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,22 +589,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-building" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Model Building<a href="model-building.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Model building methods are used mainly in exploratory situations where many independent variables have been measured, but a final model explaining the dependent variable has not been reached. You want to build a model that contains enough covariates to explain the model well, but still be parsimonious such that the model is still interpretable.</p>
-<p>This chapter introduces how to use and interpret different types of covariates, how to choose covariates, and then cover some methods to compare between competing models using measures of model fit.</p>
+<div id="ex-4-chi-squared" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Ex: 4 Chi-Squared<a href="ex-4-chi-squared.html#ex-4-chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Identify response, explanatory, and moderating variables</strong></p>
+<ul>
+<li>Categorical response variable = Ever smoked (variable <code>eversmoke_c</code></li>
+<li>Categorical explanatory variable = General Health (variable <code>genhealth</code></li>
+<li>Categorical Potential Moderator = Gender (variable <code>female5_c</code></li>
+</ul>
+<p><strong>Visualize the relationship between smoking and general health across the entire sample.</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ex-4-chi-squared.html#cb13-1" tabindex="-1"></a><span class="fu">plot_xtab</span>(addhealth<span class="sc">$</span>genhealth, addhealth<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb13-2"><a href="ex-4-chi-squared.html#cb13-2" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="ex-4-chi-squared.html#cb13-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Overall&quot;</span>)</span></code></pre></div>
+<p><img src="moderation_stratification_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ex-4-chi-squared.html#cb14-1" tabindex="-1"></a>fem <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb14-2"><a href="ex-4-chi-squared.html#cb14-2" tabindex="-1"></a>mal <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> <span class="fu">filter</span>(female_c <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb14-3"><a href="ex-4-chi-squared.html#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="ex-4-chi-squared.html#cb14-4" tabindex="-1"></a>fem.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(fem<span class="sc">$</span>genhealth, fem<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb14-5"><a href="ex-4-chi-squared.html#cb14-5" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="ex-4-chi-squared.html#cb14-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Females only&quot;</span>)</span>
+<span id="cb14-7"><a href="ex-4-chi-squared.html#cb14-7" tabindex="-1"></a>mal.plot <span class="ot">&lt;-</span> <span class="fu">plot_xtab</span>(mal<span class="sc">$</span>genhealth, mal<span class="sc">$</span>eversmoke_c, </span>
+<span id="cb14-8"><a href="ex-4-chi-squared.html#cb14-8" tabindex="-1"></a>          <span class="at">show.total =</span> <span class="cn">FALSE</span>, <span class="at">margin =</span> <span class="st">&quot;row&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb14-9"><a href="ex-4-chi-squared.html#cb14-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Males only&quot;</span>)</span>
+<span id="cb14-10"><a href="ex-4-chi-squared.html#cb14-10" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="ex-4-chi-squared.html#cb14-11" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(fem.plot, mal.plot)</span></code></pre></div>
+<p><img src="moderation_stratification_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>A general pattern is seen where the proportion of smokers increases as the level of general health decreases. This pattern is similar within males and females, but it is noteworthy that a higher proportion of non smokers are female.</p>
+<p><img src="images/q.png" alt="q" /> Does being female change the relationship between smoking and general health? Is the distribution of smoking status (proportion of those who have ever smoked) equal across all levels of general health, for both males and females?</p>
+<p><strong>Fit both the original, and stratified models.</strong></p>
+<p><strong>original</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ex-4-chi-squared.html#cb15-1" tabindex="-1"></a><span class="fu">chisq.test</span>(addhealth<span class="sc">$</span>eversmoke_c, addhealth<span class="sc">$</span>genhealth)</span>
+<span id="cb15-2"><a href="ex-4-chi-squared.html#cb15-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-3"><a href="ex-4-chi-squared.html#cb15-3" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb15-4"><a href="ex-4-chi-squared.html#cb15-4" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-5"><a href="ex-4-chi-squared.html#cb15-5" tabindex="-1"></a><span class="do">## data:  addhealth$eversmoke_c and addhealth$genhealth</span></span>
+<span id="cb15-6"><a href="ex-4-chi-squared.html#cb15-6" tabindex="-1"></a><span class="do">## X-squared = 30.795, df = 4, p-value = 3.371e-06</span></span></code></pre></div>
+<p><strong>stratified</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ex-4-chi-squared.html#cb16-1" tabindex="-1"></a><span class="fu">by</span>(addhealth, addhealth<span class="sc">$</span>female_c, <span class="cf">function</span>(x) <span class="fu">chisq.test</span>(x<span class="sc">$</span>eversmoke_c, x<span class="sc">$</span>genhealth))</span>
+<span id="cb16-2"><a href="ex-4-chi-squared.html#cb16-2" tabindex="-1"></a><span class="do">## addhealth$female_c: Male</span></span>
+<span id="cb16-3"><a href="ex-4-chi-squared.html#cb16-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-4"><a href="ex-4-chi-squared.html#cb16-4" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb16-5"><a href="ex-4-chi-squared.html#cb16-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-6"><a href="ex-4-chi-squared.html#cb16-6" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
+<span id="cb16-7"><a href="ex-4-chi-squared.html#cb16-7" tabindex="-1"></a><span class="do">## X-squared = 19.455, df = 4, p-value = 0.0006395</span></span>
+<span id="cb16-8"><a href="ex-4-chi-squared.html#cb16-8" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-9"><a href="ex-4-chi-squared.html#cb16-9" tabindex="-1"></a><span class="do">## ------------------------------------------------------------ </span></span>
+<span id="cb16-10"><a href="ex-4-chi-squared.html#cb16-10" tabindex="-1"></a><span class="do">## addhealth$female_c: Female</span></span>
+<span id="cb16-11"><a href="ex-4-chi-squared.html#cb16-11" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-12"><a href="ex-4-chi-squared.html#cb16-12" tabindex="-1"></a><span class="do">##  Pearson&#39;s Chi-squared test</span></span>
+<span id="cb16-13"><a href="ex-4-chi-squared.html#cb16-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-14"><a href="ex-4-chi-squared.html#cb16-14" tabindex="-1"></a><span class="do">## data:  x$eversmoke_c and x$genhealth</span></span>
+<span id="cb16-15"><a href="ex-4-chi-squared.html#cb16-15" tabindex="-1"></a><span class="do">## X-squared = 19.998, df = 4, p-value = 0.0004998</span></span></code></pre></div>
+<p><strong>Determine if the Third Variable is a moderator or not.</strong></p>
+<p>The relationship between smoking status and general health is significant in both the main effects and the stratified model. The distribution of smoking status across general health categories does not differ between females and males. Gender is <strong>not</strong> a moderator for this analysis.</p>
 
-<div class="rmdnote">
-This section uses functions from the <code>gtsummary</code> and <code>survey</code> packages to help tidy and visualize results from regression models. It also uses functions from the <code>performance</code> and <code>glmnet</code> packages to perform model selection and assessment.
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-to-watch-out-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mlr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
