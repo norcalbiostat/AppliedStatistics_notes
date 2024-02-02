@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.2 Stratification | Applied Statistics</title>
+  <title>10.2 Simultaneous test of multiple variables (PMA6 9.5) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.2 Stratification | Applied Statistics" />
+  <meta property="og:title" content="10.2 Simultaneous test of multiple variables (PMA6 9.5) | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.2 Stratification | Applied Statistics" />
+  <meta name="twitter:title" content="10.2 Simultaneous test of multiple variables (PMA6 9.5) | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="moderation.html"/>
-<link rel="next" href="identifying-a-moderator.html"/>
+<link rel="prev" href="interactions.html"/>
+<link rel="next" href="multicollinearity-pma6-8.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,23 +589,186 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stratification" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Stratification<a href="stratification.html#stratification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Stratified models fit the regression equations (or any other bivariate analysis) for each subgroup of the population.</p>
-<p>The mathematical model describing the relationship between Petal length (<span class="math inline">\(Y\)</span>), and Sepal length (<span class="math inline">\(X\)</span>) for each of the species separately would be written as follows:</p>
-<p><span class="math display">\[ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})\]</span>
-<span class="math display">\[ Y_{iv} \sim \beta_{0v} + \beta_{1v}*x_{i} + \epsilon_{iv} \qquad \epsilon_{iv} \sim \mathcal{N}(0,\sigma^{2}_{v}) \]</span>
-<span class="math display">\[ Y_{ir} \sim \beta_{0r} + \beta_{1r}*x_{i} + \epsilon_{ir} \qquad \epsilon_{ir} \sim \mathcal{N}(0,\sigma^{2}_{r}) \]</span></p>
-<p>where <span class="math inline">\(s, v, r\)</span> indicates species <em>setosa, versicolor</em> and <em>virginica</em> respectively.</p>
-<p>In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: <span class="math inline">\(\beta_{0}, \beta_{1}\)</span>, and <span class="math inline">\(\sigma^{2}\)</span>, for a total of 9 for the three models. The more parameters that need to be estimated, the more data we need.</p>
+<div id="general-F" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Simultaneous test of multiple variables (PMA6 9.5)<a href="general-F.html#general-F" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The General-F test is used for simultaneous tests of <span class="math inline">\(Q\)</span> variables in a model. This is used primarily in two situations:</p>
+<ol style="list-style-type: decimal">
+<li>Testing if a categorical variable (with more than 2 levels) as a whole improves model fit.</li>
+<li>Testing whether or not the regression model is helpful in predicting values of Y at all.</li>
+</ol>
+<p>Consider a model with <span class="math inline">\(P\)</span> variables and you want to test if <span class="math inline">\(Q\)</span> additional variables are useful.</p>
+<ul>
+<li><span class="math inline">\(H_{0}: Q\)</span> additional variables are useless, i.e., their <span class="math inline">\(\beta\)</span>’s all = 0<br />
+</li>
+<li><span class="math inline">\(H_{A}: Q\)</span> additional variables are useful to explain/predict <span class="math inline">\(Y\)</span></li>
+</ul>
+<p>We can leverage the ANOVA framework to compare the residual sum of squares between the model including the <span class="math inline">\(Q\)</span> variables, and the one without.</p>
+<p><span class="math display">\[
+F = \frac{({\mbox{RSS}}_P-{\mbox{RSS}_{P+Q})}/Q}{{\mbox
+{RSS}}_{P+Q}{/}(N-P-Q-1)}
+\]</span></p>
+<p>The numerator quantifies improvement in the model from adding the additional <span class="math inline">\(Q\)</span> variables. This ratio has a <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(Q\)</span> and <span class="math inline">\(N-P-Q-1\)</span> degrees of freedom.</p>
+<p><strong>Example</strong>
+Consider the following model, where <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are continuous predictors and <span class="math inline">\(X_{3}, X_{4}, X_{5}\)</span> are binary indicators from a 4 level categorical variable.</p>
+<p><span class="math display">\[
+Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}X_{3} + \beta_{4}x_{4} + \beta_{5}X_{5}+\epsilon_{i}
+\]</span></p>
+<p>If you wanted to test (1) whether or not the categorical variable as a whole improves model fit, then
+<span class="math inline">\(\mathbf{R} = \begin{bmatrix} 0 , 0 ,1,1,1 \end{bmatrix}\)</span></p>
+<p>If we want to test (2) that the regression plane is useful to predict <span class="math inline">\(Y\)</span>, then we are testing <span class="math inline">\(\beta_{1}=\beta_{2}=...\beta_{5}=0\)</span>, then
+<span class="math inline">\(\mathbf{R} = \begin{bmatrix} 1 , 1 ,1,1,1 \end{bmatrix}\)</span>.</p>
+<div id="example-modeling-depression-score" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Example: Modeling depression score<a href="general-F.html#example-modeling-depression-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a model to predict depression using age, employment status and whether or not the person was chronically ill in the past year as covariates. This example uses the cleaned depression data set.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="general-F.html#cb9-1" tabindex="-1"></a>employ.depression.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ, <span class="at">data=</span>depress)</span>
+<span id="cb9-2"><a href="general-F.html#cb9-2" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
+<span id="cb9-3"><a href="general-F.html#cb9-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb9-4"><a href="general-F.html#cb9-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb9-5"><a href="general-F.html#cb9-5" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
+<span id="cb9-6"><a href="general-F.html#cb9-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb9-7"><a href="general-F.html#cb9-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb9-8"><a href="general-F.html#cb9-8" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb9-9"><a href="general-F.html#cb9-9" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
+<span id="cb9-10"><a href="general-F.html#cb9-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb9-11"><a href="general-F.html#cb9-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb9-12"><a href="general-F.html#cb9-12" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb9-13"><a href="general-F.html#cb9-13" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
+<span id="cb9-14"><a href="general-F.html#cb9-14" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
+<span id="cb9-15"><a href="general-F.html#cb9-15" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
+<span id="cb9-16"><a href="general-F.html#cb9-16" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
+<span id="cb9-17"><a href="general-F.html#cb9-17" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
+<span id="cb9-18"><a href="general-F.html#cb9-18" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
+<span id="cb9-19"><a href="general-F.html#cb9-19" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
+<span id="cb9-20"><a href="general-F.html#cb9-20" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
+<span id="cb9-21"><a href="general-F.html#cb9-21" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
+<span id="cb9-22"><a href="general-F.html#cb9-22" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb9-23"><a href="general-F.html#cb9-23" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb9-24"><a href="general-F.html#cb9-24" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb9-25"><a href="general-F.html#cb9-25" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
+<span id="cb9-26"><a href="general-F.html#cb9-26" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
+<span id="cb9-27"><a href="general-F.html#cb9-27" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
+<p>The results of this model show that age and chronic illness are statistically associated with CESD (each p&lt;.006). However employment status shows mixed results. Some employment statuses are significantly different from the reference group, some are not. So overall, is employment status associated with depression?</p>
+<p><strong>(1) Testing if a categorical variable as a whole improves model fit</strong></p>
+<p>Since employment is a categorical variable, all the coefficient estimates shown are the effect of being in that income category has on depression <em>compared to</em> being employed full time. For example, the coefficient for PT employment is greater than zero, so they have a higher CESD score compared to someone who is fully employed.</p>
+<p>To test that employment status affects CESD we need to do a global test that all <span class="math inline">\(\beta\)</span>’s related to employment status are 0.</p>
+<p><span class="math inline">\(H_{0}: \beta_{3} = \beta_{4} = \beta_{5} = \beta_{6} = \beta_{7} = \beta_{8} = 0\)</span><br />
+<span class="math inline">\(H_{A}\)</span>: At least one <span class="math inline">\(\beta_{j}\)</span> is not 0.</p>
+<p>ANOVA to the rescue! Since ANOVA partitions the variance in our outcome <span class="math inline">\(Y\)</span> into amounts due to each variable, we get an ANOVA table that has one row per term:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="general-F.html#cb10-1" tabindex="-1"></a><span class="fu">aov</span>(employ.depression.model) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb10-2"><a href="general-F.html#cb10-2" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span id="cb10-3"><a href="general-F.html#cb10-3" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.743 0.003368 ** </span></span>
+<span id="cb10-4"><a href="general-F.html#cb10-4" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.821 0.016469 *  </span></span>
+<span id="cb10-5"><a href="general-F.html#cb10-5" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.154 0.000509 ***</span></span>
+<span id="cb10-6"><a href="general-F.html#cb10-6" tabindex="-1"></a><span class="do">## Residuals   285  20036    70.3                     </span></span>
+<span id="cb10-7"><a href="general-F.html#cb10-7" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb10-8"><a href="general-F.html#cb10-8" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<ul>
+<li>The last row for <code>employ</code> is what we are interested in here.</li>
+<li>First confirm that the degrees of freedom are correct. It should equal the # of categories in the variable you are testing, minus 1.
+<ul>
+<li>Employment has 7 levels, so <span class="math inline">\(df=6\)</span>.</li>
+<li>Or equivalently, the degrees of freedom are the number of <span class="math inline">\(beta\)</span>’s you are testing to be 0.</li>
+</ul></li>
+</ul>
+<p>The p-value of this Wald test is significant, thus not <span class="math inline">\(beta\)</span>’s are equal to zero, which implies employment status significantly predicts CESD score.</p>
+
+<div class="rmdcaution">
+Note the p-values for the individual coefficients <code>age</code> and <code>chronill</code> are not the same as in the regression model. ANOVA models are order dependent as they describe a “reduction” in variance in the outcome due to that variable. A deeper explanation of this is not included in these notes at this time.
+</div>
+<p><strong>(2) Testing that the regression plane is useful to predict <span class="math inline">\(Y\)</span></strong></p>
+<p>This information is provided to us directly in the last line of the summary output from a linear model.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="general-F.html#cb11-1" tabindex="-1"></a><span class="fu">summary</span>(employ.depression.model)</span>
+<span id="cb11-2"><a href="general-F.html#cb11-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-3"><a href="general-F.html#cb11-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb11-4"><a href="general-F.html#cb11-4" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ, data = depress)</span></span>
+<span id="cb11-5"><a href="general-F.html#cb11-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-6"><a href="general-F.html#cb11-6" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb11-7"><a href="general-F.html#cb11-7" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb11-8"><a href="general-F.html#cb11-8" tabindex="-1"></a><span class="do">## -16.665  -5.843  -1.705   3.155  33.576 </span></span>
+<span id="cb11-9"><a href="general-F.html#cb11-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-10"><a href="general-F.html#cb11-10" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb11-11"><a href="general-F.html#cb11-11" tabindex="-1"></a><span class="do">##                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb11-12"><a href="general-F.html#cb11-12" tabindex="-1"></a><span class="do">## (Intercept)       11.48255    1.50174   7.646 3.19e-13 ***</span></span>
+<span id="cb11-13"><a href="general-F.html#cb11-13" tabindex="-1"></a><span class="do">## age               -0.13300    0.03514  -3.785 0.000187 ***</span></span>
+<span id="cb11-14"><a href="general-F.html#cb11-14" tabindex="-1"></a><span class="do">## chronill           2.68759    1.02368   2.625 0.009121 ** </span></span>
+<span id="cb11-15"><a href="general-F.html#cb11-15" tabindex="-1"></a><span class="do">## employHouseperson  6.75036    1.79661   3.757 0.000208 ***</span></span>
+<span id="cb11-16"><a href="general-F.html#cb11-16" tabindex="-1"></a><span class="do">## employIn School    1.96663    5.99549   0.328 0.743138    </span></span>
+<span id="cb11-17"><a href="general-F.html#cb11-17" tabindex="-1"></a><span class="do">## employOther        4.89731    4.27848   1.145 0.253320    </span></span>
+<span id="cb11-18"><a href="general-F.html#cb11-18" tabindex="-1"></a><span class="do">## employPT           3.25937    1.47240   2.214 0.027645 *  </span></span>
+<span id="cb11-19"><a href="general-F.html#cb11-19" tabindex="-1"></a><span class="do">## employRetired      3.23316    1.88602   1.714 0.087565 .  </span></span>
+<span id="cb11-20"><a href="general-F.html#cb11-20" tabindex="-1"></a><span class="do">## employUnemp        7.63163    2.33915   3.263 0.001238 ** </span></span>
+<span id="cb11-21"><a href="general-F.html#cb11-21" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb11-22"><a href="general-F.html#cb11-22" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb11-23"><a href="general-F.html#cb11-23" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-24"><a href="general-F.html#cb11-24" tabindex="-1"></a><span class="do">## Residual standard error: 8.385 on 285 degrees of freedom</span></span>
+<span id="cb11-25"><a href="general-F.html#cb11-25" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1217, Adjusted R-squared:  0.09704 </span></span>
+<span id="cb11-26"><a href="general-F.html#cb11-26" tabindex="-1"></a><span class="do">## F-statistic: 4.936 on 8 and 285 DF,  p-value: 9.86e-06</span></span></code></pre></div>
+</div>
+<div id="testing-for-a-moderation-effect-in-a-multiple-regression-model." class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Testing for a moderation effect in a multiple regression model.<a href="general-F.html#testing-for-a-moderation-effect-in-a-multiple-regression-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Moderation is introduced in Chapter <a href="mod-strat.html#mod-strat">8</a>, and helps to set the motivation for stratified models. Later, in Chapter <a href="interactions.html#interactions-catvars">10.1.2</a>, we show that an interaction term in a regression model is equivelant to stratification.</p>
+<p>Well what if you have other predictors in the model, not just the ones that you have an interaction on? We can use the Wald test to assess if a measure is a significant moderator without stratifying.</p>
+<p>Continuing with the depression example we saw that employment affects CESD depression score. What if we think that the effect (slope) of age on CESD may be different depending on their employment? That is, is the effect of age on depression different for those that are employed versus retired?</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="general-F.html#cb12-1" tabindex="-1"></a>emp.dep.intx <span class="ot">&lt;-</span> <span class="fu">lm</span>(cesd <span class="sc">~</span> age <span class="sc">+</span> chronill <span class="sc">+</span> employ <span class="sc">+</span> age<span class="sc">*</span>employ, <span class="at">data=</span>depress)</span>
+<span id="cb12-2"><a href="general-F.html#cb12-2" tabindex="-1"></a><span class="fu">summary</span>(emp.dep.intx)</span>
+<span id="cb12-3"><a href="general-F.html#cb12-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-4"><a href="general-F.html#cb12-4" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb12-5"><a href="general-F.html#cb12-5" tabindex="-1"></a><span class="do">## lm(formula = cesd ~ age + chronill + employ + age * employ, data = depress)</span></span>
+<span id="cb12-6"><a href="general-F.html#cb12-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-7"><a href="general-F.html#cb12-7" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb12-8"><a href="general-F.html#cb12-8" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb12-9"><a href="general-F.html#cb12-9" tabindex="-1"></a><span class="do">## -18.728  -5.499  -1.900   3.251  33.973 </span></span>
+<span id="cb12-10"><a href="general-F.html#cb12-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-11"><a href="general-F.html#cb12-11" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb12-12"><a href="general-F.html#cb12-12" tabindex="-1"></a><span class="do">##                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb12-13"><a href="general-F.html#cb12-13" tabindex="-1"></a><span class="do">## (Intercept)            10.514408   2.027479   5.186 4.14e-07 ***</span></span>
+<span id="cb12-14"><a href="general-F.html#cb12-14" tabindex="-1"></a><span class="do">## age                    -0.108148   0.050325  -2.149  0.03250 *  </span></span>
+<span id="cb12-15"><a href="general-F.html#cb12-15" tabindex="-1"></a><span class="do">## chronill                2.716041   1.035393   2.623  0.00919 ** </span></span>
+<span id="cb12-16"><a href="general-F.html#cb12-16" tabindex="-1"></a><span class="do">## employHouseperson      13.136141   5.279521   2.488  0.01343 *  </span></span>
+<span id="cb12-17"><a href="general-F.html#cb12-17" tabindex="-1"></a><span class="do">## employIn School       -39.366285  42.218614  -0.932  0.35192    </span></span>
+<span id="cb12-18"><a href="general-F.html#cb12-18" tabindex="-1"></a><span class="do">## employOther             5.099073  18.815341   0.271  0.78659    </span></span>
+<span id="cb12-19"><a href="general-F.html#cb12-19" tabindex="-1"></a><span class="do">## employPT                2.742451   3.850676   0.712  0.47694    </span></span>
+<span id="cb12-20"><a href="general-F.html#cb12-20" tabindex="-1"></a><span class="do">## employRetired          -2.851372  12.739350  -0.224  0.82306    </span></span>
+<span id="cb12-21"><a href="general-F.html#cb12-21" tabindex="-1"></a><span class="do">## employUnemp            13.820668   5.677595   2.434  0.01555 *  </span></span>
+<span id="cb12-22"><a href="general-F.html#cb12-22" tabindex="-1"></a><span class="do">## age:employHouseperson  -0.130545   0.102421  -1.275  0.20351    </span></span>
+<span id="cb12-23"><a href="general-F.html#cb12-23" tabindex="-1"></a><span class="do">## age:employIn School     1.988808   1.989220   1.000  0.31828    </span></span>
+<span id="cb12-24"><a href="general-F.html#cb12-24" tabindex="-1"></a><span class="do">## age:employOther        -0.009316   0.386657  -0.024  0.98080    </span></span>
+<span id="cb12-25"><a href="general-F.html#cb12-25" tabindex="-1"></a><span class="do">## age:employPT            0.008960   0.085254   0.105  0.91638    </span></span>
+<span id="cb12-26"><a href="general-F.html#cb12-26" tabindex="-1"></a><span class="do">## age:employRetired       0.073942   0.182591   0.405  0.68582    </span></span>
+<span id="cb12-27"><a href="general-F.html#cb12-27" tabindex="-1"></a><span class="do">## age:employUnemp        -0.174615   0.146179  -1.195  0.23328    </span></span>
+<span id="cb12-28"><a href="general-F.html#cb12-28" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb12-29"><a href="general-F.html#cb12-29" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb12-30"><a href="general-F.html#cb12-30" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-31"><a href="general-F.html#cb12-31" tabindex="-1"></a><span class="do">## Residual standard error: 8.408 on 279 degrees of freedom</span></span>
+<span id="cb12-32"><a href="general-F.html#cb12-32" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1354, Adjusted R-squared:  0.09201 </span></span>
+<span id="cb12-33"><a href="general-F.html#cb12-33" tabindex="-1"></a><span class="do">## F-statistic: 3.121 on 14 and 279 DF,  p-value: 0.0001511</span></span></code></pre></div>
+<p>Let’s revisit our list of beta coefficients:</p>
+<ul>
+<li><span class="math inline">\(\beta_{1}\)</span>: Age</li>
+<li><span class="math inline">\(\beta_{2}\)</span>: Chronic illness</li>
+<li><span class="math inline">\(\beta_{3} \ldots \beta_{7}\)</span>: Effects of different levels of employment (Houseperson to Unemployed)</li>
+<li><span class="math inline">\(\beta_{8} \ldots \beta_{12}\)</span>: Multiplicative effect that levels of employment have on the slope of age.</li>
+</ul>
+<p>To see if the interaction term <code>age*employ</code> is significant, we run an F test via <code>aov()</code> and interpret the p-value for the interaction term <code>age:employ</code>. Here the pvalue is very large, so there is no reason to believe that employment moderates the relationship between age and CESD score. This is a two way relationship. There is also no reason to believe that age moderates the relationship between employment and CESD score.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="general-F.html#cb13-1" tabindex="-1"></a><span class="fu">aov</span>(emp.dep.intx) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb13-2"><a href="general-F.html#cb13-2" tabindex="-1"></a><span class="do">##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span id="cb13-3"><a href="general-F.html#cb13-3" tabindex="-1"></a><span class="do">## age           1    615   614.6   8.694 0.003462 ** </span></span>
+<span id="cb13-4"><a href="general-F.html#cb13-4" tabindex="-1"></a><span class="do">## chronill      1    409   409.2   5.789 0.016781 *  </span></span>
+<span id="cb13-5"><a href="general-F.html#cb13-5" tabindex="-1"></a><span class="do">## employ        6   1752   292.0   4.131 0.000541 ***</span></span>
+<span id="cb13-6"><a href="general-F.html#cb13-6" tabindex="-1"></a><span class="do">## age:employ    6    313    52.1   0.737 0.620089    </span></span>
+<span id="cb13-7"><a href="general-F.html#cb13-7" tabindex="-1"></a><span class="do">## Residuals   279  19723    70.7                     </span></span>
+<span id="cb13-8"><a href="general-F.html#cb13-8" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb13-9"><a href="general-F.html#cb13-9" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<p>This last table is also known as a “Two Factor” or “Two way” ANOVA with an interaction term. This is quite often used in scientific experiments where two treatments (and their combination) is being investigated.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="moderation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="identifying-a-moderator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interactions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multicollinearity-pma6-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

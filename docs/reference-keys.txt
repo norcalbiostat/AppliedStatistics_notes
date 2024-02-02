@@ -349,3 +349,6 @@ ex-anova
 ex-4-chi-squared
 motivating-example-association-of-flower-parts
 ex-correlation
+multicollinearity-pma6-8.9
+general-f-test
+automated-selection-procedures-pma6-9.6

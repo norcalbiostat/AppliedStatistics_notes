@@ -2,6 +2,11 @@
 
 Sometimes the relationship between X and Y may change depending on the value of a third variable. This section provides some motivation for why we need a single model formation that can accommodate more than a single predictor. 
 
+```{block2,  type='rmdnote'}
+This section uses functions from the `ggdist` and `ggpubr` packages to help tidy and visualize results from regression models. It also uses functions from the `performance` and `glmnet` packages to perform model selection and assessment. 
+```
+
+
 This section uses the additional following packages and data: 
 
 ```{r}
@@ -146,7 +151,7 @@ by(pen, pen$species, function(x){
 
 There is a strong, positive, linear relationship (r=.87) between the flipper length and body mass of penguins when ignoring the species. This association is attenuated however within each species. _Gentoo_ and _Chinstrap_ still have strong correlations between flipper length and body mass, $r$=.70 and .64 respectively. However _Adelie_ species penguins only have a moderate correlation with $r=.45$. 
 
-So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section \@ref(wald-test).
+So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section \@ref(general-F).
  
 ## Ex: Regression
 

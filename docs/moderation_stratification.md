@@ -2,6 +2,9 @@
 
 Sometimes the relationship between X and Y may change depending on the value of a third variable. This section provides some motivation for why we need a single model formation that can accommodate more than a single predictor. 
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the `ggdist` and `ggpubr` packages to help tidy and visualize results from regression models. It also uses functions from the `performance` and `glmnet` packages to perform model selection and assessment. </div>\EndKnitrBlock{rmdnote}
+
+
 This section uses the additional following packages and data: 
 
 
@@ -73,7 +76,7 @@ by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) +
 gridExtra::grid.arrange(overall, by_spec , ncol=2)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
 
@@ -134,7 +137,7 @@ ggscatter(pen, x="flipper_length_mm", y = "body_mass_g", add = "reg.line",
           color = "island", ellipse = TRUE)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Probably, but the relationship between flipper length and body mass changes depending on what island they are found on.
 
@@ -164,7 +167,7 @@ by(pen, pen$species, function(x){
 
 There is a strong, positive, linear relationship (r=.87) between the flipper length and body mass of penguins when ignoring the species. This association is attenuated however within each species. _Gentoo_ and _Chinstrap_ still have strong correlations between flipper length and body mass, $r$=.70 and .64 respectively. However _Adelie_ species penguins only have a moderate correlation with $r=.45$. 
 
-So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section \@ref(wald-test).
+So does Species moderate the relationship between flipper length and body mass? Visually we see a difference, but it is likely not statisticaly significant. More on how to determine that in section \@ref(general-F).
  
 ## Ex: Regression
 
@@ -183,7 +186,7 @@ by_spec <- ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species)) +
 gridExtra::grid.arrange(overall, by_spec , ncol=2)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 The points are clearly clustered by species, the slope of the lowess line between virginica and versicolor appear similar in strength, whereas the slope of the line for setosa is closer to zero. This would imply that petal length for Setosa may not be affected by the length of the sepal.
 
@@ -253,7 +256,7 @@ ggplot(pen, aes(x=flipper_length_mm, y=species, fill=species)) +
       theme(legend.position = "none")
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 
 ```r
@@ -269,7 +272,7 @@ ggplot(aes(x=flipper_length_mm, y=species, fill=species)) +
   facet_wrap(~sex)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 The pattern of distributions of flipper length by species seems the same for both sexes of penguin. Sex is likely not a moderator. Let's check the ANOVA anyhow
 
@@ -324,7 +327,7 @@ plot_xtab(addhealth$genhealth, addhealth$eversmoke_c,
   ggtitle("Overall")
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ```r
@@ -341,7 +344,7 @@ mal.plot <- plot_xtab(mal$genhealth, mal$eversmoke_c,
 gridExtra::grid.arrange(fem.plot, mal.plot)
 ```
 
-<img src="moderation_stratification_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="moderation_stratification_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 A general pattern is seen where the proportion of smokers increases as the level of general health decreases. This pattern is similar within males and females, but it is noteworthy that a higher proportion of  non smokers are female. 
 

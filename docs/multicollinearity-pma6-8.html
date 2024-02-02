@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.2 Stratification | Applied Statistics</title>
+  <title>10.3 Multicollinearity (PMA6 8.9) | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.2 Stratification | Applied Statistics" />
+  <meta property="og:title" content="10.3 Multicollinearity (PMA6 8.9) | Applied Statistics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   <meta name="github-repo" content="norcalbiostat/AppliedStatistics_notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.2 Stratification | Applied Statistics" />
+  <meta name="twitter:title" content="10.3 Multicollinearity (PMA6 8.9) | Applied Statistics" />
   
   <meta name="twitter:description" content="Course notes for Applied Statistics courses at CSU Chico" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="moderation.html"/>
-<link rel="next" href="identifying-a-moderator.html"/>
+<link rel="prev" href="general-F.html"/>
+<link rel="next" href="variable-selection-process.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -589,23 +589,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stratification" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Stratification<a href="stratification.html#stratification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Stratified models fit the regression equations (or any other bivariate analysis) for each subgroup of the population.</p>
-<p>The mathematical model describing the relationship between Petal length (<span class="math inline">\(Y\)</span>), and Sepal length (<span class="math inline">\(X\)</span>) for each of the species separately would be written as follows:</p>
-<p><span class="math display">\[ Y_{is} \sim \beta_{0s} + \beta_{1s}*x_{i} + \epsilon_{is} \qquad \epsilon_{is} \sim \mathcal{N}(0,\sigma^{2}_{s})\]</span>
-<span class="math display">\[ Y_{iv} \sim \beta_{0v} + \beta_{1v}*x_{i} + \epsilon_{iv} \qquad \epsilon_{iv} \sim \mathcal{N}(0,\sigma^{2}_{v}) \]</span>
-<span class="math display">\[ Y_{ir} \sim \beta_{0r} + \beta_{1r}*x_{i} + \epsilon_{ir} \qquad \epsilon_{ir} \sim \mathcal{N}(0,\sigma^{2}_{r}) \]</span></p>
-<p>where <span class="math inline">\(s, v, r\)</span> indicates species <em>setosa, versicolor</em> and <em>virginica</em> respectively.</p>
-<p>In each model, the intercept, slope, and variance of the residuals can all be different. This is the unique and powerful feature of stratified models. The downside is that each model is only fit on the amount of data in that particular subset. Furthermore, each model has 3 parameters that need to be estimated: <span class="math inline">\(\beta_{0}, \beta_{1}\)</span>, and <span class="math inline">\(\sigma^{2}\)</span>, for a total of 9 for the three models. The more parameters that need to be estimated, the more data we need.</p>
+<div id="multicollinearity-pma6-8.9" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Multicollinearity (PMA6 8.9)<a href="multicollinearity-pma6-8.html#multicollinearity-pma6-8.9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Occurs when some of the X variables are highly intercorrelated.</li>
+<li>Computed estimates of regression coefficients are unstable and have large standard errors.</li>
+</ul>
+<p>For example, the squared standard error of the <span class="math inline">\(i\)</span>th slope coefficient (<span class="math inline">\([SE(\beta_{i})]^2\)</span>) can be written as:</p>
+<p><span class="math display">\[
+[SE(\beta_{i})]^2 = \frac{S^{2}}{(N-1)(S_{i}^{2})}*\frac{1}{1 - (R_{i})^2}
+\]</span></p>
+<p>where <span class="math inline">\(S^{2}\)</span> is the residual mean square, <span class="math inline">\(S_{i}\)</span> the standard deviation of <span class="math inline">\(X_{i}\)</span>, and <span class="math inline">\(R_{i}\)</span> the multiple correlation between <span class="math inline">\(X_{i}\)</span> and all other <span class="math inline">\(X\)</span>’s.</p>
+<p>When <span class="math inline">\(R_{i}\)</span> is close to 1 (very large), <span class="math inline">\(1 - (R_{i})^2\)</span> becomes close to 0, which makes <span class="math inline">\(\frac{1}{1 - (R_{i})^2}\)</span> very large.</p>
+<p>This fraction is called the <strong>variance inflation factor</strong> and is available in most model diagnostics.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="multicollinearity-pma6-8.html#cb14-1" tabindex="-1"></a>big.pen.model <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm <span class="sc">+</span> flipper_length_mm, <span class="at">data=</span>pen) </span>
+<span id="cb14-2"><a href="multicollinearity-pma6-8.html#cb14-2" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_collinearity</span>(big.pen.model) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div>
+<p><img src="model_building_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li>Solution: use variable selection to delete some X variables.</li>
+<li>Alternatively, use dimension reduction techniques such as Principal Components (Chapter <a href="pca.html#pca">14</a>).</li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="moderation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="identifying-a-moderator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="general-F.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variable-selection-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -14,7 +14,7 @@ library(gtsummary); library(performance); library(leaps)
 pen <- palmerpenguins::penguins
 ```
 
-## Interactions {#interactions}
+## Interactions (PMA6 8.8) {#interactions}
 
 In this _main effects_ model, Species only changes the intercept. The effect of species is not multiplied by Sepal length. Reviewing the scatterplot below, do you think this is a reasonable model to fit the observed relationship?
 
@@ -145,9 +145,9 @@ summary(me_intx_model)
 ```
 
 
-## Wald test {#wald-test}
+## Simultaneous test of multiple variables (PMA6 9.5) {#general-F}
 
-The Wald test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
+The General-F test is used for simultaneous tests of $Q$ variables in a model. This is used primarily in two situations: 
 
 1. Testing if a categorical variable (with more than 2 levels) as a whole improves model fit. 
 2. Testing whether or not the regression model is helpful in predicting values of Y at all. 
@@ -157,18 +157,15 @@ Consider a model with $P$ variables and you want to test if $Q$ additional varia
 * $H_{0}: Q$ additional variables are useless, i.e., their $\beta$'s all = 0  
 * $H_{A}: Q$ additional variables are useful to explain/predict $Y$
 
-The traditional test statistic that we've seen since Intro stats is
-$\frac{\hat{\theta}-\theta}{\sqrt{Var(\hat{\theta})}}$, and generally has a $Z$ or $T$ distribution. 
-
-The Wald test generalizes this test _any_ linear combination of predictors. 
+We can leverage the ANOVA framework to compare the residual sum of squares between the model including the $Q$ variables, and the one without. 
 
 $$
-(R\hat{\theta}_{n}-r)^{'}[R({\hat{V}}_{n}/n)R^{'}]^{-1}
-(R\hat{\theta}_{n}-r)
-\quad \xrightarrow{\mathcal{D}}  \quad F(Q,n-P)
+F = \frac{({\mbox{RSS}}_P-{\mbox{RSS}_{P+Q})}/Q}{{\mbox
+{RSS}}_{P+Q}{/}(N-P-Q-1)}
 $$
 
-Where $\mathbf{R}$ is the vector of coefficients for the $\beta$, and $\hat{V}_{n}$ is a consistent estimator of the covariance matrix. Instead of a normal distribution, this test statistic has an $F$ distribution with $Q$ and $n-P$ degrees of freedom. 
+
+The numerator quantifies improvement in the model from adding the additional $Q$ variables. This ratio has a $F$ distribution with $Q$ and $N-P-Q-1$ degrees of freedom.
 
 **Example**
 Consider the following model, where $X_{1}$ and $X_{2}$ are continuous predictors and $X_{3}, X_{4}, X_{5}$ are binary indicators from a 4 level categorical variable. 
@@ -259,9 +256,9 @@ To see if the interaction term `age*employ` is significant, we run an F test via
 aov(emp.dep.intx) |> summary()
 ```
 
+This last table is also known as a "Two Factor" or "Two way" ANOVA with an interaction term. This is quite often used in scientific experiments where two treatments (and their combination) is being investigated. 
 
-
-## Multicollinearity 
+## Multicollinearity (PMA6 8.9)
 
 * Occurs when some of the X variables are highly intercorrelated.
 * Computed estimates of regression coefficients are unstable and have large standard errors. 
@@ -289,7 +286,9 @@ performance::check_collinearity(big.pen.model) |> plot()
 
 ## Variable Selection Process
 
-> Ref: PMA6 CH 9
+```{block2,  type='rmdnote'}
+Corresponding PMA6 Ch 9
+```
 
 Variable selection methods such as the ones described in this section, are most often used when performing an _Exploratory_ analysis, where many independent variables have been measured, but a final model to explain the variability of a dependent variable has not yet been determined. 
 
@@ -314,7 +313,7 @@ How variables are chosen for inclusion into a model is heavily driven by the pur
 * predictive 
 
 
-### Automated selection procedures
+### Automated selection procedures (PMA6 9.6)
 
 > This example uses the penguins data to model the body mass
 
@@ -513,7 +512,7 @@ This means Ridge regression is **not** a method of variable selection.
 ```
 
 
-## Comparing between models {#model-fit-criteria}
+## Comparing between models (PMA6 9.4) {#model-fit-criteria}
 
 The goal: Find the subset of independent variables that optimizes (either minimize or maximize) a certain criteria. In other words, the goal is to find the optimal model. 
 
@@ -531,7 +530,9 @@ $$
 $$
 
 
-### General F Test  {#general-F}
+### General F Test
+
+> See also Section \@ref(general-F).
 
 Two nested models are similar if the p-value for the General F-test is non-significant at a .15 level. _Nested_: The list of variables in one model is a subset of the list of variables from a bigger model. Similar to all other ANOVA models, you are essentially comparing the difference in RSS between nested models. 
 
