@@ -258,6 +258,7 @@ lm(fev1 ~ age + ht + gender + area, data=fev_long) |> tbl_regression()
 
 
 ## Presenting results
+
 The direct software output always tells you more information than what you are wanting to share with an audience. Here are some ways to "prettify" your regression output. 
 
 
@@ -272,6 +273,12 @@ tidy(mlr.dad.model) |> kable(digits=3)
 library(gtsummary)
 tbl_regression(mlr.dad.model)
 ```
+
+Consult the [vignette](https://www.danieldsjoberg.com/gtsummary/) for additional ways to modify the output to show measures such as `AIC`, $R^{2}$ and the number of observations being used to fit the model. 
+
+
+
+
 
 * Using `dwplot` from the [`dotwhisker`](https://cran.r-project.org/web/packages/dotwhisker/vignettes/dotwhisker-vignette.html) package to create a _forest plot_. 
 
