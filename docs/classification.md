@@ -49,8 +49,6 @@ Consider the main effects model of depression on age, income and sex from sectio
                                freedom          
 -------------------- ---------------------------
 
-
-
 The predicted probability of depression is calculated as: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
@@ -59,7 +57,7 @@ $$
 
 Notice this formulation requires you to specify a _covariate profile_. In other words, what value X take on for each record. Often when you are only concerned with comparing the effect of a single measures, you set all other measures equal to their means. 
 
-Let's compare the probability of being depressed for males and females separately, while holding age and income constant at their average value. 
+Let's compare the probability of being depressed for males and females separately, while holding age and income constant at the average value calculated across all individuals (regardless of sex). 
 
 
 ```r
@@ -91,7 +89,7 @@ exp(XB.m) / (1+exp(XB.m))
 ## [1] 0.08629312
 ```
 
-The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.86. 
+The probability for a 44.4 year old female who makes $20.6k annual income has a 0.19 probability of being depressed. The probability of depression for a male of equal age and income is 0.086. 
 
 
 ## Distribution of Predicted probabilities
@@ -112,7 +110,7 @@ abline(v = mean(phat.depr), col = "blue", lwd = 2) # add mean
 
 <img src="classification_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
-The average predicted probability of showing symptoms of depression is 0.45. 
+The average predicted probability of showing symptoms of depression is 0.17. 
 
 ### Plotting predictions against covariates
 
@@ -178,8 +176,7 @@ table(plot.mpp$pred.class, plot.mpp$truth)
 ##   Depressed                49        15
 ```
 
-The model correctly identified 195 individuals as not depressed and 15 as depressed.
-The model got it wrong 49 + 35 times. 
+The model correctly identified 195 individuals as not depressed and 15 as depressed. The model got it wrong 49 + 35 times. 
 
 The **accuracy** of the model is calculated as the fraction of times the model prediction matches the observed category: 
 
