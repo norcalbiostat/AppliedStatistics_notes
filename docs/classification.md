@@ -49,6 +49,8 @@ Consider the main effects model of depression on age, income and sex from sectio
                                freedom          
 -------------------- ---------------------------
 
+
+
 The predicted probability of depression is calculated as: 
 $$
 P(depressed) = \frac{e^{-0.676 - 0.02096*age - .03656*income + 0.92945*sex}}
@@ -330,20 +332,20 @@ plot(perf.acc)
 
 <img src="classification_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-We can dig into the `perf.acc` object to get the maximum accuracy value (`y.value`), then find the row where that value occurs, and link it to the corresponding cutoff value of x.
+We can dig into the `perf.f1` object to get the maximum $f1$ value (`y.value`), then find the row where that value occurs, and link it to the corresponding cutoff value of x.
 
 
 ```r
-(max.f1 <- max(perf.acc@y.values[[1]], na.rm=TRUE))
-## [1] 0.8333333
-(row.with.max <- which(perf.acc@y.values[[1]]==max.f1))
-## [1] 2 8
-(cutoff.value <- perf.acc@x.values[[1]][row.with.max])
-##       124       256 
-## 0.4508171 0.3946273
+(max.f1 <- max(perf.f1@y.values[[1]], na.rm=TRUE))
+## [1] 0.3937008
+(row.with.max <- which(perf.f1@y.values[[1]]==max.f1))
+## [1] 68
+(cutoff.value <- perf.f1@x.values[[1]][row.with.max])
+##       257 
+## 0.2282816
 ```
 
-Sometimes (like here) there is not one single maximum value for accuracy. In this case I would look at which of these two cutoff points maximize other metrics such as the $f1$ score. 
+A cutoff value of 0.228 provides the most optimal $f1$ score. 
 
 ROC curves: 
 
@@ -361,7 +363,7 @@ auc@y.values
 
 ## Model Performance
 
-* Say we decide that a value of 0.15 is our optimal cutoff value to predict depression using this model. 
+* Say we decide that a value of 0.22828 is our optimal cutoff value to predict depression using this model. (note here is a GOOD place to use all the decimals.)
 * We can use this probability to classify each row into groups. 
     - The assigned class values must match the data type and levels of the true value.
     - It also has to be in the same order, so the `0` group needs to come first. 
@@ -371,7 +373,7 @@ auc@y.values
 
 
 ```r
-plot.mpp$pred.class2 <- ifelse(plot.mpp$pred.prob <0.15, 0,1) 
+plot.mpp$pred.class2 <- ifelse(plot.mpp$pred.prob <0.22828, 0,1) 
 plot.mpp$pred.class2 <- factor(plot.mpp$pred.class2, labels=c("Not Depressed", "Depressed")) %>%   
                         forcats::fct_rev()
 
@@ -380,43 +382,43 @@ confusionMatrix(plot.mpp$pred.class2, forcats::fct_rev(plot.mpp$truth), positive
 ## 
 ##                Reference
 ## Prediction      Depressed Not Depressed
-##   Depressed            40           121
-##   Not Depressed        10           123
+##   Depressed            25            52
+##   Not Depressed        25           192
 ##                                           
-##                Accuracy : 0.5544          
-##                  95% CI : (0.4956, 0.6121)
+##                Accuracy : 0.7381          
+##                  95% CI : (0.6839, 0.7874)
 ##     No Information Rate : 0.8299          
-##     P-Value [Acc > NIR] : 1               
+##     P-Value [Acc > NIR] : 0.999973        
 ##                                           
-##                   Kappa : 0.1615          
+##                   Kappa : 0.2362          
 ##                                           
-##  Mcnemar's Test P-Value : <2e-16          
+##  Mcnemar's Test P-Value : 0.003047        
 ##                                           
-##             Sensitivity : 0.8000          
-##             Specificity : 0.5041          
-##          Pos Pred Value : 0.2484          
-##          Neg Pred Value : 0.9248          
-##              Prevalence : 0.1701          
-##          Detection Rate : 0.1361          
-##    Detection Prevalence : 0.5476          
-##       Balanced Accuracy : 0.6520          
+##             Sensitivity : 0.50000         
+##             Specificity : 0.78689         
+##          Pos Pred Value : 0.32468         
+##          Neg Pred Value : 0.88479         
+##              Prevalence : 0.17007         
+##          Detection Rate : 0.08503         
+##    Detection Prevalence : 0.26190         
+##       Balanced Accuracy : 0.64344         
 ##                                           
 ##        'Positive' Class : Depressed       
 ## 
 ```
 
-* 123 people were correctly predicted to not be depressed (True Negative, $n_{11}$)
-* 121 people were incorrectly predicted to be depressed (False Positive, $n_{21}$)
-* 10 people were incorrectly predicted to not be depressed (False Negative, $n_{12}$)
-* 40 people were correctly predicted to be depressed (True Positive, $n_{22}$)
+* 192 people were correctly predicted to not be depressed (True Negative, $n_{11}$)
+* 52 people were incorrectly predicted to be depressed (False Positive, $n_{21}$)
+* 25 people were incorrectly predicted to not be depressed (False Negative, $n_{12}$)
+* 25 people were correctly predicted to be depressed (True Positive, $n_{22}$)
 
 Other terminology: 
 
-* **Sensitivity/Recall/True positive rate**: P(predicted positive | total positive) = `40/(10+40) = .8`
-* **Specificity/true negative rate**: P(predicted negative | total negative) = `123/(123+121) = .504`
-* **Precision/positive predicted value**: P(true positive | predicted positive) = `40/(121+40) = .2484`
-* **Accuracy**: (TP + TN)/ Total: `(40 + 123)/(40+123+121+10) = .5544`
+* **Sensitivity/Recall/True positive rate**: P(predicted positive | total positive) = `25/(25+25) = .50`
+* **Specificity/true negative rate**: P(predicted negative | total negative) = `192/(52+192) = .7869`
+* **Precision/positive predicted value**: P(true positive | predicted positive) = `25/(25+52) = .3247`
+* **Accuracy**: (TP + TN)/ Total: `(25 + 192)/(25+52+25+192) = .7381`
 * **Balanced Accuracy**: $[(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2$ - This is to adjust for class size imbalances (like in this example)
-* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.2484*.8)/(.2484+.8) = .38`
+* **F1 score**: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): $2*\frac{precision*recall}{precision + recall}$ = `2*(.3247*.50)/(.3247+.50) = .3937`
 
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.7 Model Performance | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.7 Model Performance | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -592,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="model-performance" class="section level2 hasAnchor" number="12.7">
 <h2><span class="header-section-number">12.7</span> Model Performance<a href="model-performance.html#model-performance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Say we decide that a value of 0.15 is our optimal cutoff value to predict depression using this model.</li>
+<li>Say we decide that a value of 0.22828 is our optimal cutoff value to predict depression using this model. (note here is a GOOD place to use all the decimals.)</li>
 <li>We can use this probability to classify each row into groups.
 <ul>
 <li>The assigned class values must match the data type and levels of the true value.</li>
@@ -601,7 +600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>We can calculate a confusion matrix using the similarly named function from the <code>caret</code> package.</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="model-performance.html#cb16-1" tabindex="-1"></a>plot.mpp<span class="sc">$</span>pred.class2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(plot.mpp<span class="sc">$</span>pred.prob <span class="sc">&lt;</span><span class="fl">0.15</span>, <span class="dv">0</span>,<span class="dv">1</span>) </span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="model-performance.html#cb16-1" tabindex="-1"></a>plot.mpp<span class="sc">$</span>pred.class2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(plot.mpp<span class="sc">$</span>pred.prob <span class="sc">&lt;</span><span class="fl">0.22828</span>, <span class="dv">0</span>,<span class="dv">1</span>) </span>
 <span id="cb16-2"><a href="model-performance.html#cb16-2" tabindex="-1"></a>plot.mpp<span class="sc">$</span>pred.class2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(plot.mpp<span class="sc">$</span>pred.class2, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>, <span class="st">&quot;Depressed&quot;</span>)) <span class="sc">%&gt;%</span>   </span>
 <span id="cb16-3"><a href="model-performance.html#cb16-3" tabindex="-1"></a>                        forcats<span class="sc">::</span><span class="fu">fct_rev</span>()</span>
 <span id="cb16-4"><a href="model-performance.html#cb16-4" tabindex="-1"></a></span>
@@ -610,43 +609,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-7"><a href="model-performance.html#cb16-7" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb16-8"><a href="model-performance.html#cb16-8" tabindex="-1"></a><span class="do">##                Reference</span></span>
 <span id="cb16-9"><a href="model-performance.html#cb16-9" tabindex="-1"></a><span class="do">## Prediction      Depressed Not Depressed</span></span>
-<span id="cb16-10"><a href="model-performance.html#cb16-10" tabindex="-1"></a><span class="do">##   Depressed            40           121</span></span>
-<span id="cb16-11"><a href="model-performance.html#cb16-11" tabindex="-1"></a><span class="do">##   Not Depressed        10           123</span></span>
+<span id="cb16-10"><a href="model-performance.html#cb16-10" tabindex="-1"></a><span class="do">##   Depressed            25            52</span></span>
+<span id="cb16-11"><a href="model-performance.html#cb16-11" tabindex="-1"></a><span class="do">##   Not Depressed        25           192</span></span>
 <span id="cb16-12"><a href="model-performance.html#cb16-12" tabindex="-1"></a><span class="do">##                                           </span></span>
-<span id="cb16-13"><a href="model-performance.html#cb16-13" tabindex="-1"></a><span class="do">##                Accuracy : 0.5544          </span></span>
-<span id="cb16-14"><a href="model-performance.html#cb16-14" tabindex="-1"></a><span class="do">##                  95% CI : (0.4956, 0.6121)</span></span>
+<span id="cb16-13"><a href="model-performance.html#cb16-13" tabindex="-1"></a><span class="do">##                Accuracy : 0.7381          </span></span>
+<span id="cb16-14"><a href="model-performance.html#cb16-14" tabindex="-1"></a><span class="do">##                  95% CI : (0.6839, 0.7874)</span></span>
 <span id="cb16-15"><a href="model-performance.html#cb16-15" tabindex="-1"></a><span class="do">##     No Information Rate : 0.8299          </span></span>
-<span id="cb16-16"><a href="model-performance.html#cb16-16" tabindex="-1"></a><span class="do">##     P-Value [Acc &gt; NIR] : 1               </span></span>
+<span id="cb16-16"><a href="model-performance.html#cb16-16" tabindex="-1"></a><span class="do">##     P-Value [Acc &gt; NIR] : 0.999973        </span></span>
 <span id="cb16-17"><a href="model-performance.html#cb16-17" tabindex="-1"></a><span class="do">##                                           </span></span>
-<span id="cb16-18"><a href="model-performance.html#cb16-18" tabindex="-1"></a><span class="do">##                   Kappa : 0.1615          </span></span>
+<span id="cb16-18"><a href="model-performance.html#cb16-18" tabindex="-1"></a><span class="do">##                   Kappa : 0.2362          </span></span>
 <span id="cb16-19"><a href="model-performance.html#cb16-19" tabindex="-1"></a><span class="do">##                                           </span></span>
-<span id="cb16-20"><a href="model-performance.html#cb16-20" tabindex="-1"></a><span class="do">##  Mcnemar&#39;s Test P-Value : &lt;2e-16          </span></span>
+<span id="cb16-20"><a href="model-performance.html#cb16-20" tabindex="-1"></a><span class="do">##  Mcnemar&#39;s Test P-Value : 0.003047        </span></span>
 <span id="cb16-21"><a href="model-performance.html#cb16-21" tabindex="-1"></a><span class="do">##                                           </span></span>
-<span id="cb16-22"><a href="model-performance.html#cb16-22" tabindex="-1"></a><span class="do">##             Sensitivity : 0.8000          </span></span>
-<span id="cb16-23"><a href="model-performance.html#cb16-23" tabindex="-1"></a><span class="do">##             Specificity : 0.5041          </span></span>
-<span id="cb16-24"><a href="model-performance.html#cb16-24" tabindex="-1"></a><span class="do">##          Pos Pred Value : 0.2484          </span></span>
-<span id="cb16-25"><a href="model-performance.html#cb16-25" tabindex="-1"></a><span class="do">##          Neg Pred Value : 0.9248          </span></span>
-<span id="cb16-26"><a href="model-performance.html#cb16-26" tabindex="-1"></a><span class="do">##              Prevalence : 0.1701          </span></span>
-<span id="cb16-27"><a href="model-performance.html#cb16-27" tabindex="-1"></a><span class="do">##          Detection Rate : 0.1361          </span></span>
-<span id="cb16-28"><a href="model-performance.html#cb16-28" tabindex="-1"></a><span class="do">##    Detection Prevalence : 0.5476          </span></span>
-<span id="cb16-29"><a href="model-performance.html#cb16-29" tabindex="-1"></a><span class="do">##       Balanced Accuracy : 0.6520          </span></span>
+<span id="cb16-22"><a href="model-performance.html#cb16-22" tabindex="-1"></a><span class="do">##             Sensitivity : 0.50000         </span></span>
+<span id="cb16-23"><a href="model-performance.html#cb16-23" tabindex="-1"></a><span class="do">##             Specificity : 0.78689         </span></span>
+<span id="cb16-24"><a href="model-performance.html#cb16-24" tabindex="-1"></a><span class="do">##          Pos Pred Value : 0.32468         </span></span>
+<span id="cb16-25"><a href="model-performance.html#cb16-25" tabindex="-1"></a><span class="do">##          Neg Pred Value : 0.88479         </span></span>
+<span id="cb16-26"><a href="model-performance.html#cb16-26" tabindex="-1"></a><span class="do">##              Prevalence : 0.17007         </span></span>
+<span id="cb16-27"><a href="model-performance.html#cb16-27" tabindex="-1"></a><span class="do">##          Detection Rate : 0.08503         </span></span>
+<span id="cb16-28"><a href="model-performance.html#cb16-28" tabindex="-1"></a><span class="do">##    Detection Prevalence : 0.26190         </span></span>
+<span id="cb16-29"><a href="model-performance.html#cb16-29" tabindex="-1"></a><span class="do">##       Balanced Accuracy : 0.64344         </span></span>
 <span id="cb16-30"><a href="model-performance.html#cb16-30" tabindex="-1"></a><span class="do">##                                           </span></span>
 <span id="cb16-31"><a href="model-performance.html#cb16-31" tabindex="-1"></a><span class="do">##        &#39;Positive&#39; Class : Depressed       </span></span>
 <span id="cb16-32"><a href="model-performance.html#cb16-32" tabindex="-1"></a><span class="do">## </span></span></code></pre></div>
 <ul>
-<li>123 people were correctly predicted to not be depressed (True Negative, <span class="math inline">\(n_{11}\)</span>)</li>
-<li>121 people were incorrectly predicted to be depressed (False Positive, <span class="math inline">\(n_{21}\)</span>)</li>
-<li>10 people were incorrectly predicted to not be depressed (False Negative, <span class="math inline">\(n_{12}\)</span>)</li>
-<li>40 people were correctly predicted to be depressed (True Positive, <span class="math inline">\(n_{22}\)</span>)</li>
+<li>192 people were correctly predicted to not be depressed (True Negative, <span class="math inline">\(n_{11}\)</span>)</li>
+<li>52 people were incorrectly predicted to be depressed (False Positive, <span class="math inline">\(n_{21}\)</span>)</li>
+<li>25 people were incorrectly predicted to not be depressed (False Negative, <span class="math inline">\(n_{12}\)</span>)</li>
+<li>25 people were correctly predicted to be depressed (True Positive, <span class="math inline">\(n_{22}\)</span>)</li>
 </ul>
 <p>Other terminology:</p>
 <ul>
-<li><strong>Sensitivity/Recall/True positive rate</strong>: P(predicted positive | total positive) = <code>40/(10+40) = .8</code></li>
-<li><strong>Specificity/true negative rate</strong>: P(predicted negative | total negative) = <code>123/(123+121) = .504</code></li>
-<li><strong>Precision/positive predicted value</strong>: P(true positive | predicted positive) = <code>40/(121+40) = .2484</code></li>
-<li><strong>Accuracy</strong>: (TP + TN)/ Total: <code>(40 + 123)/(40+123+121+10) = .5544</code></li>
+<li><strong>Sensitivity/Recall/True positive rate</strong>: P(predicted positive | total positive) = <code>25/(25+25) = .50</code></li>
+<li><strong>Specificity/true negative rate</strong>: P(predicted negative | total negative) = <code>192/(52+192) = .7869</code></li>
+<li><strong>Precision/positive predicted value</strong>: P(true positive | predicted positive) = <code>25/(25+52) = .3247</code></li>
+<li><strong>Accuracy</strong>: (TP + TN)/ Total: <code>(25 + 192)/(25+52+25+192) = .7381</code></li>
 <li><strong>Balanced Accuracy</strong>: <span class="math inline">\([(n_{11}/n_{.1}) + (n_{22}/n_{.2})]/2\)</span> - This is to adjust for class size imbalances (like in this example)</li>
-<li><strong>F1 score</strong>: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): <span class="math inline">\(2*\frac{precision*recall}{precision + recall}\)</span> = <code>2*(.2484*.8)/(.2484+.8) = .38</code></li>
+<li><strong>F1 score</strong>: the harmonic mean of precision and recall. This ranges from 0 (bad) to 1 (good): <span class="math inline">\(2*\frac{precision*recall}{precision + recall}\)</span> = <code>2*(.3247*.50)/(.3247+.50) = .3937</code></li>
 </ul>
 
 </div>

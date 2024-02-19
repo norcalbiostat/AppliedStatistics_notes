@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.6 ROC Curves | Applied Statistics</title>
   <meta name="description" content="Course notes for Applied Statistics courses at CSU Chico" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.6 ROC Curves | Applied Statistics" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -616,15 +615,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="roc-curves.html#cb13-5" tabindex="-1"></a><span class="fu">plot</span>(perf.f1)</span>
 <span id="cb13-6"><a href="roc-curves.html#cb13-6" tabindex="-1"></a><span class="fu">plot</span>(perf.acc)</span></code></pre></div>
 <p><img src="classification_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>We can dig into the <code>perf.acc</code> object to get the maximum accuracy value (<code>y.value</code>), then find the row where that value occurs, and link it to the corresponding cutoff value of x.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="roc-curves.html#cb14-1" tabindex="-1"></a>(max.f1 <span class="ot">&lt;-</span> <span class="fu">max</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]], <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb14-2"><a href="roc-curves.html#cb14-2" tabindex="-1"></a><span class="do">## [1] 0.8333333</span></span>
-<span id="cb14-3"><a href="roc-curves.html#cb14-3" tabindex="-1"></a>(row.with.max <span class="ot">&lt;-</span> <span class="fu">which</span>(perf.acc<span class="sc">@</span>y.values[[<span class="dv">1</span>]]<span class="sc">==</span>max.f1))</span>
-<span id="cb14-4"><a href="roc-curves.html#cb14-4" tabindex="-1"></a><span class="do">## [1] 2 8</span></span>
-<span id="cb14-5"><a href="roc-curves.html#cb14-5" tabindex="-1"></a>(cutoff.value <span class="ot">&lt;-</span> perf.acc<span class="sc">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</span>
-<span id="cb14-6"><a href="roc-curves.html#cb14-6" tabindex="-1"></a><span class="do">##       124       256 </span></span>
-<span id="cb14-7"><a href="roc-curves.html#cb14-7" tabindex="-1"></a><span class="do">## 0.4508171 0.3946273</span></span></code></pre></div>
-<p>Sometimes (like here) there is not one single maximum value for accuracy. In this case I would look at which of these two cutoff points maximize other metrics such as the <span class="math inline">\(f1\)</span> score.</p>
+<p>We can dig into the <code>perf.f1</code> object to get the maximum <span class="math inline">\(f1\)</span> value (<code>y.value</code>), then find the row where that value occurs, and link it to the corresponding cutoff value of x.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="roc-curves.html#cb14-1" tabindex="-1"></a>(max.f1 <span class="ot">&lt;-</span> <span class="fu">max</span>(perf.f1<span class="sc">@</span>y.values[[<span class="dv">1</span>]], <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb14-2"><a href="roc-curves.html#cb14-2" tabindex="-1"></a><span class="do">## [1] 0.3937008</span></span>
+<span id="cb14-3"><a href="roc-curves.html#cb14-3" tabindex="-1"></a>(row.with.max <span class="ot">&lt;-</span> <span class="fu">which</span>(perf.f1<span class="sc">@</span>y.values[[<span class="dv">1</span>]]<span class="sc">==</span>max.f1))</span>
+<span id="cb14-4"><a href="roc-curves.html#cb14-4" tabindex="-1"></a><span class="do">## [1] 68</span></span>
+<span id="cb14-5"><a href="roc-curves.html#cb14-5" tabindex="-1"></a>(cutoff.value <span class="ot">&lt;-</span> perf.f1<span class="sc">@</span>x.values[[<span class="dv">1</span>]][row.with.max])</span>
+<span id="cb14-6"><a href="roc-curves.html#cb14-6" tabindex="-1"></a><span class="do">##       257 </span></span>
+<span id="cb14-7"><a href="roc-curves.html#cb14-7" tabindex="-1"></a><span class="do">## 0.2282816</span></span></code></pre></div>
+<p>A cutoff value of 0.228 provides the most optimal <span class="math inline">\(f1\)</span> score.</p>
 <p>ROC curves:</p>
 <ul>
 <li>Can also be used for model comparison: <a href="http://yaojenkuo.io/diamondsROC.html" class="uri">http://yaojenkuo.io/diamondsROC.html</a></li>
