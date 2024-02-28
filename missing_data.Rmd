@@ -8,7 +8,17 @@ Missing Data happens. Not always
 
 > This is a very brief, and very rough overview of identification and treatment of missing data. For more details (enough for an entire class) see Flexible Imputation of Missing Data, 2nd Ed, by Stef van Buuren: https://stefvanbuuren.name/fimd/ 
 
+```{block2,  type='rmdnote'}
+This section uses functions from the following additional packages: `mice`,`MASS`, `VIM`, and `forestplot`. 
+```
 
+Some examples use a modified version of the Parental HIV data set  [(Codebook)](https://www.norcalbiostat.com/data/ParhivCodebook.txt) that has had some missing data created for demonstration purposes. 
+
+```{r}
+library(VIM)
+library(mice)
+load("data/mi_example.Rdata") #not available to public
+```
 
 ## Identifying missing data
 
@@ -97,7 +107,38 @@ marginplot(survey[,c(6,10)])
 
 This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate. 
 
+### Example: Parental HIV
 
+#### Identify missing
+
+Entire data set
+```{r}
+table(is.na(hiv)) |> prop.table()
+```
+
+Only 3.7% of all values in the data set are missing. 
+
+
+#### Examine missing data patterns of scale variables. 
+
+The parental bonding and BSI scale variables are aggregated variables, meaning they are sums or means of a handful of component variables. That means if any one component variable is missing, the entire scale is missing. _E.g. if y = x1+x2+x3, then y is missing if any of x1, x2 or x3 are missing. _
+
+```{r}
+scale.vars <- hiv %>% select(parent_care:bsi_psycho, gender, siblings, age)
+aggr(scale.vars, sortVars=TRUE, combined=TRUE, numbers=TRUE, cex.axis=.7)
+```
+
+34.7% of records are missing both `bsi_overall` and `bsi_depress` This makes sense since `bsi_depress` is a subscale containing 9 component variables and the `bsi_overall` is an average of all 52. 
+
+Another 15.5% of records are missing `parental_overprotection`. 
+
+
+Is there a bivariate pattern between missing and observed values of `bsi_depress` and `parent_overprotection`?
+```{r}
+marginplot(hiv[,c('bsi_depress', 'parent_overprotection')])
+```
+
+When someone is missing `parent_overprotection`, they have a lower `bsi_depress` score. Those missing `bsi_depress` have a slightly lower `parental_overprotection` score. Only 4 individuals are missing both values. 
 
 
 ## Effects of Nonresponse
@@ -340,21 +381,50 @@ Fill in missing values, analyze completed data set
 
 ## Imputation Methods
 
-* Unconditional mean substitution. <span style ="color:red">**Never use**</span>
-    - Impute all missing data using the mean of observed cases
-    - Artificially decreases the variance. 
-* Hot deck imputation
+This section demonstrates each imputation method on the `bsi_depress` scale variable from the parental HIV example. To recap, 37% of the data on this variable is missing. 
+
+```{r}
+table(is.na(hiv$bsi_depress)) |> prop.table()
+
+# Create an index of row numbers containing missing values 
+miss.dep.idx<- which(is.na(hiv$bsi_depress))
+head(miss.dep.idx) 
+```
+
+For demonstration purposes I will also create a copy of the `bsi_depress` variable so that the original is not overwritten for each example. 
+
+### Unconditional mean substitution. 
+  - Impute all missing data using the mean of observed cases
+  - <span style ="color:red">Artificially decreases the variance</span> 
+
+```{r}
+bsi_depress.ums <- hiv$bsi_depress # copy
+complete.case.mean <- mean(hiv$bsi_depress, useNA="always")
+bsi_depress.ums[miss.dep.idx] <- complete.case.mean
+```
+
+```{r}
+dplyr::bind_rows(data.frame(value = hiv$bsi_depress, method = "Original"),
+          data.frame(value = bsi_depress.ums, method = "Unconditional mean substitution")
+)
+```
+
+
+    
+### Hot deck imputation
     - Impute values by randomly sampling values from observed data.  
     - Good for categorical data
     - Reasonable for MCAR and MAR
-* Model based imputation 
+
+### Model based imputation 
     - Conditional Mean imputation: Use regression on observed variables to estimate missing values
     - Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
         - Cross between hot-deck and conditional mean
     - Categorical data can be imputed using classification models
     - Less biased than mean substitution
     - but SE's could be inflated
-* Adding a residual
+
+### Adding a residual
     - Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
     - Over the long-term, we can reduce bias, on the average
 
@@ -510,7 +580,6 @@ prop.table(table(is.na(iris.mis)))
 
 Visualize missing data pattern.
 ```{r}
-library(VIM)
 aggr(iris.mis, col=c('darkolivegreen3','salmon'),
               numbers=TRUE, sortVars=TRUE,
               labels=names(iris.mis), cex.axis=.7,
@@ -664,7 +733,7 @@ iris_long$ratio <- iris_long$Sepal.Length / iris_long$Petal.Length
 
 Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `iris_long` data. 
 ```{r}
-ggpubr::ggboxplot(iris_long, y="ratio", x="Species", facet.by = ".imp")
+ggboxplot(iris_long, y="ratio", x="Species", facet.by = ".imp")
 ```
 
 Then convert the data back to `mids` object, specifying the variable name that identifies the imputation number. 

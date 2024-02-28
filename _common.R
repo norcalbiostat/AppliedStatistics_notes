@@ -33,6 +33,7 @@ library(knitr)
 library(kableExtra)
 library(sjPlot)
 library(broom)
+library(ggpubr)
 
 options(knitr.kable.NA = '', knitr.table.format = "html")
 theme_set(theme_bw())
