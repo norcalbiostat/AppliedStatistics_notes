@@ -15,8 +15,7 @@ This section uses functions from the following additional packages: `mice`,`MASS
 Some examples use a modified version of the Parental HIV data set  [(Codebook)](https://www.norcalbiostat.com/data/ParhivCodebook.txt) that has had some missing data created for demonstration purposes. 
 
 ```{r}
-library(VIM)
-library(mice)
+library(VIM); library(mice)
 load("data/mi_example.Rdata") #not available to public
 ```
 
@@ -374,6 +373,7 @@ Fill in missing values, analyze completed data set
 
 * Advantage: 
     * Rectangular data set easier to analyze
+    * Analysis data set $n$ matches summary table $n$
 * Disadvantage:
     * "Both seductive and dangerous" (Little and Rubin)
     * Can understate uncertainty due to missing values. 
@@ -404,35 +404,142 @@ bsi_depress.ums[miss.dep.idx] <- complete.case.mean
 ```
 
 ```{r, echo= false}
-library(gtsummary)
-ums.data <- dplyr::bind_rows(data.frame(value = hiv$bsi_depress, 
-                                        method = "Original"),
-          data.frame(value = bsi_depress.ums, 
-                     method = "Unconditional mean substitution")
-          )
+imp1.data <- data.frame(value = bsi_depress.ums)
+imp1.data$imputed <- "FALSE"
+imp1.data$imputed[miss.dep.idx] <- "TRUE"
 
-tbl_summary(ums.data)
-
+ggboxplot(imp1.data, y="value", fill = "imputed", x = "imputed")
 ```
 
-
+Only a single value was used to impute missing data. 
     
 ### Hot deck imputation
     - Impute values by randomly sampling values from observed data.  
     - Good for categorical data
     - Reasonable for MCAR and MAR
+    - `hotdeck` function in `VIM` available
+
+```{r}
+bsi_depress.hotdeck<- hiv$bsi_depress # copy
+hot.deck <- sample(na.omit(hiv$bsi_depress), size = length(miss.dep.idx))
+bsi_depress.hotdeck[miss.dep.idx] <- hot.deck
+```
+
+```{r, echo= false}
+imp2.data <- data.frame(value = bsi_depress.hotdeck)
+imp2.data$imputed <- "FALSE"
+imp2.data$imputed[miss.dep.idx] <- "TRUE"
+
+ggviolin(imp2.data, 
+         y="value", x="imputed", 
+         fill = "imputed", 
+         add = c("boxplot", "jitter"), 
+         alpha = .2)
+```
+
+The distribution of imputed values better matches the distribution of observed data, but the distribution (Q1, Q3) is shifted lower a little bit. 
+
 
 ### Model based imputation 
     - Conditional Mean imputation: Use regression on observed variables to estimate missing values
+        - Predictions only available for cases with no missing covariates
     - Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
         - Cross between hot-deck and conditional mean
     - Categorical data can be imputed using classification models
     - Less biased than mean substitution
     - but SE's could be inflated
+    - `VIM::regressionImp()` function 
 
+
+Model `bsi_depress` using gender, siblings and age as predictors using linear regression.
+
+```{r}
+reg.model <- lm(bsi_depress ~ gender + siblings + age, hiv) 
+need.imp <- hiv[miss.dep.idx, c("gender", "siblings", "age")]
+reg.imp.vals <- predict(reg.model, newdata = need.imp)
+bsi_depress.lm <- hiv$bsi_depress # copy
+bsi_depress.lm[miss.dep.idx] <- reg.imp.vals
+```
+
+And using predictive mean matching. 
+```{r}
+pmm.impute <- regressionImp(bsi_depress ~ gender + siblings + age, hiv)
+```
+
+```{r, echo= false}
+imp3.data <- data.frame(value = bsi_depress.lm)
+imp3.data$imputed <- FALSE
+imp3.data$imputed[miss.dep.idx] <- TRUE
+imp3.data$method <- "lm"
+
+imp.reg <- pmm.impute %>% 
+  select(value = bsi_depress, 
+         imputed = bsi_depress_imp) %>%
+  mutate(method = "pmm") %>%
+  bind_rows(imp3.data)
+
+ggviolin(imp.reg, y="value", 
+         x = "method", fill="imputed",
+         add = "boxplot", 
+         alpha = .2)
+```
+
+It seems like only values around 0.5 and 0.8 were imputed values for `bsi_depress`. The imputed values don't quite match the distribution of observed values. 
 ### Adding a residual
     - Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
     - Over the long-term, we can reduce bias, on the average
+
+```{r}
+rmse <- sqrt(summary(reg.model)$sigma)
+eps <- rnorm(length(miss.dep.idx), mean=0, sd=rmse)
+bsi_depress.lm.resid <- hiv$bsi_depress # copy
+bsi_depress.lm.resid[miss.dep.idx] <- reg.imp.vals + eps
+```
+
+```{r, echo= false}
+impe.data <- data.frame(value = bsi_depress.lm.resid)
+impe.data$imputed <- "FALSE"
+impe.data$imputed[miss.dep.idx] <- "TRUE"
+
+ggviolin(impe.data, 
+         y="value", x="imputed", 
+         fill = "imputed", 
+         add = c("boxplot", "jitter"), 
+         alpha = .2)
+```
+
+Well, the distribution of imputed values is spread out a bit more, but the imputations do not respect the truncation at 0 this `bsi_depress` value has. 
+
+### Comparing Methods
+```{r, echo= false}
+single.imp <- bind_rows(
+data.frame(value = na.omit(hiv$bsi_depress),  method = "Observed"),
+  data.frame(value = bsi_depress.ums, method = "Mean Sub"), 
+  data.frame(value = bsi_depress.hotdeck, method = "Hot Deck"), 
+  data.frame(value = bsi_depress.lm, method = "Regression"), 
+  data.frame(value = pmm.impute$bsi_depress, method = "PMM"), 
+  data.frame(value = bsi_depress.lm.resid, method = "Reg + eps")
+          )
+
+single.imp$method <- forcats::fct_relevel(single.imp$method , 
+      c("Observed", "Mean Sub", "Hot Deck", "Regression", "PMM", "Reg + eps"))
+
+single.imp %>%
+  group_by(method) %>%
+  summarize(mean = mean(value), 
+            median = median(value), 
+            n = n(), 
+            sd = sd(value))
+
+```
+
+```{r}
+ggviolin(single.imp, y = "value", 
+          fill = "method", x = "method", 
+          add = "boxplot", 
+          alpha = .2)
+```
+
 
 …but we can do better.
   
