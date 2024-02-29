@@ -399,14 +399,20 @@ For demonstration purposes I will also create a copy of the `bsi_depress` variab
 
 ```{r}
 bsi_depress.ums <- hiv$bsi_depress # copy
-complete.case.mean <- mean(hiv$bsi_depress, useNA="always")
+complete.case.mean <- mean(hiv$bsi_depress, na.rm=TRUE)
 bsi_depress.ums[miss.dep.idx] <- complete.case.mean
 ```
 
-```{r}
-dplyr::bind_rows(data.frame(value = hiv$bsi_depress, method = "Original"),
-          data.frame(value = bsi_depress.ums, method = "Unconditional mean substitution")
-)
+```{r, echo= false}
+library(gtsummary)
+ums.data <- dplyr::bind_rows(data.frame(value = hiv$bsi_depress, 
+                                        method = "Original"),
+          data.frame(value = bsi_depress.ums, 
+                     method = "Unconditional mean substitution")
+          )
+
+tbl_summary(ums.data)
+
 ```
 
 
