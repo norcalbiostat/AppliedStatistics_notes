@@ -8,7 +8,15 @@ Missing Data happens. Not always
 
 > This is a very brief, and very rough overview of identification and treatment of missing data. For more details (enough for an entire class) see Flexible Imputation of Missing Data, 2nd Ed, by Stef van Buuren: https://stefvanbuuren.name/fimd/ 
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">This section uses functions from the following additional packages: `mice`,`MASS`, `VIM`, and `forestplot`. </div>\EndKnitrBlock{rmdnote}
 
+Some examples use a modified version of the Parental HIV data set  [(Codebook)](https://www.norcalbiostat.com/data/ParhivCodebook.txt) that has had some missing data created for demonstration purposes. 
+
+
+```r
+library(VIM); library(mice)
+load("data/mi_example.Rdata") #not available to public
+```
 
 ## Identifying missing data
 
@@ -90,7 +98,7 @@ ggplot(pmpv, aes(x=variable, y=pct.miss)) +
   geom_text(data=pmpv, aes(label=paste0(round(pct.miss*100,1),"%"), y=pct.miss+.025), size=4)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 Using `mice`
 
@@ -99,7 +107,7 @@ library(mice)
 md.pattern(survey)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ```
 ##     Fold Exer Age Sex Wr.Hnd NW.Hnd W.Hnd Clap Smoke Height M.I Pulse    
@@ -126,7 +134,7 @@ aggr(survey, col=c('chartreuse3','mediumvioletred'),
               gap=3, ylab=c("Missing data","Pattern"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-9-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-11-1.png" width="768" />
 
 The plot on the left is a simplified, and ordered version of the ggplot from above, except the bars appear to be inflated because the y-axis goes up to 15% instead of 100%. 
 
@@ -144,11 +152,73 @@ Another plot that can be helpful to identify patterns of missing data is a `marg
 marginplot(survey[,c(6,10)])
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 This shows us that the observations missing pulse have the same median height, but those missing height have a higher median pulse rate. 
 
+### Example: Parental HIV
 
+#### Identify missing
+
+Entire data set
+
+```r
+table(is.na(hiv)) |> prop.table()
+## 
+##      FALSE       TRUE 
+## 0.96330127 0.03669873
+```
+
+Only 3.7% of all values in the data set are missing. 
+
+
+#### Examine missing data patterns of scale variables. 
+
+The parental bonding and BSI scale variables are aggregated variables, meaning they are sums or means of a handful of component variables. That means if any one component variable is missing, the entire scale is missing. _E.g. if y = x1+x2+x3, then y is missing if any of x1, x2 or x3 are missing. _
+
+
+```r
+scale.vars <- hiv %>% select(parent_care:bsi_psycho, gender, siblings, age)
+aggr(scale.vars, sortVars=TRUE, combined=TRUE, numbers=TRUE, cex.axis=.7)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+```
+## 
+##  Variables sorted by number of missings: 
+##               Variable Count
+##            bsi_overall    93
+##            bsi_depress    93
+##  parent_overprotection    44
+##             bsi_psycho     2
+##            parent_care     1
+##              bsi_somat     1
+##             bsi_obcomp     1
+##             bsi_interp     1
+##            bsi_anxiety     1
+##               siblings     1
+##             bsi_hostil     0
+##             bsi_phobic     0
+##           bsi_paranoid     0
+##                 gender     0
+##                    age     0
+```
+
+34.7% of records are missing both `bsi_overall` and `bsi_depress` This makes sense since `bsi_depress` is a subscale containing 9 component variables and the `bsi_overall` is an average of all 52. 
+
+Another 15.5% of records are missing `parental_overprotection`. 
+
+
+Is there a bivariate pattern between missing and observed values of `bsi_depress` and `parent_overprotection`?
+
+```r
+marginplot(hiv[,c('bsi_depress', 'parent_overprotection')])
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+When someone is missing `parent_overprotection`, they have a lower `bsi_depress` score. Those missing `bsi_depress` have a slightly lower `parental_overprotection` score. Only 4 individuals are missing both values. 
 
 
 ## Effects of Nonresponse
@@ -275,7 +345,7 @@ plot(c(0,1), c(-1, 1), type="n", ylab="Bias", xlab="Proportion of missing")
   abline(h=0, lty=2, col="blue")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 ![](images/q.png) What is the behavior of the bias as $p$ increases? Look specifically at the position/location of the bias, and the variance/variability of the bias. 
@@ -305,7 +375,7 @@ head(dta)
 ggplot(dta, aes(x=p, y=Z)) + geom_point() + xlab("P(missing)") + ylab("Z~Normal(0,1)")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-19-1.png" width="384" />
+<img src="missing_data_files/figure-html/unnamed-chunk-24-1.png" width="384" />
 
 3. Set $Z$ missing with probability equal to the $p$ for that row. Create a new vector `dta$z.miss` that is either 0, or the value of `dta$Z` with probability `1-dta$p`. Then change all the 0's to `NA`.
 
@@ -415,6 +485,7 @@ Fill in missing values, analyze completed data set
 
 * Advantage: 
     * Rectangular data set easier to analyze
+    * Analysis data set $n$ matches summary table $n$
 * Disadvantage:
     * "Both seductive and dangerous" (Little and Rubin)
     * Can understate uncertainty due to missing values. 
@@ -422,23 +493,153 @@ Fill in missing values, analyze completed data set
 
 ## Imputation Methods
 
-* Unconditional mean substitution. <span style ="color:red">**Never use**</span>
-    - Impute all missing data using the mean of observed cases
-    - Artificially decreases the variance. 
-* Hot deck imputation
+This section demonstrates each imputation method on the `bsi_depress` scale variable from the parental HIV example. To recap, 37% of the data on this variable is missing. 
+
+Create an index of row numbers containing missing values. This will be used to fill in those missing values with a data value. 
+
+```r
+miss.dep.idx<- which(is.na(hiv$bsi_depress))
+head(miss.dep.idx) 
+## [1]  2  4  5  9 13 14
+```
+
+For demonstration purposes I will also create a copy of the `bsi_depress` variable so that the original is not overwritten for each example. 
+
+### Unconditional mean substitution. 
+  - Impute all missing data using the mean of observed cases
+  - <span style ="color:red">Artificially decreases the variance</span> 
+
+
+```r
+bsi_depress.ums <- hiv$bsi_depress # copy
+complete.case.mean <- mean(hiv$bsi_depress, na.rm=TRUE)
+bsi_depress.ums[miss.dep.idx] <- complete.case.mean
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="384" />
+
+Only a single value was used to impute missing data. 
+    
+### Hot deck imputation
     - Impute values by randomly sampling values from observed data.  
     - Good for categorical data
     - Reasonable for MCAR and MAR
-* Model based imputation 
-    - Conditional Mean imputation: Use regression on observed variables to estimate missing values
-    - Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
-        - Cross between hot-deck and conditional mean
-    - Categorical data can be imputed using classification models
-    - Less biased than mean substitution
-    - but SE's could be inflated
-* Adding a residual
-    - Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
-    - Over the long-term, we can reduce bias, on the average
+    - `hotdeck` function in `VIM` available
+
+
+```r
+bsi_depress.hotdeck<- hiv$bsi_depress # copy
+hot.deck <- sample(na.omit(hiv$bsi_depress), size = length(miss.dep.idx))
+bsi_depress.hotdeck[miss.dep.idx] <- hot.deck
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+
+The distribution of imputed values better matches the distribution of observed data, but the distribution (Q1, Q3) is shifted lower a little bit. 
+
+
+### Model based imputation 
+
+* Conditional Mean imputation: Use regression on observed variables to estimate missing values
+    * Predictions only available for cases with no missing covariates
+    * Imputed value is the model predicted mean $\hat{\mu}_{Y|X}$
+    * Could use `VIM::regressionImp()` function 
+* Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
+    * Cross between hot-deck and conditional mean
+    * Categorical data can be imputed using classification models
+    * Less biased than mean substitution
+    * but SE's could be inflated
+    * Typically used in multivariate imputation (so not shown here)
+   
+
+Model `bsi_depress` using gender, siblings and age as predictors using linear regression.
+
+
+```r
+reg.model <- lm(bsi_depress ~ gender + siblings + age, hiv) 
+need.imp  <- hiv[miss.dep.idx, c("gender", "siblings", "age")]
+reg.imp.vals <- predict(reg.model, newdata = need.imp)
+bsi_depress.lm <- hiv$bsi_depress # copy
+bsi_depress.lm[miss.dep.idx] <- reg.imp.vals
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+
+It seems like only values around 0.5 and 0.8 were imputed values for `bsi_depress`. The imputed values don't quite match the distribution of observed values. Regression imputation and PMM seem to perform extremely similarily. 
+
+
+### Adding a residual
+
+* Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
+* Over the long-term, we can reduce bias, on the average
+
+
+```r
+set.seed(1337)
+rmse <- sqrt(summary(reg.model)$sigma)
+eps <- rnorm(length(miss.dep.idx), mean=0, sd=rmse)
+bsi_depress.lm.resid <- hiv$bsi_depress # copy
+bsi_depress.lm.resid[miss.dep.idx] <- reg.imp.vals + eps
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+
+Well, the distribution of imputed values is spread out a bit more, but the imputations do not respect the truncation at 0 this `bsi_depress` value has. 
+
+### Comparison of Estimates
+
+Create a table and plot that compares the point estimates and intervals for the average bsi depression scale. 
+
+
+```r
+single.imp <- bind_rows(
+data.frame(value = na.omit(hiv$bsi_depress),  method = "Observed"),
+  data.frame(value = bsi_depress.ums, method = "Mean Sub"), 
+  data.frame(value = bsi_depress.hotdeck, method = "Hot Deck"), 
+  data.frame(value = bsi_depress.lm, method = "Regression"), 
+  data.frame(value = bsi_depress.lm.resid, method = "Reg + eps"))
+
+single.imp$method <- forcats::fct_relevel(single.imp$method , 
+      c("Observed", "Mean Sub", "Hot Deck", "Regression", "Reg + eps"))
+
+si.ss <- single.imp %>%
+  group_by(method) %>%
+  summarize(mean = mean(value), 
+            sd = sd(value), 
+            se = sd/sqrt(n()), 
+            cil = mean-1.96*se, 
+            ciu = mean+1.96*se)
+si.ss
+## # A tibble: 5 × 6
+##   method      mean    sd     se   cil   ciu
+##   <fct>      <dbl> <dbl>  <dbl> <dbl> <dbl>
+## 1 Observed   0.723 0.782 0.0622 0.601 0.844
+## 2 Mean Sub   0.723 0.620 0.0391 0.646 0.799
+## 3 Hot Deck   0.738 0.783 0.0494 0.641 0.835
+## 4 Regression 0.682 0.631 0.0399 0.604 0.760
+## 5 Reg + eps  0.753 0.848 0.0536 0.648 0.858
+```
+
+
+```r
+ggviolin(single.imp, y = "value", 
+          fill = "method", x = "method", 
+          add = "boxplot", 
+          alpha = .2)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+
+```r
+
+ggplot(si.ss, aes(x=mean, y = method, col=method)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  scale_x_continuous(limits=c(.5, 1)) + 
+  theme_bw() + xlab("Average BSI Depression score") + ylab("")
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-40-2.png" width="672" />
+
 
 …but we can do better.
   
@@ -456,7 +657,7 @@ Fill in missing values, analyze completed data set
     - Imputation method must include a random component
 2. Create $m$ complete data sets
 3. Perform desired analysis on each of the $m$ complete data sets
-4. Combine final estimates in a manner that accounts for the between, and within imputation variance. 
+4. **Pool** final estimates in a manner that accounts for the between, and within imputation variance. 
 
 
 ![Diagram of Multiple Imputation process. Credit: https://stefvanbuuren.name/fimd/sec-nutshell.html](https://stefvanbuuren.name/fimd/fig/ch01-miflow-1.png)
@@ -473,7 +674,7 @@ Fill in missing values, analyze completed data set
 
 _Rubin 87: Multiple Imputation for Nonresponse in Surveys, Wiley, 1987)._
 
-### Inference on MI
+### Inference on MI (Pooling estimates)
 
 Consider $m$ imputed data sets. For some quantity of interest $Q$ with squared $SE = U$, calculate $Q_{1}, Q_{2}, \ldots, Q_{m}$ and $U_{1}, U_{2}, \ldots, U_{m}$ (e.g., carry out $m$ regression analyses, obtain point estimates and SE from each). 
 
@@ -497,6 +698,103 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 * df are similar to those for comparison of normal means with unequal variances, i.e., using Satterthwaite approximation.
 * Ratio of (B = between-imputation variance) to (T = between + within-imputation variance) is known as the fraction of missing information (FMI). 	
     - The FMI has been proposed as a way to monitor ongoing data collection and estimate the potential bias resulting from survey non-responders [Wagner, 2018](https://academic.oup.com/poq/article-abstract/74/2/223/1936466?redirectedFrom=fulltext)
+    
+    
+### Example
+  
+1. Create $m$ imputed datasets using linear regression plus a small amount of random noise so all the imputed values are not identical 
+
+
+```r
+set.seed(1061)
+dep.imp1 <- dep.imp2 <- dep.imp3 <- regressionImp(bsi_depress ~ gender + siblings + age, hiv) 
+dep.imp1$bsi_depress[miss.dep.idx] <- dep.imp1$bsi_depress[miss.dep.idx] +
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+
+dep.imp2$bsi_depress[miss.dep.idx] <- dep.imp2$bsi_depress[miss.dep.idx] + 
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+
+dep.imp3$bsi_depress[miss.dep.idx] <- dep.imp3$bsi_depress[miss.dep.idx] + 
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+```
+
+Visualize the distributions of observed and imputed
+
+```r
+dep.mi <- bind_rows(
+  data.frame(value = dep.imp1$bsi_depress, imputed = dep.imp1$bsi_depress_imp, 
+             imp = "dep.imp1"), 
+  data.frame(value = dep.imp2$bsi_depress, imputed = dep.imp2$bsi_depress_imp, 
+             imp ="dep.imp2"), 
+  data.frame(value = dep.imp3$bsi_depress, imputed = dep.imp3$bsi_depress_imp, 
+             imp ="dep.imp3"))
+
+ggdensity(dep.mi, x = "value", color = "imputed", fill = "imputed", 
+          add = "mean", rug=TRUE, palette = "jco") + 
+  facet_wrap(~imp, ncol=1)
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+
+2. Calculate the point estimate $Q$ and the variance $U$ from each imputation. 
+
+
+```r
+(Q <- c(mean(dep.imp1$bsi_depress), 
+        mean(dep.imp2$bsi_depress), 
+        mean(dep.imp3$bsi_depress)))
+## [1] 0.6700139 0.6808710 0.6694280
+
+n.d <- length(dep.imp1$bsi_depress)
+(U <- c(sd(dep.imp1$bsi_depress)/sqrt(n.d), 
+        sd(dep.imp2$bsi_depress)/sqrt(n.d), 
+        sd(dep.imp3$bsi_depress)/sqrt(n.d)))
+## [1] 0.04443704 0.04324317 0.04365866
+```
+
+3. Pool estimates and calculate a 95% CI
+
+
+```r
+Q.bar <- mean(Q)          # average estimate
+U.bar <- mean(U)           # average variance
+B <- sd(Q)                 # variance of averages
+Tv <- U.bar + ((3+1)/3)*B  # Total variance of estimate
+
+df <- 2*(1+(U.bar/(4*B))^2) # degress of freedom
+t95 <- qt(.975, df) # critical value for 95% CI
+
+mi.ss <- data.frame(
+  method = "MI Reg", 
+  mean = Q.bar, 
+  se = sqrt(Tv), 
+  cil = Q.bar - t95*sqrt(Tv),
+  ciu = Q.bar + t95*sqrt(Tv))
+
+(imp.ss <- bind_rows(si.ss, mi.ss))
+## # A tibble: 6 × 6
+##   method      mean     sd     se   cil   ciu
+##   <chr>      <dbl>  <dbl>  <dbl> <dbl> <dbl>
+## 1 Observed   0.723  0.782 0.0622 0.601 0.844
+## 2 Mean Sub   0.723  0.620 0.0391 0.646 0.799
+## 3 Hot Deck   0.738  0.783 0.0494 0.641 0.835
+## 4 Regression 0.682  0.631 0.0399 0.604 0.760
+## 5 Reg + eps  0.753  0.848 0.0536 0.648 0.858
+## 6 MI Reg     0.673 NA     0.229  0.143 1.20
+```
+
+
+```r
+ggplot(imp.ss, aes(x=mean, y = method, col=method)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  scale_x_continuous(limits=c(-.3, 2)) + 
+  theme_bw() + xlab("Average BSI Depression score") + ylab("")
+```
+
+<img src="missing_data_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+
+
+    
     
 ## Multiple Imputation using Chained Equations (MICE)
 
@@ -549,8 +847,6 @@ How many imputations ($m$) should we create and how many iterations ($L$) should
 Read 6.5.2: Convergence https://stefvanbuuren.name/fimd/sec-algoptions.html</div>\EndKnitrBlock{rmdimportant}
 
 
-
-
 ### Imputation Methods
 
 Some built-in imputation methods in the `mice` package are:
@@ -576,41 +872,45 @@ https://stefvanbuuren.name/fimd/sec-diagnostics.html
 
 
 ## Example: Prescribed amount of missing.
-We will demonstrate using Fisher's Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to  estimate the bias incurred by using these imputation methods.
 
-For the `iris` data we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
+We will demonstrate using the Palmer Penguins dataset where we can artificially create a prespecified percent of the data missing, (after dropping the 11 rows missing sex) This allows us to be able to  estimate the bias incurred by using these imputation methods.
+
+For the `penguin` data ) out we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
 
 ```r
 library(missForest)
-set.seed(12345) # Note to self: Change the combo on my luggage
-iris.mis <- prodNA(iris, noNA=0.1)
-prop.table(table(is.na(iris.mis)))
+set.seed(12345) # Raspberry, I HATE raspberry!
+pen.nomiss <- na.omit(pen)
+pen.miss <- prodNA(pen.nomiss, noNA=0.1)
+prop.table(table(is.na(pen.miss)))
 ## 
-## FALSE  TRUE 
-##   0.9   0.1
+##      FALSE       TRUE 
+## 0.90015015 0.09984985
 ```
 
 Visualize missing data pattern.
 
 ```r
-library(VIM)
-aggr(iris.mis, col=c('darkolivegreen3','salmon'),
+aggr(pen.miss, col=c('darkolivegreen3','salmon'),
               numbers=TRUE, sortVars=TRUE,
-              labels=names(iris.mis), cex.axis=.7,
+              labels=names(pen.miss), cex.axis=.7,
               gap=3, ylab=c("Missing data","Pattern"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-49-1.png" width="672" />
 
 ```
 ## 
 ##  Variables sorted by number of missings: 
-##      Variable      Count
-##   Petal.Width 0.14000000
-##  Sepal.Length 0.13333333
-##       Species 0.11333333
-##  Petal.Length 0.06000000
-##   Sepal.Width 0.05333333
+##           Variable      Count
+##             island 0.11411411
+##                sex 0.11111111
+##        body_mass_g 0.10510511
+##  flipper_length_mm 0.10210210
+##     bill_length_mm 0.09909910
+##            species 0.09009009
+##      bill_depth_mm 0.09009009
+##               year 0.08708709
 ```
 
 Here's another example of where only 10% of the data overall is missing, but it results in only 58% complete cases. 
@@ -619,20 +919,30 @@ Here's another example of where only 10% of the data overall is missing, but it 
 ### Multiply impute the missing data using `mice()`
 
 ```r
-imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
-summary(imp_iris)
+imp_pen <- mice(pen.miss, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+summary(imp_pen)
 ## Class: mids
 ## Number of multiple imputations:  10 
 ## Imputation methods:
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        "pmm"        "pmm"        "pmm"        "pmm"        "pmm" 
+##           species            island    bill_length_mm     bill_depth_mm 
+##             "pmm"             "pmm"             "pmm"             "pmm" 
+## flipper_length_mm       body_mass_g               sex              year 
+##             "pmm"             "pmm"             "pmm"             "pmm" 
 ## PredictorMatrix:
-##              Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## Sepal.Length            0           1            1           1       1
-## Sepal.Width             1           0            1           1       1
-## Petal.Length            1           1            0           1       1
-## Petal.Width             1           1            1           0       1
-## Species                 1           1            1           1       0
+##                   species island bill_length_mm bill_depth_mm flipper_length_mm
+## species                 0      1              1             1                 1
+## island                  1      0              1             1                 1
+## bill_length_mm          1      1              0             1                 1
+## bill_depth_mm           1      1              1             0                 1
+## flipper_length_mm       1      1              1             1                 0
+## body_mass_g             1      1              1             1                 1
+##                   body_mass_g sex year
+## species                     1   1    1
+## island                      1   1    1
+## bill_length_mm              1   1    1
+## bill_depth_mm               1   1    1
+## flipper_length_mm           1   1    1
+## body_mass_g                 0   1    1
 ```
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">The Stack Exchange post listed below has a great explanation/description of what each of these arguments control. It is a **very** good idea to understand these controls. 
@@ -642,76 +952,66 @@ https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputation
 ### Check the imputation method used on each variable.
 
 ```r
-imp_iris$meth
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-##        "pmm"        "pmm"        "pmm"        "pmm"        "pmm"
+imp_pen$meth
+##           species            island    bill_length_mm     bill_depth_mm 
+##             "pmm"             "pmm"             "pmm"             "pmm" 
+## flipper_length_mm       body_mass_g               sex              year 
+##             "pmm"             "pmm"             "pmm"             "pmm"
 ```
 
-Predictive mean matching was used for all variables, even `Species`. This is reasonable because PMM is a hot deck method of imputation. 
+Predictive mean matching was used for all variables, even `species` and `island`. This is reasonable because PMM is a hot deck method of imputation. 
 
 ### Check Convergence
 
 ```r
-plot(imp_iris, c("Sepal.Length", "Sepal.Width", "Petal.Length"))
+plot(imp_pen, c("bill_length_mm", "body_mass_g", "bill_depth_mm"))
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-53-1.png" width="672" />
 
 The variance across chains is no larger than the variance within chains. 
 
 ### Look at the values generated for imputation
 
 ```r
-imp_iris$imp$Sepal.Length
-##       1   2   3   4   5   6   7   8   9  10
-## 12  5.4 5.2 5.3 5.0 5.4 4.9 5.1 4.9 5.4 5.4
-## 13  4.7 4.4 5.0 4.4 4.6 4.4 4.9 4.9 5.0 4.9
-## 14  4.4 4.4 4.7 4.5 4.4 4.9 4.4 4.4 4.4 4.4
-## 36  4.4 4.4 4.7 4.9 4.7 4.4 4.4 4.4 4.9 4.7
-## 38  5.1 5.2 5.4 5.0 5.1 4.6 4.6 5.0 4.7 5.0
-## 40  5.2 5.0 5.4 5.4 4.6 5.0 4.8 5.0 4.6 5.1
-## 46  4.9 4.4 4.4 4.9 4.7 4.4 4.7 4.7 5.0 5.5
-## 51  6.9 6.4 6.8 6.8 6.7 6.3 6.5 6.4 6.8 6.9
-## 56  6.0 5.8 5.4 5.8 6.1 5.4 5.4 5.9 6.0 6.0
-## 62  6.3 5.8 6.3 5.8 5.7 5.7 6.8 5.8 5.8 6.2
-## 74  6.7 5.4 6.4 6.1 6.9 6.8 6.5 6.1 6.4 6.7
-## 75  6.2 6.2 5.6 5.8 6.2 6.0 6.7 6.7 5.8 5.7
-## 86  6.4 6.0 6.5 6.9 6.1 6.3 6.9 6.8 6.3 6.5
-## 90  5.2 5.6 5.5 5.2 5.2 6.0 6.2 5.2 4.9 5.8
-## 91  5.6 6.2 6.2 5.6 6.1 5.8 6.0 6.2 5.8 6.2
-## 106 7.7 7.9 7.7 7.3 7.9 7.7 7.3 7.7 7.7 7.7
-## 124 6.7 6.2 5.7 5.7 6.2 5.7 5.6 5.7 5.6 5.7
-## 142 6.2 6.1 6.0 6.1 6.9 6.6 6.1 6.5 6.6 5.8
-## 145 6.3 6.4 6.4 6.7 6.3 6.3 6.4 6.3 6.7 6.5
-## 148 6.4 6.5 5.6 6.4 6.7 6.0 6.4 6.5 6.4 5.6
+imp_pen$imp$body_mass_g |> head()
+##       1    2    3    4    5    6    7    8    9   10
+## 3  3800 3750 3550 3900 3550 3300 3400 3900 3450 3900
+## 8  3300 3150 3525 3150 3500 3150 3325 3200 3325 3300
+## 13 4300 4050 4500 4000 4675 4550 4050 3950 4575 4550
+## 35 3400 3900 4075 3600 3900 3700 3900 3425 4725 3250
+## 41 3600 4300 3900 3600 3950 3900 3500 3900 4150 4100
+## 45 2700 3100 3625 3700 3525 3800 3575 3100 3575 3525
 ```
 
-This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
+This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `body_mass_g` was needed. Notice only imputations are shown, no observed data is showing here. 
 
 ### Create a complete data set by filling in the missing data using the imputations
 
 ```r
-iris_1 <- complete(imp_iris, action=1)
+pen_1 <- complete(imp_pen, action=1)
 ```
 Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on. 
 
 #### Alternative - Stack the imputed data sets in _long_ format.
 
 ```r
-iris_long <- complete(imp_iris, 'long')
+pen_long <- complete(imp_pen, 'long')
 ```
 
-By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=150$ in each. 
+By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=333$ in each. 
 
 
 ```r
-names(iris_long)
-## [1] ".imp"         ".id"          "Sepal.Length" "Sepal.Width"  "Petal.Length"
-## [6] "Petal.Width"  "Species"
-table(iris_long$.imp)
+names(pen_long)
+##  [1] ".imp"              ".id"               "species"          
+##  [4] "island"            "bill_length_mm"    "bill_depth_mm"    
+##  [7] "flipper_length_mm" "body_mass_g"       "sex"              
+## [10] "year"
+table(pen_long$.imp)
 ## 
 ##   1   2   3   4   5   6   7   8   9  10 
-## 150 150 150 150 150 150 150 150 150 150
+## 333 333 333 333 333 333 333 333 333 333
 ```
 
 
@@ -721,34 +1021,34 @@ Let's compare the imputed values to the observed values to see if they are indee
 **Univariately**
 
 ```r
-densityplot(imp_iris)
+densityplot(imp_pen)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-37-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-58-1.png" width="768" />
 
 **Multivariately**
 
 ```r
-xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Species, cex=.8, pch=16)
+xyplot(imp_pen, bill_length_mm ~ bill_depth_mm + flipper_length_mm  | species + island, cex=.8, pch=16)
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-38-1.png" width="768" />
+<img src="missing_data_files/figure-html/unnamed-chunk-59-1.png" width="768" /><img src="missing_data_files/figure-html/unnamed-chunk-59-2.png" width="768" />
 
 **Analyze and pool**
 All of this imputation was done so we could actually perform an analysis! 
 
-Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.Width`, `Petal.Length` and `Species`.
+Let's run a simple linear regression on `body_mass_g` as a function of `bill_length_mm`, `flipper_length_mm` and `species`.
 
 
 ```r
-model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
+model <- with(imp_pen, lm(body_mass_g ~ bill_length_mm + flipper_length_mm + species))
 summary(pool(model))
-##                term   estimate  std.error statistic        df      p.value
-## 1       (Intercept)  2.3291755 0.29018720  8.026458 100.48280 1.941986e-12
-## 2       Sepal.Width  0.4324051 0.09212873  4.693488  88.97127 9.678996e-06
-## 3      Petal.Length  0.8165354 0.07163496 11.398560 107.17114 3.421864e-20
-## 4 Speciesversicolor -1.0848839 0.24416495 -4.443242  96.69963 2.360206e-05
-## 5  Speciesvirginica -1.6001933 0.31893115 -5.017363 103.29187 2.189018e-06
+##                term    estimate  std.error statistic        df      p.value
+## 1       (Intercept) -3758.87511 577.502100 -6.508851 205.80708 5.670334e-10
+## 2    bill_length_mm    51.61565   9.013278  5.726624  49.20373 6.081152e-07
+## 3 flipper_length_mm    28.67977   3.819019  7.509722  84.41687 5.618897e-11
+## 4  speciesChinstrap  -615.76862  97.112862 -6.340753  68.84331 2.051941e-08
+## 5     speciesGentoo   155.61083  92.618867  1.680120 298.97391 9.397845e-02
 ```
 
 Pooled parameter estimates $\bar{Q}$ and their standard errors $\sqrt{T}$ are provided, along with a significance test (against $\beta_p=0$). Note with this output that a 95% interval must be calculated manually. 
@@ -762,23 +1062,23 @@ gtsummary::tbl_regression(model)
 
 
 ```{=html}
-<div id="wexhgkamaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wexhgkamaj table {
+<div id="xwmupiytlv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xwmupiytlv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wexhgkamaj thead, #wexhgkamaj tbody, #wexhgkamaj tfoot, #wexhgkamaj tr, #wexhgkamaj td, #wexhgkamaj th {
+#xwmupiytlv thead, #xwmupiytlv tbody, #xwmupiytlv tfoot, #xwmupiytlv tr, #xwmupiytlv td, #xwmupiytlv th {
   border-style: none;
 }
 
-#wexhgkamaj p {
+#xwmupiytlv p {
   margin: 0;
   padding: 0;
 }
 
-#wexhgkamaj .gt_table {
+#xwmupiytlv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -804,12 +1104,12 @@ gtsummary::tbl_regression(model)
   border-left-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_caption {
+#xwmupiytlv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wexhgkamaj .gt_title {
+#xwmupiytlv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -821,7 +1121,7 @@ gtsummary::tbl_regression(model)
   border-bottom-width: 0;
 }
 
-#wexhgkamaj .gt_subtitle {
+#xwmupiytlv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -833,7 +1133,7 @@ gtsummary::tbl_regression(model)
   border-top-width: 0;
 }
 
-#wexhgkamaj .gt_heading {
+#xwmupiytlv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -845,13 +1145,13 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_bottom_border {
+#xwmupiytlv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_col_headings {
+#xwmupiytlv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -866,7 +1166,7 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_col_heading {
+#xwmupiytlv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -886,7 +1186,7 @@ gtsummary::tbl_regression(model)
   overflow-x: hidden;
 }
 
-#wexhgkamaj .gt_column_spanner_outer {
+#xwmupiytlv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -898,15 +1198,15 @@ gtsummary::tbl_regression(model)
   padding-right: 4px;
 }
 
-#wexhgkamaj .gt_column_spanner_outer:first-child {
+#xwmupiytlv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wexhgkamaj .gt_column_spanner_outer:last-child {
+#xwmupiytlv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wexhgkamaj .gt_column_spanner {
+#xwmupiytlv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -918,11 +1218,11 @@ gtsummary::tbl_regression(model)
   width: 100%;
 }
 
-#wexhgkamaj .gt_spanner_row {
+#xwmupiytlv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wexhgkamaj .gt_group_heading {
+#xwmupiytlv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +1248,7 @@ gtsummary::tbl_regression(model)
   text-align: left;
 }
 
-#wexhgkamaj .gt_empty_group_heading {
+#xwmupiytlv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -963,15 +1263,15 @@ gtsummary::tbl_regression(model)
   vertical-align: middle;
 }
 
-#wexhgkamaj .gt_from_md > :first-child {
+#xwmupiytlv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wexhgkamaj .gt_from_md > :last-child {
+#xwmupiytlv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wexhgkamaj .gt_row {
+#xwmupiytlv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -990,7 +1290,7 @@ gtsummary::tbl_regression(model)
   overflow-x: hidden;
 }
 
-#wexhgkamaj .gt_stub {
+#xwmupiytlv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,7 +1303,7 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#wexhgkamaj .gt_stub_row_group {
+#xwmupiytlv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,15 +1317,15 @@ gtsummary::tbl_regression(model)
   vertical-align: top;
 }
 
-#wexhgkamaj .gt_row_group_first td {
+#xwmupiytlv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wexhgkamaj .gt_row_group_first th {
+#xwmupiytlv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wexhgkamaj .gt_summary_row {
+#xwmupiytlv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1035,16 +1335,16 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#wexhgkamaj .gt_first_summary_row {
+#xwmupiytlv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_first_summary_row.thick {
+#xwmupiytlv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wexhgkamaj .gt_last_summary_row {
+#xwmupiytlv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1054,7 +1354,7 @@ gtsummary::tbl_regression(model)
   border-bottom-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_grand_summary_row {
+#xwmupiytlv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,7 +1364,7 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#wexhgkamaj .gt_first_grand_summary_row {
+#xwmupiytlv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1374,7 @@ gtsummary::tbl_regression(model)
   border-top-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_last_grand_summary_row_top {
+#xwmupiytlv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1084,11 +1384,11 @@ gtsummary::tbl_regression(model)
   border-bottom-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_striped {
+#xwmupiytlv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wexhgkamaj .gt_table_body {
+#xwmupiytlv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1097,7 +1397,7 @@ gtsummary::tbl_regression(model)
   border-bottom-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_footnotes {
+#xwmupiytlv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1111,7 +1411,7 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_footnote {
+#xwmupiytlv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1120,7 +1420,7 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#wexhgkamaj .gt_sourcenotes {
+#xwmupiytlv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1134,7 +1434,7 @@ gtsummary::tbl_regression(model)
   border-right-color: #D3D3D3;
 }
 
-#wexhgkamaj .gt_sourcenote {
+#xwmupiytlv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1142,69 +1442,68 @@ gtsummary::tbl_regression(model)
   padding-right: 5px;
 }
 
-#wexhgkamaj .gt_left {
+#xwmupiytlv .gt_left {
   text-align: left;
 }
 
-#wexhgkamaj .gt_center {
+#xwmupiytlv .gt_center {
   text-align: center;
 }
 
-#wexhgkamaj .gt_right {
+#xwmupiytlv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wexhgkamaj .gt_font_normal {
+#xwmupiytlv .gt_font_normal {
   font-weight: normal;
 }
 
-#wexhgkamaj .gt_font_bold {
+#xwmupiytlv .gt_font_bold {
   font-weight: bold;
 }
 
-#wexhgkamaj .gt_font_italic {
+#xwmupiytlv .gt_font_italic {
   font-style: italic;
 }
 
-#wexhgkamaj .gt_super {
+#xwmupiytlv .gt_super {
   font-size: 65%;
 }
 
-#wexhgkamaj .gt_footnote_marks {
+#xwmupiytlv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wexhgkamaj .gt_asterisk {
+#xwmupiytlv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wexhgkamaj .gt_indent_1 {
+#xwmupiytlv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wexhgkamaj .gt_indent_2 {
+#xwmupiytlv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wexhgkamaj .gt_indent_3 {
+#xwmupiytlv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wexhgkamaj .gt_indent_4 {
+#xwmupiytlv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wexhgkamaj .gt_indent_5 {
+#xwmupiytlv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
-    
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
@@ -1213,30 +1512,30 @@ gtsummary::tbl_regression(model)
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="label" class="gt_row gt_left">Sepal.Width</td>
-<td headers="estimate" class="gt_row gt_center">0.43</td>
-<td headers="ci" class="gt_row gt_center">0.25, 0.62</td>
+    <tr><td headers="label" class="gt_row gt_left">bill_length_mm</td>
+<td headers="estimate" class="gt_row gt_center">52</td>
+<td headers="ci" class="gt_row gt_center">34, 70</td>
 <td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Petal.Length</td>
-<td headers="estimate" class="gt_row gt_center">0.82</td>
-<td headers="ci" class="gt_row gt_center">0.67, 0.96</td>
+    <tr><td headers="label" class="gt_row gt_left">flipper_length_mm</td>
+<td headers="estimate" class="gt_row gt_center">29</td>
+<td headers="ci" class="gt_row gt_center">21, 36</td>
 <td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Species</td>
-<td headers="estimate" class="gt_row gt_center"></td>
-<td headers="ci" class="gt_row gt_center"></td>
-<td headers="p.value" class="gt_row gt_center"></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">    setosa</td>
+    <tr><td headers="label" class="gt_row gt_left">species</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="ci" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Adelie</td>
 <td headers="estimate" class="gt_row gt_center">—</td>
 <td headers="ci" class="gt_row gt_center">—</td>
-<td headers="p.value" class="gt_row gt_center"></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">    versicolor</td>
-<td headers="estimate" class="gt_row gt_center">-1.1</td>
-<td headers="ci" class="gt_row gt_center">-1.6, -0.60</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Chinstrap</td>
+<td headers="estimate" class="gt_row gt_center">-616</td>
+<td headers="ci" class="gt_row gt_center">-810, -422</td>
 <td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">    virginica</td>
-<td headers="estimate" class="gt_row gt_center">-1.6</td>
-<td headers="ci" class="gt_row gt_center">-2.2, -0.97</td>
-<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Gentoo</td>
+<td headers="estimate" class="gt_row gt_center">156</td>
+<td headers="ci" class="gt_row gt_center">-27, 338</td>
+<td headers="p.value" class="gt_row gt_center">0.094</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
@@ -1272,42 +1571,42 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 2.329 </td>
-   <td style="text-align:right;"> 0.073 </td>
-   <td style="text-align:right;"> 100.483 </td>
-   <td style="text-align:right;"> 0.151 </td>
+   <td style="text-align:right;"> -3758.875 </td>
+   <td style="text-align:right;"> 296028.896 </td>
+   <td style="text-align:right;"> 205.807 </td>
+   <td style="text-align:right;"> 0.127 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Sepal.Width </td>
+   <td style="text-align:left;"> bill_length_mm </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.432 </td>
-   <td style="text-align:right;"> 0.007 </td>
-   <td style="text-align:right;"> 88.971 </td>
-   <td style="text-align:right;"> 0.193 </td>
+   <td style="text-align:right;"> 51.616 </td>
+   <td style="text-align:right;"> 50.961 </td>
+   <td style="text-align:right;"> 49.204 </td>
+   <td style="text-align:right;"> 0.594 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Petal.Length </td>
+   <td style="text-align:left;"> flipper_length_mm </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.817 </td>
-   <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 107.171 </td>
-   <td style="text-align:right;"> 0.129 </td>
+   <td style="text-align:right;"> 28.680 </td>
+   <td style="text-align:right;"> 10.749 </td>
+   <td style="text-align:right;"> 84.417 </td>
+   <td style="text-align:right;"> 0.357 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Speciesversicolor </td>
+   <td style="text-align:left;"> speciesChinstrap </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> -1.085 </td>
-   <td style="text-align:right;"> 0.051 </td>
-   <td style="text-align:right;"> 96.700 </td>
-   <td style="text-align:right;"> 0.164 </td>
+   <td style="text-align:right;"> -615.769 </td>
+   <td style="text-align:right;"> 6583.091 </td>
+   <td style="text-align:right;"> 68.843 </td>
+   <td style="text-align:right;"> 0.433 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Speciesvirginica </td>
+   <td style="text-align:left;"> speciesGentoo </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> -1.600 </td>
-   <td style="text-align:right;"> 0.089 </td>
-   <td style="text-align:right;"> 103.292 </td>
-   <td style="text-align:right;"> 0.141 </td>
+   <td style="text-align:right;"> 155.611 </td>
+   <td style="text-align:right;"> 8255.317 </td>
+   <td style="text-align:right;"> 298.974 </td>
+   <td style="text-align:right;"> 0.039 </td>
   </tr>
 </tbody>
 </table>
@@ -1316,10 +1615,10 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 
 
 ### Calculating bias
-The iris data set had no missing data to begin with. So we can calculate the "true" parameter estimates...
+The penguins data set used here had no missing data to begin with. So we can calculate the "true" parameter estimates...
 
 ```r
-true.model <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data=iris)
+true.model <- lm(body_mass_g ~ bill_length_mm + flipper_length_mm + species, data = pen.nomiss)
 ```
 and find the difference in coefficients. 
 
@@ -1327,75 +1626,114 @@ The variance of the multiply imputed estimates is larger because of the between-
 
 
 ```r
-library(forestplot)
-te.mean <- summary(true.model)$coefficients[,1]
-mi.mean <- summary(pool(model))[,2]
-te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
-mi.ll   <- mi.mean - 1.96*summary(pool(model))[,3]
-te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
-mi.ul   <- mi.mean + 1.96*summary(pool(model))[,3]
-names   <- names(coef(true.model))
 
+tm.est <- true.model |> coef() |> broom::tidy() |> mutate(model = "True Model") |>
+  rename(est = x)
+tm.est$cil <- confint(true.model)[,1]
+tm.est$ciu <- confint(true.model)[,2]
+tm.est <- tm.est[-1,] # drop intercept
 
-forestplot(names, 
-           legend = c("True Model", "MICE"),
-           fn.ci_norm = c(fpDrawNormalCI, fpDrawCircleCI), 
-           mean = cbind(te.mean, mi.mean), 
-           lower = cbind(te.ll, mi.ll),
-           upper = cbind(te.ul, mi.ul), 
-           col=fpColors(box=c("blue", "darkred")), 
-           xlab="Regression coefficients",
-           boxsize = .1
-           )
+mi <- tbl_regression(model)$table_body |> 
+  select(names = label, est = estimate, cil=conf.low, ciu=conf.high) |> 
+  mutate(model = "MI") |> filter(!is.na(est))
+
+pen.mi.compare <- bind_rows(tm.est, mi)
+pen.mi.compare$names <- gsub("species", "", pen.mi.compare$names)
+
+ggplot(pen.mi.compare, aes(x=est, y = names, col=model)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  theme_bw() 
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-43-1.png" width="960" />
+<img src="missing_data_files/figure-html/unnamed-chunk-64-1.png" width="960" />
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> names </th>
+   <th style="text-align:right;"> True Model </th>
+   <th style="text-align:right;"> MI </th>
+   <th style="text-align:right;"> bias </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> bill_length_mm </td>
+   <td style="text-align:right;"> 60.11732 </td>
+   <td style="text-align:right;"> 51.61565 </td>
+   <td style="text-align:right;"> -8.501672 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> flipper_length_mm </td>
+   <td style="text-align:right;"> 27.54429 </td>
+   <td style="text-align:right;"> 28.67977 </td>
+   <td style="text-align:right;"> 1.135481 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> -732.41667 </td>
+   <td style="text-align:right;"> -615.76862 </td>
+   <td style="text-align:right;"> 116.648049 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 113.25418 </td>
+   <td style="text-align:right;"> 155.61083 </td>
+   <td style="text-align:right;"> 42.356655 </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+MI over estimates the difference in body mass between Chinstrap and Adelie, but underestiamtes that difference for Gentoo. There is also an underestimation of the relationship between bill length and body mass. 
+
 
 ## Post MICE data management
 
 Sometimes you'll have a need to do additional data management after imputation has been completed. Creating binary indicators of an event, re-creating scale variables etc. The general approach is to transform the imputed data into long format using `complete` **with the argument `include=TRUE`** , do the necessary data management, and then convert it back to a `mids` object type. 
 
-Continuing with the iris example, let's create a new variable that is the ratio of Sepal to Petal length. 
+Continuing with the penguin example, let's create a new variable that is the ratio of bill length to depth.
 
 Recapping prior steps of imputing, and then creating the completed long data set. 
 
 
 ```r
-## imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
-iris_long <- complete(imp_iris, 'long', include=TRUE)
+## imp_pen <- mice(pen.miss, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+pen_long <- complete(imp_pen, 'long', include=TRUE)
 ```
 
 We create the new ratio variable on the long data: 
 
 ```r
-iris_long$ratio <- iris_long$Sepal.Length / iris_long$Petal.Length
+pen_long$ratio <- pen_long$bill_length_mm / pen_long$bill_depth_mm
 ```
 
-Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `iris_long` data. 
+Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `pen_long` data. 
 
 ```r
-ggpubr::ggboxplot(iris_long, y="ratio", x="Species", facet.by = ".imp")
+ggboxplot(pen_long, y="ratio", x="species", facet.by = ".imp")
 ```
 
-<img src="missing_data_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="missing_data_files/figure-html/unnamed-chunk-68-1.png" width="672" />
 
 Then convert the data back to `mids` object, specifying the variable name that identifies the imputation number. 
 
 
 ```r
-imp_iris1 <- as.mids(iris_long, .imp = ".imp")
+imp_pen1 <- as.mids(pen_long, .imp = ".imp")
 ```
 
 Now we can conduct analyses such as an ANOVA (in linear model form) to see if this ratio differs significantly across the species. 
 
 
 ```r
-nova.ratio <- with(imp_iris1, lm(ratio ~ Species))
+nova.ratio <- with(imp_pen1, lm(ratio ~ species))
 pool(nova.ratio) |> summary()
-##                term  estimate  std.error statistic       df       p.value
-## 1       (Intercept)  3.439557 0.03597499  95.60967 105.1753 4.559615e-104
-## 2 Speciesversicolor -2.048535 0.04990110 -41.05191 117.2154  2.090733e-71
-## 3  Speciesvirginica -2.258591 0.05000935 -45.16337 119.3221  7.055165e-77
+##               term  estimate  std.error statistic       df       p.value
+## 1      (Intercept) 2.1221949 0.01435687 147.81738 281.7994 4.610006e-269
+## 2 speciesChinstrap 0.5217842 0.02569344  20.30807 245.0315  1.958440e-54
+## 3    speciesGentoo 1.0643029 0.02165568  49.14659 254.5258 6.526634e-132
 ```
 
 

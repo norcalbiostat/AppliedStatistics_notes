@@ -34,6 +34,7 @@ library(kableExtra)
 library(sjPlot)
 library(broom)
 library(ggpubr)
+library(gtsummary)
 
 options(knitr.kable.NA = '', knitr.table.format = "html")
 theme_set(theme_bw())
@@ -43,6 +44,7 @@ theme_set(theme_bw())
 depress <- read.delim("data/depress_081217.txt")
 names(depress) <- tolower(names(depress))
 
+pen <- palmerpenguins::penguins
 
 load("data/addhealth_clean.Rdata")
 addhealth$smoke <- ifelse(addhealth$eversmoke_c=="Smoker", 1, 0)

@@ -352,3 +352,13 @@ ex-correlation
 multicollinearity-pma6-8.9
 general-f-test
 automated-selection-procedures-pma6-9.6
+example-parental-hiv
+identify-missing
+examine-missing-data-patterns-of-scale-variables.
+unconditional-mean-substitution.
+hot-deck-imputation
+model-based-imputation
+comparison-of-estimates-1
+adding-a-residual
+inference-on-mi-pooling-estimates
+example-6

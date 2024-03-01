@@ -383,10 +383,8 @@ Fill in missing values, analyze completed data set
 
 This section demonstrates each imputation method on the `bsi_depress` scale variable from the parental HIV example. To recap, 37% of the data on this variable is missing. 
 
+Create an index of row numbers containing missing values. This will be used to fill in those missing values with a data value. 
 ```{r}
-table(is.na(hiv$bsi_depress)) |> prop.table()
-
-# Create an index of row numbers containing missing values 
 miss.dep.idx<- which(is.na(hiv$bsi_depress))
 head(miss.dep.idx) 
 ```
@@ -403,7 +401,7 @@ complete.case.mean <- mean(hiv$bsi_depress, na.rm=TRUE)
 bsi_depress.ums[miss.dep.idx] <- complete.case.mean
 ```
 
-```{r, echo= false}
+```{r, echo= FALSE, fig.height=4, fig.width=4}
 imp1.data <- data.frame(value = bsi_depress.ums)
 imp1.data$imputed <- "FALSE"
 imp1.data$imputed[miss.dep.idx] <- "TRUE"
@@ -425,7 +423,7 @@ hot.deck <- sample(na.omit(hiv$bsi_depress), size = length(miss.dep.idx))
 bsi_depress.hotdeck[miss.dep.idx] <- hot.deck
 ```
 
-```{r, echo= false}
+```{r, echo= FALSE}
 imp2.data <- data.frame(value = bsi_depress.hotdeck)
 imp2.data$imputed <- "FALSE"
 imp2.data$imputed[miss.dep.idx] <- "TRUE"
@@ -441,62 +439,59 @@ The distribution of imputed values better matches the distribution of observed d
 
 
 ### Model based imputation 
-    - Conditional Mean imputation: Use regression on observed variables to estimate missing values
-        - Predictions only available for cases with no missing covariates
-    - Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
-        - Cross between hot-deck and conditional mean
-    - Categorical data can be imputed using classification models
-    - Less biased than mean substitution
-    - but SE's could be inflated
-    - `VIM::regressionImp()` function 
 
+* Conditional Mean imputation: Use regression on observed variables to estimate missing values
+    * Predictions only available for cases with no missing covariates
+    * Imputed value is the model predicted mean $\hat{\mu}_{Y|X}$
+    * Could use `VIM::regressionImp()` function 
+* Predictive Mean Matching: Fills in a value randomly by sampling observed values whose regression-predicted values are closest to the regression-predicted value for the missing point. 
+    * Cross between hot-deck and conditional mean
+    * Categorical data can be imputed using classification models
+    * Less biased than mean substitution
+    * but SE's could be inflated
+    * Typically used in multivariate imputation (so not shown here)
+   
 
 Model `bsi_depress` using gender, siblings and age as predictors using linear regression.
 
 ```{r}
 reg.model <- lm(bsi_depress ~ gender + siblings + age, hiv) 
-need.imp <- hiv[miss.dep.idx, c("gender", "siblings", "age")]
+need.imp  <- hiv[miss.dep.idx, c("gender", "siblings", "age")]
 reg.imp.vals <- predict(reg.model, newdata = need.imp)
 bsi_depress.lm <- hiv$bsi_depress # copy
 bsi_depress.lm[miss.dep.idx] <- reg.imp.vals
 ```
 
-And using predictive mean matching. 
-```{r}
-pmm.impute <- regressionImp(bsi_depress ~ gender + siblings + age, hiv)
-```
-
-```{r, echo= false}
+```{r, echo= FALSE}
 imp3.data <- data.frame(value = bsi_depress.lm)
 imp3.data$imputed <- FALSE
 imp3.data$imputed[miss.dep.idx] <- TRUE
 imp3.data$method <- "lm"
 
-imp.reg <- pmm.impute %>% 
-  select(value = bsi_depress, 
-         imputed = bsi_depress_imp) %>%
-  mutate(method = "pmm") %>%
-  bind_rows(imp3.data)
-
-ggviolin(imp.reg, y="value", 
-         x = "method", fill="imputed",
-         add = "boxplot", 
+ggviolin(imp3.data, 
+         y="value", x="imputed", 
+         fill = "imputed", 
+         add = c("boxplot", "jitter"), 
          alpha = .2)
 ```
 
-It seems like only values around 0.5 and 0.8 were imputed values for `bsi_depress`. The imputed values don't quite match the distribution of observed values. 
+It seems like only values around 0.5 and 0.8 were imputed values for `bsi_depress`. The imputed values don't quite match the distribution of observed values. Regression imputation and PMM seem to perform extremely similarily. 
+
+
 ### Adding a residual
-    - Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
-    - Over the long-term, we can reduce bias, on the average
+
+* Impute regression value $\pm$ a randomly selected residual based on estimated residual variance
+* Over the long-term, we can reduce bias, on the average
 
 ```{r}
+set.seed(1337)
 rmse <- sqrt(summary(reg.model)$sigma)
 eps <- rnorm(length(miss.dep.idx), mean=0, sd=rmse)
 bsi_depress.lm.resid <- hiv$bsi_depress # copy
 bsi_depress.lm.resid[miss.dep.idx] <- reg.imp.vals + eps
 ```
 
-```{r, echo= false}
+```{r, echo= FALSE}
 impe.data <- data.frame(value = bsi_depress.lm.resid)
 impe.data$imputed <- "FALSE"
 impe.data$imputed[miss.dep.idx] <- "TRUE"
@@ -510,27 +505,29 @@ ggviolin(impe.data,
 
 Well, the distribution of imputed values is spread out a bit more, but the imputations do not respect the truncation at 0 this `bsi_depress` value has. 
 
-### Comparing Methods
-```{r, echo= false}
+### Comparison of Estimates
+
+Create a table and plot that compares the point estimates and intervals for the average bsi depression scale. 
+
+```{r}
 single.imp <- bind_rows(
 data.frame(value = na.omit(hiv$bsi_depress),  method = "Observed"),
   data.frame(value = bsi_depress.ums, method = "Mean Sub"), 
   data.frame(value = bsi_depress.hotdeck, method = "Hot Deck"), 
   data.frame(value = bsi_depress.lm, method = "Regression"), 
-  data.frame(value = pmm.impute$bsi_depress, method = "PMM"), 
-  data.frame(value = bsi_depress.lm.resid, method = "Reg + eps")
-          )
+  data.frame(value = bsi_depress.lm.resid, method = "Reg + eps"))
 
 single.imp$method <- forcats::fct_relevel(single.imp$method , 
-      c("Observed", "Mean Sub", "Hot Deck", "Regression", "PMM", "Reg + eps"))
+      c("Observed", "Mean Sub", "Hot Deck", "Regression", "Reg + eps"))
 
-single.imp %>%
+si.ss <- single.imp %>%
   group_by(method) %>%
   summarize(mean = mean(value), 
-            median = median(value), 
-            n = n(), 
-            sd = sd(value))
-
+            sd = sd(value), 
+            se = sd/sqrt(n()), 
+            cil = mean-1.96*se, 
+            ciu = mean+1.96*se)
+si.ss
 ```
 
 ```{r}
@@ -538,6 +535,11 @@ ggviolin(single.imp, y = "value",
           fill = "method", x = "method", 
           add = "boxplot", 
           alpha = .2)
+
+ggplot(si.ss, aes(x=mean, y = method, col=method)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  scale_x_continuous(limits=c(.5, 1)) + 
+  theme_bw() + xlab("Average BSI Depression score") + ylab("")
 ```
 
 
@@ -557,7 +559,7 @@ ggviolin(single.imp, y = "value",
     - Imputation method must include a random component
 2. Create $m$ complete data sets
 3. Perform desired analysis on each of the $m$ complete data sets
-4. Combine final estimates in a manner that accounts for the between, and within imputation variance. 
+4. **Pool** final estimates in a manner that accounts for the between, and within imputation variance. 
 
 
 ![Diagram of Multiple Imputation process. Credit: https://stefvanbuuren.name/fimd/sec-nutshell.html](https://stefvanbuuren.name/fimd/fig/ch01-miflow-1.png)
@@ -574,7 +576,7 @@ ggviolin(single.imp, y = "value",
 
 _Rubin 87: Multiple Imputation for Nonresponse in Surveys, Wiley, 1987)._
 
-### Inference on MI
+### Inference on MI (Pooling estimates)
 
 Consider $m$ imputed data sets. For some quantity of interest $Q$ with squared $SE = U$, calculate $Q_{1}, Q_{2}, \ldots, Q_{m}$ and $U_{1}, U_{2}, \ldots, U_{m}$ (e.g., carry out $m$ regression analyses, obtain point estimates and SE from each). 
 
@@ -598,6 +600,84 @@ $$\frac{\bar{Q}-Q}{\sqrt{T}} \sim t_{df}, \mbox{ where } df = (m-1)(1+\frac{1}{m
 * df are similar to those for comparison of normal means with unequal variances, i.e., using Satterthwaite approximation.
 * Ratio of (B = between-imputation variance) to (T = between + within-imputation variance) is known as the fraction of missing information (FMI). 	
     - The FMI has been proposed as a way to monitor ongoing data collection and estimate the potential bias resulting from survey non-responders [Wagner, 2018](https://academic.oup.com/poq/article-abstract/74/2/223/1936466?redirectedFrom=fulltext)
+    
+    
+### Example
+  
+1. Create $m$ imputed datasets using linear regression plus a small amount of random noise so all the imputed values are not identical 
+
+```{r}
+set.seed(1061)
+dep.imp1 <- dep.imp2 <- dep.imp3 <- regressionImp(bsi_depress ~ gender + siblings + age, hiv) 
+dep.imp1$bsi_depress[miss.dep.idx] <- dep.imp1$bsi_depress[miss.dep.idx] +
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+
+dep.imp2$bsi_depress[miss.dep.idx] <- dep.imp2$bsi_depress[miss.dep.idx] + 
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+
+dep.imp3$bsi_depress[miss.dep.idx] <- dep.imp3$bsi_depress[miss.dep.idx] + 
+  rnorm(length(miss.dep.idx), mean=0, sd=rmse/2)
+
+```
+
+Visualize the distributions of observed and imputed
+```{r}
+dep.mi <- bind_rows(
+  data.frame(value = dep.imp1$bsi_depress, imputed = dep.imp1$bsi_depress_imp, 
+             imp = "dep.imp1"), 
+  data.frame(value = dep.imp2$bsi_depress, imputed = dep.imp2$bsi_depress_imp, 
+             imp ="dep.imp2"), 
+  data.frame(value = dep.imp3$bsi_depress, imputed = dep.imp3$bsi_depress_imp, 
+             imp ="dep.imp3"))
+
+ggdensity(dep.mi, x = "value", color = "imputed", fill = "imputed", 
+          add = "mean", rug=TRUE, palette = "jco") + 
+  facet_wrap(~imp, ncol=1)
+```
+
+2. Calculate the point estimate $Q$ and the variance $U$ from each imputation. 
+
+```{r}
+(Q <- c(mean(dep.imp1$bsi_depress), 
+        mean(dep.imp2$bsi_depress), 
+        mean(dep.imp3$bsi_depress)))
+
+n.d <- length(dep.imp1$bsi_depress)
+(U <- c(sd(dep.imp1$bsi_depress)/sqrt(n.d), 
+        sd(dep.imp2$bsi_depress)/sqrt(n.d), 
+        sd(dep.imp3$bsi_depress)/sqrt(n.d)))
+```
+
+3. Pool estimates and calculate a 95% CI
+
+```{r}
+Q.bar <- mean(Q)          # average estimate
+U.bar <- mean(U)           # average variance
+B <- sd(Q)                 # variance of averages
+Tv <- U.bar + ((3+1)/3)*B  # Total variance of estimate
+
+df <- 2*(1+(U.bar/(4*B))^2) # degress of freedom
+t95 <- qt(.975, df) # critical value for 95% CI
+
+mi.ss <- data.frame(
+  method = "MI Reg", 
+  mean = Q.bar, 
+  se = sqrt(Tv), 
+  cil = Q.bar - t95*sqrt(Tv),
+  ciu = Q.bar + t95*sqrt(Tv))
+
+(imp.ss <- bind_rows(si.ss, mi.ss))
+```
+
+```{r}
+ggplot(imp.ss, aes(x=mean, y = method, col=method)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  scale_x_continuous(limits=c(-.3, 2)) + 
+  theme_bw() + xlab("Average BSI Depression score") + ylab("")
+```
+
+
+    
     
 ## Multiple Imputation using Chained Equations (MICE)
 
@@ -654,8 +734,6 @@ Read 6.5.2: Convergence https://stefvanbuuren.name/fimd/sec-algoptions.html
 ```
 
 
-
-
 ### Imputation Methods
 
 Some built-in imputation methods in the `mice` package are:
@@ -681,21 +759,23 @@ https://stefvanbuuren.name/fimd/sec-diagnostics.html
 
 
 ## Example: Prescribed amount of missing.
-We will demonstrate using Fisher's Iris data (pre-built in with R) where we can artificially create a prespecified percent of the data missing. This allows us to be able to  estimate the bias incurred by using these imputation methods.
 
-For the `iris` data we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
+We will demonstrate using the Palmer Penguins dataset where we can artificially create a prespecified percent of the data missing, (after dropping the 11 rows missing sex) This allows us to be able to  estimate the bias incurred by using these imputation methods.
+
+For the `penguin` data ) out we set a seed and use the `prodNA()` function from the `missForest` package to create 10% missing values in this data set. 
 ```{r}
 library(missForest)
-set.seed(12345) # Note to self: Change the combo on my luggage
-iris.mis <- prodNA(iris, noNA=0.1)
-prop.table(table(is.na(iris.mis)))
+set.seed(12345) # Raspberry, I HATE raspberry!
+pen.nomiss <- na.omit(pen)
+pen.miss <- prodNA(pen.nomiss, noNA=0.1)
+prop.table(table(is.na(pen.miss)))
 ```
 
 Visualize missing data pattern.
 ```{r}
-aggr(iris.mis, col=c('darkolivegreen3','salmon'),
+aggr(pen.miss, col=c('darkolivegreen3','salmon'),
               numbers=TRUE, sortVars=TRUE,
-              labels=names(iris.mis), cex.axis=.7,
+              labels=names(pen.miss), cex.axis=.7,
               gap=3, ylab=c("Missing data","Pattern"))
 ```
 
@@ -704,8 +784,8 @@ Here's another example of where only 10% of the data overall is missing, but it 
 
 ### Multiply impute the missing data using `mice()`
 ```{r}
-imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
-summary(imp_iris)
+imp_pen <- mice(pen.miss, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+summary(imp_pen)
 ```
 
 ```{block2, type="rmdnote"}
@@ -716,41 +796,41 @@ https://stats.stackexchange.com/questions/219013/how-do-the-number-of-imputation
 
 ### Check the imputation method used on each variable.
 ```{r}
-imp_iris$meth
+imp_pen$meth
 ```
 
-Predictive mean matching was used for all variables, even `Species`. This is reasonable because PMM is a hot deck method of imputation. 
+Predictive mean matching was used for all variables, even `species` and `island`. This is reasonable because PMM is a hot deck method of imputation. 
 
 ### Check Convergence
 ```{r}
-plot(imp_iris, c("Sepal.Length", "Sepal.Width", "Petal.Length"))
+plot(imp_pen, c("bill_length_mm", "body_mass_g", "bill_depth_mm"))
 ```
 
 The variance across chains is no larger than the variance within chains. 
 
 ### Look at the values generated for imputation
 ```{r}
-imp_iris$imp$Sepal.Length
+imp_pen$imp$body_mass_g |> head()
 ```
 
-This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `Sepal.Length` was needed. Notice only imputations are shown, no observed data is showing here. 
+This is just for us to see what this imputed data look like. Each column is an imputed value, each row is a row where an imputation for `body_mass_g` was needed. Notice only imputations are shown, no observed data is showing here. 
 
 ### Create a complete data set by filling in the missing data using the imputations
 ```{r, eval=FALSE}
-iris_1 <- complete(imp_iris, action=1)
+pen_1 <- complete(imp_pen, action=1)
 ```
 Action=1 returns the first completed data set, action=2 returns the second completed data set, and so on. 
 
 #### Alternative - Stack the imputed data sets in _long_ format.
 ```{r}
-iris_long <- complete(imp_iris, 'long')
+pen_long <- complete(imp_pen, 'long')
 ```
 
-By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=150$ in each. 
+By looking at the `names` of this new object we can confirm that there are indeed 10 complete data sets with $n=333$ in each. 
 
 ```{r}
-names(iris_long)
-table(iris_long$.imp)
+names(pen_long)
+table(pen_long$.imp)
 ```
 
 
@@ -759,21 +839,21 @@ Let's compare the imputed values to the observed values to see if they are indee
 
 **Univariately**
 ```{r, fig.width=8}
-densityplot(imp_iris)
+densityplot(imp_pen)
 ```
 
 **Multivariately**
 ```{r, fig.width=8, fig.height=8}
-xyplot(imp_iris, Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width | Species, cex=.8, pch=16)
+xyplot(imp_pen, bill_length_mm ~ bill_depth_mm + flipper_length_mm  | species + island, cex=.8, pch=16)
 ```
 
 **Analyze and pool**
 All of this imputation was done so we could actually perform an analysis! 
 
-Let's run a simple linear regression on `Sepal.Length` as a function of `Sepal.Width`, `Petal.Length` and `Species`.
+Let's run a simple linear regression on `body_mass_g` as a function of `bill_length_mm`, `flipper_length_mm` and `species`.
 
 ```{r}
-model <- with(imp_iris, lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species))
+model <- with(imp_pen, lm(body_mass_g ~ bill_length_mm + flipper_length_mm + species))
 summary(pool(model))
 ```
 
@@ -794,71 +874,76 @@ kable(pool(model)$pooled[,c(1:4, 8:9)], digits=3)
 
 
 ### Calculating bias
-The iris data set had no missing data to begin with. So we can calculate the "true" parameter estimates...
+The penguins data set used here had no missing data to begin with. So we can calculate the "true" parameter estimates...
 ```{r}
-true.model <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data=iris)
+true.model <- lm(body_mass_g ~ bill_length_mm + flipper_length_mm + species, data = pen.nomiss)
 ```
 and find the difference in coefficients. 
 
 The variance of the multiply imputed estimates is larger because of the between-imputation variance. 
 
 ```{r, fig.width=10}
-library(forestplot)
-te.mean <- summary(true.model)$coefficients[,1]
-mi.mean <- summary(pool(model))[,2]
-te.ll   <- te.mean - 1.96*summary(true.model)$coefficients[,2]
-mi.ll   <- mi.mean - 1.96*summary(pool(model))[,3]
-te.ul   <- te.mean + 1.96*summary(true.model)$coefficients[,2]
-mi.ul   <- mi.mean + 1.96*summary(pool(model))[,3]
-names   <- names(coef(true.model))
 
+tm.est <- true.model |> coef() |> broom::tidy() |> mutate(model = "True Model") |>
+  rename(est = x)
+tm.est$cil <- confint(true.model)[,1]
+tm.est$ciu <- confint(true.model)[,2]
+tm.est <- tm.est[-1,] # drop intercept
 
-forestplot(names, 
-           legend = c("True Model", "MICE"),
-           fn.ci_norm = c(fpDrawNormalCI, fpDrawCircleCI), 
-           mean = cbind(te.mean, mi.mean), 
-           lower = cbind(te.ll, mi.ll),
-           upper = cbind(te.ul, mi.ul), 
-           col=fpColors(box=c("blue", "darkred")), 
-           xlab="Regression coefficients",
-           boxsize = .1
-           )
+mi <- tbl_regression(model)$table_body |> 
+  select(names = label, est = estimate, cil=conf.low, ciu=conf.high) |> 
+  mutate(model = "MI") |> filter(!is.na(est))
 
+pen.mi.compare <- bind_rows(tm.est, mi)
+pen.mi.compare$names <- gsub("species", "", pen.mi.compare$names)
+
+ggplot(pen.mi.compare, aes(x=est, y = names, col=model)) + 
+  geom_point() + geom_errorbar(aes(xmin=cil, xmax=ciu), width=0.2) + 
+  theme_bw() 
 ```
+
+```{r, echo=FALSE}
+pen.mi.compare %>% 
+  tidyr::pivot_wider(id_cols = names, names_from = model, values_from = est) %>%
+  mutate(bias = MI - `True Model`) %>% kable()
+```
+
+MI over estimates the difference in body mass between Chinstrap and Adelie, but underestiamtes that difference for Gentoo. There is also an underestimation of the relationship between bill length and body mass. 
+
 
 ## Post MICE data management
 
 Sometimes you'll have a need to do additional data management after imputation has been completed. Creating binary indicators of an event, re-creating scale variables etc. The general approach is to transform the imputed data into long format using `complete` **with the argument `include=TRUE`** , do the necessary data management, and then convert it back to a `mids` object type. 
 
-Continuing with the iris example, let's create a new variable that is the ratio of Sepal to Petal length. 
+Continuing with the penguin example, let's create a new variable that is the ratio of bill length to depth.
 
 Recapping prior steps of imputing, and then creating the completed long data set. 
 
 ```{r, eval=2}
-imp_iris <- mice(iris.mis, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
-iris_long <- complete(imp_iris, 'long', include=TRUE)
+imp_pen <- mice(pen.miss, m=10, maxit=25, meth="pmm", seed=500, printFlag=FALSE)
+pen_long <- complete(imp_pen, 'long', include=TRUE)
 ```
 
 We create the new ratio variable on the long data: 
 ```{r}
-iris_long$ratio <- iris_long$Sepal.Length / iris_long$Petal.Length
+pen_long$ratio <- pen_long$bill_length_mm / pen_long$bill_depth_mm
 ```
 
-Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `iris_long` data. 
+Let's visualize this to see how different the distributions are across imputation. Notice imputation "0" still has missing data - this is a result of using `include = TRUE` and keeping the original data as part of the `pen_long` data. 
 ```{r}
-ggboxplot(iris_long, y="ratio", x="Species", facet.by = ".imp")
+ggboxplot(pen_long, y="ratio", x="species", facet.by = ".imp")
 ```
 
 Then convert the data back to `mids` object, specifying the variable name that identifies the imputation number. 
 
 ```{r}
-imp_iris1 <- as.mids(iris_long, .imp = ".imp")
+imp_pen1 <- as.mids(pen_long, .imp = ".imp")
 ```
 
 Now we can conduct analyses such as an ANOVA (in linear model form) to see if this ratio differs significantly across the species. 
 
 ```{r}
-nova.ratio <- with(imp_iris1, lm(ratio ~ Species))
+nova.ratio <- with(imp_pen1, lm(ratio ~ species))
 pool(nova.ratio) |> summary()
 ```
 
