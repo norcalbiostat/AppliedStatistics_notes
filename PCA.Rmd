@@ -48,7 +48,7 @@ We are trying to understand a phenomenon by collecting a series of component mea
 
 ## Basic Idea - change of coordinates {#basic-idea}
 
-Consider a hypothetical data set that consists of 100 random pairs of observations $X_{1}$ and $X_{2}$ that are correlated. Let $X_{1} \sim \mathcal{N}(100, 100)$, $X_{2} \sim \mathcal{N}(50, 50)$, with $\rho_{12} = \frac{1}{\sqrt{2}}$. 
+Let's simulate a data set that consists of 100 random pairs of observations $X_{1}$ and $X_{2}$ that are correlated. Let $X_{1} \sim \mathcal{N}(100, 100)$, $X_{2} \sim \mathcal{N}(50, 50)$, with $\rho$ the correlation between $X_{1}$ and $X_{12}$ set to \frac{1}{\sqrt{2}}$. 
 
 In matrix notation this is written as: $\mathbf{X} \sim \mathcal{N}\left(\mathbf{\mu}, \mathbf{\Sigma}\right)$ where 
 $$\mathbf{\mu} = 
@@ -60,12 +60,12 @@ $$\mathbf{\mu} =
   \mathbf{\Sigma} = 
   \left(\begin{array}
   {cc}
-  \sigma_{1}^{2} & \rho_{12}\sigma_{x}\sigma_{y} \\
-  \rho_{12}\sigma_{x}\sigma_{y} & \sigma_{2}^{2} 
+  \sigma_{1}^{2} & \rho\sigma_{1}\sigma_{2} \\
+  \rho\sigma_{1}\sigma_{2} & \sigma_{2}^{2} 
   \end{array}\right)
 $$. 
 
-```{r}
+```{r, echo=FALSE}
 set.seed(456)
 m <- c(100, 50)
 s <- matrix(c(100, sqrt(.5*100*50), sqrt(.5*100*50), 50), nrow=2)
